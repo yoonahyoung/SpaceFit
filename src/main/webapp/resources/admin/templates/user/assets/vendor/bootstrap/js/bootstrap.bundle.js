@@ -1244,29 +1244,29 @@
 
 
     _getConfig(config) {
-      config = { ...Default$a,
-        ...Manipulator.getDataAttributes(this._element),
-        ...(typeof config === 'object' ? config : {})
-      };
-      typeCheckConfig(NAME$b, config, DefaultType$a);
-      return config;
+	      config = { ...Default$a,
+	        ...Manipulator.getDataAttributes(this._element),
+	        ...(typeof config === 'object' ? config : {})
+	      };
+	      typeCheckConfig(NAME$b, config, DefaultType$a);
+	      return config;
     }
 
     _handleSwipe() {
-      const absDeltax = Math.abs(this.touchDeltaX);
-
-      if (absDeltax <= SWIPE_THRESHOLD) {
-        return;
-      }
-
-      const direction = absDeltax / this.touchDeltaX;
-      this.touchDeltaX = 0;
-
-      if (!direction) {
-        return;
-      }
-
-      this._slide(direction > 0 ? DIRECTION_RIGHT : DIRECTION_LEFT);
+		      const absDeltax = Math.abs(this.touchDeltaX);
+		
+		      if (absDeltax <= SWIPE_THRESHOLD) {
+		        return;
+		      }
+		
+		      const direction = absDeltax / this.touchDeltaX;
+		      this.touchDeltaX = 0;
+		
+		      if (!direction) {
+		        return;
+		      }
+		
+		      this._slide(direction > 0 ? DIRECTION_RIGHT : DIRECTION_LEFT);
     }
 
     _addEventListeners() {
@@ -1511,28 +1511,27 @@
     }
 
     _orderToDirection(order) {
-      if (![ORDER_NEXT, ORDER_PREV].includes(order)) {
-        return order;
-      }
-
-      if (isRTL()) {
-        return order === ORDER_PREV ? DIRECTION_LEFT : DIRECTION_RIGHT;
-      }
-
-      return order === ORDER_PREV ? DIRECTION_RIGHT : DIRECTION_LEFT;
-    } // Static
-
+	      if (![ORDER_NEXT, ORDER_PREV].includes(order)) {
+	        return order;
+	      }
+	
+	      if (isRTL()) {
+	        return order === ORDER_PREV ? DIRECTION_LEFT : DIRECTION_RIGHT;
+	      }
+	
+	      return order === ORDER_PREV ? DIRECTION_RIGHT : DIRECTION_LEFT;
+    }
 
     static carouselInterface(element, config) {
-      const data = Carousel.getOrCreateInstance(element, config);
-      let {
-        _config
-      } = data;
-
-      if (typeof config === 'object') {
-        _config = { ..._config,
-          ...config
-        };
+	      const data = Carousel.getOrCreateInstance(element, config);
+	      let {
+	        _config
+	      } = data;
+	
+	      if (typeof config === 'object') {
+	        _config = { ..._config,
+	          ...config
+	        };
       }
 
       const action = typeof config === 'string' ? config : _config.slide;

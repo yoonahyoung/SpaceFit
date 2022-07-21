@@ -45,7 +45,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="background:#0D6EFD;">
 
             <!--로고 클릭시 관리자메인페이지이동하게끔-->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<%= contextPath %>">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <!-- <i class="fas fa-laugh-wink"></i> -->
                 </div>
