@@ -25,7 +25,7 @@
  </style>
 </head>
 <body>
-	<%@ include file="menubar.jsp" %>
+	<%@ include file="adminMenubar.jsp" %>
 	
 	<img src="../../../resources/admin/img/로고1.png" alt="로고" width="25%">
 </body>
