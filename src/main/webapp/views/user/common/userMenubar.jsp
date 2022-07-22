@@ -60,269 +60,274 @@
 
    <!--/ 여기있는 style css 열지마세요! collapse 마이페이지 부분인데 아주 복잡합니다! /-->
   <style>
+ body{
+  font-family: 'Noto Sans KR','Noto Sans KR';
+  font-family: 'Poppins', 'Noto Sans KR';
+}
 
-    .form-control {
-      color : #0D6EFD;
-      border : 1px solid  #0D6EFD;
-    }
+.outer{
+      color: white;
+      width: 1000px;
+      margin: auto;
+  }
 
-    #searchBtn{
-      color : #0D6EFD;
-      border : 1px solid  #0D6EFD;
-    }
+.form-control {
+  color : #0D6EFD;
+  border : 1px solid  #0D6EFD;
+}
 
-    #searchBtn:hover{
-      background-color : #0D6EFD;
-      color : white;
-    }
+#searchBtn{
+  color : #0D6EFD;
+  border : 1px solid  #0D6EFD;
+}
 
-    .close-box-collapse{
-      margin-right: -30px;
-    }
+#searchBtn:hover{
+  background-color : #0D6EFD;
+  color : white;
+}
+
+.close-box-collapse{
+  margin-right: -30px;
+}
+
+   /*------------------------------------------ blue header ------------------------------------------*/
+.offcanvas-body {
+    padding : 0;
+  }
+
+  
+.offcanvas-header #logo{
+  color : white;
+  font-weight: 600;
+  font-size: 40px;
+  position: absolute;
+  top:15px;
+  left: 30px;
+
+}
+
+.offcanvas-header {
+  display: grid;
+  background-color : #0D6EFD;
+  height: 200px;
+  width: 100%;
+  z-index: -1;
+  color: white;
+}
+.btn-close{
+  filter: invert(91%) sepia(92%) saturate(1%) hue-rotate(88deg) brightness(108%) contrast(99%);
+  position: absolute;
+  right: 30px;
+  top:50px;
+}
+
+.offcanvas-header{
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+#login-btn{
+  background-color: white;
+  color: #0D6EFD;
+  border : none;
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow : 0px 0px 3px rgb(0, 0, 0, 0.5);
+  margin-bottom : -100px;
+  font-size : 15px;
+}
+
+#login-btn:hover{
+  background-color:#E7F1FF;
+  font-weight: bold;
+}
+
+
+     /*------------------------------------------ 예약 ~ 위시 ------------------------------------------*/
+ .btnMypage {
+  width: 35px;
+  height: 5px;
+  margin: 6px 0;
+  background-color : #0D6EFD;
+}
+.iconCol{
+  margin-top: -16px;
+  color: black;
+  font-size: 13px;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px;
+
+}
+
+.iconCol:hover{
+  background-color:#E7F1FF;
+  color: black;
+  font-size: 13px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.iconRow{
+    height: 80px;
+}
+
+.iconRow img{
+  filter: invert(49%) sepia(57%) saturate(7494%) hue-rotate(196deg) brightness(103%) contrast(106%);
+  width: 60px;
+}
+
+#icon2, #icon3 {
+  width: 36px;
+  margin : 12px;
+}
+/*------------------------------------------ welcome ------------------------------------------*/
+
+#welcome {
+  background-color:#E7F1FF;
+  display: grid;
+  height: 70px;
+  width: 100%;
+  z-index: -1;
+  margin-top: 40px;
+  color: #0D6EFD;
+  font-weight: bold;
+}
+
+#welcome span {
+  margin : auto;
+}
+
+
+/*------------------------------------------ 공지, 자주묻는질문 ------------------------------------------*/
+* {box-sizing: border-box}
+
+
+
+ /*------------------------------------------ footer  goToAdmin ------------------------------------------*/
+.goToAdmin{
+    display: grid;
+    background-color : #0D6EFD;
+    height: 100px;
+    width: 100%;
+    color: white;
+    position: absolute;
+    bottom: 2px ;
+    text-decoration: none;
+    border : none;
+  }
+
+  .goToAdmin:hover{
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .goToAdmin span{
+    margin: auto;
+  }
+
+
+     /*------------------------------------------ 메뉴바들 ------------------------------------------*/
+
+
+ .accordion-button:hover{
+   background-color:#E7F1FF;
+ }
+
+ 
+ .accordion-button::after {
+	 flex-shrink: 0;
+	 width: 1.25rem;
+	 height: 1.25rem;
+	 margin-left: auto;
+	 content: "";
+	 background-image: none;
+	 background-repeat: no-repeat;
+	 background-size: 1.25rem;
+	 transition: transform .2s ease-in-out;
+}
+
+
+.myPageCol{
+  border: none;
+  background-color: white;
+  
+}
+
+.myPageCol:hover{
+  background-color: #EEEEEE;
+}
+
+.accordion-body {
+  padding: 0px;
+}
+
+   /*------------------------------------------ 큰 회원가입------------------------------------------*/
+
+.big-signin{
+    display: grid;
+    height: 230px;
+    width: 100%;
+
+}
+
+.big-signin-btn{
+  font-size: 16px;
+  color:  #0D6EFD;
+  box-shadow : 0px 0px 10px rgb(0, 129, 255, 0.3);
+  padding : 40px 60px 40px 60px;
+  border-radius: 30px;
+  margin: auto;
+  margin-top: 50px;
+}
+
+.big-signin-btn:hover{
+  font-weight: bold;
+  color:  #0D6EFD;
+  box-shadow : 0px 0px 10px rgba(145, 199, 253, 0.3);
+  
+}
 
     /*------------------------------------------ blue header ------------------------------------------*/
-    .offcanvas-body {
-        padding : 0;
-      }
-
-      body{
-        font-family: 'Noto Sans KR','Noto Sans KR';
-        font-family: 'Poppins', 'Noto Sans KR';
-      }
-      
-      
-      .offcanvas-header #logo{
-        color : white;
-        font-weight: 600;
-        font-size: 40px;
-        position: absolute;
-        top:15px;
-        left: 30px;
-
-      }
-
-      .offcanvas-header {
-        display: grid;
-        background-color : #0D6EFD;
-        height: 200px;
-        width: 100%;
-        z-index: -1;
-        color: white;
-      }
-      .btn-close{
-        filter: invert(91%) sepia(92%) saturate(1%) hue-rotate(88deg) brightness(108%) contrast(99%);
-        position: absolute;
-        right: 30px;
-        top:50px;
-      }
-
-      .offcanvas-header{
-        justify-content: center;
-        align-items: center;
-      }
 
 
 
-      #login-btn{
-        background-color: white;
-        color: #0D6EFD;
-        border : none;
-        padding: 10px;
-        border-radius: 15px;
-        box-shadow : 0px 0px 3px rgb(0, 0, 0, 0.5);
-        margin-bottom : -100px;
-        font-size : 15px;
-      }
 
-      #login-btn:hover{
-        background-color:#E7F1FF;
-        font-weight: bold;
-      }
+.profile{
+  border: none;
+  background-color : #0D6EFD;
+  color : white;
+  font-size: 13px;
+  
+}
 
+.profile #userIcon{
+  margin-top: 80px;
+  width:40px;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(201deg) brightness(106%) contrast(106%);
+  margin-bottom: -20px;
+}
 
-      /*------------------------------------------ 예약 ~ 위시 ------------------------------------------*/
-       .btnMypage {
-        width: 35px;
-        height: 5px;
-        margin: 6px 0;
-        background-color : #0D6EFD;
-      }
-      .iconCol{
-        margin-top: -16px;
-        color: black;
-        font-size: 13px;
-        text-decoration: none;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 30px;
+.button.profile.text{
+	padding : 0px;
+}
 
-      }
-
-      .iconCol:hover{
-        background-color:#E7F1FF;
-        color: black;
-        font-size: 13px;
-        text-decoration: none;
-        font-weight: bold;
-      }
-
-      .iconRow{
-          height: 80px;
-      }
-
-      .iconRow img{
-        filter: invert(49%) sepia(57%) saturate(7494%) hue-rotate(196deg) brightness(103%) contrast(106%);
-        width: 60px;
-      }
-
-      #icon2, #icon3 {
-        width: 36px;
-        margin : 12px;
-      }
-      /*------------------------------------------ welcome ------------------------------------------*/
-
-      #welcome {
-        background-color:#E7F1FF;
-        display: grid;
-        height: 70px;
-        width: 100%;
-        z-index: -1;
-        margin-top: 40px;
-        color: #0D6EFD;
-        font-weight: bold;
-      }
-      
-      #welcome span {
-        margin : auto;
-      }
-
-
-      /*------------------------------------------ 공지, 자주묻는질문 ------------------------------------------*/
-      * {box-sizing: border-box}
+   /*------------------------------------------ 예약 ~ 위시 ------------------------------------------*/
     
+   /*------------------------------------------ welcome ------------------------------------------*/
+
+   /*------------------------------------------ 아이콘들------------------------------------------*/
 
 
-  /*------------------------------------------ footer  goToAdmin ------------------------------------------*/
-    .goToAdmin{
-        display: grid;
-        background-color : #0D6EFD;
-        height: 100px;
-        width: 100%;
-        color: white;
-        position: absolute;
-        bottom: 2px ;
-        text-decoration: none;
-        border : none;
-      }
+	  /*------------------------------------------ footer goToAdmin ------------------------------------------*/
 
-      .goToAdmin:hover{
-        font-weight: bold;
-        cursor: pointer;
-      }
+   /*------------------------------------------ 메뉴바들 ------------------------------------------*/
 
-      .goToAdmin span{
-        margin: auto;
-      }
-
-
-      /*------------------------------------------ 메뉴바들 ------------------------------------------*/
-
-
-      .accordion-button:hover{
-        background-color:#E7F1FF;
-      }
-
-      
-      .accordion-button::after {
-	     flex-shrink: 0;
-	     width: 1.25rem;
-	     height: 1.25rem;
-	     margin-left: auto;
-	     content: "";
-	     background-image: none;
-	     background-repeat: no-repeat;
-	     background-size: 1.25rem;
-	     transition: transform .2s ease-in-out;
-	 		 }
-	
-	
-	   .myPageCol{
-	     border: none;
-	     background-color: white;
-	     
-	   }
-	
-	   .myPageCol:hover{
-	     background-color: #EEEEEE;
-	   }
-	   
-	   .accordion-body {
-	     padding: 0px;
-	   }
-
-    /*------------------------------------------ 큰 회원가입------------------------------------------*/
-
-    .big-signin{
-        display: grid;
-        height: 230px;
-        width: 100%;
-
-      }
-
-      .big-signin-btn{
-        font-size: 16px;
-        color:  #0D6EFD;
-        box-shadow : 0px 0px 10px rgb(0, 129, 255, 0.3);
-        padding : 40px 60px 40px 60px;
-        border-radius: 30px;
-        margin: auto;
-        margin-top: 50px;
-      }
-
-      .big-signin-btn:hover{
-        font-weight: bold;
-        color:  #0D6EFD;
-        box-shadow : 0px 0px 10px rgba(145, 199, 253, 0.3);
-        
-      }
-
-          /*------------------------------------------ blue header ------------------------------------------*/
-
-
-
-
-      .profile{
-        border: none;
-        background-color : #0D6EFD;
-        color : white;
-        font-size: 13px;
-        
-      }
-
-      .profile #userIcon{
-      	margin-top: 80px;
-      	width:40px;
-        filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(201deg) brightness(106%) contrast(106%);
-        margin-bottom: -20px;
-      }
-	
-	.button.profile.text{
-		padding : 0px;
-	}
-
-    /*------------------------------------------ 예약 ~ 위시 ------------------------------------------*/
-     
-    /*------------------------------------------ welcome ------------------------------------------*/
-
-    /*------------------------------------------ 아이콘들------------------------------------------*/
-
-
- 	  /*------------------------------------------ footer goToAdmin ------------------------------------------*/
-
-    /*------------------------------------------ 메뉴바들 ------------------------------------------*/
-
-  </style>
+ </style>
 </head>
 
 <body>
