@@ -13,16 +13,13 @@
 <body>
 	<%@ include file="../common/userMenubar.jsp" %>
 	
-	<div style="height : 50px"></div>
+	<div style="height : 200px"></div>
         
-       <section class="vh-100" style="background-color: white;">
-        <div class="container py-5 h-100">
-          <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-       
-                <div class="card-body p-5 text-center">
+       <div class="outer">
+       	<div class="blueShadow text-center">
+         <div class="forPadding">
                     <form class="login">
-                        <h4 class="h4login">로그인</h4>
+                        <h4 class="h4forLgnNSign">로그인</h4>
                         <input type="text" placeholder="아이디" class="login-input"><br>
                         <input type="password" placeholder="비밀번호" class="login-input"><br>
                         <button class="btn btn-primary basicLogin" type="submit">로그인</button><br>
@@ -41,11 +38,9 @@
                         <button class="btn btn-primary signInBtn" type="button">회원가입</button><br>
                     </div>
                 </div>
-            
             </div>
           </div>
-        </div>
-      </section>
-        
+<!-- 자바스크립트 파일 연동 -->
+	<script type="text/javascript" src="../../../resources/user/js/userLoginAndSignIn.js"></script>
 </body>
 </html>

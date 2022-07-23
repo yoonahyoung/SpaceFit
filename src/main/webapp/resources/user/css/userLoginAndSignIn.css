@@ -6,7 +6,7 @@
 --------------------------------------------------------------*/
 
 body{
-color:  #0D6EFD;
+	color:  #0D6EFD;
    }
 
 .blueShadow {
@@ -29,10 +29,59 @@ color:  #0D6EFD;
 
 .h4forLgnNSign {
 	font-weight: 600;
-	font-size: 16px;
+	font-size: 20px;
 	color:  #0D6EFD;
 }
 
+
+
+/*--------------------------------------------------------------
+	input 입력부분
+--------------------------------------------------------------*/
+
+.inputs {
+    text-align: left;
+    margin-top: 10px;
+}
+
+.inputs label{
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 5px;
+    color :  #0D6EFD;
+}
+
+.inputs input{
+ 	 margin-top: -1px;
+     margin-bottom: -7px;
+     border : 1.5px solid #0D6EFD;
+     border-radius: 5px;
+     margin: 5px;
+     height: 40px;
+     font-size: 13px;
+     color:  #0D6EFD;
+}
+ 
+
+
+.inputs span{
+    font-size: 8px;
+    font-weight: 400;
+    margin-left: 5px;
+    color:  #0D6EFD;
+}
+
+
+
+.inputs hr{
+    color:  #0D6EFD;
+}
+
+
+ .already {
+     font-size: 11px;
+     color: #0D6EFD;
+ }
 
 /*--------------------------------------------------------------
 	로그인
@@ -105,32 +154,35 @@ color:  #0D6EFD;
       
   
  
+ 
+ 
     
  /*--------------------------------------------------------------
 	signInOne
-	
-	label {
-    display: block;
 }
 --------------------------------------------------------------*/     
-      
-
-
-
-
-
+     
 
 .agreement{
      font-size: 13px;
      color:  #0D6EFD;
+     width : 100%;
 }
 
+.agreement *{
+	 width : 100%;
+}
 .phoneAgreement{
 	 font-size: 13px;
      color:  #0D6EFD;
 }
-    
+
+.agreeInput input{
+	display:inline;
+	width:20px;
+}
 .agreeBox {
+	 width : 100%;
      height:80px;
      overflow:auto;  
      border:1px solid #0D6EFD;
@@ -149,37 +201,101 @@ color:  #0D6EFD;
      font-size: 13px;
 }
 
- .picon{
+.picon{
      font-size: 13px;
 }
 
- .material-icons{
+.picon-span {
+	color : grey;
+}
+
+.material-icons{
      margin-top: 5px;
+     color : grey;
 }
- .phone .message {
-     margin-top: 15px;
+.signInForm * {
+	 margin-top: 5px;
+     width : 100%;
 }
- .account-input{
-     border : 1.5px solid #0D6EFD;
-     border-radius: 5px;
-     margin: 5px;
-     height: 40px;
-     font-size: 13px;
-     color:  #0D6EFD;
-}
- 
- .confirmBtn, .nextBtn {
+
+.confirmBtn, .nextBtn {
      margin: 5px;
      margin-top: -4px;
+     width : 100%;
 }
+
 
  .getIdNoBtn {
      margin: 5px;
-     margin-top: -4px;
+     margin-top: 10px;
      margin-bottom:10px;
  }
  
- .already {
-     font-size: 11px;
-     color: #0D6EFD;
- }
+ 
+ 
+ 
+ /*--------------------------------------------------------------
+	signInTwo
+}
+--------------------------------------------------------------*/      
+ 
+ 
+ 
+.signInForm {
+	 margin-top: 5px;
+     width : 100%;
+}
+
+
+
+ /*--------------------------------------------------------------
+	signInThree
+}
+--------------------------------------------------------------*/      
+ .welcomeSpan{
+    font-size: 15px;
+    font-weight: 600;
+    color:  #0D6EFD;
+}
+
+.material-icons.giftCard{
+    font-size: 60px;
+    color:  #0D6EFD;
+}
+
+
+
+
+
+ /*--------------------------------------------------------------
+	idSearch
+}
+--------------------------------------------------------------*/   
+
+.find{
+    text-decoration: none;
+    font-size: 15px;
+    color: black;
+    font-size: 20px;
+}
+
+.find:hover{
+    color:#0D6EFD;
+    font-weight: 600;
+}
+
+
+ /*--------------------------------------------------------------
+	idSearchResult
+}
+--------------------------------------------------------------*/   
+
+#idMessage{
+    font-size: 15px;
+}
+
+#userId{
+    color:#0D6EFD;
+    font-weight: 600;
+    font-size: 20px;
+}

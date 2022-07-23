@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<title>Space Fit 회원가입</title>
+<title>Space Fit 아이디찾기</title>
 <link rel="stylesheet" href="../../../resources/user/css/userLoginAndSignIn.css">
 <style>
 		
@@ -19,53 +19,18 @@
     <div class="outer">
         <div class="blueShadow text-center">
                     <div class="forPadding">
-                        <h4 class="h4forLgnNSign">스페이스핏 회원가입</h4><br>
-                    	<form class="agreement">
+                        <h4 class="h4forLgnNSign">
+                        	<a href="" id="idSearch" class="find" style="color:#0D6EFD;">아이디 찾기&nbsp</a>
+                    		<span>|</span>
+                    		<a href="" id="pwdSearch" class="find">&nbsp비밀번호 재설정</a>
+                    		<br><br>
+                        </h4>
+                        <br>
+                        
+                        <form class="agreement">
                     	
-                    		<div>
-                                <input type="checkbox" name="agree_all" id="agree_all">
-                                <span>모두 동의합니다</span><br><hr>
-                            </div>
+                    		
                             <table align="center">
-                            	<tr>
-		                           	<td>
-		                           		<label for="agree">
-		                           			<div class="agreeInput">
-		                           				 <input type="checkbox" name="agree" value="1">
-		                                    	 <span>이용약관 동의<strong>(필수)</strong></span>
-		                           			</div>
-		                                    <div class="agreeBox">
-		                                    	<span>나중에 민아님 페이지에서 얻어올 이용약관 1</span>
-		                                   	</div>
-		                            	</label>
-		                           	</td>
-		                           </tr>
-		                           <tr>
-		                           	<td>
-		                           		<label for="agree">
-			                            	<div class="agreeInput">
-				                                <input type="checkbox" name="agree" value="2">
-				                                <span>개인정보 수집, 이용 동의<strong>(필수)</strong></span>
-				                            </div>
-			                                <div class="agreeBox">
-			                                    <span>나중에 민아님 페이지에서 얻어올 이용약관 2</span>
-			                                </div>
-		                            	</label>
-		                           	</td>
-		                           </tr>
-		                           <tr>
-		                           	<td>
-		                           		<label for="agree">
-			                            	<div class="agreeInput">
-			                            		 <input type="checkbox" name="agree" value="3">
-			                                	<span>이벤트, 혜택정보 수신동의<strong class="select_disable">(선택)</strong></span>
-			                            	</div>
-			                                <div class="agreeBox">
-			                                   <span>나중에 민아님 페이지에서 얻어올 이용약관 3</span>
-			                                </div>
-		                            	</label>
-		                           	</td>
-		                           </tr>
 		                           <tr>
 		                           	<td class="phone">
 		                           		<div class="phone box">
@@ -109,11 +74,12 @@
                         	</div>
                         <hr>
 	                        <span class="already">인증을 축하드립니다! 거의 다 왔어요!</span>
-	                        <button class="btn btn-primary nextBtn" type="button">다음 단계로 이동</button><br>
+	                        <button class="btn btn-primary nextBtn" type="button">아이디 확인하기!</button><br>
 	                   </form>
-	                  </div>
-                </div>
+            	</div> 
+          	</div>	
           </div>
+
 	<!-- 자바스크립트 파일 연동 -->
 	<script type="text/javascript" src="../../../resources/user/js/userLoginAndSignIn.js"></script>
 </body>
