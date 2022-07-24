@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+/*--------------------------------------------------------------
+	후기 등록 css
+--------------------------------------------------------------*/
+#myRvform fieldset{    
+    display: inline-block;
+    direction: rtl;
+    border:0;    
+}
+#myRvform fieldset legend{
+    text-align: right;
+}
+#myRvform input[type=radio]{
+    display: none;
+}
+#myRvform label{
+    font-size: 3em;
+    color: transparent;
+    text-shadow: 0 0 0 #f0f0f0;
+}
+#myRvform label:hover{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#myRvform label:hover ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#myRvform input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#reviewContents {         
+    box-sizing: border-box;
+    border: solid 1.5px #D3D3D3;
+    border-radius: 5px;
+    /* font-size: 16px; */
+    resize: none;
+} 
+.blueColor{    
+    color: #0D6EFD;
+    font-size: 12px;
+}
+.hoverRv:hover{
+    cursor: pointer;
+}
