@@ -5,11 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title> 
+<title>adminMenubar</title> 
  
- <!-- 부트스트랩  -->
+ <!-- 부트스트랩 4.6.1 / 4.6.2 -->
  <!-- Latest compiled and minified CSS -->
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
  
  <!-- Custom fonts for this template-->
  <link href="<%= contextPath %>/resources/admin/templates/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
