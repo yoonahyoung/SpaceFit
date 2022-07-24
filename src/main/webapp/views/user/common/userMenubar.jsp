@@ -550,9 +550,11 @@
 	      
 	    </span>
 	  </nav><!-- End Header/Navbar -->
+	  
 </div>	  
-	
-	<div class="content-outer">
+<div id="header-areaSize" style="height:200px"></div>
+
+<div class="content-outer">
 		
 		content내용 기입
 		

@@ -27,10 +27,7 @@
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&family=Poppins:wght@300&display=swap" rel="stylesheet">
  
- <style>
-    #home *{
-         text-align: right;
-     }
+ <style>   
     body{
       font-family: 'Noto Sans KR', sans-serif;
       font-family: 'Poppins', sans-serif;
@@ -163,8 +160,8 @@
                             </span>
                         </a>  
                         &nbsp;&nbsp;
-                        <a href="">
-                            <span class="material-symbols-outlined" id="home">
+                        <a href="<%= contextPath %>">
+                            <span class="material-symbols-outlined" id="homeIcon">
                                 home
                             </span>
                         </a>                                              
