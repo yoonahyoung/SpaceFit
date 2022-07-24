@@ -1,0 +1,18 @@
+@charset "UTF-8";
+/*--------------------------------------------------------------
+	예약내역리스트 table설정
+--------------------------------------------------------------*/
+.outerRv{       
+    width: 1050px;
+    margin: auto;
+    margin-top:50px; 
+    color: black;
+}
+.rv-list-area{
+    background-color: white;        
+    text-align: center;
+}
+.rv-list-area>tbody>tr:hover{
+    background-color: #E7F1FF;
+    cursor: pointer;
+}
