@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>후기등록</title>
 <link rel="stylesheet" href="../../../resources/user/css/review.css">
 <link rel="stylesheet" href="../../../resources/user/css/userLoginAndSignIn.css">
 <style>
