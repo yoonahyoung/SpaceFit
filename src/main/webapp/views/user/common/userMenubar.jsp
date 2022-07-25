@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.spacefit.mem.model.vo.Member"%>
-<% 
-	String contextPath = request.getContextPath();
-	Member loginUser = (Member)session.getAttribute("loginUser");
-	// 로그인 시도전 loginUser == null / 로그인 성공시 : Member객체 있음
-%>    
+    pageEncoding="UTF-8"%>
+<% String contextPath = request.getContextPath(); %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,8 +37,8 @@
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>  <!--cdn방식 연동-->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   
-
-  
+	<!-- 부트스트랩 5.1 -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 
   <!--Mypage CSS File -->
@@ -202,7 +198,7 @@
   font-weight: bold;
 }
 
-#welcome a {
+#welcome span {
   margin : auto;
 }
 
@@ -337,7 +333,7 @@
 <body>
 	<div class="wrap">
 	
-	  <% if(loginUser == null) { %> 
+	    
 	  <!--/ 로그인 전 마이페이지 /-->
 
 	   <div class="box-collapse">
@@ -345,17 +341,9 @@
 	      <div id="logo">SPACEFIT</div>
 	      <span class="close-box-collapse right-boxed bi bi-x"></span>
 	      
-	       <button type="button" id="login-btn"style="height: 50px; width: 220px;" onclick="loginForm();">
+	       <button type="button" id="login-btn"style="height: 50px; width: 220px;" onclick="location.href='../sign/loginForm.jsp'">
 	         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;로그인&nbsp; | &nbsp;회원가입&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	       </button>
-	       <script>
-		       function loginForm(){
-	       		// url로 직접 jsp요청시 디렉토리 구조가 url에 노출될 수 있음 => 보안에 취약
-	       		// 단순한 페이지 요청도 servlet 거쳐서 포워딩 시켜서 보여지게 할것임
-	       		// 즉 이 때 url에는 서블릿 매핑값만 노출
-	       		location.href="<%=contextPath%>/loginForm.me";
-				}
-	       </script>
 	  
 	    </div>
 	    <div class="offcanvas-body">
@@ -397,8 +385,16 @@
 	        <button class="footer goToAdmin" href=""><span>관리자페이지로 이동</span></button>
 	    </div>
 	  
-	  <% } else { %>
+	  
+	
+	  
 
+	  
+	
+	
+	
+	   <!--/ 로그인 후 마이페이지 /-->
+	<!--
 		<div class="box-collapse">
 	    <div class="offcanvas-header">
 	      <div id="logo">SPACEFIT</div>
@@ -407,7 +403,7 @@
 	      <div class="container profileContainer">
 	        <div class="row profile">
 	          <button class="profile icon"> <img src="<%= contextPath %>/resources/user/templates/real_estate/img/icon/userIcon.svg" id="userIcon"> </button>
-	          <button class="profile text"><p><br><b><%=loginUser.getMemName() %></b> 환영합니다. <br> 예약일 <b>D-7</b> 남았네요!</p> </button>
+	          <button class="profile text"><p><br><b>userName님</b> 환영합니다. <br> 예약일 <b>D-7</b> 남았네요!</p> </button>
 	        </div>
 	      </div>
 	  
@@ -420,7 +416,7 @@
 	      </div>
 	  
 	      <div id="welcome">
-	        <a href=<%=contextPath %>>로그아웃</span>
+	        <span>WELCOME!</span>
 	      </div>
 	  
 	      <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -491,9 +487,9 @@
 	        <button class="footer goToAdmin" href=""><span>관리자페이지로 이동</span></button>
 	
 	      </div>
-	  	</div>
+	  </div>
 	
-	  <% } %>
+	  --> 
 	 
 	   
 	
@@ -502,7 +498,7 @@
 	</div><!-- End cllapse section_mypage  -->
 	
 	  <!-- ======= Header/Navbar ======= -->
-	  <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
+	  <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top" style="height:100px">
 	    <div class="container">
 	      <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
 	        <span></span>
@@ -554,9 +550,11 @@
 	      
 	    </span>
 	  </nav><!-- End Header/Navbar -->
+	  
 </div>	  
-	
-	<div class="content-outer">
+<div id="header-areaSize" style="height:200px"></div>
+
+<div class="content-outer">
 		
 		<!-- content내용 기입 -->
 		

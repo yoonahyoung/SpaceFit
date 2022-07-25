@@ -35,7 +35,10 @@
 </head>
 <body>
 	<%@ include file="views/user/common/userMenubar.jsp" %>
-	잘뜨나
 	
+	
+	
+
+
 </body>
 </html>
