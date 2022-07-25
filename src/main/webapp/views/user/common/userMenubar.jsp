@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<% String contextPath = request.getContextPath(); %>    
-<!DOCTYPE html>
+    pageEncoding="UTF-8" import="com.spacefit.mem.model.vo.Member"%>
+<% 
+	String contextPath = request.getContextPath();
+	Member loginUser = (Member)session.getAttribute("loginUser");
+	// 로그인 시도전 loginUser == null / 로그인 성공시 : Member객체 있음
+%>   
 <html>
 <head>
 <meta charset="UTF-8">
@@ -332,9 +335,9 @@
 </head>
 
 <body>
-	<div class="wrap">
+		<div class="wrap">
 	
-	    
+	  <% if(loginUser == null) { %> 
 	  <!--/ 로그인 전 마이페이지 /-->
 
 	   <div class="box-collapse">
@@ -342,9 +345,17 @@
 	      <div id="logo">SPACEFIT</div>
 	      <span class="close-box-collapse right-boxed bi bi-x"></span>
 	      
-	       <button type="button" id="login-btn"style="height: 50px; width: 220px;" onclick="location.href='../sign/loginForm.jsp'">
+	       <button type="button" id="login-btn"style="height: 50px; width: 220px;" onclick="loginForm();">
 	         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;로그인&nbsp; | &nbsp;회원가입&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	       </button>
+	       <script>
+		       function loginForm(){
+	       		// url로 직접 jsp요청시 디렉토리 구조가 url에 노출될 수 있음 => 보안에 취약
+	       		// 단순한 페이지 요청도 servlet 거쳐서 포워딩 시켜서 보여지게 할것임
+	       		// 즉 이 때 url에는 서블릿 매핑값만 노출
+	       		location.href="<%=contextPath%>/loginForm.me";
+				}
+	       </script>
 	  
 	    </div>
 	    <div class="offcanvas-body">
@@ -386,16 +397,8 @@
 	        <button class="footer goToAdmin" href=""><span>관리자페이지로 이동</span></button>
 	    </div>
 	  
-	  
-	
-	  
+	  <% } else { %>
 
-	  
-	
-	
-	
-	   <!--/ 로그인 후 마이페이지 /-->
-	<!--
 		<div class="box-collapse">
 	    <div class="offcanvas-header">
 	      <div id="logo">SPACEFIT</div>
@@ -404,7 +407,7 @@
 	      <div class="container profileContainer">
 	        <div class="row profile">
 	          <button class="profile icon"> <img src="<%= contextPath %>/resources/user/templates/real_estate/img/icon/userIcon.svg" id="userIcon"> </button>
-	          <button class="profile text"><p><br><b>userName님</b> 환영합니다. <br> 예약일 <b>D-7</b> 남았네요!</p> </button>
+	          <button class="profile text"><p><br><b><%=loginUser.getMemName() %></b> 환영합니다. <br> 예약일 <b>D-7</b> 남았네요!</p> </button>
 	        </div>
 	      </div>
 	  
@@ -417,7 +420,7 @@
 	      </div>
 	  
 	      <div id="welcome">
-	        <span>WELCOME!</span>
+	        <a href=<%=contextPath %>>로그아웃</span>
 	      </div>
 	  
 	      <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -488,9 +491,9 @@
 	        <button class="footer goToAdmin" href=""><span>관리자페이지로 이동</span></button>
 	
 	      </div>
-	  </div>
+	  	</div>
 	
-	  --> 
+	  <% } %>
 	 
 	   
 	
@@ -499,7 +502,7 @@
 	</div><!-- End cllapse section_mypage  -->
 	
 	  <!-- ======= Header/Navbar ======= -->
-	  <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top" style="height:100px">
+	  <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
 	    <div class="container">
 	      <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
 	        <span></span>
@@ -542,7 +545,7 @@
 	      <button type="button" class="btn btn-b-n navbar-toggle-box navbar-toggle-box-collapse" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" style="margin-left:300px">
 	        <span class="material-symbols-outlined">
 	          menu
-	        </span>
+	          </span>
 	      </button>
 	      
 	      </div>
@@ -551,8 +554,8 @@
 	      
 	    </span>
 	  </nav><!-- End Header/Navbar -->
-	  
 </div>	  
+	
 <div id="header-areaSize" style="height:200px"></div>
 
 <div class="content-outer">
