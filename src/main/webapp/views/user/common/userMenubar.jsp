@@ -19,6 +19,7 @@
   
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   
     <!-- Vendor CSS Files -->
     <link href="<%= contextPath %>/resources/user/templates/real_estate/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
@@ -330,7 +331,11 @@
 	  /*------------------------------------------ footer goToAdmin ------------------------------------------*/
 
    /*------------------------------------------ 메뉴바들 ------------------------------------------*/
-
+.text-brand {
+  color: #000000;
+  font-size: 2rem;
+  font-weight: 600;
+}
  </style>
 </head>
 
@@ -502,7 +507,7 @@
 	</div><!-- End cllapse section_mypage  -->
 	
 	  <!-- ======= Header/Navbar ======= -->
-	  <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
+	  <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top" style="height:100px">
 	    <div class="container">
 	      <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
 	        <span></span>
@@ -516,8 +521,8 @@
 	      <!-- search bar -->
 	      <div class="container" >
 	        <div class="d-flex align-items-center" style="line-height:20">
-	          <input class="form-control" type="search" placeholder="Search" aria-label="Search" style="width:450px; margin-left:150px;" >
-	          <button id="searchBtn" class="btn btn-outline-success flex-shrink-0" type="submit" style="margin:auto;">검색</button>
+         	  <input class="form-control" type="search" placeholder="#파티룸  #연습실  #스튜디오" aria-label="Search" style="width:300px; margin-left:150px; border:0px; border-bottom: 1px solid; border-radius:0" >
+         	  <button id="searchBtn" class="btn btn-outline-success flex-shrink-0" type="submit" style="margin:auto; border:0px;">검색</button>
 	        </div>
 	      </div>  
 	
@@ -542,8 +547,8 @@
 	
 	      
 	      <div class="containor">
-	      <button type="button" class="btn btn-b-n navbar-toggle-box navbar-toggle-box-collapse" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" style="margin-left:300px">
-	        <span class="material-symbols-outlined">
+	      <button type="button" class="btn btn-b-n navbar-toggle-box navbar-toggle-box-collapse" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" style="margin-left:420px; width:45px; height:45px;">
+	        <span class="material-symbols-outlined" style="margin-left:-2px">
 	          menu
 	          </span>
 	      </button>
