@@ -2,6 +2,7 @@
  * 
  */
 
+
 $(function(){
     $(".agreeInput").click(function(){ //==> 아코디언형식
         // $(this).next():클릭이벤트가 발생한 div 요소 바로 뒤의 요소
