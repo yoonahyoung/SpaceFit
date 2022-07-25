@@ -36,6 +36,7 @@
     <!-- 내 자바스크립트(수업용), 구글아이콘 -->
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>  <!--cdn방식 연동-->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	
   
 	<!-- 부트스트랩 5.1 -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -541,7 +542,7 @@
 	      <button type="button" class="btn btn-b-n navbar-toggle-box navbar-toggle-box-collapse" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" style="margin-left:300px">
 	        <span class="material-symbols-outlined">
 	          menu
-	          </span>
+	        </span>
 	      </button>
 	      
 	      </div>

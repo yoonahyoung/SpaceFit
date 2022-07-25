@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>후기등록</title>
 <link rel="stylesheet" href="../../../resources/user/css/review.css">
-<link rel="stylesheet" href="../../../resources/user/css/userLoginAndSignIn.css">
+<!-- <link rel="stylesheet" href="../../../resources/user/css/userLoginAndSignIn.css"> -->
 <style>
 
 </style>
@@ -18,8 +18,13 @@
             <form action="" name="reviewInsertForm" id="myRvform" method="post">
                 <br><br>
                     <h3>후기등록</h3>
-                <hr style="width: 50%; color:black">
+                <hr style="width: 50%; color:black">               
                 <br>
+                <p class="blueColor">
+                이용해주셔서 감사합니다. <br>
+                저희 공간은 어떠셨나요?
+                </p>             
+                
                 <table>
                     <fieldset>                       
                         <input type="radio" name="star" value="5" id="rate1">

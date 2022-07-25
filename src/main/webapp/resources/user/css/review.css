@@ -3,6 +3,13 @@
 /*--------------------------------------------------------------
 	후기 등록 css
 --------------------------------------------------------------*/
+.blueShadow {
+	margin: auto;
+	align-items: center;
+	box-shadow : 0px 0px 8px rgb(13, 109, 253, 0.4);
+	border-radius: 15px;
+	width: 60%;
+}
 #myRvform fieldset{    
     display: inline-block;
     direction: rtl;
