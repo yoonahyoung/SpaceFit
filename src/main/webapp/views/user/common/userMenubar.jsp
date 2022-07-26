@@ -528,7 +528,7 @@
 	        <span></span>
 	      </button>
 	      
-	      <a class="navbar-brand text-brand" href="index.html" style="margin-left:100px">SPACE<span class="color-b">FIT</span>
+	      <a class="navbar-brand text-brand" href="<%=contextPath%>/index.jsp" style="margin-left:100px">SPACE<span class="color-b">FIT</span>
 	      </a>
 	      
 	      <!-- search bar -->
@@ -544,12 +544,12 @@
 	        <ul class="navbar-nav" style="margin-left:200px">
 	
 	          <li class="nav-item">
-	            <a class="nav-link active" href="index.html">HOME</a>
+	            <a class="nav-link" href="<%=contextPath%>/index.jsp">HOME</a>
 	          </li>
 	
 	
 	          <li class="nav-item">
-	            <a class="nav-link " href="property-grid.html">SPACE</a>
+	            <a class="nav-link " href="<%=contextPath%>/views/user/space/spaceListView.jsp">SPACE</a>
 	          </li>
 	
 	          <li class="nav-item">
