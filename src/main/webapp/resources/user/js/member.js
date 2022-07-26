@@ -2,6 +2,7 @@
  * 
  */
 
+// 회원가입폼 1(SignInOne에서 회원약관 보여주는 것)
 $(function(){
     $(".agreeInput").click(function(){ //==> 아코디언형식
         // $(this).next():클릭이벤트가 발생한 div 요소 바로 뒤의 요소
@@ -20,7 +21,7 @@ $(function(){
     })
 })
 
-
+// 회원가입폼 1(SignInOne에서 회원약관 전체선택)
 $(function(){
 	 const agreeChkAll = document.querySelector('input[name=agree_all]');
         agreeChkAll.addEventListener('change', (e) => {
@@ -30,3 +31,5 @@ $(function(){
         }
     });
 })
+
+

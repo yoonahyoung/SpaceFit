@@ -6,13 +6,16 @@
 <meta charset="UTF-8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <title>Space Fit 아이디찾기</title>
-<link rel="stylesheet" href="../../../resources/user/css/userLoginAndSignIn.css">
 <style>
 		
 </style>
 </head>
 <body>
+	<!-- MENUBAR MEMBER CSS 연동 -->
 	<%@ include file="../common/userMenubar.jsp" %>
+	<link rel="stylesheet" href="<%=contextPath %>/resources/user/css/member.css?ver=1">
+	
+	
 	
 	<div style="height : 200px"></div>
         
@@ -81,6 +84,6 @@
           </div>
 
 	<!-- 자바스크립트 파일 연동 -->
-	<script type="text/javascript" src="../../../resources/user/js/userLoginAndSignIn.js"></script>
+	<script type="text/javascript" src="<%=contextPath %>/resources/user/js/member.js"></script>
 </body>
 </html>

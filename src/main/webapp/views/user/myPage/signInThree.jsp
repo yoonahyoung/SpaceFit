@@ -6,13 +6,14 @@
 <meta charset="UTF-8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <title>Space Fit 회원가입</title>
-<link rel="stylesheet" href="../../../resources/user/css/userLoginAndSignIn.css">
 <style>
 		
 </style>
 </head>
 <body>
+	<!-- MENUBAR MEMBER CSS 연동 -->
 	<%@ include file="../common/userMenubar.jsp" %>
+	<link rel="stylesheet" href="<%=contextPath %>/resources/user/css/member.css?ver=1">
 	
 	<div style="height : 200px"></div>
         
@@ -36,7 +37,7 @@
             	</div> 
           	</div>	
           </div>
-	<!-- Latest compiled JavaScript -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- 자바스크립트 파일 연동 -->
+	<script type="text/javascript" src="<%=contextPath %>/resources/user/js/member.js"></script>
 </body>
 </html>
