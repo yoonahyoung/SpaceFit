@@ -548,7 +548,7 @@
 	      
 	      <div class="containor">
 	      <button type="button" class="btn btn-b-n navbar-toggle-box navbar-toggle-box-collapse" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" style="margin-left:420px; width:45px; height:45px;">
-	        <span class="material-symbols-outlined" style="margin-left:-2px">
+	        <span class="material-symbols-outlined" style="margin-left:-2px;">
 	          menu
 	          </span>
 	      </button>
@@ -574,7 +574,7 @@
 	<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 	
 	<!-- Vendor JS Files -->
-	<script src="<%= contextPath %>/resources/user/templates/real_estate/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	 <script src="<%= contextPath %>/resources/user/templates/real_estate/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="<%= contextPath %>/resources/user/templates/real_estate/assets/vendor/swiper/swiper-bundle.min.js"></script>
 	<script src="<%= contextPath %>/resources/user/templates/real_estate/assets/vendor/php-email-form/validate.js"></script>
 	
