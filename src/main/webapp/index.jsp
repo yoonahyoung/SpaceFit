@@ -15,14 +15,14 @@
         text-align: center; */        
         /* 3 */
         /* height: 800px; */
-    }
+    	}
     /* #logoarea:after{display:inline-block; height:100%; content:""; vertical-align:middle;} */
     #logo-area img{
         position:absolute; top:50%; transform:translateY(-50%) translateX(-50%);
         /* vertical-align: middle; */
         /* line-height:800px; */
        
-    }
+    	}
     
      body{
             color:  #0D6EFD;
@@ -34,7 +34,34 @@
         }
         
 	/*---------- intro section -----------*/
-	
+	.swiper-slide{
+		flex-shrink:0;
+		width:100%;
+		height:100%;
+		position:relative;
+		transition-property:transform
+		}
+	/* -------------- space section ----------------- */
+	  .col-md-4 .card-box-d{
+	    height:100%;
+	  }
+	  .img-d.img-fluid{
+	    object-fit:contain;
+	  }
+	  .card-overlay.card-overlay-hover{
+	    height:100%;
+	  }
+	  .intro.intro-carousel.swiper.position-relative{
+	  	margin-top:-200px;
+	  }
+	  .card-body-d *{
+	    color:skyblue;
+	  }
+    .link-two{
+      text-decoration:none;
+      color:white;
+    }
+  
 </style>
 </head>
 <body>
@@ -60,7 +87,7 @@
                       <br> 
                     </h1>
                     <p class="intro-subtitle intro-price">
-                      <a href="#"><span class="price-a"> 1 hour | 25,000</span></a>
+                      <a href="#"><span class="price-a"> 예약하기 </span></a>
                     </p>
                   </div>
                 </div>
@@ -85,7 +112,7 @@
                       <br>
                     </h1>
                     <p class="intro-subtitle intro-price">
-                      <a href="#"><span class="price-a">1 hour | 10,000 </span></a>
+                      <a href="#"><span class="price-a"> 예약하기 </span></a>
                     </p>
                   </div>
                 </div>
@@ -94,7 +121,7 @@
           </div>
         </div>
       </div>
-      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(resources/user/templates/real_estate/assets/img/slide-2.jpg)">
+      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(resources/user/templates/real_estate/assets/img/slide-3.jpg)">
         <div class="overlay overlay-a"></div>
         <div class="intro-content display-table">
           <div class="table-cell">
@@ -110,7 +137,7 @@
                       <br> 
                     </h1>
                     <p class="intro-subtitle intro-price">
-                      <a href="#"><span class="price-a">1 hour | 20,000 </span></a>
+                      <a href="#"><span class="price-a"> 예약하기 </span></a>
                     </p>
                   </div>
                 </div>
@@ -126,7 +153,7 @@
   <main id="main">
 
 
-    <!-- ======= space Section ======= -->
+    <!-- ======= space Section1 ======= -->
     <section class="section-agents section-t8">
       <div class="container">
         <div class="row">
@@ -147,27 +174,23 @@
           <div class="col-md-4">
             <div class="card-box-d">
               <div class="card-img-d">
-                <img src="../spacefit/스튜디오/스튜디오2/164473698_a017e0caf9119cc47e6729799c0161ba.jpg" alt="" class="img-d img-fluid">
+                <img src="resources/admin/img/스튜디오/스튜디오3/studio3_2.jpg" alt="" class="img-d img-fluid">
               </div>
               <div class="card-overlay card-overlay-hover">
                 <div class="card-header-d">
                   <div class="card-title-d align-self-center">
                     <h3 class="title-d">
-                      <a href="agent-single.html" class="link-two">Margaret Sotillo
-                        <br> Escala</a>
+                      <a href="agent-single.html" class="link-two">스튜디오3<br></a>
                     </h3>
                   </div>
                 </div>
                 <div class="card-body-d">
-                  <p class="content-d color-text-a">
-                  orta two.
-                  </p>
                   <div class="info-agents color-a">
                     <p>
-                      <strong>Phone: </strong> +54 356 945234
+                      <strong>촬영에 적합한 스튜디오</strong> 
                     </p>
                     <p>
-                      <strong>Email: </strong> agents@example.com
+                      <strong> 최대 인원 : <span>n</span>명 </strong> 
                     </p>
                   </div>
                 </div>
@@ -177,27 +200,23 @@
           <div class="col-md-4">
             <div class="card-box-d">
               <div class="card-img-d">
-                <img src="../spacefit/연습실/연습실1/164109516_bf1953c1219b66cd90b5f7f5a95faaec.jpg" alt="" class="img-d img-fluid">
+                <img src="resources/admin/img/스튜디오/스튜디오2/studio2_2.jpg" alt="" class="img-d img-fluid">
               </div>
               <div class="card-overlay card-overlay-hover">
                 <div class="card-header-d">
                   <div class="card-title-d align-self-center">
                     <h3 class="title-d">
-                      <a href="agent-single.html" class="link-two">Stiven Spilver
-                        <br> Darw</a>
+                      <a href="agent-single.html" class="link-two">스튜디오2<br></a>
                     </h3>
                   </div>
                 </div>
                 <div class="card-body-d">
-                  <p class="content-d color-text-a">
-                    um porta two.
-                  </p>
                   <div class="info-agents color-a">
                     <p>
-                      <strong>Phone: </strong> +54 356 945234
+                      <strong>패브릭한 느낌의 스튜디오</strong> 
                     </p>
                     <p>
-                      <strong>Email: </strong> agents@example.com
+                      <strong> 최대 인원 : <span>n</span>명 </strong> 
                     </p>
                   </div>
                 </div>
@@ -207,27 +226,23 @@
           <div class="col-md-4">
             <div class="card-box-d">
               <div class="card-img-d">
-                <img src="../spacefit/파티룸/파티룸1/163348399_2b85d57baf573c11e9304c8e093cfb1f.jpg" alt="" class="img-d img-fluid">
+                <img src="resources/admin/img/연습실/연습실1/prac1_1.jpg" alt="" class="img-d img-fluid">
               </div>
               <div class="card-overlay card-overlay-hover">
                 <div class="card-header-d">
                   <div class="card-title-d align-self-center">
                     <h3 class="title-d">
-                      <a href="agent-single.html" class="link-two">Emma Toledo
-                        <br> Cascada</a>
+                      <a href="agent-single.html" class="link-two">연습실1<br></a>
                     </h3>
                   </div>
                 </div>
                 <div class="card-body-d">
-                  <p class="content-d color-text-a">
-                    ictum porta two.
-                  </p>
                   <div class="info-agents color-a">
                     <p>
-                      <strong>Phone: </strong> +54 356 945234
+                      <strong>다양한 조명 색을 조절할 수 있는 연습실 </strong> 
                     </p>
                     <p>
-                      <strong>Email: </strong> agents@example.com
+                      <strong> 최대 인원 : <span>n</span>명 </strong> 
                     </p>
                   </div>
                 </div>
@@ -238,7 +253,7 @@
       </div>
     </section><!-- End Space Section -->
 
-    <!-- ======= space Section ======= -->
+    <!-- ======= space Section2 ======= -->
     <section class="section-agents section-t8 section-t8-2">
       <div class="container">
         <div class="row">
@@ -251,27 +266,23 @@
           <div class="col-md-4">
             <div class="card-box-d">
               <div class="card-img-d">
-                <img src="../spacefit/스튜디오/스튜디오1/studio10.jpeg" alt="" class="img-d img-fluid">
+                <img src="resources/admin/img/파티룸/파티룸2/party2_4.jpg" alt="" class="img-d img-fluid">
               </div>
               <div class="card-overlay card-overlay-hover">
                 <div class="card-header-d">
                   <div class="card-title-d align-self-center">
                     <h3 class="title-d">
-                      <a href="agent-single.html" class="link-two">Margaret Sotillo
-                        <br> Escala</a>
+                      <a href="agent-single.html" class="link-two">파티룸2 <br></a>
                     </h3>
                   </div>
                 </div>
                 <div class="card-body-d">
-                  <p class="content-d color-text-a">
-                     porta two.
-                  </p>
                   <div class="info-agents color-a">
                     <p>
-                      <strong>Phone: </strong> +54 356 945234
+                      <strong>낭만있는 분위기가 준비된 파티룸 </strong> 
                     </p>
                     <p>
-                      <strong>Email: </strong> agents@example.com
+                      <strong> 최대 인원 : <span>n</span>명 </strong> 
                     </p>
                   </div>
                 </div>
@@ -281,27 +292,23 @@
           <div class="col-md-4">
             <div class="card-box-d">
               <div class="card-img-d">
-                <img src="../spacefit/파티룸/파티룸2/165337647_a1e70d5c96835eaaef6592f9b8f5f894.jpg" alt="" class="img-d img-fluid">
+                <img src="resources/admin/img/파티룸/파티룸1/party1_4.jpg" alt="" class="img-d img-fluid">
               </div>
               <div class="card-overlay card-overlay-hover">
                 <div class="card-header-d">
                   <div class="card-title-d align-self-center">
                     <h3 class="title-d">
-                      <a href="agent-single.html" class="link-two">Stiven Spilver
-                        <br> Darw</a>
+                      <a href="agent-single.html" class="link-two">파티룸1<br></a>
                     </h3>
                   </div>
                 </div>
                 <div class="card-body-d">
-                  <p class="content-d color-text-a">
-                    orta two.
-                  </p>
                   <div class="info-agents color-a">
                     <p>
-                      <strong>Phone: </strong> +54 356 945234
+                      <strong>생일파티, 이벤트 등에 적합한 파티룸 </strong> 
                     </p>
                     <p>
-                      <strong>Email: </strong> agents@example.com
+                      <strong> 최대 인원 : <span>n</span>명 </strong> 
                     </p>
                   </div>
                 </div>
@@ -311,27 +318,23 @@
           <div class="col-md-4">
             <div class="card-box-d">
               <div class="card-img-d">
-                <img src="../spacefit/연습실/연습실1/164109525_fe41d2807dcb628d6f2c12ec5150d31b.jpg" alt="" class="img-d img-fluid">
+                <img src="resources/admin/img/파티룸/파티룸2/party2_2.jpg" alt="" class="img-d img-fluid">
               </div>
               <div class="card-overlay card-overlay-hover">
                 <div class="card-header-d">
                   <div class="card-title-d align-self-center">
                     <h3 class="title-d">
-                      <a href="agent-single.html" class="link-two">Emma Toledo
-                        <br> Cascada</a>
+                      <a href="agent-single.html" class="link-two">파티룸2<br></a>
                     </h3>
                   </div>
                 </div>
                 <div class="card-body-d">
-                  <p class="content-d color-text-a">
-                    dictum porta two.
-                  </p>
                   <div class="info-agents color-a">
                     <p>
-                      <strong>Phone: </strong> +54 356 945234
+                      <strong>스튜디오로 활용도 가능한 파티룸 </strong> 
                     </p>
                     <p>
-                      <strong>Email: </strong> agents@example.com
+                      <strong> 최대 인원 : <span>n</span>명 </strong> 
                     </p>
                   </div>
                 </div>
@@ -340,7 +343,8 @@
           </div>
         </div>
       </div>
-    </section><!-- End Space Section -->
+    </section>
+    <!-- End Space Section -->
 
    
 
@@ -365,7 +369,7 @@
                 <div class="row">
                   <div class="col-sm-12 col-md-6">
                     <div class="testimonial-img">
-                      <img src="../spacefit/스튜디오/스튜디오1/studio12.jpeg" alt="" class="img-fluid">
+                      <img src="resources/admin/img/파티룸/루프탑/loof1_4.jpg" alt="" class="img-fluid">
                     </div>
                   </div>
                   <div class="col-sm-12 col-md-6">
@@ -374,7 +378,7 @@
                     </div>
                     <div class="testimonials-content">
                       <p class="testimonial-text">
-                        이 가격에 이 공간 실화냐. 가슴이 웅장해진다.
+                        워크샵 장소로 회사 근처 단독 공간을 찾다가 예약하게 되었는데 무엇보다 위치와 루프탑 공간이 좋았어요! 실내 공간도 함께 이용할 수 있었고 요즘같은 날 따뜻할 때 야외에서 프라이빗한 모임 장소를 찾는 분들께 적극 추천합니다.
                       </p>
                     </div>
                     <div class="testimonial-author-box">
@@ -391,7 +395,7 @@
                 <div class="row">
                   <div class="col-sm-12 col-md-6">
                     <div class="testimonial-img">
-                      <img src="../spacefit/파티룸/파티룸1/164402491_f3ccdd27d2000e3f9255a7e3e2c48800.jpg" alt="" class="img-fluid">
+                      <img src="resources/admin/img/파티룸/파티룸1/party1_2.jpg" alt="" class="img-fluid">
                     </div>
                   </div>
                   <div class="col-sm-12 col-md-6">
@@ -400,7 +404,7 @@
                     </div>
                     <div class="testimonials-content">
                       <p class="testimonial-text">
-                        나이 서른먹고 어릴적에 맥도날드에서 생일파티 한번도 안해봐서 해보고 싶었거든요. 좋은 선택이었던것 같아요. 근데 운영자님 왜 안오셨어요?
+                      생일파티겸 겸사겸사 파티룸 예약했는데 공간도 넓고 테이블도 컸고, 특히 소파가 있어서 편하게 쉴 수 있었어요. 저희 들어가기 전에 미리 테이블 세팅도 무료로 해주셔서 감동이었어요~ 여러번 문의 들렸는데도 친절하게 말씀해주셔서 좋았어요~ 다음에 또 이용할게요♡
                       </p>
                     </div>
                     <div class="testimonial-author-box">
@@ -423,6 +427,12 @@
 	
 	<%@ include file="views/user/common/userFooter.jsp" %>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/7.3.0/swiper-bundle.esm.browser.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/7.3.0/swiper-bundle.esm.browser.js"></script> -->
 </body>
+<script src="<%= contextPath %>/resources/user/templates/real_estate/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="<%= contextPath %>/resources/user/templates/real_estate/assets/vendor/swiper/swiper-bundle.min.js"></script>
+	<script src="<%= contextPath %>/resources/user/templates/real_estate/assets/vendor/php-email-form/validate.js"></script>
+	
+	<!-- Template Main JS File -->
+	<script src="<%= contextPath %>/resources/user/templates/real_estate/assets/js/main.js"></script>
 </html>
