@@ -12,8 +12,6 @@
 		alert("<%=request.getAttribute("errorMsg")%>");
 	function load(){
 		window.location.href = "<%=contextPath%>/views/user/myPage/login.jsp";
-	
-		
 		}
 </script>
 </body>

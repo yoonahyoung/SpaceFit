@@ -5,15 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Space Fit 로그인</title>
-<link rel="stylesheet" href="../../../resources/user/css/userLoginAndSignIn.css">
-<style>
-	
-</style>
 </head>
 <body>
+	<!-- MENUBAR MEMBER CSS 연동 -->
 	<%@ include file="../common/userMenubar.jsp" %>
+	<link rel="stylesheet" href="<%=contextPath %>/resources/user/css/member.css?ver=1">
 	
-	<div style="height : 200px"></div>
         
        <div class="outer">
        	<div class="blueShadow text-center">
@@ -29,7 +26,7 @@
                         <br>	
                         	<a href="" id="idSearch" class="find" style="color:grey; font-size:16px;">아이디 찾기&nbsp</a>
                     		<span style="color:grey; font-size:16px;">|</span>
-                    		<a href="" id="pwdSearch" class="find" style="color:grey; font-size:16px;"s>&nbsp비밀번호 재설정</a>
+                    		<a href="" id="pwdSearch" class="find" style="color:grey; font-size:16px;">&nbsp비밀번호 재설정</a>
                     		<br><br>
                         </h4>
                         <hr style="color:  #0D6EFD;"><br>
@@ -43,13 +40,19 @@
                         <br>
                     </div>
                     <div class="sign-in">
-                        <span>스페이스핏이 처음이신가요?</span><br>
-                        <button class="btn btn-primary signInBtn" type="button">회원가입</button><br>
+                        <span style="color: #0D6EFD;">스페이스핏이 처음이신가요?</span><br>
+                        <button class="btn btn-primary signInBtn" type="button" onclick="signIn();">회원가입</button><br>
+                        <script>
+	                       function signIn(){
+	                        	location.href="<%=contextPath %>/signIn.me"
+	                        }
+                        </script>
                     </div>
                 </div>
             </div>
           </div>
-<!-- 자바스크립트 파일 연동 -->
-	<script type="text/javascript" src="../../../resources/user/js/userLoginAndSignIn.js"></script>
+          
+	<!-- 자바스크립트 파일 연동 -->
+	<script type="text/javascript" src="<%=contextPath %>/resources/user/js/member.js"></script>
 </body>
 </html>

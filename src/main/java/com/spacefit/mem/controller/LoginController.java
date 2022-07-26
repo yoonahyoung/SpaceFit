@@ -43,7 +43,7 @@ public class LoginController extends HttpServlet {
 		
 		// 3) 요청처리 (db에 sql문 실행) => 해당 요청 처리하는 서비스 클래스 메소드 호출 결과 받기
 		Member loginUser = new MemberService().loginMember(memId, memPwd);
-		System.out.println(loginUser);
+		// System.out.println(loginUser);
 		
 		// 4) 돌려받은 결과를 가지고 사용자가 보게될 응답화면 제시
 		/*
@@ -69,7 +69,7 @@ public class LoginController extends HttpServlet {
 		
 		if(loginUser == null) {
 			// 조회결과 없이 로그인 실패 => 에러페이지
-			RequestDispatcher view = request.getRequestDispatcher("views/user/common/errorPage.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("views/user/common/loginErrorPage.jsp");
 			request.setAttribute("errorMsg", "로그인 실패! 아이디와 비밀번호를 확인해주세요.");
 			view.forward(request, response);
 			// 포워딩방식 : 해당 경로로 선택된 뷰가 보여질 뿐 url은 변경되지 않음

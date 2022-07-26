@@ -110,7 +110,6 @@ body{
 .find{
     text-decoration: none;
     font-size: 15px;
-    color:  #0D6EFD;
 }
    
 .easy-login button{
@@ -150,11 +149,14 @@ body{
 
 .sign-in span {
     font-size: 13px;
+    
 }
       
   
- 
- 
+.find:hover{
+	color: #0D6EFD;
+}
+
  
     
  /*--------------------------------------------------------------

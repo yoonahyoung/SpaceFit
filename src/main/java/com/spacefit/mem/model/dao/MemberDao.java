@@ -55,7 +55,8 @@ public class MemberDao {
 						rset.getString("mem_profile"),
 						rset.getDate("mem_enroll_date"),
 						rset.getDate("mem_modify_date"),
-						rset.getString("mem_status")
+						rset.getString("mem_status"),
+						rset.getString("mem_adm_flag")
 						);	
 			}
 			

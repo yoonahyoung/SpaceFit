@@ -16,13 +16,17 @@ public class Member {
 	public Date memEnrollDate;
 	public Date memModifyDate;
 	public String memStatus;
+	public String memAdmFlag;
 	
 	
 	public Member() {
 		
 	}
+
+
 	public Member(int memNo, int grNo, String memId, String memPwd, String memName, String memIdNo, String memPhone,
-			String memMail, String memProfile, Date memEnrollDate, Date memModifyDate, String memStatus) {
+			String memMail, String memProfile, Date memEnrollDate, Date memModifyDate, String memStatus,
+			String memAdmFlag) {
 		super();
 		this.memNo = memNo;
 		this.grNo = grNo;
@@ -36,88 +40,148 @@ public class Member {
 		this.memEnrollDate = memEnrollDate;
 		this.memModifyDate = memModifyDate;
 		this.memStatus = memStatus;
+		this.memAdmFlag = memAdmFlag;
 	}
-	
+
+
 	public int getMemNo() {
 		return memNo;
 	}
+
+
 	public void setMemNo(int memNo) {
 		this.memNo = memNo;
 	}
+
+
 	public int getGrNo() {
 		return grNo;
 	}
+
+
 	public void setGrNo(int grNo) {
 		this.grNo = grNo;
 	}
+
+
 	public String getMemId() {
 		return memId;
 	}
+
+
 	public void setMemId(String memId) {
 		this.memId = memId;
 	}
+
+
 	public String getMemPwd() {
 		return memPwd;
 	}
+
+
 	public void setMemPwd(String memPwd) {
 		this.memPwd = memPwd;
 	}
+
+
 	public String getMemName() {
 		return memName;
 	}
+
+
 	public void setMemName(String memName) {
 		this.memName = memName;
 	}
+
+
 	public String getMemIdNo() {
 		return memIdNo;
 	}
+
+
 	public void setMemIdNo(String memIdNo) {
 		this.memIdNo = memIdNo;
 	}
+
+
 	public String getMemPhone() {
 		return memPhone;
 	}
+
+
 	public void setMemPhone(String memPhone) {
 		this.memPhone = memPhone;
 	}
+
+
 	public String getMemMail() {
 		return memMail;
 	}
+
+
 	public void setMemMail(String memMail) {
 		this.memMail = memMail;
 	}
+
+
 	public String getMemProfile() {
 		return memProfile;
 	}
+
+
 	public void setMemProfile(String memProfile) {
 		this.memProfile = memProfile;
 	}
+
+
 	public Date getMemEnrollDate() {
 		return memEnrollDate;
 	}
+
+
 	public void setMemEnrollDate(Date memEnrollDate) {
 		this.memEnrollDate = memEnrollDate;
 	}
+
+
 	public Date getMemModifyDate() {
 		return memModifyDate;
 	}
+
+
 	public void setMemModifyDate(Date memModifyDate) {
 		this.memModifyDate = memModifyDate;
 	}
+
+
 	public String getMemStatus() {
 		return memStatus;
 	}
+
+
 	public void setMemStatus(String memStatus) {
 		this.memStatus = memStatus;
 	}
-	
+
+
+	public String getMemAdmFlag() {
+		return memAdmFlag;
+	}
+
+
+	public void setMemAdmFlag(String memAdmFlag) {
+		this.memAdmFlag = memAdmFlag;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Member [memNo=" + memNo + ", grNo=" + grNo + ", memId=" + memId + ", memPwd=" + memPwd + ", memName="
 				+ memName + ", memIdNo=" + memIdNo + ", memPhone=" + memPhone + ", memMail=" + memMail + ", memProfile="
 				+ memProfile + ", memEnrollDate=" + memEnrollDate + ", memModifyDate=" + memModifyDate + ", memStatus="
-				+ memStatus + "]";
+				+ memStatus + ", memAdmFlag=" + memAdmFlag + "]";
 	}
+	
 	
 	
 

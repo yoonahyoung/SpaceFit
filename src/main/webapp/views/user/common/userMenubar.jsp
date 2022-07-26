@@ -62,7 +62,7 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 
-
+	
    <!--/ 여기있는 style css 열지마세요! collapse 마이페이지 부분인데 아주 복잡합니다! /-->
   <style>
  body{
@@ -192,7 +192,7 @@
 }
 /*------------------------------------------ welcome ------------------------------------------*/
 
-#welcome {
+.welcome {
   background-color:#E7F1FF;
   display: grid;
   height: 70px;
@@ -200,14 +200,22 @@
   z-index: -1;
   margin-top: 40px;
   color: #0D6EFD;
-  font-weight: bold;
 }
 
-#welcome span {
+.welcome span {
   margin : auto;
 }
 
+.welcome.welLOgout{
+    font-weight: bold;
+    cursor: pointer;
+}
 
+.welcome.welLOgout:hover{
+ 	background-color: #EEEEEE;
+    font-weight: bold;
+    cursor: pointer;
+}
 /*------------------------------------------ 공지, 자주묻는질문 ------------------------------------------*/
 * {box-sizing: border-box}
 
@@ -370,7 +378,7 @@
 	        <a class="col iconCol" href=""><img src="<%= contextPath %>/resources/user/templates/real_estate/img/icon/heart.svg" id="icon3"><br><span class="pp">위시리스트</span></a>
 	      </div>
 	  
-	      <div id="welcome">
+	      <div class="welcome">
 	        <span>WELCOME!</span>
 	      </div>
 		
@@ -412,7 +420,7 @@
 	      <div class="container profileContainer">
 	        <div class="row profile">
 	          <button class="profile icon"> <img src="<%= contextPath %>/resources/user/templates/real_estate/img/icon/userIcon.svg" id="userIcon"> </button>
-	          <button class="profile text"><p><br><b><%=loginUser.getMemName() %></b> 환영합니다. <br> 예약일 <b>D-7</b> 남았네요!</p> </button>
+	          <button class="profile text"><p><br><b><%=loginUser.getMemName() %></b> 님, 환영합니다. <br> 예약일 <b>D-7</b> 남았네요!</p> </button>
 	        </div>
 	      </div>
 	  
@@ -424,9 +432,14 @@
 	        <a class="col iconCol" href=""><img src="<%= contextPath %>/resources/user/templates/real_estate/img/icon/heart.svg" id="icon3"><br><span class="pp">위시리스트</span></a>
 	      </div>
 	  
-	      <div id="welcome">
-	        <a href=<%=contextPath %>>로그아웃</span>
+	      <div class="welcome welLOgout">
+	        <span onclick="logout();">로그아웃</span>
 	      </div>
+			<script>
+			       function logout(){
+		       		location.href="<%=contextPath%>/logout.me";
+					}
+		    </script>
 	  
 	      <div class="accordion accordion-flush" id="accordionFlushExample">
 	        <div class="accordion-item">
@@ -457,7 +470,7 @@
 	        <div class="accordion-item">
 	          <h2 class="accordion-header" id="flush-headingFour">
 	            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-	              내글확인
+	              내 글확인
 	            </button>
 	          </h2>
 	          <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
@@ -470,7 +483,7 @@
 	          </div>
 	       </div>
 	       </div>
-	  
+	  	<!-- 
 	       <div class="accordion-item">
 	        <h2 class="accordion-header" id="flush-headingFive">
 	          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
@@ -486,7 +499,7 @@
 	          </div>
 	        </div>
 	      </div>
-	  
+	 -->
 	      <div class="accordion-item">
 	        <h2 class="accordion-header" id="flush-headingSix">
 	          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
@@ -548,7 +561,7 @@
 	      
 	      <div class="containor">
 	      <button type="button" class="btn btn-b-n navbar-toggle-box navbar-toggle-box-collapse" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" style="margin-left:420px; width:45px; height:45px;">
-	        <span class="material-symbols-outlined" style="margin-left:-2px;">
+	        <span class="material-symbols-outlined" style="margin-left:-2px; line-height:1.3;">
 	          menu
 	          </span>
 	      </button>
