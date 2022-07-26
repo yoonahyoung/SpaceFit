@@ -15,8 +15,9 @@
 			 , MEM_ENROLL_DATE
 			 , MEM_MODIFY_DATE
 			 , MEM_STATUS
+			 , MEM_ADM_FLAG
 		  FROM TB_MEMBER
-		 WHERE MEM_STATUS = 'A'
+		 WHERE MEM_STATUS = 'Y'
 		   AND MEM_ID = ?
 		   AND MEM_PWD = ?
 	</entry>
