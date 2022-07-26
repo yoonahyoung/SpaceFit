@@ -17,6 +17,6 @@
 <body>
 	<%@ include file="adminMenubar.jsp" %>
 	
-	<img src="../../../resources/admin/img/로고1.png" alt="로고" width="25%" id="manageLogo">
+	<img src="<%= request.getContextPath() %>/resources/admin/img/로고1.png" alt="로고" width="25%" id="manageLogo">
 </body>
 </html>

@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>예약수정페이지</title>
-<link rel="stylesheet" href="../../../resources/user/css/book.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/user/css/book.css">
 </head>
 <body>
     

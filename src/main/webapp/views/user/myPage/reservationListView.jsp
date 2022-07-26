@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>예약내역리스트</title>
-<link rel="stylesheet" href="../../../resources/user/css/book.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/user/css/book.css">
 <!-- 구글아이콘 -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <style>
@@ -46,7 +46,7 @@
             <div class="card mb-3" style="max-width: 800px;">
                 <div class="row g-0" align="start">
                     <div class="col-md-4">
-                        <img src="../../../resources/user/img/파티룸.jpeg" class="rounded-start" style="width: 260px; height:200px">
+                        <img src="<%= request.getContextPath() %>/resources/user/img/파티룸.jpeg" class="rounded-start" style="width: 260px; height:200px">
                     </div>
                     <div class="col-md-6">
                     <div class="card-body vertical-center-rv1">
@@ -70,7 +70,7 @@
             <div class="card mb-3" style="max-width: 800px;">
                 <div class="row g-0" align="start">
                     <div class="col-md-4">
-                        <img src="../../../resources/user/img/파티룸.jpeg" class="rounded-start" style="width: 260px; height:200px">
+                        <img src="<%= request.getContextPath() %>/resources/user/img/파티룸.jpeg" class="rounded-start" style="width: 260px; height:200px">
                     </div>
                     <div class="col-md-6">
                     <div class="card-body vertical-center-rv1">
@@ -95,7 +95,7 @@
                 <div class="row g-0" align="start">
                     <div class="col-md-4">
                         <!-- 나중에 src속성값으로 공간대표이미지로 대입할것 -->
-                    <img src="../../../resources/user/img/파티룸.jpeg" class="rounded-start" style="width: 260px; height:200px">
+                    <img src="<%= request.getContextPath() %>/resources/user/img/파티룸.jpeg" class="rounded-start" style="width: 260px; height:200px">
                     </div>
                     <div class="col-md-6">
                     <div class="card-body vertical-center-rv1">
@@ -119,7 +119,7 @@
             <div class="card mb-3" style="max-width: 800px;">
                 <div class="row g-0" align="start">
                     <div class="col-md-4">
-                    <img src="../../../resources/user/img/파티룸.jpeg" class="rounded-start" style="width: 260px; height:200px"> <!--img-fluid 클래스주면 이미지사진 동적으로 변함-->
+                    <img src="<%= request.getContextPath() %>/resources/user/img/파티룸.jpeg" class="rounded-start" style="width: 260px; height:200px"> <!--img-fluid 클래스주면 이미지사진 동적으로 변함-->
                     </div>
                     <div class="col-md-6">
                     <div class="card-body vertical-center-rv1">

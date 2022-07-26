@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>진행중인 예약리스트</title>
-<link rel="stylesheet" href="../../../resources/admin/css/book.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/admin/css/book.css">
 </head>
 <body>
 
