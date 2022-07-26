@@ -378,3 +378,36 @@ body{
      left:43%;
      margin:30px 0px 0px -140px;
 }
+
+ /*--------------------------------------------------------------
+	memberUpdateView
+}
+--------------------------------------------------------------*/
+
+.div-member-size{
+  width:450px;
+}
+
+.memUpdateCard{
+	box-shadow: 2px 2px 10px 0px #0D6EFD;
+	width:700px; 
+	height:800px;
+}
+
+.memUpdateCard input{
+	border-color:lightgray;
+}
+
+#div-memberModify label{
+  font-weight: 650;
+      
+}
+
+#mem-input-phone{
+  width:300px;
+
+}
+
+#memProfileModal:hover{
+	cursor:pointer;
+}
