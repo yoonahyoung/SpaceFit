@@ -57,10 +57,13 @@
 	  .card-body-d *{
 	    color:skyblue;
 	  }
-    .link-two{
-      text-decoration:none;
-      color:white;
-    }
+      .link-two{
+      	text-decoration:none;
+      	color:white;
+      }	
+      .intro-subtitle.intro-price a{
+    	text-decoration:none;
+      }
   
 </style>
 </head>
@@ -71,80 +74,14 @@
   <div class="intro intro-carousel swiper position-relative">
 
     <div class="swiper-wrapper">
-      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(resources/user/templates/real_estate/assets/img/slide-1.jpg)">
-        <div class="overlay overlay-a"></div>
-        <div class="intro-content display-table">
-          <div class="table-cell">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-8">
-                  <div class="intro-body">
-                    <p class="intro-title-top">부가세 별도
-                      <br> 78345
-                    </p>
-                    <h1 class="intro-title mb-4 ">
-                      <span class="color-b">STUDIO </span> 
-                      <br> 
-                    </h1>
-                    <p class="intro-subtitle intro-price">
-                      <a href="#"><span class="price-a"> 예약하기 </span></a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(resources/admin/img/main2.jpeg)">
+      <a href=""></a>
       </div>
-      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(resources/user/templates/real_estate/assets/img/slide-2.jpg)">
-        <div class="overlay overlay-a"></div>
-        <div class="intro-content display-table">
-          <div class="table-cell">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-8">
-                  <div class="intro-body">
-                    <p class="intro-title-top">부가세 별도
-                      <br> 78345
-                    </p>
-                    <h1 class="intro-title mb-4">
-                      <span class="color-b">RECODINGROOM </span> 
-                      <br>
-                    </h1>
-                    <p class="intro-subtitle intro-price">
-                      <a href="#"><span class="price-a"> 예약하기 </span></a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(resources/admin/img/main3.jpg)">
+      <a href=""></a>
       </div>
-      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(resources/user/templates/real_estate/assets/img/slide-3.jpg)">
-        <div class="overlay overlay-a"></div>
-        <div class="intro-content display-table">
-          <div class="table-cell">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-8">
-                  <div class="intro-body">
-                    <p class="intro-title-top">부가세 별도
-                      <br> 78345
-                    </p>
-                    <h1 class="intro-title mb-4">
-                      <span class="color-b">PartyRoom </span>
-                      <br> 
-                    </h1>
-                    <p class="intro-subtitle intro-price">
-                      <a href="#"><span class="price-a"> 예약하기 </span></a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(resources/admin/img/main1.jpeg)">
+      <a href=""></a>
       </div>
     </div>
     <div class="swiper-pagination"></div>
@@ -163,7 +100,7 @@
                 <h2 class="title-a">OUR SPACE</h2>
               </div>
               <div class="title-link">
-                <a href="agents-grid.html">더 많은 상품보기
+                <a href="<%=contextPath%>/views/user/space/spaceListView.jsp">더 많은 상품보기
                   <span class="bi bi-chevron-right"></span>
                 </a>
               </div>
@@ -429,7 +366,7 @@
 
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/7.3.0/swiper-bundle.esm.browser.js"></script> -->
 </body>
-<script src="<%= contextPath %>/resources/user/templates/real_estate/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="<%= contextPath %>/resources/user/templates/real_estate/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="<%= contextPath %>/resources/user/templates/real_estate/assets/vendor/swiper/swiper-bundle.min.js"></script>
 	<script src="<%= contextPath %>/resources/user/templates/real_estate/assets/vendor/php-email-form/validate.js"></script>
 	
