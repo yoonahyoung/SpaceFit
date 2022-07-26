@@ -19,6 +19,9 @@ public class Member {
 	public String memAdmFlag;
 	
 	
+	//------------------- 테이블에는 없지만 추가된 리스트
+	private String randomNo;
+	
 	public Member() {
 		
 	}
@@ -171,6 +174,18 @@ public class Member {
 
 	public void setMemAdmFlag(String memAdmFlag) {
 		this.memAdmFlag = memAdmFlag;
+	}
+	
+	
+	
+
+	public String getRandomNo() {
+		return randomNo;
+	}
+
+
+	public void setRandomNo(String randomNo) {
+		this.randomNo = randomNo;
 	}
 
 

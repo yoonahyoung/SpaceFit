@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>   
+    pageEncoding="UTF-8"%> 
+<%@ page import ="com.spacefit.mem.model.vo.Member" %> 
+<%
+	Member m = (Member)request.getAttribute("m");
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,19 +57,22 @@
 		                            	</label>
 		                           	</td>
 		                           </tr>
-		                           <tr>
-		                           	<td>
-		                           		<label for="agree">
-			                            	<div class="agreeInput">
-			                            		 <input type="checkbox" name="agree" value="3">
-			                                	<span>이벤트, 혜택정보 수신동의<strong class="select_disable">(선택)</strong></span>
-			                            	</div>
-			                                <div class="agreeBox">
-			                                   <span>나중에 민아님 페이지에서 얻어올 이용약관 3</span>
-			                                </div>
-		                            	</label>
-		                           	</td>
-		                           </tr>
+		                           <!-- 
+			                           <tr>
+			                           	<td>
+			                           		<label for="agree">
+				                            	<div class="agreeInput">
+				                            		 <input type="checkbox" name="agree" value="3">
+				                                	<span>이벤트, 혜택정보 수신동의<strong class="select_disable">(선택)</strong></span>
+				                            	</div>
+				                                <div class="agreeBox">
+				                                   <span>나중에 민아님 페이지에서 얻어올 이용약관 3</span>
+				                                </div>
+			                            	</label>
+			                           	</td>
+			                           </tr>
+			                        -->
+			                       <tr style="height:20px;"></tr>
 		                           <tr>
 		                           	<td class="phone">
 		                           		<div class="phone box">
@@ -78,6 +85,7 @@
 				                            </span>
 	                       				 </div>
 		                           	</td>
+		                            <tr style="height:10px;"></tr>
 		                           </tr>
 		                          	<td class="phone">
 		                           		<label for="agree">
@@ -99,12 +107,66 @@
                         	<div class="inputs">
                         	
                         		<label for="#phoneIdNo" class="signInLabel">핸드폰번호</label>
-                                <input type="text" placeholder="핸드폰번호를 입력해주세요 (-제외)" class="signInInput" id="phoneIdNo">
-                                <button type="submit" class="btn btn-secondary getIdNoBtn" name="phoneIdNo">인증번호 받기</button><br><br>
+                                <input type="text" placeholder="핸드폰번호를 입력해주세요 (-제외)" class="signInInput" id="memPhone" name="memPhone">
+                                <button type="submit" class="btn btn-secondary getIdNoBtn" onclick="sms();">인증번호 받기</button><br><br>
+                                <script>
+						         
+							         // ajax로 인증번호 보내고 회원폰번호, 전송된 인증번호 기록
+							         function sms(){
+							        	 $.ajax({
+							        		 url:"<%=contextPath%>/sms.me",
+							        		 data:{
+							        			 memPhone:$("#memPhone").val();
+							        		 },
+							        		 type:"post",
+							        		 success:function(m){
+							        			console.log(m.getMemPhone());
+							        			console.log(m.getRandomNo());
+							        		 },
+							        		 error:function(){
+							        			console.log("인증번호 전송통신 ajax 실패");
+							        		 }
+							        		 
+							        	 })
+							         }
+						         </script>
+                                <label for="#phoneIdNoCheck" class="signInLabel">인증번호 작성</label>
+                                <input type="text" placeholder="인증번호를 입력해주세요" class="signInInput" id="smsNoCheck" name="smsNoCheck">
+                                <button type="submit" class="btn btn-primary getIdNoBtn" name="phoneIdNoCheck" onclick="checkSms();">확인</button><br><br>
+                                <div class="accountAnswer"></div>
                                 
-                                <label for="#phoneIdNoCheck" class="signInLabel">인증번호 받기</label>
-                                <input type="text" placeholder="인증번호를 입력해주세요" class="signInInput" id="phone">
-                                <button type="submit" class="btn btn-primary getIdNoBtn" name="phoneIdNoCheck">확인</button><br><br>
+                                 <script>
+						         
+							         // ajax로 인증번호 보내고 회원폰번호, 전송된 인증번호 기록
+							         function checkSms(){
+							        	 $.ajax({
+							        		 url:"<%=contextPath%>/smsTest.me",
+							        		 data:{
+							        			 smsNoCheck:$("#smsNoCheck").val(),
+							        			 randomNo:m.getRandomNo();
+							        		 },
+							        		 type:"post",
+							        		 // 여기까지 하면 현재 jsp에 있는 전달받은 랜덤번호랑 사용자가 적은 번호를 서블릿으로 보내게 됨
+							        		 success:function(result){
+							        			if(result > 0){
+							        				console.log("인증번호 확인 완료");
+							        				let value=" <span id='validMessage'>인증번호 확인 완료!</span>"
+							        				$(".signInForm .accountAnswer").html(value);
+							         				}
+							         				
+							        			} else {
+							        				console.log("인증번호가 틀렸다!");
+							        				let value=" <span id='validMessage'>인증번호가 틀렸다!</span>"
+							        				$(".signInForm .accountAnswer").html(value);
+							        			}
+							        		 },
+							        		 error:function(){
+							        			console.log("인증번호 전송통신 ajax 실패");
+							        		 }
+							        		 
+							        	 })
+							         }
+						         </script>
                             
                         	</div>
                         <hr>
