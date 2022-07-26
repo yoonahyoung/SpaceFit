@@ -301,3 +301,80 @@ body{
     font-weight: 600;
     font-size: 20px;
 }
+
+
+/*--------------------------------------------------------------
+	myCoupon
+}
+--------------------------------------------------------------*/   
+
+#cp-div-card1 span{
+    font-size: 24px;
+    
+ }
+ 
+ #cp-div-card1{
+ 	box-shadow: 2px 2px 10px 0px #0D6EFD;
+ }
+
+ #cp-input1{
+     width:30px;
+     border-color:lightgray;
+ }
+
+ #cpCodeDiv{
+   width:600px;
+   margin-left:100px;
+ }
+
+ #cpZone span{
+    font-size:30px;
+	font-weight: 600;
+
+ }
+ 
+ #cpZoneCard{
+ 	width:300px;
+ 	height:290px;
+ 	margin:10px;
+ }
+ 
+ #cpTable th, td{
+	color:dimgray;
+	font-size:15px;
+ }
+
+ 
+ /*--------------------------------------------------------------
+	pwdChange
+}
+--------------------------------------------------------------*/
+
+
+.pwdChangeDiv{
+     width:400px;
+     height:300px;
+     position:absolute;
+     top:50%;
+     left:50%;
+     margin:-150px 0px 0px -200px;
+}
+    
+.pwdChangeDiv input{
+	 border-color:lightgray;
+}
+
+.pwdChangeDiv label{
+     font-weight: 550;
+}
+    
+.pwdChangeCard {
+     width:550px;
+     height:480px;
+     border-radius: 30px;
+     box-shadow: 2px 2px 10px 0px #0D6EFD;
+     position:absolute;
+     top:43%;
+     left:43%;
+     margin:30px 0px 0px -140px;
+}
