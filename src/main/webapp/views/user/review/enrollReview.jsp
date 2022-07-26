@@ -5,8 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>후기등록</title>
-<link rel="stylesheet" href="../../../resources/user/css/review.css">
-<!-- <link rel="stylesheet" href="../../../resources/user/css/userLoginAndSignIn.css"> -->
+<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/user/css/review.css">
 <style>
 
 </style>
