@@ -26,9 +26,7 @@ public class TestSms {
 	  certifiedPhoneNumber(memPhone, randomNo);
 	  
 	  Member m = new Member();
-	  m.setMemPhone(memPhone);
-	  m.setRandomNo(randomNo);
-	  
+	  // 여기까지는 잘 작동됨... 문자도 잘 옴. 근데 이 이후로 반응이 없음 
 	  return m;
 	  
   }

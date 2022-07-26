@@ -31,7 +31,7 @@ public class AjaxSmsTestController extends HttpServlet {
 		String smsNoCheck = request.getParameter("smsNoCheck");
 		String randomNo = request.getParameter("randomNo");
 		int result = 0;
-		if(smsNoCheck == randomNo) {
+		if(smsNoCheck.equals(randomNo)) {
 			result = 1;
 		} else {
 			System.out.println("사용자가 입력한 번호랑 안맞는다!");

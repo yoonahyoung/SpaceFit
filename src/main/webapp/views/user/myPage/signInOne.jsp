@@ -35,7 +35,7 @@
 		                           	<td>
 		                           		<label for="agree">
 		                           			<div class="agreeInput">
-		                           				 <input type="checkbox" name="agree" value="1">
+		                           				 <input type="checkbox" name="agree1" id="agree1" value="1">
 		                                    	 <span>이용약관 동의<strong>(필수)</strong></span>
 		                           			</div>
 		                                    <div class="agreeBox">
@@ -48,7 +48,7 @@
 		                           	<td>
 		                           		<label for="agree">
 			                            	<div class="agreeInput">
-				                                <input type="checkbox" name="agree" value="2">
+				                                <input type="checkbox" name="agree" id="agree2" value="2">
 				                                <span>개인정보 수집, 이용 동의<strong>(필수)</strong></span>
 				                            </div>
 			                                <div class="agreeBox">
@@ -57,6 +57,17 @@
 		                            	</label>
 		                           	</td>
 		                           </tr>
+		                           <script>
+		                           if (document.getElementById('agree1').checked == false) {
+		                        	   alert('체크하셔야 합니다.');
+		                        	 return false;
+		                        	 }
+		                           
+		                           if (document.getElementById('agree2').checked == false) {
+		                        	   alert('체크하셔야 합니다.');
+		                        	 return false;
+		                        	 }
+		                           </script>
 		                           <!-- 
 			                           <tr>
 			                           	<td>
@@ -116,15 +127,15 @@
 							        	 $.ajax({
 							        		 url:"<%=contextPath%>/sms.me",
 							        		 data:{
-							        			 memPhone:$("#memPhone").val();
+							        			 memPhone:$("#memPhone").val()
 							        		 },
 							        		 type:"post",
 							        		 success:function(m){
-							        			console.log(m.getMemPhone());
-							        			console.log(m.getRandomNo());
+							        			console.log(m.getMemPhone())
+							        			console.log(m.getRandomNo())
 							        		 },
 							        		 error:function(){
-							        			console.log("인증번호 전송통신 ajax 실패");
+							        			console.log("인증번호 전송통신 ajax 실패")
 							        		 }
 							        		 
 							        	 })
@@ -143,27 +154,23 @@
 							        		 url:"<%=contextPath%>/smsTest.me",
 							        		 data:{
 							        			 smsNoCheck:$("#smsNoCheck").val(),
-							        			 randomNo:m.getRandomNo();
+							        			 randomNo:m.getRandomNo()
 							        		 },
 							        		 type:"post",
 							        		 // 여기까지 하면 현재 jsp에 있는 전달받은 랜덤번호랑 사용자가 적은 번호를 서블릿으로 보내게 됨
 							        		 success:function(result){
 							        			if(result > 0){
-							        				console.log("인증번호 확인 완료");
+							        				console.log("인증번호 확인 완료")
 							        				let value=" <span id='validMessage'>인증번호 확인 완료!</span>"
-							        				$(".signInForm .accountAnswer").html(value);
+							        				$(".signInForm .accountAnswer").html(value)
 							         				}
 							         				
-							        			} else {
-							        				console.log("인증번호가 틀렸다!");
-							        				let value=" <span id='validMessage'>인증번호가 틀렸다!</span>"
-							        				$(".signInForm .accountAnswer").html(value);
 							        			}
 							        		 },
 							        		 error:function(){
 							        			console.log("인증번호 전송통신 ajax 실패");
 							        		 }
-							        		 
+							         
 							        	 })
 							         }
 						         </script>
