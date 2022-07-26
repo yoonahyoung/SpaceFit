@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>예약상세내역리스트</title>
-<link rel="stylesheet" href="../../../resources/user/css/book.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/user/css/book.css">
 </head>
 <body>
     <%@ include file="../common/userMenubar.jsp" %>
@@ -104,7 +104,36 @@
             <br><br>
 
             <h5><b>주소</b></h5>
-            <small>서울 금천구 가산디지털로</small>
+            <small>서울 금천구 가산디지털로</small> <br>
+            <div id="map" style="width:100%;height:400px;">               
+            </div>
+            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=60fe4abff9c12c6895a3cd4cf80f3561"></script>
+            <script>
+              var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+               mapOption = { 
+                  center: new kakao.maps.LatLng(37.4779452652514, 126.87912918876575), // 지도의 중심좌표
+                  level: 3 // 지도의 확대 레벨
+               };
+
+               var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+               // 마커가 표시될 위치입니다 
+               var markerPosition  = new kakao.maps.LatLng(37.4779452652514, 126.87912918876575); 
+
+               // 마커를 생성합니다
+               var marker = new kakao.maps.Marker({
+                  position: markerPosition
+               });
+
+               // 마커가 지도 위에 표시되도록 설정합니다
+               marker.setMap(map);
+
+               kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
+                   
+                  location.href = "https://map.kakao.com/link/to/SpaceFit,37.4779452652514,126.87912918876575";
+    
+               });
+            </script>
 
 
 
@@ -140,8 +169,11 @@
                      call
                   </span>
                </button>
-               &nbsp;
+                &nbsp;
+
+               예약수정과 예약취소는 당일시 보이지 않도록!!
                <a href="" class="btn btn-sm btn-primary">예약수정</a> &nbsp;
+
                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteBook">예약취소</button>
             </div> -->
 
