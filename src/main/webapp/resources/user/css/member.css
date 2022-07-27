@@ -77,6 +77,9 @@ body{
     color:  #0D6EFD;
 }
 
+.smsNoCheck:focus{
+    border: 1px solid red;
+}
 
  .already {
      font-size: 11px;

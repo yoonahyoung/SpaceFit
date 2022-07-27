@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class SignInController
+ * Servlet implementation class SignInTwoController
  */
-@WebServlet("/signIn.me")
-public class SignInController extends HttpServlet {
+@WebServlet("/signInTwo.me")
+public class SignInTwoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SignInController() {
+    public SignInTwoController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +26,9 @@ public class SignInController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/user/myPage/signInOne.jsp").forward(request, response);
+		String memPhone = request.getParameter("memPhoneSubmit");
+		request.setAttribute("memPhone", memPhone);
+		request.getRequestDispatcher("views/user/myPage/signInTwo.jsp").forward(request, response);
 	}
 
 	/**

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>   
+    pageEncoding="UTF-8"%>
+<%@ page import ="com.spacefit.mem.model.vo.Member" %> 
+<%
+	String memPhone = (String)request.getAttribute("memPhoneSubmit");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,9 +18,7 @@
 	<!-- MENUBAR MEMBER CSS 연동 -->
 	<%@ include file="../common/userMenubar.jsp" %>
 	<link rel="stylesheet" href="<%=contextPath %>/resources/user/css/member.css?ver=1">
-	
-	<div style="height : 200px"></div>
-        
+    <div style="height : 50px"></div>   
     <div class="outer">
         <div class="blueShadow text-center">
                     <div class="forPadding">
@@ -52,8 +54,8 @@
 	                                    </div>
 	                                </div>
 	                            <br><br>
-	                                <label for="#phone">전화번호</label>
-	                                <input type="text" placeholder="이름을 입력해주세요" class="account-input" id="phone" value="이미 휴대폰 인증받은 번호">   
+	                                <label for="#phone">핸드폰번호</label>
+	                                <input type="text" placeholder="핸드폰번호를 입력해주세요" class="account-input" id="memPhone" name ="memPhone" value="<%=memPhone%>">   
 	                                <br><br>             
 	                                <hr>
 	                                <br><br>
@@ -72,6 +74,8 @@
             	</div> 
           	</div>	
           </div>
+          <div style="height : 100px"></div>
+          <%@ include file="../common/userFooter.jsp" %>
 	<!-- 자바스크립트 파일 연동 -->
 	<script type="text/javascript" src="<%=contextPath %>/resources/user/js/member.js"></script>
 </body>

@@ -16,18 +16,16 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
  */
 public class TestSms {
 	
-  public Member testMessage(String memPhone) {
+  public String testMessage(String memPhone) {
 	  Random rand = new Random();
 	  String randomNo = "";
 	  for(int i=0; i<6; i++) {
 		  String ran = Integer.toString(rand.nextInt(10));
 		  randomNo += ran;
 	  }
-	  certifiedPhoneNumber(memPhone, randomNo);
-	  
-	  Member m = new Member();
-	  // 여기까지는 잘 작동됨... 문자도 잘 옴. 근데 이 이후로 반응이 없음 
-	  return m;
+	  //=> 실제 회원가입할때만 사용!
+	  //certifiedPhoneNumber(memPhone, randomNo);
+	  return randomNo;
 	  
   }
   

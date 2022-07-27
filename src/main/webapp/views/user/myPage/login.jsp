@@ -10,7 +10,7 @@
 	<!-- MENUBAR MEMBER CSS 연동 -->
 	<%@ include file="../common/userMenubar.jsp" %>
 	<link rel="stylesheet" href="<%=contextPath %>/resources/user/css/member.css?ver=1">
-	
+	<div style="height : 50px"></div>
         
        <div class="outer">
        	<div class="blueShadow text-center">
@@ -44,13 +44,15 @@
                         <button class="btn btn-primary signInBtn" type="button" onclick="signIn();">회원가입</button><br>
                         <script>
 	                       function signIn(){
-	                        	location.href="<%=contextPath %>/signIn.me"
+	                        	location.href="<%=contextPath %>/signInOne.me"
 	                        }
                         </script>
                     </div>
                 </div>
             </div>
           </div>
+          <div style="height : 100px"></div>
+          <%@ include file="../common/userFooter.jsp" %>
           
 	<!-- 자바스크립트 파일 연동 -->
 	<script type="text/javascript" src="<%=contextPath %>/resources/user/js/member.js"></script>
