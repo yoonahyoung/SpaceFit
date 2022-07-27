@@ -28,16 +28,19 @@ public class Book {
 	private String bookCategory;
 	private String bookCancleReason;
 	private String bookCancelContent;
-	private String payAmount; // 쿠폰사용전 금액
+	private String payAmount; // 쿠폰사용전 금액 -- pay테이블에 varchar2로 되어있어서 string으로 했음
     private String spacePicture; // 공간대표이미지   
+    private int bookDecimalDay; // 대여날짜까지 d-day
     
     public Book() {}
+	
 
 	public Book(int bookNo, String spaceNo, String memberNo, String payListId, int bookCount, String bookDate,
 			String bookInTime, String bookOutTime, int bookPrice, String bookName, String bookPhone, String bookEmail,
 			String bookPurpose, String bookAddContent, String bookCar, String bookAnimal, String bookChair,
 			String bookStand, Date bookCreateDate, Date bookModifyDate, String bookStatus, String bookCategory,
-			String bookCancleReason, String bookCancelContent, String payAmount, String spacePicture) {
+			String bookCancleReason, String bookCancelContent, String payAmount, String spacePicture,
+			int bookDecimalDay) {
 		super();
 		this.bookNo = bookNo;
 		this.spaceNo = spaceNo;
@@ -65,8 +68,11 @@ public class Book {
 		this.bookCancelContent = bookCancelContent;
 		this.payAmount = payAmount;
 		this.spacePicture = spacePicture;
+		this.bookDecimalDay = bookDecimalDay;
 	}
-	
+
+
+
 
 	public Book(int bookNo, String spaceNo, String bookDate, String bookInTime, String bookOutTime, int bookPrice,
 			String bookCategory, String spacePicture) {
@@ -81,6 +87,37 @@ public class Book {
 		this.spacePicture = spacePicture;
 	}
 
+	public Book(int bookNo, String spaceNo, String memberNo, int bookCount, String bookDate, String bookInTime,
+			String bookOutTime, int bookPrice, String bookName, String bookPhone, String bookEmail, String bookPurpose,
+			String bookAddContent, String bookCar, String bookAnimal, String bookChair, String bookStand,
+			Date bookCreateDate, String bookCategory, String bookCancleReason,
+			String bookCancelContent, String payAmount, int bookDecimalDay) {
+		super();
+		this.bookNo = bookNo;
+		this.spaceNo = spaceNo;
+		this.memberNo = memberNo;
+		this.bookCount = bookCount;
+		this.bookDate = bookDate;
+		this.bookInTime = bookInTime;
+		this.bookOutTime = bookOutTime;
+		this.bookPrice = bookPrice;
+		this.bookName = bookName;
+		this.bookPhone = bookPhone;
+		this.bookEmail = bookEmail;
+		this.bookPurpose = bookPurpose;
+		this.bookAddContent = bookAddContent;
+		this.bookCar = bookCar;
+		this.bookAnimal = bookAnimal;
+		this.bookChair = bookChair;
+		this.bookStand = bookStand;
+		this.bookCreateDate = bookCreateDate;		
+		this.bookCategory = bookCategory;
+		this.bookCancleReason = bookCancleReason;
+		this.bookCancelContent = bookCancelContent;
+		this.payAmount = payAmount;
+		this.bookDecimalDay = bookDecimalDay;
+	}
+	
 	public int getBookNo() {
 		return bookNo;
 	}
@@ -288,6 +325,16 @@ public class Book {
 	public void setSpacePicture(String spacePicture) {
 		this.spacePicture = spacePicture;
 	}
+	 
+	public int getBookDecimalDay() {
+		return bookDecimalDay;
+	}
+
+
+	public void setBookDecimalDay(int bookDecimalDay) {
+		this.bookDecimalDay = bookDecimalDay;
+	}
+
 
 	@Override
 	public String toString() {
@@ -299,9 +346,11 @@ public class Book {
 				+ ", bookChair=" + bookChair + ", bookStand=" + bookStand + ", bookCreateDate=" + bookCreateDate
 				+ ", bookModifyDate=" + bookModifyDate + ", bookStatus=" + bookStatus + ", bookCategory=" + bookCategory
 				+ ", bookCancleReason=" + bookCancleReason + ", bookCancelContent=" + bookCancelContent + ", payAmount="
-				+ payAmount + ", spacePicture=" + spacePicture + "]";
+				+ payAmount + ", spacePicture=" + spacePicture + ", bookDecimalDay=" + bookDecimalDay + "]";
 	}
 
+
+	
 	
 	
 	
