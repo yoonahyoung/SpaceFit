@@ -12,7 +12,7 @@
 
  <%@ include file="../common/userMenubar.jsp" %>
   
-    <h2 align="center">개인정보수정</h2>
+    <h2 align="center">회원정보수정</h2>
     <br><br>
     <div align="center">
         <div class="card memUpdateCard">
@@ -28,16 +28,16 @@
                     <span style="font-size:24px; font-weight: 500;">user01</span><br>
                     <span style="font-size:18px; font-weight: 550; color:dimgray">등급 : </span> 
                     <span style="font-size:20px; font-weight:600; color:#0D6EFD">&nbsp;SILVER</span><br><br>
-                    <span style="text-decoration: underline;" id="memProfileModal" data-bs-toggle="modal" data-bs-target="#exampleModal">프로필사진변경</span><br><br><br>
+                    <span style="text-decoration: underline;" id="memProfileModal" data-bs-toggle="modal" data-bs-target="#profileModal">프로필사진변경</span><br><br><br>
                 </div>
             </div>
             
             <!-- Modal -->
-			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
 			  <div class="modal-dialog">
 			    <div class="modal-content">
 			      <div class="modal-header">
-			        <h5 class="modal-title" id="exampleModalLabel">프로필 사진 변경</h5>
+			        <h5 class="modal-title" id="profileModalLabel">프로필 사진 변경</h5>
 			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			      </div>
 			      <div class="modal-body">
@@ -107,10 +107,37 @@
           </div>
           <br><br><br>
                 
-          <button type="button" class="btn btn-secondary">탈퇴하기</button>
+          <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#memUpdateModal">탈퇴하기</button>
           <button type="button" class="btn btn-primary">수정하기</button>
-                
-             
+  
+          
+          <!-- Modal -->
+			<div class="modal fade" id="memUpdateModal" tabindex="-1" aria-labelledby="memUpdateModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered" role="document">
+			    <div class="modal-content" align="center">
+			      <div class="modal-header">
+			        <p class="modal-title" id="memUpdateModalLabel" style="margin-left:188px; font-weight:550; font-size:22px;">회원 탈퇴</h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body" style="margin:10px;">
+			       	<span style="font-size:15px;"> SPACEFIT 탈퇴시 내 프로필, 예약내역 등의 <br> 모든 정보가 삭제되며 이후 복구가 불가능합니다.
+			       	</span><br>
+			       		
+			       	<input type="checkbox">
+			       	<span style="color:red; font-size:13px;">위의 내용을 숙지했으며 서비스 탈퇴에 동의합니다</span><br><br>
+			       		
+			       	<div style="width:300px;">
+			       		<input type="password" class="form-control" placeholder="비밀번호 입력" style="font-size:13px;">
+			       	</div>
+			      </div>
+			      <div class="modal-footer" align="center">
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
+			        <button type="button" class="btn btn-primary" style="margin-right:140px;">탈퇴하기</button>
+			      </div>
+			    </div>
+			  </div>
+			</div> 
+         
         </form>
       </div>
     </div>

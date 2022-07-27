@@ -3,27 +3,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Shoping Cart</title>
+	<title>보관함</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<style>
-
-	#div-mem-cart button{
-		border-radius: 20px;
-		width:140px
-		}
-
-	#cart-radio1, #cart-radio2{
-		margin-left:85px
-	}
-
-	#cart-div-span span{
-		font-size:26px;
-		font-weight: 600;
-	}
-
-</style>
+	<link rel="stylesheet" href="../../../resources/user/css/member.css">
 </head>
 <body class="animsition">
 
@@ -54,7 +37,7 @@
 	<link rel="stylesheet" type="text/css" href="<%= contextPath %>/resources/user/templates/cozastore/css/main.css">
 <!--===============================================================================================-->
 
-	<h2 align="center">장바구니</h2>
+	<h2 align="center">보관함</h2>
 		
 
 	<!-- Shoping Cart -->
@@ -75,8 +58,8 @@
 
 								<tr class="table_row">
 									<td class="column-1">
-										<div class="how-itemcart1">
-											<img src="images/item-cart-04.jpg" alt="IMG">
+										<div class="how-itemcart1" align="center">
+											<img src="../../../resources/user/img/파티룸.jpeg" alt="IMG">
 										</div>
 									</td>
 									<td class="column-2">파티룸 C</td>
@@ -88,7 +71,7 @@
 								<tr class="table_row">
 									<td class="column-1">
 										<div class="how-itemcart1">
-											<img src="images/item-cart-05.jpg" alt="IMG">
+											<img src="../../../resources/user/img/파티룸.jpeg" alt="IMG">
 										</div>
 									</td>
 									<td class="column-2">연주실 A</td>
@@ -102,8 +85,102 @@
 						<div class="bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm" align="center" id="div-mem-cart">
 							<br>
 							<button type="button" class="btn btn-secondary"  id="mem-cart-btn1">전체삭제</button>&nbsp;&nbsp;
-          					<button type="button" class="btn btn-primary">옵션/수량 변경</button>
+          					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cartModal">옵션/수량 변경</button>
 							<br><br>
+						</div>
+						
+						<!-- Modal -->
+						<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+						  <div class="modal-dialog modal-dialog-centered">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <p class="modal-title" id="cartModalLabel" style="margin-left:188px; font-weight:550; font-size:22px;">옵션 변경</p>
+						        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						      </div>
+						      <div class="modal-body" style="padding:40px; color:black;">
+						        <div class="d-flex align-items-start align-items-sm-center gap-4">
+			                        <img
+			                          src="../../../resources/user/img/파티룸.jpeg"
+			                          alt="user-avatar"
+			                          class="d-block rounded"
+			                          height="80"
+			                          width="80"
+			                          id="uploadedAvatar"
+			                        />
+			                        <div>
+									  <p style="font-size:18px; color:black;">파티룸 C</p>
+			                          <p style="font-size:18px; color:crimson;">98,000원</p>
+			                        </div>
+		                      	</div>
+		                      		<br>
+		                      	<p style="font-weight:550; font-size:16px; margin-bottom:13px;">* 대여 날짜</p>
+		                      	<div style="width:300px;">
+					       			<input type="text" class="form-control" value="2022.07.24(일) 15~19시" style="font-size:13px;" disabled>
+					       		</div><br>
+					       		<p style="font-weight:550; font-size:16px; margin-bottom:13px;">* 선택 가능 옵션</p>
+					       		<div>
+						          <select name="" id="" style="font-family:inherit; width:300px; height:35px;">
+						            <option value="">주차 이용</option>
+						            <option value="">반려동물 동반</option>
+						            <option value="">보면대</option>
+						            <option value="">미니의자</option>
+						          </select>
+						        </div>
+					       		<br>
+					       		<p style="font-weight:550; font-size:16px; margin-bottom:13px;">* 선택된 옵션</p>
+					       			<div class="cartOptionDiv">
+									  	<table class="cartOptionTable" style="width:415px; height:55px;">
+										  		<tr class="table_row">
+										  			<td><div style="width:10px;"></div></td>
+										  			<td class="column-1" style="text-align:left; width:80px;">이용인원</td>
+										  			<td class="column-2">
+									  					<div>
+									  						<div class="d-flex cartOptionCount">
+										                        <div>-</div>
+										                        <div>1</div>
+										                        <div>+</div>
+									                      	</div>
+									  					</div>
+										  			</td>
+										  			<td class="column-3"></td>
+										  			<td class="column-4"><button type="button"><img src="../../../resources/user/img/cartDelete.png" alt="" style="width:15px; margin-left:25px;"></button></td>
+										  		</tr>
+									  	 </table>
+									  </div>
+									  
+									  <div class="cartOptionDiv">
+									  
+									  	<table class="" style="width:415px; height:55px;">
+										  		<tr class="table_row">
+										  			<td><div style="width:10px;"></div></td>
+										  			<td class="column-2" style="text-align:left;">주차 이용</td>
+										  			<td><div style="width:25px;"></div></td>
+										  			<td class="column-4"><button type="button"><img src="../../../resources/user/img/cartDelete.png" alt="" style="width:15px; margin-left:25px;"></button></td>
+										  		</tr>
+									  	</table>
+									  	</div>
+									    <!--  <div class="col">이용인원</div> 
+									    <div class="col cartOptionCount">
+									    	<div class="container text-center">
+															  <div class="row row-cols-3">
+															    <div class="col">-</div>
+															    <div class="col">1</div>
+															    <div class="col">+</div>
+															  </div>
+															</div>
+									    </div>
+									    <div class="col"></div>
+									    <div class="col"><button type="button"><img src="../../../resources/user/img/cartDelete.png" alt="" style="width:15px; margin-left:25px;"></button></div>-->
+									
+									 
+				       			
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
+						        <button type="button" class="btn btn-primary" style="margin-right:140px;">변경하기</button>
+						      </div>
+						    </div>
+						  </div>
 						</div>
 					</div>
 				</div>
