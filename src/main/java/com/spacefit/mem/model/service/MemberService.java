@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.util.Random;
 
 import com.spacefit.mem.model.dao.MemberDao;
-import com.spacefit.mem.model.dao.Naver_Sens_V2;
 import com.spacefit.mem.model.vo.Member;
 
 
@@ -22,6 +21,13 @@ public class MemberService {
 	}
 	
 	
+	public int idCheck(String memId) {
+		Connection conn = getConnection();
+		// System.out.println(memId);
+		int count = new MemberDao().idCheck(conn, memId);
+		close(conn);
+		return count;
+	}
 	
 
 

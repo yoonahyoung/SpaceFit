@@ -91,10 +91,10 @@ function checkSms(){
 		success:function(result){
 			if(result > 0){
 				console.log("인증번호 확인 완료")
-				let value=" <span id='validMessage' style='font-size:11px; text-align:rignt'>인증번호 확인 완료!</span>"
+				let value=" <span id='validMessage' style='font-size:11px;'>인증번호 확인 완료!</span>"
 				$(".signInForm .accountAnswer").html(value)
  				} else {
- 					 let value=" <span id='validMessage' style='font-size:11px; color : red; text-align:rignt'>인증번호를 다시 확인해주세요!</span>"
+ 					 let value=" <span id='validMessage' style='font-size:11px; color : red;'>인증번호를 다시 확인해주세요!</span>"
 				     $(".signInForm .accountAnswer").html(value)
 				     $("#smsNoCheck").focus();
  				}
@@ -111,3 +111,50 @@ function checkSms(){
 		$("#memPhoneSubmit").val($("#memPhone").val())
 		$("#phoneForm").submit()
 }
+
+
+
+
+
+
+
+
+
+
+
+//--------------------------------------------SignInTwo//
+
+// 1. 아이디 중복체크용 js
+function idCheck(){
+				$.ajax({
+					url:"idCheck.me",
+					data:{
+						 memId:$("#memId").val()
+					},
+					success:function(result){ // 넘어오는 데이터를 받으려면 매개변수가 필요함
+						// console.log(result);
+						if(result == "NNNNN"){
+							// 사용 불가일 경우
+							alert("이미 존재하거나 탈퇴한 회원의 아이디입니다.");
+							$memId.focus();
+						} else {
+							// 사용 가능일경우
+							if(confirm("멋진 아이디네요! 사용하시겠습니까?")){
+								// 사용하겠다
+								$("#signInForm :submit").removeAttr("disabled");
+								$memId.attr("readOnly", true);
+							} else {
+								// 사용하지 않겠다
+								$memId.focus();
+							}
+						}
+						
+					},
+					error:function(){
+						console.log("아이디 중복체크용 ajax 통신 실패");
+					}
+				})
+			}
+
+
+// 2. 아이디 유효성검사

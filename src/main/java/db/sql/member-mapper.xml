@@ -21,5 +21,13 @@
 		   AND MEM_ID = ?
 		   AND MEM_PWD = ?
 	</entry>
+	
+	
+	<entry key="idCheck">
+		SELECT
+			   COUNT(*) AS "COUNT"
+		  FROM TB_MEMBER
+		 WHERE MEM_ID = ?
+	</entry>
 
 </properties>

@@ -70,5 +70,32 @@ public class MemberDao {
 	}
 	
 	
+	public int idCheck(Connection conn, String memId) {
+		
+		int count = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("idCheck");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memId);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt("count");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}	
+		// System.out.println(count);
+		return count;
+	}
+	
+
+	
 
 }

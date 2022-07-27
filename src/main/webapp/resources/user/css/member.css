@@ -252,6 +252,16 @@ body{
 }
 
 
+.addMessege{
+	font-size:16px;
+	font-weight:bold;
+	text-align:center;
+	align-items:center;
+	margin:0;
+	justify-content:center;
+	color:  #0D6EFD;
+}
+
 
  /*--------------------------------------------------------------
 	signInThree
