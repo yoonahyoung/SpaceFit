@@ -14,7 +14,7 @@ import com.spacefit.mem.model.vo.Member;
 import com.spacefit.reservation.model.service.BookService;
 import com.spacefit.reservation.model.vo.Book;
 
-/**
+/** MyPage에서 예약조회클릭시 예약내역페이지요청
  * Servlet implementation class AjaxBookListController
  */
 @WebServlet("/blist.bo")
@@ -51,8 +51,10 @@ public class AjaxBookListController extends HttpServlet {
 		}
 		
 		// 로그인객체 만들어지면 풀기!!
-		//int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
-		int memNo = 3;
+		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
+		
+		//System.out.println(memNo);
+		
 		ArrayList<Book> list = new BookService().selectBookList(booktype, bookOrderBy, memNo);
 		//System.out.println(list);		
 		
