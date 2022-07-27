@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.spacefit.reservation.model.vo.Book" %>
+<%
+	Book b = (Book)request.getAttribute("b");
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +14,7 @@
     <%@ include file="../common/userMenubar.jsp" %>
 
     <div class="rvlvd">
-        <input type="hidden" value="예약번호" id="bookNo">
+            
         <div class="rvlvd-header" align="center">
             <h3>예약상세페이지</h3>
             <hr style="width: 230px">
@@ -24,55 +27,52 @@
             <table class="table">                    
                <tr>
                   <th width="150px">예약공간</th>    
-                  <td width="150px">연습실A</td>                        
+                  <td width="150px"><%= b.getSpaceNo() %></td>                        
                </tr>
                <tr>
                   <th>대여날짜</th>    
-                  <td>2022.07.22</td> 
+                  <td><%= b.getBookDate() %></td> 
                </tr>
                <tr>
                   <th>예약시간</th>    
-                  <td>14:00 ~ 16:00</td> 
+                  <td><%= b.getBookInTime() %>:00 ~ <%= b.getBookOutTime() %>:00 </td> 
                         <!-- 체크인시간 + "~" + 체크아웃시간 -->
                </tr>
                <tr>
                   <th>예약인원</th>                     
-                  <td>3</td>
+                  <td><%= b.getBookCount() %></td>
                </tr>
 
                <tr>
                   <th>주차</th>
-                  <td>                    
-                     <input type="radio" name="optionCar" value="Y" checked>요청 &nbsp;
-                     <input type="radio" name="optionCar" value="N">미요청
+                  <td>    
+                  	            
+                     <input type="radio" name="optionCar" value="Y" <% if("Y".equals(b.getBookCar())) { %> checked <% } %>  >                     
                   </td>                  
                </tr>
-
+				
                <tr>
                   <th>반려동물동반</th>                  
                   <td>                    
-                     <input type="radio" name="optionAnimal" value="Y">요청 &nbsp;
-                     <input type="radio" name="optionAnimal" value="N" checked>미요청
+                     <input type="radio" name="optionAnimal" id="bookAnimal" value="Y" <% if("Y".equals(b.getBookAnimal())) { %> checked <% } %> >                     
                   </td>                  
                </tr>
-
+               
+			   <tr>
+                  <th>미니의자</th>
+                  <td>                    
+                     <input type="radio" name="optionChair" id="bookChair" value="Y" <% if("Y".equals(b.getBookChair())) { %> checked <% } %> >                    
+                  </td>                  
+               </tr>
+               
                <tr>
                   <th>보면대</th>
                   <td>                    
-                     <input type="radio" name="optionStand" value="Y">요청 &nbsp;
-                     <input type="radio" name="optionStand" value="N" checked>미요청
+                     <input type="radio" name="optionStand" id="bookStand" value="Y" <% if("Y".equals(b.getBookStand())) { %> checked <% } %> >                     
                   </td>                  
-               </tr>
-
-               <tr>
-                  <th>미니의자</th>
-                  <td>                    
-                     <input type="radio" name="optionChair" value="Y" checked>요청 &nbsp;
-                     <input type="radio" name="optionChair" value="N">미요청
-                  </td>                  
-               </tr>
-
-            </table>
+               </tr>            
+            </table>            
+            
             <br><br>
 
             <h5><b>예약자정보</b></h5>
@@ -80,23 +80,23 @@
             <table class="table">
                <tr>
                   <th width="150px">예약자</th>    
-                  <td width="150px">홍길동</td>                        
+                  <td width="150px"><%= b.getBookName() %></td>                        
                </tr>
                <tr>
                   <th>연락처</th>    
-                  <td>010-5689-1234</td>                        
+                  <td><%= b.getBookPhone() %></td>                        
                </tr>
                <tr>
                   <th>이메일</th>    
-                  <td>xx123@naver.com</td>                        
+                  <td><%= b.getBookEmail() %></td>                        
                </tr>
                <tr>
                   <th>사용목적</th>    
-                  <td>친구생일파티하려고요</td>                        
+                  <td><%= b.getBookPurpose() %></td>                        
                </tr>
                <tr>
                   <th>요청사항</th>    
-                  <td><textarea name="bookContent" rows="8" cols="22" style="resize:none" readonly>파티도구 판매하나요?</textarea></td>                        
+                  <td><textarea name="bookContent" rows="8" cols="22" style="resize:none" readonly><%= b.getBookAddContent() %></textarea></td>                        
                   
                </tr>
 
@@ -104,7 +104,7 @@
             <br><br>
 
             <h5><b>주소</b></h5>
-            <small>서울 금천구 가산디지털로</small> <br>
+            <small>서울 금천구 가산디지털로</small> <br><br>
             <div id="map" style="width:100%;height:400px;">               
             </div>
             <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=60fe4abff9c12c6895a3cd4cf80f3561"></script>
@@ -148,47 +148,56 @@
             <table class="table">
                <tr>
                   <th width="150px"><h5><b>총 결제금액</b></h5></th>    
-                  <td width="150px"><h5><b>56000원</b></h5></td>                        
+                  <td width="150px"><h5><b><%= b.getBookPrice() %></b></h5></td>                        
                </tr>
                <tr>
                   <th>주문금액</th>    
-                  <td>61000원</td>                        
+                  <td> <%= b.getPayAmount() %></td>                        
                </tr>
                <tr>
                   <th>쿠폰</th>    
-                  <td>5000원</td>                        
+                  <td>-<%= Integer.parseInt(b.getPayAmount()) - b.getBookPrice() %></td>                        
                </tr>              
             </table>
 
             <br><br>
 
             <!-- 진행중인 예약 상세보기일경우 -->
-            <!-- <div align="center">                  
-               <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#callNumberModal">
-                  <span class="material-symbols-outlined" style="font-size: medium;">
-                     call
-                  </span>
-               </button>
-                &nbsp;
+           <% if(b.getBookCategory().equals("예약확정")) { %> 
+	           <div align="center">                  
+	               <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#callNumberModal">
+	                  <span class="material-symbols-outlined" style="font-size: medium;">
+	                     call
+	                  </span>
+	               </button>
+	                &nbsp;	                
+	
+	               <!-- 예약수정과 예약취소는 3일전엔 보이지 않도록!! -->
+	               <%if(b.getBookDecimalDay() > 3) { %>
+	               		<a href="" class="btn btn-sm btn-primary">예약수정</a> &nbsp;
+	
+	               		<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteBook">예약취소</button>
+	               <% } %>
+	               &nbsp;
+	               <button type="button" onclick="history.back();" class="btn btn-sm btn-secondary">뒤로가기</button>
+	            </div>	            
+            <%} %> 
 
-               예약수정과 예약취소는 당일시 보이지 않도록!!
-               <a href="" class="btn btn-sm btn-primary">예약수정</a> &nbsp;
-
-               <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteBook">예약취소</button>
-            </div> -->
-
-            <!-- 취소된 예약 상세보기일경우 -->
-            <!-- 예약리스트->예약상세보기갈때 예약번호(hidden)를 넘기고 => status=n인거 -->            
-            <!-- <div align="center">
-               <button type="button" class="btn btn-sm btn-primary" disabled>취소완료</button> &nbsp;
-               <button type="button" onclick="history.back();" class="btn btn-sm btn-secondary">뒤로가기</button>
-            </div> -->
-
+            <!-- 취소된 예약 상세보기일경우 -->  
+             <%if(b.getBookCategory().equals("예약취소")) { %>              
+	            <div align="center">
+	               <button type="button" class="btn btn-sm btn-primary" disabled>취소완료</button> &nbsp;
+	               <button type="button" onclick="history.back();" class="btn btn-sm btn-secondary">뒤로가기</button>
+	            </div>
+			 <% } %>
             <!-- 완료된 예약상세보기일경우 -->
-            <div align="center">               
-               <button type="button" class="btn btn-sm btn-primary" onclick="reviewEnroll();">후기등록</button> &nbsp;
-               <button type="button" onclick="history.back();" class="btn btn-sm btn-secondary">뒤로가기</button>
-            </div>
+            <%if(b.getBookCategory().equals("이용완료")) {%>
+	            <div align="center">               
+	               <button type="button" class="btn btn-sm btn-primary" onclick="reviewEnroll();">후기등록</button> &nbsp;
+	               <button type="button" onclick="history.back();" class="btn btn-sm btn-secondary">뒤로가기</button>
+	            </div>
+	         <%} %>   
+	            
             <script>
               function reviewEnroll(){
                   // location.href = '<%= contextPath %>/url쓰고?no=' + document.getElementById("bookNo").value;
@@ -256,15 +265,15 @@
                         <td colspan="2" align="end">
                            <span id="bCount">0</span>/500
                         </td>
-                    </tr>  
-                    <script>
+                    </tr>                         
+                  </table>
+                  <script>
                      $(function(){
                         $("#bCancelContent").keyup(function(){
                            $("#bCount").text($(this).val().length);
                         })
                      })
-                     </script>    
-                  </table>                     
+                     </script>                      
                   <br>
                   <div align="center">
                      <button type="submit" class="btn btn-sm btn-primary">예약취소</button>
