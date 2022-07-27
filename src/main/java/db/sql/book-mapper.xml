@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd"> 
+<properties>
+    
+    <!-- 사용자페이지 예약내역조회용  -->
+	<entry key="selectBookList">
+		SELECT  BOOK_NO
+		      , SPACE_NAME		      
+		      , BOOK_DATE
+		      , BOOK_IN
+		      , BOOK_OUT
+		      , BOOK_PRICE  
+		      , BOOK_CATEGORY		      
+		      , SPACE_PIC
+		   FROM VW_BOOK
+		  WHERE MEM_NO = ?
+		  
+	</entry>
+	
+	<!-- 사용자페이지 예약상세내역 조회용 | 관리자용으로 사용예정-->
+	<entry key="selectBook">
+		 SELECT BOOK_NO
+		      , SPACE_NAME      
+		      , MEM_ID      
+		      , BOOK_COUNT
+		      , BOOK_DATE
+		      , BOOK_IN
+		      , BOOK_OUT
+		      , BOOK_PRICE
+		      , BOOK_NAME
+		      , BOOK_PHONE
+		      , BOOK_EMAIL
+		      , BOOK_PURPOSE
+		      , BOOK_ADD_CONTENT
+		      , BOOK_CAR
+		      , BOOK_ANIMAL
+		      , BOOK_CHAIR
+		      , BOOK_STAND
+		      , BOOK_CREATE_DATE          
+		      , BOOK_CANCEL_REASON
+		      , BOOK_CANSEL_CONTENT
+		      , BOOK_CATEGORY
+		      , PL_AMOUNT  
+		      , BOOK_D_DAY   
+		   FROM VW_BOOK
+		  WHERE BOOK_NO = ?
+	</entry>
+	
+	
+</properties>

@@ -43,10 +43,8 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="background:#0D6EFD;">
 
             <!--로고 클릭시 관리자메인페이지이동하게끔-->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <!-- <i class="fas fa-laugh-wink"></i> -->
-                </div>
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<%=contextPath%>/adminPage.ap">
+                <div class="sidebar-brand-icon rotate-n-15"></div>
                 <div class="sidebar-brand-text mx-3">SPACE FIT</div>
             </a>
 
@@ -81,7 +79,7 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">                       
-                        <a class="collapse-item" href="">예약통계</a>
+                        <a class="collapse-item" href="<%=contextPath%>/views/admin/book/bookManageChart.jsp">예약통계</a>
                         <a class="collapse-item" href="">진행중인 예약리스트</a>
                         <a class="collapse-item" href="">이용완료예약리스트</a>  
                         <a class="collapse-item" href="">취소예약리스트</a>                      
@@ -155,7 +153,7 @@
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" style="vertical-align: middle;">
                     <div style="width: 1650px" align="right">
 
-                        <a href="">
+                        <a href="<%=contextPath%>/logout.me">
                             <span class="material-symbols-outlined">
                                 logout
                             </span>

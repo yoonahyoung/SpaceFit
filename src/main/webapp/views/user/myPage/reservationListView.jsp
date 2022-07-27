@@ -24,131 +24,30 @@
         <div class="rvlv1-header" align="center"><h3>예약내역리스트</h3></div>
        
         <div class="rvlv1-menu">
-            <select name="" id="">
-                <option value="">대여날짜순</option>
-                <option value="">예약번호순</option>
-            </select>                    
-            <select name="" id="">
-                <option value="">전체</option>
-                <option value="">예약확정</option>
-                <option value="">이용완료</option>
-                <option value="">취소환불</option>
+            <select name="booktype" id="booktype">
+                <option>전체</option>
+                <option>예약확정</option>
+                <option>이용완료</option>
+                <option>예약취소</option>
             </select>
+            <select name="bookOrderBy" id="bookOrderBy">
+                <option value="book_date">대여날짜순</option>
+                <option value="book_no">예약번호순</option>
+            </select>                   
+            
         </div>
 
-
-        <div class="rvlv1-main" align="center">
-            <!-- 예약현황없을때 -->
-            <!-- <div align="center" style="margin-top: 200px"> 조회된결과가 없습니다.</div> -->
-            
-            <!-- 예약현황있을때 -->             
-                
-            <div class="card mb-3" style="max-width: 800px;">
-                <div class="row g-0" align="start">
-                    <div class="col-md-4">
-                        <img src="<%= request.getContextPath() %>/resources/user/img/파티룸.jpeg" class="rounded-start" style="width: 260px; height:200px">
-                    </div>
-                    <div class="col-md-6">
-                    <div class="card-body vertical-center-rv1">
-                        <span id="rvlv1-status" class="rounded-pill" style="background:#f196e2"><small>예약확정</small></span>
-                        <br><br>
-                        <h5 class="card-title">파티룸A</h5>
-                        <p class="card-text">2022.05.10 10:00~19:00</p>
-                        <p class="card-text"><small class="text-muted">10000원</small></p>
-                    </div>
-                    </div>
-                    <div class="col-md-2 end-center-rv1">
-                        <a href="">
-                            <span class="material-symbols-outlined text-primary">
-                                arrow_forward_ios
-                            </span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card mb-3" style="max-width: 800px;">
-                <div class="row g-0" align="start">
-                    <div class="col-md-4">
-                        <img src="<%= request.getContextPath() %>/resources/user/img/파티룸.jpeg" class="rounded-start" style="width: 260px; height:200px">
-                    </div>
-                    <div class="col-md-6">
-                    <div class="card-body vertical-center-rv1">
-                        <span id="rvlv1-status" class="rounded-pill" style="background: #E7F1FF"><small>예약취소</small></span>
-                        <br><br>
-                        <h5 class="card-title">녹음실A</h5>
-                        <p class="card-text">2022.05.10 10:00~19:00</p>
-                        <p class="card-text"><small class="text-muted">10000원</small></p>
-                    </div>
-                    </div>
-                    <div class="col-md-2 end-center-rv1">
-                        <a href="">
-                            <span class="material-symbols-outlined text-primary">
-                                arrow_forward_ios
-                            </span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card mb-3" style="max-width: 800px;">
-                <div class="row g-0" align="start">
-                    <div class="col-md-4">
-                        <!-- 나중에 src속성값으로 공간대표이미지로 대입할것 -->
-                    <img src="<%= request.getContextPath() %>/resources/user/img/파티룸.jpeg" class="rounded-start" style="width: 260px; height:200px">
-                    </div>
-                    <div class="col-md-6">
-                    <div class="card-body vertical-center-rv1">
-                        <span id="rvlv1-status" class="rounded-pill" style="background: #e1ee32"><small>이용완료</small></span>
-                        <br><br>
-                        <h5 class="card-title">파티룸B</h5>
-                        <p class="card-text">2022.05.10 10:00~19:00</p>
-                        <p class="card-text"><small class="text-muted">10000원</small></p>
-                    </div>
-                    </div>
-                    <div class="col-md-2 end-center-rv1">
-                    <a href="">
-                        <span class="material-symbols-outlined text-primary">
-                            arrow_forward_ios
-                        </span>
-                    </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card mb-3" style="max-width: 800px;">
-                <div class="row g-0" align="start">
-                    <div class="col-md-4">
-                    <img src="<%= request.getContextPath() %>/resources/user/img/파티룸.jpeg" class="rounded-start" style="width: 260px; height:200px"> <!--img-fluid 클래스주면 이미지사진 동적으로 변함-->
-                    </div>
-                    <div class="col-md-6">
-                    <div class="card-body vertical-center-rv1">
-                        <span id="rvlv1-status" class="rounded-pill" style="background: #e1ee32"><small>이용완료</small></span>
-                        <br><br>
-                        <h5 class="card-title">파티룸B</h5>
-                        <p class="card-text">2022.05.10 10:00~19:00</p>
-                        <p class="card-text"><small class="text-muted">10000원</small></p>
-                    </div>
-                    </div>
-                    <div class="col-md-2 end-center-rv1">
-                    <a href="">
-                        <span class="material-symbols-outlined text-primary">
-                            arrow_forward_ios
-                        </span>
-                    </a>
-                    </div>
-                </div>
-            </div>
-
-
-        
-
+        <div class="rvlv1-main" id="bookListArea" align="center">
+                                      
+			<!-- 예약내역정보가 올 자리 -->
+			
         </div>
 
                
         <div class="rvlv1-footer" align="center">  
+             
                         
-            <div class="paging-area" align="center">    
+           <!--<div class="paging-area" align="center">    
         
                 <button class="btn btn-sm btn-outline-primary">&lt;</button>        
                 <button disabled class="btn btn-sm btn-outline-primary">1</button>        
@@ -158,8 +57,93 @@
                 <button class="btn btn-sm btn-outline-primary">5</button>             
                 <button class="btn btn-sm btn-outline-primary">&gt;</button>
                 
-            </div>
+            </div>--> 
         </div>
+        
+                
+        <script>
+        	$(function(){
+        		
+        		selectBookList();     
+        		setInterval(selectBookList, 1000);
+        		
+        	})	
+        	
+        	function selectBookList(){
+        		
+        		$.ajax({
+        			url: "<%= contextPath %>/blist.bo",
+        			data:{
+        				   	booktype: $("#booktype").val(),
+        				    bookOrderBy: $("#bookOrderBy").val()        				
+        			},
+        			type:"post",
+        			success:function(list){
+        				
+        				let contextPath = "<%= contextPath %>";
+        				
+        				let bookColor = "";        				
+        				let value ="";       				
+        				if(list.length == 0){
+        					value += "<div align='center' style='margin-top: 200px'> 조회된결과가 없습니다.</div>";
+        				}else{
+	        				for(let i=0; i<list.length; i++){
+	        					
+	        					switch(list[i].bookCategory){
+	        						case '예약확정' : bookColor = "#fcbbf1"; break;
+	        						case '이용완료' : bookColor = "#e1ee32"; break;
+	        						case '예약취소' :	bookColor = "#E7F1FF"; break;
+	        					}
+	        					
+	        					
+		        				value += "<div class='card mb-3' style='max-width: 800px;'>"
+				        				+   "<div class='row g-0' align='start'>"
+				        				+      	"<div class='col-md-4'>"
+				        				+         	"<img src='"+ contextPath + "/" + list[i].spacePicture + "' class='rounded-start' style='width: 260px; height:200px'>"
+				        				+      	"</div>"
+				        				+    	"<div class='col-md-6'>"
+				        				+    		 "<div class='card-body vertical-center-rv1'>"
+				        				+        	 	"<span id='rvlv1-status' class='rounded-pill' style='background:"+ bookColor  +"'><small>" + list[i].bookCategory + "</small></span>"
+				        				+        	 	"<br><br>"
+				        				+        		"<h5 class='card-title'>" + list[i].spaceNo + "</h5>"
+				        				+        		"<p class='card-text'>"+ list[i].bookDate + "  &nbsp;&nbsp;" + list[i].bookInTime + ":00 ~ " + list[i].bookOutTime + ":00 </p>"
+				        				+        		"<p class='card-text'><small class='text-muted'>" + list[i].bookPrice + "원" + "</small></p>"
+				        				+     	 	"</div>"
+				        				+     	"</div>"
+				        				+     	"<div class='col-md-2 end-center-rv1'>"
+				        				+       	  "<a href='"+ contextPath + "/bdetail.bo?no=" + list[i].bookNo + "'>"
+				        				+         	    "<span class='material-symbols-outlined text-primary'>"
+				        				+        	         "arrow_forward_ios"
+				        				+        	     "</span>"
+				        				+        	 "</a>"
+				        				+     	"</div>"
+				        				+ 	"</div>"
+				        				+"</div>"	
+		        				
+		        				//console.log(list[i].spacePicture);
+	        				}
+	        				
+        				}
+	        				$("#bookListArea").html(value);
+
+        				
+        				
+        				
+        			},
+        			
+        			error:function(){
+        				
+        				console.log("예약내역리스트 조회용 ajax통신 실패");
+        				
+        			}
+        			
+        		});
+        		
+        	}
+        
+        
+        </script>
+        
         
     </div>
 </body>
