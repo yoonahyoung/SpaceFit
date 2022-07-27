@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import ="com.spacefit.mem.model.vo.Member" %> 
 <%
-	String memPhone = (String)request.getAttribute("memPhoneSubmit");
+	String memPhone = (String)request.getAttribute("memPhone");
 %>
 <!DOCTYPE html>
 <html>

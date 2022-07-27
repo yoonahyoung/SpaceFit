@@ -26,7 +26,7 @@ public class SignInTwoController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memPhone = request.getParameter("memPhoneSubmit");
+		String memPhone = request.getParameter("memPhone");
 		request.setAttribute("memPhone", memPhone);
 		request.getRequestDispatcher("views/user/myPage/signInTwo.jsp").forward(request, response);
 	}
