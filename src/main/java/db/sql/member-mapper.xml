@@ -29,5 +29,38 @@
 		  FROM TB_MEMBER
 		 WHERE MEM_ID = ?
 	</entry>
+	
+	<entry key="insertMember">
+		INSERT
+		  INTO TB_MEMBER
+		      (MEM_NO
+		     , GR_NO
+		     , MEM_ID
+		     , MEM_PWD
+		     , MEM_NAME
+		     , MEM_IDNO
+		     , MEM_PHONE
+		     , MEM_MAIL
+		     , MEM_PROFILE
+		     , MEM_ENROLL_DATE
+		     , MEM_MODIFY_DATE
+		     , MEM_STATUS
+		     , MEM_ADM_FLAG)
+		VALUES (
+		       SEQ_MEMNO.NEXTVAL
+		     , 1
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , null 
+		     , sysdate
+		     , sysdate
+		     , 'Y'
+		     , 'U'
+     )
+	</entry>
 
 </properties>

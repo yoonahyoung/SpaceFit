@@ -55,7 +55,7 @@
 	                                <br><br>
 	                                <div class="addMessege">추가 입력사항입니다!</div>
 	                                <label for="#memEmail">이메일</label>
-			                        <input type="email" placeholder="이메일을 입력해주세요" class="account-input" id="email">
+			                        <input type="email" placeholder="이메일을 입력해주세요" class="account-input" id="memMail" name="memMail">
 			                        <input type="button" class="btn btn-secondary" style="color:white;" value="이메일 인증하기">
 			                        <br><br><br><br>
 			                        <hr>

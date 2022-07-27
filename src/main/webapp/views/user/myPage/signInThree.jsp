@@ -15,7 +15,7 @@
 	<%@ include file="../common/userMenubar.jsp" %>
 	<link rel="stylesheet" href="<%=contextPath %>/resources/user/css/member.css?ver=1">
 	
-	<div style="height : 200px"></div>
+	<div style="height : 50px"></div>
         
     <div class="outer">
         <div class="blueShadow text-center">
@@ -33,10 +33,13 @@
 	                   				</span>
 	                   			</div>
 	                   			<br>
-	                   			<button class="btn btn-primary nextBtn" type="submit">로그인</button><br>
+	                   			<button class="btn btn-primary nextBtn" type="button" onclick="loginForm();">로그인</button><br>
             	</div> 
           	</div>	
           </div>
+          
+     <div style="height : 100px"></div>
+     <%@ include file="../common/userFooter.jsp" %>
 	<!-- 자바스크립트 파일 연동 -->
 	<script type="text/javascript" src="<%=contextPath %>/resources/user/js/member.js"></script>
 </body>
