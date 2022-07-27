@@ -239,8 +239,10 @@
     cursor: pointer;
   }
 
-  .goToAdmin span{
+  .goToAdmin a{
     margin: auto;
+    text-decoration: none;
+    color: white;
   }
 
 
@@ -372,7 +374,7 @@
 	  
 	    </div>
 	    <div class="offcanvas-body">
-	      <div class="row iconRow">
+	      <div class="row iconRow" style="width:100%">
 	        <a class="col iconCol" href=""><img src="<%= contextPath %>/resources/user/templates/real_estate/img/icon/reserve.svg" id="icon1"><br><span>예약조회</span></a>
 	        <a class="col iconCol" href=""><img src="<%= contextPath %>/resources/user/templates/real_estate/img/icon/cart.svg" id="icon2"><br><span class="pp">장바구니</span></a>
 	        <a class="col iconCol" href=""><img src="<%= contextPath %>/resources/user/templates/real_estate/img/icon/heart.svg" id="icon3"><br><span class="pp">위시리스트</span></a>
@@ -406,8 +408,8 @@
 	
 	      <div class="big-signin">
 	        <button type="button" class="btn big-signin-btn">스페이스 클라우드의<br> 모든 혜택을 누릴 수 있도록<br> 회원가입 해 보세요!</button>
-	      </div>
-	        <button class="footer goToAdmin" href=""><span>관리자페이지로 이동</span></button>
+		  </div>
+
 	    </div>
 	  
 	  <% } else { %>
@@ -426,7 +428,7 @@
 	  
 	    </div>
 	    <div class="offcanvas-body">
-	      <div class="row iconRow">
+	      <div class="row iconRow" style="width:100%">
 	        <a class="col iconCol" href=""><img src="<%= contextPath %>/resources/user/templates/real_estate/img/icon/reserve.svg" id="icon1"><br><span>예약조회</span></a>
 	        <a class="col iconCol" href=""><img src="<%= contextPath %>/resources/user/templates/real_estate/img/icon/cart.svg" id="icon2"><br><span class="pp">장바구니</span></a>
 	        <a class="col iconCol" href=""><img src="<%= contextPath %>/resources/user/templates/real_estate/img/icon/heart.svg" id="icon3"><br><span class="pp">위시리스트</span></a>
@@ -506,7 +508,7 @@
 	            회원정보
 	          </button>
 	        </h2>
-	        <button class="footer goToAdmin" href=""><span>관리자페이지로 이동</span></button>
+	        <button class="footer goToAdmin"><a href="<%=contextPath%>/views/admin/common/managerIndexView.jsp">관리자페이지로 이동</a></button>
 	
 	      </div>
 	  	</div>

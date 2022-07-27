@@ -102,7 +102,7 @@
                     <div class="price-box d-flex">
                       <span class="price-a">rent | $ 12.000</span>
                     </div>
-                    <a href="property-single.html" class="link-a">Click here to view
+                    <a href="<%=contextPath%>/views/user/space/spaceDetailView.jsp" class="link-a">Click here to view
                       <span class="bi bi-chevron-right"></span>
                     </a>
                   </div>
@@ -229,7 +229,7 @@
         </div>
       </div>
     </section>
-    <!-- ======= Intro Singl2e ======= -->
+    <!-- ======= Intro Single2 ======= -->
     <section class="intro-single intro-single2">
       <div class="container">
         <div class="row">
@@ -277,7 +277,7 @@
               <div class="block2-pic hov-img0">
                 <img src="<%=thisPath%>/resources/admin/img/best1.jpg" alt="IMG-PRODUCT">
   
-                <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1 qw-btn">
+                <a href="<%=contextPath%>/views/user/space/spaceDetailView.jsp" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1 qw-btn">
                   Quick View
                 </a>
               </div>

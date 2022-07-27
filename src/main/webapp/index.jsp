@@ -117,7 +117,7 @@
                 <div class="card-header-d">
                   <div class="card-title-d align-self-center">
                     <h3 class="title-d">
-                      <a href="agent-single.html" class="link-two">스튜디오3<br></a>
+                      <a href="<%=contextPath%>/views/user/space/spaceDetailView.jsp" class="link-two">스튜디오3<br></a>
                     </h3>
                   </div>
                 </div>
