@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd"> 
+<properties>
+
+	<entry key="selectBookList">
+		SELECT  BOOK_NO
+		      , SPACE_NAME		      
+		      , BOOK_DATE
+		      , BOOK_IN
+		      , BOOK_OUT
+		      , BOOK_PRICE  
+		      , BOOK_CATEGORY		      
+		      , SPACE_PIC
+		   FROM VW_BOOK
+		  WHERE MEM_NO = ?
+		  
+	</entry>
+	
+	
+	
+</properties>
