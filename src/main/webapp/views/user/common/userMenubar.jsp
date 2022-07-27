@@ -4,6 +4,10 @@
 	String contextPath = request.getContextPath();
 	Member loginUser = (Member)session.getAttribute("loginUser");
 	// 로그인 시도전 loginUser == null / 로그인 성공시 : Member객체 있음
+			
+	String alertMsg = (String)session.getAttribute("alertMsg");
+ 	// 서비스 요청 전 menubar.jsp 로딩시 : null
+ 	// 서비스 요청 후 menubar.jsp 로딩시 : alert로 띄워줄 메세지 문구 String 		
 %>   
 <html>
 <head>
@@ -429,7 +433,7 @@
 	    </div>
 	    <div class="offcanvas-body">
 	      <div class="row iconRow" style="width:100%">
-	        <a class="col iconCol" href=""><img src="<%= contextPath %>/resources/user/templates/real_estate/img/icon/reserve.svg" id="icon1"><br><span>예약조회</span></a>
+	        <a class="col iconCol" href="<%= contextPath %>/bolist.bo"><img src="<%= contextPath %>/resources/user/templates/real_estate/img/icon/reserve.svg" id="icon1"><br><span>예약조회</span></a>
 	        <a class="col iconCol" href=""><img src="<%= contextPath %>/resources/user/templates/real_estate/img/icon/cart.svg" id="icon2"><br><span class="pp">장바구니</span></a>
 	        <a class="col iconCol" href=""><img src="<%= contextPath %>/resources/user/templates/real_estate/img/icon/heart.svg" id="icon3"><br><span class="pp">위시리스트</span></a>
 	      </div>
@@ -508,7 +512,7 @@
 	            회원정보
 	          </button>
 	        </h2>
-	        <button class="footer goToAdmin"><a href="<%=contextPath%>/views/admin/common/managerIndexView.jsp">관리자페이지로 이동</a></button>
+	        <button class="footer goToAdmin"><a href="<%=contextPath%>/adminPage.ap">관리자페이지로 이동</a></button>
 	
 	      </div>
 	  	</div>
