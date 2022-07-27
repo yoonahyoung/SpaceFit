@@ -29,7 +29,7 @@
                 <div class="row g-0" align="start">
                     <div class="col-md-4">
                          <!-- 나중에 src속성값으로 후기대표이미지로 대입할것 -->
-                        <img src="<%=contextPath%>/resources/user/img/파티룸.jpeg" class="rounded-start" style="width: 250px; height:200px">
+                        <img src="<%=contextPath%>/resources/admin/img/스튜디오/스튜디오1/studio1_1.jpeg" class="rounded-start" style="width: 250px; height:200px">
                     </div>
                     <div class="col-md-6">
                         <div class="card-body vertical-center-rv2">

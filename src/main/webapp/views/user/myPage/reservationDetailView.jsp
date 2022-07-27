@@ -200,7 +200,7 @@
         </div>
         <div class="rvlvd-footer"></div>
     </div>
-   
+        
     
     <!-- Call Modal -->
     <div class="modal fade" id="callNumberModal" tabindex="-1" aria-labelledby="callNumberModal1" aria-hidden="true">
@@ -236,7 +236,7 @@
                         <th width="100">취소사유</th>
                         <td width="200">
                            <select name="bCancelReason">
-                              <option>일정취소,변경</option>
+                              <option>일정취소및변경</option>
                               <option>예약정보오입력</option>
                               <option>호스트연락안됨</option>
                               <option>기타</option>
