@@ -251,7 +251,7 @@
 	            
             <script>
               function reviewEnroll(){
-                  // location.href = '<%= contextPath %>/url쓰고?no=' + document.getElementById("bookNo").value;
+                   location.href = '<%= contextPath %>/rInsert.re?no=' + <%=  b.getBookNo() %> ;
               }
                                                     
             </script>
@@ -290,7 +290,7 @@
                <h5 class="modal-title" id="deleteBkModalLabel">예약취소</h5>              
             </div>
             <div class="modal-body">
-               <form action="<%=contextPath %>/bdelete.bo?no=<%= b.getBookNo() %>" method=post>               
+               <form action="<%=contextPath %>/bdelete.bo?bno=<%= b.getBookNo() %>&sName=<%= b.getSpaceNo() %>" method=post>               
                   <table align="center">                     
                      <tr>
                         <th width="100">취소사유</th>
