@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.product.model.vo.*"%>
 <%
 	String thisPath = request.getContextPath();
+	ArrayList<Space> list = (ArrayList<Space>)request.getAttribute("list");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -230,7 +232,7 @@
               스튜디오
             </button>
   
-            <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".practiceRoom">
+            <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".practice">
               연습실
             </button>
   
@@ -242,11 +244,12 @@
         
         <div class="row isotope-grid">
   
-          <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item party">
+       	<%for(int i=0; i<list.size(); i++){ %>
+          <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <%=list.get(i).getSpaceCategory()%>">
             <!-- Block2 -->
             <div class="block2">
               <div class="block2-pic hov-img0">
-                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best1.jpg" alt="IMG-PRODUCT">
+                <img src="<%=thisPath%>/<%= list.get(i).getSpacePic() %>" alt="IMG-PRODUCT">
   
                 <a href="<%=contextPath%>/views/user/space/spaceDetailView.jsp" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1 qw-btn">
                   Quick View
@@ -255,252 +258,19 @@
   
               <div class="block2-txt flex-w flex-t p-t-14">
                 <div class="block2-txt-child1 flex-col-l ">
-                  <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                    Herschel supply
+                  <a href="" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                    <%= list.get(i).getSpaceName() %>
                   </a>
   
                   <span class="stext-105 cl3">
-                    <span>20,000</span>원/시간
+                    <span><%= list.get(i).getSpacePrice() %></span>원/시간
                   </span>
                 </div>
               </div>
             </div>
           </div>
+          <%} %>
   
-          <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item studio">
-            <!-- Block2 -->
-            <div class="block2">
-              <div class="block2-pic hov-img0">
-                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best1.jpg" alt="IMG-PRODUCT">
-  
-                <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1 qw-btn">
-                  Quick View
-                </a>
-              </div>
-  
-              <div class="block2-txt flex-w flex-t p-t-14">
-                <div class="block2-txt-child1 flex-col-l ">
-                  <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                    Only Check Trouser
-                  </a>
-  
-                  <span class="stext-105 cl3">
-                    원/시간
-                  </span>
-                </div>
-
-              </div>
-            </div>
-          </div>
-  
-          <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item party">
-            <!-- Block2 -->
-            <div class="block2">
-              <div class="block2-pic hov-img0">
-                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best1.jpg" alt="IMG-PRODUCT">
-  
-                <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1 qw-btn">
-                  Quick View
-                </a>
-              </div>
-  
-              <div class="block2-txt flex-w flex-t p-t-14">
-                <div class="block2-txt-child1 flex-col-l ">
-                  <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                    Classic Trench Coat
-                  </a>
-  
-                  <span class="stext-105 cl3">
-                    원/시간
-                  </span>
-                </div>
-  
-              </div>
-            </div>
-          </div>
-  
-          <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item practiceRoom">
-            <!-- Block2 -->
-            <div class="block2">
-              <div class="block2-pic hov-img0">
-                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best2.jpeg" alt="IMG-PRODUCT">
-  
-                <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1 qw-btn">
-                  Quick View
-                </a>
-              </div>
-  
-              <div class="block2-txt flex-w flex-t p-t-14">
-                <div class="block2-txt-child1 flex-col-l ">
-                  <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                    Front Pocket Jumper
-                  </a>
-  
-                  <span class="stext-105 cl3">
-                    원/시간
-                  </span>
-                </div>
-  
-              </div>
-            </div>
-          </div>
-  
-  
-          <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item party">
-            <!-- Block2 -->
-            <div class="block2">
-              <div class="block2-pic hov-img0">
-                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best2.jpeg" alt="IMG-PRODUCT">
-  
-                <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1 qw-btn">
-                  Quick View
-                </a>
-              </div>
-  
-              <div class="block2-txt flex-w flex-t p-t-14">
-                <div class="block2-txt-child1 flex-col-l ">
-                  <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                    Shirt in Stretch Cotton
-                  </a>
-  
-                  <span class="stext-105 cl3">
-                    원/시간
-                  </span>
-                </div>
-  
-              </div>
-            </div>
-          </div>
-  
-          <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item party">
-            <!-- Block2 -->
-            <div class="block2">
-              <div class="block2-pic hov-img0">
-                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best2.jpeg" alt="IMG-PRODUCT">
-  
-                <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1 qw-btn">
-                  Quick View
-                </a>
-              </div>
-  
-              <div class="block2-txt flex-w flex-t p-t-14">
-                <div class="block2-txt-child1 flex-col-l ">
-                  <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                    Pieces Metallic Printed
-                  </a>
-  
-                  <span class="stext-105 cl3">
-                    원/시간
-                  </span>
-                </div>
-  
-              </div>
-            </div>
-          </div>
-  
-          <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item practiceRoom">
-            <!-- Block2 -->
-            <div class="block2">
-              <div class="block2-pic hov-img0">
-                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best2.jpeg" alt="IMG-PRODUCT">
-  
-                <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1 qw-btn">
-                  Quick View
-                </a>
-              </div>
-  
-              <div class="block2-txt flex-w flex-t p-t-14">
-                <div class="block2-txt-child1 flex-col-l ">
-                  <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                    Femme T-Shirt In Stripe
-                  </a>
-  
-                  <span class="stext-105 cl3">
-                    원/시간
-                  </span>
-                </div>
-  
-              </div>
-            </div>
-          </div>
-  
-          <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item studio">
-            <!-- Block2 -->
-            <div class="block2">
-              <div class="block2-pic hov-img0">
-                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best3.jpeg" alt="IMG-PRODUCT">
-  
-                <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1 qw-btn">
-                  Quick View
-                </a>
-              </div>
-  
-              <div class="block2-txt flex-w flex-t p-t-14">
-                <div class="block2-txt-child1 flex-col-l ">
-                  <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                    Herschel supply 
-                  </a>
-  
-                  <span class="stext-105 cl3">
-                    원/시간
-                  </span>
-                </div>
-  
-              </div>
-            </div>
-          </div>
-  
-          <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item studio">
-            <!-- Block2 -->
-            <div class="block2">
-              <div class="block2-pic hov-img0">
-                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best3.jpeg" alt="IMG-PRODUCT">
-  
-                <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1 qw-btn">
-                  Quick View
-                </a>
-              </div>
-  
-              <div class="block2-txt flex-w flex-t p-t-14">
-                <div class="block2-txt-child1 flex-col-l ">
-                  <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                    Herschel supply
-                  </a>
-  
-                  <span class="stext-105 cl3">
-                    원/시간
-                  </span>
-                </div>
-  
-              </div>
-            </div>
-          </div>
-  
-          <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item practiceRoom">
-            <!-- Block2 -->
-            <div class="block2">
-              <div class="block2-pic hov-img0">
-                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best3.jpeg" alt="IMG-PRODUCT">
-  
-                <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1 qw-btn">
-                  Quick View
-                </a>
-              </div>
-  
-              <div class="block2-txt flex-w flex-t p-t-14">
-                <div class="block2-txt-child1 flex-col-l ">
-                  <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                    Square Neck Back
-                  </a>
-  
-                  <span class="stext-105 cl3">
-                    원/시간
-                  </span>
-                </div>
-  
-              </div>
-            </div>
-          </div>
         </div>
   
         

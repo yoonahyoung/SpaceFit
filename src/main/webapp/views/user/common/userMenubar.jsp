@@ -555,7 +555,7 @@
 	
 	
 	          <li class="nav-item">
-	            <a class="nav-link " href="<%=contextPath%>/views/user/space/spaceListView.jsp">SPACE</a>
+	            <a class="nav-link " href="<%=contextPath%>/list.sp">SPACE</a>
 	          </li>
 	
 	          <li class="nav-item">
