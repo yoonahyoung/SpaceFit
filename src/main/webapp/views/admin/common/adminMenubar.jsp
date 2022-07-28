@@ -33,6 +33,12 @@
       font-family: 'Noto Sans KR', sans-serif;
       font-family: 'Poppins', sans-serif;
     }
+    
+    .btn-primary {
+	  color: #fff;
+	  background-color:#0D6EFD;
+	  border-color: #0D6EFD;
+	}
  </style>
 </head>
 <body id="page-top">
@@ -61,8 +67,7 @@
                 </span>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">                        
-                        <a class="collapse-item" href="">공간업데이트</a>
-                        <a class="collapse-item" href="">옵션업데이트</a>                        
+                        <a class="collapse-item" href="">공간업데이트</a>                       
                     </div>
                 </div>
             </li>
