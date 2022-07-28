@@ -9,57 +9,28 @@
 <meta charset="UTF-8">
 <title>spaceListView</title>
 
-  	<link rel="stylesheet" type="text/css" href="<%=thisPath%>/resources/user/templates/cozastore/css/util.css">
-  	<link rel="stylesheet" type="text/css" href="<%=thisPath%>/resources/user/templates/cozastore/css/main.css">
-    <link rel="icon" type="image/png" href="<%=thisPath%>/resources/user/templates/cozastore/images/icons/favicon.png"/>
-  <!--===============================================================================================-->	
-  	<link rel="stylesheet" type="text/css" href="<%=thisPath%>/resources/user/templates/cozastore/vendor/css-hamburgers/hamburgers.min.css">
-  <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="<%=thisPath%>/resources/user/templates/cozastore/vendor/animsition/css/animsition.min.css">
-  <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="<%=thisPath%>/resources/user/templates/cozastore/vendor/select2/select2.min.css">
-  <!--===============================================================================================-->	
-    <link rel="stylesheet" type="text/css" href="<%=thisPath%>/resources/user/templates/cozastore/vendor/daterangepicker/daterangepicker.css">
-  <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="<%=thisPath%>/resources/user/templates/cozastore/vendor/slick/slick.css">
-  <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="<%=thisPath%>/resources/user/templates/cozastore/vendor/MagnificPopup/magnific-popup.css">
-  <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="<%=thisPath%>/resources/user/templates/cozastore/vendor/perfect-scrollbar/perfect-scrollbar.css">
-  <!--===============================================================================================-->
-  
-  <style>
-    .img-a.img-fluid{
-      height:545px;
-      width:450px;
-    }
-    .intro-single{
-      margin-top:-150px;
-    }
-    .title-single-box{
-      margin-top:-100px;
-    }
-    .intro-single.intro-single2{
-      margin-top:0px;
-      margin-bottom:-50px;
-    }
-    .qw-btn:hover{
-      background-color:#0D6EFD;
-    }
-    .block2-txt-child1.flex-col-l a{
-      text-decoration:none;
-    }
-    .block2-txt-child1.flex-col-l a:hover{
-      color:#0D6EFD;
-    }
-    .block2-pic.hov-img0 img{
-      width:307px;
-      height:380px;
-    }
-    .flex-w.flex-sb-m.p-b-52{
-      padding-bottom:10px;
-    }
-  </style>
+<!-- css -->
+<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/user/css/space.css">
+
+<link rel="stylesheet" type="text/css" href="<%=thisPath%>/resources/user/templates/cozastore/css/util.css">
+<link rel="stylesheet" type="text/css" href="<%=thisPath%>/resources/user/templates/cozastore/css/main.css">
+<link rel="icon" type="image/png" href="<%=thisPath%>/resources/user/templates/cozastore/images/icons/favicon.png"/>
+<!--===============================================================================================-->	
+<link rel="stylesheet" type="text/css" href="<%=thisPath%>/resources/user/templates/cozastore/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="<%=thisPath%>/resources/user/templates/cozastore/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="<%=thisPath%>/resources/user/templates/cozastore/vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+<link rel="stylesheet" type="text/css" href="<%=thisPath%>/resources/user/templates/cozastore/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="<%=thisPath%>/resources/user/templates/cozastore/vendor/slick/slick.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="<%=thisPath%>/resources/user/templates/cozastore/vendor/MagnificPopup/magnific-popup.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="<%=thisPath%>/resources/user/templates/cozastore/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+
 </head>
 <body>
 
