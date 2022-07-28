@@ -67,7 +67,7 @@
                 </span>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">                        
-                        <a class="collapse-item" href="">공간업데이트</a>                       
+                        <a class="collapse-item" href="<%=contextPath%>/views/admin/space/spaceManage.jsp">공간업데이트</a>                       
                     </div>
                 </div>
             </li>
