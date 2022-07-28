@@ -139,6 +139,7 @@
 	                                </table>
 	                            </div>
 	                        </div>
+	                        <button type="button" class = "btn btn-danger">추천 조작프로그램 실행</button>
 							<div class="paging-area" align="center">    
 		        
 								<button class="btn btn-sm btn-outline-primary">&lt;</button>        

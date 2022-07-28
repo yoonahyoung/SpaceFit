@@ -43,8 +43,9 @@
 							  <div style="height : 60px"></div>
 							  <div class="row" id="selectDivMem">
 							  	<form>
-								  <button class="btn btn-primary">게시글/댓글 복구</button>
-								  <button class="btn btn-danger">블랙리스트 처리</button>
+								  <button class="btn btn-primary">게시글 / 댓글 복구</button>
+								  <button class="btn btn-secondary">비공개 설정</button>
+								  <button class="btn btn-dark">블랙리스트 등록</button>
 							  	</form>
 							  </div>
 							  <div id="selectSelection">

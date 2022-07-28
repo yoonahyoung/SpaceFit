@@ -66,6 +66,20 @@ table>tfoot>tr>th{
 	
 	 
  
+ /*--------------------------------------------------------------
+	memberReviewDetailView
+}
+--------------------------------------------------------------*/      
+#photoReview{
+	width : 90%;
+}
+
+.photoRev{
+	background-color : #EEEEEE;
+	width : 80px;
+	height : 130px;
+	margin:10px;
+}
  
  
  
