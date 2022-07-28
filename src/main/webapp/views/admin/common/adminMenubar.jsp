@@ -33,6 +33,12 @@
       font-family: 'Noto Sans KR', sans-serif;
       font-family: 'Poppins', sans-serif;
     }
+    
+    .btn-primary {
+	  color: #fff;
+	  background-color:#0D6EFD;
+	  border-color: #0D6EFD;
+	}
  </style>
 </head>
 <body id="page-top">
