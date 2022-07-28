@@ -1,20 +1,41 @@
 @charset "UTF-8";
 
 /* spaceManageList */
+body{
+    font-family: 'Noto Sans KR','Noto Sans KR';
+    font-family: 'Poppins', 'Noto Sans KR';
+}
+
+
 .outerRv{       
     width: 1050px;
     margin: auto;
     margin-top:50px; 
     color: black;
 }
-.rv-list-area{
-    background-color: white;        
-    text-align: center;
-    width:100%;
+
+#dataTable th{
+    background-color:#E7F1FF;
 }
-.rv-list-area>tbody>tr:hover{
-    background-color: #E7F1FF;
-    cursor: pointer;
+
+table>tfoot>tr>th{
+    background-color:#E7F1FF;
+}
+
+#dataTable{
+    color: rgb(20, 18, 18);
+    font-size:13px; 
+    text-align: left;
+}
+
+#dataTable>tbody>tr:hover{
+    background-color : #EEEEEE;
+    color: rgb(20, 18, 18);
+    cursor : pointer;
 }
 
 
+/* spaceUpdateManage.jsp */
+.table.table-hover th{
+    width:150px;
+}
