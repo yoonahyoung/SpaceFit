@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class MemberManageController
  */
 @WebServlet("/memManage.me")
-public class MemberManageController extends HttpServlet {
+public class AdminMemberManageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberManageController() {
+    public AdminMemberManageController() {
         super();
     }
 

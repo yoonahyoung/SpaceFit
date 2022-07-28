@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MemberReviewController
+ * Servlet implementation class AdminReviewDetailView
  */
-@WebServlet("/memReview.me")
-public class MemberReviewController extends HttpServlet {
+@WebServlet("/memRevDetailView.me")
+public class AdminReviewDetailViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberReviewController() {
+    public AdminReviewDetailViewController() {
         super();
     }
 
@@ -25,7 +25,7 @@ public class MemberReviewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/admin/mem/memberReview.jsp").forward(request, response);
+		request.getRequestDispatcher("views/admin/mem/memberReviewDetailView.jsp").forward(request, response);
 	}
 
 	/**

@@ -8,67 +8,7 @@
 <title>Space Fit 후기관리</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/admin/css/member.css">
 <style>
-	#selectDivDate{
-		margin-left: 20px;
-		width: 35%;
-		float:left;
-	}
-	#selectExactDate{
-		width: 40%;
-		float:left;
-	}
 	
-
-	#selectSelection form{
-		float:right;
-		margin-top: 10px;
-		margin-right: 20px;
-	}
-
-
-	#selectDivDate button{
-		display: inline;
-		background-color:#E7F1FF;
-		width: 100px;
-		height: 40px;
-		border: none;
-		margin: 0;
-		color:black;
-	}
-
-	#selectDivDate button:hover{
-		background-color:#0D6EFD;
-		color:white;
-		cursor: pointer;
-	}
-
-	.dateInput {
-		height: 38px;
-		width: 110px;
-		border: 1px solid #0D6EFD;
-		border-radius: 5px;
-	}
-
-	#reviewChart{
-		height:100px;
-		width: 95%;
-		box-shadow : 0px 0px 12px rgb(13, 109, 253, 0.4);
-		border-radius: 10px;
-	}
-
-	#reviewChart div{
-		margin-top: 20px;
-	}
-
-	#reviewChart div span {
-		font-size: 11px;
-	}
-
-	#reviewChart div h4 {
-		font-weight: 600;
-		color:#0D6EFD;
-	}
-
 
 
 </style>
@@ -166,7 +106,12 @@
 	                                            <td>22/07/20</td>
 	                                            <td>32</td>
 	                                            <td>4</td>
-	                                            <td><input type="button" class="btn btn-primary" value="상세조회"></td>
+	                                            <td><input type="button" class="btn btn-primary btn-sm" value="상세조회" onclick="revDetailView();"></td>
+	                                            <script>
+	                                           		 function revDetailView(){
+	                                	       		location.href="<%=contextPath%>/memRevDetailView.me";
+	                                				}
+	                                            </script>
 	                                        </tr>
 	                                        <tr>
 	                                        	<td><input type="radio"></td>
@@ -177,7 +122,7 @@
 	                                            <td>22/06/15</td>
 	                                            <td>16</td>
 	                                            <td>8</td>
-	                                            <td><input type="button" class="btn btn-primary" value="상세조회"></td>
+	                                            <td><input type="button" class="btn btn-primary btn-sm" value="상세조회"></td>
 	                                        </tr>
 	                                         <tr>
 	                                        	<td><input type="radio"></td>
@@ -188,7 +133,7 @@
 	                                            <td>22/05/30</td>
 	                                            <td>7</td>
 	                                            <td>1</td>
-	                                            <td><input type="button" class="btn btn-primary" value="상세조회"></td>
+	                                            <td><input type="button" class="btn btn-primary btn-sm" value="상세조회"></td>
 	                                        </tr>
 	                                    </tbody>
 	                                </table>
@@ -207,10 +152,8 @@
 							</div>
 							<div style="height : 60px"></div>
 	                    </div>
-						
-                </div>
-
-     </div>  
+                	</div>
+     			</div>  
     
                 <!-- /.container-fluid -->
 				<br><br>        		

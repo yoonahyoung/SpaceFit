@@ -40,13 +40,110 @@ table>tfoot>tr>th{
 	background-color:#E7F1FF;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /*--------------------------------------------------------------
+	memberReview
+}
+--------------------------------------------------------------*/      
+	 
+	#selectDivMem {
+			margin-left: 20px;
+			width: 50%;
+			float:left;
+	}
+	
+	 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  /*--------------------------------------------------------------
-	memberManage
+	memberReview
 }
 --------------------------------------------------------------*/      
  
 
+	#selectDivDate{
+		margin-left: 20px;
+		width: 35%;
+		float:left;
+	}
+	#selectExactDate{
+		width: 40%;
+		float:left;
+	}
+	
+
+	#selectSelection form{
+		float:right;
+		margin-top: 10px;
+		margin-right: 20px;
+	}
+	
+
+	#selectDivDate button{
+		display: inline;
+		background-color:#E7F1FF;
+		width: 100px;
+		height: 40px;
+		border: none;
+		margin: 0;
+		color:black;
+	}
+
+	#selectDivDate button:hover{
+		background-color:#0D6EFD;
+		color:white;
+		cursor: pointer;
+	}
+
+	.dateInput {
+		height: 38px;
+		width: 110px;
+		border: 1px solid #0D6EFD;
+		border-radius: 5px;
+	}
+
+	#reviewChart{
+		height:100px;
+		width: 95%;
+		box-shadow : 0px 0px 12px rgb(13, 109, 253, 0.4);
+		border-radius: 10px;
+	}
+
+	#reviewChart div{
+		margin-top: 20px;
+	}
+
+	#reviewChart div span {
+		font-size: 11px;
+	}
+
+	#reviewChart div h4 {
+		font-weight: 600;
+		color:#0D6EFD;
+	}
 
    
 

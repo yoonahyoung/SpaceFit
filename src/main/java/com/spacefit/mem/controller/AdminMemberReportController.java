@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class MemberReportController
  */
 @WebServlet("/memReport.me")
-public class MemberReportController extends HttpServlet {
+public class AdminMemberReportController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberReportController() {
+    public AdminMemberReportController() {
         super();
     }
 

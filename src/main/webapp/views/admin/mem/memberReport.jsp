@@ -8,48 +8,58 @@
 <title>Space Fit 신고관리</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/admin/css/member.css">
 <style>
+	
+
+
 </style>
 </head>
 <body>
 	<%@ include file="../common/adminMenubar.jsp" %>
-        
-    <div class="container-fluid">
+     <div class="outerRv">
+     
+     	<div class="container-fluid">
 		<br><br><br>
-        <h1 class="h3 mb-2 text-gray-800" style="color: rgb(20, 18, 18)">신고 관리</h1>
+        <h1 class="h3 mb-2 text-gray-800" style="color: rgb(20, 18, 18)">신고관리</h1>
         <br><br><br>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-	                        <div class="row">
-	                          <div class="col-lg" align="left">
-							  	 <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-			                        <select>
-									  <option selected>글 제목</option>
-									  <option>후기 제목</option>
-									  <option>후기 내용</option>
-									  <option>후기 제목 + 내용</option>
-									  <option>글 작성 아이디</option>
-									  <option>댓글 내용</option>
-									  <option>댓글 작성 아이디</option>
+							<div style="height : 60px"></div>
+                        	  <div class="row" id="reviewChart">
+								  <div class="col-4" id="todaysReview">
+								  	<span>오늘 신고된 글</span><br>
+								  	<h4>10/8563</h4>	
+								  </div>
+								  <div class="col-4" id="avgStar">
+								  	<span>오늘 신고된 댓글</span><br>
+								  	<h4>3/546</h4>	
+								  </div>
+								  <div class="col-4" id="avgReview">
+								  	<span>최다신고회원</span><br>
+								  	<h4>user02</h4>	
+								  </div>
+								</div>
+							  <div style="height : 60px"></div>
+							  <div class="row" id="selectDivMem">
+							  	<form>
+								  <button class="btn btn-primary">게시글/댓글 복구</button>
+								  <button class="btn btn-danger">블랙리스트 처리</button>
+							  	</form>
+							  </div>
+							  <div id="selectSelection">
+							  	<form>
+							  		<select>
+									  <option selected>최신글 조회</option>
+									  <option>최신글 조회</option>
+									  <option>오래된 글 조회</option>
+									  <option>별점 높은 글</option>
+									  <option>별점 낮은 글</option>
 									</select>
+							  	</form>
+							  </div>
 
-			                        <div class="input-group">
-			                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-			                                aria-label="Search" aria-describedby="basic-addon2">
-			                            <div class="input-group-append">
-			                                <button class="btn btn-primary" type="button">
-			                                    <i class="fas fa-search fa-sm"></i>
-			                                </button>
-			                            </div>
-			                        </div>
-                    			</form>
-							  </div>
-							  <div class="col-lg" align="right">
-							  	<button type="button" class="btn btn-primary">신고내역 수정</button>
-	                            <button type="button" class="btn btn-danger">신고내역 삭제</button>
-							  </div>
-							</div>
+							<div style="height : 30px"></div>
 	                        <div class="card-body">
 	                            <div class="table-responsive">
 	                                <table class="table table-bordered memberListTable" id="dataTable" width="100%" cellspacing="0">
@@ -57,131 +67,104 @@
 	                                        <tr>
 	                                        	<th>선택</th>
 	                                        	<th>신고번호</th>
-	                                        	<th>후기번호</th>
-	                                            <th>후기작성자</th>
-	                                            <th>후기작성일</th>
-	                                            <th>공간번호</th>
-	                                            <th>공간이름</th>
-	                                            <th>댓글번호</th>
-	                                            <th>신고당한 회원 등급</th>
-	                                            <th>누적신고수</th>
+	                                            <th>글 / 댓글</th>
+	                                            <th>글 / 댓글 누적신고수</th>
+	                                            <th>작성자</th>
+	                                            <th>신고자</th>
 	                                            <th>신고사유</th>
-	                                            <th>신고접수일</th>
+	                                            <th>신고일</th>
+												<th>상세보기</th>
 	                                        </tr>
 	                                    </thead>
 	                                    <tfoot>
 	                                        <tr>
 	                                        	<th>선택</th>
-	                                            <th>회원번호</th>
-	                                            <th>아이디</th>
-	                                            <th>이름</th>
-	                                            <th>생년월일</th>
-	                                            <th>전화번호</th>
-	                                            <th>이메일</th>
-	                                            <th>회원등급</th>
-	                                            <th>총 주문건</th>
-	                                            <th>이번달 주문건</th>
-	                                            <th>총 주문액</th>
-	                                            <th>이번달 주문액</th>
-	                                            <th>누적신고</th>
-	                                            <th>누적추천</th>
-	                                            <th>회원상태</th>
-	                                            <th>관리자여부</th>
-	                                            <th>회원가입일</th>
-	                                            <th>정보수정일</th>
+	                                        	<th>신고번호</th>
+	                                            <th>글 / 댓글</th>
+	                                            <th>글 / 댓글 누적신고수</th>
+	                                            <th>작성자</th>
+	                                            <th>신고자</th>
+	                                            <th>신고사유</th>
+	                                            <th>신고일</th>
+												<th>상세보기</th>
 	                                        </tr>
 	                                    </tfoot>
 	                                    <tbody>
 	                                        <tr>
 	                                        	<td><input type="radio"></td>
-	                                            <td>00001</td>
+	                                        	<td>>003</td>
+	                                            <td>
+	                                            	<select>
+														  <option selected>글</option>
+														  <option>댓글</option>
+													</select>
+	                                            </td>
+	                                            <td>15</td>
 	                                            <td>user01</td>
-	                                            <td>박딘딘</td>
-	                                            <td>98/05/25</td>
-	                                            <td>01088856663</td>
-	                                            <td>user01@gmail.com</td>
-	                                            <td>Silver</td>
-	                                            <td>14</td>
-	                                            <td>2</td>
-	                                            <td>1,358,000</td>
-	                                            <td>200,000</td>
-	                                            <td>3</td>
-	                                            <td>10</td>
-	                                            <td>회원</td>
-	                                            <td>일반</td>
-	                                            <td>22/07/20</td>
-	                                            <td>22/07/23</td>
+	                                            <td>user02</td>
+	                                            <td>비방, 욕설신고</td>
+	                                            <td>22/08/30</td>
+												<td><input type="button" class="btn btn-primary btn-sm" value="상세조회" onclick="rptDetailView();"></td>
+	                                        </tr>
+	                                         <script>
+	                                           		 function rptDetailView(){
+	                                	       		location.href="<%=contextPath%>/memRptDetailView.me";
+	                                				}
+	                                        </script>
+	                                        <tr>
+	                                        	<td><input type="radio"></td>
+	                                        	<td>>003</td>
+	                                            <td>
+	                                            	<select>
+														  <option selected>글</option>
+														  <option>댓글</option>
+													</select>
+	                                            </td>
+	                                            <td>15</td>
+	                                            <td>user01</td>
+	                                            <td>user02</td>
+	                                            <td>비방, 욕설신고</td>
+	                                            <td>22/08/30</td>
+												<td><input type="button" class="btn btn-primary btn-sm" value="상세조회"></td>
 	                                        </tr>
 	                                        <tr>
 	                                        	<td><input type="radio"></td>
-	                                            <td>00002</td>
-	                                            <td>user02</td>
-	                                            <td>최나나</td>
-	                                            <td>02/11/15</td>
-	                                            <td>01088637225</td>
-	                                            <td>user02@gmail.com</td>
-	                                            <td>Basic</td>
-	                                            <td>5</td>
-	                                            <td>1</td>
-	                                            <td>450,000</td>
-	                                            <td>80,000</td>
-	                                            <td>1</td>
-	                                            <td>5</td>
-	                                            <td>탈퇴</td>
-	                                            <td>일반</td>
-	                                            <td>22/06/01</td>
-	                                            <td>22/06/28</td>
-	                                        </tr>
-	                                         <tr>
-	                                         	<td><input type="radio"></td>
-	                                            <td>00003</td>
-	                                            <td>user03</td>
-	                                            <td>이소소</td>
-	                                            <td>85/09/30</td>
-	                                            <td>01056612789</td>
-	                                            <td>user03@gmail.com</td>
-	                                            <td>Gold</td>
-	                                            <td>35</td>
+	                                        	<td>>003</td>
+	                                            <td>
+	                                            	<select>
+														  <option selected>글</option>
+														  <option>댓글</option>
+													</select>
+	                                            </td>
 	                                            <td>15</td>
-	                                            <td>2,870,000</td>
-	                                            <td>375,000</td>
-	                                            <td>12</td>
-	                                            <td>70</td>
-	                                            <td>회원</td>
-	                                            <td>일반</td>
-	                                            <td>20/04/09</td>
-	                                            <td>21/11/19</td>
+	                                            <td>user01</td>
+	                                            <td>user02</td>
+	                                            <td>비방, 욕설신고</td>
+	                                            <td>22/08/30</td>
+												<td><input type="button" class="btn btn-primary btn-sm" value="상세조회"></td>
 	                                        </tr>
 	                                    </tbody>
 	                                </table>
 	                            </div>
 	                        </div>
-	                    </div>
-
-                </div>
-                <!-- /.container-fluid -->
-				<br><br>
-				
-				 <script>
-		        	$(function(){
-		        		$(".memberListTable>tbody>tr").click(function(){
-		        			location.href="<%=contextPath%>/memDetailView.me?no=" + $(this).children().eq(0).text();
-		        		})
-		        	})
-        		</script>
-        
-        		
-		        <div class="paging-area" align="center">    
+							<div class="paging-area" align="center">    
 		        
-		            <button class="btn btn-sm btn-outline-primary">&lt;</button>        
-		            <button disabled class="btn btn-sm btn-outline-primary">1</button>        
-		            <button class="btn btn-sm btn-outline-primary">2</button> 
-		            <button class="btn btn-sm btn-outline-primary">3</button>    
-		            <button class="btn btn-sm btn-outline-primary">4</button> 
-		            <button class="btn btn-sm btn-outline-primary">5</button>       
-		            <button class="btn btn-sm btn-outline-primary">&gt;</button>
-		            
-		        </div>
+								<button class="btn btn-sm btn-outline-primary">&lt;</button>        
+								<button disabled class="btn btn-sm btn-outline-primary">1</button>        
+								<button class="btn btn-sm btn-outline-primary">2</button> 
+								<button class="btn btn-sm btn-outline-primary">3</button>    
+								<button class="btn btn-sm btn-outline-primary">4</button> 
+								<button class="btn btn-sm btn-outline-primary">5</button>       
+								<button class="btn btn-sm btn-outline-primary">&gt;</button>
+								
+							</div>
+							<div style="height : 60px"></div>
+	                    </div>
+                	</div>
+     			</div>  
+    
+                <!-- /.container-fluid -->
+				<br><br>        		
             </div>
     <div style="height : 100px"></div>
 	<!-- 자바스크립트 파일 연동 -->
