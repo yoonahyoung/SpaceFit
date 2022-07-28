@@ -110,7 +110,8 @@ public class BookDao {
 							rset.getString("book_cancel_reason"),
 							rset.getString("book_cansel_content"),
 							rset.getString("pl_amount"),
-							rset.getInt("BOOK_D_DAY")
+							rset.getInt("BOOK_D_DAY"),
+							rset.getInt("space_limit")
 						);
 			}
 		} catch (SQLException e) {
@@ -121,6 +122,71 @@ public class BookDao {
 		}
 		
 		return b;
+		
+	}
+	
+	/** 예약수정
+	 * @param conn
+	 * @param b 사용자가 수정가는한 항목들
+	 * @return 처리된행수
+	 */
+	public int updateBook(Connection conn, Book b) {
+		// update => 처리된행수
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateBook");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, b.getBookCount());
+			pstmt.setString(2, b.getBookName());
+			pstmt.setString(3, b.getBookPhone());
+			pstmt.setString(4, b.getBookEmail());
+			pstmt.setString(5, b.getBookPurpose());
+			pstmt.setString(6, b.getBookAddContent());
+			pstmt.setString(7, b.getBookCar());
+			pstmt.setString(8, b.getBookAnimal());
+			pstmt.setString(9, b.getBookChair());
+			pstmt.setString(10, b.getBookStand());
+			pstmt.setInt(11, b.getBookNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+	
+	/** 예약삭제용
+	 * @param conn
+	 * @param b : 삭제시 입력받은 삭제이유, 상세이유, 예약번호
+	 * @return 처리된행수
+	 */
+	public int deleteBook(Connection conn, Book b) {
+		// update => 처리된행수
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteBook");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, b.getBookCancleReason());
+			pstmt.setString(2, b.getBookCancelContent());
+			pstmt.setInt(3, b.getBookNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 		
 	}
 	

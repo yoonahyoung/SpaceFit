@@ -1,6 +1,7 @@
 package com.spacefit.reservation.model.service;
 
 import static com.spacefit.common.JDBCTemplate.*;
+import static com.spacefit.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -23,8 +24,36 @@ public class BookService {
 	public Book selectBook(int bookNo) {
 		Connection conn = getConnection();
 		Book b = new BookDao().selectBook(conn, bookNo);
-		close(conn);
+		close(conn);		
 		return b;
+	}
+	
+	// 예약수정용
+	public int updateBook(Book b) {
+		Connection conn = getConnection();
+		int result = new BookDao().updateBook(conn, b);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			 rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	// 예약취소용
+	public int deleteBook(Book b) {
+		Connection conn = getConnection();
+		int result = new BookDao().deleteBook(conn, b);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 	}
 	
 }

@@ -31,6 +31,8 @@ public class Book {
 	private String payAmount; // 쿠폰사용전 금액 -- pay테이블에 varchar2로 되어있어서 string으로 했음
     private String spacePicture; // 공간대표이미지   
     private int bookDecimalDay; // 대여날짜까지 d-day
+    private int spaceLimit;
+   
     
     public Book() {}
 	
@@ -91,7 +93,7 @@ public class Book {
 			String bookOutTime, int bookPrice, String bookName, String bookPhone, String bookEmail, String bookPurpose,
 			String bookAddContent, String bookCar, String bookAnimal, String bookChair, String bookStand,
 			Date bookCreateDate, String bookCategory, String bookCancleReason,
-			String bookCancelContent, String payAmount, int bookDecimalDay) {
+			String bookCancelContent, String payAmount, int bookDecimalDay, int spaceLimit) {
 		super();
 		this.bookNo = bookNo;
 		this.spaceNo = spaceNo;
@@ -116,8 +118,28 @@ public class Book {
 		this.bookCancelContent = bookCancelContent;
 		this.payAmount = payAmount;
 		this.bookDecimalDay = bookDecimalDay;
+		this.spaceLimit = spaceLimit;
 	}
 	
+	
+	
+	public Book(int bookNo, int bookCount, String bookName, String bookPhone, String bookEmail, String bookPurpose,
+			String bookAddContent, String bookCar, String bookAnimal, String bookChair, String bookStand) {
+		super();
+		this.bookNo = bookNo;
+		this.bookCount = bookCount;
+		this.bookName = bookName;
+		this.bookPhone = bookPhone;
+		this.bookEmail = bookEmail;
+		this.bookPurpose = bookPurpose;
+		this.bookAddContent = bookAddContent;
+		this.bookCar = bookCar;
+		this.bookAnimal = bookAnimal;
+		this.bookChair = bookChair;
+		this.bookStand = bookStand;
+	}
+
+
 	public int getBookNo() {
 		return bookNo;
 	}
@@ -335,6 +357,16 @@ public class Book {
 		this.bookDecimalDay = bookDecimalDay;
 	}
 
+	
+	public int getSpaceLimit() {
+		return spaceLimit;
+	}
+
+
+	public void setSpaceLimit(int spaceLimit) {
+		this.spaceLimit = spaceLimit;
+	}
+
 
 	@Override
 	public String toString() {
@@ -346,8 +378,11 @@ public class Book {
 				+ ", bookChair=" + bookChair + ", bookStand=" + bookStand + ", bookCreateDate=" + bookCreateDate
 				+ ", bookModifyDate=" + bookModifyDate + ", bookStatus=" + bookStatus + ", bookCategory=" + bookCategory
 				+ ", bookCancleReason=" + bookCancleReason + ", bookCancelContent=" + bookCancelContent + ", payAmount="
-				+ payAmount + ", spacePicture=" + spacePicture + ", bookDecimalDay=" + bookDecimalDay + "]";
+				+ payAmount + ", spacePicture=" + spacePicture + ", bookDecimalDay=" + bookDecimalDay + ", spaceLimit="
+				+ spaceLimit + "]";
 	}
+
+
 
 
 	

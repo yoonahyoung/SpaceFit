@@ -41,8 +41,37 @@
 		      , BOOK_CANSEL_CONTENT
 		      , BOOK_CATEGORY
 		      , PL_AMOUNT  
-		      , BOOK_D_DAY   
+		      , BOOK_D_DAY 
+		      , SPACE_LIMIT  
 		   FROM VW_BOOK
+		  WHERE BOOK_NO = ?
+	</entry>
+	
+	<!-- 예약수정용 -->
+	<entry key="updateBook">
+		 UPDATE TB_BOOK
+		    SET BOOK_COUNT = ?
+		      , BOOK_NAME = ?
+		      , BOOK_PHONE = ?
+		      , BOOK_EMAIL = ?
+		      , BOOK_PURPOSE = ?
+		      , BOOK_ADD_CONTENT = ?
+		      , BOOK_CAR = ?
+		      , BOOK_ANIMAL = ?
+		      , BOOK_CHAIR = ?
+		      , BOOK_STAND = ?
+		      , BOOK_MODIFY_DATE = SYSDATE
+		  WHERE BOOK_NO = ?
+	</entry>
+	
+	<!-- 예약삭제용 -->
+	<entry key="deleteBook">
+		 UPDATE TB_BOOK
+		    SET BOOK_MODIFY_DATE = SYSDATE
+		      , BOOK_STATUS = 'N'
+		      , BOOK_CATEGORY = '예약취소'
+		      , BOOK_CANCEL_REASON = ?
+		      , BOOK_CANCEL_CONTENT = ?
 		  WHERE BOOK_NO = ?
 	</entry>
 	
