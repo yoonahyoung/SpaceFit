@@ -35,9 +35,16 @@
 	
 	<br><br>
 	<h2 align="center" style="color:black;">배너 관리</h2>
-	<br><br><br><br>
-	
+	<br><br><br>
+	    
 	<div class="wrapBannerManage">
+		
+		<div class="btnWrap float-right" style="padding-right:10px;">
+	        <button type="button" class="btn btn-danger">삭제하기</button>
+	        <button type="button" class="btn btn-primary">수정 및 등록</button>
+	    </div>
+	    <br><br><br>
+	    
         <div class="row">
             <div class="col-md-6 col-lg-3 ban-card-margin">
                 <div class="card ban-card">
@@ -152,10 +159,7 @@
             <!-- End Col -->
         </div>
         
-        <div class="btnWrap">
-	        <button type="button" class="btn btn-secondary" style="width:120px;">삭제하기</button>
-	        <button type="button" class="btn btn-primary" style="width:120px;">수정 및 등록</button>
-	    </div>
+        
     </div>
     
     <br><br><br><br><br><br>
