@@ -11,7 +11,7 @@
 	<script type="text/javascript">
 		alert("<%=request.getAttribute("errorMsg")%>");
 	function load(){
-		window.location.href = "<%=contextPath%>/views/user/myPage/login.jsp";
+		window.location.href = "history.go(0)";
 		}
 </script>
 </body>
