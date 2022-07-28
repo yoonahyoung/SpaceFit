@@ -14,9 +14,9 @@
 	<%@ include file="../common/adminMenubar.jsp" %>
         
     <div class="container-fluid">
-					<br><br><br>
-                    <h1 class="h3 mb-2 text-gray-800">회원관리</h1>
-               		<br><br><br>
+		<br><br><br>
+        <h1 class="h3 mb-2 text-gray-800" style="color: rgb(20, 18, 18)">회원정보조회</h1>
+        <br><br><br>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -97,7 +97,7 @@
 	                                    </tfoot>
 	                                    <tbody>
 	                                        <tr>
-	                                        	<th><input type="radio"></th>
+	                                        	<td><input type="radio"></td>
 	                                            <td>00001</td>
 	                                            <td>user01</td>
 	                                            <td>박딘딘</td>
@@ -117,7 +117,7 @@
 	                                            <td>22/07/23</td>
 	                                        </tr>
 	                                        <tr>
-	                                        	<th><input type="radio"></th>
+	                                        	<td><input type="radio"></td>
 	                                            <td>00002</td>
 	                                            <td>user02</td>
 	                                            <td>최나나</td>
@@ -137,7 +137,7 @@
 	                                            <td>22/06/28</td>
 	                                        </tr>
 	                                         <tr>
-	                                         	<th><input type="radio"></th>
+	                                         	<td><input type="radio"></td>
 	                                            <td>00003</td>
 	                                            <td>user03</td>
 	                                            <td>이소소</td>
