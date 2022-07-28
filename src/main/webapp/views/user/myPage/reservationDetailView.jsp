@@ -12,6 +12,18 @@
 </head>
 <body>
     <%@ include file="../common/userMenubar.jsp" %>
+    
+    <!-- 이렇게 해야 값이 담겨있을때만 alert가 실행된다 -->
+    <% if(alertMsg != null) { %> 
+		<script>
+			alert("<%=alertMsg%>");   <%-- "" 반드시!! 따옴표!!로 묶어줘야함 안하면 alert(회원가입성공);--%>
+		</script>
+		<%--회원가입성공후 알람창띄운후에도 session으로 담아서 보냈기때문에 새로고침후에도 alertMsg는 여전히 값이 남아있어서 
+			새로고침할때마다 계속 알람창이 뜰것이다. 그래서 session을 remove해줘야함 (session은 서버만료되거나 내가 지우기전까지 계속 있음)
+			alertMsg를 제거만 해줘도 alertMsg!= 조건에 맞지않아서 실행이 안됨 	
+		 --%>
+		<% session.removeAttribute("alertMsg"); %> 
+	<% } %>
 
     <div class="rvlvd">
             
@@ -45,33 +57,73 @@
 
                <tr>
                   <th>주차</th>
-                  <td>    
-                  	            
-                     <input type="radio" name="optionCar" value="Y" <% if("Y".equals(b.getBookCar())) { %> checked <% } %>  >                     
+                  <td>                      	            
+                     <select name="bookCar" id="bookCar">
+                        <option value="N">요청하지 않아요</option>
+                        <option value="Y">요청할게요</option>
+                     </select>                   
                   </td>                  
                </tr>
 				
                <tr>
                   <th>반려동물동반</th>                  
                   <td>                    
-                     <input type="radio" name="optionAnimal" id="bookAnimal" value="Y" <% if("Y".equals(b.getBookAnimal())) { %> checked <% } %> >                     
+                     <select name="bookAnimal" id="bookAnimal">
+                        <option value="N">요청하지 않아요</option>
+                        <option value="Y">요청할게요</option>
+                     </select>                     
                   </td>                  
                </tr>
                
 			   <tr>
                   <th>미니의자</th>
                   <td>                    
-                     <input type="radio" name="optionChair" id="bookChair" value="Y" <% if("Y".equals(b.getBookChair())) { %> checked <% } %> >                    
+                     <select name="bookChair" id="bookChair">
+                        <option value="N">요청하지 않아요</option>
+                        <option value="Y">요청할게요</option>
+                     </select>                     
                   </td>                  
                </tr>
                
                <tr>
                   <th>보면대</th>
                   <td>                    
-                     <input type="radio" name="optionStand" id="bookStand" value="Y" <% if("Y".equals(b.getBookStand())) { %> checked <% } %> >                     
+                       <select name="bookStand" id="bookStand">
+                          <option value="N">요청하지 않아요</option>
+                          <option value="Y">요청할게요</option>
+                       </select>                   
                   </td>                  
                </tr>            
-            </table>            
+            </table>        
+            
+             <script>
+		    	$(function(){ // 모든요소들이 만들어지고 나서 실행
+		    		
+		    		$("#bookCar>option").each(function(){ // 순차적으로 접근 each메소드
+		    			if($(this).val() == "<%= b.getBookCar() %>") { 
+		    				$(this).attr("selected", true);
+		    			}
+		    		})
+		    		
+		    		$("#bookAnimal>option").each(function(){ 
+		    			if($(this).val() == "<%= b.getBookAnimal() %>") { 
+		    				$(this).attr("selected", true);
+		    			}
+		    		})
+		    		
+		    		$("#bookChair>option").each(function(){ 
+		    			if($(this).val() == "<%= b.getBookChair() %>") { 
+		    				$(this).attr("selected", true);
+		    			}
+		    		})
+		    		
+		    		$("#bookStand>option").each(function(){ 
+		    			if($(this).val() == "<%= b.getBookStand() %>") { 
+		    				$(this).attr("selected", true);
+		    			}
+		    		})
+		    	})
+		    </script>         
             
             <br><br>
 
@@ -105,8 +157,7 @@
 
             <h5><b>주소</b></h5>
             <small>서울 금천구 가산디지털로</small> <br><br>
-            <div id="map" style="width:100%;height:400px;">               
-            </div>
+            <div id="map" style="width:100%;height:400px;"></div>
             <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=60fe4abff9c12c6895a3cd4cf80f3561"></script>
             <script>
               var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -148,15 +199,15 @@
             <table class="table">
                <tr>
                   <th width="150px"><h5><b>총 결제금액</b></h5></th>    
-                  <td width="150px"><h5><b><%= b.getBookPrice() %></b></h5></td>                        
+                  <td width="150px" align="right"><h5><b><%= b.getBookPrice() %>원</b></h5></td>                        
                </tr>
                <tr>
                   <th>주문금액</th>    
-                  <td> <%= b.getPayAmount() %></td>                        
+                  <td align="right"><%= b.getPayAmount() %>원</td>                        
                </tr>
                <tr>
                   <th>쿠폰</th>    
-                  <td>-<%= Integer.parseInt(b.getPayAmount()) - b.getBookPrice() %></td>                        
+                  <td align="right">-<%= Integer.parseInt(b.getPayAmount()) - b.getBookPrice() %>원</td>                        
                </tr>              
             </table>
 
@@ -174,7 +225,7 @@
 	
 	               <!-- 예약수정과 예약취소는 3일전엔 보이지 않도록!! -->
 	               <%if(b.getBookDecimalDay() > 3) { %>
-	               		<a href="" class="btn btn-sm btn-primary">예약수정</a> &nbsp;
+	               		<a href="<%=contextPath %>/bupdateForm.bo?no=<%= b.getBookNo() %>" class="btn btn-sm btn-primary">예약수정</a> &nbsp;
 	
 	               		<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteBook">예약취소</button>
 	               <% } %>
@@ -239,7 +290,7 @@
                <h5 class="modal-title" id="deleteBkModalLabel">예약취소</h5>              
             </div>
             <div class="modal-body">
-               <form action="" method=post>               
+               <form action="<%=contextPath %>/bdelete.bo?no=<%= b.getBookNo() %>" method=post>               
                   <table align="center">                     
                      <tr>
                         <th width="100">취소사유</th>
