@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="selectList">
+		SELECT 
+		       SPACE_NO
+		     , SPACE_NAME
+		     , SPACE_LIMIT
+		     , SPACE_CATEGORY
+		     , SPACE_PIC
+		     , SPACE_PRICE
+		  FROM TB_SPACE
+		 WHERE SPACE_STATUS = 'Y'
+		 ORDER
+		 	BY SPACE_NO DESC
+	</entry>
+</properties>
