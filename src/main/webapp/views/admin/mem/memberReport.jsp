@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<title>Space Fit 회원관리</title>
+<title>Space Fit 신고관리</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/admin/css/member.css">
 <style>
 </style>
@@ -15,7 +15,7 @@
         
     <div class="container-fluid">
 		<br><br><br>
-        <h1 class="h3 mb-2 text-gray-800" style="color: rgb(20, 18, 18)">회원정보조회</h1>
+        <h1 class="h3 mb-2 text-gray-800" style="color: rgb(20, 18, 18)">신고 관리</h1>
         <br><br><br>
 
                     <!-- DataTales Example -->
@@ -25,19 +25,29 @@
 	                          <div class="col-lg" align="left">
 							  	 <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
 			                        <select>
-									  <option selected>최신순 조회</option>
-									  <option>최신순 조회</option>
-									  <option>오래된 순 조회</option>
-									  <option>추천순 조회</option>
-									  <option>신고순 조회</option>
+									  <option selected>글 제목</option>
+									  <option>후기 제목</option>
+									  <option>후기 내용</option>
+									  <option>후기 제목 + 내용</option>
+									  <option>글 작성 아이디</option>
+									  <option>댓글 내용</option>
+									  <option>댓글 작성 아이디</option>
 									</select>
+
+			                        <div class="input-group">
+			                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+			                                aria-label="Search" aria-describedby="basic-addon2">
+			                            <div class="input-group-append">
+			                                <button class="btn btn-primary" type="button">
+			                                    <i class="fas fa-search fa-sm"></i>
+			                                </button>
+			                            </div>
+			                        </div>
                     			</form>
-                    			<div style="height : 20px"></div>
 							  </div>
 							  <div class="col-lg" align="right">
-							  	<button type="button" class="btn btn-primary">관리자로 변경</button>
-	                            <button type="button" class="btn btn-secondary">회원등급 변경</button>
-	                            <button type="button" class="btn btn-danger">회원탈퇴</button>
+							  	<button type="button" class="btn btn-primary">신고내역 수정</button>
+	                            <button type="button" class="btn btn-danger">신고내역 삭제</button>
 							  </div>
 							</div>
 	                        <div class="card-body">
@@ -46,23 +56,17 @@
 	                                    <thead>
 	                                        <tr>
 	                                        	<th>선택</th>
-	                                            <th>회원번호</th>
-	                                            <th>아이디</th>
-	                                            <th>이름</th>
-	                                            <th>생년월일</th>
-	                                            <th>전화번호</th>
-	                                            <th>이메일</th>
-	                                            <th>회원등급</th>
-	                                            <th>총 주문건</th>
-	                                            <th>이번달 주문건</th>
-	                                            <th>총 주문액</th>
-	                                            <th>이번달 주문액</th>
-	                                            <th>누적신고</th>
-	                                            <th>누적추천</th>
-	                                            <th>회원상태</th>
-	                                            <th>관리자여부</th>
-	                                            <th>회원가입일</th>
-	                                            <th>정보수정일</th>
+	                                        	<th>신고번호</th>
+	                                        	<th>후기번호</th>
+	                                            <th>후기작성자</th>
+	                                            <th>후기작성일</th>
+	                                            <th>공간번호</th>
+	                                            <th>공간이름</th>
+	                                            <th>댓글번호</th>
+	                                            <th>신고당한 회원 등급</th>
+	                                            <th>누적신고수</th>
+	                                            <th>신고사유</th>
+	                                            <th>신고접수일</th>
 	                                        </tr>
 	                                    </thead>
 	                                    <tfoot>

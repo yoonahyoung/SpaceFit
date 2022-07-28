@@ -7,20 +7,15 @@ body{
 }
 
 
-.outerRv{       
-    width: 1050px;
-    margin: auto;
-    margin-top:50px; 
-    color: black;
+ /*--------------------------------------------------------------
+	기본 템플릿 + 테이블
 }
+--------------------------------------------------------------*/     
 
 #dataTable th{
 	background-color:#E7F1FF;
 }
 
-table>tfoot>tr>th{
-	background-color:#E7F1FF;
-}
 
 #dataTable{
 	 color: rgb(20, 18, 18);
@@ -32,6 +27,17 @@ table>tfoot>tr>th{
 	background-color : #EEEEEE;
 	color: rgb(20, 18, 18);
 	cursor : pointer;
+}
+
+.outerRv{       
+    width: 1050px;
+    margin: auto;
+    margin-top:50px; 
+    color: black;
+}
+
+table>tfoot>tr>th{
+	background-color:#E7F1FF;
 }
 
  
