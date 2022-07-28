@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+/* spaceManageList */
+.outerRv{       
+    width: 1050px;
+    margin: auto;
+    margin-top:50px; 
+    color: black;
+}
+.rv-list-area{
+    background-color: white;        
+    text-align: center;
+    width:100%;
+}
+.rv-list-area>tbody>tr:hover{
+    background-color: #E7F1FF;
+    cursor: pointer;
+}
+
+

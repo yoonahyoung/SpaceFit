@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+/* ------------ spaceDetailView.jsp --------------- */
+/* main *{
+    border:1px solid black;
+} */
+/* 사진 */
+.swiper-wrapper img{
+    height:auto;
+    max-width:100%;
+    object-fit: scale-down;
+}
+.swiper-wrapper{
+    text-align:center;
+    line-height:574px;
+}
+
+/* minisub */
+#miniSub{
+    font-size:40px;
+    font-weight:600;
+    margin-top:100px;
+    color:#0D6EFD;
+}
+.nav-item a{
+    font-size:25px;
+    font-weight:250;
+    text-align:center;
+}
+
+/* minisubContent */
+#pills-eyoung li, #pills-sisul li{
+  margin-top:30px;
+  border-bottom:1px solid lightgrey;
+}
+
+#pills-eyoung ol, #pills-sisul ol{
+  margin-top:50px;
+}
+
+
+
+/* 선택 */
+select{
+
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+
+    color: #444;
+    background-color: #fff;
+
+    padding: 0.6em 1.4em 0.5em 0.8em;
+    margin: 0;
+
+    border: 1px solid #aaa;
+    border-radius: 0.5em;
+    box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+}
+
+span.col-sm-4{
+    font-size:20px;
+    font-weight:400;
+    margin-top:10px;
+}
+
+/* 버튼 */
+#ayBtn>button{
+    margin:0 20px 0 20px;
+}
+
+
+/* ------------ END spaceDetailView.jsp --------------- */
+
+/* ------------ spaceListView.jsp --------------- */
+.img-a.img-fluid{
+    height:545px;
+    width:450px;
+  }
+  .intro-single{
+    margin-top:-150px;
+  }
+  .title-single-box{
+    margin-top:-100px;
+  }
+  .intro-single.intro-single2{
+    margin-top:0px;
+    margin-bottom:-50px;
+  }
+  .qw-btn:hover{
+    background-color:#0D6EFD;
+  }
+  .block2-txt-child1.flex-col-l a{
+    text-decoration:none;
+  }
+  .block2-txt-child1.flex-col-l a:hover{
+    color:#0D6EFD;
+  }
+  .block2-pic.hov-img0 img{
+    width:307px;
+    height:380px;
+  }
+  .flex-w.flex-sb-m.p-b-52{
+    padding-bottom:10px;
+  }
+  
+  /* ------------ END spaceListView.jsp --------------- */

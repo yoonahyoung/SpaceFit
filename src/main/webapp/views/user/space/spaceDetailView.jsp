@@ -7,6 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- css -->
+<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/user/css/space.css">
+<!-- Swiper CDN -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/7.3.0/swiper-bundle.min.css"/>
 <!-- fullcalendar CDN -->  
 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />  
@@ -14,61 +17,7 @@
 
 <title>Insert title here</title>
 <style>
-    /* main *{
-        border:1px solid black;
-    } */
-    /* 사진 */
-    .swiper-wrapper img{
-        height:auto;
-        max-width:100%;
-        object-fit: scale-down;
-    }
-    .swiper-wrapper{
-        text-align:center;
-        line-height:574px;
-    }
 
-    /* minisub */
-    #miniSub{
-        font-size:40px;
-        font-weight:600;
-        margin-top:100px;
-        color:#0D6EFD;
-    }
-    .nav-item a{
-        font-size:25px;
-        font-weight:250;
-        text-align:center;
-    }
-
-    /* 선택 */
-    select{
-
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 1.5;
-
-        color: #444;
-        background-color: #fff;
-
-        padding: 0.6em 1.4em 0.5em 0.8em;
-        margin: 0;
-
-        border: 1px solid #aaa;
-        border-radius: 0.5em;
-        box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
-    }
-
-    span.col-sm-4{
-        font-size:20px;
-        font-weight:400;
-        margin-top:10px;
-    }
-    
-    /* 버튼 */
-    #ayBtn>button{
-        margin:0 15px 0 15px;
-    }
     
     /* 캘린더 */
         #calendar {
@@ -94,7 +43,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-7">
                                 <!-- 사진파트 -->
                                 <div class="row">
                                     <div class="row justify-content-center">
@@ -126,28 +75,45 @@
                                         <div class="col-md-12">
                                             <ul class="nav nav-pills-a nav-pills mb-3 section-t3" id="pills-tab" role="tablist" style="background-color:lightgray; padding-top:0px;">
                                             <li class="nav-item col-sm-3">
-                                                <a class="nav-link active" id="pills-video-tab ayNav" data-bs-toggle="pill" href="#pills-video" role="tab" aria-controls="pills-video" aria-selected="true">공간소개</a>
+                                                <a class="nav-link active" id="pills-gonggan-tab ayNav" data-bs-toggle="pill" href="#pills-gonggan" role="tab" aria-controls="pills-gonggan" aria-selected="true">공간소개</a>
                                             </li>
                                             <li class="nav-item col-sm-3">
-                                                <a class="nav-link" id="pills-plans-tab ayNav" data-bs-toggle="pill" href="#pills-plans" role="tab" aria-controls="pills-plans" aria-selected="false">시설안내</a>
+                                                <a class="nav-link" id="pills-sisul-tab ayNav" data-bs-toggle="pill" href="#pills-sisul" role="tab" aria-controls="pills-sisul" aria-selected="false">시설안내</a>
                                             </li>
                                             <li class="nav-item col-sm-3">
-                                                <a class="nav-link" id="pills-map-tab ayNav" data-bs-toggle="pill" href="#pills-map" role="tab" aria-controls="pills-map" aria-selected="false">이용안내</a>
+                                                <a class="nav-link" id="pills-eyoung-tab ayNav" data-bs-toggle="pill" href="#pills-eyoung" role="tab" aria-controls="pills-eyoung" aria-selected="false">이용안내</a>
                                             </li>
                                             <li class="nav-item col-sm-3">
-                                                <a class="nav-link" id="pills-map-tab ayNav" data-bs-toggle="pill" href="#pills-map" role="tab" aria-controls="pills-map" aria-selected="false">Q&A</a>
+                                                <a class="nav-link" id="pills-sDetailQNA-tab ayNav" data-bs-toggle="pill" href="#pills-sDetailQNA" role="tab" aria-controls="pills-sDetailQNA" aria-selected="false">Q&A</a>
                                             </li>
                                             </ul>
                                             <div class="tab-content" id="pills-tabContent">
-                                            <div class="tab-pane fade show active" id="pills-video" role="tabpanel" aria-labelledby="pills-video-tab">
-                                                <iframe src="https://player.vimeo.com/video/73221098" width="100%" height="460" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                                            </div>
-                                            <div class="tab-pane fade" id="pills-plans" role="tabpanel" aria-labelledby="pills-plans-tab">
-                                                <img src="assets/img/plan2.jpg" alt="" class="img-fluid">
-                                            </div>
-                                            <div class="tab-pane fade" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
-                                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.1422937950147!2d-73.98731968482413!3d40.75889497932681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c6480299%3A0x55194ec5a1ae072e!2sTimes+Square!5e0!3m2!1ses-419!2sve!4v1510329142834" width="100%" height="460" frameborder="0" style="border:0" allowfullscreen></iframe>
-                                            </div>
+                                                <div class="tab-pane fade show active" id="pills-gonggan" role="tabpanel" aria-labelledby="pills-gonggan-tab">
+                                                    test공간소개탭
+                                                </div>
+                                                <div class="tab-pane fade" id="pills-sisul" role="tabpanel" aria-labelledby="pills-sisul-tab">
+                                                    <ol>
+                                                        <li> 빔 프로젝터(티빙 및 유튜브 가능)</li>
+                                                        <li>파티룸 및 루프탑 이용시 각종 식기류(맥주잔, 와인잔, 컵, 쟁반 접시류 등)</li>
+                                                        <li>공기청정기, 에어프라이어, 커피머신, 냉난방기, 전자렌지</li>
+                                                        <li>음식물 반입 및 조리(파티룸, 루프탑) 가능 (배달음식 가능)</li>
+                                                        <li>전체 연습실 블루투스 스피커 및, 마샬 앰프 제공</li>
+                                                        <li>스튜디오 조명 DAEHAN 썬빔 KIT-SUN05 (소프트박스) x2, 룩스패드 x3</li>
+                                                    </ol>
+                                                </div>
+                                                <div class="tab-pane fade" id="pills-eyoung" role="tabpanel" aria-labelledby="pills-eyoung-tab">
+                                                    <ol>
+                                                        <li>보안, 안전 및 인원체크를 위해 입구 CCTV가 작동되고 있습니다.</li>
+                                                        <li>스페이스핏은 숙박업소가 아니기 때문에 숙박시설에서 제공되는 물품이 제공되지 않습니다.</li>
+                                                        <li>건물내(실내) 전체 금연입니다.</li>
+                                                        <li>부대시설 고장 및 파손시 전액 금액청구</li>
+                                                        <li>지나치게 음악소리를 크게 틀거나 소리를 지르는 행위는 삼가 해주세요.</li>
+                                                        <li>시간엄수 부탁드리며, 퇴실전 뒷정리 부탁드립니다.</li>
+                                                    </ol>
+                                                </div>
+                                                <div class="tab-pane fade" id="pills-sDetailQNA" role="tabpanel" aria-labelledby="pills-sDetailQNA-tab">
+                                                    testQNA
+                                                </div>
                                             </div>
                                         </div>
 
@@ -162,6 +128,7 @@
                                     <div>~review보이는 공간~</div>
                                 </div>
                             </div>
+                            <div class="col-md-1"></div>
                             <div class="col-md-4">
                                 <div class="row">
                                     <div class="col-sm-12">
@@ -177,6 +144,12 @@
                                 </div>
                                 <div class="row">
                                     <h4 style="margin-top:35px; border-bottom:2px solid #0D6EFD" id="aySelect">옵션선택</h4>
+                                    <span class="col-sm-4"> 이용인원  </span>
+                                    <select name="limit">
+                                        <%for(int i=2; i<21; i++){ %>
+                                        	<option value="<%=i%>"><%= i %>명</option>
+                                        <%} %>
+                                    </select>
                                     <span class="col-sm-4"> 주차  </span>
                                     <select name="parking">
                                         <option value="N">요청하지 않아요</option>
@@ -213,7 +186,7 @@
                                     <span class="col-sm-4"> 체크인  </span>
                                     <select name="detailCI">
                                     	<%for(int i=9; i<22; i++){ %>
-                                        	<option>
+                                        	<option value="<%=i%>">
                                         		<% if(i==9){%>
                                         			0<%= i %>:00
                                         		<%}else{%>
@@ -225,7 +198,7 @@
                                     <span class="col-sm-4"> 체크아웃  </span>
                                     <select name="detailCO">
                                        <%for(int i=10; i<22; i++){ %>
-                                        	<option><%= i %>:00</option>
+                                        	<option value="<%=i%>"><%= i %>:00</option>
                                         <%} %>
                                     </select>
                                 </div>
