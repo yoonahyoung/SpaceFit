@@ -59,7 +59,7 @@
           <div class="col-md-4">
             <div class="card-box-a card-shadow">
               <div class="img-box-a">
-                <img src="<%=thisPath%>/resources/admin/img/best1.jpg" alt="" class="img-a img-fluid">
+                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best1.jpg" alt="" class="img-a img-fluid">
               </div>
               <div class="card-overlay">
                 <div class="card-overlay-a-content">
@@ -106,7 +106,7 @@
           <div class="col-md-4">
             <div class="card-box-a card-shadow">
               <div class="img-box-a">
-                <img src="<%=thisPath%>/resources/admin/img/best2.jpeg" alt="" class="img-a img-fluid">
+                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best2.jpeg" alt="" class="img-a img-fluid">
               </div>
               <div class="card-overlay">
                 <div class="card-overlay-a-content">
@@ -153,7 +153,7 @@
           <div class="col-md-4">
             <div class="card-box-a card-shadow">
               <div class="img-box-a">
-                <img src="<%=thisPath%>/resources/admin/img/best3.jpeg" alt="" class="img-a img-fluid">
+                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best3.jpeg" alt="" class="img-a img-fluid">
               </div>
               <div class="card-overlay">
                 <div class="card-overlay-a-content">
@@ -246,7 +246,7 @@
             <!-- Block2 -->
             <div class="block2">
               <div class="block2-pic hov-img0">
-                <img src="<%=thisPath%>/resources/admin/img/best1.jpg" alt="IMG-PRODUCT">
+                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best1.jpg" alt="IMG-PRODUCT">
   
                 <a href="<%=contextPath%>/views/user/space/spaceDetailView.jsp" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1 qw-btn">
                   Quick View
@@ -271,7 +271,7 @@
             <!-- Block2 -->
             <div class="block2">
               <div class="block2-pic hov-img0">
-                <img src="<%=thisPath%>/resources/admin/img/best1.jpg" alt="IMG-PRODUCT">
+                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best1.jpg" alt="IMG-PRODUCT">
   
                 <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1 qw-btn">
                   Quick View
@@ -297,7 +297,7 @@
             <!-- Block2 -->
             <div class="block2">
               <div class="block2-pic hov-img0">
-                <img src="<%=thisPath%>/resources/admin/img/best1.jpg" alt="IMG-PRODUCT">
+                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best1.jpg" alt="IMG-PRODUCT">
   
                 <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1 qw-btn">
                   Quick View
@@ -323,7 +323,7 @@
             <!-- Block2 -->
             <div class="block2">
               <div class="block2-pic hov-img0">
-                <img src="<%=thisPath%>/resources/admin/img/best2.jpeg" alt="IMG-PRODUCT">
+                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best2.jpeg" alt="IMG-PRODUCT">
   
                 <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1 qw-btn">
                   Quick View
@@ -350,7 +350,7 @@
             <!-- Block2 -->
             <div class="block2">
               <div class="block2-pic hov-img0">
-                <img src="<%=thisPath%>/resources/admin/img/best2.jpeg" alt="IMG-PRODUCT">
+                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best2.jpeg" alt="IMG-PRODUCT">
   
                 <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1 qw-btn">
                   Quick View
@@ -376,7 +376,7 @@
             <!-- Block2 -->
             <div class="block2">
               <div class="block2-pic hov-img0">
-                <img src="<%=thisPath%>/resources/admin/img/best2.jpeg" alt="IMG-PRODUCT">
+                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best2.jpeg" alt="IMG-PRODUCT">
   
                 <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1 qw-btn">
                   Quick View
@@ -402,7 +402,7 @@
             <!-- Block2 -->
             <div class="block2">
               <div class="block2-pic hov-img0">
-                <img src="<%=thisPath%>/resources/admin/img/best2.jpeg" alt="IMG-PRODUCT">
+                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best2.jpeg" alt="IMG-PRODUCT">
   
                 <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1 qw-btn">
                   Quick View
@@ -428,7 +428,7 @@
             <!-- Block2 -->
             <div class="block2">
               <div class="block2-pic hov-img0">
-                <img src="<%=thisPath%>/resources/admin/img/best3.jpeg" alt="IMG-PRODUCT">
+                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best3.jpeg" alt="IMG-PRODUCT">
   
                 <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1 qw-btn">
                   Quick View
@@ -454,7 +454,7 @@
             <!-- Block2 -->
             <div class="block2">
               <div class="block2-pic hov-img0">
-                <img src="<%=thisPath%>/resources/admin/img/best3.jpeg" alt="IMG-PRODUCT">
+                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best3.jpeg" alt="IMG-PRODUCT">
   
                 <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1 qw-btn">
                   Quick View
@@ -480,7 +480,7 @@
             <!-- Block2 -->
             <div class="block2">
               <div class="block2-pic hov-img0">
-                <img src="<%=thisPath%>/resources/admin/img/best3.jpeg" alt="IMG-PRODUCT">
+                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best3.jpeg" alt="IMG-PRODUCT">
   
                 <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1 qw-btn">
                   Quick View

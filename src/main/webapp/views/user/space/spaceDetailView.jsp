@@ -51,13 +51,13 @@
                                             <div id="property-single-carousel" class="swiper">
                                                 <div class="swiper-wrapper">
                                                     <div class="carousel-item-b swiper-slide">
-                                                        <img src="<%=thisPath%>/resources/admin/img/best3.jpeg" alt="">
+                                                        <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best3.jpeg" alt="">
                                                     </div>
                                                     <div class="carousel-item-b swiper-slide">
-                                                        <img src="<%=thisPath%>/resources/admin/img/best2.jpeg" alt="">
+                                                        <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best2.jpeg" alt="">
                                                     </div>
                                                     <div class="carousel-item-b swiper-slide">
-                                                        <img src="<%=thisPath%>/resources/admin/img/연습실/연습실1/prac1_1.jpg" alt="">
+                                                        <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/studio1_1.jpeg" alt="">
                                                     </div>
                                                 </div>
                                             </div>

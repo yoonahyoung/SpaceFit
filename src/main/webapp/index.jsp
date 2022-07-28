@@ -74,13 +74,13 @@
   <div class="intro intro-carousel swiper position-relative">
 
     <div class="swiper-wrapper">
-      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(resources/admin/img/main2.jpeg)">
+      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(resources/admin/space_upfiles/studio/main2.jpeg)">
       <a href=""></a>
       </div>
-      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(resources/admin/img/main3.jpg)">
+      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(resources/admin/space_upfiles/studio/main3.jpg)">
       <a href=""></a>
       </div>
-      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(resources/admin/img/main1.jpeg)">
+      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(resources/admin/space_upfiles/studio/main1.jpeg)">
       <a href=""></a>
       </div>
     </div>
@@ -111,7 +111,7 @@
           <div class="col-md-4">
             <div class="card-box-d">
               <div class="card-img-d">
-                <img src="resources/admin/img/스튜디오/스튜디오3/studio3_2.jpg" alt="" class="img-d img-fluid">
+                <img src="resources/admin/space_upfiles/studio/studio3_2.jpg" alt="" class="img-d img-fluid">
               </div>
               <div class="card-overlay card-overlay-hover">
                 <div class="card-header-d">
@@ -137,7 +137,7 @@
           <div class="col-md-4">
             <div class="card-box-d">
               <div class="card-img-d">
-                <img src="resources/admin/img/스튜디오/스튜디오2/studio2_2.jpg" alt="" class="img-d img-fluid">
+                <img src="resources/admin/space_upfiles/studio/studio2_2.jpg" alt="" class="img-d img-fluid">
               </div>
               <div class="card-overlay card-overlay-hover">
                 <div class="card-header-d">
@@ -163,7 +163,7 @@
           <div class="col-md-4">
             <div class="card-box-d">
               <div class="card-img-d">
-                <img src="resources/admin/img/연습실/연습실1/prac1_1.jpg" alt="" class="img-d img-fluid">
+                <img src="resources/admin/space_upfiles/practice/prac1_1.jpg" alt="" class="img-d img-fluid">
               </div>
               <div class="card-overlay card-overlay-hover">
                 <div class="card-header-d">
@@ -203,7 +203,7 @@
           <div class="col-md-4">
             <div class="card-box-d">
               <div class="card-img-d">
-                <img src="resources/admin/img/파티룸/파티룸2/party2_4.jpg" alt="" class="img-d img-fluid">
+                <img src="resources/admin/space_upfiles/party/party2_4.jpg" alt="" class="img-d img-fluid">
               </div>
               <div class="card-overlay card-overlay-hover">
                 <div class="card-header-d">
@@ -229,7 +229,7 @@
           <div class="col-md-4">
             <div class="card-box-d">
               <div class="card-img-d">
-                <img src="resources/admin/img/파티룸/파티룸1/party1_4.jpg" alt="" class="img-d img-fluid">
+                <img src="resources/admin/space_upfiles/party/party1_4.jpg" alt="" class="img-d img-fluid">
               </div>
               <div class="card-overlay card-overlay-hover">
                 <div class="card-header-d">
@@ -255,7 +255,7 @@
           <div class="col-md-4">
             <div class="card-box-d">
               <div class="card-img-d">
-                <img src="resources/admin/img/파티룸/파티룸2/party2_2.jpg" alt="" class="img-d img-fluid">
+                <img src="resources/admin/space_upfiles/party/party2_2.jpg" alt="" class="img-d img-fluid">
               </div>
               <div class="card-overlay card-overlay-hover">
                 <div class="card-header-d">
@@ -306,7 +306,7 @@
                 <div class="row">
                   <div class="col-sm-12 col-md-6">
                     <div class="testimonial-img">
-                      <img src="resources/admin/img/파티룸/루프탑/loof1_4.jpg" alt="" class="img-fluid">
+                      <img src="resources/admin/space_upfiles/party/loof1_4.jpg" alt="" class="img-fluid">
                     </div>
                   </div>
                   <div class="col-sm-12 col-md-6">
@@ -332,7 +332,7 @@
                 <div class="row">
                   <div class="col-sm-12 col-md-6">
                     <div class="testimonial-img">
-                      <img src="resources/admin/img/파티룸/파티룸1/party1_2.jpg" alt="" class="img-fluid">
+                      <img src="resources/admin/space_upfiles/party/party1_2.jpg" alt="" class="img-fluid">
                     </div>
                   </div>
                   <div class="col-sm-12 col-md-6">
