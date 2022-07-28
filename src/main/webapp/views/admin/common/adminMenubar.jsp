@@ -98,8 +98,8 @@
                 </span>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">                        
-                        <a class="collapse-item" href="">배너관리</a>
-                        <a class="collapse-item" href="">이용자 통계</a>
+                        <a class="collapse-item" href="<%=contextPath%>/views/admin/homepage/bannerManage.jsp">배너관리</a>
+                        <a class="collapse-item" href="<%=contextPath%>/views/admin/homepage/memberCharts.jsp">이용자 통계</a>
                         <a class="collapse-item" href="">이용약관</a>               
                         <a class="collapse-item" href="">쿠폰관리</a>
                     </div>
