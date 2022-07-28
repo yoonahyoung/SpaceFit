@@ -54,8 +54,8 @@ public class BookUpdateController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/bdetail.bo?no=" + bookNo);
 			
 		}else {
-			// request.setAttribute("errorMsg", "일반게시글 수정에 실패했습니다");
-			//request.getRequestDispatcher("views/user/common/errorPage.jsp").forward(request, response);
+			request.setAttribute("errorMsg", "예약수정에 실패했습니다. 잠시후 다시 시도해주세요");
+			request.getRequestDispatcher("views/user/common/backAlertErrorPage.jsp").forward(request, response);
 		}
 		
 	}

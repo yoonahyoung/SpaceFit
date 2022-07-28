@@ -12,19 +12,8 @@
 </head>
 <body>
     <%@ include file="../common/userMenubar.jsp" %>
-    
-    <!-- 이렇게 해야 값이 담겨있을때만 alert가 실행된다 -->
-    <% if(alertMsg != null) { %> 
-		<script>
-			alert("<%=alertMsg%>");   <%-- "" 반드시!! 따옴표!!로 묶어줘야함 안하면 alert(회원가입성공);--%>
-		</script>
-		<%--회원가입성공후 알람창띄운후에도 session으로 담아서 보냈기때문에 새로고침후에도 alertMsg는 여전히 값이 남아있어서 
-			새로고침할때마다 계속 알람창이 뜰것이다. 그래서 session을 remove해줘야함 (session은 서버만료되거나 내가 지우기전까지 계속 있음)
-			alertMsg를 제거만 해줘도 alertMsg!= 조건에 맞지않아서 실행이 안됨 	
-		 --%>
-		<% session.removeAttribute("alertMsg"); %> 
-	<% } %>
-
+   
+  
     <div class="rvlvd">
             
         <div class="rvlvd-header" align="center">
@@ -223,7 +212,7 @@
 	               </button>
 	                &nbsp;	                
 	
-	               <!-- 예약수정과 예약취소는 3일전엔 보이지 않도록!! -->
+	               <!-- 예약수정과 예약취소버튼은 3일전엔 보이지 않도록!! -->
 	               <%if(b.getBookDecimalDay() > 3) { %>
 	               		<a href="<%=contextPath %>/bupdateForm.bo?no=<%= b.getBookNo() %>" class="btn btn-sm btn-primary">예약수정</a> &nbsp;
 	
@@ -244,14 +233,14 @@
             <!-- 완료된 예약상세보기일경우 -->
             <%if(b.getBookCategory().equals("이용완료")) {%>
 	            <div align="center">               
-	               <button type="button" class="btn btn-sm btn-primary" onclick="reviewEnroll();">후기등록</button> &nbsp;
+	               <button type="submit" class="btn btn-sm btn-primary" onclick="reviewEnroll();">후기등록</button> &nbsp;
 	               <button type="button" onclick="history.back();" class="btn btn-sm btn-secondary">뒤로가기</button>
 	            </div>
 	         <%} %>   
 	            
             <script>
               function reviewEnroll(){
-                   location.href = '<%= contextPath %>/rInsert.re?no=' + <%=  b.getBookNo() %> ;
+                   location.href = '<%= contextPath %>/rInsertForm.re?bno=<%= b.getBookNo() %>&sName=<%= b.getSpaceNo() %>' ;
               }
                                                     
             </script>
@@ -290,7 +279,7 @@
                <h5 class="modal-title" id="deleteBkModalLabel">예약취소</h5>              
             </div>
             <div class="modal-body">
-               <form action="<%=contextPath %>/bdelete.bo?bno=<%= b.getBookNo() %>&sName=<%= b.getSpaceNo() %>" method=post>               
+               <form action="<%=contextPath %>/bdelete.bo?no=<%= b.getBookNo() %>" method=post>               
                   <table align="center">                     
                      <tr>
                         <th width="100">취소사유</th>
