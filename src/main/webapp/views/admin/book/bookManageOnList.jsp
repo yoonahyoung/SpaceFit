@@ -97,26 +97,30 @@
                            </tbody>
                         </table>
                     </div>
+                    </div>
+                    <div class="paging-area" align="center">    
+                    
+                        <button class="btn btn-sm btn-outline-primary">&lt;</button>        
+                        <button disabled class="btn btn-sm btn-outline-primary">1</button>        
+                        <button class="btn btn-sm btn-outline-primary">2</button> 
+                        <button class="btn btn-sm btn-outline-primary">3</button>    
+                        <button class="btn btn-sm btn-outline-primary">4</button> 
+                        <button class="btn btn-sm btn-outline-primary">5</button>       
+                        <button class="btn btn-sm btn-outline-primary">&gt;</button>
+                        
+                    </div>
+                    <div style="height : 60px"></div>
                 </div>
+            
             </div>
 
-    </div>
-    <!-- /.container-fluid -->
-    <br><br>
+        </div>  
+
+        <!-- /.container-fluid -->
+        <br><br>        		
     
-    <div class="paging-area" align="center">    
-    
-        <button class="btn btn-sm btn-outline-primary">&lt;</button>        
-        <button disabled class="btn btn-sm btn-outline-primary">1</button>        
-        <button class="btn btn-sm btn-outline-primary">2</button> 
-        <button class="btn btn-sm btn-outline-primary">3</button>    
-        <button class="btn btn-sm btn-outline-primary">4</button> 
-        <button class="btn btn-sm btn-outline-primary">5</button>       
-        <button class="btn btn-sm btn-outline-primary">&gt;</button>
-        
-    </div>
-</div>
-<!-- <div style="height : 100px"></div> -->
+    <div style="height : 100px"></div>
+
 
 </body>
 </html>
