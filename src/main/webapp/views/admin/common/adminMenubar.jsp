@@ -135,7 +135,7 @@
                 </span>
                 <div id="collapsePages3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">                        
-                        <a class="collapse-item" href="">회원정보조회</a>
+                        <a class="collapse-item" href="<%=contextPath%>/memManage.me">회원정보조회</a>
                         <a class="collapse-item" href="">신고</a>            
                         <a class="collapse-item" href="">후기관리</a>                 
                     </div>

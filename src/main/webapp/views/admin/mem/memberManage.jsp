@@ -6,17 +6,8 @@
 <meta charset="UTF-8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <title>Space Fit 회원관리</title>
-<link rel="stylesheet" href="../../../resources/user/css/userLoginAndSignIn.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/admin/css/member.css">
 <style>
-	#dataTable {
-        font-size:12px;
-        text-align: right;
-    }
-    
-    #dataTable>tbody>tr:hover{
-    	background-color : #EEEEEE;
-    	cursor : pointer;
-    }
 </style>
 </head>
 <body>
@@ -59,7 +50,7 @@
 							</div>
 	                        <div class="card-body">
 	                            <div class="table-responsive">
-	                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+	                                <table class="table table-bordered memberListTable" id="dataTable" width="100%" cellspacing="0">
 	                                    <thead>
 	                                        <tr>
 	                                        	<th>선택</th>
@@ -174,6 +165,15 @@
                 </div>
                 <!-- /.container-fluid -->
 				<br><br>
+				
+				 <script>
+		        	$(function(){
+		        		$(".memberListTable>tbody>tr").click(function(){
+		        			location.href="<%=contextPath%>/memDetailView.me?no=" + $(this).children().eq(0).text();
+		        		})
+		        	})
+        		</script>
+        
         		
 		        <div class="paging-area" align="center">    
 		        
