@@ -102,7 +102,7 @@
 						  	<br><br>
 						  	<button type="button" class="btn btn-danger">전체삭제</button>
                             <button type="button" class="btn btn-secondary">선택삭제</button>
-                            <button type="button" class="btn btn-primary">쿠폰등록</button>
+                            <button type="button" class="btn btn-primary" onclick="couponDetailView();">등록 및 발급</button>
                            
 						  </div>
 						  
@@ -124,6 +124,13 @@
              </div>
              <!-- /.container-fluid -->
             </div>
+            
+            <script>
+		    	function couponDetailView(){
+		   			location.href="<%=contextPath%>/views/admin/homepage/couponDetailView.jsp";
+				}
+		    	
+    		</script>
 	<br><br>
 	
 

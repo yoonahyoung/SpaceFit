@@ -57,6 +57,7 @@
                                   <thead>
                                       <tr>
                                       	  <th>선택</th>
+                                      	  <th>약관번호</th>
                                           <th>상태</th>
                                           <th>이용약관명</th>
                                           <th>게시영역</th>
@@ -68,6 +69,7 @@
                                   <tfoot>
                                       <tr>
                                       	<th>선택</th>
+                                      	  <th>약관번호</th>
                                           <th>상태</th>
                                           <th>이용약관명</th>
                                           <th>게시영역</th>
@@ -79,6 +81,7 @@
                                   <tbody>
                                       <tr>
                                       	<td><input type="radio"></td>
+                                      	  <td>0003</td>
                                           <td>게시중</td>
                                           <td>마이페이지 이용약관1</td>
                                           <td>마이페이지</td>
@@ -89,6 +92,7 @@
                                       </tr>
                                       <tr>
                                       	<td><input type="radio"></td>
+                                      	  <td>0002</td>
                                           <td>게시중</td>
                                           <td>마이페이지 이용약관1</td>
                                           <td>마이페이지</td>
@@ -99,6 +103,7 @@
                                       </tr>
                                        <tr>
                                        	<td><input type="radio"></td>
+                                       	  <td>0001</td>
                                           <td>게시중</td>
                                           <td>마이페이지 이용약관1</td>
                                           <td>마이페이지</td>
@@ -114,8 +119,8 @@
                           <div>
 						  	
 						  	<button type="button" class="btn btn-danger">선택삭제</button>
-                            <button type="button" class="btn btn-secondary">수정하기</button>
-                            <button type="button" class="btn btn-primary">등록하기</button>
+                            <button type="button" class="btn btn-secondary" onclick="termsUpdateDetailView();">수정하기</button>
+                            <button type="button" class="btn btn-primary" onclick="termsInsertDetailView();">등록하기</button>
 						  </div>
 						
                       </div>
@@ -137,6 +142,18 @@
              </div>
              <!-- /.container-fluid -->
             </div>
+            
+            <script>
+		    	function termsUpdateDetailView(){
+		   			location.href="<%=contextPath%>/views/admin/homepage/termsUpdateDetailView.jsp";
+				}
+		    	
+		    	function termsInsertDetailView(){
+		   			location.href="<%=contextPath%>/views/admin/homepage/termsInsertDetailView.jsp";
+				}
+		    </script>
+		    
+    
 	<br><br>
 	
 	 
