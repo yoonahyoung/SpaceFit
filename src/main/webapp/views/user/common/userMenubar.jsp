@@ -354,6 +354,18 @@
 </head>
 
 <body>
+	  <!-- 이렇게 해야 값이 담겨있을때만 alert가 실행된다 -->
+    <% if(alertMsg != null) { %> 
+		<script>
+			alert("<%=alertMsg%>");   <%-- "" 반드시!! 따옴표!!로 묶어줘야함 안하면 alert(회원가입성공);--%>
+		</script>
+		<%--알람창띄운후에도 session으로 담아서 보냈기때문에 새로고침후에도 alertMsg는 여전히 값이 남아있어서 
+			remove해줘야함 	
+		 --%>
+		<% session.removeAttribute("alertMsg"); %> 
+	<% } %>
+
+
 		<div class="wrap">
 	
 	  <% if(loginUser == null) { %> 

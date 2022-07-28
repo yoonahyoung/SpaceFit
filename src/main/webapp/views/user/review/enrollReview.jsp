@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	int bookNo = (int)request.getAttribute("bookNo");
+	int memNo = (int)request.getAttribute("memNo");
+	int spaceNo = (int)request.getAttribute("spaceNo");
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,9 +17,14 @@
 </head>
 <body>
 	<%@ include file="../common/userMenubar.jsp" %>
+		
 	 <div class="outer">
         <div class="blueShadow" align="center">
-            <form action="" name="reviewInsertForm" id="myRvform" method="post">
+            <form action="<%= contextPath %>/rInsert.re" name="reviewInsertForm" id="myRvform" method="post" enctype="multipart/form-data">
+            	            	
+            	<input type="hidden" name="bookNo" value="<%=bookNo%>">
+            	<input type="hidden" name="memNo" value="<%=memNo%>">
+            	<input type="hidden" name="spaceNo" value="<%=spaceNo%>">
                 <br><br>
                     <h3>후기등록</h3>
                 <hr style="width: 50%; color:black">               
@@ -45,7 +55,7 @@
                     <br><br>
                     <tr>                        
                         <td colspan="3" id="rvContentArea">
-                            <textarea id="reviewContents" maxlength="500" placeholder="수강평을 남겨주세요!! :)" rows="8" style="width: 100%"></textarea>   
+                            <textarea name="reviewContent" id="reviewContents" maxlength="500" placeholder="수강평을 남겨주세요!! :)" rows="8" style="width: 100%"></textarea>   
                         </td>
                     </tr>
                     <tr>
@@ -77,7 +87,7 @@
                     <input type="file" name="file3" onchange="loadImg(this, 3);" >                   
                 </div>
 
-                <!-- <script>
+                 <script>
 
                     function chooseFile(num){
                         $("input[name=file" + num + "]").click(); // name속성이 file1/file2/..이 클릭되게끔
@@ -119,7 +129,7 @@
                                 }
                         }
                     }
-                </script> -->
+                </script> 
     
                 <br>
     

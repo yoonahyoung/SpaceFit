@@ -28,6 +28,16 @@ public class Review {
 		this.reviewStar = reviewStar;
 		this.reviewStatus = reviewStatus;
 	}
+	
+	
+	public Review(int bookNo, String spaceNo, String memNo, String reviewContent, int reviewStar) {
+		super();
+		this.bookNo = bookNo;
+		this.spaceNo = spaceNo;
+		this.memNo = memNo;
+		this.reviewContent = reviewContent;
+		this.reviewStar = reviewStar;
+	}
 
 	public int getReviewNo() {
 		return reviewNo;

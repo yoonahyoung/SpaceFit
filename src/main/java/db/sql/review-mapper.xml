@@ -8,7 +8,53 @@
 		 WHERE SPACE_NAME = ?
 	</entry>
 
-
+	<entry key="insertReview">
+	   INSERT
+		 INTO TB_REVIEW
+		    (
+		      RV_NO
+		    , BOOK_NO
+		    , SPACE_NO
+		    , MEM_NO
+		    , RV_CONTENT  
+		    , RV_STAR
+		    )
+		 VALUES
+		    (
+		       SEQ_RVNO.NEXTVAL
+		     , ?
+		     , ?
+		     , ?
+		     , ?   
+		     , ? 
+		     )
+	</entry>
+	
+	<entry key="insertAttachmentList">
+		INSERT
+		  INTO TB_FILE
+		    (
+		       FILE_NO
+		     , REF_BNO
+		     , FILE_CATEGORY
+		     , FILE_ORIGIN_NAME
+		     , FILE_CHANGE_NAME
+		     , FILE_UPLOAD_DATE
+		     , FILE_PATH
+		     , FILE_LEVEL
+		    )
+		 VALUES
+		    (
+		       SEQ_FINO.NEXTVAL
+		     , SEQ_RVNO.CURRVAL
+		     , 2
+		     , ?
+		     , ?
+		     , SYSDATE
+		     , ?
+		     , ?
+		    )
+	</entry>
 
 
 

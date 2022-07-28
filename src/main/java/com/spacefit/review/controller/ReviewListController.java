@@ -1,27 +1,23 @@
 package com.spacefit.review.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.spacefit.mem.model.vo.Member;
-import com.spacefit.review.model.service.ReviewService;
-
 /**
- * Servlet implementation class ReviewInsertForm
+ * Servlet implementation class ReviewListController
  */
-@WebServlet("/rInsertForm.re")
-public class ReviewInsertForm extends HttpServlet {
+@WebServlet("/rlist.rv")
+public class ReviewListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewInsertForm() {
+    public ReviewListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,22 +27,12 @@ public class ReviewInsertForm extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int bookNo = Integer.parseInt(request.getParameter("bno")); // 예약번호
-		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo(); // 회원번호
+		// 응답페이지상에 필요한 데이커 조회기능구현은 나중에 
 		
-		String spaceName = request.getParameter("sName"); // book에서 select해올때부터 spaceNo에 공간명을 담았었음
+		// 위임먼저
+		request.getRequestDispatcher("views/user/review/reviewListView.jsp").forward(request, response);
 		
-		int spaceNo = new ReviewService().selectSpaceNo(spaceName);
 		
-		request.setAttribute("bookNo", bookNo);
-		request.setAttribute("memNo", memNo);
-		request.setAttribute("spaceNo", spaceNo);
-		
-		//System.out.println(bookNo + "bn");
-		//System.out.println(memNo + "mn");
-		//System.out.println("sn" + spaceNo);
-		
-		request.getRequestDispatcher("views/user/review/enrollReview.jsp").forward(request, response);
 	}
 
 	/**
