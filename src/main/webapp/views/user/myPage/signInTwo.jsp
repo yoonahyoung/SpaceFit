@@ -3,6 +3,7 @@
 <%@ page import ="com.spacefit.mem.model.vo.Member" %> 
 <%
 	String memPhone = (String)request.getAttribute("memPhone");
+	String memName = (String)request.getAttribute("memName");
 %>
 <!DOCTYPE html>
 <html>
@@ -43,7 +44,7 @@
 	                                <span>비밀번호를 한번 더 입력해주세요.</span>
 	                            <br><br>
 	                                <label for="#memName">이름</label>
-	                                <input type="text" placeholder="이름을 입력해주세요" class="account-input" id="memName" name="memName" required>
+	                                <input type="text" placeholder="이름을 입력해주세요" class="account-input" id="memName" name="memName"  value="<%=memName%>" required readOnly>
 	                            <br><br>
 	                                <label for="#memIdNo">생년월일</label>
 	                                <input type="text" placeholder="생년월일 6자리를 입력하세요." class="account-input" id="memIdNo" name="memIdNo" required>

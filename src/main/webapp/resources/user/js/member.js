@@ -26,6 +26,7 @@ $(function(){
 })
 
 // 회원가입폼 1(SignInOne에서 회원약관 전체선택)
+/*
 $(function(){
 	 const agreeChkAll = document.querySelector('input[name=agree_all]');
         agreeChkAll.addEventListener('change', (e) => {
@@ -34,7 +35,7 @@ $(function(){
         agreeChk[i].checked = e.target.checked;
         }
     });
-})
+})*/
 
 // js1-------------------------------------------------------
 
@@ -88,9 +89,10 @@ function checkSms(){
 		},
 		type:"post",
 		// 여기까지 하면 현재 jsp에 있는 전달받은 랜덤번호랑 사용자가 적은 번호를 서블릿으로 보내게 됨
+		// 번호를 인증하지 않아도....넘어가는데....?
 		success:function(result){
 			if(result > 0){
-				console.log("인증번호 확인 완료")
+				console.log(result);
 				let value=" <span id='validMessage' style='font-size:11px;'>인증번호 확인 완료!</span>"
 				$(".signInForm .accountAnswer").html(value)
  				} else {
@@ -106,9 +108,10 @@ function checkSms(){
 }
 
 
-// js3-------------------------------------------------------
+// js3------------------------------------------------------- 휴대폰인증 공통메소드
  function signInTwo(){
 		$("#memPhoneSubmit").val($("#memPhone").val())
+		$("#memNameSubmit").val($("#memName").val())
 		$("#phoneForm").submit()
 }
 
@@ -136,16 +139,16 @@ function idCheck(){
 						if(result == "NNNNN"){
 							// 사용 불가일 경우
 							alert("이미 존재하거나 탈퇴한 회원의 아이디입니다.");
-							$memId.focus();
+							$("#memId").focus();
 						} else {
 							// 사용 가능일경우
 							if(confirm("멋진 아이디네요! 사용하시겠습니까?")){
 								// 사용하겠다
 								$("#signInForm :submit").removeAttr("disabled");
-								$memId.attr("readOnly", true);
+								$("#memId").attr("readOnly", true);
 							} else {
 								// 사용하지 않겠다
-								$memId.focus();
+								$("#memId").focus();
 							}
 						}
 						

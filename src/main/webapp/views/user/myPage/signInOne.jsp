@@ -105,6 +105,10 @@
 	                    <br>
                         <form class="signInForm"  method="post">
                         	<div class="inputs">
+                        		
+                        		<label for="#phoneNameCheck" class="signInLabel">이름</label> <span class="memName"  style="text-align:rignt"></span>
+                                <input type="text" placeholder="가입하셨던 이름을 입력해주세요." class="signInInput" id="memName" name="memName" required>
+                        		<br><br>
                         	
                         		<label for="#phoneIdNo" class="signInLabel">핸드폰번호</label> <span class="pHoneAnswer" style="text-align:rignt"></span>
                                 <input type="text" placeholder="핸드폰번호를 입력해주세요 (-제외)" class="signInInput" id="memPhone" name="memPhone" required>
@@ -133,6 +137,7 @@
 	                   </form>
                         <form action="<%=contextPath %>/signInTwo.me" method="post" id="phoneForm">
                         	<input type="hidden" name="memPhone" value="" id="memPhoneSubmit">
+                        	<input type="hidden" name="memName" value="" id="memNameSubmit">
                         </form>
           <div style="height : 100px"></div>
           <%@ include file="../common/userFooter.jsp" %>

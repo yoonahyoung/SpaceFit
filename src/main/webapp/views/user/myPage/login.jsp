@@ -24,9 +24,9 @@
                         <hr style="color:  #0D6EFD;">
                         <h4>
                         <br>	
-                        	<a href="" id="idSearch" class="find" style="color:grey; font-size:16px;">아이디 찾기&nbsp</a>
+                        	<a href="<%=contextPath %>/idSearch.me" id="idSearch" class="find" style="color:grey; font-size:16px;">아이디 찾기&nbsp</a>
                     		<span style="color:grey; font-size:16px;">|</span>
-                    		<a href="" id="pwdSearch" class="find" style="color:grey; font-size:16px;">&nbsp비밀번호 재설정</a>
+                    		<a href="<%=contextPath %>/pwdChangeOne.me" id="pwdSearch" class="find" style="color:grey; font-size:16px;">&nbsp비밀번호 재설정</a>
                     		<br><br>
                         </h4>
                         <hr style="color:  #0D6EFD;"><br>
@@ -51,7 +51,7 @@
                 </div>
             </div>
           </div>
-          </div>
+          </div> </div>
           <div style="height : 100px"></div>
           <%@ include file="../common/userFooter.jsp" %>
           
