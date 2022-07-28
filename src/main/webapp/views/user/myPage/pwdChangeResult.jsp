@@ -15,15 +15,16 @@
 	<%@ include file="../common/userMenubar.jsp" %>
 	<link rel="stylesheet" href="<%=contextPath %>/resources/user/css/member.css?ver=1">
 	
+	
 	<div style="height : 200px"></div>
         
     <div class="outer">
         <div class="blueShadow text-center">
                     <div class="forPadding">
                         <h4 class="h4forLgnNSign">
-                        	<a href="" id="idSearch" class="find">아이디 찾기&nbsp</a>
+                        	<a href="<%=contextPath %>/idSearch.me" id="idSearch" class="find">아이디 찾기&nbsp</a>
                     		<span>|</span>
-                    		<a href="" id="pwdSearch" class="find" style="color:#0D6EFD;">&nbsp비밀번호 재설정</a>
+                    		<a href="<%=contextPath %>/pwdChangeOne.me" id="pwdSearch" class="find" style="color:#0D6EFD;">&nbsp비밀번호 재설정</a>
                     		<br><br>
                         </h4>
                         <br>
@@ -33,19 +34,9 @@
 		                           <tr>
 			                           	<td>
 			                           		<hr>
-			                           		<form class="signInForm" style="padding:20px;">
-									        	<div class="inputs">
-									        		<br><br>
-						                                <label for="#password">비밀번호</label>
-						                                <input type="password" placeholder="새 비밀밀번호를 입력해주세요" class="account-input" id="password">
-						                                <span>비밀번호는 영문 대소문자+숫자+특수문자로 10자 이상입니다.</span>
-						                            <br><br>
-						                                <label for="#password-check">비밀번호</label>
-						                                <input type="password" placeholder="새 비밀번호를 다시 입력해주세요" class="account-input" id="password-check">
-						                                <span>비밀번호를 한번 더 입력해주세요.</span>
-						                            <br><br>
-									        	</div>
-								       		</form>
+			                           		<div id="idMessage">
+					                           비밀번호 변경이 완료되었습니다!<br>비밀번호는 스페이스핏 보안정책에 따라 안전하게 보관됩니다.
+	                        				</div>
 	                        				<hr>
 			                           	</td>
 		                           </tr>
@@ -55,8 +46,18 @@
 	                    <br>
                         <form class="signInForm">
                         	<div class="inputs">
-		                        <label for="#pwdBtn" class="inputLabel">이제는 잊지마세요! :)</label>
-		                        <button type="submit" class="btn btn-primary" id="pwdBtn">비밀번호 재설정</button><br>
+                        	
+                        		<label for="#pwdBtn" class="inputLabel">혹시 아이디도 모르시나요?</label>
+		                        <button type="submit" class="btn btn-secondary" id="pwdBtn" onclick="idSearch();">아이디 찾기</button><br>
+		                        <br>
+		                        <script>
+		                        	function idSearch(){
+		                        		location.href="<%=contextPath%>/idSearch.me";
+		                        	}
+		                        </script>
+		
+		                        <label for="#pwdBtn" class="inputLabel">이제 로그인하러 가요!</label>
+		                        <button type="submit" class="btn btn-primary" id="pwdBtn"  onclick="loginForm();">로그인</button><br>
 		                        <br>
                             
                         	</div>
@@ -64,6 +65,7 @@
             	</div> 
           	</div>	
           </div>
+          <div style="height : 100px"></div>
 	<!-- 자바스크립트 파일 연동 -->
 	<script type="text/javascript" src="<%=contextPath %>/resources/user/js/member.js"></script>
 </body>

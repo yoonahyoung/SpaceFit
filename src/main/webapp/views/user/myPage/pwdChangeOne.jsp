@@ -21,9 +21,9 @@
         <div class="blueShadow text-center">
                     <div class="forPadding">
                         <h4 class="h4forLgnNSign">
-                        	<a href="" id="idSearch" class="find">아이디 찾기&nbsp</a>
+                        	<a href="<%=contextPath %>/idSearch.me" id="idSearch" class="find">아이디 찾기&nbsp</a>
                     		<span>|</span>
-                    		<a href="" id="pwdSearch" class="find" style="color:#0D6EFD;">&nbsp비밀번호 재설정</a>
+                    		<a href="<%=contextPath %>/pwdChangeOne.me" id="pwdSearch" class="find" style="color:#0D6EFD;">&nbsp비밀번호 재설정</a>
                     		<br><br>
                         </h4>
                         <br>
@@ -77,11 +77,17 @@
                         	</div>
                         <hr>
 	                        <span class="already">인증을 축하드립니다! 비밀번호를 바꿔볼까요?</span>
-	                        <button class="btn btn-primary nextBtn" type="button">비밀번호 재설정하러 가기!</button><br>
+	                        <button class="btn btn-primary nextBtn" type="button" onclick="pwdChangeTwo();">비밀번호 재설정하러 가기!</button><br>
+	                        <script>
+	                        	function pwdChangeTwo(){
+	                        		location.href = "<%=contextPath%>/pwdChangeTwo.me";
+	                        	}
+	                        </script>
 	                   </form>
             	</div> 
           	</div>	
           </div>
+          <div style="height : 100px"></div>
 	<!-- 자바스크립트 파일 연동 -->
 	<script type="text/javascript" src="<%=contextPath %>/resources/user/js/member.js"></script>
 </body>
