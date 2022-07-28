@@ -106,7 +106,7 @@
                         <a class="collapse-item" href="<%=contextPath%>/views/admin/homepage/bannerManage.jsp">배너관리</a>
                         <a class="collapse-item" href="<%=contextPath%>/views/admin/homepage/memberCharts.jsp">이용자 통계</a>
                         <a class="collapse-item" href="">이용약관</a>               
-                        <a class="collapse-item" href="">쿠폰관리</a>
+                        <a class="collapse-item" href="<%=contextPath%>/views/admin/homepage/couponManage.jsp">쿠폰관리</a>
                     </div>
                 </div>
             </li>
