@@ -14,18 +14,15 @@
 	<!-- MENUBAR MEMBER CSS 연동 -->
 	<%@ include file="../common/userMenubar.jsp" %>
 	<link rel="stylesheet" href="<%=contextPath %>/resources/user/css/member.css?ver=1">
-	
-	
-	
-	<div style="height : 200px"></div>
+
         
     <div class="outer">
         <div class="blueShadow text-center">
                     <div class="forPadding">
                         <h4 class="h4forLgnNSign">
-                        	<a href="" id="idSearch" class="find" style="color:#0D6EFD;">아이디 찾기&nbsp</a>
+                        	<a href="<%=contextPath %>/idSearch.me" id="idSearch" class="find" style="color:#0D6EFD;">아이디 찾기&nbsp</a>
                     		<span>|</span>
-                    		<a href="" id="pwdSearch" class="find">&nbsp비밀번호 재설정</a>
+                    		<a href="<%=contextPath %>/pwdChangeOne.me" id="pwdSearch" class="find">&nbsp비밀번호 재설정</a>
                     		<br><br>
                         </h4>
                         <br>
@@ -66,23 +63,34 @@
                         <form class="signInForm">
                         	<div class="inputs">
                         	
-                        		<label for="#phoneIdNo" class="signInLabel">핸드폰번호</label>
-                                <input type="text" placeholder="핸드폰번호를 입력해주세요 (-제외)" class="signInInput" id="phoneIdNo">
-                                <button type="submit" class="btn btn-secondary getIdNoBtn" name="phoneIdNo">인증번호 받기</button><br><br>
-                                
-                                <label for="#phoneIdNoCheck" class="signInLabel">인증번호 받기</label>
-                                <input type="text" placeholder="인증번호를 입력해주세요" class="signInInput" id="phone">
-                                <button type="submit" class="btn btn-primary getIdNoBtn" name="phoneIdNoCheck">확인</button><br><br>
+                        		<label for="#phoneNameCheck" class="signInLabel">이름</label> <span class="memName"  style="text-align:rignt"></span>
+                                <input type="text" placeholder="가입하셨던 이름을 입력해주세요." class="signInInput" id="memName" name="memName" required>
+                        		<br><br>
+                        		
+                        		<label for="#phoneIdNo" class="signInLabel">핸드폰번호</label> <span class="pHoneAnswer" style="text-align:rignt"></span>
+                                <input type="text" placeholder="핸드폰번호를 입력해주세요 (-제외)" class="signInInput" id="memPhone" name="memPhone" required>
+                                <button type="button" class="btn btn-secondary getIdNoBtn" onclick="sms();">인증번호 받기</button><br><br>
+                                <input type="hidden" id="hideRandomNo" name="hideRandomNo">
+
+                                <label for="#phoneIdNoCheck" class="signInLabel">인증번호 작성</label> <span class="accountAnswer"  style="text-align:rignt"></span>
+                                <input type="text" placeholder="인증번호를 입력해주세요" class="signInInput" id="smsNoCheck" name="smsNoCheck" required>
+                                <button type="button" class="btn btn-primary getIdNoBtn" name="phoneIdNoCheck" onclick="checkSms();">확인</button><br><br>
                             
                         	</div>
                         <hr>
-	                        <span class="already">인증을 축하드립니다! 거의 다 왔어요!</span>
-	                        <button class="btn btn-primary nextBtn" type="button">아이디 확인하기!</button><br>
+	                        <span class="already">인증을 축하드립니다! 아이디를 확인하러 가요!</span>
+	                        <div style="height:10px;"></div>
+	                        <button class="btn btn-primary nextBtn" type="button" onclick="signInTwo();">아이디 확인하기!</button><br>
 	                   </form>
+	                   <form action="<%=contextPath %>/idSearchResult.me" method="post" id="phoneForm">
+                        	<input type="hidden" name="memPhone" value="" id="memPhoneSubmit">
+                        	<input type="hidden" name="memName" value="" id="memNameSubmit">
+                       </form>
             	</div> 
           	</div>	
           </div>
-
+	<div style="height : 100px"></div>
+    <%@ include file="../common/userFooter.jsp" %>
 	<!-- 자바스크립트 파일 연동 -->
 	<script type="text/javascript" src="<%=contextPath %>/resources/user/js/member.js"></script>
 </body>

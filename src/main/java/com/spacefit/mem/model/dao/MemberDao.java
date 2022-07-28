@@ -123,7 +123,34 @@ public class MemberDao {
 		
 	}
 	
-	
+	public Member idSearch(Connection conn, Member m) {
+		
+		String memId = "";
+		Member searchM = new Member();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("idSearch");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, m.getMemName());
+			pstmt.setString(2, m.getMemPhone());
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				memId = rset.getString("mem_id");
+				searchM.setMemId(memId);
+				searchM.setMemName(m.getMemName());
+				searchM.setMemPhone(m.getMemPhone());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		return searchM;
+		
+	}
 	
 	
 

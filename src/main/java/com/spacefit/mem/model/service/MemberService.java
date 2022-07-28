@@ -43,6 +43,13 @@ public class MemberService {
 		return result;
 		
 	}
+	
+	public Member idSearch(Member m) {
+		Connection conn = getConnection();
+		Member searchM = new MemberDao().idSearch(conn, m);
+		close(conn);
+		return searchM;
+	}
 
 
 }

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>   
+    pageEncoding="UTF-8"%>
+<%@ page import ="com.spacefit.mem.model.vo.Member" %> 
+<%
+	Member m = (Member)request.getAttribute("searchM");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +29,7 @@
                         <h4 class="h4forLgnNSign">
                         	<a href="" id="idSearch" class="find" style="color:#0D6EFD;">아이디 찾기&nbsp</a>
                     		<span>|</span>
-                    		<a href="" id="pwdSearch" class="find">&nbsp비밀번호 재설정</a>
+                    		<a href="<%=contextPath %>/pwdChangeOne.me" id="pwdSearch" class="find">&nbsp비밀번호 재설정</a>
                     		<br><br>
                         </h4>
                         <br>
@@ -36,8 +40,8 @@
 			                           	<td>
 			                           		<hr>
 			                           		<div id="idMessage">
-					                           회원님의 아이디는<br>
-					                           <span id="userId">user05</span>
+					                           <b><%=m.getMemName() %></b>님의 아이디는<br>
+					                           <span id="userId"><%=m.getMemId() %></span>
 					                           <br>입니다.
 	                        				</div>
 	                        				<hr>
@@ -51,18 +55,24 @@
                         	<div class="inputs">
                         	
                         		<label for="#pwdBtn" class="inputLabel">혹시 비밀번호도 모르시나요?</label>
-		                        <button type="submit" class="btn btn-secondary" id="pwdBtn">비밀번호 재설정</button><br>
+		                        <button type="submit" class="btn btn-secondary" id="pwdBtn" onclick="pwdChangeOne()">비밀번호 재설정</button><br>
 		                        <br>
+		                        <script>
+		                        	function pwdChangeOne(){
+		                        		location.href="<%=contextPath%>/pwdChangeOne.me";
+		                        	}
+		                        </script>
 		
 		                        <label for="#pwdBtn" class="inputLabel">이제 로그인하러 가요!</label>
-		                        <button type="submit" class="btn btn-primary" id="pwdBtn">로그인</button><br>
+		                        <button type="submit" class="btn btn-primary" id="pwdBtn" onclick="loginForm();">로그인</button><br>
 		                        <br>
-                            
+                            	
                         	</div>
 	                   </form>
             	</div> 
           	</div>	
           </div>
+          <div style="height : 100px"></div>
 	<!-- 자바스크립트 파일 연동 -->
 	<script type="text/javascript" src="<%=contextPath %>/resources/user/js/member.js"></script>
 </body>
