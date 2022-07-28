@@ -41,7 +41,8 @@
 		
 		<div class="btnWrap float-right" style="padding-right:10px;">
 	        <button type="button" class="btn btn-danger">삭제하기</button>
-	        <button type="button" class="btn btn-primary">수정 및 등록</button>
+	        <button type="button" class="btn btn-secondary" onclick="bannerUpdateDetailView();">수정하기</button>
+	        <button type="button" class="btn btn-primary" onclick="bannerInsertDetailView();">등록하기</button>
 	    </div>
 	    <br><br><br>
 	    
@@ -161,6 +162,16 @@
         
         
     </div>
+    
+    <script>
+    	function bannerUpdateDetailView(){
+   			location.href="<%=contextPath%>/views/admin/homepage/bannerUpdateDetailView.jsp";
+		}
+    	
+    	function bannerInsertDetailView(){
+   			location.href="<%=contextPath%>/views/admin/homepage/bannerInsertDetailView.jsp";
+		}
+    </script>
     
     <br><br><br><br><br><br>
 
