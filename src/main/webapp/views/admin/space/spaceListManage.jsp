@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>   
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.product.model.vo.Space"%>   
+<%
+	ArrayList<Space> list = (ArrayList<Space>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,14 +50,14 @@
                                 </form>
                             </div>
                             <div style="width:100px; display:inline-block">
-                                <a type="button" class="btn btn-secondary">글작성</a>
+                                <a type="button" class="btn btn-secondary" href="<%=contextPath%>/adEnroll.sp">공간추가</a>
                             </div>
                         </div>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered spaceListTable" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-bordered spaceListTable" id="dataTable" width="80%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th width="100px">번호</th>
@@ -64,18 +67,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                	<%for(Space s : list){ %>
                                     <tr>
-                                        <td>2</td>
-                                        <td style="text-align:left">파티룸A</td>
-                                        <td>파티룸</td>
-                                        <td>21/05/25</td>
+                                        <td><%= s.getSpaceNo() %></td>
+                                        <td><%= s.getSpaceName() %></td>
+                                        <td>
+                                        	<%if(s.getSpaceCategory().equals("studio")){ %>
+												스튜디오                                        
+                                        	<%}else if(s.getSpaceCategory().equals("practice")){ %>
+                                        		연습실
+                                        	<%}else if(s.getSpaceCategory().equals("party")){ %>
+                                        		파티룸
+                                        	<%} %>
+                                        </td>
+                                        <td><%= s.getSpaceEnDate() %></td>
                                     </tr>
+                                    <%} %>
                                     <tr>
-                                        <td>1</td>
-                                        <td>스튜디오D</td>
-                                        <td>스튜디오</td>
-                                        <td>21/05/25</td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -100,7 +108,7 @@
 				 <script>
 		        	$(function(){
 		        		$(".spaceListTable>tbody>tr").click(function(){
-		        			location.href="<%=contextPath%>/spaceDetailManage.me?no=" + $(this).children().eq(0).text();
+		        			location.href="<%=contextPath%>/adDetail.sp?no=" + $(this).children().eq(0).text();
 		        		})
 		        	})
         		</script>
