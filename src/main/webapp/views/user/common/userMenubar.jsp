@@ -517,7 +517,7 @@
 	 -->
 	      <div class="accordion-item">
 	        <h2 class="accordion-header" id="flush-headingSix">
-	          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
+	          <button class="accordion-button collapsed" type="button" onclick="updatePage();" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
 	            회원정보
 	          </button>
 	        </h2>
@@ -525,6 +525,12 @@
 	
 	      </div>
 	  	</div>
+	  	
+	  	<script>
+		       function updatePage(){
+	       			location.href="<%=contextPath%>/updatePage.me";
+			   }
+		</script>
 	
 	  <% } %>
 	 

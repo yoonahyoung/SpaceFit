@@ -69,5 +69,34 @@
 		 WHERE MEM_NAME = ?
            AND MEM_PHONE= ?
 	</entry>
+	
+	<entry key="updateMember">
+		UPDATE TB_MEMBER
+		   SET MEM_NAME = ?
+		     , MEM_MAIL = ?
+		     , MEM_PHONE = ?
+		     , MEM_MODIFY_DATE = SYSDATE
+		 WHERE MEM_ID = ?
+	</entry>
+	
+	<entry key="selectMember">
+		SELECT 
+			   MEM_NO
+			 , GR_NO
+			 , MEM_ID
+			 , MEM_PWD
+			 , MEM_NAME
+			 , MEM_IDNO
+			 , MEM_PHONE
+			 , MEM_MAIL
+			 , MEM_PROFILE
+			 , MEM_ENROLL_DATE
+			 , MEM_MODIFY_DATE
+			 , MEM_STATUS
+			 , MEM_ADM_FLAG
+		  FROM TB_MEMBER
+		 WHERE MEM_STATUS = 'Y'  
+		   AND MEM_ID = ? 
+	</entry>
 
 </properties>
