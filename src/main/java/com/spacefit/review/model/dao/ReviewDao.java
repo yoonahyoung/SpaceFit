@@ -54,7 +54,7 @@ public class ReviewDao {
 		return spaceNo;
 	}
 	
-	/** 후기등록 시 1. TB_REVIEW INSERT
+	/** 후기등록시 1. TB_REVIEW INSERT
 	 * @param conn
 	 * @param rv Reivew 정보
 	 * @return
@@ -112,5 +112,71 @@ public class ReviewDao {
 		}
 		
 		return result;
+	}
+	
+	/** 후기등록시 3. 해당 예약번호에 해당 회원이 등록한 유효한 리뷰가 있는지
+	 * @param conn
+	 * @param rv
+	 * @return
+	 */
+	public String selectReviewValid(Connection conn, Review rv) {
+		// select => ResultSet(한행) => String
+		String reviewValid = "";
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectReviewValid");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, rv.getBookNo());
+			pstmt.setString(2, rv.getMemNo());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				reviewValid = rset.getString("review_valid");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return reviewValid;	
+		
+	}
+	
+	public ArrayList<Review> selectReviewList(Connection conn, int memNo){
+		// select => ResultSet => ArrayList<Review>
+		ArrayList<Review> list = new ArrayList<>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectReviewList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			rset= pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Review(rset.getInt("rv_no"),
+									 rset.getString("space_name"),
+									 rset.getString("rv_content"),
+									 rset.getInt("rv_star"),
+									 rset.getString("book_date"),
+									 rset.getString("REVIEW_MAINIMG"))					 
+						);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+		
 	}
 }

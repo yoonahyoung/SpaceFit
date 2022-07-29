@@ -12,11 +12,14 @@ public class Review {
 	private Date ReviewModifyDate;
 	private int reviewStar;
 	private String reviewStatus;
+	private String bookDate;
+	private String mainImgUrl;
 	
 	public Review() {}
 
+	
 	public Review(int reviewNo, int bookNo, String spaceNo, String memNo, String reviewContent, Date reviewEnrollDdate,
-			Date reviewModifyDate, int reviewStar, String reviewStatus) {
+			Date reviewModifyDate, int reviewStar, String reviewStatus, String bookDate, String mainImgUrl) {
 		super();
 		this.reviewNo = reviewNo;
 		this.bookNo = bookNo;
@@ -27,9 +30,13 @@ public class Review {
 		ReviewModifyDate = reviewModifyDate;
 		this.reviewStar = reviewStar;
 		this.reviewStatus = reviewStatus;
+		this.bookDate = bookDate;
+		this.mainImgUrl = mainImgUrl;
 	}
-	
-	
+
+
+
+
 	public Review(int bookNo, String spaceNo, String memNo, String reviewContent, int reviewStar) {
 		super();
 		this.bookNo = bookNo;
@@ -38,6 +45,19 @@ public class Review {
 		this.reviewContent = reviewContent;
 		this.reviewStar = reviewStar;
 	}
+	
+	
+	public Review(int reviewNo, String spaceNo, String reviewContent, int reviewStar, String bookDate,
+			String mainImgUrl) {
+		super();
+		this.reviewNo = reviewNo;
+		this.spaceNo = spaceNo;
+		this.reviewContent = reviewContent;
+		this.reviewStar = reviewStar;
+		this.bookDate = bookDate;
+		this.mainImgUrl = mainImgUrl;
+	}
+
 
 	public int getReviewNo() {
 		return reviewNo;
@@ -110,14 +130,38 @@ public class Review {
 	public void setReviewStatus(String reviewStatus) {
 		this.reviewStatus = reviewStatus;
 	}
+		
+
+	public String getBookDate() {
+		return bookDate;
+	}
+
+
+	public void setBookDate(String bookDate) {
+		this.bookDate = bookDate;
+	}
+
+
+	public String getMainImgUrl() {
+		return mainImgUrl;
+	}
+
+
+	public void setMainImgUrl(String mainImgUrl) {
+		this.mainImgUrl = mainImgUrl;
+	}
+
 
 	@Override
 	public String toString() {
 		return "Review [reviewNo=" + reviewNo + ", bookNo=" + bookNo + ", spaceNo=" + spaceNo + ", memNo=" + memNo
 				+ ", reviewContent=" + reviewContent + ", ReviewEnrollDdate=" + ReviewEnrollDdate
 				+ ", ReviewModifyDate=" + ReviewModifyDate + ", reviewStar=" + reviewStar + ", reviewStatus="
-				+ reviewStatus + "]";
+				+ reviewStatus + ", bookDate=" + bookDate + ", mainImgUrl=" + mainImgUrl + "]";
 	}
+
+
+	
 	
 	
 }
