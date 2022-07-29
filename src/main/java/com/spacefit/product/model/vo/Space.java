@@ -11,8 +11,45 @@ public class Space {
 	private String spacePic;
 	private Date spaceEnDate;
 	private int spacePrice;
+	private String spaceStatus;
 	
 	public Space() {}
+
+	public Space(int spaceNo, String spaceName, int spaceLimit, String spaceInfo, String spaceCategory, String spacePic,
+			Date spaceEnDate, int spacePrice, String spaceStatus) {
+		super();
+		this.spaceNo = spaceNo;
+		this.spaceName = spaceName;
+		this.spaceLimit = spaceLimit;
+		this.spaceInfo = spaceInfo;
+		this.spaceCategory = spaceCategory;
+		this.spacePic = spacePic;
+		this.spaceEnDate = spaceEnDate;
+		this.spacePrice = spacePrice;
+		this.spaceStatus = spaceStatus;
+	}
+	
+	public Space(int spaceNo, String spaceName, int spaceLimit, String spaceCategory, String spacePic, Date spaceEnDate, int spacePrice) {
+		super();
+		this.spaceNo = spaceNo;
+		this.spaceName = spaceName;
+		this.spaceLimit = spaceLimit;
+		this.spaceCategory = spaceCategory;
+		this.spacePic = spacePic;
+		this.spaceEnDate = spaceEnDate;
+		this.spacePrice = spacePrice;
+	}
+	
+	public Space(int spaceNo, String spaceName, int spaceLimit, String spaceCategory, String spacePic, int spacePrice) {
+		super();
+		this.spaceNo = spaceNo;
+		this.spaceName = spaceName;
+		this.spaceLimit = spaceLimit;
+		this.spaceCategory = spaceCategory;
+		this.spacePic = spacePic;
+		this.spacePrice = spacePrice;
+	}
+
 
 	public Space(int spaceNo, String spaceName, int spaceLimit, String spaceInfo, String spaceCategory, String spacePic,
 			Date spaceEnDate, int spacePrice) {
@@ -24,17 +61,6 @@ public class Space {
 		this.spaceCategory = spaceCategory;
 		this.spacePic = spacePic;
 		this.spaceEnDate = spaceEnDate;
-		this.spacePrice = spacePrice;
-	}
-
-
-	public Space(int spaceNo, String spaceName, int spaceLimit, String spaceCategory, String spacePic, int spacePrice) {
-		super();
-		this.spaceNo = spaceNo;
-		this.spaceName = spaceName;
-		this.spaceLimit = spaceLimit;
-		this.spaceCategory = spaceCategory;
-		this.spacePic = spacePic;
 		this.spacePrice = spacePrice;
 	}
 

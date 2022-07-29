@@ -1,7 +1,6 @@
 package com.spacefit.product.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,16 +12,16 @@ import com.spacefit.product.model.service.SpaceService;
 import com.spacefit.product.model.vo.Space;
 
 /**
- * Servlet implementation class SpaceListView
+ * Servlet implementation class SpaceDetailViewController
  */
-@WebServlet("/list.sp")
-public class SpaceListViewController extends HttpServlet {
+@WebServlet("/detail.sp")
+public class SpaceDetailViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SpaceListViewController() {
+    public SpaceDetailViewController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,18 +31,12 @@ public class SpaceListViewController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 인기공간 리스트
-		ArrayList<Space> topList = new SpaceService().selectTopList();
+		int spNo = Integer.parseInt(request.getParameter("no"));
 		
-		// 모든 공간 리스트
-		ArrayList<Space> list = new SpaceService().selectList();
+		Space s = new SpaceService().spaceDetailView(spNo);
 		
 		
-		// 상품 리스트 받아서 넘기기
-		request.setAttribute("list", list);
-		request.setAttribute("topList", topList);
-		request.getRequestDispatcher("views/user/space/spaceListView.jsp").forward(request, response);
-		
+		request.getRequestDispatcher("views/user/space/spaceDetailView.jsp").forward(request, response);
 	}
 
 	/**
