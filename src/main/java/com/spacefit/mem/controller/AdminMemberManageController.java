@@ -32,7 +32,7 @@ public class AdminMemberManageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
-		ArrayList <Member> list = new MemberService().adminMemberManageDetailListSelect();
+		ArrayList <Member> list = new MemberService().adminMemberManageListSelect();
 		
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/admin/mem/memberManage.jsp").forward(request, response);
