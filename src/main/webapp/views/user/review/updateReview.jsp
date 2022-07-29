@@ -69,16 +69,18 @@
                     <tr>
                         <th></th>
                     </tr>
-                    <tr class="hoverRv">                        
-                        <td>                <!-- src 기존 저장된 이미지경로-->
-                            <img id="titleImg" src="<%= list.get(0).get %>" width="100" height="80" onclick="chooseFile(1);">
+                    <tr class="hoverRv">  
+                    	<% int i = 1; %>                      
+                        <% for(Attachment at : list) { %>
+                        	<td>                <!-- src 기존 저장된 이미지경로-->
+                            <img id="reviewImg<%= i %>" src="<%= contextPath  %>/<%= at.getFilePath() %><%= at.getFileChangeName() %>" width="100" height="80" onclick="chooseFile(<%= i++ %>);">
                         </td>
-                        <td>
-                            <img id="contentImg1" src="" width="100" height="80" onclick="chooseFile(2);">
-                        </td>
-                        <td>
-                            <img id="contentImg2" src="" width="100" height="80" onclick="chooseFile(3);">
-                        </td>                       
+                        <%} %>
+                        <% for( int j=i; j<=3; j++){ %>
+                        	<td>
+                            	<img id="reviewImg<%= j %>"  width="100" height="80" onclick="chooseFile(<%= j %>);">
+                        	</td>
+                          <%} %>                    
                     </tr>
                 </table>
 
@@ -88,8 +90,44 @@
                     <input type="file" name="file3" onchange="loadImg(this, 3);" >                   
                 </div>
 
-         
-                </script> -->
+         		<script>
+
+                    function chooseFile(num){
+                        $("input[name=file" + num + "]").click(); // name속성이 file1/file2/..이 클릭되게끔
+                    }
+    
+                    function loadImg(inputFile, num){
+                           
+                        if(inputFile.files.length == 1){ // 파일선택된경우 => 파일읽어들여서 미리보기
+    
+                            // 파일을 읽어들일 FileReader 객체 생성
+                            const reader = new FileReader();
+    
+                            // 파일을 읽어들이는 메소드
+                            // reader.readAsDataURL(읽어들이고자하는파일); <= 파일은 inputFile.files[0]에 담겨있음
+                            reader.readAsDataURL(inputFile.files[0]);                        
+    
+                            // 파일 읽어들이기가 완료됐을때 실행할 함수를 정의
+                            reader.onload = function(e){
+                                // e.target.result => 읽어들인 파일의 고유한 url
+                                //console.log(e.target.result); 파일의 고유한 url이 부여되어 보여졌음 
+                                switch(num){
+                                    case 1: $("#reviewImg1").attr("src", e.target.result); break;
+                                    case 2: $("#reviewImg2").attr("src", e.target.result); break;
+                                    case 3: $("#reviewImg3").attr("src", e.target.result); break;                                    
+                                }
+                            }
+    
+                        }else{ // 파일취소됐을 경우 => 미리보기된것도 사라지게
+                            switch(num){
+                                    case 1: $("#titleImg").attr("src", null); break;
+                                    case 2: $("#contentImg1").attr("src",null); break;
+                                    case 3: $("#contentImg2").attr("src", null); break;                                   
+                                }
+                        }
+                    }
+                </script> 
+               
     
                 <br>
     
