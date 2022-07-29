@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="selectNoticeList">
+	SELECT NT_NO
+        , NT_CATEGORY
+     	, NT_TITLE
+	     , MEM_ID
+	     , NT_COUNT
+	     , NT_CREATE_DATE
+	  FROM TB_NOTICE
+	  JOIN TB_MEMBER ON(NT_MEM_NO = MEM_NO)
+	 WHERE NT_STATUS = 'Y'
+	 ORDER
+	    BY NT_NO DESC
+	</entry>
+	
+	
+</properties>

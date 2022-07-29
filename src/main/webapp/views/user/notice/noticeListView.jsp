@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.notice.model.vo.Notice"%>
+<%
+	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+    System.out.println(list);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +21,13 @@
     th{
         font-size: 18px;
     }
+    .table>tbody>tr:hover{
+   	background:#E1F0FF;
+   	cursor:pointer;
+    }
+	h2{
+		color: #0d6efd !important; 
+	}
 </style>
 </head>
 <body>
@@ -36,93 +47,26 @@
                 <th width="100">조회수</th>
                 <th width="100">작성일</th>
             </tr>
+		</thead>
+		<tbody>
+        <%if(list.isEmpty()) { %>
+            <!-- case1. 공지글이 없을 경우 -->
             <tr>
-				<td>10</td>
-				<td>일반</td>
-				<td>제목</td>
-				<td>admin</td>
-				<td>3</td>
-				<td>2020.12.29</td>
+                <td colspan="6">존재하는 공지사항이 없습니다.</td>
             </tr>
+		<% } else{ %>
+            <!-- case2. 공지글이 있을 경우 -->
+            	<% for(Notice n : list) { %>
             <tr>
-				<td>9</td>
-				<td>일반</td>
-				<td>제목</td>
-				<td>admin</td>
-				<td>3</td>
-				<td>2020.12.29</td>
+				<td><%= n.getNoticeNo() %></td>
+				<td><%= n.getNoticeCategory() %></td>
+				<td><%= n.getNoticeTitle() %></td>
+				<td><%= n.getNoticeWriter() %></td>
+				<td><%= n.getCount() %></td>
+				<td><%= n.getCreateDate() %></td>
             </tr>
-            <tr>
-				<td>8</td>
-				<td>이벤트</td>
-				<td>제목</td>
-				<td>admin</td>
-				<td>3</td>
-				<td>2020.12.29</td>
-            </tr>
-            <tr>
-				<td>7</td>
-				<td>이벤트</td>
-				<td>제목</td>
-				<td>admin</td>
-				<td>3</td>
-				<td>2020.12.29</td>
-            </tr>
-            <tr>
-				<td>6</td>
-				<td>이벤트</td>
-				<td>제목</td>
-				<td>admin</td>
-				<td>3</td>
-				<td>2020.12.29</td>
-            </tr>
-            <tr>
-				<td>5</td>
-				<td>이벤트</td>
-				<td>제목555</td>
-				<td>admin</td>
-				<td>3</td>
-				<td>2020.12.29</td>
-            </tr>
-            <tr>
-				<td>4</td>
-				<td>이벤트</td>
-				<td>제목</td>
-				<td>admin</td>
-				<td>3</td>
-				<td>2020.12.29</td>
-            </tr>   
-			<tr>
-				<td>3</td>
-				<td>이벤트</td>
-				<td>세번째제목</td>
-				<td>admin</td>
-				<td>3</td>
-				<td>2020.12.29</td>
-            </tr>
-            
-            
-			<tr>
-				<td>2</td>
-				<td>이벤트</td>
-				<td>두번째제목</td>
-				<td>admin</td>
-				<td>3</td>
-				<td>2020.12.29</td>
-            </tr>
-            
-			<tr>
-				<td>1</td>
-				<td>이벤트</td>
-				<td>첫번째제목</td>
-				<td>admin</td>
-				<td>3</td>
-				<td>2020.12.29</td>
-            </tr>        
-        </thead>
-        
-        <tbody>
-
+            <% } %>
+		<% } %>     
         </tbody>
     </table>
 
