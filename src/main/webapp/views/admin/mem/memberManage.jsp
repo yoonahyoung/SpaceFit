@@ -135,12 +135,9 @@
 			                                            
 			                                      
 			                                            <td><%=m.getBookCountMonth() %></td>
-			                                            <td><input type="button" class="btn btn-primary btn-sm" value="상세조회" onclick="memDetailView();"></td>
+			                                            <td><input type="button" class="btn btn-primary btn-sm" value="상세조회" onclick="location.href='<%=contextPath%>/memDetailView.me?no=<%=m.getMemNo()%>'"></td>
 			                                            <script>
-			                                           		 function memDetailView(){
-			                                           			const num = <%=m.getMemNo()%>
-			                                	       			location.href="<%=contextPath%>/memDetailView.me?no=" + num;
-			                                				}
+			
 			                                            </script>
 			                                        </tr>
 			                                      <% } %>

@@ -99,6 +99,34 @@
 		   AND MEM_ID = ? 
 	</entry>
 
+<entry key="updateMember">
+      UPDATE TB_MEMBER
+         SET MEM_NAME = ?
+           , MEM_MAIL = ?
+           , MEM_PHONE = ?
+           , MEM_MODIFY_DATE = SYSDATE
+       WHERE MEM_ID = ?
+   </entry>
+   
+   <entry key="selectMember">
+      SELECT 
+            MEM_NO
+          , GR_NO
+          , MEM_ID
+          , MEM_PWD
+          , MEM_NAME
+          , MEM_IDNO
+          , MEM_PHONE
+          , MEM_MAIL
+          , MEM_PROFILE
+          , MEM_ENROLL_DATE
+          , MEM_MODIFY_DATE
+          , MEM_STATUS
+          , MEM_ADM_FLAG
+        FROM TB_MEMBER
+       WHERE MEM_STATUS = 'Y'  
+         AND MEM_ID = ? 
+   </entry>
 
 
 
@@ -108,37 +136,59 @@
 
 <!-- admin -->
 
-	<entry key="allMemberCount">
-		SELECT COUNT(*) AS "MEM_ALL_COUNT"
-		FROM TB_MEMBER
-	</entry>
-
-
+	
+	
 	<entry key="adminMemberManageListSelect">
 		SELECT MEM_NO
 		     , MEM_ID
 		     , MEM_NAME
+		     , MEM_IDNO 
 		     , MEM_PHONE
-		     , MEM_ENROLL_DATE
-		     , MEM_STATUS
-		     , MEM_ADM_FLAG
+		     , MEM_MAIL
 		     , GR_NAME
 		     , (
+		        SELECT COUNT(*) AS "BOOK_COUNT"
+		                       FROM TB_BOOK B1
+		                      WHERE B1.MEM_NO = MEM.MEM_NO
+		        )AS "BOOK_COUNT_ALL"
+		     , (
+		        SELECT COUNT(*) AS "BOOK_COUNT_MONTH"
+		                       FROM TB_BOOK B2
+		                      WHERE B2.MEM_NO = MEM.MEM_NO
+		                        AND BOOK_DATE BETWEEN TO_DATE('2022.05.01', 'YYYY.MM.DD') 
+		                                          AND TO_DATE('2022-07-28', 'YYYY.MM.DD')
+		        )AS "BOOK_COUNT_MONTH"
+		     , (
+		            SELECT SUM(BOOK_PRICE)
+		              FROM TB_BOOK B3
+		              WHERE B3.MEM_NO = MEM.MEM_NO
+		            )AS "BOOK_AMOUNT_ALL"
+		     , (
+		         SELECT SUM(BOOK_PRICE)
+		           FROM TB_BOOK B4
+		          WHERE B4.MEM_NO = MEM.MEM_NO
+		            AND BOOK_DATE BETWEEN TO_DATE('2022.05.01', 'YYYY.MM.DD') 
+		                              AND TO_DATE('2022-07-28', 'YYYY.MM.DD')
+		        )AS "BOOK_AMOUNT_MONTH"
+		     , (
 		        SELECT COUNT(*) AS "RPT_COUNT"
-		                       FROM TB_REPORT
-		                      WHERE MEM_NO = ?
+		                       FROM TB_REPORT R
+		                      WHERE R.MEM_NO = MEM.MEM_NO
 		        ) AS "RPT_COUNT"
 		     , (
 		        SELECT COUNT(*) AS "LIKE_COUNT"
-		                       FROM TB_LIKE
-		                      WHERE MEM_NO = ?
+		                       FROM TB_LIKE L
+		                      WHERE L.MEM_NO = MEM.MEM_NO
 		        )AS "LIKE_COUNT"
-		  FROM TB_MEMBER
+		     , MEM_STATUS
+		     , MEM_ADM_FLAG
+		     , MEM_ENROLL_DATE
+		     , MEM_MODIFY_DATE
+		  FROM TB_MEMBER MEM
 		  LEFT JOIN TB_GRADE USING (GR_NO)
-		  WHERE MEM_NO = ?
 	</entry>
-	
-	
+
+
 	<entry key="adminMemberManageDetailListSelect">
 		SELECT MEM_NO
 		     , MEM_ID
@@ -149,47 +199,44 @@
 		     , GR_NAME
 		     , (
 		        SELECT COUNT(*) AS "BOOK_COUNT"
-		                       FROM TB_BOOK
-		                      WHERE MEM_NO = ? 
+		                       FROM TB_BOOK B1
+		                      WHERE B1.MEM_NO = MEM.MEM_NO
 		        )AS "BOOK_COUNT_ALL"
 		     , (
 		        SELECT COUNT(*) AS "BOOK_COUNT_MONTH"
-		                       FROM TB_BOOK
-		                      WHERE MEM_NO = ?
+		                       FROM TB_BOOK B2
+		                      WHERE B2.MEM_NO = MEM.MEM_NO
 		                        AND BOOK_DATE BETWEEN TO_DATE('2022.05.01', 'YYYY.MM.DD') 
 		                                          AND TO_DATE('2022-07-28', 'YYYY.MM.DD')
 		        )AS "BOOK_COUNT_MONTH"
 		     , (
 		            SELECT SUM(BOOK_PRICE)
-		              FROM TB_BOOK
-		              JOIN TB_MEMBER USING (MEM_NO)
-		             WHERE MEM_NO = ?
+		              FROM TB_BOOK B3
+		              WHERE B3.MEM_NO = MEM.MEM_NO
 		            )AS "BOOK_AMOUNT_ALL"
 		     , (
 		         SELECT SUM(BOOK_PRICE)
-		           FROM TB_BOOK
-		           JOIN TB_MEMBER USING (MEM_NO)
-		          WHERE MEM_NO = ?
+		           FROM TB_BOOK B4
+		          WHERE B4.MEM_NO = MEM.MEM_NO
 		            AND BOOK_DATE BETWEEN TO_DATE('2022.05.01', 'YYYY.MM.DD') 
 		                              AND TO_DATE('2022-07-28', 'YYYY.MM.DD')
 		        )AS "BOOK_AMOUNT_MONTH"
 		     , (
 		        SELECT COUNT(*) AS "RPT_COUNT"
-		                       FROM TB_REPORT
-		                      WHERE MEM_NO = ?
+		                       FROM TB_REPORT R
+		                      WHERE R.MEM_NO = MEM.MEM_NO
 		        ) AS "RPT_COUNT"
 		     , (
 		        SELECT COUNT(*) AS "LIKE_COUNT"
-		                       FROM TB_LIKE
-		                      WHERE MEM_NO = ?
+		                       FROM TB_LIKE L
+		                      WHERE L.MEM_NO = MEM.MEM_NO
 		        )AS "LIKE_COUNT"
 		     , MEM_STATUS
 		     , MEM_ADM_FLAG
 		     , MEM_ENROLL_DATE
 		     , MEM_MODIFY_DATE
-		  FROM TB_MEMBER
+		  FROM TB_MEMBER MEM
 		  LEFT JOIN TB_GRADE USING (GR_NO)
-		  WHERE MEM_NO = ?
+		 WHERE MEM_NO = ?
 	</entry>
-
 </properties>

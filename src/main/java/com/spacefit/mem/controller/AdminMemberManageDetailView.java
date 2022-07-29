@@ -32,8 +32,9 @@ public class AdminMemberManageDetailView extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int memNo = Integer.parseInt(request.getParameter("no"));
-		ArrayList <Member> list = new MemberService().adminMemberManageDetailListSelect(memNo);
-		request.setAttribute("list", list);
+		Member m = new MemberService().adminMemberManageDetailListSelect(memNo);
+		request.setAttribute("memNo", memNo);
+		request.setAttribute("m", m);
 		request.getRequestDispatcher("views/admin/mem/memberManageDetailView.jsp").forward(request, response);
 	}
 
