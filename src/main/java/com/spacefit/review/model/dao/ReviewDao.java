@@ -219,7 +219,7 @@ public class ReviewDao {
 		ArrayList<Attachment> list = new ArrayList<>();
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("selectAttachment");
+		String sql = prop.getProperty("selectAttachmentList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
