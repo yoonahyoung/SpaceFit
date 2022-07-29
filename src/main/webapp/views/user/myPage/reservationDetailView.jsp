@@ -219,7 +219,7 @@
 	               		<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteBook">예약취소</button>
 	               <% } %>
 	               &nbsp;
-	               <button type="button" onclick="history.back();" class="btn btn-sm btn-secondary">뒤로가기</button>
+	               <button type="button" onclick="location.href='<%= contextPath %>/bolist.bo'" class="btn btn-sm btn-secondary">뒤로가기</button>
 	            </div>	            
             <%} %> 
 
@@ -227,14 +227,14 @@
              <%if(b.getBookCategory().equals("예약취소")) { %>              
 	            <div align="center">
 	               <button type="button" class="btn btn-sm btn-primary" disabled>취소완료</button> &nbsp;
-	               <button type="button" onclick="history.back();" class="btn btn-sm btn-secondary">뒤로가기</button>
+	               <button type="button" onclick="location.href='<%= contextPath %>/bolist.bo'" class="btn btn-sm btn-secondary">뒤로가기</button>
 	            </div>
 			 <% } %>
             <!-- 완료된 예약상세보기일경우 -->
             <%if(b.getBookCategory().equals("이용완료")) {%>
 	            <div align="center">               
 	               <button type="submit" class="btn btn-sm btn-primary" onclick="reviewEnroll();">후기등록</button> &nbsp;
-	               <button type="button" onclick="history.back();" class="btn btn-sm btn-secondary">뒤로가기</button>
+	               <button type="button" onclick="location.href='<%= contextPath %>/bolist.bo'" class="btn btn-sm btn-secondary">뒤로가기</button>
 	            </div>
 	         <%} %>   
 	            
@@ -242,6 +242,7 @@
               function reviewEnroll(){
                    location.href = '<%= contextPath %>/rInsertForm.re?bno=<%= b.getBookNo() %>&sName=<%= b.getSpaceNo() %>' ;
               }
+                            
                                                     
             </script>
 
