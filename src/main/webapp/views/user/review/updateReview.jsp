@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ 
+	page import="com.spacefit.review.model.vo.Review, java.util.ArrayList, com.spacefit.attachment.model.vo.Attachment"
+%>
+<%
+	Review rv = (Review)request.getAttribute("rv");
+	ArrayList<Attachment> list = (ArrayList<Attachment>)request.getAttribute("list"); 
+%>    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +19,7 @@
     <%@ include file="../common/userMenubar.jsp" %>
 	 <div class="outer">
         <div class="blueShadow" align="center">
-            <form action="" name="reviewInsertForm" id="myRvform" method="post">
+            <form action="" name="reviewInsertForm" id="myRvform" method="post"  enctype="multipart/form-data">
                 <br><br>
                     <h3>후기수정</h3>
                 <hr style="width: 50%; color:black">               
@@ -42,7 +50,7 @@
                     <br><br>
                     <tr>                        
                         <td colspan="3" id="rvContentArea">
-                            <textarea id="reviewContents" maxlength="500" placeholder="수강평을 남겨주세요!! :)" rows="8" style="width: 100%">기존의 내용이 들어갈자리</textarea>   
+                            <textarea id="reviewContents" maxlength="500" placeholder="수강평을 남겨주세요!! :)" rows="8" style="width: 100%" required><%= rv.getReviewContent() %></textarea>   
                         </td>
                     </tr>
                     <tr>
@@ -63,13 +71,13 @@
                     </tr>
                     <tr class="hoverRv">                        
                         <td>                <!-- src 기존 저장된 이미지경로-->
-                            <img id="titleImg" src="" width="100" height="80" onclick="chooseFile(1);">
+                            <img id="titleImg" src="<%= list.get(0).get %>" width="100" height="80" onclick="chooseFile(1);">
                         </td>
                         <td>
-                            <img id="contentImg1" width="100" height="80" onclick="chooseFile(2);">
+                            <img id="contentImg1" src="" width="100" height="80" onclick="chooseFile(2);">
                         </td>
                         <td>
-                            <img id="contentImg2" width="100" height="80" onclick="chooseFile(3);">
+                            <img id="contentImg2" src="" width="100" height="80" onclick="chooseFile(3);">
                         </td>                       
                     </tr>
                 </table>

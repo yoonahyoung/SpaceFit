@@ -34,9 +34,6 @@ public class Review {
 		this.mainImgUrl = mainImgUrl;
 	}
 
-
-
-
 	public Review(int bookNo, String spaceNo, String memNo, String reviewContent, int reviewStar) {
 		super();
 		this.bookNo = bookNo;
@@ -56,6 +53,16 @@ public class Review {
 		this.reviewStar = reviewStar;
 		this.bookDate = bookDate;
 		this.mainImgUrl = mainImgUrl;
+	}
+	
+	public Review(int reviewNo, int bookNo, String spaceNo, String memNo, String reviewContent, int reviewStar) {
+		super();
+		this.reviewNo = reviewNo;
+		this.bookNo = bookNo;
+		this.spaceNo = spaceNo;
+		this.memNo = memNo;
+		this.reviewContent = reviewContent;
+		this.reviewStar = reviewStar;
 	}
 
 
