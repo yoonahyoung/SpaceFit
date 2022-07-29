@@ -288,102 +288,7 @@ public class MemberDao {
 		return list;
 	}
 	
-<<<<<<< Updated upstream
-	public int updateMember(Connection conn, Member m) {
-		
-		int result = 0;
-		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("updateMember");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, m.getMemName());
-			pstmt.setString(2, m.getMemMail());
-			pstmt.setString(3, m.getMemPhone());
-			pstmt.setString(4, m.getMemId());
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		System.out.println(result);
-		return result;
-	}
-	
-	public Member selectMember(Connection conn, String memId) {
-		
-		Member m = null;
-		ResultSet rset = null;
-		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("selectMember");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, memId);
-			
-			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				m = new Member(rset.getInt("mem_no"),
-							   rset.getInt("gr_no"),
-							   rset.getString("mem_id"),
-							   rset.getString("mem_pwd"),
-							   rset.getString("mem_name"),
-							   rset.getString("mem_idno"),
-							   rset.getString("mem_phone"),
-							   rset.getString("mem_mail"),
-							   rset.getString("mem_profile"),
-							   rset.getDate("mem_enroll_date"),
-							   rset.getDate("mem_modify_date"),
-							   rset.getString("mem_status"),
-							   rset.getString("mem_adm_flag")
-							   );
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rset);
-			close(pstmt);
-		}
-	
-		return m;
-		
-	}
-	
-	public int updatePwdMember(Connection conn, String memId, String memPwd, String updatePwd) {
-		
-		int result = 0;
-		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("updatePwdMember");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, updatePwd);
-			pstmt.setString(2, memId);
-			pstmt.setString(3, memPwd);
-
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return result;
-	}
-		
-	
-	//---------ADMIN-----------//
-	
-	public int allMemberCount(Connection conn) {
-=======
 	public Member adminMemberManageDetailListSelect(Connection conn, int memNo){
->>>>>>> Stashed changes
 		
 		Member m = null;
 		
@@ -425,12 +330,7 @@ public class MemberDao {
 			close(pstmt);
 		}
 		
-<<<<<<< Updated upstream
-
-		return list;
-=======
 		return m;
->>>>>>> Stashed changes
 	}
 
 }
