@@ -13,16 +13,16 @@ import com.spacefit.mem.model.service.MemberService;
 import com.spacefit.mem.model.vo.Member;
 
 /**
- * Servlet implementation class MemberUpdateController
+ * Servlet implementation class MemUpdatePwdController
  */
-@WebServlet("/memUpdate.me")
-public class MemberUpdateController extends HttpServlet {
+@WebServlet("/updatePwd.me")
+public class MemUpdatePwdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberUpdateController() {
+    public MemUpdatePwdController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,33 +32,24 @@ public class MemberUpdateController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		request.setCharacterEncoding("utf-8");
-		
 		String memId = request.getParameter("memId");
-		String memName = request.getParameter("memName");
-		String memPhone = request.getParameter("memPhone");
-		String memMail = request.getParameter("memMail");
-
-		Member m = new Member(memId, memName, memPhone, memMail);
+		String memPwd = request.getParameter("memPwd");
+		String updatePwd = request.getParameter("updatePwd");
 		
-		Member updateMem = new MemberService().updateMember(m);
+		Member updateMem = new MemberService().updatePwdMember(memId, memPwd, updatePwd);
 		
-		
-		if(updateMem == null) { 
+		HttpSession session = request.getSession();
+		if(updateMem == null) {
 			
-			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg", "회원정보 수정에 실패하였습니다.");
-			
-			response.sendRedirect(request.getContextPath() + "/updatePage.me");
+			session.setAttribute("alertMsg", "비밀번호 변경에 실패했습니다.");
 			
 		}else {
 			
-			HttpSession session = request.getSession();
+			session.setAttribute("alertMsg", "비밀번호 변경에 성공했습니다.");
 			session.setAttribute("loginUser", updateMem);
-			session.setAttribute("alertMsg", "성공적으로 회원정보를 수정했습니다.");
-			
-			response.sendRedirect(request.getContextPath() + "/updatePage.me");
 		}
+		
+		response.sendRedirect(request.getContextPath() + "/updatePwdForm.me");
 	}
 
 	/**

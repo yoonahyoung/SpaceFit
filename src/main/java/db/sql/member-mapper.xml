@@ -99,7 +99,13 @@
 		   AND MEM_ID = ? 
 	</entry>
 
-
+	<entry key="updatePwdMember">
+		UPDATE TB_MEMBER
+		   SET MEM_PWD = ?
+		     , MEM_MODIFY_DATE = SYSDATE
+		 WHERE MEM_ID = ?
+		   AND MEM_PWD = ?   
+	</entry>
 
 
 

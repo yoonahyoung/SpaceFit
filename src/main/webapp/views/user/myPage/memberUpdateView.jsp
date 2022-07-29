@@ -115,7 +115,7 @@
       
           <div>
             <label class="col-sm-2 col-form-label" for="basic-default-name">비밀번호</label>
-            <a href="" style="text-decoration: underline; color: black; font-weight: 500; margin-right:340px;">변경하기</a>
+            <a href="<%= contextPath %>/updatePwdForm.me" style="text-decoration: underline; color: black; font-weight: 500; margin-right:340px;">변경하기</a>
           </div>
           <br><br><br>
                 
