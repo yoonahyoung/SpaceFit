@@ -60,5 +60,22 @@ public class ReviewService {
 		return list;
 		
 	}
+	
+	// 특정 후기 조회용
+	public Review selectReview(int reviewNo) {
+		Connection conn = getConnection();
+		Review rv = new ReviewDao().selectReview(conn, reviewNo);
+		close(conn);
+		return rv;
+	}
+	
+	// 등록된 후기의 첨부파일
+	public ArrayList<Attachment> selectAttachmentList(int reviewNo) {
+		Connection conn = getConnection();
+		
+		ArrayList<Attachment> list = new ReviewDao().selectAttachmentList(conn, reviewNo);
+		close(conn);
+		return list;
+	}
 
 }

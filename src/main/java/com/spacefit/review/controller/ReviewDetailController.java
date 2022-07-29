@@ -1,4 +1,4 @@
-package com.spacefit.mem.controller;
+package com.spacefit.review.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,21 +9,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.spacefit.mem.model.service.MemberService;
-import com.spacefit.mem.model.vo.Member;
+import com.spacefit.attachment.model.vo.Attachment;
+import com.spacefit.review.model.service.ReviewService;
+import com.spacefit.review.model.vo.Review;
 
 /**
- * Servlet implementation class MemberManageDetailView
+ * Servlet implementation class ReviewDetailController
  */
-@WebServlet("/memDetailView.me")
-public class AdminMemberManageDetailView extends HttpServlet {
+@WebServlet("/rdetail.rv")
+public class ReviewDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminMemberManageDetailView() {
+    public ReviewDetailController() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -31,17 +33,23 @@ public class AdminMemberManageDetailView extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int memNo = Integer.parseInt(request.getParameter("no"));
-		Member m = new MemberService().adminMemberManageDetailListSelect(memNo);
-		request.setAttribute("memNo", memNo);
-		request.setAttribute("m", m);
-		request.getRequestDispatcher("views/admin/mem/memberManageDetailView.jsp").forward(request, response);
+		// rivew정보 첨부파일정보
+		int reviewNo = Integer.parseInt(request.getParameter("no"));
+		Review rv = new ReviewService().selectReview(reviewNo);
+		ArrayList<Attachment> list = new ReviewService().selectAttachmentList(reviewNo);
+				
+		request.setAttribute("rv", rv);
+		request.setAttribute("list", list);
+		
+		request.getRequestDispatcher("views/user/review/updateReview.jsp").forward(request, response);
+				
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

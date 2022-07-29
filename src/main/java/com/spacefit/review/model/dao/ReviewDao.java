@@ -56,7 +56,7 @@ public class ReviewDao {
 	
 	/** 후기등록시 1. TB_REVIEW INSERT
 	 * @param conn
-	 * @param rv Reivew 정보
+	 * @param insert할 Reivew 정보
 	 * @return
 	 */
 	public int insertReview(Connection conn, Review rv) {
@@ -147,6 +147,11 @@ public class ReviewDao {
 		
 	}
 	
+	/** 후기내역조회용
+	 * @param conn
+	 * @param memNo 회원번호
+	 * @return 회원의 후기들
+	 */
 	public ArrayList<Review> selectReviewList(Connection conn, int memNo){
 		// select => ResultSet => ArrayList<Review>
 		ArrayList<Review> list = new ArrayList<>();
@@ -175,8 +180,68 @@ public class ReviewDao {
 			close(pstmt);
 		}
 		
+		return list;				
+	}
+	
+	public Review selectReview(Connection conn, int reviewNo) {
+		// select > ResultSet > Review
+		Review rv = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectReview");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				rv = new Review( rset.getInt("rv_no"),
+								 rset.getInt("book_no"),
+								 rset.getString("space_no"),
+								 rset.getString("mem_no"),
+								 rset.getString("rv_content"),
+								 rset.getInt("rv_star") 
+						);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return rv;
+	}
+	
+	public ArrayList<Attachment> selectAttachmentList(Connection conn, int reviewNo) {
+		// select => ResultSet(한행) => ArrayList<Attachment>
+		ArrayList<Attachment> list = new ArrayList<>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Attachment( rset.getInt("file_no"),
+										 rset.getString("file_origin_name"),
+										 rset.getString("file_change_name"),
+										 rset.getString("file_path"),
+										 rset.getInt("file_level")						
+						));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
 		return list;
-		
-		
 	}
 }

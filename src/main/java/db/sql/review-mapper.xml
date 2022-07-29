@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd"> 
 <properties>
-
+	
+	<!-- 리뷰등록1_1 필요한 공간번호 조회 -->
 	<entry key="selectSpaceNo">
 		SELECT SPACE_NO
 		  FROM TB_SPACE
 		 WHERE SPACE_NAME = ?
 	</entry>
-
+	
+	<!-- 리뷰등록1_2 TB_REVIEW INSERT -->
 	<entry key="insertReview">
 	   INSERT
 		 INTO TB_REVIEW
@@ -30,6 +32,7 @@
 		     )
 	</entry>
 	
+	<!-- 리뷰등록1_3 TB_FILE INSERT -->
 	<entry key="insertAttachmentList">
 		INSERT
 		  INTO TB_FILE
@@ -56,9 +59,62 @@
 		    )
 	</entry>
 
+	<!-- 리뷰등록 1_4 해당 예약번호로 회원이 리뷰 했는지 조회 여부 -->
+	<entry key="selectReviewValid">
+		 SELECT NVL2(MAX(RV_NO), 'Y', 'N') AS "REVIEW_VALID"
+	       FROM TB_REVIEW
+	      WHERE BOOK_NO  = ? 
+	        AND RV_STATUS = 'Y' 
+	        AND MEM_NO = ? 
+	</entry>
+	
+	<!-- 전체후기조회용 -->
+	<entry key="selectReviewList">
+		SELECT RV_NO
+		     , SPACE_NAME
+		     , BOOK_DATE     
+		     , RV_CONTENT     
+		     , RV_STAR 
+		     , FILE_PATH || FILE_CHANGE_NAME AS "REVIEW_MAINIMG"
+		  FROM TB_REVIEW R
+		  JOIN TB_BOOK USING (BOOK_NO)
+		  JOIN TB_SPACE S ON (R.SPACE_NO = S.SPACE_NO)
+		  JOIN TB_FILE ON (REF_BNO = RV_NO)
+		 WHERE R.MEM_NO = ?
+		   AND RV_STATUS = 'Y'
+		   AND FILE_CATEGORY = 2
+		   AND FILE_LEVEL = 1
+		 ORDER 
+		    BY RV_NO DESC 
+	</entry>
 
-
-
+	<!-- detailReview - review -->
+	<entry key="selectReview">
+		SELECT RV_NO
+	         , BOOK_NO
+	         , SPACE_NO
+	         , MEM_NO
+	         , RV_CONTENT        
+	         , RV_STAR       
+	      FROM TB_REVIEW
+	     WHERE RV_NO = ?
+	</entry>
+	
+	<!-- detailReview - Attachment -->
+	<entry key="selectAttachmentList">
+		 SELECT FILE_NO
+	          , FILE_ORIGIN_NAME
+	          , FILE_CHANGE_NAME
+	          , FILE_PATH	          
+	          , FILE_LEVEL    
+	      FROM TB_FILE
+	     WHERE REF_BNO = ?
+	       AND FILE_CATEGORY = 2
+	       AND FILE_STATUS = 'Y'
+	     ORDER 
+	        BY FILE_LEVEL ASC
+	</entry>
+	
 
 
 
