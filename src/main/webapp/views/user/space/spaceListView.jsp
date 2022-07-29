@@ -3,6 +3,7 @@
 <%
 	String thisPath = request.getContextPath();
 	ArrayList<Space> list = (ArrayList<Space>)request.getAttribute("list");
+	ArrayList<Space> topList = (ArrayList<Space>)request.getAttribute("topList");
 	
 %>
 <!DOCTYPE html>
@@ -58,46 +59,38 @@
       <div class="container">
         <div class="row">
   
+  		  <%for(Space s : topList){ %>
           <div class="col-md-4">
             <div class="card-box-a card-shadow">
               <div class="img-box-a">
-                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best1.jpg" alt="" class="img-a img-fluid">
+              	<a href="<%=thisPath%>/detail.sp">
+	                <img src="<%=thisPath%>/<%=s.getSpacePic() %>" alt="" class="img-a img-fluid">
+              	</a>
               </div>
               <div class="card-overlay">
                 <div class="card-overlay-a-content">
                   <div class="card-header-a">
                     <h2 class="card-title-a">
-                      <a href="#">204 Mount
-                        <br /> Olive Road Two</a>
+                      <a href="<%=thisPath%>/detail.sp?no=<%=s.getSpaceNo()%>"><%= s.getSpaceName() %></a>
                     </h2>
                   </div>
                   <div class="card-body-a">
                     <div class="price-box d-flex">
-                      <span class="price-a">rent | $ 12.000</span>
+                      <span class="price-a"> 1시간 | <%= s.getSpacePrice() %>원</span>
                     </div>
-                    <a href="<%=contextPath%>/views/user/space/spaceDetailView.jsp" class="link-a">Click here to view
+                    <a href="<%=thisPath%>/detail.sp?no=<%=s.getSpaceNo()%>" class="link-a">Click here to view
                       <span class="bi bi-chevron-right"></span>
                     </a>
                   </div>
                   <div class="card-footer-a">
                     <ul class="card-info d-flex justify-content-around">
                       <li>
-                        <h4 class="card-info-title">Area</h4>
-                        <span>340m
-                          <sup>2</sup>
-                        </span>
+                        <h4 class="card-info-title">수용인원</h4>
+                        <span><%=s.getSpaceLimit() %></span>
                       </li>
                       <li>
-                        <h4 class="card-info-title">Beds</h4>
-                        <span>2</span>
-                      </li>
-                      <li>
-                        <h4 class="card-info-title">Baths</h4>
-                        <span>4</span>
-                      </li>
-                      <li>
-                        <h4 class="card-info-title">Garages</h4>
-                        <span>1</span>
+                        <h4 class="card-info-title">분류</h4>
+                        <span><%=s.getSpaceCategory() %></span>
                       </li>
                     </ul>
                   </div>
@@ -105,100 +98,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="card-box-a card-shadow">
-              <div class="img-box-a">
-                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best2.jpeg" alt="" class="img-a img-fluid">
-              </div>
-              <div class="card-overlay">
-                <div class="card-overlay-a-content">
-                  <div class="card-header-a">
-                    <h2 class="card-title-a">
-                      <a href="#">204 Mount
-                        <br /> Olive Road Two</a>
-                    </h2>
-                  </div>
-                  <div class="card-body-a">
-                    <div class="price-box d-flex">
-                      <span class="price-a">rent | $ 12.000</span>
-                    </div>
-                    <a href="property-single.html" class="link-a">Click here to view
-                      <span class="bi bi-chevron-right"></span>
-                    </a>
-                  </div>
-                  <div class="card-footer-a">
-                    <ul class="card-info d-flex justify-content-around">
-                      <li>
-                        <h4 class="card-info-title">Area</h4>
-                        <span>340m
-                          <sup>2</sup>
-                        </span>
-                      </li>
-                      <li>
-                        <h4 class="card-info-title">Beds</h4>
-                        <span>2</span>
-                      </li>
-                      <li>
-                        <h4 class="card-info-title">Baths</h4>
-                        <span>4</span>
-                      </li>
-                      <li>
-                        <h4 class="card-info-title">Garages</h4>
-                        <span>1</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card-box-a card-shadow">
-              <div class="img-box-a">
-                <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best3.jpeg" alt="" class="img-a img-fluid">
-              </div>
-              <div class="card-overlay">
-                <div class="card-overlay-a-content">
-                  <div class="card-header-a">
-                    <h2 class="card-title-a">
-                      <a href="#">204 Mount
-                        <br /> Olive Road Two</a>
-                    </h2>
-                  </div>
-                  <div class="card-body-a">
-                    <div class="price-box d-flex">
-                      <span class="price-a">rent | $ 12.000</span>
-                    </div>
-                    <a href="property-single.html" class="link-a">Click here to view
-                      <span class="bi bi-chevron-right"></span>
-                    </a>
-                  </div>
-                  <div class="card-footer-a">
-                    <ul class="card-info d-flex justify-content-around">
-                      <li>
-                        <h4 class="card-info-title">Area</h4>
-                        <span>340m
-                          <sup>2</sup>
-                        </span>
-                      </li>
-                      <li>
-                        <h4 class="card-info-title">Beds</h4>
-                        <span>2</span>
-                      </li>
-                      <li>
-                        <h4 class="card-info-title">Baths</h4>
-                        <span>4</span>
-                      </li>
-                      <li>
-                        <h4 class="card-info-title">Garages</h4>
-                        <span>1</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+		  <%} %>
         </div>
       </div>
     </section>
@@ -249,16 +149,14 @@
             <!-- Block2 -->
             <div class="block2">
               <div class="block2-pic hov-img0">
-                <img src="<%=thisPath%>/<%= list.get(i).getSpacePic() %>" alt="IMG-PRODUCT">
-  
-                <a href="<%=contextPath%>/views/user/space/spaceDetailView.jsp" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1 qw-btn">
-                  Quick View
-                </a>
+              	<a href="<%=thisPath%>/detail.sp?no=<%=list.get(i).getSpaceNo()%>">              	
+	                <img src="<%=thisPath%>/<%= list.get(i).getSpacePic() %>" alt="IMG-PRODUCT">
+              	</a>
               </div>
   
               <div class="block2-txt flex-w flex-t p-t-14">
                 <div class="block2-txt-child1 flex-col-l ">
-                  <a href="" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                  <a href="<%=thisPath%>/detail.sp?no=<%=list.get(i).getSpaceNo()%>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
                     <%= list.get(i).getSpaceName() %>
                   </a>
   
@@ -283,6 +181,14 @@
 
 
 	<%@ include file="../common/userFooter.jsp" %>
+  <!-- 일반 js리스트 -->
+  
+
+
+
+
+	
+<!------------------------------- bootstrap js리스트 ---------------------------------------------->
 
   <!-- Vendor JS Files -->
   <script src="<%=thisPath%>/resources/user/templates/cozastore/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -393,9 +299,6 @@
     </script>
   <!--===============================================================================================-->
     <script src="<%=thisPath%>/resources/user/templates/cozastore/js/main.js"></script>
-
-
-</body>
 
 </body>
 </html>

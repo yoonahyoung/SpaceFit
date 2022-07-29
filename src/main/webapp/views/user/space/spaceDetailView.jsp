@@ -204,6 +204,11 @@
                                 </div>
 
                                 <div class="row">
+                                    <h4 style="margin-top:40px; border-bottom:2px solid #0D6EFD">총 금액</h4>
+                                    <span class="col-sm-4">(price) <b>원</b></span>
+                                </div>
+
+                                <div class="row">
                                     <div id="ayBtn" style="text-align:center; margin-top:100px;">
                                         <button class="btn btn-primary">바로결제</button>
                                         <button class="btn btn-outline-dark">보관함</button>

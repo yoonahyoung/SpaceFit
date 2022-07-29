@@ -32,10 +32,16 @@ public class SpaceListViewController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// 인기공간 리스트
+		ArrayList<Space> topList = new SpaceService().selectTopList();
+		
+		// 모든 공간 리스트
 		ArrayList<Space> list = new SpaceService().selectList();
+		
 		
 		// 상품 리스트 받아서 넘기기
 		request.setAttribute("list", list);
+		request.setAttribute("topList", topList);
 		request.getRequestDispatcher("views/user/space/spaceListView.jsp").forward(request, response);
 		
 	}
