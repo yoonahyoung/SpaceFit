@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.spacefit.product.model.vo.*"%>
+ <%
+ 	Space s = (Space)request.getAttribute("s");
+ %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,24 +22,38 @@
         <form>
 			<table class="table table-hover" id="dataTable">
 				<tr>
+					<th>공간분류</th>
+                    <td colspan="3">
+						<%if(s.getSpaceCategory().equals("studio")){ %>
+							스튜디오                                        
+                       	<%}else if(s.getSpaceCategory().equals("practice")){ %>
+                    		연습실
+                     	<%}else if(s.getSpaceCategory().equals("party")){ %>
+                     		파티룸
+                     	<%} %>
+					</td>
+				</tr>
+				<tr>
 					<th>공간명</th>
-					<td>공간명 들어올 자리</td>
+					<td><%= s.getSpaceName() %></td>
 				</tr>
 				<tr>
 					<th>최대 수용 인원</th>
-                    <td>수용 인원 들어올 자리</td>
-					<!-- <td><input type="text" value="user01" readOnly></td> -->
+                    <td><%= s.getSpaceLimit() %></td>
+				</tr>
+				<tr>
+					<th>시간당 가격</th>
+                    <td><%= s.getSpacePrice() %></td>
 				</tr>
 				<tr>
 					<th>공간소개</th>
-                    <td>공간소개 들어올 자리</td>
-					<!-- <td><input type="text" value="김딘딘" readOnly></td> -->
+                    <td><%= s.getSpaceInfo() %></td>
 				</tr>
 				<tr>
 					<th>대표사진</th>
                     <td colspan="3">
                         <!-- 기본에 선택되었던 사진 와야함 -->
-                        <img id="titleImg" width="250" height="200">
+                        <img src="<%=contextPath%>/<%= s.getSpacePic() %>" width="250" height="200">
                     </td>
 				</tr>
                 <tr>
@@ -47,14 +64,16 @@
                         <td><img id="contentImg3" width="200" height="150"></td>
 				</tr>
 				<tr>
-					<th>정보수정일</th>
-                    <td>xx.xx.xx</td>
+					<th>공간등록일</th>
+                    <td><%= s.getSpaceEnDate() %></td>
 					<!-- <td><input type="text" value="정보수정일" readOnly></td> -->
 				</tr>
+				
 			</table>
 			<br><br>
-			<button type="button" class="btn btn-primary">공간수정</button>
-	        <button type="button" class="btn btn-danger">공간삭제</button>
+			<a href="<%=contextPath%>/adList.sp" type="button" class="btn btn-secondary">목록가기</a>
+			<a href="<%=contextPath%>/adUpdate.sp?no=<%= s.getSpaceNo() %>" type="button" class="btn btn-primary">공간수정</a>
+	        <a type="button" class="btn btn-danger">공간삭제</a>
 		</form>
 		        
     </div>

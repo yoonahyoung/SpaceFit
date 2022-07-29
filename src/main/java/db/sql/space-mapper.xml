@@ -8,10 +8,113 @@
 		     , SPACE_LIMIT
 		     , SPACE_CATEGORY
 		     , SPACE_PIC
+		     , SPACE_EN_DATE
 		     , SPACE_PRICE
 		  FROM TB_SPACE
 		 WHERE SPACE_STATUS = 'Y'
 		 ORDER
-		 	BY SPACE_NO DESC
+			BY SPACE_NO DESC
 	</entry>
+
+
+	<entry key="selectTopList">
+		SELECT 
+			   예약순위
+			 , SPACE_NO
+			 , SPACE_NAME
+			 , SPACE_LIMIT
+			 , SPACE_CATEGORY
+			 , SPACE_PIC
+			 , SPACE_PRICE
+		  FROM (
+		        SELECT 
+		               ROW_NUMBER() OVER(ORDER BY COUNT(B.SPACE_NO) DESC) 예약순위
+		             , S.SPACE_NO
+		             , SPACE_NAME
+		             , SPACE_LIMIT
+		             , SPACE_CATEGORY
+		             , SPACE_PIC
+		             , SPACE_PRICE
+		          FROM TB_SPACE S
+		          JOIN TB_BOOK B ON(S.SPACE_NO = B.SPACE_NO)
+		         WHERE SPACE_STATUS = 'Y' 
+		         GROUP
+		            BY B.SPACE_NO, S.SPACE_NO, SPACE_NAME, SPACE_LIMIT, SPACE_CATEGORY, SPACE_PIC, SPACE_PRICE
+		         ORDER
+		            BY 1 ASC
+		       )예약뷰
+		 WHERE 예약순위 &lt;= 3
+	</entry>
+	
+	<entry key="spaceDetailView">
+		SELECT 
+		       SPACE_NO
+		     , SPACE_NAME
+		     , SPACE_LIMIT
+		     , SPACE_INFO
+		     , SPACE_CATEGORY
+		     , SPACE_PIC
+		     , SPACE_EN_DATE
+		     , SPACE_PRICE
+		  FROM TB_SPACE
+		 WHERE SPACE_NO = ?
+	</entry>
+	
+	<entry key="insertSpace">
+		INSERT
+		  INTO TB_SPACE
+		  (
+		    SPACE_NO
+		  , SPACE_NAME
+		  , SPACE_LIMIT
+		  , SPACE_INFO
+		  , SPACE_CATEGORY
+		  , SPACE_PIC
+		  , SPACE_PRICE
+		  )
+		  VALUES
+		  (
+		    SEQ_SPNO.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  )
+	</entry>
+	
+	<entry key="insertAttach">
+		INSERT
+		  INTO TB_FILE
+		  (
+		    FILE_NO
+		  , REF_BNO
+		  , FILE_CATEGORY
+		  , FILE_ORIGIN_NAME
+		  , FILE_CHANGE_NAME
+		  , FILE_PATH
+		  , FILE_UPLOAD_DATE
+		  )
+		  VALUES
+		  (
+		    SEQ_FINO.NEXTVAL
+		  , SEQ_SPNO.CURRVAL
+		  , 1
+		  , ?
+		  , ?
+		  , ?
+		  , SYSDATE
+		  )
+	</entry>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </properties>
