@@ -1,16 +1,17 @@
 package com.spacefit.mem.model.dao;
 
+import static com.spacefit.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import com.spacefit.mem.model.vo.Member;
-
-import static com.spacefit.common.JDBCTemplate.*;
 
 public class MemberDao {
 	
@@ -206,6 +207,84 @@ public class MemberDao {
 							   rset.getString("mem_adm_flag")
 							   );
 			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+	
+		return m;
+		
+	}
+	
+	//---------ADMIN-----------//
+	
+	public int allMemberCount(Connection conn) {
+		
+		int allMemberCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("allMemberCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				allMemberCount = rset.getInt("MEM_ALL_COUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return allMemberCount;
+		
+	}
+	
+	public ArrayList<Member> adminMemberManageDetailListSelect(Connection conn, int allMemberCount){
+		
+		ArrayList<Member> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminMemberManageDetailListSelect");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			for(int i=1; i<allMemberCount; i++) {
+				pstmt.setInt(1, i);
+				pstmt.setInt(2, i);
+				pstmt.setInt(3, i);
+				pstmt.setInt(4, i);
+				pstmt.setInt(5, i);
+				pstmt.setInt(6, i);
+				pstmt.setInt(7, i);
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					list.add(new Member(
+								rset.getInt("mem_no"),
+								rset.getString("mem_id"),
+								rset.getString("mem_name"),
+								rset.getString("mem_idno"),
+								rset.getString("mem_phone"),
+								rset.getString("mem_mail"),
+								rset.getString("gr_name"),
+								rset.getInt("book_count_all"),
+								rset.getInt("book_count_month"),
+								rset.getInt("book_amount_all"),
+								rset.getInt("book_amount_month"),
+								rset.getInt("rpt_count"),
+								rset.getInt("like_count"),
+								rset.getString("mem_status"),
+								rset.getString("mem_adm_flag"),
+								rset.getDate("mem_enroll_date"),
+								rset.getDate("mem_modify_date")
+							));
+				}
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -213,9 +292,10 @@ public class MemberDao {
 			close(pstmt);
 		}
 		
-		return m;
-		
+
+		return list;
 	}
+	
 
 }
 

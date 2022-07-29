@@ -1,9 +1,13 @@
 package com.spacefit.mem.model.service;
 
 
-import static com.spacefit.common.JDBCTemplate.*;
+import static com.spacefit.common.JDBCTemplate.close;
+import static com.spacefit.common.JDBCTemplate.commit;
+import static com.spacefit.common.JDBCTemplate.getConnection;
+import static com.spacefit.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.spacefit.mem.model.dao.MemberDao;
 import com.spacefit.mem.model.vo.Member;
@@ -66,6 +70,21 @@ public class MemberService {
 		
 		close(conn);
 		return updateMem;
+	}
+	
+	public ArrayList<Member> adminMemberManageDetailListSelect() {
+		Connection conn = getConnection();
+		int allMemberCount = new MemberDao().allMemberCount(conn);
+		ArrayList <Member> list = new MemberDao().adminMemberManageDetailListSelect(conn, allMemberCount);
+		close(conn);
+		return list;
+	}
+	
+	public ArrayList <Member> adminMemberManageDetailListSelect(int memNo) {
+		Connection conn = getConnection();
+		ArrayList <Member> list = new MemberDao().adminMemberManageDetailListSelect(conn, memNo);
+		close(conn);
+		return list;
 	}
 
 

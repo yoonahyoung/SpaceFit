@@ -20,7 +20,14 @@ public class Member {
 	
 	
 	//------------------- 테이블에는 없지만 추가된 리스트
-	private String randomNo;
+	private String randomNo; // 핸드폰 앤덤메시지 인증 위한 핸덤메시지 
+	private String grName; // 관리자 회원조회를 위한 등급이름
+	private int bookCountAll;
+	private int bookCountMonth;
+	private int bookAmountAll;
+	private int bookAmountMonth;
+	private int rptCount; // 관리자 회원조회를 위한 누적신고수
+	private int likeCount; // 관리자 회원조회를 위한 누적신고수
 	
 	public Member() {
 		
@@ -67,6 +74,34 @@ public class Member {
 		this.memName = memName;
 		this.memPhone = memPhone;
 		this.memMail = memMail;
+	
+	}
+	
+
+
+
+	public Member(int memNo, String memId, String memName, String memIdNo, String memPhone,
+			String memMail, String grName, int bookCountAll, int bookCountMonth, int bookAmountAll, int bookAmountMonth,
+			int rptCount, int likeCount, String memStatus, String memAdmFlag,  Date memEnrollDate, Date memModifyDate
+			 ) {
+		super();
+		this.memNo = memNo;
+		this.memId = memId;
+		this.memName = memName;
+		this.memIdNo = memIdNo;
+		this.memPhone = memPhone;
+		this.memMail = memMail;
+		this.grName = grName;
+		this.bookCountAll = bookCountAll;
+		this.bookCountMonth = bookCountMonth;
+		this.bookAmountAll = bookAmountAll;
+		this.bookAmountMonth = bookAmountMonth;
+		this.rptCount = rptCount;
+		this.likeCount = likeCount;
+		this.memStatus = memStatus;
+		this.memAdmFlag = memAdmFlag;
+		this.memEnrollDate = memEnrollDate;
+		this.memModifyDate = memModifyDate;
 	}
 
 
@@ -209,6 +244,81 @@ public class Member {
 
 	public void setRandomNo(String randomNo) {
 		this.randomNo = randomNo;
+	}
+	
+	
+	
+	
+
+	public int getBookCountAll() {
+		return bookCountAll;
+	}
+
+
+	public void setBookCountAll(int bookCountAll) {
+		this.bookCountAll = bookCountAll;
+	}
+
+
+	public int getBookCountMonth() {
+		return bookCountMonth;
+	}
+
+
+	public void setBookCountMonth(int bookCountMonth) {
+		this.bookCountMonth = bookCountMonth;
+	}
+
+
+	public int getBookAmountAll() {
+		return bookAmountAll;
+	}
+
+
+	public void setBookAmountAll(int bookAmountAll) {
+		this.bookAmountAll = bookAmountAll;
+	}
+
+
+	public int getBookAmountMonth() {
+		return bookAmountMonth;
+	}
+
+
+	public void setBookAmountMonth(int bookAmountMonth) {
+		this.bookAmountMonth = bookAmountMonth;
+	}
+
+
+	public int getRptCount() {
+		return rptCount;
+	}
+
+
+	public void setRptCount(int rptCount) {
+		this.rptCount = rptCount;
+	}
+
+
+	public int getLikeCount() {
+		return likeCount;
+	}
+
+
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
+	
+	
+
+
+	public String getGrName() {
+		return grName;
+	}
+
+
+	public void setGrName(String grName) {
+		this.grName = grName;
 	}
 
 

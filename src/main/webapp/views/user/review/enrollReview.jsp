@@ -55,7 +55,7 @@
                     <br><br>
                     <tr>                        
                         <td colspan="3" id="rvContentArea">
-                            <textarea name="reviewContent" id="reviewContents" maxlength="500" placeholder="수강평을 남겨주세요!! :)" rows="8" style="width: 100%"></textarea>   
+                            <textarea name="reviewContent" id="reviewContents" maxlength="500" placeholder="수강평을 남겨주세요!! :)" rows="8" style="width: 100%" required></textarea>   
                         </td>
                     </tr>
                     <tr>
@@ -82,7 +82,7 @@
                 </table>
 
                 <div id="file-area" style="display: none">   <!--this : 변화가 생긴 input요소-->
-                    <input type="file" name="file1" onchange="loadImg(this, 1);"  required>
+                    <input type="file" name="file1" onchange="loadImg(this, 1);" required >
                     <input type="file" name="file2" onchange="loadImg(this, 2);" >
                     <input type="file" name="file3" onchange="loadImg(this, 3);" >                   
                 </div>

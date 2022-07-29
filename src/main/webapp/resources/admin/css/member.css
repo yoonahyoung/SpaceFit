@@ -26,7 +26,6 @@ body{
 #dataTable>tbody>tr:hover{
 	background-color : #EEEEEE;
 	color: rgb(20, 18, 18);
-	cursor : pointer;
 }
 
 .outerRv{       

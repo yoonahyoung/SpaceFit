@@ -12,6 +12,7 @@ import com.spacefit.review.model.vo.Review;
 
 public class ReviewService {
 	
+	// 후기등록1
 	public int selectSpaceNo(String spaceName) {
 		
 		Connection conn = getConnection();
@@ -21,6 +22,7 @@ public class ReviewService {
 		
 	}
 	
+	// 후기등록 2
 	public int insertReview(Review rv, ArrayList<Attachment> list) {
 		Connection conn = getConnection();
 		
@@ -36,6 +38,26 @@ public class ReviewService {
 		close(conn);
 		
 		return result1 * result2;
+		
+	}
+	
+	// 후기등록 3
+	public String selectReviewValid(Review rv) {
+		
+		Connection conn = getConnection();		
+		String reviewValid = new ReviewDao().selectReviewValid(conn, rv);
+		close(conn);
+		return reviewValid;
+		
+	}
+	
+	// 후기내역리스트조회
+	public ArrayList<Review> selectReviewList(int memNo){
+		
+		Connection conn = getConnection();
+		ArrayList<Review> list = new ReviewDao().selectReviewList(conn, memNo);
+		close(conn);
+		return list;
 		
 	}
 

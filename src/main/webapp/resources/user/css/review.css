@@ -100,7 +100,7 @@ text-overflow: ellipsis;
 }
 
 .end-center-rv2{         
-    position:absolute; top:50%; transform:translateY(-50%) translateX(500%);                           
+    position:absolute; top:50%; transform:translateY(-50%) translateX(500%);                          
   
 }
 
@@ -111,5 +111,5 @@ text-overflow: ellipsis;
 }
 #starWhite{       
     font-size: 1.5em;     
-    color: rgb(168, 168, 167);
+    color: rgb(197, 197, 194);
 }
