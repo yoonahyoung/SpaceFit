@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.spacefit.mem.model.vo.Grade;
 import com.spacefit.mem.model.vo.Member;
 
 public class MemberDao {
@@ -218,7 +219,59 @@ public class MemberDao {
       
    }
 
-	
+   public int updatePwdMember(Connection conn, String memId, String memPwd, String updatePwd) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updatePwdMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, updatePwd);
+			pstmt.setString(2, memId);
+			pstmt.setString(3, memPwd);
+
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+   
+   public String selectGrade(Connection conn, String memId) {
+	   
+	   String grName = null;
+	   ResultSet rset = null;
+	   PreparedStatement pstmt = null;
+	   String sql = prop.getProperty("selectGrade");
+	   
+	   try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, memId);
+		
+		rset = pstmt.executeQuery();
+		
+		if(rset.next()) {
+			grName = rset.getString("gr_name");
+		}
+	   } catch (SQLException e) {
+		e.printStackTrace();
+	   } finally {
+		   close(rset);
+		   close(pstmt);
+	   }
+	   
+	   return grName;
+	   
+   }
+   
+   
+   
+   //---------ADMIN-----------//
 	
 
    public int allMemberCount(Connection conn) {

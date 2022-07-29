@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.spacefit.mem.model.service.MemberService;
+import com.spacefit.mem.model.vo.Member;
+
 /**
  * Servlet implementation class UserMemberUpdateController
  */
@@ -31,6 +34,9 @@ public class MemberUpdatePageController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
+		String memId = ((Member)session.getAttribute("loginUser")).getMemId();
+		String grName = new MemberService().selectGrade(memId);
+		
 		if(session.getAttribute("loginUser") == null) {
 			
 			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
@@ -38,6 +44,7 @@ public class MemberUpdatePageController extends HttpServlet {
 			
 		}else {
 			
+			request.setAttribute("grName", grName);
 			request.getRequestDispatcher("views/user/myPage/memberUpdateView.jsp").forward(request, response);
 		}
 	}

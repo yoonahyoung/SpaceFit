@@ -48,6 +48,8 @@
  		String memName = loginUser.getMemName();
  		String memPhone = loginUser.getMemPhone();
  		
+ 		String grName = (String)request.getAttribute("grName");
+ 		
  	%>
   
     <h2 align="center">회원정보수정</h2>
@@ -60,12 +62,12 @@
             <div align="center">
               <br>
                 <div>
-                    <img src="../../../resources/user/img/user.png" alt="" style="width:100px;">
+                    <img src="<%=contextPath %>/resources/user/img/user.png" alt="" style="width:100px;">
                 </div>
                 <div>
                     <span style="font-size:24px; font-weight: 500;"><%= memId %></span><br>
                     <span style="font-size:18px; font-weight: 550; color:dimgray">등급 : </span> 
-                    <span style="font-size:20px; font-weight:600; color:#0D6EFD">&nbsp;SILVER</span><br><br>
+                    <span style="font-size:20px; font-weight:600; color:#0D6EFD">&nbsp;<%= grName %></span><br><br>
                     <span style="text-decoration: underline;" id="memProfileModal" data-bs-toggle="modal" data-bs-target="#profileModal">프로필사진변경</span><br><br><br>
                 </div>
              </div>
@@ -78,7 +80,7 @@
                 <div class="col-sm-10">
                   <div style="margin-top:6px">
                   <span style="color:#0D6EFD; font-weight:550;">1장</span>
-                  <a href=""><img src="../../../resources/user/img/myCoupon.png" alt="" width="20px" 
+                  <a href=""><img src="<%=contextPath %>/resources/user/img/myCoupon.png" alt="" width="20px" 
                     style="margin-left:15px; margin-right:260px; margin-bottom:2px;"></a>
                   </div>
                 </div>
@@ -139,7 +141,7 @@
 		      </div>
 		      <div class="modal-body">
 		        <div class="input-group">
-                       <input type="file" class="form-control" id="inputGroupFile02" style="color:black;"/>
+                       <input type="file" class="form-control" id="inputGroupFile02" style="color:black; border-color:lightgray;"/>
                      </div>
 		      </div>
 		      <div class="modal-footer">
