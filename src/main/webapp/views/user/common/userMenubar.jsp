@@ -492,7 +492,7 @@
 	            <div class="accordion-body container">
 	              <div class="row myPageRow">
 	                <button class="col myPageCol"> 1:1 문의답변 </button>
-	                <button class="col myPageCol"> 내 후기 </button>
+	                <button class="col myPageCol" onclick="location.href='<%=contextPath%>/rlist.rv'"> 내 후기 </button>
 	              </div>
 	            </div>
 	          </div>
