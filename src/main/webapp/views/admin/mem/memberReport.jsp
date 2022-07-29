@@ -43,7 +43,7 @@
 							  <div style="height : 60px"></div>
 							  <div class="row" id="selectDivMem">
 							  	<form>
-								  <button class="btn btn-primary">게시글 / 댓글 복구</button>
+								  <button class="btn btn-primary">글 / 댓글 복구</button>
 								  <button class="btn btn-secondary">비공개 설정</button>
 								  <button class="btn btn-dark">블랙리스트 등록</button>
 							  	</form>
@@ -51,11 +51,11 @@
 							  <div id="selectSelection">
 							  	<form>
 							  		<select>
-									  <option selected>최신글 조회</option>
-									  <option>최신글 조회</option>
-									  <option>오래된 글 조회</option>
-									  <option>별점 높은 글</option>
-									  <option>별점 낮은 글</option>
+									  <option selected>글 신고 조회</option>
+									  <option>댓글 신고 조회</option>
+									  <option>누적신고순</option>
+									  <option>최신 신고순</option>
+									  <option>오래된 신고순</option>
 									</select>
 							  	</form>
 							  </div>
@@ -93,7 +93,7 @@
 	                                    <tbody>
 	                                        <tr>
 	                                        	<td><input type="radio"></td>
-	                                        	<td>>003</td>
+	                                        	<td>003</td>
 	                                            <td>
 	                                            	<select>
 														  <option selected>글</option>

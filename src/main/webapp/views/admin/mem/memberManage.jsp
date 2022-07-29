@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>   
+    pageEncoding="UTF-8"%>  
+<%@ page import = "java.util.ArrayList, com.spacefit.mem.model.vo.Member" %>
+<%
+	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list");
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +33,7 @@
                         	  <div class="row" id="reviewChart">
 								  <div class="col-4" id="todaysReview">
 								  	<span>오늘 가입한 회원</span><br>
-								  	<h4>10/315</h4>	
+								  	<h4>10/<%=list.size() %></h4>	
 								  </div>
 								  <div class="col-4" id="avgStar">
 								  	<span>평균별점</span><br>
@@ -76,7 +80,7 @@
 	                                            <th>누적추천</th>
 	                                            <th>관리자여부</th>
 	                                            <th>회원상태</th>
-	                                            <th>회원가입일</th>
+	                                            <th>이번달 주문건수</th>
 	                                            <th>상세보기</th>
 	                                        </tr>
 	                                    </thead>
@@ -92,58 +96,55 @@
 	                                            <th>누적추천</th>
 	                                            <th>관리자여부</th>
 	                                            <th>회원상태</th>
-	                                            <th>회원가입일</th>
+	                                            <th>이번달 주문건수</th>
 	                                            <th>상세보기</th>
 	                                        </tr>
 	                                    </tfoot>
 	                                    <tbody>
-	                                        <tr>
-	                                        	<td><input type="radio"></td>
-	                                            <td>00001</td>
-	                                            <td>user01</td>
-	                                            <td>박딘딘</td>
-	                                            <td>01088856663</td>
-	                                            <td>Silver</td>
-	                                            <td>14</td>
-	                                            <td>2</td>
-	                                            <td>일반</td>
-	                                            <td>회원</td>
-	                                            <td>22/07/20</td>
-	                                            <td><input type="button" class="btn btn-primary btn-sm" value="상세조회" onclick="memDetailView();"></td>
-	                                            <script>
-	                                           		 function memDetailView(){
-	                                	       		location.href="<%=contextPath%>/memDetailView.me";
-	                                				}
-	                                            </script>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td><input type="radio"></td>
-	                                            <td>00001</td>
-	                                            <td>user01</td>
-	                                            <td>박딘딘</td>
-	                                            <td>01088856663</td>
-	                                            <td>Silver</td>
-	                                            <td>14</td>
-	                                            <td>2</td>
-	                                            <td>일반</td>
-	                                            <td>회원</td>
-	                                            <td>22/07/20</td>
-	                                            <td><input type="button" class="btn btn-primary btn-sm" value="상세조회" onclick="memDetailView();"></td>
-	                                        </tr>
-	                                         <tr>
-	                                        	<td><input type="radio"></td>
-	                                            <td>00001</td>
-	                                            <td>user01</td>
-	                                            <td>박딘딘</td>
-	                                            <td>01088856663</td>
-	                                            <td>Silver</td>
-	                                            <td>14</td>
-	                                            <td>2</td>
-	                                            <td>일반</td>
-	                                            <td>회원</td>
-	                                            <td>22/07/20</td>
-	                                            <td><input type="button" class="btn btn-primary btn-sm" value="상세조회" onclick="memDetailView();"></td>
-	                                        </tr>
+	                                    	<% if(list.isEmpty()) { %>
+	                                    	<!-- 회원이 없을경우 -->
+	                                    	<tr>
+	                                    		<td colspan="11">존재하는 회원이 없습니다.</td>
+	                                    	</tr>
+	                                    	<% } else { %>
+	                                    	<!-- 회원이 있을경우 -->
+	                                    		<% for(Member m : list) { %>
+			                                        <tr>
+			                                        	<td><input type="radio"></td>
+			                                            <td><%=m.getMemNo() %></td>
+			                                            <td><%=m.getMemId() %></td>
+			                                            <td><%=m.getMemName() %></td>
+			                                            <td><%=m.getMemPhone() %></td>
+			                                            <td><%=m.getGrName() %></td>
+			                                            <td><%=m.getRptCount() %></td>
+			                                            <td><%=m.getLikeCount() %></td>
+			                                            
+			                                            <% if (m.getMemAdmFlag().equals("A")) {  %>
+			                                            	<td>관리자</td>
+			                                            <% } else { %>
+			                                            	<td>일반</td>
+			                                            <% } %>	
+			                                                                                        
+			                                            <% if (m.getMemStatus().equals("Y")) {  %>
+			                                            	<td>회원</td>
+			                                            <% } else if(m.getMemStatus().equals("N")) { %>
+			                                            	<td>탈퇴한 회원</td>
+			                                            <% } else { %>
+			                                            	<td>블랙리스트</td>
+			                                            <% } %>	
+			                                            
+			                                      
+			                                            <td><%=m.getBookCountMonth() %></td>
+			                                            <td><input type="button" class="btn btn-primary btn-sm" value="상세조회" onclick="memDetailView();"></td>
+			                                            <script>
+			                                           		 function memDetailView(){
+			                                           			const num = <%=m.getMemNo()%>
+			                                	       			location.href="<%=contextPath%>/memDetailView.me?no=" + num;
+			                                				}
+			                                            </script>
+			                                        </tr>
+			                                      <% } %>
+			                                   <% } %>
 	                                    </tbody>
 	                                </table>
 	                            </div>

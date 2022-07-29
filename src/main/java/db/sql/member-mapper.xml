@@ -69,5 +69,100 @@
 		 WHERE MEM_NAME = ?
            AND MEM_PHONE= ?
 	</entry>
+	
+
+
+
+
+
+
+
+
+
+<!-- admin -->
+
+	<entry key="allMemberCount">
+		SELECT COUNT(*) AS "MEM_ALL_COUNT"
+		FROM TB_MEMBER
+	</entry>
+
+
+	<entry key="adminMemberManageListSelect">
+		SELECT MEM_NO
+		     , MEM_ID
+		     , MEM_NAME
+		     , MEM_PHONE
+		     , MEM_ENROLL_DATE
+		     , MEM_STATUS
+		     , MEM_ADM_FLAG
+		     , GR_NAME
+		     , (
+		        SELECT COUNT(*) AS "RPT_COUNT"
+		                       FROM TB_REPORT
+		                      WHERE MEM_NO = ?
+		        ) AS "RPT_COUNT"
+		     , (
+		        SELECT COUNT(*) AS "LIKE_COUNT"
+		                       FROM TB_LIKE
+		                      WHERE MEM_NO = ?
+		        )AS "LIKE_COUNT"
+		  FROM TB_MEMBER
+		  LEFT JOIN TB_GRADE USING (GR_NO)
+		  WHERE MEM_NO = ?
+	</entry>
+	
+	
+	<entry key="adminMemberManageDetailListSelect">
+		SELECT MEM_NO
+		     , MEM_ID
+		     , MEM_NAME
+		     , MEM_IDNO 
+		     , MEM_PHONE
+		     , MEM_MAIL
+		     , GR_NAME
+		     , (
+		        SELECT COUNT(*) AS "BOOK_COUNT"
+		                       FROM TB_BOOK
+		                      WHERE MEM_NO = ? 
+		        )AS "BOOK_COUNT_ALL"
+		     , (
+		        SELECT COUNT(*) AS "BOOK_COUNT_MONTH"
+		                       FROM TB_BOOK
+		                      WHERE MEM_NO = ?
+		                        AND BOOK_DATE BETWEEN TO_DATE('2022.05.01', 'YYYY.MM.DD') 
+		                                          AND TO_DATE('2022-07-28', 'YYYY.MM.DD')
+		        )AS "BOOK_COUNT_MONTH"
+		     , (
+		            SELECT SUM(BOOK_PRICE)
+		              FROM TB_BOOK
+		              JOIN TB_MEMBER USING (MEM_NO)
+		             WHERE MEM_NO = ?
+		            )AS "BOOK_AMOUNT_ALL"
+		     , (
+		         SELECT SUM(BOOK_PRICE)
+		           FROM TB_BOOK
+		           JOIN TB_MEMBER USING (MEM_NO)
+		          WHERE MEM_NO = ?
+		            AND BOOK_DATE BETWEEN TO_DATE('2022.05.01', 'YYYY.MM.DD') 
+		                              AND TO_DATE('2022-07-28', 'YYYY.MM.DD')
+		        )AS "BOOK_AMOUNT_MONTH"
+		     , (
+		        SELECT COUNT(*) AS "RPT_COUNT"
+		                       FROM TB_REPORT
+		                      WHERE MEM_NO = ?
+		        ) AS "RPT_COUNT"
+		     , (
+		        SELECT COUNT(*) AS "LIKE_COUNT"
+		                       FROM TB_LIKE
+		                      WHERE MEM_NO = ?
+		        )AS "LIKE_COUNT"
+		     , MEM_STATUS
+		     , MEM_ADM_FLAG
+		     , MEM_ENROLL_DATE
+		     , MEM_MODIFY_DATE
+		  FROM TB_MEMBER
+		  LEFT JOIN TB_GRADE USING (GR_NO)
+		  WHERE MEM_NO = ?
+	</entry>
 
 </properties>
