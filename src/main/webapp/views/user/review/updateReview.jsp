@@ -86,7 +86,8 @@
                 <br>
     
                 <div align="center">
-                    <button type="submit" class="btn btn-sm btn-primary hoverRv">수정하기</button>
+                    <button type="submit" class="btn btn-sm btn-primary hoverRv">수정</button> &nbsp;
+                    <button type="button" class="btn btn-sm btn-danger hoverRv">삭제</button>
                 </div>
 
                 <br>
