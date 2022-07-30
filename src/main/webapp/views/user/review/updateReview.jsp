@@ -19,7 +19,10 @@
     <%@ include file="../common/userMenubar.jsp" %>
 	 <div class="outer">
         <div class="blueShadow" align="center">
-            <form action="" name="reviewInsertForm" id="myRvform" method="post"  enctype="multipart/form-data">
+            <form action="<%= contextPath %>/rupdate.rv" name="reviewInsertForm" id="myRvform" method="post"  enctype="multipart/form-data">
+               
+               <input type="hidden" name="reviewNo" value="<%=rv.getReviewNo() %>">                       	
+               
                 <br><br>
                     <h3>후기수정</h3>
                 <hr style="width: 50%; color:black">               
@@ -34,7 +37,7 @@
                         <input type="radio" name="star" value="5" id="rate1">
                         <label for="rate1">★</label>
         
-                        <input type="radio" name="star" value="4" id="rate2" checked> <!--사용자가 입력한 num == value 이 $(this).attr("checked", true);} 되게 -->
+                        <input type="radio" name="star" value="4" id="rate2"> <!--사용자가 입력한 num == value 이 $(this).attr("checked", true);} 되게 -->
                         <label for="rate2">★</label>
         
                         <input type="radio" name="star" value="3" id="rate3">
@@ -44,13 +47,15 @@
                         <label for="rate4">★</label>
         
                         <input type="radio" name="star" value="1" id="rate5">
-                        <label for="rate5">★</label>
-                        
+                        <label for="rate5">★</label>                        
                     </fieldset>
+                    
+                    
                     <br><br>
+                    
                     <tr>                        
                         <td colspan="3" id="rvContentArea">
-                            <textarea id="reviewContents" maxlength="500" placeholder="수강평을 남겨주세요!! :)" rows="8" style="width: 100%" required><%= rv.getReviewContent() %></textarea>   
+                            <textarea id="reviewContents" name="reviewContent" maxlength="500" placeholder="수강평을 남겨주세요!! :)" rows="8" style="width: 100%" required><%= rv.getReviewContent() %></textarea>   
                         </td>
                     </tr>
                     <tr>
@@ -63,6 +68,12 @@
                                 $("#reviewContents").keyup(function(){
                                     $("#rvContentcount").text($(this).val().length); 
                                 })
+                                
+                               $(":radio").each(function(){
+		         					if(<%=rv.getReviewStar() %> == $(this).val()){
+		         						$(this).attr("checked", true);
+         					}
+         				})
                             })
                         </script>
                     </tr>
@@ -71,10 +82,10 @@
                     </tr>
                     <tr class="hoverRv">  
                     	<% int i = 1; %>                      
-                        <% for(Attachment at : list) { %>
+                        <% for(Attachment at : list) { %>                          		               	                        
                         	<td>                <!-- src 기존 저장된 이미지경로-->
-                            <img id="reviewImg<%= i %>" src="<%= contextPath  %>/<%= at.getFilePath() %><%= at.getFileChangeName() %>" width="100" height="80" onclick="chooseFile(<%= i++ %>);">
-                        </td>
+                            	<img id="reviewImg<%= i %>" src="<%= contextPath  %>/<%= at.getFilePath() %><%= at.getFileChangeName() %>" width="100" height="80" onclick="chooseFile(<%= i++ %>);">
+                            </td>
                         <%} %>
                         <% for( int j=i; j<=3; j++){ %>
                         	<td>
@@ -90,8 +101,8 @@
                     <input type="file" name="file3" onchange="loadImg(this, 3);" >                   
                 </div>
 
-         		<script>
-
+         		<script>            			       			
+         		
                     function chooseFile(num){
                         $("input[name=file" + num + "]").click(); // name속성이 file1/file2/..이 클릭되게끔
                     }
@@ -120,9 +131,9 @@
     
                         }else{ // 파일취소됐을 경우 => 미리보기된것도 사라지게
                             switch(num){
-                                    case 1: $("#titleImg").attr("src", null); break;
-                                    case 2: $("#contentImg1").attr("src",null); break;
-                                    case 3: $("#contentImg2").attr("src", null); break;                                   
+                                    case 1: $("#reviewImg1").attr("src", null); break;
+                                    case 2: $("#reviewImg2").attr("src",null); break;
+                                    case 3: $("#reviewImg3").attr("src", null); break;                                   
                                 }
                         }
                     }
@@ -133,11 +144,34 @@
     
                 <div align="center">
                     <button type="submit" class="btn btn-sm btn-primary hoverRv">수정</button> &nbsp;
-                    <button type="button" class="btn btn-sm btn-danger hoverRv">삭제</button>
+                    <button type="button" class="btn btn-sm btn-danger hoverRv" data-bs-toggle="modal" data-bs-target="#deleteReview">삭제</button> &nbsp;                    
                 </div>
 
                 <br>
             </form>
+            
+            <!-- 후기삭제 Modal -->
+		    
+		    <div class="modal fade" id="deleteReview" tabindex="-1" aria-labelledby="deleteBkModalLabel" aria-hidden="true">
+		        <div class="modal-dialog">
+		        <div class="modal-content">
+		           <div class="modal-header">                            
+		           </div>           
+		           <div class="modal-body" align="center">
+		           	  <form action="  " method=post>  
+			              <h4>해당 후기를 삭제하시겠습니까?</h4>
+			                 <br>
+			                 <div>
+			                    <button type="submit" class="btn btn-sm btn-primary" style="width: 60px;" onclick="location.href='<%=contextPath%>/rdelete.vo?no=<%=rv.getReviewNo() %>'">네</button>
+			                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" style="width: 60px;">아니오</button>
+			                 </div>                       
+		              </form> 
+		           </div>
+		           <div class="modal-footer">
+		           </div>
+		        </div>
+		        </div>
+		       
         </div>    
     
     </div>

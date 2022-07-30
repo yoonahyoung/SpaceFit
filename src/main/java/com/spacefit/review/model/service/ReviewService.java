@@ -77,5 +77,39 @@ public class ReviewService {
 		close(conn);
 		return list;
 	}
+	
+	// 후기수정
+	public int updateReview(Review rv, ArrayList<Attachment> list) {
+		Connection conn = getConnection();
+			
+		
+		// tb_review update
+		int result1 = new ReviewDao().updateReview(conn, rv);
+		
+		// tb_Attachment => delete(update status=n)
+		int result2 = new ReviewDao().deleteReview(conn, list);
+		
+		// tb_Attachment => insert
+		int result3 = new ReviewDao().insertAttachmentList2(conn, list);
+		
+		if(result1 * result2 * result3 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result1 * result2 * result3;
+		
+	}
+	
+	public int deleteReview(int reviewNo) {
+		Connection conn = getConnection();
+		
+		int result1 = new ReviewDao().deleteAttachment(conn, reviewNo);
+		
+		//int result2 = new ReviewDao().deleteReivewReal(conn, reviewNo);
+		return result1;
+	}
 
 }

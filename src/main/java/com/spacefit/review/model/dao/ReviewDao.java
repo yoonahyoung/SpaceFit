@@ -183,6 +183,11 @@ public class ReviewDao {
 		return list;				
 	}
 	
+	/** 특정 후기의 정보조회1. tb_review
+	 * @param conn
+	 * @param reviewNo 후기번호
+	 * @return
+	 */
 	public Review selectReview(Connection conn, int reviewNo) {
 		// select > ResultSet > Review
 		Review rv = null;
@@ -214,6 +219,11 @@ public class ReviewDao {
 		return rv;
 	}
 	
+	/** 특정 후기 정보조회 2. tb_attachment
+	 * @param conn
+	 * @param reviewNo
+	 * @return
+	 */
 	public ArrayList<Attachment> selectAttachmentList(Connection conn, int reviewNo) {
 		// select => ResultSet(한행) => ArrayList<Attachment>
 		ArrayList<Attachment> list = new ArrayList<>();
@@ -244,4 +254,121 @@ public class ReviewDao {
 		
 		return list;
 	}
+	
+	/** 후기수정1
+	 * @param conn
+	 * @param rv
+	 * @return
+	 */
+	public int updateReview(Connection conn, Review rv) {
+		// update => int처리된행수
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateReview");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, rv.getReviewContent());
+			pstmt.setInt(2, rv.getReviewStar());
+			pstmt.setInt(3, rv.getReviewNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+								
+	}
+	
+	/** 후기수정2
+	 * @param conn
+	 * @param list 거기서 참조글번호 추출
+	 * @return
+	 */
+	public int deleteReview(Connection conn, ArrayList<Attachment> list) {
+		// UPDATE => int
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteAttachment");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, list.get(0).getRefBoardNo()); // 참조후기글번호는 list의at모두 같을것
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;	
+		
+	}
+	
+	/** 후기수정3
+	 * @param conn
+	 * @param list 새로운 첨부파일 업로드
+	 * @return
+	 */
+	public int insertAttachmentList2(Connection conn, ArrayList<Attachment> list) {
+		// insert => int
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertAttachmentList2");
+		try {
+			for(Attachment at:list) {
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, at.getRefBoardNo());
+				pstmt.setString(2, at.getFileOriginName());
+				pstmt.setString(3, at.getFileChangeName());
+				pstmt.setString(4, at.getFilePath());
+				pstmt.setInt(5, at.getFileLevel());
+				
+				result = pstmt.executeUpdate();
+				
+								
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+	
+	public int deleteAttachment(Connection conn, int reviewNo) {
+		// update => int
+		int result = 0;
+		PreparedStatement pstmt= null;
+		String sql = prop.getProperty("deleteAttachment");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;				
+	}
+	
+	public int deleteReivewReal(Connection conn, int reviewNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteReivewReal");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			//pstmt.setInt(1, );
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
 }

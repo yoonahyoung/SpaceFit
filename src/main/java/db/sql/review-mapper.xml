@@ -84,8 +84,9 @@
 		   AND RV_STATUS = 'Y'
 		   AND FILE_CATEGORY = 2
 		   AND FILE_LEVEL = 1
+		   AND FILE_STATUS = 'Y'
 		 ORDER 
-		    BY RV_NO DESC 
+		    BY RV_NO ASC
 	</entry>
 
 	<!-- detailReview - review -->
@@ -115,8 +116,55 @@
 	        BY FILE_LEVEL ASC
 	</entry>
 	
+	<!-- 후기수정 1. 리뷰 -->
+	<entry key="updateReview">
+		UPDATE TB_REVIEW
+		   SET RV_CONTENT = ?
+		     , RV_STAR = ?
+		     , RV_MODIFY_DATE = SYSDATE
+		 WHERE RV_NO = ? 
+	</entry>
+	<!-- 기존파일 삭제 -->
+	<entry key="deleteAttachment">
+		UPDATE TB_FILE
+		   SET FILE_STATUS = 'N'
+		 WHERE REF_BNO = ?
+	</entry>
+	
+	<!-- 후기수정3. 새로운파일업로드  -->
+	<entry key="insertAttachmentList2">		
+		INSERT
+		  INTO TB_FILE
+		    (
+		       FILE_NO
+		     , REF_BNO
+		     , FILE_CATEGORY
+		     , FILE_ORIGIN_NAME
+		     , FILE_CHANGE_NAME
+		     , FILE_UPLOAD_DATE
+		     , FILE_PATH
+		     , FILE_LEVEL
+		    )
+		 VALUES
+		    (
+		       SEQ_FINO.NEXTVAL
+		     , ?
+		     , 2
+		     , ?
+		     , ?
+		     , SYSDATE
+		     , ?
+		     , ?
+		    )	
+	</entry>
+	
+	<entry key="deleteReivewReal">
+		UPDATE TB_REVIEW
+		   SET RV_STATUS = 'N'
+		WHERE RV_NO = ? 
+	</entry>
 
-
+	
 
 
 </properties>

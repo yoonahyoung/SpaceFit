@@ -65,7 +65,7 @@
         	$(function(){
         		
         		selectBookList();     
-        		setInterval(selectBookList, 1500);
+        		setInterval(selectBookList, 1200);
         		
         	})	
         	
