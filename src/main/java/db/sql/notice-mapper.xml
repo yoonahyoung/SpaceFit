@@ -35,5 +35,32 @@
 	     , ?
 	     )
 	</entry>
+	<entry key="increaseCount">
+		UPDATE TB_NOTICE
+		   SET NT_COUNT = NT_COUNT+1
+		 WHERE NT_NO = ?
+		   AND NT_STATUS = 'Y'
+	</entry>
 	
+	<entry key="selectNotice">
+		SELECT
+		       NT_NO
+		     , NT_CATEGORY
+		     , NT_TITLE
+		     , NT_CONTENT
+		     , MEM_ID
+		     , NT_COUNT
+		     , NT_CREATE_DATE
+		  FROM TB_NOTICE
+		  JOIN TB_MEMBER ON(NT_MEM_NO = MEM_NO)
+		 WHERE NT_NO = ?
+	</entry>
+	
+	<entry key="updateNotice">
+		UPDATE TB_NOTICE
+		   SET NT_TITLE = ?
+		     , NT_CONTENT = ?
+		     , NT_CATEGORY = ?
+		 WHERE NT_NO = ?
+	</entry>
 </properties>

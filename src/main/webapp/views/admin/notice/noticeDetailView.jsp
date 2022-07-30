@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.notice.model.vo.Notice"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.notice.model.vo.Notice, com.spacefit.mem.model.vo.Member"%>
 <%
-	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+	Notice n = (Notice)request.getAttribute("notice");
+	Member loginUser = (Member)session.getAttribute("loginUser");
 %>
 <!DOCTYPE html>
 <html>
@@ -35,29 +36,36 @@
 
     <table class="table" id="detail-area">
         <tr>
-            <th width="70">제목</th>
-            <td colspan="5" width="430"></td>
+            <th width="80">제목</th>
+            <td colspan="7" width="430" align="left"><%=n.getNoticeTitle() %></td>
 
         </tr>
         <tr>
             <th>유형</th>
-            <td></td>
-            <th width="70">작성자</th>
-            <td></td>
-            <th width="70">작성일</th>
-            <td></td>
+            <td><%=n.getNoticeCategory() %></td>
+            <th width="80">작성자</th>
+            <td><%=n.getNoticeWriter() %></td>
+            <th width="80">작성일</th>
+            <td><%=n.getCreateDate() %></td>
+            <th width="80">조회수</th>
+            <td><%=n.getCount() %></td>
         </tr>
         <tr>
             <th>내용</th>
-            <td colspan="5">
-                <p style="height: 400px;"></p>
+            <td colspan="7" align="left">
+                <p style="height: 400px;"><%=n.getNoticeContent() %></p>
             </td>
         </tr>
     </table>
 
     <br>
 	<div align="right">
-        <a href="<%= contextPath %>/adminList.no" class="btn btn-sm btn-secondary">목록가기</a>
+		<!-- 현재 로그인이 되어있고 로그인한 회원의 아이디가 해당 공지사항 작성자 아이디 일치할경우 -->
+        <% if(loginUser != null && n.getNoticeWriter().equals(loginUser.getMemId()) ) { %>
+	        <a href="<%=contextPath%>/updateForm.no?no=<%=n.getNoticeNo() %>" class="btn btn-sm btn-primary">수정</a> 
+	        <a href="" class="btn btn-sm btn-danger">삭제</a>
+    	<% } %>
+	        <a href="<%= contextPath %>/adminList.no" class="btn btn-sm btn-secondary">목록</a>
     </div>
     <div style="height : 60px"></div>
  </div>
