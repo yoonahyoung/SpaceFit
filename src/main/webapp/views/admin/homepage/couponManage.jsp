@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.mem.model.vo.Mcp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +12,10 @@
 	
 	<%@ include file="../common/adminMenubar.jsp" %>
         
+    <%
+    	ArrayList<Mcp> list = (ArrayList<Mcp>)request.getAttribute("list");
+    %>
+    
     <div class="outerRv">
     	<div class="container-fluid">
 		<br><br>
@@ -71,30 +75,16 @@
                                       </tr>
                                   </tfoot>
                                   <tbody>
+                                  	<% for(Mcp mc : list){ %>
                                       <tr>
                                       	<td><input type="radio"></td>
-                                          <td>00001</td>
-                                          <td>silver 등급 쿠폰</td>
-                                          <td>10000원</td>
-                                          <td>98/05/25</td>
+                                          <td><%= mc.getCpNo() %></td>
+                                          <td><%= mc.getCpName() %></td>
+                                          <td><%= mc.getCpDiscount() %>원</td>
+                                          <td><%= mc.getCpEnrollDate() %></td>
                                           
                                       </tr>
-                                      <tr>
-                                      	<td><input type="radio"></td>
-                                          <td>00002</td>
-                                          <td>7월 이벤트 쿠폰</td>
-                                          <td>5000원</td>
-                                          <td>02/11/15</td>
-                                          
-                                      </tr>
-                                       <tr>
-                                       	<td><input type="radio"></td>
-                                          <td>00003</td>
-                                          <td>7월 이벤트 쿠폰</td>
-                                          <td>5000원</td>
-                                          <td>85/09/30</td>
-                                          
-                                      </tr>
+                                    <% } %>
                                   </tbody>
                               </table>
                           </div>

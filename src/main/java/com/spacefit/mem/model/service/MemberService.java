@@ -125,5 +125,11 @@ public class MemberService {
 		return m;
 	}
 
+	public ArrayList<Mcp> selectAdminCouponList(){
+		Connection conn = getConnection();
+		ArrayList<Mcp> list = new MemberDao().selectAdminCouponList(conn);
+		close(conn);
+		return list;
+	}
 
 }
