@@ -80,7 +80,7 @@
                 <div class="col-sm-10">
                   <div style="margin-top:6px">
                   <span style="color:#0D6EFD; font-weight:550;">1장</span>
-                  <a href=""><img src="<%=contextPath %>/resources/user/img/myCoupon.png" alt="" width="20px" 
+                  <a href="<%=contextPath%>/myCouponList.me"><img src="<%=contextPath %>/resources/user/img/myCoupon.png" alt="" width="20px" 
                     style="margin-left:15px; margin-right:260px; margin-bottom:2px;"></a>
                   </div>
                 </div>

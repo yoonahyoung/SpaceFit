@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.spacefit.mem.model.vo.Grade;
+import com.spacefit.mem.model.vo.Mcp;
 import com.spacefit.mem.model.vo.Member;
 
 public class MemberDao {
@@ -266,6 +266,39 @@ public class MemberDao {
 	   }
 	   
 	   return grName;
+	   
+   }
+   
+   public ArrayList<Mcp> selectCouponList(Connection conn, int memNo) {
+	   
+	   ArrayList<Mcp> list = new ArrayList<>();
+	   ResultSet rset = null;
+	   PreparedStatement pstmt = null;
+	   String sql = prop.getProperty("selectCouponList");
+	   
+	   try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, memNo);
+		
+		rset = pstmt.executeQuery();
+		
+		while(rset.next()) {
+			list.add( new Mcp(rset.getString("cp_name"),
+							  rset.getInt("cp_discount"),
+							  rset.getString("mcp_use"),
+							  rset.getString("mcp_end_date")
+					));
+			
+		}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(rset);
+		close(pstmt);
+	}
+	   
+	 return list;
 	   
    }
    

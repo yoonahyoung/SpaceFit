@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.spacefit.mem.model.dao.MemberDao;
+import com.spacefit.mem.model.vo.Mcp;
 import com.spacefit.mem.model.vo.Member;
 
 
@@ -95,6 +96,19 @@ public class MemberService {
 	   close(conn);
 	   return grName;
    }
+   
+   public ArrayList<Mcp> selectCouponList(int memNo) {
+	   Connection conn = getConnection();
+	   ArrayList<Mcp> list = new MemberDao().selectCouponList(conn, memNo);
+	   close(conn);
+	   return list;
+   }
+   
+   
+   
+   
+   
+    // ----------------------- admin ------------------------- //
 
 	public ArrayList<Member> adminMemberManageListSelect() {
 		Connection conn = getConnection();

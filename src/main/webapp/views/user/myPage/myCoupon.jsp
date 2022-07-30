@@ -1,17 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.mem.model.vo.Mcp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>내 쿠폰 관리</title>
-<link rel="stylesheet" href="../../../resources/user/css/member.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/user/css/member.css">
 </head>
 <body>
 
 	<%@ include file="../common/userMenubar.jsp" %>
 	
-
+	<%
+		String memName = loginUser.getMemName();
+		
+		ArrayList<Mcp> list = (ArrayList<Mcp>)request.getAttribute("list");
+		String grName = (String)request.getAttribute("grName");
+		
+	%>
   <br>
 
     <h2 align="center">내 쿠폰 관리</h2>
@@ -23,9 +29,9 @@
         <div class="card" id="cp-div-card1" style="width:600px;">
             <div class="card-body">
             	<div style="padding:15px">
-		            <span style="font-size:600;"><b>홍길동</b></span>
+		            <span style="font-size:600;"><b><%= memName %></b></span>
 		            <span>회원님의 등급은</span>
-		            <span style="color:#0D6EFD; font-weight: 600;">SILVER</span>
+		            <span style="color:#0D6EFD; font-weight: 600;"><%= grName %></span>
 		            <span>입니다</span>
 		        </div>
             </div>
@@ -67,24 +73,15 @@
                             </tr>
                         </thead>
                         <tbody style="border-top-color:lightgray; border-top-width:1px;">
+                        
+                        	<% for(Mcp m : list) { %>
                             <tr>
-                                <td>sliver 등급 혜택</td>
-                                <td>10000원</td>
-                                <td>22.09.26까지</td>
-                                <td style="color:#0D6EFD;">미사용</td>
+                                <td><%= m.getCpName() %></td>
+                                <td><%= m.getCpDiscount() %>원</td>
+                                <td><%= m.getMcpEndDate() %>까지</td>
+                                <td style="color:#0D6EFD;"><%= ( m.getMcpUse().equals("N") ) ? "미사용" : "사용" %></td>
                             </tr>
-                            <tr>
-                              <td>sliver 등급 혜택</td>
-                              <td>10000원</td>
-                              <td>22.09.26까지</td>
-                              <td style="color:#0D6EFD;">미사용</td>
-                          </tr>
-                          <tr>
-                            <td>sliver 등급 혜택</td>
-                            <td>10000원</td>
-                            <td>22.09.26까지</td>
-                            <td style="color:#0D6EFD;">미사용</td>
-                        </tr>
+                            <% } %>
                            
                         </tbody>
                     </table>
@@ -106,9 +103,9 @@
     <div  align="center">
       <div id="cpZoneDiv" style="width:950px">
       <div class="row mb-5">
+      
         <div class="col-md-6 col-lg-4 mb-3" id="cpZoneCard">
           <div class="card h-100" style="box-shadow: 2px 2px 10px 0px #0D6EFD;">
-            
             <div class="card-body">
               <br>
               <h4 class="card-title" >등급 혜택 쿠폰</h4>
@@ -120,40 +117,11 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-4 mb-3" id="cpZoneCard">
-          <div class="card h-100" style="box-shadow: 2px 2px 10px 0px #0D6EFD;">
-            
-            <div class="card-body">
-              <br>
-              <h4 class="card-title">등급 혜택 쿠폰</h4>
-              <br>
-              <p class="card-text" style="font-size:26px; font-weight:600; color:#0D6EFD;">10000원</p>
-              <p>2022.07.07~2022.09.26</p>
-              <br>
-              <a href="javascript:void(0)" class="btn btn-outline-primary">쿠폰 다운 받기</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4 mb-3" id="cpZoneCard">
-          <div class="card h-100" style="box-shadow: 2px 2px 10px 0px #0D6EFD;">
-            
-            <div class="card-body">
-              <br>
-              <h4 class="card-title">등급 혜택 쿠폰</h4>
-              <br>
-              <p class="card-text" style="font-size:26px; font-weight:600; color:#0D6EFD;">10000원</p>
-              <p>2022.07.07~2022.09.26</p>
-              <br>
-              <a href="javascript:void(0)" class="btn btn-outline-primary">쿠폰 다운 받기</a>
-            </div>
-          </div>
-        </div>
-        
-      
+
       </div>
     </div>
 </div>
-
+<br><br><br>
 
 
 <%@ include file="../common/userFooter.jsp" %>

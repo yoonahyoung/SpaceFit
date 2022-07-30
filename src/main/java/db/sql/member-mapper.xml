@@ -114,7 +114,15 @@
 		 WHERE MEM_ID = ?
 	</entry>
 
-
+	<entry key="selectCouponList">
+		SELECT CP_NAME
+		     , CP_DISCOUNT
+		     , MCP_USE
+		     , MCP_END_DATE
+		  FROM TB_COUPON
+		  JOIN TB_MCP USING(CP_NO)
+		 WHERE MEM_NO = ?
+	</entry>
 
 
 
