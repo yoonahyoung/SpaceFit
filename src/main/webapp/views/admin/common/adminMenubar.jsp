@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%
 	String contextPath = request.getContextPath();
-	String msg = (String)session.getAttribute("alertMsg");
+	String alertMsg = (String)session.getAttribute("alertMsg");
 // 서비스 요청 전 menubar.jsp 로딩시 : null
 // 서비스 성공 후 menubar.jsp 로딩시 : alert로 띄워줄 메세지 문구
 %>    
@@ -49,9 +49,9 @@
 <body id="page-top">
 
 	<!-- alert 메세지 출력 -->
-	<% if(msg != null) { %>
+	<% if(alertMsg != null) { %>
 			<script>
-				alert("<%= msg %>");
+				alert("<%= alertMsg %>");
 			</script>
 			<% session.removeAttribute("alertMsg"); %>
 		<% } %>
