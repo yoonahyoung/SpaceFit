@@ -362,12 +362,16 @@ public class ReviewDao {
 		String sql = prop.getProperty("deleteReivewReal");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			//pstmt.setInt(1, );
+			pstmt.setInt(1, reviewNo);
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
-		
 		return result;
+		
+		
 	}
 	
 	

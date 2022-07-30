@@ -42,9 +42,7 @@ public class ReviewInsertForm extends HttpServlet {
 		request.setAttribute("memNo", memNo);
 		request.setAttribute("spaceNo", spaceNo);
 		
-		//System.out.println(bookNo + "bn");
-		//System.out.println(memNo + "mn");
-		//System.out.println("sn" + spaceNo);
+		
 		
 		request.getRequestDispatcher("views/user/review/enrollReview.jsp").forward(request, response);
 	}

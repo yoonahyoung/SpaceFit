@@ -35,6 +35,15 @@ public class ReviewDeleteController extends HttpServlet {
 		int result = new ReviewService().deleteReview(reviewNo);
 		
 		
+		if(result > 0 ) { // 성공							
+			request.getSession().setAttribute("alertMsg", "후기삭제되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/rlist.rv");	
+						
+		}else { // 실패
+			request.setAttribute("errorMsg", "후기삭제에 실패했습니다.");
+			request.getRequestDispatcher("views/user/common/backAlertErrorPage.jsp").forward(request, response);
+		}
+		
 	}
 
 	/**

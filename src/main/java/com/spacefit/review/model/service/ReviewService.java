@@ -103,13 +103,24 @@ public class ReviewService {
 		
 	}
 	
+	// 후기삭제
 	public int deleteReview(int reviewNo) {
 		Connection conn = getConnection();
 		
 		int result1 = new ReviewDao().deleteAttachment(conn, reviewNo);
 		
-		//int result2 = new ReviewDao().deleteReivewReal(conn, reviewNo);
-		return result1;
+		int result2 = new ReviewDao().deleteReivewReal(conn, reviewNo);
+		
+		if(result1 * result2 >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result1 * result2;
+		
 	}
 
 }
