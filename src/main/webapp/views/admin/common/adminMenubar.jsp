@@ -122,7 +122,7 @@
                 </span>
                 <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">                        
-                        <a class="collapse-item" href="">공지사항</a>
+                        <a class="collapse-item" href="<%=contextPath%>/adminList.no">공지사항</a>
                         <a class="collapse-item" href="">1:1 문의</a>                        
                     </div>
                 </div>
