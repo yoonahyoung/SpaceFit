@@ -43,7 +43,7 @@
 		                    </div>
 		                    <div class="col-md-6">
 		                        <div class="card-body vertical-center-rv2">
-		                            <span id="rvlv2-status"><b><%= rv.getSpaceNo() %></b></span> &nbsp;&nbsp;&nbsp;&nbsp;
+		                            <span id="rvlv2-status"><b><%= rv.getSpaceName() %></b></span> &nbsp;&nbsp;&nbsp;&nbsp;
 		                            <span><small><%= rv.getBookDate() %></small></span>
 		                            <br>                            
 		                            <div class="card-title">

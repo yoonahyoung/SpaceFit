@@ -168,4 +168,26 @@
 	
 
 
+
+
+	<!-- 이 부분부터 공간별 후기리스트 관련 SQL 작성. 소희작성  --> 
+	
+	<entry key="selectRvListForSpace">
+		SELECT RV_NO
+		     , BOOK_NO
+		     , SPACE_NAME
+		     , MEM_ID
+		     , RV_CONTENT
+		     , RV_ENROLL_DATE
+		     , RV_MODIFY_DATE
+		     , RV_STAR
+		     , RV_STATUS
+		     , GR_NAME
+		  FROM TB_REVIEW
+		  JOIN TB_MEMBER USING (MEM_NO)
+		  JOIN TB_GRADE USING (GR_NO)
+		  JOIN TB_SPACE USING (SPACE_NO)
+		 WHERE SPACE_NO = ?
+	</entry>
+
 </properties>

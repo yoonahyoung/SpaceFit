@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.review.model.vo.Review"%>
 <%
 	String thisPath = request.getContextPath();
+	ArrayList<Review> rvList = (ArrayList<Review>)request.getAttribute("rvList");
 %>
 <!DOCTYPE html>
 <html>
@@ -130,90 +131,95 @@
                                         
                                         
                                         
-                                        ~review보이는 공간~
-                                        <hr>
-                                        <div class="introRv">
-                                            <div class="stars" >
-                                                <span id='starYellow'>★</span>
-                                                <span id='starYellow'>★</span> 
-                                                <span id='starYellow'>★</span> 
-                                                <span id='starYellow'>★</span>  
-                                                <span id='starWhite'>★</span>
-                                            </div>
-                                            <h4>" 스페이스핏의 고객님들은 이 장소를 이렇게 평가하셨어요! "</h3><br>
-                                        </div>
-                                        <div class="rvPhotoZone">
-                                            <tr class="rvPhotos"> 
-                                                <td>
-                                                    <span class="material-symbols-outlined">
-                                                    arrow_back_ios
-                                                    </span>
-                                                </td>                       
-                                                <td><img class="titleImg" width="200" height="160" onclick=""></td>
-                                                <td><img class="titleImg" width="200" height="160" onclick=""></td>
-                                                <td><img class="titleImg" width="200" height="160" onclick=""></td>
-                                                <td>
-                                                    <span class="material-symbols-outlined">
-                                                    arrow_forward_ios
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                        </div>
-                                        <div id="rvOrderBy">
-                                            <a>추천순</a>&ensp;|&ensp;<a>최신순</a>&ensp;|&ensp;<a>우수후기</a>
-                                        </div>
-                                        <div class="container-fluid eachRvList">
-                                            <div class="row">
-                                                <div class="col-lg-3"> 
-                                                    <img class="titleImg" width="150" height="120" onclick="">
-                                                </div>
-                                                <div class="col-lg-6" id="eachRvListHeader">
-                                                    <h4>파티룸 a</h4>
-                                                        <span id="commentSpan">
-                                                            <span class="material-symbols-outlined forum">
-                                                                forum 
-                                                            </span>
-                                                            <span id="showCom">후기댓글보기</span>
-                                                        </span>
-                                                    <hr>
-                                                    <div id ="showStars">
-                                                        <div class="smallStars" >
-                                                            <span id='starYellow'>★</span>
-                                                            <span id='starYellow'>★</span> 
-                                                            <span id='starYellow'>★</span> 
-                                                            <span id='starYellow'>★</span>  
-                                                            <span id='starWhite'>★</span>
-                                                        </div>
-                                                        <span id="countLike">37명이 이 후기를 추천했어요!</span><br>
-                                                    </div>
-                                                    <div id="rvContentDiv">
-                                                        사진에서 보던 이미지와 똑같아요!! <br>
-                                                        자연광도 좋고 소품이 많아서 활용하기 좋았어요!
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3 memInfoDiv">
-                                                    <div class="mem">
-                                                        <span class="material-symbols-outlined memProfilePic" id="memProfilePic">
-                                                            account_circle
-                                                        </span>
-                                                        <span id="memSpan">
-                                                            <div>user01</div>
-                                                            <span>회원등급 :</span><span>silver</span>
-                                                        </span>
-                                                    </div>
-                                                    <hr>
-                                                    <div class="rvLikeAndReport">
-                                                        <button type="button" class="btn btn-primary btn-sm">후기추천</button>
-                                                        <button type="button" class="btn btn-danger btn-sm">후기신고</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
+                                        <!--  ~review보이는 공간~ -->
+                                    <% if (rvList.isEmpty()) { %>
+                                    	<h4>" 아직 작성된 후기가 없습니다 "</h4><br>
+                                    <% } else { %>
+	                                        <hr>
+	                                        <div class="introRv">
+	                                            <div class="stars" >
+	                                                <span id='starYellow'>★</span>
+	                                                <span id='starYellow'>★</span> 
+	                                                <span id='starYellow'>★</span> 
+	                                                <span id='starYellow'>★</span>  
+	                                                <span id='starWhite'>★</span>
+	                                            </div>
+	                                            <h4>" 스페이스핏의 고객님들은 이 장소를 이렇게 평가하셨어요! "</h4><br>
+	                                        </div>
+	                                        <div class="rvPhotoZone">
+	                                            <tr class="rvPhotos"> 
+	                                                <td>
+	                                                    <span class="material-symbols-outlined">
+	                                                    arrow_back_ios
+	                                                    </span>
+	                                                </td>                       
+	                                                <td><img class="titleImg" width="200" height="160" onclick=""></td>
+	                                                <td><img class="titleImg" width="200" height="160" onclick=""></td>
+	                                                <td><img class="titleImg" width="200" height="160" onclick=""></td>
+	                                                <td>
+	                                                    <span class="material-symbols-outlined">
+	                                                    arrow_forward_ios
+	                                                    </span>
+	                                                </td>
+	                                            </tr>
+	                                        </div>
+	                                        <div id="rvOrderBy">
+	                                            <a>추천순</a>&ensp;|&ensp;<a>최신순</a>&ensp;|&ensp;<a>우수후기</a>
+	                                        </div>
+	                                        
+	                                        <% for(Review r : rvList) { %>  
+	                                        <div class="container-fluid eachRvList">
+	                                            <div class="row">
+	                                                <div class="col-lg-3"> 
+	                                                    <img class="titleImg" width="150" height="120" onclick="">
+	                                                    <span id="titleImgSpan">후기작성일 : <%=r.getReviewModifyDate() %>)</span>
+	                                                </div>
+	                                                <div class="col-lg-6" id="eachRvListHeader">
+	                                                    <h4><%=r.getSpaceName() %></h4>
+	                                                        <span id="commentSpan">
+	                                                            <span class="material-symbols-outlined forum">
+	                                                                forum 
+	                                                            </span>
+	                                                            <span id="showCom">후기댓글보기</span>
+	                                                        </span>
+	                                                    <hr>
+	                                                    <div id ="showStars">
+	                                                        <div class="smallStars" >
+	                                                            <span id='starYellow'>★</span>
+	                                                            <span id='starYellow'>★</span> 
+	                                                            <span id='starYellow'>★</span> 
+	                                                            <span id='starYellow'>★</span>  
+	                                                            <span id='starWhite'>★</span>
+	                                                        </div>
+	                                                        <span id="countLike">37명이 이 후기를 추천했어요!</span><br>
+	                                                    </div>
+	                                                    <div id="rvContentDiv">
+	                                                        <%=r.getReviewContent() %>
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-lg-3 memInfoDiv">
+	                                                    <div class="mem">
+	                                                        <span class="material-symbols-outlined memProfilePic" id="memProfilePic">
+	                                                            account_circle
+	                                                        </span>
+	                                                        <span id="memSpan">
+	                                                            <div><%=r.getMemId() %></div>
+	                                                            <span>회원등급 :</span><span><%=r.getGradeName() %></span>
+	                                                        </span>
+	                                                    </div>
+	                                                    <div class="rvLikeAndReport">
+	                                                        <button type="button" class="btn btn-primary btn-sm">후기추천</button>
+	                                                        <button type="button" class="btn btn-danger btn-sm">후기신고</button>
+	                                                    </div>
+	                                                </div>
+	                                            </div>
+	                                        </div>
+                                        <% } %>
+									<% } %>
 
                                     
                                     
-                                        ~review보이는 공간~
+                                         <!--  ~review보이는 공간~ -->
                                     
                                     
                                     

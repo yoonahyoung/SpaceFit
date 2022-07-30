@@ -1,12 +1,12 @@
 package com.spacefit.review.model.service;
 
 import static com.spacefit.common.JDBCTemplate.*;
-import static com.spacefit.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.spacefit.attachment.model.vo.Attachment;
+import com.spacefit.product.model.dao.SpaceDao;
 import com.spacefit.review.model.dao.ReviewDao;
 import com.spacefit.review.model.vo.Review;
 
@@ -121,6 +121,26 @@ public class ReviewService {
 		
 		return result1 * result2;
 		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// 이 부분부터 공간별 후기리스트 관련 메소드 소희작성
+	
+	
+	// 공간조회 디테일 페이지에서 후기리스트 전체조회용 메소드 1
+	public ArrayList<Review> selectRvListForSpace(int spNo){
+		Connection conn = getConnection();
+		ArrayList<Review> rvList = new ReviewDao().selectRvListForSpace(conn, spNo);
+		close(conn);
+		return rvList;
 	}
 
 }

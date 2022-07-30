@@ -170,5 +170,62 @@ public class Review {
 
 	
 	
+	// 이 부분부터 공간별 후기리스트 관련 vo
+	private String memId;
+	private String gradeName;
+	private String spaceName;
+
+	public Review(int reviewNo, int bookNo, String spaceName, String memId, String reviewContent, Date reviewEnrollDdate,
+			Date reviewModifyDate, int reviewStar, String reviewStatus, String gradeName) {
+		super();
+		this.reviewNo = reviewNo;
+		this.bookNo = bookNo;
+		this.spaceName = spaceName;
+		this.memId = memId;
+		this.reviewContent = reviewContent;
+		ReviewEnrollDdate = reviewEnrollDdate;
+		ReviewModifyDate = reviewModifyDate;
+		this.reviewStar = reviewStar;
+		this.reviewStatus = reviewStatus;
+		this.gradeName = gradeName;
+	}
+
+
+	public String getMemId() {
+		return memId;
+	}
+
+
+	public void setMemId(String memId) {
+		this.memId = memId;
+	}
+
+
+	public String getGradeName() {
+		return gradeName;
+	}
+
+
+	public void setGradeName(String gradeName) {
+		this.gradeName = gradeName;
+	}
+
+
+	public String getSpaceName() {
+		return spaceName;
+	}
+
+
+	public void setSpaceName(String spaceName) {
+		this.spaceName = spaceName;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

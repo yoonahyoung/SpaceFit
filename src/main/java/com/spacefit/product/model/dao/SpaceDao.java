@@ -1,6 +1,6 @@
 package com.spacefit.product.model.dao;
 
-import static com.spacefit.common.JDBCTemplate.close;
+import static com.spacefit.common.JDBCTemplate.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -199,14 +199,7 @@ public class SpaceDao {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	

@@ -1,6 +1,6 @@
 package com.spacefit.review.model.dao;
 
-import static com.spacefit.common.JDBCTemplate.close;
+import static com.spacefit.common.JDBCTemplate.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -373,6 +373,70 @@ public class ReviewDao {
 		
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// 이 부분부터 공간별 후기리스트 관련 메소드 소희작성
+	
+	/**
+	 * @param conn
+	 * @param 공간조회 디테일 페이지에서 후기리스트 전체조회용 메소드 1
+	 * @return
+	 */
+	public ArrayList<Review> selectRvListForSpace(Connection conn, int spNo){
+		
+		ArrayList<Review> rvList = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectRvListForSpace");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, spNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				rvList.add(new Review(
+							rset.getInt("rv_no"),
+							rset.getInt("book_no"),
+							rset.getString("space_name"), // == SPACE NAME 으로 하기!
+							rset.getString("mem_id"),
+							rset.getString("rv_content"),
+							rset.getDate("rv_enroll_date"),
+							rset.getDate("rv_modify_date"),
+							rset.getInt("rv_star"),
+							rset.getString("rv_status"),
+							rset.getString("gr_name")							
+						));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return rvList;
+		
+	}
+	
+	
 	
 	
 }
