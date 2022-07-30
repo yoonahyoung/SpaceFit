@@ -115,23 +115,45 @@
 			                                            <td><%=m.getMemId() %></td>
 			                                            <td><%=m.getMemName() %></td>
 			                                            <td><%=m.getMemPhone() %></td>
-			                                            <td><%=m.getGrName() %></td>
+			                                            <td>
+			                                            	<select>
+															  <option selected><%=m.getGrName() %></option>
+															  <option>Basic</option>
+															  <option>Silver</option>
+															  <option>Gold</option>
+															</select>
+			                                            </td>
 			                                            <td><%=m.getRptCount() %></td>
 			                                            <td><%=m.getLikeCount() %></td>
 			                                            
-			                                            <% if (m.getMemAdmFlag().equals("A")) {  %>
-			                                            	<td>관리자</td>
-			                                            <% } else { %>
-			                                            	<td>일반</td>
-			                                            <% } %>	
+			                                            <td>
+															<select>
+															  <option selected>
+															  <% if(m.getMemAdmFlag().equals("A")) { %>
+															  	<option selected>관리자</option>
+															  <% } else {  %>
+															  	<option selected>일반</option>
+															  <% } %>
+															  <option>일반</option>
+															  <option>관리자</option>
+															</select>
+														</td>
 			                                                                                        
-			                                            <% if (m.getMemStatus().equals("Y")) {  %>
-			                                            	<td>회원</td>
-			                                            <% } else if(m.getMemStatus().equals("N")) { %>
-			                                            	<td>탈퇴한 회원</td>
-			                                            <% } else { %>
-			                                            	<td>블랙리스트</td>
-			                                            <% } %>	
+			                                            <td>
+															<select>
+															  <option selected>
+															  <% if(m.getMemStatus().equals("Y")) { %>
+															  	<option selected>회원</option>
+															  <% } else if (m.getMemStatus().equals("N")) { %>
+															  	<option selected>탈퇴회원</option>
+															  <% } else { %>
+															  	<option selected>블랙리스트</option>
+															  <% } %>
+															  <option>회원</option>
+															  <option>탈퇴회원</option>
+															  <option>블랙리스트</option>
+															</select>
+														</td>
 			                                            
 			                                      
 			                                            <td><%=m.getBookCountMonth() %></td>
