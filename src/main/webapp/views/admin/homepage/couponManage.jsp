@@ -75,16 +75,26 @@
                                       </tr>
                                   </tfoot>
                                   <tbody>
-                                  	<% for(Mcp mc : list){ %>
-                                      <tr>
-                                      	<td><input type="radio"></td>
-                                          <td><%= mc.getCpNo() %></td>
-                                          <td><%= mc.getCpName() %></td>
-                                          <td><%= mc.getCpDiscount() %>원</td>
-                                          <td><%= mc.getCpEnrollDate() %></td>
-                                          
-                                      </tr>
-                                    <% } %>
+                                  	<% if(list.isEmpty()){ %>
+                                  	
+                                  		<tr>
+						                    <td colspan="5">등록된 쿠폰이 없습니다.</td>
+						                </tr>
+						                
+                                  	<% }else {%>
+                                  	
+	                                  	<% for(Mcp mc : list){ %>
+	                                      <tr>
+	                                      	<td><input type="radio"></td>
+	                                          <td><%= mc.getCpNo() %></td>
+	                                          <td><%= mc.getCpName() %></td>
+	                                          <td><%= mc.getCpDiscount() %>원</td>
+	                                          <td><%= mc.getCpEnrollDate() %></td>
+	                                          
+	                                      </tr>
+	                                    <% } %>
+	                                    
+	                                 <% } %>
                                   </tbody>
                               </table>
                           </div>
@@ -117,7 +127,7 @@
             
             <script>
 		    	function couponDetailView(){
-		   			location.href="<%=contextPath%>/views/admin/homepage/couponDetailView.jsp";
+		   			location.href="<%=contextPath%>/adCouponDetail.me";
 				}
 		    	
     		</script>

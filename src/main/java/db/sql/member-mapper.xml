@@ -239,4 +239,19 @@
 		     , CP_ENROLL_DATE
 		  FROM TB_COUPON
 	</entry>
+	
+	<entry key="adminInsertCoupon">
+		INSERT 
+		  INTO TB_COUPON
+		      (CP_NO
+		     , CP_NAME
+		     , CP_DISCOUNT
+		     , CP_ENROLL_DATE)
+		VALUES(
+		       SEQ_CPNO.NEXTVAL
+		     , ?
+		     , ?
+		     , SYSDATE
+		       )
+	</entry>
 </properties>

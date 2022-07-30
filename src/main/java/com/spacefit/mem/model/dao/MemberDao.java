@@ -450,6 +450,28 @@ public class MemberDao {
 		
 	}
 	
+	public int adminInsertCoupon(Connection conn, String cpName, int cpDiscount) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("adminInsertCoupon");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, cpName);
+			pstmt.setInt(2, cpDiscount);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	
 	

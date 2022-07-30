@@ -132,4 +132,16 @@ public class MemberService {
 		return list;
 	}
 
+	public int adminInsertCoupon(String cpName, int cpDiscount) {
+		Connection conn = getConnection();
+		int result = new MemberDao().adminInsertCoupon(conn, cpName, cpDiscount);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
 }

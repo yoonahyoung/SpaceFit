@@ -16,17 +16,18 @@
         <h1 class="h3 mb-2 text-gray-800" style="color: rgb(20, 18, 18)">쿠폰 등록</h1>
         <br><br>
         
-        <button type="button" class="btn btn-primary float-right" style="margin-right:10px; margin-bottom:15px;">등록하기</button>
+        <form action="<%=contextPath %>/adCouponInsert.me" method="post">
+        	<button type="submit" class="btn btn-primary float-right" style="margin-right:10px; margin-bottom:15px;">등록하기</button>
 
-        <form>
+       
 			<table class="table table-hover" id="dataTable">
 				<tr>
 					<th>쿠폰명</th>
-					<td><input type="text" value=""></td>
+					<td><input type="text" name="cpName"></td>
 				</tr>
 				<tr>
 					<th>할인금액</th>
-					<td><input type="text">&nbsp;&nbsp;원</td>
+					<td><input type="text" name="cpDiscount">&nbsp;&nbsp;원</td>
 				</tr>
 				
 			</table>
@@ -64,7 +65,7 @@
 				
 			</table>
 			<br><br>
-			<button type="button" class="btn btn-secondary">취소하기</button>&nbsp;
+			<button type="button" class="btn btn-secondary" onclick="location.href='<%=contextPath%>/adCouponList.me'">쿠폰목록</button>&nbsp;
 			<button type="button" class="btn btn-primary">발급하기</button>
 	        
 		</form>
