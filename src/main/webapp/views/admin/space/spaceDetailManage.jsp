@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.spacefit.product.model.vo.*"%>
- <%
- 	Space s = (Space)request.getAttribute("s");
- %>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.attachment.model.vo.*, com.spacefit.product.model.vo.*"%>
+<%
+	Space s = (Space)request.getAttribute("s");
+	ArrayList<Attachment> list = (ArrayList<Attachment>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,9 +60,9 @@
                 <tr>
 					<th>추가사진</th>
                         <!-- 기본에 선택되었던 사진 와야함 -->
-                        <td><img id="contentImg1" width="200" height="150"></td>
-                        <td><img id="contentImg2" width="200" height="150"></td>
-                        <td><img id="contentImg3" width="200" height="150"></td>
+                        <%for(int i=0; i<list.size(); i++){ %>
+                        <td><img id="contentImg<%= i %>" width="200" height="150" src="<%= contextPath %>/<%= list.get(i).getFilePath() + list.get(i).getFileChangeName() %>"></td>
+                        <%} %>
 				</tr>
 				<tr>
 					<th>공간등록일</th>

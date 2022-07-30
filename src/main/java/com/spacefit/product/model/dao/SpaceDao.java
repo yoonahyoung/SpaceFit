@@ -118,7 +118,7 @@ public class SpaceDao {
 		return s;
 	}
 
-	public int insertSpace(Connection conn, Space s) {
+	public int insertSpace(Connection conn, Space s, ArrayList<Attachment> at) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertSpace");
@@ -148,11 +148,11 @@ public class SpaceDao {
 		String sql = prop.getProperty("insertAttach");
 		
 		try {
-			for(Attachment at : list) {
+			for(int i=0; i<list.size(); i++) {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, at.getFileOriginName());
-				pstmt.setString(2, at.getFileChangeName());
-				pstmt.setString(3, at.getFilePath());
+				pstmt.setString(1, list.get(i).getFileOriginName());
+				pstmt.setString(2, list.get(i).getFileChangeName());
+				pstmt.setString(3, list.get(i).getFilePath());
 				
 				result = pstmt.executeUpdate();
 			}
@@ -163,6 +163,35 @@ public class SpaceDao {
 		}
 		
 		return result;
+	}
+
+	public ArrayList<Attachment> selectAttach(Connection conn, int spNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Attachment> list = new ArrayList<>();
+		String sql = prop.getProperty("selectAttach");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, spNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Attachment(rset.getInt("file_no"),
+									  rset.getInt("ref_bno"),
+									  rset.getString("file_origin_name"),
+									  rset.getString("file_change_name"),
+									  rset.getString("file_path")
+						));
+			
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 
 	

@@ -41,6 +41,15 @@ public class Attachment {
 		this.fileLevel = fileLevel;
 	}
 
+	public Attachment(int fileNo, int refBoardNo, String fileOriginName, String fileChangeName, String filePath) {
+		super();
+		this.fileNo = fileNo;
+		this.refBoardNo = refBoardNo;
+		this.fileOriginName = fileOriginName;
+		this.fileChangeName = fileChangeName;
+		this.filePath = filePath;
+	}
+
 	public int getFileNo() {
 		return fileNo;
 	}

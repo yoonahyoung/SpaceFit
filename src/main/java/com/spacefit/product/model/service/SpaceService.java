@@ -36,7 +36,7 @@ public class SpaceService {
 		Connection conn = getConnection();
 		
 		// 추가파일x
-		int result1 = new SpaceDao().insertSpace(conn, s);
+		int result1 = new SpaceDao().insertSpace(conn, s, list);
 		// 추가파일o
 		int result2 = new SpaceDao().insertAttach(conn, list);
 		
@@ -48,6 +48,14 @@ public class SpaceService {
 		close(conn);
 		
 		return result1 * result2;
+	}
+
+	public ArrayList<Attachment> selectAttach(int spNo) {
+		Connection conn = getConnection();
+		ArrayList<Attachment> list = new SpaceDao().selectAttach(conn, spNo);
+		close(conn);
+		
+		return list;
 	}
 
 }

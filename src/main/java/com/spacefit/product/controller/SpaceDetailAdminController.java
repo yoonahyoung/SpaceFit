@@ -1,6 +1,7 @@
 package com.spacefit.product.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.spacefit.attachment.model.vo.Attachment;
 import com.spacefit.product.model.service.SpaceService;
 import com.spacefit.product.model.vo.Space;
 
@@ -34,7 +36,9 @@ public class SpaceDetailAdminController extends HttpServlet {
 		int spNo = Integer.parseInt(request.getParameter("no"));
 		
 		Space s = new SpaceService().spaceDetailView(spNo);
+		ArrayList<Attachment> list = new SpaceService().selectAttach(spNo);
 		request.setAttribute("s", s);
+		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/admin/space/spaceDetailManage.jsp").forward(request, response);
 	}
 
