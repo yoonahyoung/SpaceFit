@@ -13,16 +13,16 @@ import com.spacefit.notice.model.service.NoticeService;
 import com.spacefit.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class NoticeListController
+ * Servlet implementation class AdminNoticeListController
  */
-@WebServlet("/list.no")
-public class NoticeListController extends HttpServlet {
+@WebServlet("/adminList.no")
+public class AdminNoticeListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeListController() {
+    public AdminNoticeListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,7 +37,7 @@ public class NoticeListController extends HttpServlet {
 		ArrayList<Notice> list = new NoticeService().selectNoticeList();
 		// 4) 응답뷰 => noticeListView.jsp
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/user/notice/noticeListView.jsp").forward(request, response);
+		request.getRequestDispatcher("views/admin/notice/noticeListView.jsp").forward(request, response);
 	}
 
 	/**

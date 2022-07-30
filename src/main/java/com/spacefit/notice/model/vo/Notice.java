@@ -15,6 +15,15 @@ public class Notice {
 	public Notice() {}
 
 	
+	public Notice(String noticeCategory, String noticeTitle, String noticeContent, String noticeWriter) {
+		super();
+		this.noticeCategory = noticeCategory;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+		this.noticeWriter = noticeWriter;
+	}
+
+
 	public Notice(int noticeNo, String noticeCategory, String noticeTitle, String noticeWriter, int count,
 			Date createDate) {
 		super();

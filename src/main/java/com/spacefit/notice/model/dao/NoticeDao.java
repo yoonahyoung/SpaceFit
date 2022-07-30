@@ -52,10 +52,33 @@ public class NoticeDao {
 		} finally {
 			close(rset);
 			close(pstmt);
-//			System.out.println("dao"+list);
 		}
 		
 		return list;
+	}
+	
+	public int insertNotice(Connection conn, Notice n) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, n.getNoticeCategory());
+			pstmt.setString(2, n.getNoticeTitle());
+			pstmt.setString(3, n.getNoticeContent());
+			pstmt.setString(4, n.getNoticeWriter()); 
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 	
 }

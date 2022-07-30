@@ -16,5 +16,24 @@
 	    BY NT_NO DESC
 	</entry>
 	
+	<entry key="insertNotice">
+	INSERT
+	  INTO TB_NOTICE
+	     (
+	       NT_NO
+	     , NT_CATEGORY
+	     , NT_TITLE
+	     , NT_CONTENT
+	     , NT_MEM_NO
+		 )
+	VALUES
+	     (
+	       SEQ_NONO.NEXTVAL
+	     , ?
+	     , ?
+	     , ?
+	     , ?
+	     )
+	</entry>
 	
 </properties>
