@@ -286,7 +286,7 @@ public class MemberDao {
 			list.add( new Mcp(rset.getString("cp_name"),
 							  rset.getInt("cp_discount"),
 							  rset.getString("mcp_use"),
-							  rset.getString("mcp_end_date")
+							  rset.getDate("mcp_end_date")
 					));
 			
 		}
@@ -418,6 +418,46 @@ public class MemberDao {
 		
 		return m;
 	}
+	
+	
+	public ArrayList<Mcp> selectAdminCouponList(Connection conn){
+		
+		ArrayList<Mcp> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectAdminCouponList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Mcp(rset.getInt("cp_no"),
+								 rset.getString("cp_name"),
+								 rset.getInt("cp_discount"),
+								 rset.getDate("cp_enroll_date")
+						));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
 

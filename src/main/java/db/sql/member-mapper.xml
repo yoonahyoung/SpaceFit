@@ -231,4 +231,12 @@
 		  LEFT JOIN TB_GRADE USING (GR_NO)
 		 WHERE MEM_NO = ?
 	</entry>
+	
+	<entry key="selectAdminCouponList">
+		SELECT CP_NO
+		     , CP_NAME
+		     , CP_DISCOUNT
+		     , CP_ENROLL_DATE
+		  FROM TB_COUPON
+	</entry>
 </properties>
