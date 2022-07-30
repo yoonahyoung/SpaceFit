@@ -87,12 +87,5 @@
     </div>
     <div style="height : 60px"></div>
  </div>
- <!-- 이렇게 해야 값이 담겨있을때만 alert가 실행된다 -->
-    <% if(alertMsg != null) { %> 
-		<script>
-			alert("<%=alertMsg%>");   <%-- "" 반드시!! 따옴표!!로 묶어줘야함 안하면 alert(회원가입성공);--%>
-		</script>		
-		<% request.removeAttribute("alertMsg"); %> 
-	<% } %>
 </body>
 </html>
