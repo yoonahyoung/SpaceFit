@@ -2,7 +2,6 @@
     pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.notice.model.vo.Notice"%>
 <%
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
-    System.out.println(list);
 %>
 <!DOCTYPE html>
 <html>
@@ -85,5 +84,18 @@
     <div style="height : 60px"></div>
  </div>
 <%@ include file="../common/userFooter.jsp" %>
+     <script>
+    	$(function(){
+    		$(".table>tbody>tr").click(function(){
+    			const num = $(this).children().eq(0).text(); // 클릭했을때의 글번호
+    			
+    			// 요청할url?키=밸류&키=밸류...
+    			// 요청시전달값(키=밸류) => 쿼리스트링
+				
+    			// /web/detail.no?no=xx
+    			location.href = '<%= contextPath%>/detail.no?no=' + num;
+    		})
+    	})
+    </script>
 </body>
 </html>

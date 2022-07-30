@@ -2,7 +2,6 @@
     pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.notice.model.vo.Notice"%>
 <%
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
-	String alertMsg = (String)request.getAttribute("alertMsg");
 %>
 <!DOCTYPE html>
 <html>
@@ -87,5 +86,18 @@
     </div>
     <div style="height : 60px"></div>
  </div>
+     <script>
+    	$(function(){
+    		$(".table>tbody>tr").click(function(){
+    			const num = $(this).children().eq(0).text(); // 클릭했을때의 글번호
+    			
+    			// 요청할url?키=밸류&키=밸류...
+    			// 요청시전달값(키=밸류) => 쿼리스트링
+				
+    			// /web/detail.no?no=xx
+    			location.href = '<%= contextPath%>/adminDetail.no?no=' + num;
+    		})
+    	})
+    </script>
 </body>
 </html>
