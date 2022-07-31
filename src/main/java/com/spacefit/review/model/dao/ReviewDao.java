@@ -346,6 +346,11 @@ public class ReviewDao {
 		
 	}
 	
+	/** 후기삭제시 해당 첨부파일 삭제
+	 * @param conn
+	 * @param reviewNo 삭제할 후기번호 => ref_board
+	 * @return 처리결과
+	 */
 	public int deleteAttachment(Connection conn, int reviewNo) {
 		// update => int
 		int result = 0;
@@ -364,6 +369,11 @@ public class ReviewDao {
 		return result;				
 	}
 	
+	/** 후시삭제
+	 * @param conn
+	 * @param reviewNo 삭제할 후기번호
+	 * @return
+	 */
 	public int deleteReivewReal(Connection conn, int reviewNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -382,6 +392,10 @@ public class ReviewDao {
 		
 	}
 	
+	/** 페이징처리 => listCount
+	 * @param conn
+	 * @return
+	 */
 	public int selectListCount(Connection conn) {
 		// select문 => ResultSet => int
 		
@@ -405,8 +419,7 @@ public class ReviewDao {
 			close(pstmt);
 		}
 		
-		return listCount;
-		
+		return listCount;		
 		
 	}
 	
