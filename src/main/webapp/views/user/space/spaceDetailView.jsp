@@ -221,6 +221,79 @@
 	                                                    </div>
 	                                                </div>
 	                                            </div>
+	                                            <br><br>
+	                                            <div class="commentDiv">
+                                                    <div class="parentCommentAll">
+                                                        <div class="commentMem row">
+                                                            <div class="parentMem col-lg-6">
+                                                                <span class="material-symbols-outlined memProfilePic" id="memProfilePic">
+                                                                    account_circle
+                                                                </span>
+                                                                <span id="memSpan">
+                                                                    user09
+                                                                </span>
+                                                            </div>
+                                                            <div class="parentInfo col-lg-6">
+                                                                <span>22.08.01</span>
+                                                                <span>&ensp;|&ensp;</span>
+                                                                <span id="reReport">신고하기</span>
+                                                                <span>&ensp;|&ensp;</span>
+                                                                <span id="reComment">대댓달기</span>
+                                                            </div>
+                                                            <hr> 
+                                                            <div id="showComment">
+                                                                <div class="parentComment">
+                                                                    <span>진짜 미치지 않고서야 이런 댓글은 왜다는거야??ㅋㅋㅋㅋㅋㅋ 개빡친당!</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="sonCommentAll row">
+                                                        <div class="blank col-lg-1"><!--나중에 이 블랭크 반복문 넣어서 한 탭씩 넣기?--></div>
+                                                        <div class="commentSon row col-lg-11" style="padding : 0px; margin : 0px;">
+                                                            <div class="sonMem col-lg-6">
+                                                                <span class="material-symbols-outlined memProfilePic" id="memProfilePic">
+                                                                    account_circle
+                                                                </span>
+                                                                <span id="memSpan">
+                                                                    user09
+                                                                </span>
+                                                            </div>
+                                                            <div class="sonInfo col-lg-6">
+                                                                <span>22.08.01</span>
+                                                                <span>&ensp;|&ensp;</span>
+                                                                <span id="reReport">신고하기</span>
+                                                                <span>&ensp;|&ensp;</span>
+                                                                <span id="reComment">대댓달기</span>
+                                                            </div>
+                                                            <hr>
+                                                            <div id="showComment">
+                                                                <div class="sonComment">
+                                                                    <span>너 지금 나보고 미쳤다고 한거야? 니 어디사냐? 확마!</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="writeComment">
+                                                            <table id="writeTable" align="center">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th id="justText">댓글작성</th>
+                                                                        <th><textarea rows="3" cols="50" style="resize:none;"></textarea></th>
+                                                                        <td><button class="btn btn-primary" type="button">댓글등록</button></td>
+                                                                    </tr>
+                                                                </thead>
+                                                            </table>
+                                                        </div>
+                                                    
+                                                    </div>
+	                                            	
+
+
+                                                   
+                                                    
+	                                            
+	                                            </div>
 	                                        </div>
 	                                        
                                         <% } %>

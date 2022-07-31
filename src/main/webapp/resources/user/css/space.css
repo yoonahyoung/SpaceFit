@@ -170,6 +170,74 @@ span.col-sm-4{
   color: #aaa;
 }
 
+
+
+
+/* ------------ 댓글부분 --------------- */
+.parentMem * {
+  float:left;
+}
+
+.parentInfo * {
+  float:right;
+}
+
+.sonMem * {
+  float:left;
+}
+
+.sonInfo * {
+  float:right;
+}
+
+.parentCommentAll{
+  margin-bottom: 30px;
+}
+
+.sonCommentAll{
+  margin-bottom: 30px;
+  float:right;
+}
+
+#reComment{
+  color: #0D6EFD;
+}
+
+#reReport{
+  color : red;
+}
+
+.blank{
+
+  
+}
+
+#writeComment{
+  margin-top: 70px;
+  margin-bottom: 140px;
+  width: 100%;
+}
+
+#justText{
+  width: 100px;
+  color: #0D6EFD;
+}
+
+#writeTable textarea{
+  width: 520px;
+  height: 100px;
+  border: 2px solid #0D6EFD;
+  border-radius: 10px;
+}
+
+#writeTable button{
+  width: 100px;
+  height: 100px;
+  margin-bottom: 6px;
+  border-radius: 10px;
+}
+
+
 /* ------------ END spaceDetailView.jsp --------------- */
 
 /* ------------ spaceListView.jsp --------------- */
