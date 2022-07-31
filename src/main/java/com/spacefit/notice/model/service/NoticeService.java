@@ -1,17 +1,21 @@
 package com.spacefit.notice.model.service;
 
-import static com.spacefit.common.JDBCTemplate.*;
+import static com.spacefit.common.JDBCTemplate.close;
+import static com.spacefit.common.JDBCTemplate.commit;
+import static com.spacefit.common.JDBCTemplate.getConnection;
+import static com.spacefit.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.spacefit.common.model.vo.PageInfo;
 import com.spacefit.notice.model.dao.NoticeDao;
 import com.spacefit.notice.model.vo.Notice;
 
 public class NoticeService {
-	public ArrayList<Notice> selectNoticeList(){
+	public ArrayList<Notice> selectNoticeList(PageInfo pi){
 		Connection conn = getConnection();
-		ArrayList<Notice> list = new NoticeDao().selectNoticeList(conn);
+		ArrayList<Notice> list = new NoticeDao().selectNoticeList(conn, pi);
 		close(conn);
 		
 		return list;
@@ -84,5 +88,12 @@ public class NoticeService {
 		close(conn);
 		
 		return result;
+	}
+	
+	public int selectListCount() {
+		Connection conn = getConnection();
+		int listCount = new NoticeDao().selectListCount(conn);
+		close(conn);
+		return listCount;
 	}
 }

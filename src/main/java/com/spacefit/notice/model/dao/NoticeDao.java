@@ -1,5 +1,7 @@
 package com.spacefit.notice.model.dao;
 
+import static com.spacefit.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,9 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.spacefit.common.model.vo.PageInfo;
 import com.spacefit.notice.model.vo.Notice;
-
-import static com.spacefit.common.JDBCTemplate.*;
 
 public class NoticeDao {
 	private Properties prop = new Properties();
@@ -23,7 +24,7 @@ public class NoticeDao {
 			e.printStackTrace();
 		}
 	}
-	public ArrayList<Notice> selectNoticeList(Connection conn){
+	public ArrayList<Notice> selectNoticeList(Connection conn, PageInfo pi){
 		// select문 => ResultSet(여러행) => ArrayList<Notice>객체
 		ArrayList<Notice> list = new ArrayList<>();
 		
@@ -34,6 +35,12 @@ public class NoticeDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -180,6 +187,34 @@ public class NoticeDao {
 		}
 		
 		return result;
+	}
+	
+	public int selectListCount(Connection conn) {
+		// select문 => ResultSet(숫자한개) => int
+		int listCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+		
 	}
 	
 }

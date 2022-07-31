@@ -65,7 +65,7 @@
 	        <a href="<%=contextPath%>/updateForm.no?no=<%=n.getNoticeNo() %>" class="btn btn-sm btn-primary">수정</a> 
 	        <a href="<%=contextPath %>/delete.no?no=<%=n.getNoticeNo() %>" class="btn btn-sm btn-danger" onclick="return deleteConfirm();">삭제</a>
     	<% } %>
-	        <a href="<%= contextPath %>/adminList.no" class="btn btn-sm btn-secondary">목록</a>
+	        <a href="<%= contextPath %>/adminList.no?cpage=1" class="btn btn-sm btn-secondary">목록</a>
     </div>
     <div style="height : 60px"></div>
  </div>

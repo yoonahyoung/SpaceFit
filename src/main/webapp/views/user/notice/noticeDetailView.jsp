@@ -59,7 +59,7 @@
 
     <br>
 	<div align="right">
-        <a href="<%= contextPath %>/list.no" class="btn btn-sm btn-secondary">목록가기</a>
+        <a href="<%= contextPath %>/list.no?cpage=1" class="btn btn-sm btn-secondary">목록가기</a>
     </div>
     <div style="height : 60px"></div>
  </div>

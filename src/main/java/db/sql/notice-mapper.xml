@@ -3,17 +3,25 @@
 <properties>
 
 	<entry key="selectNoticeList">
-	SELECT NT_NO
-        , NT_CATEGORY
-     	, NT_TITLE
-	     , MEM_ID
-	     , NT_COUNT
-	     , NT_CREATE_DATE
-	  FROM TB_NOTICE
-	  JOIN TB_MEMBER ON(NT_MEM_NO = MEM_NO)
-	 WHERE NT_STATUS = 'Y'
-	 ORDER
-	    BY NT_NO DESC
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT 
+		                       NT_NO
+		                     , NT_CATEGORY
+		                     , NT_TITLE
+		                     , MEM_ID
+		                     , NT_COUNT
+		                     , NT_CREATE_DATE
+		                  FROM TB_NOTICE B
+		                  JOIN TB_MEMBER ON (NT_MEM_NO = MEM_NO)
+		                 WHERE B.NT_STATUS = 'Y'
+		                 ORDER 
+		                    BY NT_NO DESC
+		               ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
 	<entry key="insertNotice">
@@ -68,5 +76,11 @@
 		UPDATE TB_NOTICE
 		   SET NT_STATUS = 'N'
 		 WHERE NT_NO = ?
+	</entry>
+	
+	<entry key="selectListCount">
+		SELECT COUNT(*) as "COUNT"
+		  FROM TB_NOTICE
+		 WHERE NT_STATUS = 'Y'
 	</entry>
 </properties>
