@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.reservation.model.vo.Book"%>
+<%
+	ArrayList<Book> list = (ArrayList<Book>)request.getAttribute("list");
+%>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>진행중인 예약리스트</title>
+<title>예약리스트</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/admin/css/member.css">
 </head>
 <body>
@@ -13,7 +16,7 @@
     
     <div class="container-fluid">
         <br><br><br>
-        <h1 class="h3 mb-2 text-gray-800" style="color: rgb(20, 18, 18)">예약확정내역리스트</h1>
+        <h1 class="h3 mb-2 text-gray-800" style="color: rgb(20, 18, 18)">내역리스트</h1>
            <br><br><br>
 
         <!-- DataTales Example -->
@@ -21,22 +24,31 @@
             <div class="card-header py-3">
                 <div class="row">
                   <div class="col-lg" align="left">
-                    <form method="post" name="search" action="">
+                  
                         <table class="pull-right">
                             <tr>
-                                <td><select class="form-control mr-sm-0" name="searchType" style="height: 35px;">
+                                <td><select class="form-control mr-sm-0" name="searchType" id="searchType" style="height: 35px;">                                        
                                         <option value="spaceNo">공간명</option>
                                         <option value="userID">회원아이디</option>
                                         <option value="userName">예약자명</option>
                                 </select></td>
-                                <td><input type="text" class="form-control" placeholder="검색어 입력" name="searchText" maxlength="100" style="height: 35px;"></td>
-                                <td><button type="submit" class="btn btn-sm btn-primary">검색</button></td>
+                                <td><input type="text" class="form-control" placeholder="검색어 입력" name="searchText" id="searchText"  maxlength="30" style="height: 35px;"></td>
+                                <!-- <td><button type="button" id="searchBtn" class="btn btn-sm btn-primary">검색</button></td>-->
                             </tr>        
-                        </table>                        
-                        
-                    </form>          
+                        </table>                       
+                          
                   </div>
-                  <div class="col-lg" align="right">                        
+                  <div class="col-lg" align="right"> 
+                  	    <select name="booktype" id="booktype">
+			                <option selected>전체</option>
+			                <option>예약확정</option>
+			                <option>이용완료</option>
+			                <option>예약취소</option>
+			            </select>
+			            <select name="bookOrderBy" id="bookOrderBy">
+			                <option value="book_date" selected>대여날짜순</option>
+			                <option value="book_no">예약번호순</option>
+			            </select>       
                   </div>
                 </div>
                 <div class="card-body">
@@ -63,50 +75,13 @@
                             </thead>
                             
                            <tbody>
-                                 <!--예약내역이 없을때 -->
-                                <!-- <tr>
-                                    <td colspan="11"> 예약내역이 없습니다. </td>
-                                </tr> -->
-                
-                                <!-- 예약내역이 있을경우 -->
-                                <tr>
-                                    <td>01</td>
-                                    <td>파티룸A</td>
-                                    <td>2022.12.06</td>
-                                    <td>14시</td>
-                                    <td>16시</td>
-                                    <td>5명</td>
-                                    <td>56000원</td>
-                                    <td>user01</td>
-                                    <td>장지미</td>
-                                    <td>wwlaal00051@naver.com</td>
-                                    <td>010-xxxx-xxxx</td>
-                                    <td>Y</td>
-                                    <td>N</td>
-                                    <td>N</td>
-                                    <td>N</td>
-                                </tr>
-                                <tr>
-                                    <td>02</td>
-                                    <td>연주실B</td>
-                                    <td>2022.09.06</td>
-                                    <td>14시</td>
-                                    <td>18시</td>
-                                    <td>6명</td>
-                                    <td>86000원</td>
-                                    <td>user03</td>
-                                    <td>김구디</td>
-                                    <td>wwlaal@naver.com</td>
-                                    <td>010-xxxx-xxxx</td>
-                                    <td>Y</td>
-                                    <td>N</td>
-                                    <td>Y</td>
-                                    <td>N</td>
-                                </tr>
+                           	                           		                             
                            </tbody>
+                           
                         </table>
                     </div>
                     </div>
+                    <!-- 
                     <div class="paging-area" align="center">    
                     
                         <button class="btn btn-sm btn-outline-primary">&lt;</button>        
@@ -118,6 +93,7 @@
                         <button class="btn btn-sm btn-outline-primary">&gt;</button>
                         
                     </div>
+                     -->
                     <div style="height : 60px"></div>
                 </div>
             
@@ -126,7 +102,72 @@
         </div>  
 
         <!-- /.container-fluid -->
-        <br><br>        		
+        <br><br>        	
+        
+        <script>
+        	$(function(){
+        		
+        		selectAdminBookList();
+        		setInterval(selectAdminBookList, 1200);
+})
+        	
+        	function selectAdminBookList(){
+        		
+        		$.ajax({        			
+        			url: "<%= contextPath %>/aBookList.bo",
+        			data:{
+    				    searchType:$("#searchType").val(),
+    				    searchText:$("#searchText").val()
+        				booktype: $("#booktype").val(),
+    				    bookOrderBy: $("#bookOrderBy").val(),
+        			},
+        			type:"post",
+        			success:function(list){
+        				let contextPath = "<%= contextPath %>"
+        				let value = "";
+        				
+        				if(list.length == 0){
+        					value += "<tr>"
+        					       + "<td colspan='11'> 예약내역이 없습니다. </td>"
+                                   + "</tr>";
+        				}else{
+        					
+        					for(let i=0; i<list.length(); i++){
+        						
+	        					value += "<tr>"
+		                               +    "<td>" +  list[i].bookNo + "</td>"
+		                               +    "<td>" +  list[i].spaceNo + "</td>"
+		                               +    "<td>" +  list[i].bookDate + "</td>"
+		                               +    "<td>" +  list[i].bookInTime + "</td>"
+		                               +    "<td>" +  list[i].bookOutTime + "</td>"
+		                               +    "<td>" +  list[i].bookCount + "</td>"
+		                               +    "<td>" +  list[i].bookPrice + "</td>"
+		                               +    "<td>" +  list[i].memberNo + "</td>"
+		                               +    "<td>" +  list[i].bookName + "</td>"
+		                               +    "<td>" +  list[i].bookEmail + "</td>"
+		                               +    "<td>" +  list[i].bookPhone + "</td>"
+		                               +    "<td>" +  list[i].bookCar + "</td>"
+		                               +    "<td>" +  list[i].bookAnimal + "</td>"
+		                               +    "<td>" +  list[i].bookChair + "</td>"
+		                               +    "<td>" +  list[i].bookStand + "</td>"
+		                               + "</tr>";
+        					}
+        				}
+        				
+
+        				$("tbody").html(value);
+        				
+        				
+        			},
+        			error:function(){
+        				console.log("관리자 예약내역리스트 조회용 ajax통신 실패");
+        			}
+        			
+        		});
+        		
+        	}
+        
+        </script>	
     
     <div style="height : 100px"></div>
 
