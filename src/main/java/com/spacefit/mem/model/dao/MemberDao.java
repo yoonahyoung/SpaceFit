@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -450,8 +451,33 @@ public class MemberDao {
 		
 	}
 	
-	public int adminInsertCoupon(Connection conn, String cpName, int cpDiscount) {
+	public int adminInsertGroupCoupon(Connection conn, int cpNo, int grNo, String mcpEndDate) {
 		
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("adminInsertGroupCoupon");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, cpNo);
+			pstmt.setString(2, mcpEndDate);
+			pstmt.setInt(3, grNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int adminInsertCoupon(Connection conn, String cpName, int cpDiscount) {
+	
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("adminInsertCoupon");

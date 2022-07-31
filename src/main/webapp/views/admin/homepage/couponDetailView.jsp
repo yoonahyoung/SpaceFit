@@ -38,35 +38,48 @@
         <h1 class="h3 mb-2 text-gray-800" style="color: rgb(20, 18, 18)">쿠폰 발급</h1>
         <br><br><br>
 
-        <form>
+        <form action="<%=contextPath %>/adMemCouponInsert.me" method="post">
 			<table class="table table-hover" id="dataTable">
 				<tr>
+					<th>발급할 쿠폰번호</th>
+					<td>
+						<input type="number" name="cpNo">
+					</td>
+				</tr>
+				<tr>
+					<th>쿠폰 만료일</th>
+					<td>
+						<input type="date" name="mcpEndDate">
+					</td>
+				</tr>
+				<tr>
 					<th>전체회원쿠폰 발급</th>
-					<td><input type="radio" value=""></td>
+					<td><input type="radio" name="cpGroup" value="전체회원"></td>
 				</tr>
 				<tr>
 					<th>그룹회원쿠폰 발급</th>
 					<td>
-						<input type="radio" value="">&nbsp;&nbsp;&nbsp;
-						<select>
-						  <option>Basic</option>
-						  <option>Silver</option>
-						  <option>Gold</option>
+						<input type="radio" name="cpGroup" value="그룹회원">&nbsp;&nbsp;&nbsp;
+						<select name="cpGroup_2">
+						  <option value="1">Basic</option>
+						  <option value="2">Silver</option>
+						  <option value="3">Gold</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
 					<th>개별회원쿠폰 발급</th>
 					<td>
-						<input type="radio" value="">&nbsp;&nbsp;&nbsp;
-						<input type="text" value="">
+						<input type="radio" name="cpGroup" value="개별회원">&nbsp;&nbsp;&nbsp;
+						<input type="text" name="cpGroup_3">
 					</td>
 				</tr>
+				
 				
 			</table>
 			<br><br>
 			<button type="button" class="btn btn-secondary" onclick="location.href='<%=contextPath%>/adCouponList.me'">쿠폰목록</button>&nbsp;
-			<button type="button" class="btn btn-primary">발급하기</button>
+			<button type="submit" class="btn btn-primary">발급하기</button>
 	        
 		</form>
 		        

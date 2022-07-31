@@ -144,4 +144,18 @@ public class MemberService {
 		
 		return result;
 	}
+	
+	public int adminInsertGroupCoupon(int cpNo, int grNo, String mcpEndDate) {
+		Connection conn = getConnection();
+		int result = new MemberDao().adminInsertGroupCoupon(conn, cpNo, grNo, mcpEndDate);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+		
+	}
 }
