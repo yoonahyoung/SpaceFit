@@ -182,7 +182,7 @@
 	                                                            <span class="material-symbols-outlined forum">
 	                                                                forum 
 	                                                            </span>
-	                                                            <span id="showCom">후기댓글보기</span>
+	                                                            <a id="showCom">후기댓글보기</a>
 	                                                        </span>
 	                                                    <hr>
 	                                                    <div id ="showStars">
@@ -211,18 +211,48 @@
 	                                                            <span>회원등급 :</span><span><%=r.getGradeName() %></span>
 	                                                        </span>
 	                                                    </div>
+	                                                    <br>
 	                                                    <div class="rvLikeAndReport">
-	                                                        <button type="button" class="btn btn-primary btn-sm">후기추천</button>
+	                                                        <button type="button" class="btn btn-primary btn-sm" onclick="likeUpdate();">후기추천</button>
 	                                                        <button type="button" class="btn btn-danger btn-sm">후기신고</button>
+	                                                        <input type="hidden" value="<%= loginUser.getMemNo() %>" name="memNo" id="memNo">
+	                                        				<input type="hidden" value="<%= r.getReviewNo() %>" name="rvNo" id="rvNo">
+	                                        				<span><%= r.getReviewNo() %></span>
 	                                                    </div>
 	                                                </div>
 	                                            </div>
 	                                        </div>
+	                                        
                                         <% } %>
                                     <% } else { %>
                                     	 <h4>" 아직 작성된 후기가 없습니다 "</h4><br>
 									<% } %>
-
+									<script>
+				                       function likeUpdate(){
+				                    	   
+				                    		 
+				                    			  $.ajax({
+						                    			url:"<%=contextPath %>/likeUpdate.lk",
+						                    			data:{
+						                    				memNo:$("#memNo").val(),
+						                    				rvNo:$("#rvNo").val()
+						                    			},
+						                    			success:function(result){
+						                    				if(result == "likeOk"){
+						            							// 추천이 완료된 데이터가 넘어옴
+						            							alert("추천해주셔서 감사합니다!");
+						            						} else {
+						            							alert("이미 추천한 후기입니다!");
+						            							}
+						                    			},
+						                    			error:function(){
+						                    				console.log("추천 +1 AJAX 통신 실패");
+						                    			}
+						                    		})
+				                    		  }
+					                    		
+				                    	   
+									</script>
                                     
                                     
                                          <!--  ~review보이는 공간~ -->

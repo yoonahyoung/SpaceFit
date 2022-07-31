@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="checkLikeOnce">
+		SELECT COUNT(*) AS "ID_CHECK"
+		  FROM TB_LIKE
+		 WHERE MEM_NO=?
+		   AND RV_NO=?
+	</entry>
+	
+	<entry key="updateLike">
+		INSERT
+		  INTO TB_LIKE
+			  (
+			   LIKE_NO
+			 , MEM_NO
+			 , LIKE_DATE
+			 , RV_NO
+			  )
+		VALUES
+		    (
+		       SEQ_LIKENO.NEXTVAL
+		     , ?
+		     , SYSDATE
+		     , ?
+		     )
+	</entry>
+
+</properties>

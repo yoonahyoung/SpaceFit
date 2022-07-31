@@ -15,6 +15,10 @@ import com.spacefit.attachment.model.vo.Attachment;
 import com.spacefit.common.model.vo.PageInfo;
 import com.spacefit.review.model.vo.Review;
 
+/**
+ * @author USER
+ *
+ */
 public class ReviewDao {
 	
 	private Properties prop = new Properties();
@@ -487,6 +491,11 @@ public class ReviewDao {
 	}
 	
 	
+	/**
+	 * @param conn
+	 * @param 해당 공간에 대한 전체 별점 평균 (소수점 올림처리)
+	 * @return
+	 */
 	public int selectAvgStars(Connection conn, int spNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
