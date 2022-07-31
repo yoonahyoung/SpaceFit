@@ -32,6 +32,8 @@ public class ReviewDeleteController extends HttpServlet {
 		
 		int reviewNo = Integer.parseInt(request.getParameter("no"));
 		
+		//System.out.println(reviewNo);
+		
 		int result = new ReviewService().deleteReview(reviewNo);
 		
 		

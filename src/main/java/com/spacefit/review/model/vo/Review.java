@@ -26,8 +26,8 @@ public class Review {
 		this.spaceNo = spaceNo;
 		this.memNo = memNo;
 		this.reviewContent = reviewContent;
-		ReviewEnrollDdate = reviewEnrollDdate;
-		ReviewModifyDate = reviewModifyDate;
+		this.ReviewEnrollDdate = reviewEnrollDdate;
+		this.ReviewModifyDate = reviewModifyDate;
 		this.reviewStar = reviewStar;
 		this.reviewStatus = reviewStatus;
 		this.bookDate = bookDate;

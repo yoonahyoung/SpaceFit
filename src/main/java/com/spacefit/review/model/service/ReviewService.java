@@ -1,12 +1,15 @@
 package com.spacefit.review.model.service;
 
-import static com.spacefit.common.JDBCTemplate.*;
+import static com.spacefit.common.JDBCTemplate.close;
+import static com.spacefit.common.JDBCTemplate.commit;
+import static com.spacefit.common.JDBCTemplate.getConnection;
+import static com.spacefit.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.spacefit.attachment.model.vo.Attachment;
-import com.spacefit.product.model.dao.SpaceDao;
+import com.spacefit.common.model.vo.PageInfo;
 import com.spacefit.review.model.dao.ReviewDao;
 import com.spacefit.review.model.vo.Review;
 
@@ -52,10 +55,10 @@ public class ReviewService {
 	}
 	
 	// 후기내역리스트조회
-	public ArrayList<Review> selectReviewList(int memNo){
+	public ArrayList<Review> selectReviewList(int memNo, PageInfo pi){
 		
 		Connection conn = getConnection();
-		ArrayList<Review> list = new ReviewDao().selectReviewList(conn, memNo);
+		ArrayList<Review> list = new ReviewDao().selectReviewList(conn, memNo, pi);
 		close(conn);
 		return list;
 		
@@ -121,6 +124,14 @@ public class ReviewService {
 		
 		return result1 * result2;
 		
+	}
+	
+	// 후기조회 페이징처리1. listCount용
+	public int selectListCount() {
+		Connection conn = getConnection();
+		int listCount = new ReviewDao().selectListCount(conn);
+		close(conn);
+		return listCount;
 	}
 	
 	

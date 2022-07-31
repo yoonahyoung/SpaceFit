@@ -1,6 +1,6 @@
 package com.spacefit.review.model.dao;
 
-import static com.spacefit.common.JDBCTemplate.*;
+import static com.spacefit.common.JDBCTemplate.close;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.spacefit.attachment.model.vo.Attachment;
+import com.spacefit.common.model.vo.PageInfo;
 import com.spacefit.review.model.vo.Review;
 
 public class ReviewDao {
@@ -152,7 +153,7 @@ public class ReviewDao {
 	 * @param memNo 회원번호
 	 * @return 회원의 후기들
 	 */
-	public ArrayList<Review> selectReviewList(Connection conn, int memNo){
+	public ArrayList<Review> selectReviewList(Connection conn, int memNo, PageInfo pi){
 		// select => ResultSet => ArrayList<Review>
 		ArrayList<Review> list = new ArrayList<>();
 		ResultSet rset = null;
@@ -161,7 +162,14 @@ public class ReviewDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() -1 ) * pi.getBoardLimit() +1;
+			int endRow = startRow + pi.getBoardLimit() -1;			
+			
 			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
 			rset= pstmt.executeQuery();
 			
 			while(rset.next()) {
@@ -370,6 +378,34 @@ public class ReviewDao {
 			close(pstmt);
 		}
 		return result;
+		
+		
+	}
+	
+	public int selectListCount(Connection conn) {
+		// select문 => ResultSet => int
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
 		
 		
 	}
