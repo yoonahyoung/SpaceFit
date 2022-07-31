@@ -63,11 +63,19 @@
 		<!-- 현재 로그인이 되어있고 로그인한 회원의 아이디가 해당 공지사항 작성자 아이디 일치할경우 -->
         <% if(loginUser != null && n.getNoticeWriter().equals(loginUser.getMemId()) ) { %>
 	        <a href="<%=contextPath%>/updateForm.no?no=<%=n.getNoticeNo() %>" class="btn btn-sm btn-primary">수정</a> 
-	        <a href="" class="btn btn-sm btn-danger">삭제</a>
+	        <a href="<%=contextPath %>/delete.no?no=<%=n.getNoticeNo() %>" class="btn btn-sm btn-danger" onclick="return deleteConfirm();">삭제</a>
     	<% } %>
 	        <a href="<%= contextPath %>/adminList.no" class="btn btn-sm btn-secondary">목록</a>
     </div>
     <div style="height : 60px"></div>
  </div>
+ <script>
+    function deleteConfirm(){
+        
+        let result = confirm('정말 삭제하시겠습니까?');
+
+        return result;
+    }
+ </script>
 </body>
 </html>

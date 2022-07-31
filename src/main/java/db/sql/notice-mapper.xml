@@ -63,4 +63,10 @@
 		     , NT_CATEGORY = ?
 		 WHERE NT_NO = ?
 	</entry>
+	
+	<entry key="deleteNotice">
+		UPDATE TB_NOTICE
+		   SET NT_STATUS = 'N'
+		 WHERE NT_NO = ?
+	</entry>
 </properties>
