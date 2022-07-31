@@ -21,13 +21,22 @@
             <div class="card-header py-3">
                 <div class="row">
                   <div class="col-lg" align="left">
-                      
+                    <form method="post" name="search" action="">
+                        <table class="pull-right">
+                            <tr>
+                                <td><select class="form-control mr-sm-0" name="searchType" style="height: 35px;">
+                                        <option value="spaceNo">공간명</option>
+                                        <option value="userID">회원아이디</option>
+                                        <option value="userName">예약자명</option>
+                                </select></td>
+                                <td><input type="text" class="form-control" placeholder="검색어 입력" name="searchText" maxlength="100" style="height: 35px;"></td>
+                                <td><button type="submit" class="btn btn-sm btn-primary">검색</button></td>
+                            </tr>        
+                        </table>                        
+                        
+                    </form>          
                   </div>
-                  <div class="col-lg" align="right">
-                        <select name="" id="">
-                            <option value="">대여날짜</option>
-                            <option value="">예약번호</option>                       
-                        </select>
+                  <div class="col-lg" align="right">                        
                   </div>
                 </div>
                 <div class="card-body">
@@ -54,12 +63,12 @@
                             </thead>
                             
                            <tbody>
-                                 <!-- 취소예약내역이 없을때 -->
+                                 <!--예약내역이 없을때 -->
                                 <!-- <tr>
-                                    <td colspan="11"> 이용예약내역이 없습니다. </td>
+                                    <td colspan="11"> 예약내역이 없습니다. </td>
                                 </tr> -->
                 
-                                <!-- 이용예약내역이 있을경우 -->
+                                <!-- 예약내역이 있을경우 -->
                                 <tr>
                                     <td>01</td>
                                     <td>파티룸A</td>

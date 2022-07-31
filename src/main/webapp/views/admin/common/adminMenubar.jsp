@@ -98,10 +98,10 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">                       
-                        <a class="collapse-item" href="<%=contextPath%>/views/admin/book/bookManageChart.jsp">예약통계</a>
-                        <a class="collapse-item" href="">진행중인 예약리스트</a>
-                        <a class="collapse-item" href="">이용완료예약리스트</a>  
-                        <a class="collapse-item" href="">취소예약리스트</a>                      
+                        <a class="collapse-item" href="<%=contextPath%>/aBookChart.bo">예약통계</a>
+                        <a class="collapse-item" href="<%= contextPath %>/aBookOn.bo">진행중인 예약리스트</a>
+                        <a class="collapse-item" href="<%= contextPath %>/aBookOff.bo">이용완료예약리스트</a>  
+                        <a class="collapse-item" href="<%= contextPath %>/aBookCancel.bo">취소예약리스트</a>                      
                     </div>
                 </div>
             </li>

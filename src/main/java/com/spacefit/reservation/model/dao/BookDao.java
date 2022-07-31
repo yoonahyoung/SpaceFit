@@ -186,8 +186,14 @@ public class BookDao {
 			close(pstmt);
 		}
 		
-		return result;
-		
+		return result;		
 	}
 	
+	/*
+	 * 관리자용
+	 */
+	public ArrayList<Book> adminSelectBookList(Connection conn){
+		// select문 => ResultSet => ArrayList<Book>
+		ArrayList<Book>
+	}
 }

@@ -56,4 +56,17 @@ public class BookService {
 		return result;
 	}
 	
+	/*
+	 * 관리자용
+	 */
+	
+	// 진행중인예약내역 리스트
+	public ArrayList<Book> adminSelectBookList(){
+		Connection conn = getConnection();
+		ArrayList<Book> list = new BookDao().adminSelectBookList(conn);
+		close(conn);
+		return list;
+	}
+	
+	
 }
