@@ -424,14 +424,7 @@
 		  </div>
 
 	    </div>
-	  	   <script>
-		       function noticeList(){
-	       		// url로 직접 jsp요청시 디렉토리 구조가 url에 노출될 수 있음 => 보안에 취약
-	       		// 단순한 페이지 요청도 servlet 거쳐서 포워딩 시켜서 보여지게 할것임
-	       		// 즉 이 때 url에는 서블릿 매핑값만 노출
-	       		location.href="<%=contextPath%>/list.no";
-				}
-	       </script>
+
 	  <% } else { %>
 
 		<div class="box-collapse">
@@ -466,7 +459,7 @@
 	      <div class="accordion accordion-flush" id="accordionFlushExample">
 	        <div class="accordion-item">
 	          <h2 class="accordion-header" id="flush-headingOne">
-	            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+	            <button onclick="noticeList();" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
 	              공지사항
 	            </button>
 	          </h2>
@@ -499,7 +492,7 @@
 	            <div class="accordion-body container">
 	              <div class="row myPageRow">
 	                <button class="col myPageCol"> 1:1 문의답변 </button>
-	                <button class="col myPageCol" onclick="location.href='<%=contextPath%>/rlist.rv'"> 내 후기 </button>
+	                <button class="col myPageCol" onclick="location.href='<%=contextPath%>/rlist.rv?cpage=1'"> 내 후기 </button>
 	              </div>
 	            </div>
 	          </div>
@@ -608,7 +601,14 @@
 		
 		<!-- content내용 기입 -->
 		
-
+  	   <script>
+	       function noticeList(){
+       		// url로 직접 jsp요청시 디렉토리 구조가 url에 노출될 수 있음 => 보안에 취약
+       		// 단순한 페이지 요청도 servlet 거쳐서 포워딩 시켜서 보여지게 할것임
+       		// 즉 이 때 url에는 서블릿 매핑값만 노출
+       		location.href="<%=contextPath%>/list.no?cpage=1";
+			}
+       </script>
 
 
 <div id="preloader"></div>

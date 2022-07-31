@@ -17,7 +17,7 @@
 		  
 	</entry>
 	
-	<!-- 사용자페이지 예약상세내역 조회용 | 관리자용으로 사용예정-->
+	<!-- 사용자페이지 예약상세내역 조회용 -->
 	<entry key="selectBook">
 		 SELECT BOOK_NO
 		      , SPACE_NAME      
@@ -75,5 +75,25 @@
 		  WHERE BOOK_NO = ?
 	</entry>
 	
+	<entry key="adminSelectBookList">
+		SELECT  BOOK_NO
+		      , SPACE_NAME		      
+              , MEM_ID
+              , BOOK_COUNT
+		      , BOOK_DATE
+		      , BOOK_IN
+		      , BOOK_OUT
+		      , BOOK_PRICE  
+              , BOOK_NAME
+		      , BOOK_PHONE
+		      , BOOK_EMAIL
+              , BOOK_CAR
+		      , BOOK_ANIMAL
+		      , BOOK_CHAIR
+		      , BOOK_STAND  
+		   FROM VW_BOOK
+		  		  
+  
+	</entry>
 	
 </properties>

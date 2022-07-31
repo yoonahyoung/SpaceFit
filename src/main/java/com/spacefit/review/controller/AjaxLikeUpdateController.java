@@ -2,57 +2,54 @@ package com.spacefit.review.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.spacefit.review.model.service.ReviewService;
+import com.spacefit.review.model.service.LikeService;
 
 /**
- * Servlet implementation class ReviewDeleteController
+ * Servlet implementation class LikeUpdateController
  */
-@WebServlet("/rdelete.vo")
-public class ReviewDeleteController extends HttpServlet {
+@WebServlet("/likeUpdate.lk")
+public class AjaxLikeUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewDeleteController() {
+    public AjaxLikeUpdateController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		int rvNo = Integer.parseInt(request.getParameter("rvNo"));
 		
-		int reviewNo = Integer.parseInt(request.getParameter("no"));
-		
-		//System.out.println(reviewNo);
-		
-		int result = new ReviewService().deleteReview(reviewNo);
-		
-		
-		if(result > 0 ) { // 성공							
-			request.getSession().setAttribute("alertMsg", "후기삭제되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/rlist.rv");	
-						
-		}else { // 실패
-			request.setAttribute("errorMsg", "후기삭제에 실패했습니다.");
-			request.getRequestDispatcher("views/user/common/backAlertErrorPage.jsp").forward(request, response);
+		// 추천은 1번만 할 수 있음
+		int idCheckCount = new LikeService().checkLikeOnce(memNo, rvNo);
+		if(idCheckCount > 0) {
+			System.out.println("이미 추천한 후기입니다.");
+		} else {
+			int updateLike = new LikeService().updateLike(memNo, rvNo);
+			if(updateLike == 1) {
+				response.getWriter().print("likeOk");
+			} else {
+				response.getWriter().print("likeNo");
+			}
 		}
-		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

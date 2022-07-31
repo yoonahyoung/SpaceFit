@@ -1,26 +1,23 @@
-package com.spacefit.review.controller;
+package com.spacefit.reservation.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.spacefit.review.model.service.ReviewService;
-
 /**
- * Servlet implementation class ReviewDeleteController
+ * Servlet implementation class AdminBookChartController
  */
-@WebServlet("/rdelete.vo")
-public class ReviewDeleteController extends HttpServlet {
+@WebServlet("/aBookChart.bo")
+public class AdminBookChartController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewDeleteController() {
+    public AdminBookChartController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,23 +26,7 @@ public class ReviewDeleteController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int reviewNo = Integer.parseInt(request.getParameter("no"));
-		
-		//System.out.println(reviewNo);
-		
-		int result = new ReviewService().deleteReview(reviewNo);
-		
-		
-		if(result > 0 ) { // 성공							
-			request.getSession().setAttribute("alertMsg", "후기삭제되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/rlist.rv");	
-						
-		}else { // 실패
-			request.setAttribute("errorMsg", "후기삭제에 실패했습니다.");
-			request.getRequestDispatcher("views/user/common/backAlertErrorPage.jsp").forward(request, response);
-		}
-		
+		request.getRequestDispatcher("views/admin/book/bookManageChart.jsp").forward(request, response);
 	}
 
 	/**

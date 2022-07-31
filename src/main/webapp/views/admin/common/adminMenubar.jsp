@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%
 	String contextPath = request.getContextPath();
-	String msg = (String)session.getAttribute("alertMsg");
+	String alertMsg = (String)session.getAttribute("alertMsg");
 // 서비스 요청 전 menubar.jsp 로딩시 : null
 // 서비스 성공 후 menubar.jsp 로딩시 : alert로 띄워줄 메세지 문구
 %>    
@@ -49,9 +49,9 @@
 <body id="page-top">
 
 	<!-- alert 메세지 출력 -->
-	<% if(msg != null) { %>
+	<% if(alertMsg != null) { %>
 			<script>
-				alert("<%= msg %>");
+				alert("<%= alertMsg %>");
 			</script>
 			<% session.removeAttribute("alertMsg"); %>
 		<% } %>
@@ -98,10 +98,12 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">                       
-                        <a class="collapse-item" href="<%=contextPath%>/views/admin/book/bookManageChart.jsp">예약통계</a>
-                        <a class="collapse-item" href="">진행중인 예약리스트</a>
-                        <a class="collapse-item" href="">이용완료예약리스트</a>  
-                        <a class="collapse-item" href="">취소예약리스트</a>                      
+                        <a class="collapse-item" href="<%=contextPath%>/aBookChart.bo">예약통계</a>
+                        <a class="collapse-item" href="<%= contextPath %>/aBookList.bo">예약리스트</a>
+                       <!--  
+                        <a class="collapse-item" href="/aBookOff.bo">이용완료예약리스트</a>  
+                        <a class="collapse-item" href="/aBookCancel.bo">취소예약리스트</a>
+                        -->                      
                     </div>
                 </div>
             </li>
@@ -136,7 +138,7 @@
                 </span>
                 <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">                        
-                        <a class="collapse-item" href="<%=contextPath%>/adminList.no">공지사항</a>
+                        <a class="collapse-item" href="<%=contextPath%>/adminList.no?cpage=1">공지사항</a>
                         <a class="collapse-item" href="">1:1 문의</a>                        
                     </div>
                 </div>

@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.notice.model.vo.Notice"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.notice.model.vo.Notice, com.spacefit.common.model.vo.PageInfo"%>
 <%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
-	String alertMsg = (String)request.getAttribute("alertMsg");
+	
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
 %>
 <!DOCTYPE html>
 <html>
@@ -75,17 +80,38 @@
 
     <br>
     <div class="paging-area" align="center">    
-		        
-        <button class="btn btn-sm btn-outline-primary">&lt;</button>        
-        <button class="btn btn-sm btn-outline-primary" disabled>1</button>        
-        <button class="btn btn-sm btn-outline-primary">2</button> 
-        <button class="btn btn-sm btn-outline-primary">3</button>    
-        <button class="btn btn-sm btn-outline-primary">4</button> 
-        <button class="btn btn-sm btn-outline-primary">5</button>       
-        <button class="btn btn-sm btn-outline-primary">&gt;</button>
+		
+		<% if(currentPage != 1) { %>
+           <button class="btn btn-sm btn-outline-primary" onclick="location.href='<%=contextPath%>/adminList.no?cpage=<%=currentPage-1%>';">&lt;</button>
+           <% } %>
+		<% for(int p = startPage ; p <= endPage; p++) { %>
+			
+			<% if(p == currentPage) { %>
+				<button class="btn btn-sm btn-outline-primary" disabled><%=p %></button>
+			<% } else { %>
+          			<button class="btn btn-sm btn-outline-primary" onclick="location.href='<%=contextPath%>/adminList.no?cpage=<%=p%>';"><%= p %></button>
+			<% } %>        
+			 
+		<% } %>
+		<% if(currentPage != maxPage){ %>
+           <button class="btn btn-sm btn-outline-primary" onclick="location.href='<%=contextPath%>/adminList.no?cpage=<%=currentPage+1%>';">&gt;</button>
+           <% } %>
         
     </div>
     <div style="height : 60px"></div>
  </div>
+     <script>
+    	$(function(){
+    		$(".table>tbody>tr").click(function(){
+    			const num = $(this).children().eq(0).text(); // 클릭했을때의 글번호
+    			
+    			// 요청할url?키=밸류&키=밸류...
+    			// 요청시전달값(키=밸류) => 쿼리스트링
+				
+    			// /web/detail.no?no=xx
+    			location.href = '<%= contextPath%>/adminDetail.no?no=' + num;
+    		})
+    	})
+    </script>
 </body>
 </html>

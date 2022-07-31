@@ -1,4 +1,4 @@
-package com.spacefit.review.controller;
+package com.spacefit.notice.controller;
 
 import java.io.IOException;
 
@@ -7,20 +7,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.spacefit.review.model.service.ReviewService;
+import com.spacefit.notice.model.service.NoticeService;
 
 /**
- * Servlet implementation class ReviewDeleteController
+ * Servlet implementation class NoticeDeleteController
  */
-@WebServlet("/rdelete.vo")
-public class ReviewDeleteController extends HttpServlet {
+@WebServlet("/delete.no")
+public class NoticeDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewDeleteController() {
+    public NoticeDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,20 +31,18 @@ public class ReviewDeleteController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int reviewNo = Integer.parseInt(request.getParameter("no"));
+		int noticeNo = Integer.parseInt(request.getParameter("no"));
 		
-		//System.out.println(reviewNo);
+		int result = new NoticeService().deleteNotice(noticeNo);
 		
-		int result = new ReviewService().deleteReview(reviewNo);
-		
-		
-		if(result > 0 ) { // 성공							
-			request.getSession().setAttribute("alertMsg", "후기삭제되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/rlist.rv");	
-						
-		}else { // 실패
-			request.setAttribute("errorMsg", "후기삭제에 실패했습니다.");
-			request.getRequestDispatcher("views/user/common/backAlertErrorPage.jsp").forward(request, response);
+		if(result > 0) { // 성공시 => 상세조회페이지 응답
+			HttpSession session = request.getSession();
+			session.setAttribute("alertMsg", "성공적으로 공지사항 삭제했습니다!");
+			response.sendRedirect(request.getContextPath()+"/adminList.no?cpage=1");
+		}else { // 실패시 => 에러문구담아서 errorPage
+			request.setAttribute("errorMsg", "공지사항 삭제에 실패했습니다.");
+			request.getRequestDispatcher("views/admin/common/errorPage.jsp").forward(request, response);
+
 		}
 		
 	}

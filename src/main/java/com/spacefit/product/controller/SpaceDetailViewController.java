@@ -1,6 +1,7 @@
 package com.spacefit.product.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.spacefit.product.model.service.SpaceService;
 import com.spacefit.product.model.vo.Space;
+import com.spacefit.review.model.service.ReviewService;
+import com.spacefit.review.model.vo.Like;
+import com.spacefit.review.model.vo.Review;
 
 /**
  * Servlet implementation class SpaceDetailViewController
@@ -34,6 +38,17 @@ public class SpaceDetailViewController extends HttpServlet {
 		int spNo = Integer.parseInt(request.getParameter("no"));
 		
 		Space s = new SpaceService().spaceDetailView(spNo);
+		
+		
+		// 이 부분부터 후기쪽 부분입니다. 소희작성
+		
+		// 해당 공간넘버에 해당하는 후기리스트 불러오기
+		ArrayList<Review> rvList = new ReviewService().selectRvListForSpace(spNo);
+		request.setAttribute("rvList", rvList);
+		
+		int avgStars = new ReviewService().selectAvgStars(spNo);
+		request.setAttribute("avgStars", avgStars);
+		// 후기 부분 끝!
 		
 		
 		request.getRequestDispatcher("views/user/space/spaceDetailView.jsp").forward(request, response);

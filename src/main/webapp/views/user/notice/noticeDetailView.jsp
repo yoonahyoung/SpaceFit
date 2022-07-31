@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.notice.model.vo.Notice"%>
 <%
-	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
-    System.out.println(list);
+	Notice n = (Notice)request.getAttribute("notice");
 %>
 <!DOCTYPE html>
 <html>
@@ -36,29 +35,31 @@
 
     <table class="table" id="detail-area">
         <tr>
-            <th width="70">제목</th>
-            <td colspan="5" width="430"></td>
+            <th width="80">제목</th>
+            <td colspan="7" width="430" align="left"><%=n.getNoticeTitle() %></td>
 
         </tr>
         <tr>
             <th>유형</th>
-            <td></td>
-            <th width="70">작성자</th>
-            <td></td>
-            <th width="70">작성일</th>
-            <td></td>
+            <td><%=n.getNoticeCategory() %></td>
+            <th width="80">작성자</th>
+            <td><%=n.getNoticeWriter() %></td>
+            <th width="80">작성일</th>
+            <td><%=n.getCreateDate() %></td>
+            <th width="80">조회수</th>
+            <td><%=n.getCount() %></td>
         </tr>
         <tr>
             <th>내용</th>
-            <td colspan="5">
-                <p style="height: 400px;"></p>
+            <td colspan="7" align="left">
+                <p style="height: 400px;"><%=n.getNoticeContent() %></p>
             </td>
         </tr>
     </table>
 
     <br>
 	<div align="right">
-        <a href="<%= contextPath %>/list.no" class="btn btn-sm btn-secondary">목록가기</a>
+        <a href="<%= contextPath %>/list.no?cpage=1" class="btn btn-sm btn-secondary">목록가기</a>
     </div>
     <div style="height : 60px"></div>
  </div>

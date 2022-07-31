@@ -15,6 +15,18 @@ public class Notice {
 	public Notice() {}
 
 	
+
+
+	
+	public Notice(int noticeNo, String noticeCategory, String noticeTitle, String noticeContent) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeCategory = noticeCategory;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+	}
+	
+	
 	public Notice(String noticeCategory, String noticeTitle, String noticeContent, String noticeWriter) {
 		super();
 		this.noticeCategory = noticeCategory;
@@ -22,6 +34,24 @@ public class Notice {
 		this.noticeContent = noticeContent;
 		this.noticeWriter = noticeWriter;
 	}
+
+
+
+
+	public Notice(int noticeNo, String noticeCategory, String noticeTitle, String noticeContent, String noticeWriter,
+			int count, Date createDate) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeCategory = noticeCategory;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+		this.noticeWriter = noticeWriter;
+		this.count = count;
+		this.createDate = createDate;
+	}
+
+
+
 
 
 	public Notice(int noticeNo, String noticeCategory, String noticeTitle, String noticeWriter, int count,

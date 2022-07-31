@@ -1,4 +1,4 @@
-package com.spacefit.review.controller;
+package com.spacefit.notice.controller;
 
 import java.io.IOException;
 
@@ -8,19 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.spacefit.review.model.service.ReviewService;
+import com.spacefit.notice.model.service.NoticeService;
+import com.spacefit.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class ReviewDeleteController
+ * Servlet implementation class NoticeUpdateFormController
  */
-@WebServlet("/rdelete.vo")
-public class ReviewDeleteController extends HttpServlet {
+@WebServlet("/updateForm.no")
+public class NoticeUpdateFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewDeleteController() {
+    public NoticeUpdateFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,23 +30,13 @@ public class ReviewDeleteController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 공지사항 수정페이지 요청
+		int noticeNo = Integer.parseInt(request.getParameter("no"));
 		
-		int reviewNo = Integer.parseInt(request.getParameter("no"));
+		Notice n = new NoticeService().selectNotice(noticeNo);
 		
-		//System.out.println(reviewNo);
-		
-		int result = new ReviewService().deleteReview(reviewNo);
-		
-		
-		if(result > 0 ) { // 성공							
-			request.getSession().setAttribute("alertMsg", "후기삭제되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/rlist.rv");	
-						
-		}else { // 실패
-			request.setAttribute("errorMsg", "후기삭제에 실패했습니다.");
-			request.getRequestDispatcher("views/user/common/backAlertErrorPage.jsp").forward(request, response);
-		}
-		
+		request.setAttribute("notice", n);
+		request.getRequestDispatcher("views/admin/notice/noticeUpdateForm.jsp").forward(request, response);
 	}
 
 	/**

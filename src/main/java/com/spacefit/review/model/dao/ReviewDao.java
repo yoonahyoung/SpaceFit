@@ -12,8 +12,13 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.spacefit.attachment.model.vo.Attachment;
+import com.spacefit.common.model.vo.PageInfo;
 import com.spacefit.review.model.vo.Review;
 
+/**
+ * @author USER
+ *
+ */
 public class ReviewDao {
 	
 	private Properties prop = new Properties();
@@ -152,7 +157,7 @@ public class ReviewDao {
 	 * @param memNo 회원번호
 	 * @return 회원의 후기들
 	 */
-	public ArrayList<Review> selectReviewList(Connection conn, int memNo){
+	public ArrayList<Review> selectReviewList(Connection conn, int memNo, PageInfo pi){
 		// select => ResultSet => ArrayList<Review>
 		ArrayList<Review> list = new ArrayList<>();
 		ResultSet rset = null;
@@ -161,7 +166,14 @@ public class ReviewDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() -1 ) * pi.getBoardLimit() +1;
+			int endRow = startRow + pi.getBoardLimit() -1;			
+			
 			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
 			rset= pstmt.executeQuery();
 			
 			while(rset.next()) {
@@ -338,6 +350,11 @@ public class ReviewDao {
 		
 	}
 	
+	/** 후기삭제시 해당 첨부파일 삭제
+	 * @param conn
+	 * @param reviewNo 삭제할 후기번호 => ref_board
+	 * @return 처리결과
+	 */
 	public int deleteAttachment(Connection conn, int reviewNo) {
 		// update => int
 		int result = 0;
@@ -356,6 +373,11 @@ public class ReviewDao {
 		return result;				
 	}
 	
+	/** 후시삭제
+	 * @param conn
+	 * @param reviewNo 삭제할 후기번호
+	 * @return
+	 */
 	public int deleteReivewReal(Connection conn, int reviewNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -373,6 +395,129 @@ public class ReviewDao {
 		
 		
 	}
+	
+	/** 페이징처리 => listCount
+	 * @param conn
+	 * @return
+	 */
+	public int selectListCount(Connection conn) {
+		// select문 => ResultSet => int
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// 이 부분부터 공간별 후기리스트 관련 메소드 소희작성
+	
+	/**
+	 * @param conn
+	 * @param 공간조회 디테일 페이지에서 후기리스트 전체조회용 메소드 1
+	 * @return
+	 */
+	public ArrayList<Review> selectRvListForSpace(Connection conn, int spNo){
+		
+		ArrayList<Review> rvList = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectRvListForSpace");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, spNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				rvList.add(new Review(
+							rset.getInt("rv_no"),
+							rset.getInt("book_no"),
+							rset.getString("space_name"), // == SPACE NAME 으로 하기!
+							rset.getString("mem_id"),
+							rset.getString("rv_content"),
+							rset.getDate("rv_enroll_date"),
+							rset.getDate("rv_modify_date"),
+							rset.getInt("rv_star"),
+							rset.getString("rv_status"),
+							rset.getString("gr_name"),
+							rset.getInt("all_like_count")
+						));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return rvList;
+		
+	}
+	
+	
+	/**
+	 * @param conn
+	 * @param 해당 공간에 대한 전체 별점 평균 (소수점 올림처리)
+	 * @return
+	 */
+	public int selectAvgStars(Connection conn, int spNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("avgStars");
+		int avgStars = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, spNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				avgStars = rset.getInt("avg_star");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		} return avgStars;
+		
+	}
+	
 	
 	
 }

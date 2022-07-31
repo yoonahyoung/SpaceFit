@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.review.model.vo.Review"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.review.model.vo.Review, com.spacefit.common.model.vo.PageInfo"%>
 <%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<Review> list = (ArrayList<Review>)request.getAttribute("list");
+
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
 %>    
 <!DOCTYPE html>
 <html>
@@ -75,15 +81,28 @@
                 
                
         <div class="rvlv2-footer" align="center">  
-                        
+            
+            <!-- 페이징바 영역 -->         
             <div class="paging-area" align="center">    
-        
-                <button class="btn btn-sm btn-outline-primary">&lt;</button>        
-                <button disabled class="btn btn-sm btn-outline-primary">1</button>        
-                <button class="btn btn-sm btn-outline-primary">2</button> 
-                <button class="btn btn-sm btn-outline-primary">3</button>          
-                <button class="btn btn-sm btn-outline-primary">&gt;</button>
-                
+        		
+        		
+	        	<%if(currentPage != 1){ %>  <!--시용자가보게될페이지가 1이아니면 저 이전페이지로가는버튼이보이게 -->
+	           	 	<button class="btn btn-sm btn-outline-primary" onclick="location.href='<%=contextPath%>/rlist.rv?cpage=<%= currentPage -1 %>';">&lt;</button>
+				<% } %>
+        	
+                 <% for(int p=startPage; p<=endPage; p++) { %>
+				   
+				   		<% if(p == currentPage) { %> <%-- 사용자가 현재 보고있는 페이지의 버튼은 비활성화 --%>
+				   			<button class="btn btn-sm btn-outline-primary" disabled><%= p %></button>
+				   		<%} else {%>
+		           			<button class="btn btn-sm btn-outline-primary" onclick="location.href='<%=contextPath%>/rlist.rv?cpage=<%= p %>';"><%= p %></button>
+		           		<%} %>
+		         <% } %>    
+		         
+		         <% if(currentPage != maxPage) {%>
+	            	<button class="btn btn-sm btn-outline-primary" onclick="location.href='<%=contextPath%>/rlist.rv?cpage=<%= currentPage+1 %>'">&gt;</button>
+	            <% } %>
+                                
             </div>
         </div>
         

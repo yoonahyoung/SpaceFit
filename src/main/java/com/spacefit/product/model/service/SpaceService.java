@@ -1,6 +1,9 @@
 package com.spacefit.product.model.service;
 
-import static com.spacefit.common.JDBCTemplate.*;
+import static com.spacefit.common.JDBCTemplate.close;
+import static com.spacefit.common.JDBCTemplate.commit;
+import static com.spacefit.common.JDBCTemplate.getConnection;
+import static com.spacefit.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -8,6 +11,7 @@ import java.util.ArrayList;
 import com.spacefit.attachment.model.vo.Attachment;
 import com.spacefit.product.model.dao.SpaceDao;
 import com.spacefit.product.model.vo.Space;
+import com.spacefit.review.model.vo.Review;
 
 public class SpaceService {
 	

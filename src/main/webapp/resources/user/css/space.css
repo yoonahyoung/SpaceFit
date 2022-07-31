@@ -140,7 +140,9 @@ span.col-sm-4{
 }
 
 #showCom{
+  text-decoration : none;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 
@@ -157,8 +159,16 @@ span.col-sm-4{
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #EEEE;
+  width: 100%;
+  height: 80px;
+  border-radius: 10px;
 }
 
+#titleImgSpan{
+  font-size: 13px;
+  color: #aaa;
+}
 
 /* ------------ END spaceDetailView.jsp --------------- */
 

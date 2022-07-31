@@ -63,7 +63,7 @@ public class NoticeInsertController extends HttpServlet {
 		String content = request.getParameter("content");
 		
 		Notice n = new Notice(category, title, content, userNo);
-		System.out.println(n);
+		//System.out.println(n);
 		int result = new NoticeService().insertNotice(userNo, n);
 		
 		if(result > 0) { // 성공했을 경우 => 공지사항목록페이지
@@ -71,12 +71,11 @@ public class NoticeInsertController extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("alertMsg", "성공적으로 공지사항 등록되었습니다!");
 			
-			response.sendRedirect(request.getContextPath()+"/adminList.no");
+			response.sendRedirect(request.getContextPath()+"/adminList.no?cpage=1");
 			
 		}else { // 실패했을 경우 => 에러문구가 보여지는 에러페이지
 			
 			request.setAttribute("errorMsg", "공지사항 등록에 실패했습니다.");
-			//response.sendRedirect(request.getContextPath()+"/adminList.no");
 			request.getRequestDispatcher("views/admin/common/errorManager.jsp").forward(request, response);
 			
 			

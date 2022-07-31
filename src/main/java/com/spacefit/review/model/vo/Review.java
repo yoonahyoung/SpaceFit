@@ -26,8 +26,8 @@ public class Review {
 		this.spaceNo = spaceNo;
 		this.memNo = memNo;
 		this.reviewContent = reviewContent;
-		ReviewEnrollDdate = reviewEnrollDdate;
-		ReviewModifyDate = reviewModifyDate;
+		this.ReviewEnrollDdate = reviewEnrollDdate;
+		this.ReviewModifyDate = reviewModifyDate;
 		this.reviewStar = reviewStar;
 		this.reviewStatus = reviewStatus;
 		this.bookDate = bookDate;
@@ -168,6 +168,75 @@ public class Review {
 	}
 
 
+	
+	
+	// 이 부분부터 공간별 후기리스트 관련 vo
+	private String memId;
+	private String gradeName;
+	private String spaceName;
+	private int allLikeCount;
+
+	public Review(int reviewNo, int bookNo, String spaceName, String memId, String reviewContent, Date reviewEnrollDdate,
+			Date reviewModifyDate, int reviewStar, String reviewStatus, String gradeName, int allLikeCount) {
+		super();
+		this.reviewNo = reviewNo;
+		this.bookNo = bookNo;
+		this.spaceName = spaceName;
+		this.memId = memId;
+		this.reviewContent = reviewContent;
+		ReviewEnrollDdate = reviewEnrollDdate;
+		ReviewModifyDate = reviewModifyDate;
+		this.reviewStar = reviewStar;
+		this.reviewStatus = reviewStatus;
+		this.gradeName = gradeName;
+		this.allLikeCount = allLikeCount;
+	}
+
+
+	public String getMemId() {
+		return memId;
+	}
+
+
+	public void setMemId(String memId) {
+		this.memId = memId;
+	}
+
+
+	public String getGradeName() {
+		return gradeName;
+	}
+
+
+	public void setGradeName(String gradeName) {
+		this.gradeName = gradeName;
+	}
+
+
+	public String getSpaceName() {
+		return spaceName;
+	}
+
+
+	public void setSpaceName(String spaceName) {
+		this.spaceName = spaceName;
+	}
+
+
+	public int getAllLikeCount() {
+		return allLikeCount;
+	}
+
+
+	public void setAllLikeCount(int allLikeCount) {
+		this.allLikeCount = allLikeCount;
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	

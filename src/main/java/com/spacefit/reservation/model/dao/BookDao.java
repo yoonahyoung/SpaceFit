@@ -186,8 +186,96 @@ public class BookDao {
 			close(pstmt);
 		}
 		
-		return result;
-		
+		return result;		
 	}
 	
+	/*
+	 * 관리자용
+	 */
+	// 임시
+	public ArrayList<Book> adminSelectBookList(Connection conn, String category){
+		// select문 => ResultSet => ArrayList<Book>
+		ArrayList<Book> list = new ArrayList<>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("adminSelectBookList");
+		sql += "ORDER BY BOOK_NO DESC";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, category);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Book( rset.getInt("book_no"),
+								   rset.getString("space_name"),
+								   rset.getString("mem_id"),
+								   rset.getInt("book_count"),
+								   rset.getString("book_date"),
+								   rset.getString("book_in"),
+								   rset.getString("book_out"),
+								   rset.getInt("book_price"),
+								   rset.getString("book_name"),
+								   rset.getString("book_phone"),
+								   rset.getString("book_email"),
+								   rset.getString("book_car"),
+								   rset.getString("book_animal"),
+								   rset.getString("book_chair"),
+								   rset.getString("book_stand")							   
+								
+						));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<Book> searchSelectBook(Connection conn, String search, String booktype, String bookOrderBy){
+		// select문 => ResultSet => ArrayList<Book>
+		ArrayList<Book> list = new ArrayList<>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("adminSelectBookList");
+		sql += booktype; // 이용완료/예약취소/예약확정
+		sql += search;   // 검색
+		sql += bookOrderBy; // 정렬
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				 list.add(new Book(rset.getInt("book_no"),
+								   rset.getString("space_name"),
+								   rset.getString("mem_id"),
+								   rset.getInt("book_count"),
+								   rset.getString("book_date"),
+								   rset.getString("book_in"),
+								   rset.getString("book_out"),
+								   rset.getInt("book_price"),
+								   rset.getString("book_name"),
+								   rset.getString("book_phone"),
+								   rset.getString("book_email"),
+								   rset.getString("book_car"),
+								   rset.getString("book_animal"),
+								   rset.getString("book_chair"),
+								   rset.getString("book_stand")								
+						));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+		
+	}
 }
