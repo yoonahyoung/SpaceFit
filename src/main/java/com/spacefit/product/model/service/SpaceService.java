@@ -11,6 +11,7 @@ import com.spacefit.product.model.vo.Space;
 
 public class SpaceService {
 	
+	// 공간 리스트 불러오기
 	public ArrayList<Space> selectList() {
 		Connection conn = getConnection();
 		ArrayList<Space> list = new SpaceDao().selectList(conn);
@@ -18,6 +19,7 @@ public class SpaceService {
 		return list;
 	}
 	
+	// 사용자 인기공간 불러오기
 	public ArrayList<Space> selectTopList(){
 		Connection conn = getConnection();
 		ArrayList<Space> topList = new SpaceDao().selectTopList(conn);
@@ -25,13 +27,15 @@ public class SpaceService {
 		return topList;
 	}
 
+	// 사용자 공간 상세보기
 	public Space spaceDetailView(int spNo) {
 		Connection conn = getConnection();
 		Space s = new SpaceDao().spaceDetailView(conn, spNo);
 		close(conn);
 		return s;
 	}
-
+	
+	// 관리자 공간 추가
 	public int insertSpace(Space s, ArrayList<Attachment> list) {
 		Connection conn = getConnection();
 		
@@ -50,12 +54,25 @@ public class SpaceService {
 		return result1 * result2;
 	}
 
+	// 관리자 추가사진 불러오기
 	public ArrayList<Attachment> selectAttach(int spNo) {
 		Connection conn = getConnection();
 		ArrayList<Attachment> list = new SpaceDao().selectAttach(conn, spNo);
 		close(conn);
 		
 		return list;
+	}
+
+	// 관리자 공간 삭제
+	public int deleteSpace(int spNo) {
+		Connection conn = getConnection();
+		int result = new SpaceDao().deleteSpace(conn, spNo);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		return result;
 	}
 
 }

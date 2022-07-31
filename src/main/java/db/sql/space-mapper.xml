@@ -121,7 +121,9 @@
 		   AND FILE_STATUS = 'Y'
 	</entry>
 	
-	
+	<entry key="deleteSpace">
+		
+	</entry>
 	
 	
 	

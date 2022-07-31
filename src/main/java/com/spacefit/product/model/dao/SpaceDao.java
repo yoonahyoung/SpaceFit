@@ -194,6 +194,15 @@ public class SpaceDao {
 		return list;
 	}
 
+	public int deleteSpace(Connection conn, int spNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteSpace");
+		
+		
+		return 0;
+	}
+
 	
 	
 	
