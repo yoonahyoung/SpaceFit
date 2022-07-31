@@ -68,32 +68,25 @@
 	        AND MEM_NO = ? 
 	</entry>
 	
-	<!-- 나의 전체후기조회용 -->
+	<!-- 전체후기조회용 -->
 	<entry key="selectReviewList">
-		  SELECT *
-			  FROM (  
-			    SELECT ROWNUM RNUM, A.*
-			      FROM (
-			            SELECT RV_NO
-                             , SPACE_NAME
-                             , BOOK_DATE     
-                             , RV_CONTENT     
-                             , RV_STAR 
-                             , FILE_PATH || FILE_CHANGE_NAME AS "REVIEW_MAINIMG"
-                          FROM TB_REVIEW R
-                          JOIN TB_BOOK USING (BOOK_NO)
-                          JOIN TB_SPACE S ON (R.SPACE_NO = S.SPACE_NO)
-                          JOIN TB_FILE ON (REF_BNO = RV_NO)
-                         WHERE R.MEM_NO = ?
-                           AND RV_STATUS = 'Y'
-                           AND FILE_CATEGORY = 2
-                           AND FILE_LEVEL = 1
-                           AND FILE_STATUS = 'Y'
-                         ORDER 
-                            BY RV_NO ASC
-			            ) A
-			         )     
-   			WHERE RNUM BETWEEN ? AND ?
+		SELECT RV_NO
+		     , SPACE_NAME
+		     , BOOK_DATE     
+		     , RV_CONTENT     
+		     , RV_STAR 
+		     , FILE_PATH || FILE_CHANGE_NAME AS "REVIEW_MAINIMG"
+		  FROM TB_REVIEW R
+		  JOIN TB_BOOK USING (BOOK_NO)
+		  JOIN TB_SPACE S ON (R.SPACE_NO = S.SPACE_NO)
+		  JOIN TB_FILE ON (REF_BNO = RV_NO)
+		 WHERE R.MEM_NO = ?
+		   AND RV_STATUS = 'Y'
+		   AND FILE_CATEGORY = 2
+		   AND FILE_LEVEL = 1
+		   AND FILE_STATUS = 'Y'
+		 ORDER 
+		    BY RV_NO ASC
 	</entry>
 
 	<!-- detailReview - review -->
@@ -171,12 +164,6 @@
 		   SET RV_STATUS = 'N'
 		WHERE RV_NO = ? 
 	</entry>
-	
-	<entry key="selectListCount">
-		SELECT COUNT(*) AS "COUNT"
-		  FROM TB_REVIEW
-		  WHERE RV_STATUS = 'Y'
-	</entry>
 
 	
 
@@ -196,10 +183,24 @@
 		     , RV_STAR
 		     , RV_STATUS
 		     , GR_NAME
-		  FROM TB_REVIEW
+             , (
+             SELECT COUNT(*) AS "ALL_LIKE_COUNT"
+             FROM TB_LIKE L
+            WHERE L.RV_NO = R.RV_NO
+             )  AS "ALL_LIKE_COUNT"
+		  FROM TB_REVIEW R
 		  JOIN TB_MEMBER USING (MEM_NO)
 		  JOIN TB_GRADE USING (GR_NO)
 		  JOIN TB_SPACE USING (SPACE_NO)
+         WHERE RV_STATUS = 'Y'
+           AND SPACE_NO =?
+	</entry>
+	
+	
+	<!-- 공간별 평균 별점 올림으로 구하기ㅇ -->
+	<entry key="avgStars">
+		SELECT CEIL(AVG(RV_STAR)) AS "AVG_STAR"
+		  FROM TB_REVIEW
 		 WHERE SPACE_NO = ?
 	</entry>
 

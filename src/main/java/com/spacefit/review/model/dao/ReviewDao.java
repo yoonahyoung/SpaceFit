@@ -457,7 +457,8 @@ public class ReviewDao {
 							rset.getDate("rv_modify_date"),
 							rset.getInt("rv_star"),
 							rset.getString("rv_status"),
-							rset.getString("gr_name")							
+							rset.getString("gr_name"),
+							rset.getInt("all_like_count")
 						));
 			}
 		} catch (SQLException e) {
@@ -472,6 +473,28 @@ public class ReviewDao {
 		
 	}
 	
+	
+	public int selectAvgStars(Connection conn, int spNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("avgStars");
+		int avgStars = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, spNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				avgStars = rset.getInt("avg_star");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		} return avgStars;
+		
+	}
 	
 	
 	
