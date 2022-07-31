@@ -51,8 +51,8 @@ public class AdminBooklistController extends HttpServlet {
 		
 		String searchText = request.getParameter("searchText");
 		
-		// 검색이 없을 경우 search는 ""빈문자열
-		if(searchText != null) {
+		// 검색이 없을 경우제외
+		if(searchText != null && !searchText.equals("")) {
 			
 			switch(request.getParameter("searchType")) {
 			case "spaceNo": search += "AND SPACE_NAME LIKE '%"+ searchText + "%'"; break;
