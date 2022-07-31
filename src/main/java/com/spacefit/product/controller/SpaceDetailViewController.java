@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.spacefit.product.model.service.SpaceService;
 import com.spacefit.product.model.vo.Space;
 import com.spacefit.review.model.service.ReviewService;
+import com.spacefit.review.model.vo.Like;
 import com.spacefit.review.model.vo.Review;
 
 /**
@@ -41,10 +42,12 @@ public class SpaceDetailViewController extends HttpServlet {
 		
 		// 이 부분부터 후기쪽 부분입니다. 소희작성
 		
+		// 해당 공간넘버에 해당하는 후기리스트 불러오기
 		ArrayList<Review> rvList = new ReviewService().selectRvListForSpace(spNo);
 		request.setAttribute("rvList", rvList);
-
 		
+		int avgStars = new ReviewService().selectAvgStars(spNo);
+		request.setAttribute("avgStars", avgStars);
 		// 후기 부분 끝!
 		
 		

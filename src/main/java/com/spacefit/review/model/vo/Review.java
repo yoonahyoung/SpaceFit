@@ -174,9 +174,10 @@ public class Review {
 	private String memId;
 	private String gradeName;
 	private String spaceName;
+	private int allLikeCount;
 
 	public Review(int reviewNo, int bookNo, String spaceName, String memId, String reviewContent, Date reviewEnrollDdate,
-			Date reviewModifyDate, int reviewStar, String reviewStatus, String gradeName) {
+			Date reviewModifyDate, int reviewStar, String reviewStatus, String gradeName, int allLikeCount) {
 		super();
 		this.reviewNo = reviewNo;
 		this.bookNo = bookNo;
@@ -188,6 +189,7 @@ public class Review {
 		this.reviewStar = reviewStar;
 		this.reviewStatus = reviewStatus;
 		this.gradeName = gradeName;
+		this.allLikeCount = allLikeCount;
 	}
 
 
@@ -218,6 +220,16 @@ public class Review {
 
 	public void setSpaceName(String spaceName) {
 		this.spaceName = spaceName;
+	}
+
+
+	public int getAllLikeCount() {
+		return allLikeCount;
+	}
+
+
+	public void setAllLikeCount(int allLikeCount) {
+		this.allLikeCount = allLikeCount;
 	}
 	
 	

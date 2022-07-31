@@ -3,6 +3,7 @@
 <%
 	String thisPath = request.getContextPath();
 	ArrayList<Review> rvList = (ArrayList<Review>)request.getAttribute("rvList");
+	int avgStars = (Integer)request.getAttribute("avgStars");
 %>
 <!DOCTYPE html>
 <html>
@@ -132,17 +133,18 @@
                                         
                                         
                                         <!--  ~review보이는 공간~ -->
-                                    <% if (rvList.isEmpty()) { %>
-                                    	<h4>" 아직 작성된 후기가 없습니다 "</h4><br>
-                                    <% } else { %>
+                                    <% if (!rvList.isEmpty()) { %> <!-- 리뷰리스트가 엠티가 아니면 -->
+                                    
 	                                        <hr>
 	                                        <div class="introRv">
 	                                            <div class="stars" >
-	                                                <span id='starYellow'>★</span>
-	                                                <span id='starYellow'>★</span> 
-	                                                <span id='starYellow'>★</span> 
-	                                                <span id='starYellow'>★</span>  
-	                                                <span id='starWhite'>★</span>
+	                                            	<% for(int i=0; i<avgStars; i++) { %>
+	                                                   <span id='starYellow'>★</span>
+                                                   	<% } %>
+                                                   	<% int whiteStar1 = 5-avgStars; %>
+                                                   	<% for(int i=0; i<whiteStar1; i++){ %>
+                                                       	<span id='starWhite'>★</span>
+                                                    <% } %>
 	                                            </div>
 	                                            <h4>" 스페이스핏의 고객님들은 이 장소를 이렇게 평가하셨어요! "</h4><br>
 	                                        </div>
@@ -172,7 +174,7 @@
 	                                            <div class="row">
 	                                                <div class="col-lg-3"> 
 	                                                    <img class="titleImg" width="150" height="120" onclick="">
-	                                                    <span id="titleImgSpan">후기작성일 : <%=r.getReviewModifyDate() %>)</span>
+	                                                    <span id="titleImgSpan">후기작성일 : <%=r.getReviewModifyDate() %></span>
 	                                                </div>
 	                                                <div class="col-lg-6" id="eachRvListHeader">
 	                                                    <h4><%=r.getSpaceName() %></h4>
@@ -185,13 +187,15 @@
 	                                                    <hr>
 	                                                    <div id ="showStars">
 	                                                        <div class="smallStars" >
-	                                                            <span id='starYellow'>★</span>
-	                                                            <span id='starYellow'>★</span> 
-	                                                            <span id='starYellow'>★</span> 
-	                                                            <span id='starYellow'>★</span>  
-	                                                            <span id='starWhite'>★</span>
+	                                                        	<% for(int i=0; i<r.getReviewStar(); i++) { %>
+	                                                        		<span id='starYellow'>★</span>
+	                                                        	<% } %>
+			                                                   	<% int whiteStar2 = 5-(r.getReviewStar()); %>
+			                                                   	<% for(int i=0; i<whiteStar2; i++){ %>
+	                                                            	<span id='starWhite'>★</span>
+	                                                            <% } %>
 	                                                        </div>
-	                                                        <span id="countLike">37명이 이 후기를 추천했어요!</span><br>
+	                                                        <span id="countLike"><span><%=r.getAllLikeCount() %></span>명이 이 후기를 추천했어요!</span><br>
 	                                                    </div>
 	                                                    <div id="rvContentDiv">
 	                                                        <%=r.getReviewContent() %>
@@ -215,6 +219,8 @@
 	                                            </div>
 	                                        </div>
                                         <% } %>
+                                    <% } else { %>
+                                    	 <h4>" 아직 작성된 후기가 없습니다 "</h4><br>
 									<% } %>
 
                                     

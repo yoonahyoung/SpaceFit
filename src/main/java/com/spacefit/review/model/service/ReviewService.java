@@ -153,5 +153,13 @@ public class ReviewService {
 		close(conn);
 		return rvList;
 	}
+	
+	
+	public int selectAvgStars(int spNo) {
+		Connection conn = getConnection();
+		int avgStars = new ReviewDao().selectAvgStars(conn, spNo);
+		close(conn);
+		return avgStars;
+	}
 
 }
