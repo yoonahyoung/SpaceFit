@@ -138,6 +138,27 @@ public class Book {
 		this.bookChair = bookChair;
 		this.bookStand = bookStand;
 	}
+	
+	public Book(int bookNo, String spaceNo, String memberNo, int bookCount, String bookDate, String bookInTime,
+			String bookOutTime, int bookPrice, String bookName, String bookPhone, String bookEmail, String bookCar,
+			String bookAnimal, String bookChair, String bookStand) {
+		super();
+		this.bookNo = bookNo;
+		this.spaceNo = spaceNo;
+		this.memberNo = memberNo;
+		this.bookCount = bookCount;
+		this.bookDate = bookDate;
+		this.bookInTime = bookInTime;
+		this.bookOutTime = bookOutTime;
+		this.bookPrice = bookPrice;
+		this.bookName = bookName;
+		this.bookPhone = bookPhone;
+		this.bookEmail = bookEmail;
+		this.bookCar = bookCar;
+		this.bookAnimal = bookAnimal;
+		this.bookChair = bookChair;
+		this.bookStand = bookStand;
+	}
 
 
 	public int getBookNo() {

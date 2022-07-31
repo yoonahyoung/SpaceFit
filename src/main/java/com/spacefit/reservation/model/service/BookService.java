@@ -60,13 +60,19 @@ public class BookService {
 	 * 관리자용
 	 */
 	
-	// 진행중인예약내역 리스트
-	public ArrayList<Book> adminSelectBookList(){
+	// 예약내역 리스트 -- 임시 지워질지모름
+	public ArrayList<Book> adminSelectBookList(String category){
 		Connection conn = getConnection();
-		ArrayList<Book> list = new BookDao().adminSelectBookList(conn);
+		ArrayList<Book> list = new BookDao().adminSelectBookList(conn, category);
 		close(conn);
 		return list;
 	}
 	
+	public ArrayList<Book> searchSelectBook(String search, String booktype, String bookOrderBy){
+		Connection conn = getConnection();
+		ArrayList<Book> list = new BookDao().searchSelectBook(conn, search, booktype, bookOrderBy);
+		close(conn);
+		return list;
+	}
 	
 }

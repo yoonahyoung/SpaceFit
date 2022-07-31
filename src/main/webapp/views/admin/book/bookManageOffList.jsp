@@ -21,13 +21,32 @@
             <div class="card-header py-3">
                 <div class="row">
                   <div class="col-lg" align="left">
+                  
+                  		<table class="pull-right">
+                            <tr>
+                                <td><select class="form-control mr-sm-0" name="searchType" id="searchType" style="height: 35px;">
+                                        <!-- <option value="total">선택안함</option> -->
+                                        <option value="spaceNo">공간명</option>
+                                        <option value="userID">회원아이디</option>
+                                        <option value="userName">예약자명</option>
+                                </select></td>
+                                <td><input type="text" class="form-control" placeholder="검색어 입력" name="searchText" id="searchText"  maxlength="30" style="height: 35px;"></td>
+                                <td><button type="button" id="searchBtn" class="btn btn-sm btn-primary">검색</button></td>
+                            </tr>        
+                        </table>    
                       
                   </div>
                   <div class="col-lg" align="right">
-                        <select name="" id="">
-                            <option value="">대여날짜</option>
-                            <option value="">예약번호</option>                       
-                        </select>
+                       <select name="booktype" id="booktype">
+			                <option>전체</option>
+			                <option>예약확정</option>
+			                <option>이용완료</option>
+			                <option>예약취소</option>
+			            </select>
+			            <select name="bookOrderBy" id="bookOrderBy">
+			                <option value="book_date">대여날짜순</option>
+			                <option value="book_no">예약번호순</option>
+			            </select>  
                   </div>
                 </div>
                 <div class="card-body">
