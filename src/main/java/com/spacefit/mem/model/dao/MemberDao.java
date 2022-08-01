@@ -349,6 +349,37 @@ public class MemberDao {
 		return result;
 	}
    
+   public ArrayList<Mcp> selectDownCoupon(Connection conn){
+		
+		ArrayList<Mcp> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectDownCoupon");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Mcp(rset.getInt("cp_no"),
+								 rset.getString("cp_name"),
+								 rset.getInt("cp_discount"),
+								 rset.getDate("cp_enroll_date"),
+								 rset.getDate("cp_end_date")
+						));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
+   
    
    //---------ADMIN-----------//
 	

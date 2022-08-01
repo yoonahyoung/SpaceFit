@@ -13,16 +13,16 @@ import com.spacefit.mem.model.service.MemberService;
 import com.spacefit.mem.model.vo.Mcp;
 
 /**
- * Servlet implementation class AdminCouponListController
+ * Servlet implementation class DownCouponListController
  */
-@WebServlet("/adCouponList.me")
-public class AdminCouponListController extends HttpServlet {
+@WebServlet("/downCouponList.me")
+public class DownCouponListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminCouponListController() {
+    public DownCouponListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,10 +32,10 @@ public class AdminCouponListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		ArrayList<Mcp> list = new MemberService().selectAdminCouponList();	
+		ArrayList<Mcp> list = new MemberService().selectDownCoupon();
 		
-		request.setAttribute("cpList", list);
-		request.getRequestDispatcher("views/admin/homepage/couponManage.jsp").forward(request, response);
+		request.setAttribute("list", list);
+		response.sendRedirect(request.getContextPath() + "myCouponList.me");
 	}
 
 	/**

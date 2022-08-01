@@ -130,6 +130,13 @@ public class MemberService {
 		return result;
 	}
    
+   public ArrayList<Mcp> selectDownCoupon() { 
+	   Connection conn = getConnection();
+	   ArrayList<Mcp> list = new MemberDao().selectDownCoupon(conn);
+	   close(conn);
+	   return list;
+   }
+   
    
    
     // ----------------------- admin ------------------------- //

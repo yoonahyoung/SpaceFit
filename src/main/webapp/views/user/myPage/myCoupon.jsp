@@ -17,6 +17,7 @@
 		ArrayList<Mcp> list = (ArrayList<Mcp>)request.getAttribute("list");
 		String grName = (String)request.getAttribute("grName");
 		
+		ArrayList<Mcp> cpList = (ArrayList<Mcp>)request.getAttribute("cpList");
 	%>
   <br>
 
@@ -105,20 +106,21 @@
       <div id="cpZoneDiv" style="width:950px">
       <div class="row mb-5">
       
+      <% for(Mcp m : cpList) { %>
         <div class="col-md-6 col-lg-4 mb-3" id="cpZoneCard">
           <div class="card h-100" style="box-shadow: 2px 2px 10px 0px #0D6EFD;">
             <div class="card-body">
               <br>
               <h4 class="card-title" >등급 혜택 쿠폰</h4>
               <br>
-              <p class="card-text" style="font-size:26px; font-weight:600; color:#0D6EFD;">10000원</p>
+              <p class="card-text" style="font-size:26px; font-weight:600; color:#0D6EFD;"><%=m.getCpDiscount() %>원</p>
               <p>2022.07.07~2022.09.26</p>
               <br>
               <a href="javascript:void(0)" class="btn btn-outline-primary">쿠폰 다운 받기</a>
             </div>
           </div>
         </div>
-
+		 <% } %>
       </div>
     </div>
 </div>
