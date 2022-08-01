@@ -220,6 +220,8 @@
 
 
         <div class="rvlvd-footer"></div>
+        
     </div>
+    <%@ include file="../common/userFooter.jsp" %>
 </body>
 </html>

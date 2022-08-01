@@ -11,7 +11,9 @@
 <style>
     .end-center-rv1{         
     position:absolute; top:50%; transform:translateY(-50%) translateX(550%);          
-}
+	}
+
+	#bookListArea{min-height: 800px; }
 </style>
 </head>
 <body>
@@ -146,5 +148,7 @@
         
         
     </div>
+    
+    <%@ include file="../common/userFooter.jsp" %>
 </body>
 </html>

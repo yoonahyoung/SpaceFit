@@ -327,6 +327,8 @@
          </div>
          </div>
       </div>
+      
+        <%@ include file="../common/userFooter.jsp" %>
 
 
 </body>

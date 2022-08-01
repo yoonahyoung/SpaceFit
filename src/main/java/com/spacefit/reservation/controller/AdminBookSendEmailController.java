@@ -74,12 +74,21 @@ public class AdminBookSendEmailController extends HttpServlet {
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(bookEmail));
             
             //메일 제목
-            msg.setSubject("안녕하세요. "+ bookName + "님 spaceFit입니다.");
+            msg.setSubject("안녕하세요. "+ bookName + "님 spaceFit입니다. ");
             //메일 내용
-            msg.setText("공간 : " + spaceNo 
+            msg.setText("안녕하세요. spaceFit입니다. \n\n"
+            			+ "공간 : " + spaceNo 
             			+ "\n인원 : " + bookCount
             			+ "\n날짜 : " + bookDate + " " + bookDateTime + " 으로 예약해주셨습니다. \n\n"
-            			+ "당부의 말씀으로 \n" + sendContent);
+            			+ "당부의 말씀으로 \n" + sendContent + "\n\n"
+            			+ "이용해주셔서 감사합니다. \n\n\n"
+            			+ "------------------------------------------------\n"
+            			+ "서울시 금천구 가산디지털2로 115 (대륭테크노타운 3차) 1109-1호\r\n"
+            			+ "Tel 070-8847-9500(9513) Mobile +82 010-123-4567\r\n"
+            			+ "Mail esy@goodee.co.kr Fax 02-2108-5909\r\n"
+            			+ "Homepage http://localhost:8200/SpaceFit \r\n"        			
+            		
+            		);
             
             Transport.send(msg);
             //System.out.println("이메일 전송");
@@ -87,7 +96,8 @@ public class AdminBookSendEmailController extends HttpServlet {
         }catch (Exception e) {
             e.printStackTrace();
         }
-          
+        
+        request.getSession().setAttribute("alertMsg", "이메일 전송되었습니다.");
         response.sendRedirect(request.getContextPath() + "/abdetail.bo?no=" + bookNo);
 		
 	    

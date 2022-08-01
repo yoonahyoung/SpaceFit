@@ -154,25 +154,26 @@
 		    
 		    <div class="modal fade" id="deleteReview" tabindex="-1" aria-labelledby="deleteBkModalLabel" aria-hidden="true">
 		        <div class="modal-dialog">
-		        <div class="modal-content">
-		           <div class="modal-header">                            
-		           </div>           
-		           <div class="modal-body" align="center">
-		           	  
-			              <h4>해당 후기를 삭제하시겠습니까?</h4>
-			                 <br>
-			                 <div>
-			                    <button type="button" class="btn btn-sm btn-primary" style="width: 60px;" onclick="location.href='<%=contextPath%>/rdelete.vo?no=<%=rv.getReviewNo() %>'">네</button>
-			                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" style="width: 60px;">아니오</button>
-			                 </div>        
-		           </div>
-		           <div class="modal-footer">
-		           </div>
-		        </div>
+			        <div class="modal-content">
+			           <div class="modal-header">                            
+			           </div>           
+			           <div class="modal-body" align="center">
+			           	  
+				              <h4>해당 후기를 삭제하시겠습니까?</h4>
+				                 <br>
+				                 <div>
+				                    <button type="button" class="btn btn-sm btn-primary" style="width: 60px;" onclick="location.href='<%=contextPath%>/rdelete.vo?no=<%=rv.getReviewNo() %>'">네</button>
+				                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" style="width: 60px;">아니오</button>
+				                 </div>        
+			           </div>
+			           <div class="modal-footer"> </div>
+			        </div>
 		        </div>
 		       
-        </div>    
+    	    </div>    
     
+    	</div>
     </div>
+    <%@ include file="../common/userFooter.jsp" %>
 </body>
 </html>

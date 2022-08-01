@@ -94,7 +94,7 @@ public class ReviewUpdateController extends HttpServlet {
 				
 				if(result > 0 ) { // 성공							
 						session.setAttribute("alertMsg", "후기수정되었습니다.");
-						response.sendRedirect(request.getContextPath() + "/rlist.rv");			
+						response.sendRedirect(request.getContextPath() + "/rlist.rv?cpage=1");			
 									
 				}else { // 실패
 					request.setAttribute("errorMsg", "후기수정에 실패했습니다.");
