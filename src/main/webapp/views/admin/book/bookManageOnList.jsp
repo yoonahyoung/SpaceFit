@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.reservation.model.vo.Book"%>
-<%
-	ArrayList<Book> list = (ArrayList<Book>)request.getAttribute("list");
+<% 
+ 	
 %>    
 <!DOCTYPE html>
 <html>
@@ -33,19 +33,19 @@
                                         <option value="userName">예약자명</option>
                                 </select></td>
                                 <td><input type="text" class="form-control" placeholder="검색어 입력" name="searchText" id="searchText"  maxlength="30" style="height: 35px;"></td>
-                                <!-- <td><button type="button" id="searchBtn" class="btn btn-sm btn-primary">검색</button></td>-->
+                                <td><button type="button" id="searchBtn" class="btn btn-sm btn-primary" onclick="selectAdminBookList();">검색</button></td>
                             </tr>        
                         </table>                       
                           
                   </div>
                   <div class="col-lg" align="right"> 
-                  	    <select name="booktype" id="booktype">
+                  	    <select name="booktype" id="booktype" onchange="selectAdminBookList();">
 			                <option selected>전체</option>
 			                <option>예약확정</option>
 			                <option>이용완료</option>
 			                <option>예약취소</option>
 			            </select>
-			            <select name="bookOrderBy" id="bookOrderBy">
+			            <select name="bookOrderBy" id="bookOrderBy" onchange="selectAdminBookList();">
 			                <option value="book_date" selected>대여날짜순</option>
 			                <option value="book_no">예약번호순</option>
 			            </select>       
@@ -74,7 +74,7 @@
                                 </tr>
                             </thead>
                             
-                           <tbody>
+                           <tbody id="listArea">
                            	                           		                             
                            </tbody>
                            
@@ -108,18 +108,18 @@
         	$(function(){
         		
         		selectAdminBookList();
-        		setInterval(selectAdminBookList, 1200);
-})
+        		//setInterval(selectAdminBookList, 1200);
+			})
         	
         	function selectAdminBookList(){
         		
         		$.ajax({        			
-        			url: "<%= contextPath %>/aBookList.bo",
+        			url: "<%= contextPath %>/ablist.bo",
         			data:{
     				    searchType:$("#searchType").val(),
-    				    searchText:$("#searchText").val()
+    				    searchText:$("#searchText").val(),
         				booktype: $("#booktype").val(),
-    				    bookOrderBy: $("#bookOrderBy").val(),
+    				    bookOrderBy: $("#bookOrderBy").val()
         			},
         			type:"post",
         			success:function(list){
@@ -128,11 +128,11 @@
         				
         				if(list.length == 0){
         					value += "<tr>"
-        					       + "<td colspan='11'> 예약내역이 없습니다. </td>"
+        					       + "<td colspan='15'> 예약내역이 없습니다. </td>"
                                    + "</tr>";
         				}else{
         					
-        					for(let i=0; i<list.length(); i++){
+        					for(let i=0; i<list.length; i++){
         						
 	        					value += "<tr>"
 		                               +    "<td>" +  list[i].bookNo + "</td>"
@@ -155,7 +155,7 @@
         				}
         				
 
-        				$("tbody").html(value);
+        				$("#listArea").html(value);
         				
         				
         			},

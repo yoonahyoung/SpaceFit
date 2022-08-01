@@ -61,13 +61,15 @@ public class BookService {
 	 */
 	
 	// 예약내역 리스트 -- 임시 지워질지모름
+	/*
 	public ArrayList<Book> adminSelectBookList(String category){
 		Connection conn = getConnection();
 		ArrayList<Book> list = new BookDao().adminSelectBookList(conn, category);
 		close(conn);
 		return list;
 	}
-	
+	*/
+	// 예약내역리스트
 	public ArrayList<Book> searchSelectBook(String search, String booktype, String bookOrderBy){
 		Connection conn = getConnection();
 		ArrayList<Book> list = new BookDao().searchSelectBook(conn, search, booktype, bookOrderBy);

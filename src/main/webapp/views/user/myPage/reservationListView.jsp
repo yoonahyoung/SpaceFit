@@ -24,13 +24,13 @@
         <div class="rvlv1-header" align="center"><h3>예약내역리스트</h3></div>
        
         <div class="rvlv1-menu">
-            <select name="booktype" id="booktype">
+            <select name="booktype" id="booktype" onchange="selectBookList();">
                 <option>전체</option>
                 <option>예약확정</option>
                 <option>이용완료</option>
                 <option>예약취소</option>
             </select>
-            <select name="bookOrderBy" id="bookOrderBy">
+            <select name="bookOrderBy" id="bookOrderBy" onchange="selectBookList();">
                 <option value="book_date">대여날짜순</option>
                 <option value="book_no">예약번호순</option>
             </select>                   
@@ -65,7 +65,7 @@
         	$(function(){
         		
         		selectBookList();     
-        		setInterval(selectBookList, 1200);
+        		//setInterval(selectBookList, 1200);
         		
         	})	
         	
