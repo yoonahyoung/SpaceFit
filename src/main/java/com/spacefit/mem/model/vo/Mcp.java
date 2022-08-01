@@ -8,6 +8,7 @@ public class Mcp {
 	private String cpName;
 	private int cpDiscount;
 	private Date cpEnrollDate;
+	private Date cpEndDate;
 	private int mcpNo;
 	private int memNo;
 	private String mcpStatus;
@@ -50,6 +51,16 @@ public class Mcp {
 		this.cpName = cpName;
 		this.cpDiscount = cpDiscount;
 		this.cpEnrollDate = cpEnrollDate;
+	}
+	
+
+	public Mcp(int cpNo, String cpName, int cpDiscount, Date cpEnrollDate, Date cpEndDate) {
+		super();
+		this.cpNo = cpNo;
+		this.cpName = cpName;
+		this.cpDiscount = cpDiscount;
+		this.cpEnrollDate = cpEnrollDate;
+		this.cpEndDate = cpEndDate;
 	}
 
 	public int getCpNo() {
