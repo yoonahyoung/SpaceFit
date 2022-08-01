@@ -17,7 +17,7 @@
 		  
 	</entry>
 	
-	<!-- 사용자페이지 예약상세내역 조회용 -->
+	<!-- 예약상세내역 조회용 -->
 	<entry key="selectBook">
 		 SELECT BOOK_NO
 		      , SPACE_NAME      
@@ -75,6 +75,7 @@
 		  WHERE BOOK_NO = ?
 	</entry>
 	
+	<!-- 관리자페이지 예약리스트 -->
 	<entry key="adminSelectBookList">
 		SELECT  BOOK_NO
 		      , SPACE_NAME		      
