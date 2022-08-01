@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.qna.model.vo.QnA"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.qna.model.vo.QnA, com.spacefit.attachment.model.vo.Attachment"%>
 <%
 	QnA q = (QnA)request.getAttribute("qna");
+	Attachment at = (Attachment)request.getAttribute("at");
 %>
 <!DOCTYPE html>
 <html>
@@ -35,8 +36,8 @@
 
     <table class="table" id="detail-area">
         <tr>
-            <th width="80">제목</th>
-            <td colspan="7" width="430" align="left"><%=q.getQnaTitle() %></td>
+            <th width="90">제목</th>
+            <td colspan="11" width="430" align="left"><%=q.getQnaTitle() %></td>
 
         </tr>
         <tr>
@@ -45,7 +46,7 @@
             <th>공간분류</th>
             <td><%=q.getSpaceCategory() %></td>
             <th width="80">공간</th>
-            <td><%=q.getQnaTitle() %></td>
+            <td><%=q.getQnaSpaceNo() %></td>
             <th width="80">작성자</th>
             <td><%=q.getQnaWriter() %></td>
             <th width="80">작성일</th>
@@ -55,15 +56,27 @@
         </tr>
         <tr>
             <th>내용</th>
-            <td colspan="7" align="left">
+            <td colspan="11" align="left">
                 <p style="height: 400px;"><%=q.getQnaContent() %></p>
+            </td>
+        </tr>
+        <tr>
+            <th>첨부파일</th>
+            <td colspan="11" align="left">
+                <% if( at == null) { %>
+                    <!-- case1. 첨부파일이 없을 경우 -->
+                    첨부파일이 없습니다.
+                <% } else { %>
+                    <!-- case2. 첨부파일이 있을 경우 -->
+                    <a download="<%= at.getFileOriginName() %>" href="<%=contextPath%>/<%=at.getFilePath() + at.getFileChangeName()%>"><%= at.getFileOriginName() %></a>
+            		<% } %>
             </td>
         </tr>
     </table>
 
     <br>
 	<div align="right">
-        <a href="<%= contextPath %>/list.no?cpage=1" class="btn btn-sm btn-secondary">목록가기</a>
+        <a href="<%=contextPath %>/list.qa?cpage=1" class="btn btn-sm btn-secondary">목록가기</a>
     </div>
     <div style="height : 60px"></div>
  </div>

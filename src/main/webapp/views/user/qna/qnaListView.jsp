@@ -48,14 +48,14 @@
     <table class="table" align="center">
         <thead>
             <tr>
-                <th width="100">글번호</th>
+                <th width="90">글번호</th>
                 <th width="100">질문유형</th>
                 <th width="100">공간분류</th>
                 <th width="100">공간</th>
-                <th width="350">글제목</th>
+                <th width="300">글제목</th>
                 <th width="100">작성자</th>
                 <th width="100">조회수</th>
-                <th width="100">작성일</th>
+                <th width="115">작성일</th>
             </tr>
 		</thead>
 		<tbody>
@@ -115,7 +115,7 @@
     			// 요청시전달값(키=밸류) => 쿼리스트링
 				
     			// /web/detail.no?no=xx
-    			location.href = '<%= contextPath%>/detail.no?no=' + num;
+    			location.href = '<%= contextPath%>/detail.qa?no=' + num;
     		})
     	})
     </script>

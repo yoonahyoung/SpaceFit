@@ -2,36 +2,42 @@ package com.spacefit.qna.model.vo;
 
 public class Category {
 	
-	private int categoryNo;
-	private String categoryName;
+	private int spaceNo;
+	private String spaceName;
 	
 	public Category() {}
 
-	public Category(int categoryNo, String categoryName) {
+	
+	public Category(int spaceNo, String spaceName) {
 		super();
-		this.categoryNo = categoryNo;
-		this.categoryName = categoryName;
+		this.spaceNo = spaceNo;
+		this.spaceName = spaceName;
 	}
 
-	public int getCategoryNo() {
-		return categoryNo;
+	
+	public int getSpaceNo() {
+		return spaceNo;
 	}
 
-	public void setCategoryNo(int categoryNo) {
-		this.categoryNo = categoryNo;
+
+	public void setSpaceNo(int spaceNo) {
+		this.spaceNo = spaceNo;
 	}
 
-	public String getCategoryName() {
-		return categoryName;
+
+	public String getSpaceName() {
+		return spaceName;
 	}
 
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
+
+	public void setSpaceName(String spaceName) {
+		this.spaceName = spaceName;
 	}
+
 
 	@Override
 	public String toString() {
-		return "Category [categoryNo=" + categoryNo + ", categoryName=" + categoryName + "]";
+		return "Category [spaceNo=" + spaceNo + ", spaceName=" + spaceName + "]";
 	}
 	
 }

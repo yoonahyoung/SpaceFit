@@ -39,4 +39,112 @@
 		  FROM TB_SPACE
 		 WHERE SPACE_CATEGORY = ?
 	</entry>
+	
+	<entry key="insertPublicQnA">
+	INSERT
+	  INTO TB_QNA 
+	  (
+	    QNA_NO
+	  , QNA_CATEGORY
+	  , QNA_SPACE_NO
+	  , QNA_TITLE
+	  , QNA_CONTENT
+	  , QNA_MEM_NO
+	  )
+	  VALUES
+	  (
+	    SEQ_QNNO.NEXTVAL
+	  , ?
+	  , ?
+	  , ?
+	  , ?
+	  , ?
+	  )
+	</entry>
+	
+	<entry key="insertSecretQnA">
+	INSERT
+	  INTO TB_QNA 
+	  (
+	    QNA_NO
+	  , QNA_CATEGORY
+	  , QNA_SPACE_NO
+	  , QNA_TITLE
+	  , QNA_CONTENT
+	  , QNA_MEM_NO
+	  , QNA_PUBLIC
+	  , QNA_PWD
+	  )
+	  VALUES
+	  (
+	    SEQ_QNNO.NEXTVAL
+	  , ?
+	  , ?
+	  , ?
+	  , ?
+	  , ?
+	  , 'N'
+	  , ?
+	  )
+	</entry>
+	
+	<entry key="insertAttachment">
+	INSERT 
+	  INTO TB_FILE
+	  (
+	    FILE_NO
+	  , REF_BNO
+	  , FILE_CATEGORY
+	  , FILE_ORIGIN_NAME
+	  , FILE_CHANGE_NAME
+	  , FILE_PATH
+	  )
+	  VALUES
+	  (
+	    SEQ_FINO.NEXTVAL
+	  , SEQ_QNNO.CURRVAL
+	  , 4
+	  , ?
+	  , ?
+	  , ?
+	  )
+	</entry>
+	
+	<entry key="selectAttachment">
+		SELECT 
+		       FILE_NO
+		     , REF_BNO
+		     , FILE_ORIGIN_NAME
+		     , FILE_CHANGE_NAME
+		     , FILE_PATH
+		  FROM TB_FILE
+		 WHERE FILE_CATEGORY = 4
+		   AND REF_BNO = ?
+		   AND FILE_STATUS = 'Y'
+	</entry>
+	
+	<entry key="increaseCount">
+		UPDATE TB_QNA
+		   SET QNA_COUNT = QNA_COUNT+1
+		 WHERE QNA_NO = ?
+		   AND QNA_STATUS = 'Y'
+	</entry>
+	
+		<entry key="selectQnA">
+      	SELECT
+		       QNA_NO
+		     , QNA_CATEGORY
+		     , SPACE_CATEGORY
+		     , SPACE_NAME
+		     , QNA_TITLE
+		     , QNA_CONTENT
+		     , MEM_ID
+		     , QNA_COUNT
+		     , QNA_CREATE_DATE
+		  FROM TB_QNA
+		  JOIN TB_MEMBER ON(QNA_MEM_NO = MEM_NO)
+		  JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+		 WHERE QNA_NO = ?
+	</entry>
+	
 </properties>

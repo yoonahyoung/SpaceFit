@@ -45,9 +45,9 @@
     <br>
     <h2 align="center">1 : 1 문의 등록</h2>
     <br><br><br>
-<form action="enroll.qa">
+<form action="insert.qa" method="post" enctype="multipart/form-data">
     <!-- 회원번호 같이 보내기 -->
-    <!-- <input type="hidden" value=""> -->
+    <input type="hidden" name="userNo" value="<%=loginUser.getMemNo()%>">
     <table class="table" id="detail-area">
         <tr>
             <th width="90">질문유형</th>
@@ -62,8 +62,8 @@
             </td>
             <th width="90">공간분류</th>
             <td width="100">
-                <select name="room" id="spaceCategory" onchange="spaceList();">
-                    <option value="선택" selected>--선택--</option>
+                <select name="room" id="spaceCategory" onclick="spaceList();">
+                    <option value="선택">--선택--</option>
                     <option value="스튜디오">스튜디오</option>
                     <option value="연습실">연습실</option>
                     <option value="파티룸">파티룸</option>
@@ -72,36 +72,36 @@
             <td width="100">
 
                 <!-- 기본선택 -->
-                <select name="space" id="basic" style="display: block;">
-                    <option value="선택" selected>--선택--</option>
+                
+                <select name="" id="basic">
+                    <option value="선택">--선택--</option>
                 </select>
-
+                
                 <!-- 공간 목록이 나오도록 -->
-                <select name="space" id="studio" style="display: none;">
-                    <option value="선택" selected>--선택--</option>
+                <select name="spaceNo" id="studio" style="display: none;">
                     <% for(Category c : studioList) { %>
-                    <option value="<%=c.getCategoryNo()%>"><%= c.getCategoryName() %></option>
+                    <option onchange="select();" value="<%=c.getSpaceNo()%>"><%= c.getSpaceName() %></option>
                     <% } %>
                 </select>
-                <select name="space" id="practice" style="display: none;">
-                    <option value="선택" selected>--선택--</option>
+                <select name="spaceNo" id="practice" style="display: none;">
                     <% for(Category c : practiceList) { %>
-                    <option value="<%=c.getCategoryNo()%>"><%= c.getCategoryName() %></option>
+                    <option onchange="select();" value="<%=c.getSpaceNo()%>"><%= c.getSpaceName() %></option>
                     <% } %>
                 </select>
-                <select name="space" id="party" style="display: none;">
-                    <option value="선택" selected>--선택--</option>
+                <select name="spaceNo" id="party" style="display: none;">
                     <% for(Category c : partyList) { %>
-                    <option value="<%=c.getCategoryNo()%>"><%= c.getCategoryName() %></option>
+                    <option onchange="select();" value="<%=c.getSpaceNo()%>"><%= c.getSpaceName() %></option>
                     <% } %>
                 </select>
 
             </td>
+        <tr>
             <th width="70">제목</th>
-            <td width="350">
-                <input type="text" id="title" required>
+            <td width="350" colspan="5">
+            <input type="text" name="title" id="title">
             </td>
-
+        </tr>
+            
         </tr>
         <tr>
             <th>내용</th>
@@ -125,7 +125,7 @@
 
     <br>
 	<div align="right">
-        <button type="button" class="btn btn-sm btn-primary" onclick="return check();">등록</button>
+        <button class="btn btn-sm btn-primary" onclick="return check();">등록</button>
         <button type="button" class="btn btn-sm btn-secondary" onclick="history.back();">취소</button>
     </div>
     </form>
@@ -155,8 +155,13 @@
         }
     }
     
-    function spaceList(){
+    /*
+    function select(){
+        $(this).attr("selected", true);
+    }
+    */
 
+    function spaceList(){
         if($("#spaceCategory").val()=='스튜디오'){
             $("#basic").css("display", 'none');
             $("#studio").css("display", 'block');
