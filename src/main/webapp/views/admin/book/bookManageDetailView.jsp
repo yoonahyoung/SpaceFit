@@ -278,6 +278,7 @@
 					            </div>
 					            <div class="modal-body">
 					                <form action="<%=contextPath %>/sendEmail.bo" method=post>               
+						                 <input type="hidden" name="bookNo" value="<%= b.getBookNo() %>">
 						                 <table align="center">   
 						                 	<tr>
 						                 		 <th width="100">예약자</th>
