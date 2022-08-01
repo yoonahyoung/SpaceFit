@@ -69,16 +69,13 @@ public class SpaceInsertAdminController extends HttpServlet {
 			
 			// Attachment에 여러행 insert할 데이터 뽑기
 			ArrayList<Attachment> list = new ArrayList<>();
-			Attachment at = new Attachment();
 			
 			if(multiRequest.getOriginalFileName("file1") != null) {
-				at.setFileOriginName(multiRequest.getOriginalFileName("file1"));
-				at.setFileChangeName(multiRequest.getFilesystemName("file1"));
-				at.setFilePath("resources/admin/space_upfiles/");
 				
-				s.setSpacePic(at.getFilePath()+at.getFileChangeName());
+				s.setSpacePic("resources/admin/space_upfiles/" + multiRequest.getFilesystemName("file1"));
 				
 				for(int i=2; i<=4; i++) {
+					Attachment at = new Attachment();
 					String key = "file" + i;
 					if(multiRequest.getOriginalFileName(key) != null) {
 						// 첨부파일이 존재할 경우 list에 추가
@@ -87,7 +84,6 @@ public class SpaceInsertAdminController extends HttpServlet {
 						at.setFilePath("resources/admin/space_upfiles/");
 						
 						list.add(at);
-						System.out.println(at);
 					}
 				}
 			}
@@ -100,10 +96,12 @@ public class SpaceInsertAdminController extends HttpServlet {
 				response.sendRedirect(request.getContextPath() + "/adList.sp");
 			}else { // 실패
 				// 첨부파일이 있었을 경우 업로드된 파일 찾아서 삭제시키기
-				if(at != null) {
-					new File(savePath + at.getFileChangeName()).delete();
-				}
-				session.setAttribute("errorMsg", "공간 추가에 실패하였습니다.");
+				
+//				
+//				if(at != null) {
+//					new File(savePath + at.getFileChangeName()).delete();
+//				}
+//				session.setAttribute("errorMsg", "공간 추가에 실패하였습니다.");
 				response.sendRedirect("views/admin/common/errorManager.jsp");
 			}
 		}

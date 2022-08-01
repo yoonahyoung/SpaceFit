@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.review.model.vo.Review"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.review.model.vo.Review, com.spacefit.product.model.vo.Space, com.spacefit.attachment.model.vo.Attachment"%>
 <%
 	String thisPath = request.getContextPath();
 	ArrayList<Review> rvList = (ArrayList<Review>)request.getAttribute("rvList");
 	int avgStars = (Integer)request.getAttribute("avgStars");
+	Space s = (Space)request.getAttribute("s");
+	ArrayList<Attachment> atList = (ArrayList<Attachment>)request.getAttribute("at");
 %>
 <!DOCTYPE html>
 <html>
@@ -20,18 +22,19 @@
 <title>Insert title here</title>
 <style>
 
-    
-    /* 캘린더 */
-        #calendar {
-        max-width: 1100px;
-        margin: 40px auto;
-    }
-    .fc-toolbar-chunk{
-        width:100%;
-    }
-    .fc-toolbar-title{
-        font-size:15px;
-    }
+/* 캘린더 */
+body {
+  margin: 40px 10px;
+  padding: 0;
+  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+#calendar {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
 </style>
 </head>
 <body>
@@ -52,15 +55,14 @@
                                         <div class="col-lg-8">
                                             <div id="property-single-carousel" class="swiper">
                                                 <div class="swiper-wrapper">
-                                                    <div class="carousel-item-b swiper-slide">
-                                                        <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best3.jpeg" alt="">
+                                                	<div class="carousel-item-b swiper-slide">
+                                                        <img src="<%=thisPath%>/<%= s.getSpacePic() %>" alt="">
                                                     </div>
+                                                	<%for(Attachment a : atList){ %>
                                                     <div class="carousel-item-b swiper-slide">
-                                                        <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/best2.jpeg" alt="">
+                                                        <img src="<%=thisPath%>/<%=a.getFilePath()%>/<%=a.getFileChangeName() %>" alt="">
                                                     </div>
-                                                    <div class="carousel-item-b swiper-slide">
-                                                        <img src="<%=thisPath%>/resources/admin/space_upfiles/studio/studio1_1.jpeg" alt="">
-                                                    </div>
+                                                    <%} %>
                                                 </div>
                                             </div>
                                         <div class="property-single-carousel-pagination carousel-pagination"></div>
@@ -91,7 +93,7 @@
                                             </ul>
                                             <div class="tab-content" id="pills-tabContent">
                                                 <div class="tab-pane fade show active" id="pills-gonggan" role="tabpanel" aria-labelledby="pills-gonggan-tab">
-                                                    test공간소개탭
+                                                    <%= s.getSpaceInfo() %>
                                                 </div>
                                                 <div class="tab-pane fade" id="pills-sisul" role="tabpanel" aria-labelledby="pills-sisul-tab">
                                                     <ol>
@@ -384,6 +386,7 @@
                                     <!-- calendar 태그 -->  
                                     <div id='calendar-container'>    
                                         <div id='calendar'></div>  
+                                        
                                     </div>  
                                 
                                 </div>
@@ -391,7 +394,7 @@
                                 <div class="row">
                                     <h4 style="margin-top:40px; border-bottom:2px solid #0D6EFD">시간선택</h4>
                                     <span class="col-sm-4"> 체크인  </span>
-                                    <select name="detailCI">
+                                    <select name="detailCI" class="detailCI">
                                     	<%for(int i=9; i<22; i++){ %>
                                         	<option value="<%=i%>">
                                         		<% if(i==9){%>
@@ -403,7 +406,7 @@
                                         <%} %>
                                     </select>
                                     <span class="col-sm-4"> 체크아웃  </span>
-                                    <select name="detailCO">
+                                    <select name="detailCO" class="detailCO">
                                        <%for(int i=10; i<22; i++){ %>
                                         	<option value="<%=i%>"><%= i %>:00</option>
                                         <%} %>
@@ -412,8 +415,16 @@
 
                                 <div class="row">
                                     <h4 style="margin-top:40px; border-bottom:2px solid #0D6EFD">총 금액</h4>
-                                    <span class="col-sm-4">(price) <b>원</b></span>
+                                    <span class="col-sm-4"><span name="price" id="price"></span> <b>원</b></span>
                                 </div>
+                                <script>
+                                	$(".detailCO").change(function(){
+                                		console.log($(".detailCO>option:selected").val());
+                                        const pp = $(".detailCO>option:selected").val() - $(".detailCI>option:selected").val();
+                                        $("#price").text(pp * <%= s.getSpacePrice() %>);
+                                	})
+                                </script>
+                                
 
                                 <div class="row">
                                     <div id="ayBtn" style="text-align:center; margin-top:100px;">
@@ -429,25 +440,82 @@
             </div>
         </section>
     </main>
-	<script>  
-        document.addEventListener('DOMContentLoaded', function () {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
 
         var calendar = new FullCalendar.Calendar(calendarEl, {
-            timeZone: 'UTC',
-            themeSystem: 'bootstrap5',
-            headerToolbar: {
-            left: 'title',
-            right: 'today prev,next'
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: ''
+        },
+        initialDate: '2020-09-12',
+        navLinks: true, // can click day/week names to navigate views
+        businessHours: true, // display business hours
+        editable: true,
+        selectable: true,
+        events: [
+            {
+            title: 'Business Lunch',
+            start: '2020-09-03T13:00:00',
+            constraint: 'businessHours'
             },
-            weekNumbers: true,
-            dayMaxEvents: true, // allow "more" link when too many events
-            events: 'https://fullcalendar.io/api/demo-feeds/events.json'
+            {
+            title: 'Meeting',
+            start: '2020-09-13T11:00:00',
+            constraint: 'availableForMeeting', // defined below
+            color: '#257e4a'
+            },
+            {
+            title: 'Conference',
+            start: '2020-09-18',
+            end: '2020-09-20'
+            },
+            {
+            title: 'Party',
+            start: '2020-09-29T20:00:00'
+            },
+
+            // areas where "Meeting" must be dropped
+            {
+            groupId: 'availableForMeeting',
+            start: '2020-09-11T10:00:00',
+            end: '2020-09-11T16:00:00',
+            display: 'background'
+            },
+            {
+            groupId: 'availableForMeeting',
+            start: '2020-09-13T10:00:00',
+            end: '2020-09-13T16:00:00',
+            display: 'background'
+            },
+
+            // red areas where no events can be dropped
+            {
+            start: '2020-09-24',
+            end: '2020-09-28',
+            overlap: false,
+            display: 'background',
+            color: '#ff9f89'
+            },
+            {
+            start: '2020-09-06',
+            end: '2020-09-08',
+            overlap: false,
+            display: 'background',
+            color: '#ff9f89'
+            }
+        ]
         });
 
         calendar.render();
-        });
+  });
+
+
     </script>
+
+
     <!-- footer -->
     <%@ include file="../common/userFooter.jsp" %>
 
@@ -466,6 +534,8 @@
 
 
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>  
-<!-- fullcalendar 언어 CDN -->  
+
+<!-- fullcalendar -->  
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
+<script src='<%= thisPath %>/resources/user/js/spaceCalender.js'></script>
 </html>

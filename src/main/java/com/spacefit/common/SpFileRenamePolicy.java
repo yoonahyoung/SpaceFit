@@ -19,7 +19,7 @@ public class SpFileRenamePolicy implements FileRenamePolicy {
 		//			파일업로드시간(년월일시분초) + 원본파일확장자
 		
 		// 1) 파일업로드시간(년월일시분초) String currentTime
-		String currentTime = new SimpleDateFormat("yyyyMMdd").format(new Date());
+		String currentTime = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
 		
 		int ranNum = (int)(Math.random()*90000 + 10000);
 		

@@ -199,8 +199,17 @@ public class SpaceDao {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("deleteSpace");
 		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, spNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
 		
-		return 0;
+		return result;
 	}
 
 	

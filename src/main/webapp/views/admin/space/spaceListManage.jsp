@@ -42,10 +42,10 @@
                             <div align="right" style="width:400px; display:inline-block">
                                 <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                                     <select>
-                                    <option selected>전체</option>
-                                    <option>스튜디오</option>
-                                    <option>연습실</option>
-                                    <option>파티룸</option>
+                                    <option selected id="all">전체</option>
+                                    <option id="stdio">스튜디오</option>
+                                    <option id="practice">연습실</option>
+                                    <option id="party">파티룸</option>
                                     </select>
                                 </form>
                             </div>
@@ -109,6 +109,14 @@
 		        	$(function(){
 		        		$(".spaceListTable>tbody>tr").click(function(){
 		        			location.href="<%=contextPath%>/adDetail.sp?no=" + $(this).children().eq(0).text();
+		        		})
+		        	})
+		        	
+		        	$(function(){
+		        		$("#studio").selected(function(){
+		        			$("studio")
+		        			$("#practice").attr(display, "none");
+		        			$("#party").attr(display, "none");
 		        		})
 		        	})
         		</script>

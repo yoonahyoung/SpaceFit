@@ -122,7 +122,9 @@
 	</entry>
 	
 	<entry key="deleteSpace">
-		
+		UPDATE TB_SPACE 
+		   SET SPACE_STATUS = 'N'
+		 WHERE SPACE_NO = ?
 	</entry>
 	
 	

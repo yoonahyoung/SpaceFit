@@ -60,23 +60,61 @@
 				<tr>
 					<th>대표사진</th>
                     <td colspan="3">
-                        <img id="titleImg" width="250" height="200" onclick="chooseFile(1);" src="<%=contextPath%>/<%=s.getSpacePic()%>"> <input type="file">
+                        <img id="titleImg" width="250" height="200" onclick="chooseFile(1);" src="<%=contextPath%>/<%=s.getSpacePic()%>">
                     </td>
 				</tr>
                 <tr>
 					<th>추가사진</th>
-                    <td><img id="contentImg1" width="200" height="150" onclick="chooseFile(2);"> <input type="file"></td>
-                    <td><img id="contentImg2" width="200" height="150" onclick="chooseFile(3);"> <input type="file"></td>
-                    <td><img id="contentImg3" width="200" height="150" onclick="chooseFile(4);"> <input type="file"></td>
+                    <td><img id="contentImg1" width="200" height="150" onclick="chooseFile(2);"></td>
+                    <td><img id="contentImg2" width="200" height="150" onclick="chooseFile(3);"></td>
+                    <td><img id="contentImg3" width="200" height="150" onclick="chooseFile(4);"></td>
 				</tr>
 				<tr>
 					<th>공간등록일</th>
 					<td><input type="text" value="<%=s.getSpaceEnDate() %>" readOnly disabled></td>
 				</tr>
 			</table>
+			
+			<div id="file-area" style="display:none">
+                <input type="file" name="file1" onchange="loadImg(this, 1);" required>
+                <input type="file" name="file2" onchange="loadImg(this, 2);">
+                <input type="file" name="file3" onchange="loadImg(this, 3);">
+                <input type="file" name="file4" onchange="loadImg(this, 4);">
+            </div>
+	
+			<script>
+				function chooseFile(num){
+					$("input[name=file" + num + "]").click();
+				}
+				function loadImg(inputFile, num){
+					if(inputFile.files.length == 1){ // 파일 선택된 경우 => 파일 읽어들여서 미리보기
+						const reader = new FileReader();
+						// 파일을 읽어들이는 메소드
+						reader.readAsDataURL(inputFile.files[0]);
+						
+						// 파일 읽어들이기가 완료됐을 때 실행할 함수를 정의해두기
+						reader.onload = function(e){
+							switch(num){
+								case 1: $("#titleImg").attr("src", e.target.result); break;
+								case 2: $("#contentImg1").attr("src", e.target.result); break;
+								case 3: $("#contentImg2").attr("src", e.target.result); break;
+								case 4: $("#contentImg1").attr("src", e.target.result); break;
+							}
+						}
+					}else{ // 파일취소됐을 경우 => 미리보기된 것도 사라지게
+						switch(num){
+							case 1: $("#titleImg").attr("src", null); break;
+							case 2: $("#contentImg1").attr("src", null); break;
+							case 3: $("#contentImg2").attr("src", null); break;
+							case 4: $("#contentImg1").attr("src", null); break;
+						}
+					}
+				}
+			</script>
 
 			<br><br>
 			<button type="button" class="btn btn-primary">수정완료</button>
+			<a href="<%=contextPath%>/adList.sp" type="button" class="btn btn-secondary">뒤로가기</a>
 		</form>
 		        
     </div>

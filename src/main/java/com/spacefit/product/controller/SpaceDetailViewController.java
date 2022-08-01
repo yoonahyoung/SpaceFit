@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.spacefit.attachment.model.vo.Attachment;
 import com.spacefit.product.model.service.SpaceService;
 import com.spacefit.product.model.vo.Space;
 import com.spacefit.review.model.service.ReviewService;
@@ -38,6 +39,10 @@ public class SpaceDetailViewController extends HttpServlet {
 		int spNo = Integer.parseInt(request.getParameter("no"));
 		
 		Space s = new SpaceService().spaceDetailView(spNo);
+		ArrayList<Attachment> at = new SpaceService().selectAttach(spNo);
+		
+		request.setAttribute("s", s);
+		request.setAttribute("at", at);
 		
 		
 		// 이 부분부터 후기쪽 부분입니다. 소희작성

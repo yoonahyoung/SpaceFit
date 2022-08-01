@@ -74,7 +74,7 @@
 			<br><br>
 			<a href="<%=contextPath%>/adList.sp" type="button" class="btn btn-secondary">목록가기</a>
 			<a href="<%=contextPath%>/adUpdate.sp?no=<%= s.getSpaceNo() %>" type="button" class="btn btn-primary">공간수정</a>
-	        <a type="button" class="btn btn-danger">공간삭제</a>
+	        <a href="<%=contextPath%>/adDelete.sp?no=<%=s.getSpaceNo() %>" type="button" class="btn btn-danger">공간삭제</a>
 		</form>
 		        
     </div>
