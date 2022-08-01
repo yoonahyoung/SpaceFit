@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/7.3.0/swiper-bundle.min.css"/>
 <!-- fullcalendar CDN -->  
 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />  
+<link href='<%= request.getContextPath() %>/resources/user/css/calendar.css' rel="stylesheet" />
 
 
 <title>Insert title here</title>
@@ -42,6 +43,7 @@ body {
 	<%@ include file="../common/userMenubar.jsp" %>
 
     <main id="main">
+    <form action="<%=contextPath%>/결제페이지" method="get">
         <!-- ======= space view ======= -->
         <section class="agent-single">
             <div class="container">
@@ -340,40 +342,35 @@ body {
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="title-box-d" style="margin-bottom:0; margin-top:30px;">
-                                            <h1 class="title-d">Property Description</h1>
+                                            <h1 class="title-d"><%=s.getSpaceName() %></h1>
                                         </div>
-                                    </div>
-                                    <div class="property-description">
-                                        <p class="description color-text-a no-margin">
-                                            다양한 파티를 원하는 분들을 위한 공간
-                                        </p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <h4 style="margin-top:35px; border-bottom:2px solid #0D6EFD" id="aySelect">옵션선택</h4>
                                     <span class="col-sm-4"> 이용인원  </span>
-                                    <select name="limit">
+                                    <select name="limit" required>
                                         <%for(int i=2; i<21; i++){ %>
                                         	<option value="<%=i%>"><%= i %>명</option>
                                         <%} %>
                                     </select>
                                     <span class="col-sm-4"> 주차  </span>
-                                    <select name="parking">
+                                    <select name="parking" required>
                                         <option value="N">요청하지 않아요</option>
                                         <option value="Y">요청할게요</option>
                                     </select>
                                     <span class="col-sm-4"> 반려동물  </span>
-                                    <select name="animal">
+                                    <select name="animal" required>
                                         <option value="N">동반하지 않아요</option>
                                         <option value="Y">동반할게요</option>
                                     </select>
                                     <span class="col-sm-4"> 보면대  </span>
-                                    <select name="stand">
+                                    <select name="stand" required>
                                         <option value="N">필요하지 않아요</option>
                                         <option value="Y">필요해요</option>
                                     </select>
                                     <span class="col-sm-4"> 미니의자  </span>
-                                    <select name="chiar">
+                                    <select name="chiar" required>
                                         <option value="N">필요하지 않아요</option>
                                         <option value="Y">필요해요</option>
                                     </select>
@@ -387,12 +384,12 @@ body {
                                     </div>  
                                 </div>
                                 <br><br>
-                                <h5>선택 날짜 : <b name="chDate" id="chDate"></b></h5>
+                                <h5>선택 날짜 : <b id="chDate"><input type="hidden" class="chDate" name="date" value="nill" required></b></h5>
 
                                 <div class="row">
                                     <h4 style="margin-top:40px; border-bottom:2px solid #0D6EFD">시간선택</h4>
                                     <span class="col-sm-4"> 체크인  </span>
-                                    <select name="detailCI" class="detailCI">
+                                    <select name="detailCI" class="detailCI" required>
                                     	<%for(int i=9; i<22; i++){ %>
                                         	<option value="<%=i%>">
                                         		<% if(i==9){%>
@@ -404,7 +401,7 @@ body {
                                         <%} %>
                                     </select>
                                     <span class="col-sm-4"> 체크아웃  </span>
-                                    <select name="detailCO" class="detailCO">
+                                    <select name="detailCO" class="detailCO" required>
                                        <%for(int i=10; i<22; i++){ %>
                                         	<option value="<%=i%>"><%= i %>:00</option>
                                         <%} %>
@@ -413,22 +410,24 @@ body {
 
                                 <div class="row">
                                     <h4 style="margin-top:40px; border-bottom:2px solid #0D6EFD">총 금액</h4>
-                                    <span class="col-sm-4"><span name="price" id="price"></span> <b>원</b></span>
+                                    <span class="col-sm-4"><span id="price"><input type="hidden" name="price" class="price" required></span> <b>원</b></span>
                                 </div>
                                 <script>
                                 	$(".detailCO").change(function(){
-                                		console.log($(".detailCO>option:selected").val());
                                         const pp = $(".detailCO>option:selected").val() - $(".detailCI>option:selected").val();
                                         $("#price").text(pp * <%= s.getSpacePrice() %>);
+                                        $(".price").attr("value", (pp * <%= s.getSpacePrice() %>));
                                 	})
                                 </script>
                                 
 
                                 <div class="row">
+                                <!-- limit, parking, animal, stand, chair, date, detailCI, detailCO, price  -->
+                                	<input type="hidden" name="no" value="<%=s.getSpaceNo() %>">
                                     <div id="ayBtn" style="text-align:center; margin-top:100px;">
-                                        <button class="btn btn-primary">바로결제</button>
-                                        <button class="btn btn-outline-dark">보관함</button>
-                                        <button class="btn btn-outline-danger">찜하기</button>
+                                        <button type="submit" class="btn btn-primary">바로결제</button>
+                                        <button onclick="javascript: form.action='<%=contextPath %>/cart.sp';" class="btn btn-outline-dark">보관함</button>
+                                        <a href="<%=contextPath %>/zzim.sp" class="btn btn-outline-danger">찜하기</a>
                                     </div>
                                 </div>
                             </div>
@@ -437,6 +436,7 @@ body {
                 </div>
             </div>
         </section>
+        </form>
     </main>
     <script>
     
@@ -454,20 +454,33 @@ body {
 		    selectable:true,
 		    dateClick:function(info){
 		    	//console.log(info.dateStr); // 선택한 날짜 2022-08-02
-		    	
 		    	$("#chDate").html(info.dateStr);
-		    	//  ajax 조회 
+		    	$(".chDate").attr("value", info.dateStr);
 		    	
-		    	$.ajax({
-		    		url: '<%=contextPath%>/calender.sp',
-		    		data:{no:<%=s.getSpaceNo()%>, date:info.dateStr},
-		    		success: function(list){
-		    			// 캘린더에서 클릭된 날짜를 토대로 시간 선택 할 수 있게 해주기
-		    			// 즉, 캘린더에 예약된 내역들을 굳이 뿌리지 않을 것임
-		    			
-		    		},
-		    	});
-		    	
+			    	$.ajax({
+			    		url: '<%=contextPath%>/calender.sp',
+			    		data:{no:<%=s.getSpaceNo()%>, date:info.dateStr},
+			    		success: function(list){
+			    			//console.log(list);
+			    			// 캘린더에서 클릭된 날짜를 토대로 시간 선택 할 수 있게 해주기
+			    			// 즉, 캘린더에 예약된 내역들을 굳이 뿌리지 않을 것임
+			    			
+			    			// 예약 없는 날은 disabled해제
+		    				$(".detailCI").children().each(function(){
+		    					$(this).attr('disabled',false).css("background", "white");
+		    				});
+		    				$(".detailCO").children().each(function(){
+		    					$(this).attr('disabled',false).css("background", "white");
+		    				});
+		    				
+			    			// 예약된 시간들은 disabled처리
+		    				for(let i=0; i<list.length; i++){
+		    					for(let j=list[i].bookInTime; j<=list[i].bookOutTime; j++){
+		    						$("select option[value*="+ j + "]").attr('disabled',true).css("background", "lightgrey");
+		    					}
+			    			}
+			    		},
+			    	});
 		    }
 		});
 		calendar.render();
