@@ -9,6 +9,11 @@
 <meta charset="UTF-8">
 <title>예약리스트</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/admin/css/member.css">
+<style>
+	#dataTable>tbody>tr:hover{
+		cursor:pointer;
+	}
+</style>
 </head>
 <body>
 
@@ -16,7 +21,7 @@
     
     <div class="container-fluid">
         <br><br><br>
-        <h1 class="h3 mb-2 text-gray-800" style="color: rgb(20, 18, 18)">내역리스트</h1>
+        <h1 class="h3 mb-2 text-gray-800" style="color: rgb(20, 18, 18)">예약내역리스트</h1>
            <br><br><br>
 
         <!-- DataTales Example -->
@@ -79,6 +84,7 @@
                            </tbody>
                            
                         </table>
+                      
                     </div>
                     </div>
                     <!-- 
@@ -109,6 +115,9 @@
         		
         		selectAdminBookList();
         		//setInterval(selectAdminBookList, 1200);
+        		
+        		selectDetailBook();
+				        
 			})
         	
         	function selectAdminBookList(){
@@ -135,8 +144,8 @@
         					for(let i=0; i<list.length; i++){
         						
 	        					value += "<tr>"
-		                               +    "<td>" +  list[i].bookNo + "</td>"
-		                               +    "<td>" +  list[i].spaceNo + "</td>"
+		                               +  	"<td>" +  list[i].bookNo + "</td>"
+		                               +   	"<td>" +  list[i].spaceNo + "</td>"
 		                               +    "<td>" +  list[i].bookDate + "</td>"
 		                               +    "<td>" +  list[i].bookInTime + "</td>"
 		                               +    "<td>" +  list[i].bookOutTime + "</td>"
@@ -151,6 +160,7 @@
 		                               +    "<td>" +  list[i].bookChair + "</td>"
 		                               +    "<td>" +  list[i].bookStand + "</td>"
 		                               + "</tr>";
+		                             
         					}
         				}
         				
@@ -165,6 +175,14 @@
         			
         		});
         		
+        	}
+        	
+        	function selectDetailBook(){
+        		
+        		$("#dataTable").on("click", "tr", function(){
+        			location.href = "<%= contextPath %>/abdetail.bo?no=" + $(this).children().eq(0).text();
+        		})
+				
         	}
         
         </script>	

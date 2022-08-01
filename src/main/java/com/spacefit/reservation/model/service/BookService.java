@@ -20,7 +20,7 @@ public class BookService {
 		return list;
 	}
 	
-	// 사용자페이지 예약상세페이지용
+	// 예약상세페이지용
 	public Book selectBook(int bookNo) {
 		Connection conn = getConnection();
 		Book b = new BookDao().selectBook(conn, bookNo);
