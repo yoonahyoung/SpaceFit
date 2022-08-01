@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import com.spacefit.attachment.model.vo.Attachment;
 import com.spacefit.product.model.dao.SpaceDao;
 import com.spacefit.product.model.vo.Space;
+import com.spacefit.reservation.model.vo.Book;
 import com.spacefit.review.model.vo.Review;
 
 public class SpaceService {
@@ -77,6 +78,13 @@ public class SpaceService {
 			rollback(conn);
 		}
 		return result;
+	}
+
+	public ArrayList<Book> selectCalBook(int spNo) {
+		Connection conn = getConnection();
+		ArrayList<Book> list = new SpaceDao().selectCalBook(conn, spNo);
+		close(conn);
+		return list;
 	}
 
 }

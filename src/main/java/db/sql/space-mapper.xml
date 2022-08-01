@@ -127,7 +127,16 @@
 		 WHERE SPACE_NO = ?
 	</entry>
 	
-	
+	<entry key="selectCalBook">
+		SELECT
+		       BOOK_NO
+		     , BOOK_DATE
+		     , BOOK_IN
+		     , BOOK_OUT
+		  FROM TB_BOOK
+		 WHERE BOOK_STATUS = 'Y'
+		   AND SPACE_NO = ?
+	</entry>
 	
 
 </properties>

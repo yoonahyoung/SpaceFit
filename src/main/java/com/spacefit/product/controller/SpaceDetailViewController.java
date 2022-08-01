@@ -12,8 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.spacefit.attachment.model.vo.Attachment;
 import com.spacefit.product.model.service.SpaceService;
 import com.spacefit.product.model.vo.Space;
+import com.spacefit.reservation.model.service.BookService;
+import com.spacefit.reservation.model.vo.Book;
 import com.spacefit.review.model.service.ReviewService;
-import com.spacefit.review.model.vo.Like;
 import com.spacefit.review.model.vo.Review;
 
 /**
@@ -43,6 +44,7 @@ public class SpaceDetailViewController extends HttpServlet {
 		
 		request.setAttribute("s", s);
 		request.setAttribute("at", at);
+		
 		
 		
 		// 이 부분부터 후기쪽 부분입니다. 소희작성

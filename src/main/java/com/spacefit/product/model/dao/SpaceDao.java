@@ -14,6 +14,7 @@ import java.util.Properties;
 import com.spacefit.attachment.model.vo.Attachment;
 import com.spacefit.mem.model.dao.MemberDao;
 import com.spacefit.product.model.vo.Space;
+import com.spacefit.reservation.model.vo.Book;
 
 public class SpaceDao {
 	
@@ -210,6 +211,35 @@ public class SpaceDao {
 		}
 		
 		return result;
+	}
+
+	public ArrayList<Book> selectCalBook(Connection conn, int spNo) {
+		ArrayList<Book> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectCalBook");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, spNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Book b = new Book();
+				b.setBookNo(rset.getInt("book_no"));
+				b.setBookDate(rset.getString("book_date"));
+				b.setBookInTime(rset.getString("book_in"));
+				b.setBookOutTime(rset.getString("book_out"));
+				list.add(b);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 
 	
