@@ -303,6 +303,51 @@ public class MemberDao {
 	   
    }
    
+   public int insertMemCoupon(Connection conn, String cpCode) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertMemCoupon");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+//			pstmt.setString(1, cpName);
+//			pstmt.setInt(2, cpDiscount);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+   
+   public int updateMemberStatus(Connection conn, String memId, String memPwd) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateMemberStatus");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memId);
+			pstmt.setString(2, memPwd);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
    
    
    //---------ADMIN-----------//
@@ -475,7 +520,7 @@ public class MemberDao {
 		return result;
 	}
 	
-	public int adminInsertCoupon(Connection conn, String cpName, int cpDiscount) {
+	public int adminInsertCoupon(Connection conn, String cpName, int cpDiscount, String cpEndDate) {
 	
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -486,6 +531,7 @@ public class MemberDao {
 			
 			pstmt.setString(1, cpName);
 			pstmt.setInt(2, cpDiscount);
+			pstmt.setString(3, cpEndDate);
 			
 			result = pstmt.executeUpdate();
 			

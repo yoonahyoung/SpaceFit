@@ -104,7 +104,31 @@ public class MemberService {
 	   return list;
    }
    
+   public int insertMemCoupon(String cpCode) {
+		Connection conn = getConnection();
+		int result = new MemberDao().insertMemCoupon(conn, cpCode);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
    
+   public int updateMemberStatus(String memId, String memPwd) {
+		Connection conn = getConnection();
+		int result = new MemberDao().updateMemberStatus(conn, memId, memPwd);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
    
    
    
@@ -132,9 +156,9 @@ public class MemberService {
 		return list;
 	}
 
-	public int adminInsertCoupon(String cpName, int cpDiscount) {
+	public int adminInsertCoupon(String cpName, int cpDiscount, String cpEndDate) {
 		Connection conn = getConnection();
-		int result = new MemberDao().adminInsertCoupon(conn, cpName, cpDiscount);
+		int result = new MemberDao().adminInsertCoupon(conn, cpName, cpDiscount, cpEndDate);
 		
 		if(result > 0) {
 			commit(conn);
