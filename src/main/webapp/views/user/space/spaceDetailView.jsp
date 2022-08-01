@@ -170,7 +170,7 @@
 	                                        </div>
 	                                        
 	                                        <% for(Review r : rvList) { %>  
-	                                        <div class="container-fluid eachRvList">
+	                                        <div class="container-fluid eachRvList ">
 	                                            <div class="row">
 	                                                <div class="col-lg-3"> 
 	                                                    <img class="titleImg" width="150" height="120" onclick="">
@@ -213,11 +213,14 @@
 	                                                    </div>
 	                                                    <br>
 	                                                    <div class="rvLikeAndReport">
-	                                                        <button type="button" class="btn btn-primary btn-sm" onclick="likeUpdate();">후기추천</button>
-	                                                        <button type="button" class="btn btn-danger btn-sm">후기신고</button>
-	                                                        <input type="hidden" value="<%= loginUser.getMemNo() %>" name="memNo" id="memNo">
-	                                        				<input type="hidden" value="<%= r.getReviewNo() %>" name="rvNo" id="rvNo">
-	                                        				<span><%= r.getReviewNo() %></span>
+	                                                    	<% if (directMemNo == 0) { %>
+	                                                    		<span>테스트테스트</span>
+	                                                    	<% } else { %>
+		                                                        <button type="button" class="btn btn-primary btn-sm" data-value="<%= r.getReviewNo() %>" onclick="likeUpdate(this);">후기추천</button>
+		                                                        <button type="button" class="btn btn-danger btn-sm">후기신고</button>
+		                                                        <input type="hidden" value="<%= directMemNo %>" name="memNo" id="memNo">
+		                                        				<input type="hidden" value="<%= r.getReviewNo() %>" name="rvNo" id="rvNo">
+		                                        			<% } %>
 	                                                    </div>
 	                                                </div>
 	                                            </div>
@@ -285,14 +288,7 @@
                                                                 </thead>
                                                             </table>
                                                         </div>
-                                                    
                                                     </div>
-	                                            	
-
-
-                                                   
-                                                    
-	                                            
 	                                            </div>
 	                                        </div>
 	                                        
@@ -301,20 +297,22 @@
                                     	 <h4>" 아직 작성된 후기가 없습니다 "</h4><br>
 									<% } %>
 									<script>
-				                       function likeUpdate(){
-				                    	   
+				                       function likeUpdate(e){
+				                    	   let rvNo = $(e).data("value")
 				                    		 
 				                    			  $.ajax({
 						                    			url:"<%=contextPath %>/likeUpdate.lk",
 						                    			data:{
 						                    				memNo:$("#memNo").val(),
-						                    				rvNo:$("#rvNo").val()
+						                    				rvNo:rvNo
 						                    			},
 						                    			success:function(result){
 						                    				if(result == "likeOk"){
-						            							// 추천이 완료된 데이터가 넘어옴
+						                    					// 추천이 완료된 데이터, 예약번호가 넘어옴
 						            							alert("추천해주셔서 감사합니다!");
+						                    					// 바로 표시되게 하는 걸 못하게씀 ㅜㅜ
 						            						} else {
+						            							// 후기 중복확인
 						            							alert("이미 추천한 후기입니다!");
 						            							}
 						                    			},
