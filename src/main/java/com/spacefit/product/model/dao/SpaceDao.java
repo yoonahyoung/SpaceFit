@@ -144,18 +144,24 @@ public class SpaceDao {
 	}
 	
 	public int insertAttach(Connection conn, ArrayList<Attachment> list) {
+		System.out.println(list);
+		
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertAttach");
 		
 		try {
-			for(int i=0; i<list.size(); i++) {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, list.get(i).getFileOriginName());
-				pstmt.setString(2, list.get(i).getFileChangeName());
-				pstmt.setString(3, list.get(i).getFilePath());
-				
-				result = pstmt.executeUpdate();
+			if(list.isEmpty()) {
+				result = 1;
+			}else {
+				for(int i=0; i<list.size(); i++) {
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, list.get(i).getFileOriginName());
+					pstmt.setString(2, list.get(i).getFileChangeName());
+					pstmt.setString(3, list.get(i).getFilePath());
+					
+					result = pstmt.executeUpdate();
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
