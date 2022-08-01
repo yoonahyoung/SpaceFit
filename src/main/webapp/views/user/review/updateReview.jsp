@@ -158,14 +158,13 @@
 		           <div class="modal-header">                            
 		           </div>           
 		           <div class="modal-body" align="center">
-		           	  <form action="  " method=post>  
+		           	  
 			              <h4>해당 후기를 삭제하시겠습니까?</h4>
 			                 <br>
 			                 <div>
-			                    <button type="submit" class="btn btn-sm btn-primary" style="width: 60px;" onclick="location.href='<%=contextPath%>/rdelete.vo?no=<%=rv.getReviewNo() %>'">네</button>
+			                    <button type="button" class="btn btn-sm btn-primary" style="width: 60px;" onclick="location.href='<%=contextPath%>/rdelete.vo?no=<%=rv.getReviewNo() %>'">네</button>
 			                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" style="width: 60px;">아니오</button>
-			                 </div>                       
-		              </form> 
+			                 </div>        
 		           </div>
 		           <div class="modal-footer">
 		           </div>

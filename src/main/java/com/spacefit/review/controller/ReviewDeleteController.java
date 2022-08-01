@@ -39,7 +39,7 @@ public class ReviewDeleteController extends HttpServlet {
 		
 		if(result > 0 ) { // 성공							
 			request.getSession().setAttribute("alertMsg", "후기삭제되었습니다.");
-			response.sendRedirect(request.getContextPath() + "rlist.rv?cpage=1");	
+			response.sendRedirect(request.getContextPath() + "/rlist.rv?cpage=1");	
 						
 		}else { // 실패
 			request.setAttribute("errorMsg", "후기삭제에 실패했습니다.");
