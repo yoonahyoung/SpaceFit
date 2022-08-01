@@ -32,8 +32,13 @@ public class QnAEnrollFormController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<Category> list = new QnAService().selectCategoryList();
-		request.setAttribute("list", list);
+		ArrayList<Category> partyList = new QnAService().selectCategoryList("party");
+		ArrayList<Category> practiceList = new QnAService().selectCategoryList("practice");
+		ArrayList<Category> studioList = new QnAService().selectCategoryList("studio");
+		
+		request.setAttribute("partyList", partyList);
+		request.setAttribute("practiceList", practiceList);
+		request.setAttribute("studioList", studioList);
 		request.getRequestDispatcher("views/user/qna/qnaEnrollForm.jsp").forward(request, response);
 	}
 

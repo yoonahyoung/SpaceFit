@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.qna.model.vo.Category"%>
 <%
-	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
+	ArrayList<Category> partyList = (ArrayList<Category>)request.getAttribute("partyList");
+	ArrayList<Category> practiceList = (ArrayList<Category>)request.getAttribute("practiceList");
+	ArrayList<Category> studioList = (ArrayList<Category>)request.getAttribute("studioList");
 %>
 <!DOCTYPE html>
 <html>
@@ -48,9 +50,9 @@
     <!-- <input type="hidden" value=""> -->
     <table class="table" id="detail-area">
         <tr>
-            <th width="90">유형</th>
+            <th width="90">질문유형</th>
             <td width="80">
-                <select name="category" id="category">
+                <select name="category" id="qnaCategory">
                     <option value="선택" selected>--선택--</option>
                     <option value="공간">공간</option>
                     <option value="결제">결제</option>
@@ -58,35 +60,62 @@
                     <option value="기타">기타</option>
                 </select>
             </td>
+            <th width="90">공간분류</th>
+            <td width="100">
+                <select name="room" id="spaceCategory" onchange="spaceList();">
+                    <option value="선택" selected>--선택--</option>
+                    <option value="스튜디오">스튜디오</option>
+                    <option value="연습실">연습실</option>
+                    <option value="파티룸">파티룸</option>
+                </select>
             <th width="70">공간</th>
             <td width="100">
-                <!-- 공간 목록이 나오도록 -->
-                <select name="room" id="room">
+
+                <!-- 기본선택 -->
+                <select name="space" id="basic" style="display: block;">
                     <option value="선택" selected>--선택--</option>
-                    <% for(Category c : list) { %>
+                </select>
+
+                <!-- 공간 목록이 나오도록 -->
+                <select name="space" id="studio" style="display: none;">
+                    <option value="선택" selected>--선택--</option>
+                    <% for(Category c : studioList) { %>
                     <option value="<%=c.getCategoryNo()%>"><%= c.getCategoryName() %></option>
                     <% } %>
                 </select>
+                <select name="space" id="practice" style="display: none;">
+                    <option value="선택" selected>--선택--</option>
+                    <% for(Category c : practiceList) { %>
+                    <option value="<%=c.getCategoryNo()%>"><%= c.getCategoryName() %></option>
+                    <% } %>
+                </select>
+                <select name="space" id="party" style="display: none;">
+                    <option value="선택" selected>--선택--</option>
+                    <% for(Category c : partyList) { %>
+                    <option value="<%=c.getCategoryNo()%>"><%= c.getCategoryName() %></option>
+                    <% } %>
+                </select>
+
             </td>
             <th width="70">제목</th>
-            <td width="430">
+            <td width="350">
                 <input type="text" id="title" required>
             </td>
 
         </tr>
         <tr>
             <th>내용</th>
-            <td colspan="5">
+            <td colspan="7">
                 <textarea rows="10" name="content" required style="resize: none;"></textarea>
             </td>
         </tr>
         <tr>
             <th>첨부파일</th>
-            <td colspan="5" align="left"><input type="file" name="upfile"></td>
+            <td colspan="7" align="left"><input type="file" name="upfile"></td>
         </tr>
         <tr>
             <th>비밀번호</th>
-            <td colspan="5" align="left">
+            <td colspan="7" align="left">
                 <input type="radio" name="public" id="pu" checked onclick="publi();"><label for="pu">&nbsp;공개글</label>&nbsp;
                 <input type="radio" name="public" id="sc" onclick="secret();"><label for="sc">&nbsp;비밀글</label> &nbsp;
                 <input type="password" name="password" maxlength="8" placeholder="8자리 이내로 입력해주세요" id="pwd">
@@ -120,11 +149,35 @@
         $("#pwd").attr("disabled", false);
     }
     function check(){
-        if($("#category").val()=='선택'||$("#room").val()=='선택'){
+        if($("#qnaCategory").val()=='선택'||$("#space").val()=='선택'||$("#spaceCategory").val()=='선택'){
             alert("유형 및 공간을 선택하세요");
             return false;
         }
-        
+    }
+    
+    function spaceList(){
+
+        if($("#spaceCategory").val()=='스튜디오'){
+            $("#basic").css("display", 'none');
+            $("#studio").css("display", 'block');
+            $("#practice").css("display", 'none');
+            $("#party").css("display", 'none');
+        }else if($("#spaceCategory").val()=='연습실'){
+            $("#basic").css("display", 'none');
+            $("#studio").css("display", 'none');
+            $("#practice").css("display", 'block');
+            $("#party").css("display", 'none');
+        }else if($("#spaceCategory").val()=='파티룸'){
+            $("#basic").css("display", 'none');
+            $("#studio").css("display", 'none');
+            $("#practice").css("display", 'none');
+            $("#party").css("display", 'block');
+        }else if($("#spaceCategory").val()=='선택'){
+            $("#basic").css("display", 'block');
+            $("#studio").css("display", 'none');
+            $("#practice").css("display", 'none');
+            $("#party").css("display", 'none');
+        }
     }
 </script>
 </html>

@@ -51,6 +51,7 @@ public class QnADao {
 			while(rset.next()) {
 				list.add(new QnA(rset.getInt("QNA_NO"),
 									rset.getString("QNA_CATEGORY"),
+									rset.getString("SPACE_CATEGORY"),
 									rset.getString("SPACE_NAME"),
 									rset.getString("QNA_TITLE"),
 									rset.getString("MEM_ID"),
@@ -97,7 +98,7 @@ public class QnADao {
 		
 	}
 	
-	public ArrayList<Category> selectCategoryList(Connection conn){
+	public ArrayList<Category> selectCategoryList(Connection conn, String spaceCategory){
 		// select문 => ResultSet(여러행) => ArrayList<Category>
 		ArrayList<Category> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -107,6 +108,7 @@ public class QnADao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, spaceCategory);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {

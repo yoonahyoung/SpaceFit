@@ -26,9 +26,9 @@ public class QnAService {
 		return listCount;
 	}
 	
-	public ArrayList<Category> selectCategoryList(){
+	public ArrayList<Category> selectCategoryList(String spaceCategory){
 		Connection conn = getConnection();
-		ArrayList<Category> list = new QnADao().selectCategoryList(conn);
+		ArrayList<Category> list = new QnADao().selectCategoryList(conn, spaceCategory);
 		close(conn);
 		return list;
 	}

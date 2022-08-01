@@ -72,6 +72,17 @@ public class QnAListController extends HttpServlet {
 
 		// 3) 요청처리 (응답페이지에 필요한 데이터를 조회)
 		ArrayList<QnA> list = new QnAService().selectQnAList(pi);
+		
+		for(QnA q : list) {
+			if(q.getSpaceCategory().equals("practice")) {
+				q.setSpaceCategory("연습실");
+			} else if(q.getSpaceCategory().equals("studio")) {
+				q.setSpaceCategory("스튜디오");
+			}else if(q.getSpaceCategory().equals("party")) {
+				q.setSpaceCategory("파티룸");
+			}
+		}
+		
 		// 4) 응답뷰 => noticeListView.jsp
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);

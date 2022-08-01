@@ -5,6 +5,7 @@ import java.sql.Date;
 public class QnA {
 	private int qnaNo;
 	private String qnaCategory;
+	private String spaceCategory;
 	private String qnaSpaceNo;	
 	private String qnaTitle;
 	private String qnaContent;
@@ -16,27 +17,25 @@ public class QnA {
 	
 	public QnA() {}
 
-	
-	
-	public QnA(int qnaNo, String qnaCategory, String qnaSpaceNo, String qnaTitle, String qnaWriter, int count,
+	public QnA(int qnaNo, String qnaCategory, String spaceCategory, String qnaSpaceNo, String qnaTitle, String qnaWriter, int count,
 			Date qnaCreateDate) {
 		super();
 		this.qnaNo = qnaNo;
 		this.qnaCategory = qnaCategory;
+		this.spaceCategory = spaceCategory;
 		this.qnaSpaceNo = qnaSpaceNo;
 		this.qnaTitle = qnaTitle;
 		this.qnaWriter = qnaWriter;
 		this.count = count;
 		this.qnaCreateDate = qnaCreateDate;
 	}
-
-
-
-	public QnA(int qnaNo, String qnaCategory, String qnaSpaceNo, String qnaTitle, String qnaContent, String qnaWriter,
-			int qnaGroup, int qnaRefNo, int count, Date qnaCreateDate) {
+	
+	public QnA(int qnaNo, String qnaCategory, String spaceCategory, String qnaSpaceNo, String qnaTitle,
+			String qnaContent, String qnaWriter, int qnaGroup, int qnaRefNo, int count, Date qnaCreateDate) {
 		super();
 		this.qnaNo = qnaNo;
 		this.qnaCategory = qnaCategory;
+		this.spaceCategory = spaceCategory;
 		this.qnaSpaceNo = qnaSpaceNo;
 		this.qnaTitle = qnaTitle;
 		this.qnaContent = qnaContent;
@@ -47,11 +46,11 @@ public class QnA {
 		this.qnaCreateDate = qnaCreateDate;
 	}
 
-
-
+	
 	public int getQnaNo() {
 		return qnaNo;
 	}
+
 
 
 	public void setQnaNo(int qnaNo) {
@@ -59,9 +58,11 @@ public class QnA {
 	}
 
 
+
 	public String getQnaCategory() {
 		return qnaCategory;
 	}
+
 
 
 	public void setQnaCategory(String qnaCategory) {
@@ -69,9 +70,23 @@ public class QnA {
 	}
 
 
+
+	public String getSpaceCategory() {
+		return spaceCategory;
+	}
+
+
+
+	public void setSpaceCategory(String spaceCategory) {
+		this.spaceCategory = spaceCategory;
+	}
+
+
+
 	public String getQnaSpaceNo() {
 		return qnaSpaceNo;
 	}
+
 
 
 	public void setQnaSpaceNo(String qnaSpaceNo) {
@@ -79,9 +94,11 @@ public class QnA {
 	}
 
 
+
 	public String getQnaTitle() {
 		return qnaTitle;
 	}
+
 
 
 	public void setQnaTitle(String qnaTitle) {
@@ -89,9 +106,11 @@ public class QnA {
 	}
 
 
+
 	public String getQnaContent() {
 		return qnaContent;
 	}
+
 
 
 	public void setQnaContent(String qnaContent) {
@@ -99,9 +118,11 @@ public class QnA {
 	}
 
 
+
 	public String getQnaWriter() {
 		return qnaWriter;
 	}
+
 
 
 	public void setQnaWriter(String qnaWriter) {
@@ -109,9 +130,11 @@ public class QnA {
 	}
 
 
+
 	public int getQnaGroup() {
 		return qnaGroup;
 	}
+
 
 
 	public void setQnaGroup(int qnaGroup) {
@@ -119,9 +142,11 @@ public class QnA {
 	}
 
 
+
 	public int getQnaRefNo() {
 		return qnaRefNo;
 	}
+
 
 
 	public void setQnaRefNo(int qnaRefNo) {
@@ -129,9 +154,11 @@ public class QnA {
 	}
 
 
+
 	public int getCount() {
 		return count;
 	}
+
 
 
 	public void setCount(int count) {
@@ -139,9 +166,11 @@ public class QnA {
 	}
 
 
+
 	public Date getQnaCreateDate() {
 		return qnaCreateDate;
 	}
+
 
 
 	public void setQnaCreateDate(Date qnaCreateDate) {
@@ -149,16 +178,20 @@ public class QnA {
 	}
 
 
+
+
+
+
+
 	@Override
 	public String toString() {
-		return "QnA [qnaNo=" + qnaNo + ", qnaCategory=" + qnaCategory + ", qnaSpaceNo=" + qnaSpaceNo + ", qnaTitle="
-				+ qnaTitle + ", qnaContent=" + qnaContent + ", qnaWriter=" + qnaWriter + ", qnaGroup=" + qnaGroup
-				+ ", qnaRefNo=" + qnaRefNo + ", count=" + count + ", qnaCreateDate=" + qnaCreateDate + "]";
+		return "QnA [qnaNo=" + qnaNo + ", qnaCategory=" + qnaCategory + ", spaceCategory=" + spaceCategory
+				+ ", qnaSpaceNo=" + qnaSpaceNo + ", qnaTitle=" + qnaTitle + ", qnaContent=" + qnaContent
+				+ ", qnaWriter=" + qnaWriter + ", qnaGroup=" + qnaGroup + ", qnaRefNo=" + qnaRefNo + ", count=" + count
+				+ ", qnaCreateDate=" + qnaCreateDate + "]";
 	}
-	
+
 	
 }
 
-	
-	
-	
+		

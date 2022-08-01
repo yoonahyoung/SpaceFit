@@ -49,7 +49,8 @@
         <thead>
             <tr>
                 <th width="100">글번호</th>
-                <th width="100">유형</th>
+                <th width="100">질문유형</th>
+                <th width="100">공간분류</th>
                 <th width="100">공간</th>
                 <th width="350">글제목</th>
                 <th width="100">작성자</th>
@@ -62,7 +63,7 @@
         <%if(list.isEmpty()) { %>
             <!-- case1. 공지글이 없을 경우 -->
             <tr>
-                <td colspan="7">존재하는 문의사항이 없습니다.</td>
+                <td colspan="8">존재하는 문의사항이 없습니다.</td>
             </tr>
 		<% } else{ %>
             <!-- case2. 공지글이 있을 경우 -->
@@ -70,6 +71,7 @@
             <tr>
 				<td><%= n.getQnaNo() %></td>
 				<td><%= n.getQnaCategory() %></td>
+                <td><%= n.getSpaceCategory() %></td>
                 <td><%= n.getQnaSpaceNo() %></td>
 				<td><%= n.getQnaTitle() %></td>
 				<td><%= n.getQnaWriter() %></td>

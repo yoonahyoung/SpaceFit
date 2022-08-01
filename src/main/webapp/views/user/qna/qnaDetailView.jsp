@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.notice.model.vo.Notice"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.qna.model.vo.QnA"%>
 <%
-	Notice n = (Notice)request.getAttribute("notice");
+	QnA q = (QnA)request.getAttribute("qna");
 %>
 <!DOCTYPE html>
 <html>
@@ -36,25 +36,27 @@
     <table class="table" id="detail-area">
         <tr>
             <th width="80">제목</th>
-            <td colspan="7" width="430" align="left"><%=n.getNoticeTitle() %></td>
+            <td colspan="7" width="430" align="left"><%=q.getQnaTitle() %></td>
 
         </tr>
         <tr>
-            <th>유형</th>
-            <td><%=n.getNoticeCategory() %></td>
+            <th>질문유형</th>
+            <td><%=q.getQnaCategory() %></td>
+            <th>공간분류</th>
+            <td><%=q.getSpaceCategory() %></td>
             <th width="80">공간</th>
-            <td>공간이름들어올자리</td>
+            <td><%=q.getQnaTitle() %></td>
             <th width="80">작성자</th>
-            <td><%=n.getNoticeWriter() %></td>
+            <td><%=q.getQnaWriter() %></td>
             <th width="80">작성일</th>
-            <td><%=n.getCreateDate() %></td>
+            <td><%=q.getQnaCreateDate() %></td>
             <th width="80">조회수</th>
-            <td><%=n.getCount() %></td>
+            <td><%=q.getCount() %></td>
         </tr>
         <tr>
             <th>내용</th>
             <td colspan="7" align="left">
-                <p style="height: 400px;"><%=n.getNoticeContent() %></p>
+                <p style="height: 400px;"><%=q.getQnaContent() %></p>
             </td>
         </tr>
     </table>
