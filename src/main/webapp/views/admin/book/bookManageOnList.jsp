@@ -39,7 +39,7 @@
                           
                   </div>
                   <div class="col-lg" align="right"> 
-                  	    <select name="booktype" id="booktype" onchange="selectAdminBookList();">
+                  	    <select  name="booktype" id="booktype" onchange="selectAdminBookList();">
 			                <option selected>전체</option>
 			                <option>예약확정</option>
 			                <option>이용완료</option>
