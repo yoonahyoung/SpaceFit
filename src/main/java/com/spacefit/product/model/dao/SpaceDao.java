@@ -219,7 +219,7 @@ public class SpaceDao {
 		return result;
 	}
 
-	public ArrayList<Book> selectCalBook(Connection conn, int spNo) {
+	public ArrayList<Book> selectCalBook(Connection conn, int spNo, String date) {
 		ArrayList<Book> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -228,6 +228,7 @@ public class SpaceDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, spNo);
+			pstmt.setString(2, date);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {

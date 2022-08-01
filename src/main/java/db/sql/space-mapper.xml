@@ -136,6 +136,7 @@
 		  FROM TB_BOOK
 		 WHERE BOOK_STATUS = 'Y'
 		   AND SPACE_NO = ?
+		   AND BOOK_DATE = ?
 	</entry>
 	
 

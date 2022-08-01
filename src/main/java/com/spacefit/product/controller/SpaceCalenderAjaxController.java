@@ -36,12 +36,17 @@ public class SpaceCalenderAjaxController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int spNo = Integer.parseInt(request.getParameter("no"));
-		// 캘린더에 뿌리기 위한 데이터 가져오기
-		ArrayList<Book> bList = new SpaceService().selectCalBook(spNo);
+		String date = request.getParameter("date").replace("-", ".");
+		
+		// 캘린더에 뿌리기 위한 데이터 가져오기 (공간 번호와 클릭된 날짜 넘기기)
+		ArrayList<Book> bList = new SpaceService().selectCalBook(spNo , date);
+		for(Book b : bList) {
+			b.setBookDate(b.getBookDate().replace(".", "-"));
+		}
 		
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(bList, response.getWriter());
-		System.out.println(bList);
+		
 	}
 
 	/**

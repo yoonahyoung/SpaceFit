@@ -80,9 +80,9 @@ public class SpaceService {
 		return result;
 	}
 
-	public ArrayList<Book> selectCalBook(int spNo) {
+	public ArrayList<Book> selectCalBook(int spNo, String date) {
 		Connection conn = getConnection();
-		ArrayList<Book> list = new SpaceDao().selectCalBook(conn, spNo);
+		ArrayList<Book> list = new SpaceDao().selectCalBook(conn, spNo, date);
 		close(conn);
 		return list;
 	}

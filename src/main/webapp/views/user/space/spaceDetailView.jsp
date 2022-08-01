@@ -24,16 +24,16 @@
 
 /* 캘린더 */
 body {
-  margin: 40px 10px;
-  padding: 0;
-  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-  font-size: 14px;
-}
+    margin: 40px 10px;
+    padding: 0;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+  }
 
-#calendar {
-  max-width: 1100px;
-  margin: 0 auto;
-}
+  #calendar {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
 
 </style>
 </head>
@@ -384,10 +384,10 @@ body {
                                     <!-- calendar 태그 -->  
                                     <div id='calendar-container'>    
                                         <div id='calendar'></div>  
-                                        
                                     </div>  
-                                
                                 </div>
+                                <br><br>
+                                <h5>선택 날짜 : <b name="chDate" id="chDate"></b></h5>
 
                                 <div class="row">
                                     <h4 style="margin-top:40px; border-bottom:2px solid #0D6EFD">시간선택</h4>
@@ -439,81 +439,40 @@ body {
         </section>
     </main>
     <script>
-    $.ajax({
-		url: '<%=contextPath%>/calender.sp',
-		data:{no:'<%=s.getSpaceNo() %>'},
-		success: function(res){
-			var list = res;
-			console.log(list);
-			
-			
- 			var calendarEl = document.getElementById('calendar');
-			
-			var events = list.map(function(item) {
-				return {
-					title : item.bookNo,
-					start : item.bookDate + "T" + item.bookIntime
-				}
-			});
-			
-			var calendar = new FullCalendar.Calendar(calendarEl, {
-				
-			        locale: 'ko',
-				
-				events : events,
-				eventTimeFormat: { // like '14:30:00'
-				    hour: 'hh',
-				    minute: 'mm',
-				    hour12: false
-				  }
-			});
-			calendar.render();
-		},
-	});
-        <%-- document.addEventListener('DOMContentLoaded', function() {
-	       	var request = $.ajax({
-	               url: "<%=contextPath%>/calender.sp", // 변경하기
-	               data:{no:<%=s.getSpaceNo() %>},
-			       success:function(list){
-			    	   //console.log(list);
-			    	   
-	        			var calendarEl = document.getElementById('calendar');
-						
-	        			var events = list.map(function(item){
-	        				return {
-	        					start:item.bookDate + "T" + item.bookInTime + ":00",
-	        					end:item.bookDate + "T" + item.bookOutTime + ":00"
-	        				}
-	        			});
-	        			
-	        			var calendar = new FullCalendar.Calendar(calendarEl, {
-				            slotMinTime: '09:00',
-				            slotMaxTime: '22:00',
-					        headerToolbar: {
-					            left: 'prev,next today',
-					            center: 'title',
-					            right: '',
-						        initialView: 'dayGridMonth',
-						        navLinks: false, // 일정 클릭시 url연결 안되게끔
-						        businessHours: false, // display business hours
-						        editable: false, // 수정불가
-						        nowIndicator: true, 
-						        selectable: true, // 여러개 선택 불가
-						        locale: 'ko',
-						        events: events,
-						        eventTimeFormat:{
-						        	hour: '2-digit',
-						        	minute: '2-digit',
-						        	hour12: false
-						        }
-						    }});
-				        calendar.render();
-			       }
-	           });
-	       	
-  	}); --%>
-
-
+    
+	$(function(){
+		calendarRendering();
+	})
+   
+    function calendarRendering(){
+    	var calendarEl = document.getElementById('calendar');
+		
+		
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+		    locale: 'ko',
+		    
+		    selectable:true,
+		    dateClick:function(info){
+		    	//console.log(info.dateStr); // 선택한 날짜 2022-08-02
+		    	
+		    	$("#chDate").html(info.dateStr);
+		    	//  ajax 조회 
+		    	
+		    	$.ajax({
+		    		url: '<%=contextPath%>/calender.sp',
+		    		data:{no:<%=s.getSpaceNo()%>, date:info.dateStr},
+		    		success: function(list){
+		    			// 캘린더에서 클릭된 날짜를 토대로 시간 선택 할 수 있게 해주기
+		    			// 즉, 캘린더에 예약된 내역들을 굳이 뿌리지 않을 것임
+		    			
+		    		},
+		    	});
+		    	
+		    }
+		});
+		calendar.render();
+		
+    }
     </script>
 
 
@@ -538,5 +497,4 @@ body {
 
 <!-- fullcalendar -->  
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
-<script src='<%= thisPath %>/resources/user/js/spaceCalender.js'></script>
 </html>
