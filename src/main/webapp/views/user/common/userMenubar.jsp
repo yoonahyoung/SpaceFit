@@ -479,7 +479,7 @@
 	  
 	        <div class="accordion-item">
 	          <h2 class="accordion-header" id="flush-headingThree">
-	            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+	            <button onclick="qnaList();" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
 	              1:1문의
 	            </button>
 	          </h2>
@@ -612,6 +612,10 @@
        		// 즉 이 때 url에는 서블릿 매핑값만 노출
        		location.href="<%=contextPath%>/list.no?cpage=1";
 			}
+	       
+	       function qnaList(){
+	       		location.href="<%=contextPath%>/list.qa?cpage=1";
+				}
        </script>
 
 

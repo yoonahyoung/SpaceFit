@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.notice.model.vo.Notice"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.qna.model.vo.Category"%>
 <%
-	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
-    System.out.println(list);
+	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -64,10 +63,9 @@
                 <!-- 공간 목록이 나오도록 -->
                 <select name="room" id="room">
                     <option value="선택" selected>--선택--</option>
-                    <option value="">파티룸A</option>
-                    <option value="">파티룸B</option>
-                    <option value="">파티룸C</option>
-                    <option value="">파티룸D</option>
+                    <% for(Category c : list) { %>
+                    <option value="<%=c.getCategoryNo()%>"><%= c.getCategoryName() %></option>
+                    <% } %>
                 </select>
             </td>
             <th width="70">제목</th>
@@ -99,7 +97,7 @@
     <br>
 	<div align="right">
         <button type="button" class="btn btn-sm btn-primary" onclick="return check();">등록</button>
-        <button class="btn btn-sm btn-secondary">취소</button>
+        <button type="button" class="btn btn-sm btn-secondary" onclick="history.back();">취소</button>
     </div>
     </form>
     <div style="height : 60px">
