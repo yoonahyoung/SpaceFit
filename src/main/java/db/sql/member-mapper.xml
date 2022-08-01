@@ -255,7 +255,7 @@
 		       )
 	</entry>
 	
-	<entry key="admminInsertGroupCoupon">
+	<entry key="adminInsertGroupCoupon">
 		INSERT
 		  INTO TB_MCP
 		      (MCP_NO
@@ -276,5 +276,54 @@
 		  LEFT JOIN TB_MCP P ON (C.CP_NO = P.CP_NO)
 		 RIGHT JOIN TB_MEMBER M ON(P.MEM_NO = M.MEM_NO)
 		 WHERE GR_NO = ?
+	</entry>
+	
+	<entry key="adminInsertOneCoupon">
+		INSERT
+		  INTO TB_MCP
+		      (MCP_NO
+		     , CP_NO
+		     , MEM_NO
+		     , MCP_STATUS
+		     , MCP_USE
+		     , MCP_START_DATE
+		     , MCP_END_DATE)
+		SELECT SEQ_MCNO.NEXTVAL
+		     , ? 
+		     , M.MEM_NO
+		     , 'Y'
+		     , 'N'
+		     , SYSDATE
+		     , ?
+		  FROM TB_COUPON C
+		  LEFT JOIN TB_MCP P ON (C.CP_NO = P.CP_NO)
+		 RIGHT JOIN TB_MEMBER M ON(P.MEM_NO = M.MEM_NO)
+		 WHERE MEM_ID = ?
+	</entry>
+	
+	<entry key="adminInsertAllCoupon">
+		INSERT
+		  INTO TB_MCP
+		      (MCP_NO
+		     , CP_NO
+		     , MEM_NO
+		     , MCP_STATUS
+		     , MCP_USE
+		     , MCP_START_DATE
+		     , MCP_END_DATE)
+		SELECT 
+               SEQ_MCNO.NEXTVAL
+		     , ?
+		     , MEM_NO
+		     , 'Y'
+		     , 'N'
+		     , SYSDATE
+		     , ?
+		  FROM (SELECT DISTINCT 
+                	   P.CP_NO
+		     	     , M.MEM_NO
+				  FROM TB_COUPON C
+				  LEFT JOIN TB_MCP P ON (C.CP_NO = P.CP_NO)
+				 RIGHT JOIN TB_MEMBER M ON(P.MEM_NO = M.MEM_NO))
 	</entry>
 </properties>

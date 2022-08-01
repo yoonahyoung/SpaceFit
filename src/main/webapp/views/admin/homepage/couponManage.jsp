@@ -78,7 +78,7 @@
                                   	<% if(list.isEmpty()){ %>
                                   	
                                   		<tr>
-						                    <td colspan="5">등록된 쿠폰이 없습니다.</td>
+						                    <td colspan="5" align="center">등록된 쿠폰이 없습니다.</td>
 						                </tr>
 						                
                                   	<% }else {%>

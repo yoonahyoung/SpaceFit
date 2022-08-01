@@ -451,9 +451,8 @@ public class MemberDao {
 		
 	}
 	
-	public int adminInsertGroupCoupon(Connection conn, int cpNo, int grNo, String mcpEndDate) {
+	public int adminInsertGroupCoupon(Connection conn, int cpNo, String grNo, String mcpEndDate) {
 		
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("adminInsertGroupCoupon");
@@ -463,7 +462,7 @@ public class MemberDao {
 			
 			pstmt.setInt(1, cpNo);
 			pstmt.setString(2, mcpEndDate);
-			pstmt.setInt(3, grNo);
+			pstmt.setString(3, grNo);
 			
 			result = pstmt.executeUpdate();
 			
@@ -499,7 +498,52 @@ public class MemberDao {
 		return result;
 	}
 	
+	public int adminInsertOneCoupon(Connection conn, int cpNo, String memId, String mcpEndDate) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("adminInsertOneCoupon");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, cpNo);
+			pstmt.setString(2, mcpEndDate);
+			pstmt.setString(3, memId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
+	public int adminInsertAllCoupon(Connection conn, int cpNo, String mcpEndDate) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("adminInsertAllCoupon");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, cpNo);
+			pstmt.setString(2, mcpEndDate);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	
 	

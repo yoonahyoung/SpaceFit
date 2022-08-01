@@ -145,7 +145,7 @@ public class MemberService {
 		return result;
 	}
 	
-	public int adminInsertGroupCoupon(int cpNo, int grNo, String mcpEndDate) {
+	public int adminInsertGroupCoupon(int cpNo, String grNo, String mcpEndDate) {
 		Connection conn = getConnection();
 		int result = new MemberDao().adminInsertGroupCoupon(conn, cpNo, grNo, mcpEndDate);
 		
@@ -157,5 +157,31 @@ public class MemberService {
 		
 		return result;
 		
+	}
+	
+	public int adminInsertOneCoupon(int cpNo, String memId, String mcpEndDate) {
+		Connection conn = getConnection();
+		int result = new MemberDao().adminInsertOneCoupon(conn, cpNo, memId, mcpEndDate);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+	
+	public int adminInsertAllCoupon(int cpNo, String mcpEndDate) {
+		Connection conn = getConnection();
+		int result = new MemberDao().adminInsertAllCoupon(conn, cpNo, mcpEndDate);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
 	}
 }

@@ -7,7 +7,13 @@
 			
 	String alertMsg = (String)session.getAttribute("alertMsg");
  	// 서비스 요청 전 menubar.jsp 로딩시 : null
- 	// 서비스 요청 후 menubar.jsp 로딩시 : alert로 띄워줄 메세지 문구 String 		
+ 	// 서비스 요청 후 menubar.jsp 로딩시 : alert로 띄워줄 메세지 문구 String 
+ 	int directMemNo = 0;
+ 	if(loginUser == null) {
+ 	} else {
+ 		directMemNo = (Integer)session.getAttribute("directMemNo");
+ 	}
+ 	
 %>   
 <html>
 <head>
@@ -367,7 +373,6 @@
 	
 	  <% if(loginUser == null) { %> 
 	  <!--/ 로그인 전 마이페이지 /-->
-
 	   <div class="box-collapse">
 	    <div class="offcanvas-header">
 	      <div id="logo">SPACEFIT</div>
@@ -426,7 +431,6 @@
 	    </div>
 
 	  <% } else { %>
-
 		<div class="box-collapse">
 	    <div class="offcanvas-header">
 	      <div id="logo">SPACEFIT</div>

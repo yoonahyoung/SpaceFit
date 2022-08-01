@@ -66,9 +66,11 @@ public class LoginController extends HttpServlet {
 		 * 		   데이터를 꺼내고자 한다면 .getAttribute("키") : 밸류 (Objsect 형으로 반환)
 		 * 		   데이터를 지우고자 한다면 .removeAttribute("키")
 		 */
+		HttpSession session = request.getSession();
 		
 		if(loginUser == null) {
 			// 조회결과 없이 로그인 실패 => 에러페이지
+			
 			RequestDispatcher view = request.getRequestDispatcher("views/user/common/backAlertErrorPage.jsp");
 			request.setAttribute("errorMsg", "로그인 실패! 아이디와 비밀번호를 확인해주세요.");
 			view.forward(request, response);
@@ -78,9 +80,9 @@ public class LoginController extends HttpServlet {
 			// 조회결과 있음 로그인 성공 => 메인페이지 응담 index.jsp
 			// 로그인한 회원정보가 담겨있는 loginUser를 세션에 담아서 모두가 쓰게 하자!
 			// 서블릿에서 session을 호출하려면 HttpSession 에서 session을 얻어와야 함
-			HttpSession session = request.getSession();
+			int directMemNo = loginUser.getMemNo();
 			session.setAttribute("loginUser", loginUser);
-			
+			session.setAttribute("directMemNo", directMemNo);
 			// url 재요청방식 redirect 방식 : 기존에 저 페이지를 응답하는 url이 존재할경우
 			// localhost:0000/web
 			response.sendRedirect(request.getContextPath());
