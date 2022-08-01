@@ -40,16 +40,17 @@
         <br><br>
         <p style="font-size:20px; margin:15px;">SPACEFIT 쿠폰 등록</p>
         
-
-        <div class="row mb-3" id="cpCodeDiv">
-            <div class="col-sm-10">
-              <div class="input-group">
-                <input type="text" class="form-control" id="cp-input1" placeholder="쿠폰 코드를 입력해주세요" style="border-radius: 5px;"/>
-                &nbsp;&nbsp;
-                <button class="btn btn-primary" style="border-radius:5px;">등록</button>
-              </div>
-          </div>
-        </div>
+		<form action="<%=contextPath %>/memCouponInsert.me" method="post">
+	        <div class="row mb-3" id="cpCodeDiv">
+	            <div class="col-sm-10">
+	              <div class="input-group">
+	                <input type="text" class="form-control" id="cp-input1" placeholder="쿠폰 코드를 입력해주세요" name="cpCode" style="border-radius: 5px;"/>
+	                &nbsp;&nbsp;
+	                <button type="submit" class="btn btn-primary" style="border-radius:5px;">등록</button>
+	              </div>
+	          </div>
+	        </div>
+        </form>
       </div>
         <br>
 

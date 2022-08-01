@@ -7,21 +7,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.spacefit.mem.model.service.MemberService;
 
 /**
- * Servlet implementation class AdminCouponInsertController
+ * Servlet implementation class MemCouponInsertController
  */
-@WebServlet("/adCouponInsert.me")
-public class AdminCouponInsertController extends HttpServlet {
+@WebServlet("/memCouponInsert.me")
+public class MemCouponInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminCouponInsertController() {
+    public MemCouponInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,23 +32,9 @@ public class AdminCouponInsertController extends HttpServlet {
 
 		request.setCharacterEncoding("utf-8");
 		
-		String cpName = request.getParameter("cpName");
-		int cpDiscount = Integer.parseInt(request.getParameter("cpDiscount"));
-		String cpEndDate = request.getParameter("cpEndDate");
+		String cpCode = request.getParameter("cpCode");
 		
-		int result = new MemberService().adminInsertCoupon(cpName, cpDiscount, cpEndDate);
-		
-		HttpSession session = request.getSession();
-		if(result > 0) {
-			
-			session.setAttribute("alertMsg", "쿠폰이 등록되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/adCouponDetail.me");
-			
-		}else {
-			
-			session.setAttribute("alertMsg", "쿠폰 등록에 실패했습니다.");
-			response.sendRedirect(request.getContextPath() + "/adCouponDetail.me");
-		}
+		int result = new MemberService().insertMemCoupon(cpCode);
 		
 	}
 
