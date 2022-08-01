@@ -37,28 +37,34 @@ public class AdminMemCouponInsertController extends HttpServlet {
 		int cpNo = Integer.parseInt(request.getParameter("cpNo"));
 		String mcpEndDate = request.getParameter("mcpEndDate");
 		String cpGroup = request.getParameter("cpGroup");
-		int grNo = Integer.parseInt(request.getParameter("cpGroup_2"));
+		String grNo = request.getParameter("cpGroup_2");
 		String memId = request.getParameter("cpGroup_3");
 
 		int result = 0;
-		if(grNo != 0 && cpGroup.equals("그룹회원")) {
+		if( (grNo != null || !grNo.equals("null")) && cpGroup.equals("그룹회원") ) {
 			
 			result = new MemberService().adminInsertGroupCoupon(cpNo, grNo, mcpEndDate);
 			
+		}else if( (memId != null || !memId.equals("null")) && cpGroup.equals("개별회원") ) {
+			
+			result = new MemberService().adminInsertOneCoupon(cpNo, memId, mcpEndDate);
+			
+		}else {
+			
+			result = new MemberService().adminInsertAllCoupon(cpNo, mcpEndDate);
+			
 		}
-		
-		System.out.println(result);
 		
 		HttpSession session = request.getSession();
 		if(result > 0) {
 			
 			session.setAttribute("alertMsg", "쿠폰이 발급되었습니다.");
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getContextPath() + "/adCouponDetail.me");
 			
 		}else {
 			
 			session.setAttribute("alertMsg", "쿠폰 발급에 실패했습니다.");
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getContextPath() + "/adCouponDetail.me");
 			
 		}
 		
