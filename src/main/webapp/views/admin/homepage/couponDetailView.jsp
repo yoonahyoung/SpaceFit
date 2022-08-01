@@ -29,6 +29,10 @@
 					<th>할인금액</th>
 					<td><input type="text" name="cpDiscount">&nbsp;&nbsp;원</td>
 				</tr>
+				<tr>
+					<th>만료일</th>
+					<td><input type="date" name="cpEndDate">&nbsp;&nbsp;(회원등록가능쿠폰일시 입력)</td>
+				</tr>
 				
 			</table>
 	        

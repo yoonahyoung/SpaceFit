@@ -124,6 +124,28 @@
 		 WHERE MEM_NO = ?
 	</entry>
 
+	<entry key="insertMemCoupon">
+		INSERT
+		  INTO TB_MCP
+		      (MCP_NO
+		     , CP_NO
+		     , MEM_NO
+		     , MCP_STATUS
+		     , MCP_USE
+		     , MCP_START_DATE
+		     , MCP_END_DATE)
+		SELECT SEQ_MCNO.NEXTVAL
+		     , ? 
+		     , M.MEM_NO
+		     , 'Y'
+		     , 'N'
+		     , SYSDATE
+		     , ?
+		  FROM TB_COUPON C
+		  LEFT JOIN TB_MCP P ON (C.CP_NO = P.CP_NO)
+		 RIGHT JOIN TB_MEMBER M ON(P.MEM_NO = M.MEM_NO)
+		 WHERE MEM_ID = ?
+	</entry>
 
 
 <!-- admin -->
@@ -246,12 +268,14 @@
 		      (CP_NO
 		     , CP_NAME
 		     , CP_DISCOUNT
-		     , CP_ENROLL_DATE)
+		     , CP_ENROLL_DATE
+		     , CP_END_DATE)
 		VALUES(
 		       SEQ_CPNO.NEXTVAL
 		     , ?
 		     , ?
 		     , SYSDATE
+		     , ?
 		       )
 	</entry>
 	
@@ -261,21 +285,14 @@
 		      (MCP_NO
 		     , CP_NO
 		     , MEM_NO
-		     , MCP_STATUS
-		     , MCP_USE
-		     , MCP_START_DATE
 		     , MCP_END_DATE)
 		SELECT SEQ_MCNO.NEXTVAL
-		     , ? 
-		     , M.MEM_NO
-		     , 'Y'
-		     , 'N'
-		     , SYSDATE
 		     , ?
-		  FROM TB_COUPON C
-		  LEFT JOIN TB_MCP P ON (C.CP_NO = P.CP_NO)
-		 RIGHT JOIN TB_MEMBER M ON(P.MEM_NO = M.MEM_NO)
-		 WHERE GR_NO = ?
+		     , MEM_NO
+		     , ?
+		  FROM (SELECT MEM_NO
+				  FROM TB_MEMBER
+                  WHERE GR_NO = ?)
 	</entry>
 	
 	<entry key="adminInsertOneCoupon">
@@ -284,21 +301,14 @@
 		      (MCP_NO
 		     , CP_NO
 		     , MEM_NO
-		     , MCP_STATUS
-		     , MCP_USE
-		     , MCP_START_DATE
 		     , MCP_END_DATE)
 		SELECT SEQ_MCNO.NEXTVAL
-		     , ? 
-		     , M.MEM_NO
-		     , 'Y'
-		     , 'N'
-		     , SYSDATE
 		     , ?
-		  FROM TB_COUPON C
-		  LEFT JOIN TB_MCP P ON (C.CP_NO = P.CP_NO)
-		 RIGHT JOIN TB_MEMBER M ON(P.MEM_NO = M.MEM_NO)
-		 WHERE MEM_ID = ?
+		     , MEM_NO
+		     , ?
+		  FROM (SELECT MEM_NO
+				  FROM TB_MEMBER
+                  WHERE MEM_ID = ?)
 	</entry>
 	
 	<entry key="adminInsertAllCoupon">
@@ -307,23 +317,13 @@
 		      (MCP_NO
 		     , CP_NO
 		     , MEM_NO
-		     , MCP_STATUS
-		     , MCP_USE
-		     , MCP_START_DATE
 		     , MCP_END_DATE)
 		SELECT 
                SEQ_MCNO.NEXTVAL
 		     , ?
 		     , MEM_NO
-		     , 'Y'
-		     , 'N'
-		     , SYSDATE
 		     , ?
-		  FROM (SELECT DISTINCT 
-                	   P.CP_NO
-		     	     , M.MEM_NO
-				  FROM TB_COUPON C
-				  LEFT JOIN TB_MCP P ON (C.CP_NO = P.CP_NO)
-				 RIGHT JOIN TB_MEMBER M ON(P.MEM_NO = M.MEM_NO))
+		  FROM (SELECT MEM_NO
+				  FROM TB_MEMBER)
 	</entry>
 </properties>
