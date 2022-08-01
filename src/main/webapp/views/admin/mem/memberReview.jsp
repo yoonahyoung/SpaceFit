@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>   
+    pageEncoding="UTF-8"%> 
+<%@ page import = "java.util.ArrayList, com.spacefit.review.model.vo.Review" %>
+<%
+	ArrayList<Review> rvList = (ArrayList<Review>)request.getAttribute("rvList");
+%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +33,7 @@
                         	  <div class="row" id="reviewChart">
 								  <div class="col-4" id="todaysReview">
 								  	<span>오늘 등록 후기</span><br>
-								  	<h4>51/8953</h4>	
+								  	<h4>51/<%=rvList.size() %></h4>	
 								  </div>
 								  <div class="col-4" id="avgStar">
 								  	<span>평균별점</span><br>
@@ -80,6 +84,7 @@
 	                                            <th>예약일</th>
 	                                            <th>추천수</th>
 	                                            <th>신고수</th>
+	                                            <th>후기상태</th>
 	                                            <th>상세보기</th>
 	                                        </tr>
 	                                    </thead>
@@ -93,53 +98,54 @@
 	                                            <th>예약일</th>
 	                                            <th>추천수</th>
 	                                            <th>신고수</th>
+	                                            <th>후기상태</th>
 	                                            <th>상세보기</th>
 	                                        </tr>
 	                                    </tfoot>
 	                                    <tbody>
-	                                        <tr>
-	                                        	<td><input type="radio"></td>
-	                                            <td>00003</td>
-	                                            <td>user01</td>
-	                                            <td>스튜디오A</td>
-	                                            <td>4.0</td>
-	                                            <td>22/07/20</td>
-	                                            <td>32</td>
-	                                            <td>4</td>
-	                                            <td><input type="button" class="btn btn-primary btn-sm" value="상세조회" onclick="revDetailView();"></td>
-	                                            <script>
-	                                           		 function revDetailView(){
-	                                	       		location.href="<%=contextPath%>/memRevDetailView.me";
-	                                				}
-	                                            </script>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td><input type="radio"></td>
-	                                            <td>00002</td>
-	                                            <td>user02</td>
-	                                            <td>스튜디오B</td>
-	                                            <td>3.5</td>
-	                                            <td>22/06/15</td>
-	                                            <td>16</td>
-	                                            <td>8</td>
-	                                            <td><input type="button" class="btn btn-primary btn-sm" value="상세조회"></td>
-	                                        </tr>
-	                                         <tr>
-	                                        	<td><input type="radio"></td>
-	                                            <td>00001</td>
-	                                            <td>user03</td>
-	                                            <td>스튜디오C</td>
-	                                            <td>2.0</td>
-	                                            <td>22/05/30</td>
-	                                            <td>7</td>
-	                                            <td>1</td>
-	                                            <td><input type="button" class="btn btn-primary btn-sm" value="상세조회"></td>
-	                                        </tr>
+	                                    <% if(rvList.isEmpty()) { %>
+	                                    	<!-- 후기글 없을경우 -->
+	                                    	<tr>
+	                                    		<td colspan="10">아직 후기가 없습니다.</td>
+	                                    	</tr>
+	                                    	<% } else { %>
+	                                    	<!-- 후기가 있을경우 -->
+	                                    		<% for(Review r : rvList) { %>
+			                                        <tr>
+			                                        	<td><input type="radio"></td>
+			                                            <td><%= r.getReviewNo()%></td>
+			                                            <td><%= r.getMemId() %></td>
+			                                            <td><%= r.getSpaceName() %></td>
+			                                            <td><%= r.getReviewStar() %></td>
+			                                            <td><%= r.getBookDate() %></td>
+			                                            <td><%= r.getAllLikeCount() %></td>
+			                                            <td><%= r.getAllRptCount() %></td>
+			                                            <td>
+			                                            	<% if(r.getReviewStatus().equals("Y")) { %>
+																<input type="radio" name="revStatus" value="Y" checked>공개 &nbsp;
+									                     		<input type="radio" name="revStatus" value="N">비공개&nbsp;
+									                     		<input type="radio" name="revStatus" value="B">베스트&nbsp;
+															<% } else if (r.getReviewStatus().equals("B")) { %>
+																<input type="radio" name="revStatus" value="Y">공개 &nbsp;
+									                     		<input type="radio" name="revStatus" value="N" checked>비공개&nbsp;
+									                     		<input type="radio" name="revStatus" value="B">베스트&nbsp;
+															<% } else { %>
+																<input type="radio" name="revStatus" value="Y">공개 &nbsp;
+									                     		<input type="radio" name="revStatus" value="N">비공개&nbsp;
+									                     		<input type="radio" name="revStatus" value="B" checked>베스트&nbsp;
+															<% } %>
+			                                            </td>
+			                                            <td><input type="button" class="btn btn-primary btn-sm" value="상세조회" onclick="location.href='<%=contextPath%>/memRevDetailView.me?no=<%=r.getReviewNo()%>'"></td>
+			                                        </tr>
+			                                   <% } %>
+											<% } %>
 	                                    </tbody>
 	                                </table>
 	                            </div>
 	                        </div>
+	                        <div style="height : 20px"></div>
 	                        <button type="button" class = "btn btn-danger">추천 조작프로그램 실행</button>
+	                       	<div style="height : 40px"></div>
 							<div class="paging-area" align="center">    
 		        
 								<button class="btn btn-sm btn-outline-primary">&lt;</button>        

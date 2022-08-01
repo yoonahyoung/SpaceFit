@@ -432,10 +432,87 @@ public class ReviewDao {
 	
 	
 	
+	// 이 부분부터 admin 리뷰 부분 소희작성
+	
+	/** admin-리뷰리스트 전체조회
+	 * @param conn
+	 * @param 
+	 * @return
+	 */
+	public ArrayList<Review> adminReviewSelect(Connection conn) {
+		// select => ResultSet(한행) => ArrayList<Attachment>
+		ArrayList<Review> rvList = new ArrayList<>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("adminReviewSelect");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				rvList.add(new Review( rset.getInt("rv_no"),
+									   rset.getString("mem_id"),
+									   rset.getString("space_name"),
+									   rset.getInt("rv_star"),
+									   rset.getString("book_date"),
+									   rset.getInt("all_like_count"),
+									   rset.getInt("all_rpt_count"),
+									   rset.getString("rv_status"),
+									   rset.getDate("rv_enroll_date")
+						));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return rvList;
+	}
 	
 	
-	
-	
+	public Review adminSelectEachReview(Connection conn, int reviewNo) {
+		
+		Review rv = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminSelectEachReview");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				rv = new Review(
+								rset.getInt("rv_no"),
+								rset.getInt("book_no"),
+								rset.getString("space_name"),
+								rset.getString("mem_id"),
+								rset.getInt("rv_star"),
+								rset.getString("rv_content"),
+								rset.getDate("rv_enroll_date"),
+								rset.getDate("rv_modify_date"),
+								rset.getString("book_date"),
+								rset.getInt("gr_no"),
+								rset.getInt("all_like_count"),
+								rset.getInt("all_rpt_count"),
+								rset.getString("rv_status")
+								// rset.getString("space_no")
+						);
+						
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		} return rv;
+		
+	}
 	
 	
 	

@@ -166,10 +166,71 @@ public class Review {
 				+ ", ReviewModifyDate=" + ReviewModifyDate + ", reviewStar=" + reviewStar + ", reviewStatus="
 				+ reviewStatus + ", bookDate=" + bookDate + ", mainImgUrl=" + mainImgUrl + "]";
 	}
-
-
 	
 	
+	// 이 부분부터 Admin 후기리스트 관련 vo
+	private int allRptCount;
+	private int grNo;
+	
+
+	public int getAllRptCount() {
+		return allRptCount;
+	}
+
+
+	public void setAllRptCount(int allRptCount) {
+		this.allRptCount = allRptCount;
+	}
+
+	
+
+	public int getGrNo() {
+		return grNo;
+	}
+
+
+	public void setGrNo(int grNo) {
+		this.grNo = grNo;
+	}
+
+
+	public Review(int reviewNo,  String memId, String spaceName, int reviewStar, String bookDate, 
+			 int allLikeCount, int allRptCount  ,String reviewStatus, Date reviewEnrollDate) {
+		super();
+		this.reviewNo = reviewNo;
+		this.memId = memId;
+		this.spaceName = spaceName;
+		this.reviewStar = reviewStar;
+		this.bookDate = bookDate;
+		this.allLikeCount = allLikeCount;
+		this.allRptCount = allRptCount;
+		this.reviewStatus = reviewStatus;
+		this.ReviewEnrollDdate = reviewEnrollDate;
+	}
+
+	
+
+	public Review(int reviewNo, int bookNo, String spaceName, String memId, int reviewStar, String reviewContent,
+			Date reviewEnrollDate, Date reviewModifyDate, String bookDate, int grNo, int allLikeCount, int allRptCount,
+			String reviewStatus /*,String spaceNo*/) {
+		super();
+		this.reviewNo = reviewNo;
+		this.bookNo = bookNo;
+		this.spaceName = spaceName;
+		this.memId = memId;
+		this.reviewStar = reviewStar;
+		this.reviewContent = reviewContent;
+		ReviewEnrollDdate = reviewEnrollDate;
+		ReviewModifyDate = reviewModifyDate;
+		this.bookDate = bookDate;
+		this.grNo = grNo;
+		this.allLikeCount = allLikeCount;
+		this.allRptCount = allRptCount;
+		this.reviewStatus = reviewStatus;
+		//this.spaceNo = spaceNo;
+	}
+
+
 	// 이 부분부터 공간별 후기리스트 관련 vo
 	private String memId;
 	private String gradeName;

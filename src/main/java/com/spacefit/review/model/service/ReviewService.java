@@ -139,13 +139,33 @@ public class ReviewService {
 	
 	
 	
+	// 이 부분부터 admin 리뷰 부분 소희작성
+	
+	public ArrayList<Review> adminReviewSelect(){
+		
+		Connection conn = getConnection();
+		ArrayList<Review> rvList = new ReviewDao().adminReviewSelect(conn);
+		close(conn);
+		return rvList;
+		
+	}
+	
+	
+	public Review adminSelectEachReview( int reviewNo) {
+		
+		Connection conn = getConnection();
+		Review rv = new ReviewDao().adminSelectEachReview(conn, reviewNo);
+		close(conn);
+		return rv;
+	}
+	
 	
 	
 	
 	
 	// 이 부분부터 공간별 후기리스트 관련 메소드 소희작성
 	
-	
+
 	// 공간조회 디테일 페이지에서 후기리스트 전체조회용 메소드 1
 	public ArrayList<Review> selectRvListForSpace(int spNo){
 		Connection conn = getConnection();

@@ -179,7 +179,66 @@
 	</entry>
 
 	
-
+	
+	
+	
+	<!-- 이 부분부터 ADMIN 쪽 SQL 소희작성 -->
+	<entry key="adminReviewSelect">
+		SELECT 
+		       RV_NO
+		     , MEM_ID
+		     , SPACE_NAME
+		     , RV_STAR
+		     , BOOK_DATE
+		     , (
+		       SELECT COUNT(*) AS "LIKE_COUNT"
+		         FROM TB_LIKE L
+		        WHERE R.RV_NO = L.RV_NO
+		        )  AS "ALL_LIKE_COUNT"
+		    ,  (
+		        SELECT COUNT(*) AS "RPT_COUNT"
+		         FROM TB_REPORT RPT
+		        WHERE R.RV_NO = RPT.RPT_REF_NO
+		          AND RPT_REF_CAT = 1
+		        )  AS "ALL_RPT_COUNT"
+		     , RV_STATUS
+		     , RV_ENROLL_DATE
+		  FROM TB_REVIEW R
+		  JOIN TB_MEMBER USING (MEM_NO)
+		  JOIN TB_SPACE USING (SPACE_NO)
+		  JOIN TB_BOOK USING (BOOK_NO)
+	</entry>
+	
+	<entry key="adminSelectEachReview">
+		SELECT
+		       RV_NO
+		     , BOOK_NO
+		     , SPACE_NAME
+		     , MEM_ID
+		     , RV_STAR
+		     , RV_CONTENT
+		     , RV_ENROLL_DATE
+		     , RV_MODIFY_DATE
+		     , BOOK_DATE
+		     , GR_NO
+		     , (
+		       SELECT COUNT(*) AS "LIKE_COUNT"
+		         FROM TB_LIKE L
+		        WHERE R.RV_NO = L.RV_NO
+		        )  AS "ALL_LIKE_COUNT"
+		     ,  (
+		        SELECT COUNT(*) AS "RPT_COUNT"
+		         FROM TB_REPORT RPT
+		        WHERE R.RV_NO = RPT.RPT_REF_NO
+		          AND RPT_REF_CAT = 1
+		        )  AS "ALL_RPT_COUNT"
+		     , RV_STATUS
+		  FROM TB_REVIEW R
+		  JOIN TB_MEMBER USING (MEM_NO)
+		  JOIN TB_SPACE USING (SPACE_NO)
+		  JOIN TB_BOOK USING (BOOK_NO)
+		 WHERE RV_NO=?
+	</entry>
 
 
 
