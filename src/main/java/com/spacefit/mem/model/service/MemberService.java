@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.spacefit.mem.model.dao.MemberDao;
+import com.spacefit.mem.model.vo.Cart;
 import com.spacefit.mem.model.vo.Mcp;
 import com.spacefit.mem.model.vo.Member;
 
@@ -153,6 +154,19 @@ public class MemberService {
 		
 		return updateMem;
    }
+   // 보관함(장바구니)
+   public int insertCart(Cart cart) {
+	   Connection conn = getConnection();
+	   int result = new MemberDao().insertCart(conn, cart);
+	   if(result > 0) {
+		   commit(conn);
+	   }else {
+		   rollback(conn);
+	   }
+	   close(conn);
+	   return result;
+   }
+   
    
    
     // ----------------------- admin ------------------------- //

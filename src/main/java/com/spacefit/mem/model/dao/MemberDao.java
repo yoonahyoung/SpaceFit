@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.spacefit.mem.model.vo.Cart;
 import com.spacefit.mem.model.vo.Mcp;
 import com.spacefit.mem.model.vo.Member;
 
@@ -401,6 +402,33 @@ public class MemberDao {
 		
 		return result;
 	}
+	
+   public int insertCart(Connection conn, Cart cart) {
+	   int result = 0;
+	   PreparedStatement pstmt = null;
+	   String sql = prop.getProperty("insertCart");;
+	   try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, cart.getMemNo());
+		pstmt.setInt(2, cart.getSpaceNo());
+		pstmt.setInt(3, cart.getCartLimit());
+		pstmt.setString(4, cart.getCartDate());
+		pstmt.setString(5, cart.getCartIn());
+		pstmt.setString(6, cart.getCartOut());
+		pstmt.setString(7, cart.getCartParking());
+		pstmt.setString(8, cart.getCartAnimal());
+		pstmt.setString(9, cart.getCartStand());
+		pstmt.setString(10, cart.getCartChair());
+		pstmt.setInt(11, cart.getCartPrice());
+		
+		result = pstmt.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+	}
+	   return result;
+   }
    
    
    //---------ADMIN-----------//

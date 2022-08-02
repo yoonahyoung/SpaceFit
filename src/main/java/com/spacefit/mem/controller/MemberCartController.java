@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+import com.spacefit.mem.model.service.MemberService;
+import com.spacefit.mem.model.vo.Cart;
 import com.spacefit.mem.model.vo.Member;
 
 /**
@@ -45,8 +48,17 @@ public class MemberCartController extends HttpServlet {
 		int price = Integer.parseInt(request.getParameter("price"));
 		int memNo = ((Member)session.getAttribute("loginUser")).getMemNo();
 		
+		Cart cart = new Cart(memNo, spNo, limit, date, detailCI, detailCO, park, animal, stand, chair, price);
 		
+		int result = new MemberService().insertCart(cart);
 		
+		if(result > 0) { //성공
+			response.setContentType("application/json; charset=UTF-8");
+			new Gson().toJson("장바구니에 담기 성공! 확인하러 가시겠습니까?", response.getWriter());
+		}else { // 실패
+			request.setAttribute("errorCart", "장바구니 담기 실패! 옵션을 확인하세요!");
+			response.sendRedirect(request.getContextPath() + "/detail.sp?no=" + spNo);
+		}
 	
 	}
 

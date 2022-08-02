@@ -1,11 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.review.model.vo.Review, com.spacefit.product.model.vo.Space, com.spacefit.attachment.model.vo.Attachment"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList,
+    							 com.spacefit.review.model.vo.Review,
+    							 com.spacefit.product.model.vo.Space,
+    							 com.spacefit.attachment.model.vo.Attachment,
+    							 com.spacefit.review.model.vo.Comment
+    							 "%>
 <%
 	String thisPath = request.getContextPath();
 	ArrayList<Review> rvList = (ArrayList<Review>)request.getAttribute("rvList");
 	int avgStars = (Integer)request.getAttribute("avgStars");
 	Space s = (Space)request.getAttribute("s");
 	ArrayList<Attachment> atList = (ArrayList<Attachment>)request.getAttribute("at");
+	
+	ArrayList<Comment> comList = new ArrayList<>();
 %>
 <!DOCTYPE html>
 <html>
@@ -43,7 +50,7 @@ body {
 	<%@ include file="../common/userMenubar.jsp" %>
 
     <main id="main">
-    <form action="<%=contextPath%>/결제페이지" method="get">
+    <form action="<%=contextPath%>/결제페이지" method="get" id="detailForm">
         <!-- ======= space view ======= -->
         <section class="agent-single">
             <div class="container">
@@ -232,33 +239,12 @@ body {
 	                                            <br><br>
 	                                            <div class="collapse commentDiv" id="flush-collapseFour"  aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
                                                     <div class="parentCommentAll">
-                                                        <div class="commentMem row">
-                                                            <div class="parentMem col-lg-6">
-                                                                <span class="material-symbols-outlined memProfilePic" id="memProfilePic">
-                                                                    account_circle
-                                                                </span>
-                                                                <span id="memSpan">
-                                                                    user09
-                                                                </span>
-                                                            </div>
-                                                            <div class="parentInfo col-lg-6">
-                                                                <span>22.08.01</span>
-                                                                <span>&ensp;|&ensp;</span>
-                                                                <span id="reReport">신고하기</span>
-                                                                <span>&ensp;|&ensp;</span>
-                                                                <span id="reComment">대댓달기</span>
-                                                            </div>
-                                                            <hr> 
-                                                            <div id="showComment">
-                                                                <div class="parentComment">
-                                                                    <span>진짜 미치지 않고서야 이런 댓글은 왜다는거야??ㅋㅋㅋㅋㅋㅋ 개빡친당!</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        
                                                         
                                                     </div>
+                                                    <!--  
                                                     <div class="sonCommentAll row">
-                                                        <div class="blank col-lg-1"><!--나중에 이 블랭크 반복문 넣어서 한 탭씩 넣기?--></div>
+                                                        <div class="blank col-lg-1"></div>
                                                         <div class="commentSon row col-lg-11" style="padding : 0px; margin : 0px;">
                                                             <div class="sonMem col-lg-6">
                                                                 <span class="material-symbols-outlined memProfilePic" id="memProfilePic">
@@ -282,6 +268,7 @@ body {
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        -->
                                                         <div id="writeComment">
                                                             <table id="writeTable" align="center">
                                                                 <thead>
@@ -340,17 +327,48 @@ body {
 				                    		   data:{
 				                    			   rvNo : rvNo
 				                    		   },
+				                    		   
+				                    		   
 				                    		   success:function(result){
-				                    				if(result == "listOk"){
-				            							alert("추천해주셔서 감사합니다!");
-				                    					// 바로 표시되게 하는 걸 못하게씀 ㅜㅜ
+				                    				if(result == "emptyComList"){
+				                    					// 댓글리스트가 비어있다면
+				            							let value ="<h4> 아직 작성된 후기가 없습니다 </h4><br>"
+				            							$(".parentCommentAll").html(value);
 				            						} else {
-				            							// 후기 중복확인
-				            							alert("이미 추천한 후기입니다!");
+				            							// 댓글리스트가 있다면
+				            							<%comList = (ArrayList<Comment>)request.getAttribute("comList");%>
+				            							let value = "
+				            							<% for (Comment c : comList) {%>
+		                                                        <div class="commentMem row">
+		                                                            <div class="parentMem col-lg-6">
+		                                                                <span class="material-symbols-outlined memProfilePic" id="memProfilePic">
+		                                                                    account_circle
+		                                                                </span>
+		                                                                <span id="memSpan">
+		                                                                   <%= c.getMemId()%>
+		                                                                </span>
+		                                                            </div>
+		                                                            <div class="parentInfo col-lg-6">
+		                                                                <span> <%= c.getComEnrollDate()%></span>
+		                                                                <span>&ensp;|&ensp;</span>
+		                                                                <span id="reReport">신고하기</span>
+		                                                                <span>&ensp;|&ensp;</span>
+		                                                                <span id="reComment">대댓달기</span>
+		                                                            </div>
+		                                                            <hr> 
+		                                                            <div id="showComment">
+		                                                                <div class="parentComment">
+		                                                                    <span><%= c.getComContent()%></span>
+		                                                                </div>
+		                                                    		</div>
+		                                                    	</div>
+														<%}%>				            							
+				            							"
+														$(".parentCommentAll").html(value);
 				            							}
 				                    			},
 				                    			error:function(){
-				                    				console.log("추천 +1 AJAX 통신 실패");
+				                    				console.log("댓글조회용 AJAX 실패");
 				                    			}
 				                    	   })
 				                       }
@@ -382,22 +400,22 @@ body {
                                     </select>
                                     <span class="col-sm-4"> 주차  </span>
                                     <select name="parking" required>
-                                        <option value="N">요청하지 않아요</option>
+                                        <option value="N" selected>요청하지 않아요</option>
                                         <option value="Y">요청할게요</option>
                                     </select>
                                     <span class="col-sm-4"> 반려동물  </span>
                                     <select name="animal" required>
-                                        <option value="N">동반하지 않아요</option>
+                                        <option value="N" selected>동반하지 않아요</option>
                                         <option value="Y">동반할게요</option>
                                     </select>
                                     <span class="col-sm-4"> 보면대  </span>
                                     <select name="stand" required>
-                                        <option value="N">필요하지 않아요</option>
+                                        <option value="N" selected>필요하지 않아요</option>
                                         <option value="Y">필요해요</option>
                                     </select>
                                     <span class="col-sm-4"> 미니의자  </span>
                                     <select name="chiar" required>
-                                        <option value="N">필요하지 않아요</option>
+                                        <option value="N" selected>필요하지 않아요</option>
                                         <option value="Y">필요해요</option>
                                     </select>
                                 </div>
@@ -410,8 +428,9 @@ body {
                                     </div>  
                                 </div>
                                 <br><br>
-                                <h5>선택 날짜 : <b id="chDate"><input type="hidden" class="chDate" name="date" value="nill" required></b></h5>
-
+                                <h5>선택 날짜 : <b id="chDate"></b></h5>
+                                <input type="hidden" class="chDate" name="date" required>
+	
                                 <div class="row">
                                     <h4 style="margin-top:40px; border-bottom:2px solid #0D6EFD">시간선택</h4>
                                     <span class="col-sm-4"> 체크인  </span>
@@ -436,13 +455,14 @@ body {
 
                                 <div class="row">
                                     <h4 style="margin-top:40px; border-bottom:2px solid #0D6EFD">총 금액</h4>
-                                    <span class="col-sm-4"><span id="price"><input type="hidden" name="price" class="price" required></span> <b>원</b></span>
+                                    <div><span class="col-sm-4" id="price"> </span><b>원</b></div>
+                                    <input type="hidden" name="price" class="price" required>
                                 </div>
                                 <script>
                                 	$(".detailCO").change(function(){
                                         const pp = $(".detailCO>option:selected").val() - $(".detailCI>option:selected").val();
                                         $("#price").text(pp * <%= s.getSpacePrice() %>);
-                                        $(".price").attr("value", (pp * <%= s.getSpacePrice() %>));
+                                        $(".price").val((pp * <%= s.getSpacePrice() %>));
                                 	})
                                 </script>
                                 
@@ -451,8 +471,8 @@ body {
                                 <!-- limit, parking, animal, stand, chair, date, detailCI, detailCO, price  -->
                                 	<input type="hidden" name="no" value="<%=s.getSpaceNo() %>">
                                     <div id="ayBtn" style="text-align:center; margin-top:100px;">
-                                        <button type="submit" class="btn btn-primary">바로결제</button>
-                                        <button onclick="goCart();" class="btn btn-outline-dark">보관함</button>
+                                        <button type="button" class="btn btn-primary" onclick="formSumbit(1);">바로결제</button>
+                                        <button type="button" onclick="formSubmit(2);" class="btn btn-outline-dark">보관함</button>
                                         <a href="<%=contextPath %>/zzim.sp" class="btn btn-outline-danger">찜하기</a>
                                     </div>
                                 </div>
@@ -465,12 +485,33 @@ body {
         </form>
     </main>
     <script>
-    	function goCart(){
-    		form.action='<%=contextPath %>/cart.sp';
-    		let viewCart = confirm('<%=request.getAttribute("alertMsg") %>');
-    		if(viewCart){
-    			location.href = "<%=contextPath%>/list.ca";
+    	function formSubmit(num){
+    		if(num == 1){
+    			$("#detailForm").attr("action", "결제페이지");
+	    		$("#detailForm").submit();
+    		}else{
+    			$.ajax({
+    				url:'<%=contextPath %>/cart.sp',
+    				data:{no:<%=s.getSpaceNo() %>
+    					, limit:$("select[name=limit]").val()
+    					, parking:$("select[name=parking]").val()
+    					, animal:$("select[name=animal]").val()
+    					, stand:$("select[name=stand]").val()
+    					, chair:$("select[name=chair]").val()
+    					, date:$("input[name=date]").val()
+    					, detailCI:$("select[name=detailCI]").val()
+    					, detailCO:$("select[name=detailCO]").val()
+    					, price:$("input[name=price]").val()
+    					},
+    				success:function(cfMsg){
+    					if(confirm(cfMsg)){
+    						location.href="<%=contextPath%>/views/user/myPage/cartListView.jsp";
+    					}
+    				}
+    				
+    			})
     		}
+    		
     	}
     </script>
     <script>
@@ -490,7 +531,7 @@ body {
 		    dateClick:function(info){
 		    	//console.log(info.dateStr); // 선택한 날짜 2022-08-02
 		    	$("#chDate").html(info.dateStr);
-		    	$(".chDate").attr("value", info.dateStr);
+		    	$(".chDate").val(info.dateStr);
 		    	
 			    	$.ajax({
 			    		url: '<%=contextPath%>/calender.sp',
