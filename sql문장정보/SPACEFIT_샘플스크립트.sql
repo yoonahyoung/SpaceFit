@@ -97,7 +97,7 @@ END;
 --  DDL for Sequence SEQ_QNNO
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "SEQ_QNNO"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 NOCACHE  NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "SEQ_QNNO"  MINVALUE 2 MAXVALUE 9999999999999999999999999999 INCREMENT BY 2 START WITH 2 NOCACHE  NOORDER  NOCYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence SEQ_RPTNO
 --------------------------------------------------------
@@ -254,13 +254,15 @@ END;
    (	"CP_NO" NUMBER, 
 	"CP_NAME" VARCHAR2(30 BYTE), 
 	"CP_DISCOUNT" NUMBER, 
-	"CP_ENROLL_DATE" DATE DEFAULT SYSDATE
+	"CP_ENROLL_DATE" DATE DEFAULT SYSDATE,
+  "CP_END_DATE" DATE
    ) ;
 
    COMMENT ON COLUMN "TB_COUPON"."CP_NO" IS '쿠폰번호';
    COMMENT ON COLUMN "TB_COUPON"."CP_NAME" IS '쿠폰명';
    COMMENT ON COLUMN "TB_COUPON"."CP_DISCOUNT" IS '할인금액';
    COMMENT ON COLUMN "TB_COUPON"."CP_ENROLL_DATE" IS '등록일';
+   COMMENT ON COLUMN "TB_COUPON"."CP_END_DATE" IS '만료일';
 --------------------------------------------------------
 --  DDL for Table TB_FAQ
 --------------------------------------------------------
@@ -300,7 +302,7 @@ END;
 
    COMMENT ON COLUMN "TB_FILE"."FILE_NO" IS '파일번호';
    COMMENT ON COLUMN "TB_FILE"."REF_BNO" IS '참조게시글번호';
-   COMMENT ON COLUMN "TB_FILE"."FILE_CATEGORY" IS '참조게시글카테고리(1공간/2:후기/3.홈페이지관리)';
+   COMMENT ON COLUMN "TB_FILE"."FILE_CATEGORY" IS '참조게시글카테고리(1공간/2:후기/3.홈페이지관리/4.일대일문의)';
    COMMENT ON COLUMN "TB_FILE"."FILE_ORIGIN_NAME" IS '파일원본명';
    COMMENT ON COLUMN "TB_FILE"."FILE_CHANGE_NAME" IS '파일수정명';
    COMMENT ON COLUMN "TB_FILE"."FILE_PATH" IS '저장폴더경로';
