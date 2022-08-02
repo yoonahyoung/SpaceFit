@@ -102,7 +102,7 @@ public class QnAReplyInsertController extends HttpServlet {
 				
 				session.setAttribute("alertMsg", "성공적으로 답변등록되었습니다!");
 				
-				response.sendRedirect(request.getContextPath()+"/list.qa?cpage=1");
+				response.sendRedirect(request.getContextPath()+"/adminList.qa?cpage=1");
 				
 			}else { // 실패했을 경우 => 에러문구가 보여지는 에러페이지
 				
@@ -112,7 +112,7 @@ public class QnAReplyInsertController extends HttpServlet {
 				}
 				
 				request.setAttribute("errorMsg", "답변등록에 실패했습니다.");
-				request.getRequestDispatcher("views/user/common/backAlertErrorPage.jsp").forward(request, response);
+				request.getRequestDispatcher("views/admin/common/backAlertErrorPage.jsp").forward(request, response);
 				
 				
 			}

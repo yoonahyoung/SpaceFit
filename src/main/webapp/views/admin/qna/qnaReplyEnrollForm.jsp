@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.qna.model.vo.QnA"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.qna.model.vo.QnA, com.spacefit.mem.model.vo.Member"%>
 <%
 	QnA q = (QnA)request.getAttribute("qna");
+	Member loginUser = (Member)session.getAttribute("loginUser");
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>일대일문의 등록</title>
+<title>답변 등록</title>
 <style>
     .outer{
         width: 1000px;
@@ -38,7 +40,7 @@
 </style>
 </head>
 <body>
-<%@ include file="../common/userMenubar.jsp" %>
+<%@ include file="../common/adminMenubar.jsp" %>
  <div class="outer">
     <br>
     <h2 align="center">답변 등록</h2>
@@ -111,7 +113,6 @@
     </div>
     
  </div>
-<%@ include file="../common/userFooter.jsp" %>
 </body>
 <script>
     // 공개글 기본값 -> 비밀번호 입력못하도록 설정

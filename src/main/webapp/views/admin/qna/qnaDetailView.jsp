@@ -28,7 +28,7 @@
 </style>
 </head>
 <body>
-<%@ include file="../common/userMenubar.jsp" %>
+<%@ include file="../common/adminMenubar.jsp" %>
  <div class="outer">
     <br>
     <h2 align="center">1 : 1 문의</h2>
@@ -36,7 +36,7 @@
 
     <table class="table" id="detail-area">
         <tr>
-            <th width="90">제목</th>
+            <th width="100">제목</th>
             <td colspan="11" width="430" align="left"><%=q.getQnaTitle() %></td>
 
         </tr>
@@ -76,11 +76,13 @@
 
     <br>
 	<div align="right">
+		<% if (q.getQnaGroup() != 1){ %>
+        <a href="<%=contextPath%>/reply.qa?no=<%=q.getQnaNo()%>" class="btn btn-sm btn-primary">답변하기</a> 
+	    <% } %>
 	    <a onclick="history.back();" class="btn btn-sm btn-secondary">목록가기</a>
     </div>
     <div style="height : 60px"></div>
  </div>
-<%@ include file="../common/userFooter.jsp" %>
 
 <script>
     function goQnAlist(){

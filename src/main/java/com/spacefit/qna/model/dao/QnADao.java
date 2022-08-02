@@ -263,17 +263,18 @@ public class QnADao {
 		// attachment에 insert => 처리된 행수
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("insertAttachment");
-		int insertNo = refNo -1;
-		
-		System.out.println(insertNo);
+		String sql = prop.getProperty("insertRelpyAttachment");
+		int refBno = refNo -1; // 답변글 번호(ex 58)는 참조번호 -1(ex 57) 이니까
+								 // 첨부파일 참조글번호(REF_BNO) == 답변글번호 == 참조번호 -1
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, insertNo);
+			
+			pstmt.setInt(1, refBno);
 			pstmt.setString(2, at.getFileOriginName());
 			pstmt.setString(3, at.getFileChangeName());
 			pstmt.setString(4, at.getFilePath());
+			
 			
 			result = pstmt.executeUpdate();
 			
