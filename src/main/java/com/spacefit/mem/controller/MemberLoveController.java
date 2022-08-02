@@ -7,22 +7,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
-import com.spacefit.common.controller.TestSms;
+import com.spacefit.mem.model.service.MemberService;
 import com.spacefit.mem.model.vo.Member;
 
 /**
- * Servlet implementation class SmsAccountCheck
+ * Servlet implementation class MemberLoveInsertController
  */
-@WebServlet("/sms.me")
-public class AjaxSmsController extends HttpServlet {
+@WebServlet("/wish.lo")
+public class MemberLoveController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxSmsController() {
+    public MemberLoveController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,12 +32,21 @@ public class AjaxSmsController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memPhone = request.getParameter("memPhone");
-		//System.out.println("서비스에서 확인하는 memPhone" + memPhone);
-		String randomNo = new TestSms().testMessage(memPhone);
-		//System.out.println("서비스 에서 확인하는 " + randomNo);
-		response.setContentType("application/json; charset=UTF-8");
-		new Gson().toJson(randomNo, response.getWriter());
+		HttpSession session = request.getSession();
+		
+		int spNo = Integer.parseInt(request.getParameter("no"));
+		int memNo = ((Member)session.getAttribute("loginUser")).getMemNo();
+		String status = request.getParameter("status");
+		
+		int result = new MemberService().loveList(spNo, memNo, status);			
+		
+		if(result > 0) { // insert든 delete든 성공시
+			response.setContentType("application/json; charset=UTF-8");
+			new Gson().toJson(result, response.getWriter());
+		}else { // 실패시
+			
+		}
+		
 	}
 
 	/**

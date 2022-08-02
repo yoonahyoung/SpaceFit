@@ -1,28 +1,27 @@
-package com.spacefit.mem.controller;
+package com.spacefit.qna.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
-import com.spacefit.common.controller.TestSms;
-import com.spacefit.mem.model.vo.Member;
+import com.spacefit.qna.model.service.QnAService;
+import com.spacefit.qna.model.vo.QnA;
 
 /**
- * Servlet implementation class SmsAccountCheck
+ * Servlet implementation class QnAPwdCheckController
  */
-@WebServlet("/sms.me")
-public class AjaxSmsController extends HttpServlet {
+@WebServlet("/pwdcheck.qa")
+public class QnAPwdCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxSmsController() {
+    public QnAPwdCheckController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,12 +30,18 @@ public class AjaxSmsController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memPhone = request.getParameter("memPhone");
-		//System.out.println("서비스에서 확인하는 memPhone" + memPhone);
-		String randomNo = new TestSms().testMessage(memPhone);
-		//System.out.println("서비스 에서 확인하는 " + randomNo);
-		response.setContentType("application/json; charset=UTF-8");
-		new Gson().toJson(randomNo, response.getWriter());
+
+		int qnaNo = Integer.parseInt(request.getParameter("no"));
+		
+		QnA q = new QnAService().selectQnA(qnaNo);
+		
+		
+		if(q.getQnaPublic().equals("N") && q.getQnaPwd() != null) {
+			request.setAttribute("qna", q);
+			request.getRequestDispatcher("views/user/qna/qnaPwdCheck.jsp").forward(request, response);
+		}else {
+			response.sendRedirect(request.getContextPath()+"/detail.qa?no=" + qnaNo);
+		}
 	}
 
 	/**

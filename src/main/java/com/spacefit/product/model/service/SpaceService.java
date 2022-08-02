@@ -67,6 +67,8 @@ public class SpaceService {
 		
 		return list;
 	}
+	
+	
 
 	// 관리자 공간 삭제
 	public int deleteSpace(int spNo) {

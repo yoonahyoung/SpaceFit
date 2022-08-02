@@ -206,7 +206,7 @@
 		   AND QNA_STATUS = 'Y'
 	</entry>
 	
-		<entry key="selectQnA">
+	<entry key="selectQnA">
         SELECT
 		       QNA_NO
 		     , QNA_CATEGORY
@@ -225,6 +225,14 @@
 		  JOIN TB_MEMBER ON(QNA_MEM_NO = MEM_NO)
 		  JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
 		 WHERE QNA_NO = ?
+	</entry>
+	
+	<entry key="isSolved">
+		SELECT
+			   COUNT(*) AS COUNT
+		 FROM TB_QNA
+	    WHERE QNA_NO = ?
+	       OR QNA_REF_NO = ?
 	</entry>
 	
 </properties>

@@ -154,4 +154,10 @@ public class QnAService {
 		close(conn);
 		return at;
 	}
+	public int isSolved(int qnaNo) {
+		Connection conn = getConnection();
+		int result = new QnADao().isSolved(conn, qnaNo);
+		close(conn);
+		return result;
+	}
 }

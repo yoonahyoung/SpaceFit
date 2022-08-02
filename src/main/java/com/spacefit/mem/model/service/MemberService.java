@@ -207,7 +207,6 @@ public class MemberService {
    public int loveCheck(int spNo, int memNo) {
 	   Connection conn = getConnection();
 	   int count = new MemberDao().loveCheck(conn, spNo, memNo);
-	   System.out.println(count);
 	   close(conn);
 	   return count;
 	   
@@ -237,6 +236,24 @@ public class MemberService {
 		Member m = new MemberDao().adminMemberManageDetailListSelect(conn, memNo);
 		close(conn);
 		return m;
+	}
+	
+	
+	public ArrayList<Member> selectMemberListOrderBy(String orderBy){
+		Connection conn = getConnection();
+		String addSql = "";
+		
+		switch(orderBy) {
+		case "newest" : addSql = "ORDER BY MEM_ENROLL_DATE ASC"; break;
+		case "bestOrder" : addSql = "ORDER BY BOOK_AMOUNT_MONTH"; break;
+		case "reported" : addSql = "ORDER BY RPT_COUNT DESC"; break;
+		case "like" : addSql = "ORDER BY LIKE_COUNT DESC"; break;
+		default : addSql ="ORDER BY MEM_ENROLL_DATE ASC"; break;
+		}
+
+		ArrayList<Member> memList = new MemberDao().selectMemberListOrderBy(conn, addSql);
+		close(conn);
+		return memList;
 	}
 
 	public ArrayList<Mcp> selectAdminCouponList(){

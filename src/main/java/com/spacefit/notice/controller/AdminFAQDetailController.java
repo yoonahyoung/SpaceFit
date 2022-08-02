@@ -1,4 +1,4 @@
-package com.spacefit.mem.controller;
+package com.spacefit.notice.controller;
 
 import java.io.IOException;
 
@@ -7,22 +7,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
-import com.spacefit.common.controller.TestSms;
-import com.spacefit.mem.model.vo.Member;
+import com.spacefit.notice.model.service.NoticeService;
+import com.spacefit.notice.model.vo.FAQ;
 
 /**
- * Servlet implementation class SmsAccountCheck
+ * Servlet implementation class AdminFAQDetailController
  */
-@WebServlet("/sms.me")
-public class AjaxSmsController extends HttpServlet {
+@WebServlet("/detail.fa")
+public class AdminFAQDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxSmsController() {
+    public AdminFAQDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,12 +31,14 @@ public class AjaxSmsController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memPhone = request.getParameter("memPhone");
-		//System.out.println("서비스에서 확인하는 memPhone" + memPhone);
-		String randomNo = new TestSms().testMessage(memPhone);
-		//System.out.println("서비스 에서 확인하는 " + randomNo);
-		response.setContentType("application/json; charset=UTF-8");
-		new Gson().toJson(randomNo, response.getWriter());
+		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+		
+		int faNo = Integer.parseInt(request.getParameter("no"));
+		FAQ faq = new NoticeService().adminSelectFAQ(faNo);
+		
+		request.setAttribute("faq", faq);
+		request.getRequestDispatcher("views/admin/notice/FAQDetailManage.jsp").forward(request, response);
 	}
 
 	/**

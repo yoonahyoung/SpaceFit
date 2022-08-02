@@ -33,15 +33,15 @@
 	                                <input type="text" placeholder="아이디를 입력해주세요" class="account-input" id="memId" name="memId" required>
 	                                <input type="button" class="btn btn-primary" value="중복확인" style="color:white"  onclick="idCheck();">
 	                               <!-- <button type="button" class="btn btn-primary" style="color:white" onclick="idCheck();">중복확인</button> -->
-	                                <span id="idSpan">아이디는 4~12자의 영문 대소문자와 숫자로만 입력해주세요</span>
+	                                <span id="idSpan">아이디는 영문 대소문자, 숫자 5~20자리까지 입력해주세요.</span>
 	                            <br><br>
 	                                <label for="#memPwd">비밀번호</label>
 	                                <input type="password" placeholder="비밀번호를 입력해주세요" class="account-input" id="memPwd" name="memPwd" required>
-	                                <span>비밀번호는 영문 대소문자+숫자+특수문자로 10자 이상입니다.</span>
+	                                <span id="pwdSpan">영문 대문자와 소문자, 숫자, 특수문자를 하나 이상 포함하여 8~16자</span>
 	                            <br><br>
 	                                <label for="#memPwd-check">비밀번호 확인</label>
 	                                <input type="password" placeholder="비밀번호를 입력해주세요" class="account-input" id="memPwd-check" required>
-	                                <span>비밀번호를 한번 더 입력해주세요.</span>
+	                                <span id="pwdCheckSpan">비밀번호를 한번 더 입력해주세요.</span>
 	                            <br><br>
 	                                <label for="#memName">이름</label>
 	                                <input type="text" placeholder="이름을 입력해주세요" class="account-input" id="memName" name="memName"  value="<%=memName%>" required readOnly>
@@ -54,10 +54,12 @@
 	                                <br><br><br><br>           
 	                                <hr>
 	                                <br><br>
-	                                <div class="addMessege">추가 입력사항입니다! <br>이메일을 등록하면 예약정보를 받아보실 수 있어요!</div>
-	                                <label for="#memEmail">이메일</label>
+	                                <div class="addMessege">이메일을 등록하면 예약정보를 받아보실 수 있어요!</div>
+	                                <label for="#memMail">이메일</label>
 			                        <input type="email" placeholder="이메일을 입력해주세요" class="account-input" id="memMail" name="memMail">
-			                        <input type="button" class="btn btn-secondary" style="color:white;" value="이메일 인증하기">
+			                        <input type="button" class="btn btn-secondary" style="color:white;" value='$("#memMail").val()' onclick="checkEmail(e);">
+			                        <input type="text" placeholder="인증번호를 입력해주세요" class="account-input" id="memMailCheck" name="memMailCheck">
+			                        <span id="mailSpan"></span>
 			                        <br><br><br><br>
 			                        <hr>
 			                        <br><br>
@@ -66,7 +68,30 @@
 		                        	<br><br><br>
 	                           </div>
 	                   </form>
-            	</div> 
+		                    <script>
+						       function checkEmail(){
+						    	   let mailSpan = document.querySelector("#mailSpan");
+						    	   $.ajax({
+						       			url:"<%=contextPath%>/checkEmail.me",
+						       			data:{
+						       				memMail:$("#memMail").val(),
+						       			},
+						       			success:function(randomNo){
+						       				if(randomNo == $("#memMailCheck").val()){
+						       					mailSpan.style="color:#0082FF ;"
+						       					mailSpan.innerHTML = "이메일 인증 완료!"
+											} else {
+												mailSpan.style="color:#red ;"
+							       				mailSpan.innerHTML = "이메일 인증 실패! 다시 한 번 확인해주세요!"
+												}
+						       			},
+						       			error:function(){
+						       				console.log("추천 +1 AJAX 통신 실패");
+						       			}
+						       		})
+								}
+					        </script>
+            	</div>
           	</div>	
           </div>
           <div style="height : 100px"></div>

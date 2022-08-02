@@ -54,14 +54,14 @@
 							  </div>
 							  <div id="selectSelection">
 							  	<form>
-							  		<select>
-									  <option selected>최신글 조회</option>
-									  <option>최신글 조회</option>
-									  <option>오래된 글 조회</option>
-									  <option>별점 높은 글</option>
-									  <option>별점 낮은 글</option>
+							  		<select id="orderBySel" name="orderBySel" onchange="changeSelect()">
+									  <option value="newest" selected>최신회원 조회</option>
+									  <option value="bestOrder">이번달주문건수</option>
+									  <option value="reported">누적신고순</option>
+									  <option alue="like">누적추천순</option>
 									</select>
 							  	</form>
+							  	
 							  </div>
 
 							<div style="height : 30px"></div>
@@ -100,72 +100,90 @@
 	                                            <th>상세보기</th>
 	                                        </tr>
 	                                    </tfoot>
-	                                    <tbody>
-	                                    	<% if(list.isEmpty()) { %>
-	                                    	<!-- 회원이 없을경우 -->
-	                                    	<tr>
-	                                    		<td colspan="11">존재하는 회원이 없습니다.</td>
-	                                    	</tr>
-	                                    	<% } else { %>
-	                                    	<!-- 회원이 있을경우 -->
-	                                    		<% for(Member m : list) { %>
-			                                        <tr>
-			                                        	<td><input type="radio"></td>
-			                                            <td><%=m.getMemNo() %></td>
-			                                            <td><%=m.getMemId() %></td>
-			                                            <td><%=m.getMemName() %></td>
-			                                            <td><%=m.getMemPhone() %></td>
-			                                            <td>
-			                                            	<select>
-															  <option selected><%=m.getGrName() %></option>
-															  <option>Basic</option>
-															  <option>Silver</option>
-															  <option>Gold</option>
-															</select>
-			                                            </td>
-			                                            <td><%=m.getRptCount() %></td>
-			                                            <td><%=m.getLikeCount() %></td>
-			                                            
-			                                            <td>
-															<select>
-															  <option selected>
-															  <% if(m.getMemAdmFlag().equals("A")) { %>
-															  	<option selected>관리자</option>
-															  <% } else {  %>
-															  	<option selected>일반</option>
-															  <% } %>
-															  <option>일반</option>
-															  <option>관리자</option>
-															</select>
-														</td>
-			                                                                                        
-			                                            <td>
-															<select>
-															  <option selected>
-															  <% if(m.getMemStatus().equals("Y")) { %>
-															  	<option selected>회원</option>
-															  <% } else if (m.getMemStatus().equals("N")) { %>
-															  	<option selected>탈퇴회원</option>
-															  <% } else { %>
-															  	<option selected>블랙리스트</option>
-															  <% } %>
-															  <option>회원</option>
-															  <option>탈퇴회원</option>
-															  <option>블랙리스트</option>
-															</select>
-														</td>
-			                                            
-			                                      
-			                                            <td><%=m.getBookCountMonth() %></td>
-			                                            <td><input type="button" class="btn btn-primary btn-sm" value="상세조회" onclick="location.href='<%=contextPath%>/memDetailView.me?no=<%=m.getMemNo()%>'"></td>
-			                                            <script>
-			
-			                                            </script>
-			                                        </tr>
-			                                      <% } %>
-			                                   <% } %>
+	                                    <tbody id="memListTBody">
+	                                    	
 	                                    </tbody>
 	                                </table>
+	                                <script>
+	                                
+	                                $(function(){
+	                                	changeSelect();
+	                                })
+	                                
+	                               
+	                                
+								  	function changeSelect(){
+											let orderBy = $("#orderBySel").val();
+											const memListTBody = $("#memListTBody");
+											 $.ajax({
+						     	        		 url:"<%=contextPath%>/orderByMem.me",
+										  		 data:{
+										  			orderBy:orderBy
+										  		 },
+										  		 type:"post",
+										  		 success:function(memList){
+										  			if(memList.length == 0){
+						               					// 회원리스트가 비어있다면
+						       							let value ='<tr><td colspan="11">존재하는 회원이 없습니다.</td></tr>'
+						       							memListTBody.html(value);
+						       						} else {
+											  			let value = ""
+											  			for(let i = 0; i<memList.length; i++) {
+											  				 $(function(){
+												  					if( memList[i].memAdmFlag == 'A') {
+												  						$("#adminFlag").val("Admin").attr('selected', 'selected');
+												  					} else {
+												  						$("#adminFlag").val("General").attr('selected', 'selected');
+												  					}
+												  				})
+											  				
+											  				
+											  			value += 
+												  			'<tr>'
+					                                       + ' 	<td><input type="radio"></td> '
+					                                       + '     <td>' + memList[i].memNo + '</td> '
+					                                       + '     <td>' + memList[i].memId + '</td> '
+					                                       + '     <td>' + memList[i].memName + '</td> '
+					                                       + '     <td>' + memList[i].memPhone + '</td> '
+					                                       + '     <td> '
+					                                       + '     	<select> '
+					                                       + '		  <option selected>' + memList[i].grName + '</option> '
+					                                       + '		  <option>Basic</option> '
+					                                       + '		  <option>Silver</option> '
+					                                       + '		  <option>Gold</option> '
+					                                       + '		</select> '
+					                                       + '     </td> '
+					                                       + '     <td>' + memList[i].rptCount + '</td> '
+					                                       + '     <td>' + memList[i].likeCount + '</td> '
+					                                       + '     <td> '  //+ memList[i].memAdmFlag
+					                                       + '		<select id="adminFlag">'
+					                                       + '		  <option id ="General" value="General">일반</option> '
+					                                       + '		  <option id ="Admin" value="Admin">관리자</option> '
+					                                       + '		</select> '
+					                                       + '	   </td> '
+					                                       + '     <td> '// + memList[i].memStatus 
+					                                       + '		<select id="statusFlag"> '
+					                                       + '		  <option id ="YesUser" value="YesUser">회원</option> '
+					                                       + '		  <option id ="NotUser" value="NotUser">탈퇴회원</option> '
+					                                       + '		  <option id ="Black" value="Black">블랙리스트</option> '
+					                                       + '		</select> '
+					                                       + '	   </td> '
+					                                       + '     <td>' + memList[i].bookCountMonth + '</td> '
+					                                       + '     <td><input type="button" class="btn btn-primary btn-sm" value="상세조회" onclick="location.href=' + '/memDetailView.me?no=' + memList[i].memNo + '"></td> '
+					                                       + '  </tr> '
+					                                       + '<input id="hiddenAdmFlag" type="hidden" value="' + memList[i].memAdmFlag + '">'
+										  					 }
+											  				memListTBody.html(value);
+											  				
+												  		 }
+										  		 },
+										  		 error:function(){
+										  			console.log("회원목록 조회용 ajax 통신 실패");
+										  		 }
+										  		 
+										  	 })
+										}
+								</script>
 	                            </div>
 	                        </div>
 							<div class="paging-area" align="center">    

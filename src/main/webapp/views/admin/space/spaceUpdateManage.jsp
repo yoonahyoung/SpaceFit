@@ -41,20 +41,20 @@
 				</tr>
 				<tr>
 					<th>공간명</th>
-                    <td colspan="3"><input type="text" value="<%=s.getSpaceName() %>"></td>
+                    <td colspan="3"><input name="" type="text" value="<%=s.getSpaceName() %>" required></td>
 				</tr>
 				<tr>
 					<th>최대 수용 인원</th>
-					<td colspan="3"><input type="number" value="<%=s.getSpaceLimit() %>"></td>
+					<td colspan="3"><input type="number" value="<%=s.getSpaceLimit() %>" required></td>
 				</tr>
 				<tr>
 					<th>시간당 가격</th>
-					<td colspan="3"><input type="number" value="<%=s.getSpacePrice() %>"></td>
+					<td colspan="3"><input type="number" value="<%=s.getSpacePrice() %>" required></td>
 				</tr>
 				<tr>
 					<th>공간소개</th>
                     <td colspan="3">
-                        <textarea name="" id="" cols="100" rows="20" style="resize:none"><%=s.getSpaceInfo() %></textarea>
+                        <textarea name="" id="" cols="100" rows="20" style="resize:none" required><%=s.getSpaceInfo() %></textarea>
                     </td>
 				</tr>
 				<tr>
@@ -113,7 +113,7 @@
 			</script>
 
 			<br><br>
-			<button type="button" class="btn btn-primary">수정완료</button>
+			<button type="submit" href="<%=contextPath%>/adUpdate.sp?no=<%=s.getSpaceNo() %>" class="btn btn-primary">수정완료</button>
 			<a href="<%=contextPath%>/adList.sp" type="button" class="btn btn-secondary">뒤로가기</a>
 		</form>
 		        

@@ -26,7 +26,7 @@ $(function(){
 })
 
 // 회원가입폼 1(SignInOne에서 회원약관 전체선택)
-/*
+
 $(function(){
 	 const agreeChkAll = document.querySelector('input[name=agree_all]');
         agreeChkAll.addEventListener('change', (e) => {
@@ -35,7 +35,7 @@ $(function(){
         agreeChk[i].checked = e.target.checked;
         }
     });
-})*/
+})
 
 // js1-------------------------------------------------------
 
@@ -161,3 +161,56 @@ function idCheck(){
 
 
 // 2. 아이디 유효성검사
+let memId = document.querySelector("#memId");
+let idSpan = document.querySelector("#idSpan");
+let regId = RegExp(/^[A-Za-z0-9_\-]{5,20}$/);
+
+function idCheck() {
+  if (regId.test(memId.value)) {
+	idSpan.style="color:#0082FF ;"
+    idSpan.innerHTML = "안전한 아이디입니다!";
+  } else {
+	idSpan.style="color:red;"
+    idSpan.innerHTML = "아이디는 영문 대소문자, 숫자 5~20자리까지 입력해주세요.";
+  }
+}
+memId.addEventListener("blur", idCheck);
+
+
+
+// 3. 비밀번호 유효성 체크
+let memPwd = document.querySelector("#memPwd");
+let pwdSpan = document.querySelector("#pwdSpan");
+let regPwd = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,16}$/);
+
+function pwdCheck(){
+	if(regPwd.test(memPwd.value)) {
+		pwdSpan.style="color:#0082FF ;"
+		pwdSpan.innerHTML = "안전한 비밀번호입니다!"
+	} else {
+		pwdSpan.style="color:red;"
+		pwdSpan.innerHTML = "비밀번호는 영문 대-소문자, 숫자, 특수문자를 하나 이상 포함하여 8~16자 입력해주세요."
+	}
+}
+memPwd.addEventListener("blur", pwdCheck);
+
+// 4. 비밀번호 확인
+let memPwdCheck = document.querySelector("#memPwd-check");
+let pwdCheckSpan = document.querySelector("#pwdCheckSpan");
+function pwdDBcheck(){
+	if(memPwd.value === memPwdCheck.value) {
+		pwdCheckSpan.style="color:#0082FF ;"
+		pwdCheckSpan.innerHTML = "비밀번호 확인 완료"
+	} else {
+		pwdCheckSpan.style="color:red;"
+		pwdCheckSpan.innerHTML = "비밀번호를 확인해주세요."
+	}
+}
+
+memPwdCheck.addEventListener("blur", pwdDBcheck);
+
+
+
+
+
+
