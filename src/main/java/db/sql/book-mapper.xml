@@ -97,4 +97,35 @@
   
 	</entry>
 	
+	<!-- 예약통계 이번달건수 -->
+	<entry key="selectMonthCount">
+		SELECT COUNT
+		  FROM (
+		        SELECT COUNT(*) AS "COUNT" , EXTRACT(MONTH FROM (TO_DATE(BOOK_DATE))) AS "MONTH" 
+		          FROM TB_BOOK
+		          WHERE BOOK_STATUS = 'Y'
+		          GROUP
+		            BY EXTRACT(MONTH FROM (TO_DATE(BOOK_DATE)))    
+		        )
+		 WHERE MONTH = EXTRACT(MONTH FROM SYSDATE)   
+	
+	</entry>
+	
+	<!-- 오늘 예약건수 -->
+	<entry key="selectTodayCount">
+		 SELECT NVL(COUNT(*), 0) AS "TODAY_COUNT"
+		   FROM TB_BOOK
+		  WHERE BOOK_CREATE_DATE = SYSDATE
+		   AND BOOK_STATUS = 'Y'  
+	</entry>
+	
+	<!-- 매월 예약건수 -->
+	<entry key="selectMonthlyCount">
+		SELECT COUNT(*) AS "COUNT" , EXTRACT(MONTH FROM (TO_DATE(BOOK_DATE))) || '월' AS "MONTH" 
+		  FROM TB_BOOK
+		 WHERE BOOK_STATUS = 'Y'
+		 GROUP
+		    BY EXTRACT(MONTH FROM (TO_DATE(BOOK_DATE)))
+	</entry>
+	
 </properties>

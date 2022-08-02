@@ -1,4 +1,4 @@
-package com.spacefit.reservation.controller;
+package com.spacefit.review.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,44 +9,43 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.spacefit.reservation.model.service.BookService;
-import com.spacefit.reservation.model.vo.Book;
+import com.google.gson.Gson;
+import com.spacefit.review.model.service.CommentService;
+import com.spacefit.review.model.vo.Comment;
 
 /**
- * Servlet implementation class AdminBookChartController
+ * Servlet implementation class CommentListController
  */
-@WebServlet("/aBookChart.bo")
-public class AdminBookChartController extends HttpServlet {
+@WebServlet("/comList.com")
+public class AjaxCommentListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminBookChartController() {
+    public AjaxCommentListController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int thisMonth = new BookService().selectMonthCount();
-		int todayCount = new BookService().selectTodayCount();
-		ArrayList<Book> list  = new BookService().selectMonthlyCount();
-				
-		request.setAttribute("thisMonth", thisMonth);
-		request.setAttribute("todayCount", todayCount);
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/admin/book/bookManageChart.jsp").forward(request, response);
+		int rvNo = Integer.parseInt(request.getParameter("rvNo"));
+		ArrayList <Comment> comList = new CommentService().selectComList(rvNo);
+		if(comList.isEmpty()) {
+			response.setContentType("application/json; charset=UTF-8");
+			new Gson().toJson(comList, response.getWriter());
+		} else {
+			response.setContentType("application/json; charset=UTF-8");
+			new Gson().toJson(comList, response.getWriter());
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
