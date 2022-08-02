@@ -14,7 +14,6 @@ public class CommentService {
 	public ArrayList<Comment> selectComList(int rvNo) {
 		Connection conn = getConnection();
 		ArrayList <Comment> comList = new CommentDao().selectComList(conn, rvNo);
-		System.out.println("서비스에서 확인 : " + comList);
 		close(conn);
 		return comList;
 	}

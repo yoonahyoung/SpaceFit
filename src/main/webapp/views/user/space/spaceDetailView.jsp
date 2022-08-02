@@ -192,8 +192,9 @@ body {
 	                                                        <span id="commentSpan">
 	                                                            <button type="button" id="showCom" class="collapsed"
 	                                                             data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour"
-	                                                             data-value="<%= r.getReviewNo() %>" onclick="commentList(this);">
+	                                                              onclick="commentList(this);">
 		                                                            후기댓글보기
+		                                                            <input type="hidden" id="rvNo" value="<%=r.getReviewNo()%>">
 		                                                         </button>
 	                                                        </span>
 	                                                    <hr>
@@ -238,7 +239,7 @@ body {
 	                                            </div>
 	                                            <br><br>
 	                                            <div class="collapse commentDiv" id="flush-collapseFour"  aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
-                                                    <div class="parentCommentAll">
+                                                    <div class="parentCommentAll" id="parentCommentAll">
                                                         
                                                         
                                                     </div>
@@ -319,54 +320,51 @@ body {
 				           				}
 				                       
 				                       
-				                       function commentList(){
-				                    	   let rvNo = $(e).data("value")
+				                       function commentList(e){
 				                    	   
 				                    	   $.ajax({
-				                    		   url : "<%=contextPath%>/comList.com"
+				                    		   url : "<%=contextPath%>/comList.com",
 				                    		   data:{
-				                    			   rvNo : rvNo
-				                    		   },
-				                    		   
-				                    		   
-				                    		   success:function(result){
-				                    				if(result == "emptyComList"){
+				                    			   rvNo:$("#rvNo").val(),
+					                    			},
+				                    		   success:function(comList){
+				                    				if(comList.length == 0){
+				                    					console.log(comList + "이건 에이젝스에서 넘어옴");
 				                    					// 댓글리스트가 비어있다면
-				            							let value ="<h4> 아직 작성된 후기가 없습니다 </h4><br>"
+				            							let value ='<h4> 아직 작성된 댓글 없습니다 </h4><br>'
 				            							$(".parentCommentAll").html(value);
 				            						} else {
 				            							// 댓글리스트가 있다면
-				            							<%comList = (ArrayList<Comment>)request.getAttribute("comList");%>
-				            							let value = "
-				            							<% for (Comment c : comList) {%>
-		                                                        <div class="commentMem row">
-		                                                            <div class="parentMem col-lg-6">
-		                                                                <span class="material-symbols-outlined memProfilePic" id="memProfilePic">
-		                                                                    account_circle
-		                                                                </span>
-		                                                                <span id="memSpan">
-		                                                                   <%= c.getMemId()%>
-		                                                                </span>
-		                                                            </div>
-		                                                            <div class="parentInfo col-lg-6">
-		                                                                <span> <%= c.getComEnrollDate()%></span>
-		                                                                <span>&ensp;|&ensp;</span>
-		                                                                <span id="reReport">신고하기</span>
-		                                                                <span>&ensp;|&ensp;</span>
-		                                                                <span id="reComment">대댓달기</span>
-		                                                            </div>
-		                                                            <hr> 
-		                                                            <div id="showComment">
-		                                                                <div class="parentComment">
-		                                                                    <span><%= c.getComContent()%></span>
-		                                                                </div>
-		                                                    		</div>
-		                                                    	</div>
-														<%}%>				            							
-				            							"
-														$(".parentCommentAll").html(value);
-				            							}
-				                    			},
+				            							console.log(comList + "이건 에이젝스에서 넘어옴");
+				            							let value = ""
+				            								for(let i = 0; i<comList.length; i++) {
+				            									value += ' <div class="commentMem row"> '
+					            												+ '<div class="parentMem col-lg-6">'
+					            												+ 	'<span class="material-symbols-outlined memProfilePic" id="memProfilePic">'
+					            												+		'account_circle'
+					            												+		'</span>'
+					            												+		'<span id="memSpan">'
+					            												+			comList[i].memId
+					            												+		'</span>'
+					            												+ '</div>'
+					            												+ '<div class="parentInfo col-lg-6">'
+					            												+ 	'<span>' + comList[i].comEnrollDate + '</span>'
+					            												+	'<span>&ensp;|&ensp;</span>'
+					            												+	'<span id="reReport">신고하기</span>'
+					            												+ 	'<span>&ensp;|&ensp;</span>'
+					            												+	'<span id="reComment">대댓달기</span>'
+					            												+ '</div>'
+					            												+ '<hr>'
+					            												+ '<div id="showComment">'
+					            												+ 	'<div class="parentComment">'
+					            												+		'<span>' + comList[i].comContent + '</span>'
+					            												+	'</div>'
+					            												+ '</div>'
+				            												+ '</div>'
+				            								}
+				            							$(".parentCommentAll").html(value);
+				                    			}
+				                    		   },
 				                    			error:function(){
 				                    				console.log("댓글조회용 AJAX 실패");
 				                    			}

@@ -36,7 +36,7 @@ public class BookService {
 		if(result>0) {
 			commit(conn);
 		}else {
-			 rollback(conn);
+			rollback(conn);
 		}
 		close(conn);
 		return result;
@@ -73,6 +73,30 @@ public class BookService {
 	public ArrayList<Book> searchSelectBook(String search, String booktype, String bookOrderBy){
 		Connection conn = getConnection();
 		ArrayList<Book> list = new BookDao().searchSelectBook(conn, search, booktype, bookOrderBy);
+		close(conn);
+		return list;
+	}
+	
+	// 이번달 예약건수
+	public int selectMonthCount() {
+		Connection conn = getConnection();
+		int thisMonth = new BookDao().selectMonthCount(conn); // select문이므로 commit없음
+		close(conn);
+		return thisMonth;
+	}
+	
+	// 오늘 예약건수
+	public int selectTodayCount() {
+		Connection conn = getConnection();
+		int todayCount = new BookDao().selectTodayCount(conn);
+		close(conn);
+		return todayCount;
+	}
+	
+	// 월별 예약건수 
+	public ArrayList<Book> selectMonthlyCount(){
+		Connection conn = getConnection();
+		ArrayList<Book> list = new BookDao().selectMonthlyCount(conn);
 		close(conn);
 		return list;
 	}

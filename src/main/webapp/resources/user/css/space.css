@@ -182,7 +182,9 @@ span.col-sm-4{
   background-color: white;
   color: #0D6EFD;
   border:none;
-  font-size: 15px;
+  font-size: 13px;
+  width : 100px;
+  height : 10px;
 }
 
 /* ------------ 댓글부분 --------------- */

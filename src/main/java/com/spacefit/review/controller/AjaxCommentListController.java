@@ -33,7 +33,6 @@ public class AjaxCommentListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int rvNo = Integer.parseInt(request.getParameter("rvNo"));
 		ArrayList <Comment> comList = new CommentService().selectComList(rvNo);
-		System.out.println(comList);
 		if(comList.isEmpty()) {
 			response.setContentType("application/json; charset=UTF-8");
 			new Gson().toJson(comList, response.getWriter());

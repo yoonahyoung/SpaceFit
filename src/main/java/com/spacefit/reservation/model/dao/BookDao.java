@@ -193,6 +193,13 @@ public class BookDao {
 	 * 관리자용
 	 */
 		
+	/** 관리자 예약리스트 (정렬 + 검색)
+	 * @param conn
+	 * @param search 검색
+	 * @param booktype 이용완료 | 예약취소 | 예약확정
+	 * @param bookOrderBy 예약번호순 | 대여날짜순
+	 * @return
+	 */
 	public ArrayList<Book> searchSelectBook(Connection conn, String search, String booktype, String bookOrderBy){
 		// select문 => ResultSet => ArrayList<Book>
 		ArrayList<Book> list = new ArrayList<>();
@@ -233,6 +240,81 @@ public class BookDao {
 			close(pstmt);
 		}
 		return list;
+		
+	}
+	
+	public int selectMonthCount(Connection conn) {
+		// select => ResultSet(int)
+		int thisMonth = 0;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectMonthCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				thisMonth = rset.getInt("count");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return thisMonth;
+		
+	}
+	
+	public int selectTodayCount(Connection conn) {
+		// select => ResultSet(int)
+		int todayCount = 0;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectTodayCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				todayCount = rset.getInt("TODAY_COUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return todayCount;	
+		
+	}
+	
+	public ArrayList<Book> selectMonthlyCount(Connection conn){
+		// select => ResultSet => ArrayList<Book>
+		ArrayList<Book> list = new ArrayList<>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectMonthlyCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()){
+				list.add(new Book(rset.getInt("count"),
+								  rset.getString("MONTH")		
+						));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
 		
 	}
 }
