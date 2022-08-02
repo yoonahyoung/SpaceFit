@@ -125,6 +125,7 @@
 
     <br>
 	<div align="right">
+		
         <button class="btn btn-sm btn-primary" onclick="return check();">등록</button>
         <button type="button" class="btn btn-sm btn-secondary" onclick="history.back();">취소</button>
     </div>

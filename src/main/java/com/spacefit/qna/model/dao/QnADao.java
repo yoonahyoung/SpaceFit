@@ -180,7 +180,61 @@ public class QnADao {
 		
 		return result;
 	}
+	public int insertPublicReply(Connection conn, QnA q) {
+		// board에 insert => 처리된 행수 
+		int result = 0; 
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertPublicReply");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, q.getQnaRefNo()-1);
+			pstmt.setString(2, q.getQnaCategory());
+			pstmt.setString(3, q.getQnaSpaceNo());
+			pstmt.setString(4, q.getQnaTitle());
+			pstmt.setString(5, q.getQnaContent());
+			pstmt.setString(6, q.getQnaWriter());
+			pstmt.setInt(7, q.getQnaRefNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
+	public int insertSecretReply(Connection conn, QnA q) {
+		// board에 insert => 처리된 행수 
+		int result = 0; 
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertSecretReply");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, q.getQnaRefNo()-1);
+			pstmt.setString(2, q.getQnaCategory());
+			pstmt.setString(3, q.getQnaSpaceNo());
+			pstmt.setString(4, q.getQnaTitle());
+			pstmt.setString(5, q.getQnaContent());
+			pstmt.setString(6, q.getQnaWriter());
+			pstmt.setInt(7, q.getQnaRefNo());
+			pstmt.setString(8, q.getQnaPwd());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	public int insertAttachment(Connection conn, Attachment at) {
 		// attachment에 insert => 처리된 행수
 		int result = 0;
@@ -192,6 +246,34 @@ public class QnADao {
 			pstmt.setString(1, at.getFileOriginName());
 			pstmt.setString(2, at.getFileChangeName());
 			pstmt.setString(3, at.getFilePath());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
+	public int insertRelpyAttachment(Connection conn, Attachment at, int refNo) {
+		// attachment에 insert => 처리된 행수
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertAttachment");
+		int insertNo = refNo -1;
+		
+		System.out.println(insertNo);
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, insertNo);
+			pstmt.setString(2, at.getFileOriginName());
+			pstmt.setString(3, at.getFileChangeName());
+			pstmt.setString(4, at.getFilePath());
 			
 			result = pstmt.executeUpdate();
 			
@@ -243,12 +325,16 @@ public class QnADao {
 				q = new QnA(rset.getInt("QNA_NO"),
 						rset.getString("QNA_CATEGORY"),
 						rset.getString("SPACE_CATEGORY"),
+						rset.getString("SPACE_NO"),
 						rset.getString("SPACE_NAME"),
 						rset.getString("QNA_TITLE"),
 						rset.getString("QNA_CONTENT"),
 						rset.getString("MEM_ID"),
+						rset.getInt("QNA_GROUP"),
 						rset.getInt("QNA_COUNT"),
-						rset.getDate("QNA_CREATE_DATE")
+						rset.getDate("QNA_CREATE_DATE"),
+						rset.getString("QNA_PWD"),
+						rset.getString("QNA_PUBLIC")
 						);
 			}
 		} catch (SQLException e) {
