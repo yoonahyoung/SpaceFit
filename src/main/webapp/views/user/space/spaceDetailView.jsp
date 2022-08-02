@@ -452,7 +452,7 @@ body {
                                 	<input type="hidden" name="no" value="<%=s.getSpaceNo() %>">
                                     <div id="ayBtn" style="text-align:center; margin-top:100px;">
                                         <button type="submit" class="btn btn-primary">바로결제</button>
-                                        <button onclick="javascript: form.action='<%=contextPath %>/cart.sp';" class="btn btn-outline-dark">보관함</button>
+                                        <button onclick="goCart();" class="btn btn-outline-dark">보관함</button>
                                         <a href="<%=contextPath %>/zzim.sp" class="btn btn-outline-danger">찜하기</a>
                                     </div>
                                 </div>
@@ -464,6 +464,15 @@ body {
         </section>
         </form>
     </main>
+    <script>
+    	function goCart(){
+    		form.action='<%=contextPath %>/cart.sp';
+    		let viewCart = confirm('<%=request.getAttribute("alertMsg") %>');
+    		if(viewCart){
+    			location.href = "<%=contextPath%>/list.ca";
+    		}
+    	}
+    </script>
     <script>
     
 	$(function(){
