@@ -100,7 +100,7 @@
                 <h2 class="title-a">OUR SPACE</h2>
               </div>
               <div class="title-link">
-                <a href="<%=contextPath%>/views/user/space/spaceListView.jsp">더 많은 상품보기
+                <a href="<%=contextPath%>/list.sp">더 많은 상품보기
                   <span class="bi bi-chevron-right"></span>
                 </a>
               </div>
