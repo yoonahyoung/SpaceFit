@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>  
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.mem.model.vo.Cart"%>  
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<title>보관함</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="../../../resources/user/css/member.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/user/css/member.css">
 </head>
 <body class="animsition">
 
@@ -37,6 +37,10 @@
 	<link rel="stylesheet" type="text/css" href="<%= contextPath %>/resources/user/templates/cozastore/css/main.css">
 <!--===============================================================================================-->
 
+	<%
+		ArrayList<Cart> list = (ArrayList<Cart>)request.getAttribute("list");
+	%>
+
 	<h2 align="center">보관함</h2>
 		
 
@@ -55,30 +59,20 @@
 									<th class="column-4" style="text-align:center;">Quantity</th>
 									<th class="column-5">select</th>
 								</tr>
+								<% for(Cart c : list) { %>
+									<tr class="table_row">
+										<td class="column-1">
+											<div class="how-itemcart1" align="center">
+												<img src="<%=contextPath%>/resources/user/img/파티룸.jpeg" alt="IMG">
+											</div>
+										</td>
+										<td class="column-2"><%= c.getSpaceName() %></td>
+										<td class="column-3"><%= c.getCartPrice() %>원</td>
+										<td class="column-4" style="text-align:center;">1</td>
+										<td class="column-5"><input type="radio" name="cart-radio" id="cart-radio1"></td>
+									</tr>
+								<% } %>
 
-								<tr class="table_row">
-									<td class="column-1">
-										<div class="how-itemcart1" align="center">
-											<img src="../../../resources/user/img/파티룸.jpeg" alt="IMG">
-										</div>
-									</td>
-									<td class="column-2">파티룸 C</td>
-									<td class="column-3">86,000원</td>
-									<td class="column-4" style="text-align:center;">1</td>
-									<td class="column-5"><input type="radio" id="cart-radio1"></td>
-								</tr>
-
-								<tr class="table_row">
-									<td class="column-1">
-										<div class="how-itemcart1">
-											<img src="../../../resources/user/img/파티룸.jpeg" alt="IMG">
-										</div>
-									</td>
-									<td class="column-2">연주실 A</td>
-									<td class="column-3">78,000원</td>
-									<td class="column-4" style="text-align:center;">1</td>
-									<td class="column-5"><input type="radio" id="cart-radio2"></td>
-								</tr>
 							</table>
 						</div>
 
@@ -89,7 +83,7 @@
 							<br><br>
 						</div>
 						
-						<!-- Modal -->
+						<!-- 옵션/수량 변경 Modal -->
 						<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
 						  <div class="modal-dialog modal-dialog-centered">
 						    <div class="modal-content">
@@ -187,36 +181,12 @@
 
 				<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
 					<div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
-						<!-- <br> -->
 						<h4 class="mtext-109 cl2 p-b-30">
 							space Totals
 						</h4>
+						<div class="flex-w flex-t bor12 p-b-13"></div>
 
-						<div class="flex-w flex-t bor12 p-b-13">
-							
-						</div>
-
-						<br>
-						<div class="flex-w flex-t bor12 p-t-15 p-b-30">
-							<div class="size-208 w-full-ssm">
-								<span class="stext-110 cl2">
-									Options:
-								</span>
-							</div>
-
-							<div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
-								<div class="stext-111 cl6 p-t-2">
-									<p><b>파티룸 C</b></p>
-									<p>2022.07.07(일) 12시~16시</p>
-									<p>이용인원 5명</p>
-									<p>주차 이용</p>
-									<p>앰프 1대 이용</p>
-								
-								</div>
-								
-								
-							</div>
-						</div>
+						<% for(Cart c : list) { %>
 						<br>
 						<div class="flex-w flex-t bor12 p-t-15 p-b-30">
 							
@@ -228,17 +198,32 @@
 
 							<div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
 								<div class="stext-111 cl6 p-t-2">
-									<p><b>연습실 A</b></p>
-									<p>2022.07.07(일) 12시~16시</p>
-									<p>이용인원 5명</p>
-									<p>주차 이용</p>
-									<p>앰프 1대 이용</p>
+									<p><b><%= c.getSpaceName() %></b></p>
+									<p><%= c.getCartDate() %> <%=c.getCartIn()%>~<%=c.getCartOut()%></p>
+									<p>이용인원 <%=c.getCartLimit()%>명</p>
+									
+									<% if( !c.getCartParking().equals("N") ) { %>
+										<p>주차 이용</p>
+									<% }  %>
+									
+									<% if( !c.getCartAnimal().equals("N") ) { %>
+										<p>반려동물 동반</p>
+									<% }  %>
+									
+									<% if( !c.getCartStand().equals("N")) { %>
+										<p>보면대 사용</p>
+									<% }  %>
+									
+									<% if( !c.getCartChair().equals("N")) { %>
+										<p>미니의자 사용</p>
+									<% }  %>
 								
 								</div>
 								
 								
 							</div>
 						</div>
+						<% } %>
 
 						<div class="flex-w flex-t p-t-27 p-b-33">
 							<div class="size-208">

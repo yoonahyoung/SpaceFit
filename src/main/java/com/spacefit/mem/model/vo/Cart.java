@@ -13,6 +13,10 @@ public class Cart {
 	private String cartChair;
 	private int cartPrice;
 	
+	// -------- 보관함 조회를 위해 필요한 것들
+	private String spaceName;
+	private int spaceLimit;
+	
 	public Cart() {}
 
 	public Cart(int memNo, int spaceNo, int cartLimit, String cartDate, String cartIn, String cartOut,
@@ -29,6 +33,41 @@ public class Cart {
 		this.cartStand = cartStand;
 		this.cartChair = cartChair;
 		this.cartPrice = cartPrice;
+	}
+	
+	public Cart(int memNo, int spaceNo, int cartLimit, String cartDate, String cartIn, String cartOut,
+			String cartParking, String cartAnimal, String cartStand, String cartChair, int cartPrice, String spaceName,
+			int spaceLimit) {
+		super();
+		this.memNo = memNo;
+		this.spaceNo = spaceNo;
+		this.cartLimit = cartLimit;
+		this.cartDate = cartDate;
+		this.cartIn = cartIn;
+		this.cartOut = cartOut;
+		this.cartParking = cartParking;
+		this.cartAnimal = cartAnimal;
+		this.cartStand = cartStand;
+		this.cartChair = cartChair;
+		this.cartPrice = cartPrice;
+		this.spaceName = spaceName;
+		this.spaceLimit = spaceLimit;
+	}
+
+	public String getSpaceName() {
+		return spaceName;
+	}
+
+	public void setSpaceName(String spaceName) {
+		this.spaceName = spaceName;
+	}
+
+	public int getSpaceLimit() {
+		return spaceLimit;
+	}
+
+	public void setSpaceLimit(int spaceLimit) {
+		this.spaceLimit = spaceLimit;
 	}
 
 	public int getMemNo() {
