@@ -447,8 +447,9 @@
 	    <div class="offcanvas-body">
 	      <div class="row iconRow" style="width:100%">
 	        <a class="col iconCol" href="<%= contextPath %>/bolist.bo"><img src="<%= contextPath %>/resources/user/templates/real_estate/img/icon/reserve.svg" id="icon1"><br><span>예약조회</span></a>
-	        <a class="col iconCol" href=""><img src="<%= contextPath %>/resources/user/templates/real_estate/img/icon/cart.svg" id="icon2"><br><span class="pp">장바구니</span></a>
+	        <a class="col iconCol" href="<%= contextPath %>/cartList.me"><img src="<%= contextPath %>/resources/user/templates/real_estate/img/icon/cart.svg" id="icon2"><br><span class="pp">장바구니</span></a>
 	        <a class="col iconCol" href="<%=contextPath%>/views/user/myPage/wishListView.jsp"><img src="<%= contextPath %>/resources/user/templates/real_estate/img/icon/heart.svg" id="icon3"><br><span class="pp">위시리스트</span></a>
+
 	      </div>
 	  
 	      <div class="welcome welLOgout">

@@ -154,6 +154,7 @@ public class MemberService {
 		
 		return updateMem;
    }
+   
    // 보관함(장바구니)
    public int insertCart(Cart cart) {
 	   Connection conn = getConnection();
@@ -167,6 +168,12 @@ public class MemberService {
 	   return result;
    }
    
+   public ArrayList<Cart> selectCartList(int memNo){
+	   Connection conn = getConnection();
+	   ArrayList<Cart> list = new MemberDao().selectCartList(conn, memNo);
+	   close(conn);
+	   return list;
+   }
    
    
     // ----------------------- admin ------------------------- //
