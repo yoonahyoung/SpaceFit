@@ -14,6 +14,39 @@
 		     , COM_STATUS
 		  FROM TB_COMMENT
 		 WHERE RV_NO=?
+		 ORDER BY COM_NO ASC
 	</entry>
-
+	
+	<!-- 대댓글은 생각하지 않은 상태 -->
+	<entry key="insertComment"> 
+		INSERT
+		  INTO TB_COMMENT
+		    (
+		       COM_NO
+		     , RV_NO
+		     , MEM_NO
+		     , MEM_ID
+		     , COM_CONTENT
+		     , COM_ENROLL_DATE
+		     , COM_MODIFY_DATE
+		     , COM_PARENT_NO
+		     , COM_STATUS
+		     )
+		VALUES
+		    (
+		      SEQ_COMNO.NEXTVAL
+		     , ?
+		     , ?
+		     , (
+		        SELECT MEM_ID
+		        FROM TB_MEMBER
+		        WHERE MEM_NO = ?
+		        )
+		     , ?
+		     , SYSDATE
+		     , SYSDATE
+		     , 0
+		     , 'Y'
+		     )
+	</entry>
 </properties>
