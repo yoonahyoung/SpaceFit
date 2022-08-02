@@ -207,7 +207,6 @@ public class MemberService {
    public int loveCheck(int spNo, int memNo) {
 	   Connection conn = getConnection();
 	   int count = new MemberDao().loveCheck(conn, spNo, memNo);
-	   System.out.println(count);
 	   close(conn);
 	   return count;
 	   
