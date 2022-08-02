@@ -550,7 +550,7 @@ public class MemberDao {
 		
 		rset = pstmt.executeQuery();
 		if(rset.next()) {
-			count = 1;
+			count = rset.getInt("count");
 		}
 		
 	} catch (SQLException e) {

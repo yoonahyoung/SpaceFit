@@ -12,7 +12,6 @@
 	int avgStars = (Integer)request.getAttribute("avgStars");
 	Space s = (Space)request.getAttribute("s");
 	int loveCheck = (int)request.getAttribute("loveCheck");
-	
 	ArrayList<Attachment> atList = (ArrayList<Attachment>)request.getAttribute("at");
 	
 	ArrayList<Comment> comList = new ArrayList<>();
@@ -273,9 +272,8 @@ body {
                          <!--  ~review보이는 공간~ -->
                                     
                                
-                            </div>
-                            
-                            
+                            	</div>
+                        	</div>
                             
                             <div class="col-md-1"></div>
                             <div class="col-md-4">
@@ -373,7 +371,7 @@ body {
                                         	<button type="button" onclick="love();" id="zzim" class="btn btn-outline-danger">찜하기</button>
                                     	<%}else if(loginUser != null && loveCheck == 1){%>
                                         	<button type="button" onclick="love();" id="zzim" class="btn btn-danger">찜해제</button>
-                                        <%else{ %>
+                                        <%}else{ %>
                                     		<button type="button" onclick="alert('로그인이 필요한 서비스입니다!');"  id="zzim" class="btn btn-outline-danger">찜하기</button>
                                     	<%} %>
                                     </div>
@@ -417,14 +415,6 @@ body {
 
     	// 찜하기
     	
-
-    	function insertLove(){
-    		<%-- $.ajax({
-    			url:'<%=contextPath%>/insert/lo',
-    			data:{no:<%=s.getSpaceNo() %>},
-    			success:
-    		}) --%>
-
     	function love(){
     		if($("#zzim").text()==('찜하기')){
 				$.ajax({

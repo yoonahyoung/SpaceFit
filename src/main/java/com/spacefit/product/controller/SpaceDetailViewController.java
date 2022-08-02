@@ -51,12 +51,16 @@ public class SpaceDetailViewController extends HttpServlet {
 		
 		// 찜했는지 안했는지 불러오기
 		HttpSession session = request.getSession();
-		int memNo = ((Member)session.getAttribute("loginUser")).getMemNo();
-		
-		int count = new MemberService().loveCheck(spNo, memNo);
-		// count가 1이면 찜한 공간, 0이면 찜하지 않은 공간
-		request.setAttribute("loveCheck", count);
-		
+		if(session.getAttribute("loginUser") != null) {
+			int memNo = ((Member)session.getAttribute("loginUser")).getMemNo();
+			
+			int count = new MemberService().loveCheck(spNo, memNo);
+			// count가 1이면 찜한 공간, 0이면 찜하지 않은 공간
+			request.setAttribute("loveCheck", count);
+		}else {
+			// 비회원이 조회시 명시적인 값 제시(사용할 값은 아님)
+			request.setAttribute("loveCheck", 10);
+		}
 		
 		// 이 부분부터 후기쪽 부분입니다. 소희작성
 		

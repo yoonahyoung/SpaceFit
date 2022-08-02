@@ -253,12 +253,10 @@
 	
 	<entry key="loveCheck">
 		SELECT
-		       SPACE_NO
-		     , MEM_NO
+		       COUNT(*) "COUNT"
 		  FROM TB_LOVE
 		 WHERE SPACE_NO = ?
 		   AND MEM_NO = ?
-		   
 	</entry>
 	
 
