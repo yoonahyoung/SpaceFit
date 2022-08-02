@@ -8,8 +8,8 @@ public class Book {
 	private String spaceNo; // 공간번호 | 공간이름
 	private String memberNo;  // 회원번호 | 회원아이디
 	private String payListId;
-	private int bookCount;
-	private String bookDate;
+	private int bookCount; // 예약인원 | 예약건수
+	private String bookDate; // 예약날짜 | 예약월 
 	private String bookInTime;
 	private String bookOutTime;
 	private int bookPrice; // 총 결제금액
@@ -32,10 +32,18 @@ public class Book {
     private String spacePicture; // 공간대표이미지   
     private int bookDecimalDay; // 대여날짜까지 d-day
     private int spaceLimit;
-   
-    
+   // private int bookMonth; // 관리자용 예약월
+       
+        
     public Book() {}
 	
+    
+	public Book(int bookCount, String bookDate) {
+	super();
+	this.bookCount = bookCount;
+	this.bookDate = bookDate;
+	}
+
 
 	public Book(int bookNo, String spaceNo, String memberNo, String payListId, int bookCount, String bookDate,
 			String bookInTime, String bookOutTime, int bookPrice, String bookName, String bookPhone, String bookEmail,
@@ -387,6 +395,8 @@ public class Book {
 	public void setSpaceLimit(int spaceLimit) {
 		this.spaceLimit = spaceLimit;
 	}
+		
+	
 
 
 	@Override
