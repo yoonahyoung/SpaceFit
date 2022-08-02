@@ -32,9 +32,9 @@ public class AjaxSmsController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String memPhone = request.getParameter("memPhone");
-		System.out.println("서비스에서 확인하는 memPhone" + memPhone);
+		//System.out.println("서비스에서 확인하는 memPhone" + memPhone);
 		String randomNo = new TestSms().testMessage(memPhone);
-		System.out.println("서비스 에서 확인하는 " + randomNo);
+		//System.out.println("서비스 에서 확인하는 " + randomNo);
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(randomNo, response.getWriter());
 	}

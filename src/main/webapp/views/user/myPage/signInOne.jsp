@@ -107,7 +107,7 @@
                         	<div class="inputs">
                         		
                         		<label for="#phoneNameCheck" class="signInLabel">이름</label> <span class="memName"  style="text-align:rignt"></span>
-                                <input type="text" placeholder="가입하실 이름을 입력해주세요." class="signInInput" id="memName" name="memName" required>
+                                <input type="text" placeholder="이름을 입력해주세요." class="signInInput" id="memName" name="memName" required>
                         		<br><br>
                         	
                         		<label for="#phoneIdNo" class="signInLabel">핸드폰번호</label> <span class="pHoneAnswer" style="text-align:rignt"></span>

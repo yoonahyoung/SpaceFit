@@ -43,8 +43,7 @@ $(function(){
  function sms(){
 	 //const divEl = document.getElementById("memPhone");
 	 
-	 let memPhoneVal = $("#memPhone").val();
-	 console.log(memPhoneVal);
+	 let memPhoneVal = document.getElementById("memPhone").value;
 	 const regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
 	 
      if (regPhone.test(memPhoneVal) === true) {
@@ -64,7 +63,6 @@ $(function(){
     		 },
     		 error:function(){
     			console.log("인증번호 전송통신 ajax 실패")
-				alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
     		 }
     		 
     	 })

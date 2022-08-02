@@ -54,10 +54,12 @@
 	                                <br><br><br><br>           
 	                                <hr>
 	                                <br><br>
-	                                <div class="addMessege">추가 입력사항입니다! <br>이메일을 등록하면 예약정보를 받아보실 수 있어요!</div>
-	                                <label for="#memEmail">이메일</label>
+	                                <div class="addMessege">이메일을 등록하면 예약정보를 받아보실 수 있어요!</div>
+	                                <label for="#memMail">이메일</label>
 			                        <input type="email" placeholder="이메일을 입력해주세요" class="account-input" id="memMail" name="memMail">
-			                        <input type="button" class="btn btn-secondary" style="color:white;" value="이메일 인증하기">
+			                        <input type="button" class="btn btn-secondary" style="color:white;" value='$("#memMail").val()' onclick="checkEmail(e);">
+			                        <input type="text" placeholder="인증번호를 입력해주세요" class="account-input" id="memMailCheck" name="memMailCheck">
+			                        <span id="mailSpan"></span>
 			                        <br><br><br><br>
 			                        <hr>
 			                        <br><br>
@@ -66,7 +68,30 @@
 		                        	<br><br><br>
 	                           </div>
 	                   </form>
-            	</div> 
+		                    <script>
+						       function checkEmail(){
+						    	   let mailSpan = document.querySelector("#mailSpan");
+						    	   $.ajax({
+						       			url:"<%=contextPath%>/checkEmail.me",
+						       			data:{
+						       				memMail:$("#memMail").val(),
+						       			},
+						       			success:function(randomNo){
+						       				if(randomNo == $("#memMailCheck").val()){
+						       					mailSpan.style="color:#0082FF ;"
+						       					mailSpan.innerHTML = "이메일 인증 완료!"
+											} else {
+												mailSpan.style="color:#red ;"
+							       				mailSpan.innerHTML = "이메일 인증 실패! 다시 한 번 확인해주세요!"
+												}
+						       			},
+						       			error:function(){
+						       				console.log("추천 +1 AJAX 통신 실패");
+						       			}
+						       		})
+								}
+					        </script>
+            	</div>
           	</div>	
           </div>
           <div style="height : 100px"></div>

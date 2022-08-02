@@ -30,6 +30,18 @@ public class TestSms {
 	  
   }
   
+  public String testMail() {
+	  Random rand = new Random();
+	  String randomNo = "";
+	  for(int i=0; i<6; i++) {
+		  String ran = Integer.toString(rand.nextInt(10));
+		  randomNo += ran;
+		  System.out.println("TestMail에서 확인하는 randomNo" +randomNo);
+	  }
+	  return randomNo;
+	  
+  }
+  
   
   public static void certifiedPhoneNumber(String memPhone, String  randomNo) {
     String api_key = "NCSGPPD1D13FRKZH";
