@@ -1,7 +1,6 @@
 package com.spacefit.mem.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +8,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.spacefit.mem.model.service.MemberService;
-import com.spacefit.mem.model.vo.Mcp;
+import com.spacefit.mem.model.vo.Cart;
+import com.spacefit.mem.model.vo.Member;
 
 /**
- * Servlet implementation class DownCouponListController
+ * Servlet implementation class CartUpdateController
  */
-@WebServlet("/downCouponList.me")
-public class DownCouponListController extends HttpServlet {
+@WebServlet("/cartUpdateView.me")
+public class CartUpdateViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DownCouponListController() {
+    public CartUpdateViewController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,10 +33,15 @@ public class DownCouponListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		ArrayList<Mcp> list = new MemberService().selectDownCoupon();
+		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
+		String spaceName = request.getParameter("spaceName");
 		
-		request.setAttribute("cpList", list);
-		response.sendRedirect(request.getContextPath() + "myCouponList.me");
+		Cart c = new MemberService().selectCartUpdateView(memNo, spaceName);
+		
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(c, response.getWriter());
+		
+		
 	}
 
 	/**

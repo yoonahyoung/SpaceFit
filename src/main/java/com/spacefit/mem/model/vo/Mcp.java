@@ -62,6 +62,16 @@ public class Mcp {
 		this.cpEnrollDate = cpEnrollDate;
 		this.cpEndDate = cpEndDate;
 	}
+	
+	
+
+	public Date getCpEndDate() {
+		return cpEndDate;
+	}
+
+	public void setCpEndDate(Date cpEndDate) {
+		this.cpEndDate = cpEndDate;
+	}
 
 	public int getCpNo() {
 		return cpNo;

@@ -76,15 +76,24 @@
                         </thead>
                         <tbody style="border-top-color:lightgray; border-top-width:1px;">
                         
-                        	<% for(Mcp m : list) { %>
-                            <tr>
-                                <td><%= m.getCpName() %></td>
-                                <td><%= m.getCpDiscount() %>원</td>
-                                <td><%= m.getMcpEndDate() %>까지</td>
-                                <td style="color:#0D6EFD;"><%= ( m.getMcpUse().equals("N") ) ? "미사용" : "사용" %></td>
-                            </tr>
-                            <% } %>
-                           
+                        	<% if(list.isEmpty()){ %>
+                                  	
+                                  		<tr>
+						                    <td colspan="4" align="center">사용 가능한 쿠폰이 없습니다.</td>
+						                </tr>
+						                
+                           	<% }else {%>
+                        
+	                        	<% for(Mcp m : list) { %>
+	                            <tr>
+	                                <td><%= m.getCpName() %></td>
+	                                <td><%= m.getCpDiscount() %>원</td>
+	                                <td><%= m.getMcpEndDate() %>까지</td>
+	                                <td style="color:#0D6EFD;"><%= ( m.getMcpUse().equals("N") ) ? "미사용" : "사용" %></td>
+	                            </tr>
+	                            <% } %>
+	                            
+                           <% } %>
                         </tbody>
                     </table>
                
@@ -106,21 +115,29 @@
       <div id="cpZoneDiv" style="width:950px">
       <div class="row mb-5">
       
-      <% for(Mcp m : cpList) { %>
-        <div class="col-md-6 col-lg-4 mb-3" id="cpZoneCard">
-          <div class="card h-100" style="box-shadow: 2px 2px 10px 0px #0D6EFD;">
-            <div class="card-body">
-              <br>
-              <h4 class="card-title" >등급 혜택 쿠폰</h4>
-              <br>
-              <p class="card-text" style="font-size:26px; font-weight:600; color:#0D6EFD;"><%=m.getCpDiscount() %>원</p>
-              <p>2022.07.07~2022.09.26</p>
-              <br>
-              <a href="javascript:void(0)" class="btn btn-outline-primary">쿠폰 다운 받기</a>
-            </div>
-          </div>
-        </div>
-		 <% } %>
+      <% if(cpList.isEmpty()){ %>
+                                  	
+            <p align="center">다운 가능한 쿠폰이 없습니다.</p>
+						                
+ 	  <% }else {%>
+ 	  
+	      <% for(Mcp mc : cpList) { %>
+	        <div class="col-md-6 col-lg-4 mb-3" id="cpZoneCard">
+	          <div class="card h-100" style="box-shadow: 2px 2px 10px 0px #0D6EFD;">
+	            <div class="card-body">
+	              <br>
+	              <h4 class="card-title" ><%= mc.getCpName() %></h4>
+	              <br>
+	              <p class="card-text" style="font-size:26px; font-weight:600; color:#0D6EFD;"><%= mc.getCpDiscount() %>원</p>
+	              <p>2022.07.07~<%= mc.getCpEndDate() %></p>
+	              <br>
+	              <a href="javascript:void(0)" class="btn btn-outline-primary">쿠폰 다운 받기</a>
+	            </div>
+	          </div>
+	        </div>
+		   <% } %>
+		   
+		<% } %>
       </div>
     </div>
 </div>

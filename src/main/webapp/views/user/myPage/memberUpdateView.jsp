@@ -140,16 +140,18 @@
 		        <h5 class="modal-title" id="profileModalLabel">프로필 사진 변경</h5>
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
-		      <div class="modal-body">
-		        <div class="input-group">
-                       <input type="file" class="form-control" id="inputGroupFile02" style="color:black; border-color:lightgray;"/>
-                     </div>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-		        <button type="button" class="btn btn-danger">사진 삭제</button>
-		        <button type="button" class="btn btn-primary">사진 등록</button>
-		      </div>
+		      <form action="<%=contextPath %>/profileUpdate.me" method="post" enctype="multipart/form-data">
+			      <div class="modal-body">
+			        <div class="input-group">
+	                       <input type="file" class="form-control" name="profile" style="color:black; border-color:lightgray;"/>
+	                     </div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+			        <button type="button" class="btn btn-danger">사진 삭제</button>
+			        <button type="submit" class="btn btn-primary">사진 등록</button>
+			      </div>
+			   </form>
 		    </div>
 		  </div>
 		</div>

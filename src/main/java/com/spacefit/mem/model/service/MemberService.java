@@ -213,6 +213,15 @@ public class MemberService {
 	   
    }
    
+   public Cart selectCartUpdateView(int memNo, String spaceName) {
+		Connection conn = getConnection();
+		Cart c = new MemberDao().selectCartUpdateView(conn, memNo, spaceName);
+		close(conn);
+		return c;
+	}
+   
+   
+   
     // ----------------------- admin ------------------------- //
 
 	public ArrayList<Member> adminMemberManageListSelect() {

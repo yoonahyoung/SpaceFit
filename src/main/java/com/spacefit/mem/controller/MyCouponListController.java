@@ -41,10 +41,12 @@ public class MyCouponListController extends HttpServlet {
 		
 		String grName = new MemberService().selectGrade(memId);
 		ArrayList<Mcp> list = new MemberService().selectCouponList(memNo);
-	
+		
 		request.setAttribute("grName", grName);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/user/myPage/myCoupon.jsp").forward(request, response);
+			
+		
 	
 	}
 

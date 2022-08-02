@@ -34,7 +34,7 @@ public class AdminCouponListController extends HttpServlet {
 
 		ArrayList<Mcp> list = new MemberService().selectAdminCouponList();	
 		
-		request.setAttribute("cpList", list);
+		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/admin/homepage/couponManage.jsp").forward(request, response);
 	}
 
