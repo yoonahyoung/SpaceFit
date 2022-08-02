@@ -201,6 +201,26 @@
 		  , ?
 		  )
 	</entry>
+	
+	<entry key="selectCartList">
+		SELECT 
+		       MEM_NO
+		     , SPACE_NO
+		     , CART_LIMIT
+		     , CART_DATE
+		     , CART_IN
+		     , CART_OUT
+		     , CART_PARKING
+		     , CART_ANIMAL
+		     , CART_STAND
+		     , CART_CHAIR
+		     , CART_PRICE
+		     , SPACE_NAME
+		     , SPACE_LIMIT
+		  FROM TB_CART
+		  JOIN TB_SPACE USING(SPACE_NO)
+		 WHERE MEM_NO = ?
+	</entry>
 
 	<!-- admin -->
 
