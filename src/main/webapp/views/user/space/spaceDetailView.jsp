@@ -210,9 +210,9 @@ body {
 	                                                        </div>
 	                                                        <span id="countLike"><span><%=r.getAllLikeCount() %></span>명이 이 후기를 추천했어요!</span><br>
 	                                                    </div>
-	                                                    <div id="rvContentDiv">
+	                                                    <textarea id="rvContentDiv">
 	                                                        <%=r.getReviewContent() %>
-	                                                    </div>
+	                                                    </textarea>
 	                                                </div>
 	                                                <div class="col-lg-3 memInfoDiv">
 	                                                    <div class="mem">
@@ -274,9 +274,15 @@ body {
                                                             <table id="writeTable" align="center">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th id="justText">댓글작성</th>
-                                                                        <th><textarea rows="3" cols="50" style="resize:none;"></textarea></th>
-                                                                        <td><button class="btn btn-primary" type="button">댓글등록</button></td>
+                                                                    	<% if(directMemNo == 0) { %>
+	                                                                        <th id="justText">댓글작성</th>
+	                                                                        <th><textarea rows="3" cols="50" style="resize:none;"readonly>로그인 후 이용가능한 서비스입니다.</textarea></th>
+	                                                                        <td><button class="btn btn-primary" type="button">댓글등록</button></td>
+	                                                                     <% } else { %>
+	                                                                     	<th id="justText">댓글작성</th>
+	                                                                        <th><textarea rows="3" cols="50" style="resize:none;" id="comContent"></textarea></th>
+	                                                                        <td><button class="btn btn-primary" type="button" onclick="insertComment();" >댓글등록</button></td>
+	                                                                     <% } %>
                                                                     </tr>
                                                                 </thead>
                                                             </table>
@@ -329,13 +335,11 @@ body {
 					                    			},
 				                    		   success:function(comList){
 				                    				if(comList.length == 0){
-				                    					console.log(comList + "이건 에이젝스에서 넘어옴");
 				                    					// 댓글리스트가 비어있다면
 				            							let value ='<h4> 아직 작성된 댓글 없습니다 </h4><br>'
 				            							$(".parentCommentAll").html(value);
 				            						} else {
 				            							// 댓글리스트가 있다면
-				            							console.log(comList + "이건 에이젝스에서 넘어옴");
 				            							let value = ""
 				            								for(let i = 0; i<comList.length; i++) {
 				            									value += ' <div class="commentMem row"> '
@@ -346,18 +350,20 @@ body {
 					            												+		'<span id="memSpan">'
 					            												+			comList[i].memId
 					            												+		'</span>'
+					            												+		'<span id="dateSpan">'
+					            												+			comList[i].comEnrollDate
+					            												+		'</span>'
 					            												+ '</div>'
 					            												+ '<div class="parentInfo col-lg-6">'
-					            												+ 	'<span>' + comList[i].comEnrollDate + '</span>'
-					            												+	'<span>&ensp;|&ensp;</span>'
-					            												+	'<span id="reReport">신고하기</span>'
-					            												+ 	'<span>&ensp;|&ensp;</span>'
-					            												+	'<span id="reComment">대댓달기</span>'
+					            												+	'<button type="button" class="comBtn" id="reDelete">삭제하기</span>'
+					            												+	'<button type="button" class="comBtn" id="reReport">신고하기</span>'
+					            												+	'<button type="button" class="comBtn" id="reComment">대댓달기</span>'
+					            												+	'<input type="hidden" value="' + comList[i].parentNo + '" id="hiddenPno">'
 					            												+ '</div>'
 					            												+ '<hr>'
 					            												+ '<div id="showComment">'
 					            												+ 	'<div class="parentComment">'
-					            												+		'<span>' + comList[i].comContent + '</span>'
+					            												+		'<textarea id="commentArea">' + comList[i].comContent + '</textarea >'
 					            												+	'</div>'
 					            												+ '</div>'
 				            												+ '</div>'
@@ -370,6 +376,32 @@ body {
 				                    			}
 				                    	   })
 				                       }
+				                       
+				                       // 대댓달기라는 버튼을 눌렀을때만 그 댓글의 hiddenPno를 가져오고, 대댓달기를 누르지 않으면 0이 되도록
+									// 그럼 대댓을 생각하지 말고 일단 댓글만 생각해보자				                       
+				                       function insertComment(){
+				          	        	 $.ajax({
+				          	        		 url:"<%=contextPath%>/coInsert.com",
+				          	        		 data:{
+				          	        			 comContent:$("#comContent").val(),
+				          	        			 memNo:$("#memNo").val(),
+				          	        			 rvNo:$("#rvNo").val()
+				          	        		 },
+				          	        		 type:"post",
+				          	        		 success:function(result){
+				          	        			 if(result > 0){
+				          	        				 // 댓글작성 성공
+				          	        				 // => 내가 작성한 댓글이 보여지기 위해서는 갱신된 댓글리스트 조회필요
+				          	        				 commentList(rvNo);
+				          	        				 $("#comContent").val(""); //textarea 초기회
+				          	        			 }
+				          	        		 },
+				          	        		 error:function(){
+				          	        			console.log("댓글작성 ajax 통신 실패");
+				          	        		 }
+				          	        		 
+				          	        	 })
+				          	         }
 				                    	   
 									</script>
                          <!--  ~review보이는 공간~ -->

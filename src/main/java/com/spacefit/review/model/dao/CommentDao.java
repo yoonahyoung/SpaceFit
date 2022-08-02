@@ -57,5 +57,24 @@ public class CommentDao {
 		}
 		return comList;
 	}
+	
+	
+	public int insertComment(Connection conn, Comment c) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertComment");
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, c.getRvNo());
+			pstmt.setInt(2, c.getMemNo());
+			pstmt.setInt(3, c.getMemNo());
+			pstmt.setString(4, c.getComContent());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 }

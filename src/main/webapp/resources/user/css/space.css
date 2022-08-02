@@ -152,7 +152,15 @@ span.col-sm-4{
 }
 
 #rvContentDiv{
-  font-size: 13px;
+  border:none;
+  width : 100%;
+  font-size: 12px;
+}
+
+#commentArea{
+  border:none;
+  width : 100%;
+  font-size: 12px;
 }
 
 .mem{
@@ -188,6 +196,10 @@ span.col-sm-4{
 }
 
 /* ------------ 댓글부분 --------------- */
+
+#dateSpan{
+	font-size : 12px;
+}
 .parentMem * {
   float:left;
 }
@@ -221,6 +233,16 @@ span.col-sm-4{
   color : red;
 }
 
+#reDelete{
+	color : #FEE500;
+}
+
+.comBtn{
+	border : none;
+	background-color : white;
+	width : 80px;
+	font-size : 12px;
+}
 .blank{
 
   

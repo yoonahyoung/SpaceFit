@@ -1,6 +1,6 @@
 package com.spacefit.review.model.service;
 
-import static com.spacefit.common.JDBCTemplate.close;
+import static com.spacefit.common.JDBCTemplate.*;
 import static com.spacefit.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
@@ -16,6 +16,18 @@ public class CommentService {
 		ArrayList <Comment> comList = new CommentDao().selectComList(conn, rvNo);
 		close(conn);
 		return comList;
+	}
+	
+	public int insertComment(Comment c) {
+		Connection conn = getConnection();
+		int result = new CommentDao().insertComment(conn, c);
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 	}
 
 }
