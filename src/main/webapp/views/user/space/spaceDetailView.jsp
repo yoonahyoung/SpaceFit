@@ -32,7 +32,6 @@
 
 <title>Insert title here</title>
 <style>
-
 /* 캘린더 */
 body {
     margin: 40px 10px;
@@ -40,15 +39,15 @@ body {
     font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
     font-size: 14px;
   }
-
   #calendar {
     max-width: 1100px;
     margin: 0 auto;
   }
-
 </style>
 </head>
 <body>
+
+
 
 	<%@ include file="../common/userMenubar.jsp" %>
 
@@ -141,138 +140,106 @@ body {
                                     </div> 
                                 </div>
                                 <div class="row">
+                                
+                                
                                     <div id = "rvContentList">
-                                        
-                                        
-                                        
-                                        
                                         <!--  ~review보이는 공간~ -->
-                                    <% if (!rvList.isEmpty()) { %> <!-- 리뷰리스트가 엠티가 아니면 -->
-                                    
-	                                        <hr>
-	                                        <div class="introRv">
-	                                            <div class="stars" >
-	                                            	<% for(int i=0; i<avgStars; i++) { %>
-	                                                   <span id='starYellow'>★</span>
-                                                   	<% } %>
-                                                   	<% int whiteStar1 = 5-avgStars; %>
-                                                   	<% for(int i=0; i<whiteStar1; i++){ %>
-                                                       	<span id='starWhite'>★</span>
-                                                    <% } %>
-	                                            </div>
-	                                            <h4>" 스페이스핏의 고객님들은 이 장소를 이렇게 평가하셨어요! "</h4><br>
-	                                        </div>
-	                                        <div class="rvPhotoZone">
-	                                            <tr class="rvPhotos"> 
-	                                                <td>
-	                                                    <span class="material-symbols-outlined">
-	                                                    arrow_back_ios
-	                                                    </span>
-	                                                </td>                       
-	                                                <td><img class="titleImg" width="200" height="160" onclick=""></td>
-	                                                <td><img class="titleImg" width="200" height="160" onclick=""></td>
-	                                                <td><img class="titleImg" width="200" height="160" onclick=""></td>
-	                                                <td>
-	                                                    <span class="material-symbols-outlined">
-	                                                    arrow_forward_ios
-	                                                    </span>
-	                                                </td>
-	                                            </tr>
-	                                        </div>
-	                                        <div id="rvOrderBy">
-	                                            <a>추천순</a>&ensp;|&ensp;<a>최신순</a>&ensp;|&ensp;<a>우수후기</a>
-	                                        </div>
-	                                        
-	                                        <% for(Review r : rvList) { %>  
-	                                        <div class="container-fluid eachRvList ">
-	                                            <div class="row">
-	                                                <div class="col-lg-3"> 
-	                                                    <img class="titleImg" width="150" height="120" onclick="">
-	                                                    <span id="titleImgSpan">후기작성일 : <%=r.getReviewModifyDate() %></span>
-	                                                </div>
-	                                                <div class="col-lg-6" id="eachRvListHeader">
-	                                                    <h4><%=r.getSpaceName() %></h4>
-	                                                        <span id="commentSpan">
-	                                                            <button type="button" id="showCom" class="collapsed"
-	                                                             data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour"
-	                                                              onclick="commentList(this);">
-		                                                            후기댓글보기
-		                                                            <input type="hidden" id="rvNo" value="<%=r.getReviewNo()%>">
-		                                                         </button>
-	                                                        </span>
-	                                                    <hr>
-	                                                    <div id ="showStars">
-	                                                        <div class="smallStars" >
-	                                                        	<% for(int i=0; i<r.getReviewStar(); i++) { %>
-	                                                        		<span id='starYellow'>★</span>
-	                                                        	<% } %>
-			                                                   	<% int whiteStar2 = 5-(r.getReviewStar()); %>
-			                                                   	<% for(int i=0; i<whiteStar2; i++){ %>
-	                                                            	<span id='starWhite'>★</span>
-	                                                            <% } %>
-	                                                        </div>
-	                                                        <span id="countLike"><span><%=r.getAllLikeCount() %></span>명이 이 후기를 추천했어요!</span><br>
-	                                                    </div>
-	                                                    <textarea id="rvContentDiv">
-	                                                        <%=r.getReviewContent() %>
-	                                                    </textarea>
-	                                                </div>
-	                                                <div class="col-lg-3 memInfoDiv">
-	                                                    <div class="mem">
-	                                                        <span class="material-symbols-outlined memProfilePic" id="memProfilePic">
-	                                                            account_circle
-	                                                        </span>
-	                                                        <span id="memSpan">
-	                                                            <div><%=r.getMemId() %></div>
-	                                                            <span>회원등급 :</span><span><%=r.getGradeName() %></span>
-	                                                        </span>
-	                                                    </div>
-	                                                    <br>
-	                                                    <div class="rvLikeAndReport">
-	                                                    	<% if (directMemNo == 0) { %>
-	                                                    		<button type="button" class="btn btn-primary btn-sm" id="login-btn" onclick="loginForm();">로그인하고 추천!</button>
-	                                                    	<% } else { %>
-		                                                        <button type="button" class="btn btn-primary btn-sm" data-value="<%= r.getReviewNo() %>" onclick="likeUpdate(this);">후기추천</button>
-		                                                        <button type="button" class="btn btn-danger btn-sm">후기신고</button>
-		                                                        <input type="hidden" value="<%= directMemNo %>" name="memNo" id="memNo">
-		                                        				<input type="hidden" value="<%= r.getReviewNo() %>" name="rvNo" id="rvNo">
-		                                        			<% } %>
-	                                                    </div>
-	                                                </div>
-	                                            </div>
-	                                            <br><br>
-	                                            <div class="collapse commentDiv" id="flush-collapseFour"  aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
-                                                    <div class="parentCommentAll" id="parentCommentAll">
-                                                        
-                                                        
-                                                    </div>
-                                                    <!--  
-                                                    <div class="sonCommentAll row">
-                                                        <div class="blank col-lg-1"></div>
-                                                        <div class="commentSon row col-lg-11" style="padding : 0px; margin : 0px;">
-                                                            <div class="sonMem col-lg-6">
-                                                                <span class="material-symbols-outlined memProfilePic" id="memProfilePic">
-                                                                    account_circle
-                                                                </span>
-                                                                <span id="memSpan">
-                                                                    user09
-                                                                </span>
-                                                            </div>
-                                                            <div class="sonInfo col-lg-6">
-                                                                <span>22.08.01</span>
-                                                                <span>&ensp;|&ensp;</span>
-                                                                <span id="reReport">신고하기</span>
-                                                                <span>&ensp;|&ensp;</span>
-                                                                <span id="reComment">대댓달기</span>
-                                                            </div>
-                                                            <hr>
-                                                            <div id="showComment">
-                                                                <div class="sonComment">
-                                                                    <span>너 지금 나보고 미쳤다고 한거야? 니 어디사냐? 확마!</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        -->
+	                                    <% if (!rvList.isEmpty()) { %> <!-- 리뷰리스트가 엠티가 아니면 -->
+	                                    
+		                                        <hr>
+		                                        <div class="introRv">
+		                                            <div class="stars" >
+		                                            	<% for(int i=0; i<avgStars; i++) { %>
+		                                                   <span id='starYellow'>★</span>
+	                                                   	<% } %>
+	                                                   	<% int whiteStar1 = 5-avgStars; %>
+	                                                   	<% for(int i=0; i<whiteStar1; i++){ %>
+	                                                       	<span id='starWhite'>★</span>
+	                                                    <% } %>
+		                                            </div>
+		                                            <h4>" 스페이스핏의 고객님들은 이 장소를 이렇게 평가하셨어요! "</h4><br>
+		                                        </div>
+		                                        <div class="rvPhotoZone">
+		                                            <tr class="rvPhotos"> 
+		                                                <td>
+		                                                    <span class="material-symbols-outlined">
+		                                                    arrow_back_ios
+		                                                    </span>
+		                                                </td>                       
+		                                                <td><img class="titleImg" width="200" height="160" onclick=""></td>
+		                                                <td><img class="titleImg" width="200" height="160" onclick=""></td>
+		                                                <td><img class="titleImg" width="200" height="160" onclick=""></td>
+		                                                <td>
+		                                                    <span class="material-symbols-outlined">
+		                                                    arrow_forward_ios
+		                                                    </span>
+		                                                </td>
+		                                            </tr>
+		                                        </div>
+		                                        <div id="rvOrderBy">
+		                                            <a>추천순</a>&ensp;|&ensp;<a>최신순</a>&ensp;|&ensp;<a>우수후기</a>
+		                                        </div>
+		                                        
+		                                        <% for(Review r : rvList) { %>  
+		                                        <div class="container-fluid eachRvList">
+		                                            <div class="row">
+		                                                <div class="col-lg-3"> 
+		                                                    <img class="titleImg" width="150" height="120" onclick="">
+		                                                    <span id="titleImgSpan">후기작성일 : <%=r.getReviewModifyDate() %></span>
+		                                                </div>
+		                                                <div class="col-lg-6" id="eachRvListHeader">
+		                                                    <h4><%=r.getSpaceName() %></h4>
+		                                                        <span id="commentSpan">
+		                                                            <button type="button" id="showCom" class="collapsed"
+		                                                             data-bs-toggle="collapse" data-bs-target="#flush-collapse<%= r.getReviewNo() %>" aria-expanded="false" aria-controls="flush-collapse<%= r.getReviewNo() %>"
+		                                                              onclick="commentList(<%= r.getReviewNo() %>);">
+			                                                            후기댓글보기
+			                                                            <input type="hidden" id="rvNo" value="<%=r.getReviewNo()%>">
+			                                                         </button>
+		                                                        </span>
+		                                                    <hr>
+		                                                    <div id ="showStars">
+		                                                        <div class="smallStars" >
+		                                                        	<% for(int i=0; i<r.getReviewStar(); i++) { %>
+		                                                        		<span id='starYellow'>★</span>
+		                                                        	<% } %>
+				                                                   	<% int whiteStar2 = 5-(r.getReviewStar()); %>
+				                                                   	<% for(int i=0; i<whiteStar2; i++){ %>
+		                                                            	<span id='starWhite'>★</span>
+		                                                            <% } %>
+		                                                        </div>
+		                                                        <span id="countLike"><span><%=r.getAllLikeCount() %></span>명이 이 후기를 추천했어요!</span><br>
+		                                                    </div>
+		                                                    <textarea id="rvContentDiv">
+		                                                        <%=r.getReviewContent() %>
+		                                                    </textarea>
+		                                                </div>
+		                                                <div class="col-lg-3 memInfoDiv">
+		                                                    <div class="mem">
+		                                                        <span class="material-symbols-outlined memProfilePic" id="memProfilePic">
+		                                                            account_circle
+		                                                        </span>
+		                                                        <span id="memSpan">
+		                                                            <div><%=r.getMemId() %></div>
+		                                                            <span>회원등급 :</span><span><%=r.getGradeName() %></span>
+		                                                        </span>
+		                                                    </div>
+		                                                    <br>
+		                                                    <div class="rvLikeAndReport">
+		                                                    	<% if (directMemNo == 0) { %>
+		                                                    		<button type="button" class="btn btn-primary btn-sm" id="login-btn" onclick="loginForm();">로그인하고 추천!</button>
+		                                                    	<% } else { %>
+			                                                        <button type="button" class="btn btn-primary btn-sm" data-value="<%= r.getReviewNo() %>" onclick="likeUpdate(this);">후기추천</button>
+			                                                        <button type="button" class="btn btn-danger btn-sm">후기신고</button>
+			                                                        <input type="hidden" value="<%= directMemNo %>" name="memNo" id="memNo">
+			                                        				<input type="hidden" value="<%= r.getReviewNo() %>" name="rvNo" id="rvNo">
+			                                        			<% } %>
+		                                                    </div>
+		                                                </div>
+		                                            </div>
+		                                            <br><br>
+		                                            <div class="collapse commentDiv" id="flush-collapse<%= r.getReviewNo() %>"  aria-labelledby="flush-heading<%= r.getReviewNo() %>" data-bs-parent="#accordionFlushExample">
+	                                                    <div class="parentCommentAll" id="parentCommentAll"></div>
                                                         <div id="writeComment">
                                                             <table id="writeTable" align="center">
                                                                 <thead>
@@ -290,130 +257,26 @@ body {
                                                                 </thead>
                                                             </table>
                                                         </div>
-                                                    </div>
-	                                            </div>
-	                                        </div>
-	                                        
-                                        <% } %>
-                                    <% } else { %>
-                                    	 <h4>" 아직 작성된 후기가 없습니다 "</h4><br>
-									<% } %>
-									<script>
-				                       function likeUpdate(e){
-				                    	   let rvNo = $(e).data("value")
-				                    		 
-				                    			  $.ajax({
-						                    			url:"<%=contextPath %>/likeUpdate.lk",
-						                    			data:{
-						                    				memNo:$("#memNo").val(),
-						                    				rvNo:rvNo
-						                    			},
-						                    			success:function(result){
-						                    				if(result == "likeOk"){
-						                    					// 추천이 완료된 데이터, 예약번호가 넘어옴
-						            							alert("추천해주셔서 감사합니다!");
-						                    					// 바로 표시되게 하는 걸 못하게씀 ㅜㅜ
-						            						} else {
-						            							// 후기 중복확인
-						            							alert("이미 추천한 후기입니다!");
-						            							}
-						                    			},
-						                    			error:function(){
-						                    				console.log("추천 +1 AJAX 통신 실패");
-						                    			}
-						                    		})
-				                    		  }
-					                    
-				                       function loginForm(){
-				           	       		location.href="<%=contextPath%>/loginForm.me";
-				           				}
-				                       
-				                       
-				                       function commentList(e){
-				                    	   
-				                    	   $.ajax({
-				                    		   url : "<%=contextPath%>/comList.com",
-				                    		   data:{
-				                    			   rvNo:$("#rvNo").val(),
-					                    			},
-				                    		   success:function(comList){
-				                    				if(comList.length == 0){
-				                    					// 댓글리스트가 비어있다면
-				            							let value ='<h4> 아직 작성된 댓글 없습니다 </h4><br>'
-				            							$(".parentCommentAll").html(value);
-				            						} else {
-				            							// 댓글리스트가 있다면
-				            							let value = ""
-				            								for(let i = 0; i<comList.length; i++) {
-				            									value += ' <div class="commentMem row"> '
-					            												+ '<div class="parentMem col-lg-6">'
-					            												+ 	'<span class="material-symbols-outlined memProfilePic" id="memProfilePic">'
-					            												+		'account_circle'
-					            												+		'</span>'
-					            												+		'<span id="memSpan">'
-					            												+			comList[i].memId
-					            												+		'</span>'
-					            												+		'<span id="dateSpan">'
-					            												+			comList[i].comEnrollDate
-					            												+		'</span>'
-					            												+ '</div>'
-					            												+ '<div class="parentInfo col-lg-6">'
-					            												+	'<button type="button" class="comBtn" id="reDelete">삭제하기</span>'
-					            												+	'<button type="button" class="comBtn" id="reReport">신고하기</span>'
-					            												+	'<button type="button" class="comBtn" id="reComment">대댓달기</span>'
-					            												+	'<input type="hidden" value="' + comList[i].parentNo + '" id="hiddenPno">'
-					            												+ '</div>'
-					            												+ '<hr>'
-					            												+ '<div id="showComment">'
-					            												+ 	'<div class="parentComment">'
-					            												+		'<textarea id="commentArea">' + comList[i].comContent + '</textarea >'
-					            												+	'</div>'
-					            												+ '</div>'
-				            												+ '</div>'
-				            								}
-				            							$(".parentCommentAll").html(value);
-				                    			}
-				                    		   },
-				                    			error:function(){
-				                    				console.log("댓글조회용 AJAX 실패");
-				                    			}
-				                    	   })
-				                       }
-				                       
-				                       // 대댓달기라는 버튼을 눌렀을때만 그 댓글의 hiddenPno를 가져오고, 대댓달기를 누르지 않으면 0이 되도록
-									// 그럼 대댓을 생각하지 말고 일단 댓글만 생각해보자				                       
-				                       function insertComment(){
-				          	        	 $.ajax({
-				          	        		 url:"<%=contextPath%>/coInsert.com",
-				          	        		 data:{
-				          	        			 comContent:$("#comContent").val(),
-				          	        			 memNo:$("#memNo").val(),
-				          	        			 rvNo:$("#rvNo").val()
-				          	        		 },
-				          	        		 type:"post",
-				          	        		 success:function(result){
-				          	        			 if(result > 0){
-				          	        				 // 댓글작성 성공
-				          	        				 // => 내가 작성한 댓글이 보여지기 위해서는 갱신된 댓글리스트 조회필요
-				          	        				 commentList(rvNo);
-				          	        				 $("#comContent").val(""); //textarea 초기회
-				          	        			 }
-				          	        		 },
-				          	        		 error:function(){
-				          	        			console.log("댓글작성 ajax 통신 실패");
-				          	        		 }
-				          	        		 
-				          	        	 })
-				          	         }
-				                    	   
-									</script>
+		                                            </div>
+		                                        </div>
+	                                        	<% } %>
+	                                        	
+	                                        	
+	                                    <% } else { %>
+	                                    	 <h4>" 아직 작성된 후기가 없습니다 "</h4><br>
+										<% } %>
+										
+										
+										
+									</div>
+									
                          <!--  ~review보이는 공간~ -->
                                     
-                                    
-                                    
-                                    </div>
-                                </div>
+                               
                             </div>
+                            
+                            
+                            
                             <div class="col-md-1"></div>
                             <div class="col-md-4">
                                 <div class="row">
@@ -551,7 +414,17 @@ body {
     			})
     		}
     	}
+
     	// 찜하기
+    	
+
+    	function insertLove(){
+    		<%-- $.ajax({
+    			url:'<%=contextPath%>/insert/lo',
+    			data:{no:<%=s.getSpaceNo() %>},
+    			success:
+    		}) --%>
+
     	function love(){
     		if($("#zzim").text()==('찜하기')){
 				$.ajax({
@@ -574,7 +447,6 @@ body {
 					}
 				})
 			}
-			
     	}
     </script>
 
@@ -627,6 +499,120 @@ body {
 		
     }
     </script>
+    
+    
+    <script>
+				                       function likeUpdate(e){
+				                    	   let rvNo = $(e).data("value")
+				                    		 
+				                    			  $.ajax({
+						                    			url:"<%=contextPath %>/likeUpdate.lk",
+						                    			data:{
+						                    				memNo:$("#memNo").val(),
+						                    				rvNo:rvNo
+						                    			},
+						                    			success:function(result){
+						                    				if(result == "likeOk"){
+						                    					// 추천이 완료된 데이터, 예약번호가 넘어옴
+						            							alert("추천해주셔서 감사합니다!");
+						                    					// 바로 표시되게 하는 걸 못하게씀 ㅜㅜ
+						            						} else {
+						            							// 후기 중복확인
+						            							alert("이미 추천한 후기입니다!");
+						            							}
+						                    			},
+						                    			error:function(){
+						                    				console.log("추천 +1 AJAX 통신 실패");
+						                    			}
+						                    		})
+				                    		  }
+					                    
+				                       function loginForm(){
+				           	       		location.href="<%=contextPath%>/loginForm.me";
+				           				}
+				                       
+				                       
+				                       function commentList(e){
+				                    	   const commentDiv = $(window.event.target).parents(".eachRvList").find(".parentCommentAll");
+				                    	   console.log(commentDiv);
+				                    	   $.ajax({
+				                    		   url : "<%=contextPath%>/comList.com",
+				                    		   data:{
+				                    			   rvNo:e,
+					                    			},
+				                    		   success:function(comList){
+				                    				if(comList.length == 0){
+				                    					// 댓글리스트가 비어있다면
+				            							let value ='<h4> 아직 작성된 댓글 없습니다 </h4><br>'
+				            								commentDiv.html(value);
+				            						} else {
+				            							// 댓글리스트가 있다면
+				            							let value = ""
+				            								for(let i = 0; i<comList.length; i++) {
+				            									value += ' <div class="commentMem row"> '
+					            												+ '<div class="parentMem col-lg-6">'
+					            												+ 	'<span class="material-symbols-outlined memProfilePic" id="memProfilePic">'
+					            												+		'account_circle'
+					            												+		'</span>'
+					            												+		'<span id="memSpan">'
+					            												+			comList[i].memId
+					            												+		'</span>'
+					            												+		'<span id="dateSpan">'
+					            												+			comList[i].comEnrollDate
+					            												+		'</span>'
+					            												+ '</div>'
+					            												+ '<div class="parentInfo col-lg-6">'
+					            												+	'<button type="button" class="comBtn" id="reDelete">삭제하기</span>'
+					            												+	'<button type="button" class="comBtn" id="reReport">신고하기</span>'
+					            												+	'<button type="button" class="comBtn" id="reComment">대댓달기</span>'
+					            												+	'<input type="hidden" value="' + comList[i].parentNo + '" id="hiddenPno">'
+					            												+ '</div>'
+					            												+ '<hr>'
+					            												+ '<div id="showComment">'
+					            												+ 	'<div class="parentComment">'
+					            												+		'<textarea id="commentArea">' + comList[i].comContent + '</textarea >'
+					            												+	'</div>'
+					            												+ '</div>'
+				            												+ '</div>'
+				            								}
+				            							
+				            							commentDiv.html(value);
+				            							//$(".parentCommentAll").html(value);
+				                    			}
+				                    		   },
+				                    			error:function(){
+				                    				console.log("댓글조회용 AJAX 실패");
+				                    			}
+				                    	   })
+				                       }
+				                       
+				                       // 대댓달기라는 버튼을 눌렀을때만 그 댓글의 hiddenPno를 가져오고, 대댓달기를 누르지 않으면 0이 되도록
+									// 그럼 대댓을 생각하지 말고 일단 댓글만 생각해보자				                       
+				                       function insertComment(){
+				          	        	 $.ajax({
+				          	        		 url:"<%=contextPath%>/coInsert.com",
+				          	        		 data:{
+				          	        			 comContent:$("#comContent").val(),
+				          	        			 memNo:$("#memNo").val(),
+				          	        			 rvNo:$("#rvNo").val()
+				          	        		 },
+				          	        		 type:"post",
+				          	        		 success:function(result){
+				          	        			 if(result > 0){
+				          	        				 // 댓글작성 성공
+				          	        				 // => 내가 작성한 댓글이 보여지기 위해서는 갱신된 댓글리스트 조회필요
+				          	        				 commentList(rvNo);
+				          	        				 $("#comContent").val(""); //textarea 초기회
+				          	        			 }
+				          	        		 },
+				          	        		 error:function(){
+				          	        			console.log("댓글작성 ajax 통신 실패");
+				          	        		 }
+				          	        		 
+				          	        	 })
+				          	         }
+				                    	   
+									</script>
 
 
     <!-- footer -->

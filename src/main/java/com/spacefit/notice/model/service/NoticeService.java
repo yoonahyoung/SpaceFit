@@ -9,8 +9,10 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.spacefit.common.model.vo.PageInfo;
+import com.spacefit.mem.model.dao.MemberDao;
 import com.spacefit.notice.model.dao.NoticeDao;
 import com.spacefit.notice.model.vo.Notice;
+import com.spacefit.notice.model.vo.Terms;
 
 public class NoticeService {
 	public ArrayList<Notice> selectNoticeList(PageInfo pi){
@@ -95,5 +97,29 @@ public class NoticeService {
 		int listCount = new NoticeDao().selectListCount(conn);
 		close(conn);
 		return listCount;
+	}
+	
+	
+	
+	// -------------- admin ------------------ //
+	
+	public ArrayList<Terms> adminTermsList(){
+		Connection conn = getConnection();
+		ArrayList<Terms> list = new NoticeDao().adminTermsList(conn);
+		close(conn);
+		return list;
+	}
+	
+	public int adminInsertTerms(Terms t) {
+		Connection conn = getConnection();
+		int result = new NoticeDao().adminInsertTerms(conn, t);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 	}
 }

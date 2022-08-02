@@ -94,7 +94,7 @@
 			<% if(p == currentPage) { %>
 				<button class="btn btn-sm btn-outline-primary" disabled><%=p %></button>
 			<% } else { %>
-          			<button class="btn btn-sm btn-outline-primary" onclick="location.href='<%=contextPath%>/list.no?cpage=<%=p%>';"><%= p %></button>
+          			<button class="btn btn-sm btn-outline-primary" onclick="location.href='<%=contextPath%>/list.qa?cpage=<%=p%>';"><%= p %></button>
 			<% } %>        
 			 
 		<% } %>

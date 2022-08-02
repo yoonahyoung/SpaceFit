@@ -80,6 +80,50 @@ public class QnAService {
 		return result1 * result2;
 	}
 	
+	public int insertPublicReply(QnA q, Attachment at) {
+		Connection conn = getConnection();
+		
+		int result1 = new QnADao().insertPublicReply(conn, q); // QnA에 INSERT
+		int refNo = q.getQnaRefNo();
+		int result2 = 1;
+		if(at != null) { // 첨부파일이 있을 경우 
+			result2 = new QnADao().insertRelpyAttachment(conn, at, refNo);
+		}
+		
+		
+		if(result1 > 0 && result2 > 0 ) { // 성공
+			commit(conn);
+		}else { // 실패
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result1 * result2;
+	}
+	
+	public int insertSecretReply(QnA q, Attachment at) {
+		Connection conn = getConnection();
+		
+		int result1 = new QnADao().insertSecretReply(conn, q); // QnA에 INSERT
+		int refNo = q.getQnaRefNo();
+		int result2 = 1;
+		if(at != null) { // 첨부파일이 있을 경우 
+			result2 = new QnADao().insertRelpyAttachment(conn, at, refNo);
+		}
+		
+		
+		if(result1 > 0 && result2 > 0 ) { // 성공
+			commit(conn);
+		}else { // 실패
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result1 * result2;
+	}
+	
 	public int increaseCount(int qnaNo) {
 		Connection conn = getConnection();
 		

@@ -76,10 +76,17 @@
 
     <br>
 	<div align="right">
-        <a href="<%=contextPath %>/list.qa?cpage=1" class="btn btn-sm btn-secondary">목록가기</a>
+        <a href="<%=contextPath%>/reply.qa?no=<%=q.getQnaNo()%>" class="btn btn-sm btn-primary">답변하기</a> 
+	    <a onclick="history.back();" class="btn btn-sm btn-secondary">목록가기</a>
     </div>
     <div style="height : 60px"></div>
  </div>
 <%@ include file="../common/userFooter.jsp" %>
+
+<script>
+    function goQnAlist(){
+        location.href="<%=contextPath%>/list.qa?cpage=1";
+    }
+</script>
 </body>
 </html>

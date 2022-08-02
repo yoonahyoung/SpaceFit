@@ -7,6 +7,7 @@ public class QnA {
 	private String qnaCategory;
 	private String spaceCategory;
 	private String qnaSpaceNo;	
+	private String qnaSpaceName;	
 	private String qnaTitle;
 	private String qnaContent;
 	private String qnaWriter;
@@ -15,9 +16,11 @@ public class QnA {
 	private int count;
 	private Date qnaCreateDate;
 	private String qnaPwd;
+	private String qnaPublic;
 	
 	public QnA() {}
 
+	//공개글 등록
 	public QnA(String qnaCategory, String qnaSpaceNo, String qnaTitle, String qnaContent, String qnaWriter) {
 		super();
 		this.qnaCategory = qnaCategory;
@@ -27,7 +30,7 @@ public class QnA {
 		this.qnaWriter = qnaWriter;
 	}
 
-	
+	//비밀글 등록
 	public QnA(String qnaCategory, String qnaSpaceNo, String qnaTitle, String qnaContent, String qnaWriter,
 			String qnaPwd) {
 		super();
@@ -52,8 +55,9 @@ public class QnA {
 		this.qnaCreateDate = qnaCreateDate;
 	}
 	
+
 	public QnA(int qnaNo, String qnaCategory, String spaceCategory, String qnaSpaceNo, String qnaTitle,
-			String qnaContent, String qnaWriter, int count, Date qnaCreateDate) {
+			String qnaContent, String qnaWriter, int count, Date qnaCreateDate, String qnaPwd, String qnaPublic) {
 		super();
 		this.qnaNo = qnaNo;
 		this.qnaCategory = qnaCategory;
@@ -64,6 +68,28 @@ public class QnA {
 		this.qnaWriter = qnaWriter;
 		this.count = count;
 		this.qnaCreateDate = qnaCreateDate;
+		this.qnaPwd = qnaPwd;
+		this.qnaPublic = qnaPublic;
+	}
+	
+	//답변등록용
+	public QnA(int qnaNo, String qnaCategory, String spaceCategory, String qnaSpaceNo, String qnaSpaceName,
+			String qnaTitle, String qnaContent, String qnaWriter, int qnaGroup, int count, Date qnaCreateDate,
+			String qnaPwd, String qnaPublic) {
+		super();
+		this.qnaNo = qnaNo;
+		this.qnaCategory = qnaCategory;
+		this.spaceCategory = spaceCategory;
+		this.qnaSpaceNo = qnaSpaceNo;
+		this.qnaSpaceName = qnaSpaceName;
+		this.qnaTitle = qnaTitle;
+		this.qnaContent = qnaContent;
+		this.qnaWriter = qnaWriter;
+		this.qnaGroup = qnaGroup;
+		this.count = count;
+		this.qnaCreateDate = qnaCreateDate;
+		this.qnaPwd = qnaPwd;
+		this.qnaPublic = qnaPublic;
 	}
 
 	public QnA(int qnaNo, String qnaCategory, String spaceCategory, String qnaSpaceNo, String qnaTitle,
@@ -81,9 +107,6 @@ public class QnA {
 		this.count = count;
 		this.qnaCreateDate = qnaCreateDate;
 	}
-
-	
-
 
 	public int getQnaNo() {
 		return qnaNo;
@@ -115,6 +138,14 @@ public class QnA {
 
 	public void setQnaSpaceNo(String qnaSpaceNo) {
 		this.qnaSpaceNo = qnaSpaceNo;
+	}
+
+	public String getQnaSpaceName() {
+		return qnaSpaceName;
+	}
+
+	public void setQnaSpaceName(String qnaSpaceName) {
+		this.qnaSpaceName = qnaSpaceName;
 	}
 
 	public String getQnaTitle() {
@@ -181,18 +212,49 @@ public class QnA {
 		this.qnaPwd = qnaPwd;
 	}
 
+	public String getQnaPublic() {
+		return qnaPublic;
+	}
+
+	public void setQnaPublic(String qnaPublic) {
+		this.qnaPublic = qnaPublic;
+	}
+	
+	//전체 생성자
+	public QnA(int qnaNo, String qnaCategory, String spaceCategory, String qnaSpaceNo, String qnaSpaceName,
+			String qnaTitle, String qnaContent, String qnaWriter, int qnaGroup, int qnaRefNo, int count,
+			Date qnaCreateDate, String qnaPwd, String qnaPublic) {
+		super();
+		this.qnaNo = qnaNo;
+		this.qnaCategory = qnaCategory;
+		this.spaceCategory = spaceCategory;
+		this.qnaSpaceNo = qnaSpaceNo;
+		this.qnaSpaceName = qnaSpaceName;
+		this.qnaTitle = qnaTitle;
+		this.qnaContent = qnaContent;
+		this.qnaWriter = qnaWriter;
+		this.qnaGroup = qnaGroup;
+		this.qnaRefNo = qnaRefNo;
+		this.count = count;
+		this.qnaCreateDate = qnaCreateDate;
+		this.qnaPwd = qnaPwd;
+		this.qnaPublic = qnaPublic;
+	}
+
 	@Override
 	public String toString() {
 		return "QnA [qnaNo=" + qnaNo + ", qnaCategory=" + qnaCategory + ", spaceCategory=" + spaceCategory
-				+ ", qnaSpaceNo=" + qnaSpaceNo + ", qnaTitle=" + qnaTitle + ", qnaContent=" + qnaContent
-				+ ", qnaWriter=" + qnaWriter + ", qnaGroup=" + qnaGroup + ", qnaRefNo=" + qnaRefNo + ", count=" + count
-				+ ", qnaCreateDate=" + qnaCreateDate + ", qnaPwd=" + qnaPwd + "]";
+				+ ", qnaSpaceNo=" + qnaSpaceNo + ", qnaSpaceName=" + qnaSpaceName + ", qnaTitle=" + qnaTitle
+				+ ", qnaContent=" + qnaContent + ", qnaWriter=" + qnaWriter + ", qnaGroup=" + qnaGroup + ", qnaRefNo="
+				+ qnaRefNo + ", count=" + count + ", qnaCreateDate=" + qnaCreateDate + ", qnaPwd=" + qnaPwd
+				+ ", qnaPublic=" + qnaPublic + "]";
 	}
 
+	
+	
+	
 
-
-
-
+	
 
 
 
