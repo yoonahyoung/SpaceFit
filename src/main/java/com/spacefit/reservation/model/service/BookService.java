@@ -1,11 +1,14 @@
 package com.spacefit.reservation.model.service;
 
-import static com.spacefit.common.JDBCTemplate.*;
+import static com.spacefit.common.JDBCTemplate.close;
+import static com.spacefit.common.JDBCTemplate.commit;
 import static com.spacefit.common.JDBCTemplate.getConnection;
+import static com.spacefit.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.spacefit.common.model.vo.PageInfo;
 import com.spacefit.reservation.model.dao.BookDao;
 import com.spacefit.reservation.model.vo.Book;
 
@@ -13,9 +16,9 @@ import com.spacefit.reservation.model.vo.Book;
 public class BookService {
 	
 	// 사용자페이지 myPage 예약내역조회용 
-	public ArrayList<Book> selectBookList(String booktype, String bookOrderBy, int memNo){
+	public ArrayList<Book> selectBookList(String booktype, String bookOrderBy, int memNo, PageInfo pi){
 		Connection conn = getConnection();
-		ArrayList<Book> list = new BookDao().selectBookList(conn, booktype, bookOrderBy, memNo);		
+		ArrayList<Book> list = new BookDao().selectBookList(conn, booktype, bookOrderBy, memNo, pi);		
 		close(conn);
 		return list;
 	}
@@ -54,6 +57,15 @@ public class BookService {
 		}
 		close(conn);
 		return result;
+	}
+	
+	// listCount
+	public int selectBookListCount(String booktype, int memNo) {
+		Connection conn = getConnection();
+		int listCount = new BookDao().selectBookListCount(conn, booktype, memNo);
+		close(conn);
+		return listCount;
+		
 	}
 	
 	/*

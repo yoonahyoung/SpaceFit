@@ -3,18 +3,40 @@
 <properties>
     
     <!-- 사용자페이지 예약내역조회용  -->
-	<entry key="selectBookList">
-		SELECT  BOOK_NO
-		      , SPACE_NAME		      
-		      , BOOK_DATE
-		      , BOOK_IN
-		      , BOOK_OUT
-		      , BOOK_PRICE  
-		      , BOOK_CATEGORY		      
-		      , SPACE_PIC
+	<entry key="selectBookList1">
+	
+			SELECT *
+			  FROM (  
+			    SELECT ROWNUM RNUM, A.*
+			      FROM (
+			            SELECT  BOOK_NO
+						      , SPACE_NAME		      
+						      , BOOK_DATE
+						      , BOOK_IN
+						      , BOOK_OUT
+						      , BOOK_PRICE  
+						      , BOOK_CATEGORY		      
+						      , SPACE_PIC
+						   FROM VW_BOOK
+						  WHERE MEM_NO = ?
+			           
+		  
+	</entry>
+	
+	<entry key="selectBookList2">
+						 ) A
+					 )     
+			  WHERE RNUM BETWEEN ? AND ?	
+	</entry>
+	
+	
+	
+	
+	<!-- 페이징처리 listCount -->
+	<entry key="selectBookListCount">
+		 SELECT COUNT(*) AS "COUNT"
 		   FROM VW_BOOK
 		  WHERE MEM_NO = ?
-		  
 	</entry>
 	
 	<!-- 예약상세내역 조회용 -->

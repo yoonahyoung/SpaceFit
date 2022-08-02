@@ -1,5 +1,7 @@
 package com.spacefit.reservation.model.dao;
 
+import static com.spacefit.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -8,8 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
-import static com.spacefit.common.JDBCTemplate.*;
 
+import com.spacefit.common.model.vo.PageInfo;
 import com.spacefit.reservation.model.vo.Book;
 
 public class BookDao {
@@ -31,20 +33,27 @@ public class BookDao {
 	 * @param memNo : 로그인한 회원번호
 	 * @return 해당 회원의 예약정보
 	 */
-	public ArrayList<Book> selectBookList(Connection conn, String booktype, String bookOrderBy, int memNo){
+	public ArrayList<Book> selectBookList(Connection conn, String booktype, String bookOrderBy, int memNo, PageInfo pi){
 		// select > ResultSet(여러행) > ArrayList<Book>
 		ArrayList<Book> list = new ArrayList<>();
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("selectBookList");
+		String sql = prop.getProperty("selectBookList1");
 		sql += booktype;
 		sql += bookOrderBy;
+		sql += prop.getProperty("selectBookList2");
 		
 		//System.out.println(sql);
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, memNo); 			
+			
+			int startRow = (pi.getCurrentPage() -1 ) * pi.getBoardLimit() +1;
+			int endRow = startRow + pi.getBoardLimit() -1;			
+			
+			pstmt.setInt(1, memNo); 		
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
@@ -66,7 +75,34 @@ public class BookDao {
 			close(pstmt);
 		}
 		
+		System.out.println(list);
 		return list;
+	}
+	
+	public int selectBookListCount(Connection conn, String booktype, int memNo) {
+		// select => ResultSet(int)
+		int listCount = 0;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectBookListCount");
+		sql += booktype;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
 	}
 	
 	/** 예약상세페이지
@@ -188,6 +224,8 @@ public class BookDao {
 		
 		return result;		
 	}
+	
+	
 	
 	/*
 	 * 관리자용

@@ -492,117 +492,117 @@ body {
     
     
     <script>
-				                       function likeUpdate(e){
-				                    	   let rvNo = $(e).data("value")
-				                    		 
-				                    			  $.ajax({
-						                    			url:"<%=contextPath %>/likeUpdate.lk",
-						                    			data:{
-						                    				memNo:$("#memNo").val(),
-						                    				rvNo:rvNo
-						                    			},
-						                    			success:function(result){
-						                    				if(result == "likeOk"){
-						                    					// 추천이 완료된 데이터, 예약번호가 넘어옴
-						            							alert("추천해주셔서 감사합니다!");
-						                    					// 바로 표시되게 하는 걸 못하게씀 ㅜㅜ
-						            						} else {
-						            							// 후기 중복확인
-						            							alert("이미 추천한 후기입니다!");
-						            							}
-						                    			},
-						                    			error:function(){
-						                    				console.log("추천 +1 AJAX 통신 실패");
-						                    			}
-						                    		})
-				                    		  }
-					                    
-				                       function loginForm(){
-				           	       		location.href="<%=contextPath%>/loginForm.me";
-				           				}
-				                       
-				                       
-				                       function commentList(e){
-				                    	   const commentDiv = $(window.event.target).parents(".eachRvList").find(".parentCommentAll");
-				                    	   console.log(commentDiv);
-				                    	   $.ajax({
-				                    		   url : "<%=contextPath%>/comList.com",
-				                    		   data:{
-				                    			   rvNo:e,
-					                    			},
-				                    		   success:function(comList){
-				                    				if(comList.length == 0){
-				                    					// 댓글리스트가 비어있다면
-				            							let value ='<h4> 아직 작성된 댓글 없습니다 </h4><br>'
-				            								commentDiv.html(value);
-				            						} else {
-				            							// 댓글리스트가 있다면
-				            							let value = ""
-				            								for(let i = 0; i<comList.length; i++) {
-				            									value += ' <div class="commentMem row"> '
-					            												+ '<div class="parentMem col-lg-6">'
-					            												+ 	'<span class="material-symbols-outlined memProfilePic" id="memProfilePic">'
-					            												+		'account_circle'
-					            												+		'</span>'
-					            												+		'<span id="memSpan">'
-					            												+			comList[i].memId
-					            												+		'</span>'
-					            												+		'<span id="dateSpan">'
-					            												+			comList[i].comEnrollDate
-					            												+		'</span>'
-					            												+ '</div>'
-					            												+ '<div class="parentInfo col-lg-6">'
-					            												+	'<button type="button" class="comBtn" id="reDelete">삭제하기</span>'
-					            												+	'<button type="button" class="comBtn" id="reReport">신고하기</span>'
-					            												+	'<button type="button" class="comBtn" id="reComment">대댓달기</span>'
-					            												+	'<input type="hidden" value="' + comList[i].parentNo + '" id="hiddenPno">'
-					            												+ '</div>'
-					            												+ '<hr>'
-					            												+ '<div id="showComment">'
-					            												+ 	'<div class="parentComment">'
-					            												+		'<textarea id="commentArea">' + comList[i].comContent + '</textarea >'
-					            												+	'</div>'
-					            												+ '</div>'
-				            												+ '</div>'
-				            								}
-				            							
-				            							commentDiv.html(value);
-				            							//$(".parentCommentAll").html(value);
-				                    			}
-				                    		   },
-				                    			error:function(){
-				                    				console.log("댓글조회용 AJAX 실패");
-				                    			}
-				                    	   })
-				                       }
-				                       
-				                       // 대댓달기라는 버튼을 눌렀을때만 그 댓글의 hiddenPno를 가져오고, 대댓달기를 누르지 않으면 0이 되도록
-									// 그럼 대댓을 생각하지 말고 일단 댓글만 생각해보자				                       
-				                       function insertComment(){
-				          	        	 $.ajax({
-				          	        		 url:"<%=contextPath%>/coInsert.com",
-				          	        		 data:{
-				          	        			 comContent:$("#comContent").val(),
-				          	        			 memNo:$("#memNo").val(),
-				          	        			 rvNo:$("#rvNo").val()
-				          	        		 },
-				          	        		 type:"post",
-				          	        		 success:function(result){
-				          	        			 if(result > 0){
-				          	        				 // 댓글작성 성공
-				          	        				 // => 내가 작성한 댓글이 보여지기 위해서는 갱신된 댓글리스트 조회필요
-				          	        				 commentList(rvNo);
-				          	        				 $("#comContent").val(""); //textarea 초기회
-				          	        			 }
-				          	        		 },
-				          	        		 error:function(){
-				          	        			console.log("댓글작성 ajax 통신 실패");
-				          	        		 }
-				          	        		 
-				          	        	 })
-				          	         }
-				                    	   
-									</script>
+        function likeUpdate(e){
+     	   let rvNo = $(e).data("value")
+     		 
+     			  $.ajax({
+       			url:"<%=contextPath %>/likeUpdate.lk",
+       			data:{
+       				memNo:$("#memNo").val(),
+       				rvNo:rvNo
+       			},
+       			success:function(result){
+       				if(result == "likeOk"){
+       					// 추천이 완료된 데이터, 예약번호가 넘어옴
+						alert("추천해주셔서 감사합니다!");
+       					// 바로 표시되게 하는 걸 못하게씀 ㅜㅜ
+					} else {
+						// 후기 중복확인
+						alert("이미 추천한 후기입니다!");
+						}
+       			},
+       			error:function(){
+       				console.log("추천 +1 AJAX 통신 실패");
+       			}
+       		})
+     		  }
+      
+        function loginForm(){
+    		location.href="<%=contextPath%>/loginForm.me";
+}
+        
+        
+        function commentList(e){
+     	   const commentDiv = $(window.event.target).parents(".eachRvList").find(".parentCommentAll");
+     	   console.log(commentDiv);
+     	   $.ajax({
+     		   url : "<%=contextPath%>/comList.com",
+               		   data:{
+               			   rvNo:e,
+                			},
+               		   success:function(comList){
+               				if(comList.length == 0){
+               					// 댓글리스트가 비어있다면
+       							let value ='<h4> 아직 작성된 댓글 없습니다 </h4><br>'
+       								commentDiv.html(value);
+       						} else {
+       							// 댓글리스트가 있다면
+       							let value = ""
+       								for(let i = 0; i<comList.length; i++) {
+       									value += ' <div class="commentMem row"> '
+        												+ '<div class="parentMem col-lg-6">'
+        												+ 	'<span class="material-symbols-outlined memProfilePic" id="memProfilePic">'
+        												+		'account_circle'
+        												+		'</span>'
+        												+		'<span id="memSpan">'
+        												+			comList[i].memId
+        												+		'</span>'
+        												+		'<span id="dateSpan">'
+        												+			comList[i].comEnrollDate
+        												+		'</span>'
+        												+ '</div>'
+        												+ '<div class="parentInfo col-lg-6">'
+        												+	'<button type="button" class="comBtn" id="reDelete">삭제하기</span>'
+        												+	'<button type="button" class="comBtn" id="reReport">신고하기</span>'
+        												+	'<button type="button" class="comBtn" id="reComment">대댓달기</span>'
+        												+	'<input type="hidden" value="' + comList[i].parentNo + '" id="hiddenPno">'
+        												+ '</div>'
+        												+ '<hr>'
+        												+ '<div id="showComment">'
+        												+ 	'<div class="parentComment">'
+        												+		'<textarea id="commentArea">' + comList[i].comContent + '</textarea >'
+        												+	'</div>'
+        												+ '</div>'
+       												+ '</div>'
+       								}
+       							
+       							commentDiv.html(value);
+       							//$(".parentCommentAll").html(value);
+               			}
+               		   },
+               			error:function(){
+               				console.log("댓글조회용 AJAX 실패");
+               			}
+               	   })
+                  }
+                  
+                  // 대댓달기라는 버튼을 눌렀을때만 그 댓글의 hiddenPno를 가져오고, 대댓달기를 누르지 않으면 0이 되도록
+					// 그럼 대댓을 생각하지 말고 일단 댓글만 생각해보자				                       
+                  function insertComment(){
+     	        	 $.ajax({
+     	        		 url:"<%=contextPath%>/coInsert.com",
+				  		 data:{
+				  			 comContent:$("#comContent").val(),
+				  			 memNo:$("#memNo").val(),
+				  			 rvNo:$("#rvNo").val()
+				  		 },
+				  		 type:"post",
+				  		 success:function(result){
+				  			 if(result > 0){
+				  				 // 댓글작성 성공
+				  				 // => 내가 작성한 댓글이 보여지기 위해서는 갱신된 댓글리스트 조회필요
+				  				 commentList(rvNo);
+				  				 $("#comContent").val(""); //textarea 초기회
+				  			 }
+				  		 },
+				  		 error:function(){
+				  			console.log("댓글작성 ajax 통신 실패");
+				  		 }
+				  		 
+				  	 })
+				   }
+     	   
+				</script>
 
 
     <!-- footer -->
