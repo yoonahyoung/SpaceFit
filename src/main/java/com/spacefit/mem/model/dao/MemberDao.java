@@ -15,21 +15,22 @@ import com.spacefit.mem.model.vo.Cart;
 import com.spacefit.mem.model.vo.Love;
 import com.spacefit.mem.model.vo.Mcp;
 import com.spacefit.mem.model.vo.Member;
+import com.spacefit.review.model.dao.CommentDao;
 
 public class MemberDao {
    
    private Properties prop = new Properties();
    
-   public MemberDao() {
-      // member-mapper.xml 읽기 (classes 폴더 안에 있는 파일)
-      String filePath = MemberDao.class.getResource("/db/sql/member-mapper.xml").getPath();
-      try {
-         prop.loadFromXML(new FileInputStream(filePath));
-      } catch (IOException e) {
-         e.printStackTrace();
-      }
-   }
+ 
    
+   
+   public MemberDao() {
+		try {
+			prop.loadFromXML(new FileInputStream(MemberDao.class.getResource("/db/sql/member-mapper.xml").getPath()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
    
    public Member loginMember(Connection conn, String memId, String memPwd) {
       
@@ -677,6 +678,52 @@ public class MemberDao {
 		return m;
 	}
 	
+	public ArrayList<Member> selectMemberListOrderBy(Connection conn, String addSql) {
+		ArrayList<Member> memList = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminMemberManageListSelect") + addSql;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				memList.add(new Member(
+							rset.getInt("mem_no"),
+							rset.getString("mem_id"),
+							rset.getString("mem_name"),
+							rset.getString("mem_idno"),
+							rset.getString("mem_phone"),
+							rset.getString("mem_mail"),
+							rset.getString("gr_name"),
+							rset.getInt("book_count_all"),
+							rset.getInt("book_count_month"),
+							rset.getInt("book_amount_all"),
+							rset.getInt("book_amount_month"),
+							rset.getInt("rpt_count"),
+							rset.getInt("like_count"),
+							rset.getString("mem_status"),
+							rset.getString("mem_adm_flag"),
+							rset.getDate("mem_enroll_date"),
+							rset.getDate("mem_modify_date")
+						));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return memList;
+		
+	}
+	
+	
+	
+	
 	
 	public ArrayList<Mcp> selectAdminCouponList(Connection conn){
 		
@@ -802,6 +849,8 @@ public class MemberDao {
 		
 		return result;
 	}
+	
+	
 	
 	
 	
