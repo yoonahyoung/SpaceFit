@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="selectComList">
+		SELECT
+		       COM_NO
+		     , RV_NO
+		     , MEM_NO
+		     , MEM_ID
+		     , COM_CONTENT
+		     , COM_ENROLL_DATE
+		     , COM_MODIFY_DATE
+		     , COM_PARENT_NO
+		     , COM_STATUS
+		  FROM TB_COMMENT
+		 WHERE RV_NO=?
+	</entry>
+
+</properties>

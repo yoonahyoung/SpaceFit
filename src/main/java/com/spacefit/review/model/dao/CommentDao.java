@@ -49,7 +49,6 @@ public class CommentDao {
 							rset.getString("com_status")
 						));
 			}
-			System.out.println("다오에서 확인 : " + comList);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

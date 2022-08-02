@@ -55,6 +55,7 @@ public class SpaceDetailViewController extends HttpServlet {
 		
 		int avgStars = new ReviewService().selectAvgStars(spNo);
 		request.setAttribute("avgStars", avgStars);
+		
 		// 후기 부분 끝!
 		
 		
