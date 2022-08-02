@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.spacefit.common.model.vo.PageInfo;
 import com.spacefit.reservation.model.service.BookService;
 import com.spacefit.reservation.model.vo.Book;
 
@@ -33,6 +34,7 @@ public class AjaxAdminBookListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+				
 		String booktype = "";				
 		switch(request.getParameter("booktype")) {
 		case "전체": booktype = "WHERE BOOK_NO IS NOT NULL"; break;
@@ -62,7 +64,7 @@ public class AjaxAdminBookListController extends HttpServlet {
 			
 			} 
 			
-		}
+		}				
 			
 		//System.out.println(search + booktype + bookOrderBy);
 		

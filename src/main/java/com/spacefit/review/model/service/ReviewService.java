@@ -127,9 +127,9 @@ public class ReviewService {
 	}
 	
 	// 후기조회 페이징처리1. listCount용
-	public int selectListCount() {
+	public int selectListCount(int memNo) {
 		Connection conn = getConnection();
-		int listCount = new ReviewDao().selectListCount(conn);
+		int listCount = new ReviewDao().selectListCount(conn, memNo);
 		close(conn);
 		return listCount;
 	}

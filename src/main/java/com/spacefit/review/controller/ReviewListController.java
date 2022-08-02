@@ -43,8 +43,10 @@ public class ReviewListController extends HttpServlet {
 		int maxPage;	 // 가장 마지막 페이지 (총 페이지 수)
 		int startPage;   // 페이징바의 시작수  예) 사용자가 3페이지(currentPage)본다면 1~10(pageLimit 10)일때 start는 1이고 12페이지를 골랐다면 시작수는 11 
 		int endPage;	 // 페이징바의 끝수
+
+		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
 		
-		listCount = new ReviewService().selectListCount();
+		listCount = new ReviewService().selectListCount(memNo);
 		
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
 		
@@ -64,7 +66,6 @@ public class ReviewListController extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
 		
 		ArrayList<Review> list = new ReviewService().selectReviewList(memNo, pi);
 		request.setAttribute("pi", pi);

@@ -166,16 +166,19 @@
 		    )	
 	</entry>
 	
+	<!-- 후기삭제 -->
 	<entry key="deleteReivewReal">
 		UPDATE TB_REVIEW
 		   SET RV_STATUS = 'N'
 		WHERE RV_NO = ? 
 	</entry>
 	
+	<!--  리뷰리스트 페이징처리 -LIST COUNT -->
 	<entry key="selectListCount">
 		SELECT COUNT(*) AS "COUNT"
 		  FROM TB_REVIEW
 		  WHERE RV_STATUS = 'Y'
+		    AND MEM_NO = ?
 	</entry>
 
 	

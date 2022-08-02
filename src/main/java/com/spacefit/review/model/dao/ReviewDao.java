@@ -400,7 +400,7 @@ public class ReviewDao {
 	 * @param conn
 	 * @return
 	 */
-	public int selectListCount(Connection conn) {
+	public int selectListCount(Connection conn, int memNo) {
 		// select문 => ResultSet => int
 		
 		int listCount = 0;
@@ -411,6 +411,7 @@ public class ReviewDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
