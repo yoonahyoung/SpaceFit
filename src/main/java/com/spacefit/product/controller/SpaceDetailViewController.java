@@ -8,8 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.spacefit.attachment.model.vo.Attachment;
+import com.spacefit.mem.model.service.MemberService;
+import com.spacefit.mem.model.vo.Member;
 import com.spacefit.product.model.service.SpaceService;
 import com.spacefit.product.model.vo.Space;
 import com.spacefit.reservation.model.service.BookService;
@@ -39,12 +42,20 @@ public class SpaceDetailViewController extends HttpServlet {
 		
 		int spNo = Integer.parseInt(request.getParameter("no"));
 		
+		// 공간 리스트 불러오기
 		Space s = new SpaceService().spaceDetailView(spNo);
 		ArrayList<Attachment> at = new SpaceService().selectAttach(spNo);
 		
 		request.setAttribute("s", s);
 		request.setAttribute("at", at);
 		
+		// 찜했는지 안했는지 불러오기
+		HttpSession session = request.getSession();
+		int memNo = ((Member)session.getAttribute("loginUser")).getMemNo();
+		
+		int count = new MemberService().loveCheck(spNo, memNo);
+		// count가 1이면 찜한 공간, 0이면 찜하지 않은 공간
+		request.setAttribute("loveCheck", count);
 		
 		
 		// 이 부분부터 후기쪽 부분입니다. 소희작성

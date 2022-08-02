@@ -222,7 +222,7 @@
 		 WHERE MEM_NO = ?
 	</entry>
 	
-	<entry key="insertLove">
+	<entry key="loveInsert">
 		INSERT
 		  INTO TB_LOVE
 		  (
@@ -235,6 +235,32 @@
 		  , ?
 		  )
 	</entry>
+	
+	<entry key="loveDelete">
+		DELETE 
+		  FROM TB_LOVE
+		 WHERE SPACE_NO = ?
+		   AND MEM_NO = ?
+	</entry>
+	
+	<entry key="selectLove">
+		SELECT
+		       SPACE_NO
+		     , MEM_NO
+		  FROM TB_LOVE
+		 WHERE MEM_NO = ?
+	</entry>
+	
+	<entry key="loveCheck">
+		SELECT
+		       SPACE_NO
+		     , MEM_NO
+		  FROM TB_LOVE
+		 WHERE SPACE_NO = ?
+		   AND MEM_NO = ?
+		   
+	</entry>
+	
 
 	<!-- admin -->
 

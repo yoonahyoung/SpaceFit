@@ -8,11 +8,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Properties;
 
 import com.spacefit.mem.model.vo.Cart;
+import com.spacefit.mem.model.vo.Love;
 import com.spacefit.mem.model.vo.Mcp;
 import com.spacefit.mem.model.vo.Member;
 
@@ -472,7 +472,95 @@ public class MemberDao {
 		return list;
 	}
    
+   // wishList
+   public int loveInsert(Connection conn, int spNo, int memNo) {
+	   PreparedStatement pstmt = null;
+	   int result = 0;
+	   String sql = prop.getProperty("loveInsert");
+	   
+	   try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, spNo);
+		pstmt.setInt(2, memNo);
+		
+		result = pstmt.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(pstmt);
+	}
+	   return result;
+   }
    
+   public int loveDelete(Connection conn, int spNo, int memNo) {
+	   PreparedStatement pstmt = null;
+	   int result = 0;
+	   String sql = prop.getProperty("loveDelete");
+	   
+	   try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, spNo);
+		pstmt.setInt(2, memNo);
+		
+		result = pstmt.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(pstmt);
+	}
+	   return result;
+   }
+   
+   public ArrayList<Love> selectLove(Connection conn, int memNo) {
+	   ResultSet rset = null;
+	   PreparedStatement pstmt = null;
+	   ArrayList<Love> list = new ArrayList<>();
+	   String sql = prop.getProperty("selectLove");
+	   
+	   try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, memNo);
+		
+		rset = pstmt.executeQuery();
+		while(rset.next()) {
+			Love l = new Love();
+			l.setSpaceNo(rset.getInt("space_no"));
+			l.setMemNo(rset.getInt("mem_no"));
+			list.add(l);
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(rset);
+		close(pstmt);
+	}
+	 return list;  
+   }
+   
+   public int loveCheck(Connection conn, int spNo, int memNo) {
+	   ResultSet rset = null;
+	   PreparedStatement pstmt = null;
+	   int count = 0;
+	   String sql = prop.getProperty("loveCheck");
+	   
+	   try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, spNo);
+		pstmt.setInt(2, memNo);
+		
+		rset = pstmt.executeQuery();
+		if(rset.next()) {
+			count = 1;
+		}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(rset);
+		close(pstmt);
+	}  
+	   return count;
+   }
    
    //---------ADMIN-----------//
 	

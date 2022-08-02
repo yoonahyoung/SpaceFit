@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import com.spacefit.mem.model.dao.MemberDao;
 import com.spacefit.mem.model.vo.Cart;
+import com.spacefit.mem.model.vo.Love;
 import com.spacefit.mem.model.vo.Mcp;
 import com.spacefit.mem.model.vo.Member;
 
@@ -175,6 +176,41 @@ public class MemberService {
 	   return list;
    }
    
+   // 찜하기(위시리스트)
+   public int loveList(int spNo, int memNo, String status) {
+	   Connection conn = getConnection();
+	   int result = 0;
+	   // status = n일시 찜추가, y일시 찜해제
+	   if(status.equals("n")) {
+		   result = new MemberDao().loveInsert(conn, spNo, memNo);   
+	   }else {
+		   result = new MemberDao().loveDelete(conn, spNo, memNo);
+	   }
+	   // 커밋롤백처리
+	   if(result > 0) {
+		   commit(conn);
+	   }else {
+		   rollback(conn);
+	   }
+	   close(conn);
+	   
+	   return result;
+   }
+   
+   public ArrayList<Love> selectLove(int memNo){
+	   Connection conn = getConnection();
+	   ArrayList<Love> list = new MemberDao().selectLove(conn,memNo);
+	   close(conn);
+	   return list;
+   }
+   
+   public int loveCheck(int spNo, int memNo) {
+	   Connection conn = getConnection();
+	   int count = new MemberDao().loveCheck(conn, spNo, memNo);
+	   close(conn);
+	   return count;
+	   
+   }
    
     // ----------------------- admin ------------------------- //
 

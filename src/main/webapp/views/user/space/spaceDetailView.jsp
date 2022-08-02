@@ -3,13 +3,16 @@
     							 com.spacefit.review.model.vo.Review,
     							 com.spacefit.product.model.vo.Space,
     							 com.spacefit.attachment.model.vo.Attachment,
-    							 com.spacefit.review.model.vo.Comment
+    							 com.spacefit.review.model.vo.Comment,
+    							 com.spacefit.mem.model.vo.Member
     							 "%>
 <%
 	String thisPath = request.getContextPath();
 	ArrayList<Review> rvList = (ArrayList<Review>)request.getAttribute("rvList");
 	int avgStars = (Integer)request.getAttribute("avgStars");
 	Space s = (Space)request.getAttribute("s");
+	int loveCheck = (int)request.getAttribute("loveCheck");
+	
 	ArrayList<Attachment> atList = (ArrayList<Attachment>)request.getAttribute("at");
 	
 	ArrayList<Comment> comList = new ArrayList<>();
@@ -424,7 +427,7 @@ body {
                                     <h4 style="margin-top:35px; border-bottom:2px solid #0D6EFD" id="aySelect">옵션선택</h4>
                                     <span class="col-sm-4"> 이용인원  </span>
                                     <select name="limit" required>
-                                        <%for(int i=2; i<21; i++){ %>
+                                        <%for(int i=2; i<=s.getSpaceLimit(); i++){ %>
                                         	<option value="<%=i%>"><%= i %>명</option>
                                         <%} %>
                                     </select>
@@ -503,7 +506,13 @@ body {
                                     <div id="ayBtn" style="text-align:center; margin-top:100px;">
                                         <button type="button" class="btn btn-primary" onclick="formSumbit(1);">바로결제</button>
                                         <button type="button" onclick="formSubmit(2);" class="btn btn-outline-dark">보관함</button>
-                                        <button type="button" onclick="love();" id="zzim" class="btn btn-outline-danger">찜하기</button>
+                                        <% if(loginUser != null && loveCheck == 0){ %>
+                                        	<button type="button" onclick="love();" id="zzim" class="btn btn-outline-danger">찜하기</button>
+                                    	<%}else if(loginUser != null && loveCheck == 1){%>
+                                        	<button type="button" onclick="love();" id="zzim" class="btn btn-danger">찜해제</button>
+                                        <%else{ %>
+                                    		<button type="button" onclick="alert('로그인이 필요한 서비스입니다!');"  id="zzim" class="btn btn-outline-danger">찜하기</button>
+                                    	<%} %>
                                     </div>
                                 </div>
                             </div>
@@ -542,25 +551,30 @@ body {
     			})
     		}
     	}
-    	
+    	// 찜하기
     	function love(){
-    		if($("#zzim").val().equals('찜하기')){
+    		if($("#zzim").text()==('찜하기')){
 				$.ajax({
 					url:'<%=contextPath%>/wish.lo',
 					data:{no:<%=s.getSpaceNo() %>, status:'n'},
-					success:function(e){
-						$("#zzim").val("찜해제");
+					success:function(result){
+						if(result == '1'){
+						$("#zzim").prop("class", "btn btn-danger").text("찜해제");
+						}
 					}
 				})
 			}else{
 				$.ajax({
 					url:'<%=contextPath%>/wish.lo',
 					data:{no:<%=s.getSpaceNo() %>, status:'y'},
-					success:function(e){
-						$("#zzim").val("찜하기");
+					success:function(result){
+						if(result == '1'){
+						$("#zzim").prop("class", "btn btn-outline-danger").text("찜하기");							
+						}
 					}
 				})
 			}
+			
     	}
     </script>
 
