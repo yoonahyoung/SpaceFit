@@ -162,6 +162,38 @@
  		 WHERE CP_END_DATE IS NOT NULL;
 	</entry>
 
+	<entry key="insertCart">
+		INSERT
+		  INTO TB_CART
+		  (
+		    MEM_NO
+		  , SPACE_NO
+		  , CART_LIMIT
+		  , CART_DATE
+		  , CART_IN
+		  , CART_OUT
+		  , CART_PARKING
+		  , CART_ANIMAL
+		  , CART_STAND
+		  , CART_CHAIR
+		  , CART_PRICE
+		  )
+		  VALUES
+		  (
+		    ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  )
+	</entry>
+
 	<!-- admin -->
 
 	
@@ -340,4 +372,6 @@
 		  FROM (SELECT MEM_NO
 				  FROM TB_MEMBER)
 	</entry>
+	
+	
 </properties>
