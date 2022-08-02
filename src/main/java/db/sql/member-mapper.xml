@@ -193,6 +193,20 @@
 		  , ?
 		  )
 	</entry>
+	
+	<entry key="insertLove">
+		INSERT
+		  INTO TB_LOVE
+		  (
+		    SPACE_NO
+		  , MEM_NO
+		  )
+		  VALUES
+		  (
+		    ?
+		  , ?
+		  )
+	</entry>
 
 	<!-- admin -->
 
