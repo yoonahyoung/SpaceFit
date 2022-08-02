@@ -9,8 +9,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.spacefit.common.model.vo.PageInfo;
-import com.spacefit.mem.model.dao.MemberDao;
 import com.spacefit.notice.model.dao.NoticeDao;
+import com.spacefit.notice.model.vo.FAQ;
 import com.spacefit.notice.model.vo.Notice;
 import com.spacefit.notice.model.vo.Terms;
 
@@ -99,6 +99,13 @@ public class NoticeService {
 		return listCount;
 	}
 	
+	// FAQ
+	public ArrayList<FAQ> selectFAQList(PageInfo pi){
+		Connection conn = getConnection();
+		ArrayList<FAQ> list = new NoticeDao().selectFAQList(conn, pi);
+		close(conn);
+		return list;
+	}
 	
 	
 	// -------------- admin ------------------ //
@@ -121,5 +128,12 @@ public class NoticeService {
 		}
 		close(conn);
 		return result;
+	}
+	
+	public FAQ adminSelectFAQ(int faNo) {
+		Connection conn = getConnection();
+		FAQ faq = new NoticeDao().adminSelectFAQ(conn, faNo);
+		close(conn);
+		return faq;
 	}
 }

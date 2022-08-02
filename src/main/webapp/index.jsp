@@ -74,13 +74,13 @@
   <div class="intro intro-carousel swiper position-relative">
 
     <div class="swiper-wrapper">
-      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(resources/admin/space_upfiles/studio/main2.jpeg)">
+      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(resources/admin/space_upfiles/studio/main2.jpg)">
       <a href=""></a>
       </div>
       <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(resources/admin/space_upfiles/studio/main3.jpg)">
       <a href=""></a>
       </div>
-      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(resources/admin/space_upfiles/studio/main1.jpeg)">
+      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(resources/admin/space_upfiles/studio/main1.jpg)">
       <a href=""></a>
       </div>
     </div>

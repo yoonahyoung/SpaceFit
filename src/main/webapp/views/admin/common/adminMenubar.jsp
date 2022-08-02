@@ -139,7 +139,8 @@
                 <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">                        
                         <a class="collapse-item" href="<%=contextPath%>/adminList.no?cpage=1">공지사항</a>
-                        <a class="collapse-item" href="<%=contextPath%>/adminList.qa?cpage=1">1:1 문의</a>                        
+                        <a class="collapse-item" href="<%=contextPath%>/adminList.qa?cpage=1">1:1 문의</a>
+                        <a class="collapse-item" href="<%=contextPath%>/list.fa?cpage=1">자주묻는질문</a>                        
                     </div>
                 </div>
                

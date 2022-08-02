@@ -84,6 +84,27 @@
 		 WHERE NT_STATUS = 'Y'
 	</entry>
 	
+	<entry key="selectFAQ">
+		SELECT *
+		  FROM(
+		        SELECT ROWNUM RNUM, F.*
+		          FROM(
+		          		SELECT 
+						       FAQ_NO
+						     , FAQ_TITLE
+						     , FAQ_CONTENT
+						     , MEM_NAME
+						     , FAQ_CREATE_DATE
+						     , FAQ_UPDATE_DATE
+						     , FAQ_STATUS
+						  FROM TB_FAQ
+						  JOIN TB_MEMBER ON(FAQ_MEM_NO = MEM_NO)
+		            ) F
+		    )
+		WHERE RNUM BETWEEN ? AND ?
+		
+	</entry>
+	
 	
 	<!-- admin -->
 	
@@ -120,5 +141,19 @@
 		      , ?
 		      , ?
 		      )
+	</entry>
+	
+	<entry key="adminSelectFAQ">
+		SELECT 
+			   FAQ_NO
+		     , FAQ_TITLE
+		     , FAQ_CONTENT
+		     , MEM_NAME
+		     , FAQ_CREATE_DATE
+		     , FAQ_UPDATE_DATE
+		     , FAQ_STATUS
+		  FROM TB_FAQ
+		  JOIN TB_MEMBER ON(FAQ_MEM_NO = MEM_NO)
+		 WHERE FAQ_NO = ?
 	</entry>
 </properties>

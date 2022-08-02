@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.spacefit.common.model.vo.PageInfo;
-import com.spacefit.mem.model.vo.Mcp;
+import com.spacefit.notice.model.vo.FAQ;
 import com.spacefit.notice.model.vo.Notice;
 import com.spacefit.notice.model.vo.Terms;
 
@@ -219,6 +219,40 @@ public class NoticeDao {
 		
 	}
 	
+	// FAQ
+	public ArrayList<FAQ> selectFAQList(Connection conn, PageInfo pi){
+		ArrayList<FAQ> list = new ArrayList<>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectFAQ");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				list.add(new FAQ(rset.getInt("faq_no"),
+								 rset.getString("faq_title"),
+								 rset.getString("faq_content"),
+								 rset.getString("mem_name"),
+								 rset.getString("faq_create_date"),
+								 rset.getString("faq_update_date"),
+								 rset.getString("faq_status")
+						));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 	
 	
 	// -------------------- admin ---------------------- //
@@ -282,6 +316,36 @@ public class NoticeDao {
 		}
 		
 		return result;
+	}
+	
+	public FAQ adminSelectFAQ(Connection conn, int faNo) {
+		FAQ f = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminSelectFAQ");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, faNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				f = new FAQ(rset.getInt("faq_no"),
+							rset.getString("faq_title"),
+							rset.getString("faq_content"),
+							rset.getString("mem_name"),
+							rset.getString("faq_create_date"),
+							rset.getString("faq_update_date"),
+							rset.getString("faq_status")
+						);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return f;
 	}
 	
 }
