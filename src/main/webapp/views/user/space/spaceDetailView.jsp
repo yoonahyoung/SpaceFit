@@ -1,11 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.review.model.vo.Review, com.spacefit.product.model.vo.Space, com.spacefit.attachment.model.vo.Attachment"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList,
+    							 com.spacefit.review.model.vo.Review,
+    							 com.spacefit.product.model.vo.Space,
+    							 com.spacefit.attachment.model.vo.Attachment,
+    							 com.spacefit.review.model.vo.Comment
+    							 "%>
 <%
 	String thisPath = request.getContextPath();
 	ArrayList<Review> rvList = (ArrayList<Review>)request.getAttribute("rvList");
 	int avgStars = (Integer)request.getAttribute("avgStars");
 	Space s = (Space)request.getAttribute("s");
 	ArrayList<Attachment> atList = (ArrayList<Attachment>)request.getAttribute("at");
+	
+	ArrayList<Comment> comList = new ArrayList<>();
 %>
 <!DOCTYPE html>
 <html>
@@ -232,33 +239,12 @@ body {
 	                                            <br><br>
 	                                            <div class="collapse commentDiv" id="flush-collapseFour"  aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
                                                     <div class="parentCommentAll">
-                                                        <div class="commentMem row">
-                                                            <div class="parentMem col-lg-6">
-                                                                <span class="material-symbols-outlined memProfilePic" id="memProfilePic">
-                                                                    account_circle
-                                                                </span>
-                                                                <span id="memSpan">
-                                                                    user09
-                                                                </span>
-                                                            </div>
-                                                            <div class="parentInfo col-lg-6">
-                                                                <span>22.08.01</span>
-                                                                <span>&ensp;|&ensp;</span>
-                                                                <span id="reReport">신고하기</span>
-                                                                <span>&ensp;|&ensp;</span>
-                                                                <span id="reComment">대댓달기</span>
-                                                            </div>
-                                                            <hr> 
-                                                            <div id="showComment">
-                                                                <div class="parentComment">
-                                                                    <span>진짜 미치지 않고서야 이런 댓글은 왜다는거야??ㅋㅋㅋㅋㅋㅋ 개빡친당!</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        
                                                         
                                                     </div>
+                                                    <!--  
                                                     <div class="sonCommentAll row">
-                                                        <div class="blank col-lg-1"><!--나중에 이 블랭크 반복문 넣어서 한 탭씩 넣기?--></div>
+                                                        <div class="blank col-lg-1"></div>
                                                         <div class="commentSon row col-lg-11" style="padding : 0px; margin : 0px;">
                                                             <div class="sonMem col-lg-6">
                                                                 <span class="material-symbols-outlined memProfilePic" id="memProfilePic">
@@ -282,6 +268,7 @@ body {
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        -->
                                                         <div id="writeComment">
                                                             <table id="writeTable" align="center">
                                                                 <thead>
@@ -340,17 +327,48 @@ body {
 				                    		   data:{
 				                    			   rvNo : rvNo
 				                    		   },
+				                    		   
+				                    		   
 				                    		   success:function(result){
-				                    				if(result == "listOk"){
-				            							alert("추천해주셔서 감사합니다!");
-				                    					// 바로 표시되게 하는 걸 못하게씀 ㅜㅜ
+				                    				if(result == "emptyComList"){
+				                    					// 댓글리스트가 비어있다면
+				            							let value ="<h4> 아직 작성된 후기가 없습니다 </h4><br>"
+				            							$(".parentCommentAll").html(value);
 				            						} else {
-				            							// 후기 중복확인
-				            							alert("이미 추천한 후기입니다!");
+				            							// 댓글리스트가 있다면
+				            							<%comList = (ArrayList<Comment>)request.getAttribute("comList");%>
+				            							let value = "
+				            							<% for (Comment c : comList) {%>
+		                                                        <div class="commentMem row">
+		                                                            <div class="parentMem col-lg-6">
+		                                                                <span class="material-symbols-outlined memProfilePic" id="memProfilePic">
+		                                                                    account_circle
+		                                                                </span>
+		                                                                <span id="memSpan">
+		                                                                   <%= c.getMemId()%>
+		                                                                </span>
+		                                                            </div>
+		                                                            <div class="parentInfo col-lg-6">
+		                                                                <span> <%= c.getComEnrollDate()%></span>
+		                                                                <span>&ensp;|&ensp;</span>
+		                                                                <span id="reReport">신고하기</span>
+		                                                                <span>&ensp;|&ensp;</span>
+		                                                                <span id="reComment">대댓달기</span>
+		                                                            </div>
+		                                                            <hr> 
+		                                                            <div id="showComment">
+		                                                                <div class="parentComment">
+		                                                                    <span><%= c.getComContent()%></span>
+		                                                                </div>
+		                                                    		</div>
+		                                                    	</div>
+														<%}%>				            							
+				            							"
+														$(".parentCommentAll").html(value);
 				            							}
 				                    			},
 				                    			error:function(){
-				                    				console.log("추천 +1 AJAX 통신 실패");
+				                    				console.log("댓글조회용 AJAX 실패");
 				                    			}
 				                    	   })
 				                       }
