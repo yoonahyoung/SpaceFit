@@ -87,7 +87,61 @@
 	  , ?
 	  )
 	</entry>
+	<entry key="insertPublicReply">
+	INSERT
+		  INTO TB_QNA 
+		  (
+		    QNA_NO
+		  , QNA_CATEGORY
+		  , QNA_SPACE_NO
+		  , QNA_TITLE
+		  , QNA_CONTENT
+		  , QNA_MEM_NO
+		  , QNA_GROUP
+		  , QNA_REF_NO
+		  )
+		  VALUES
+		  (
+		    ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , 1
+		  , ?
+		  )
+	</entry>
 	
+	<entry key="insertSecretReply">
+	INSERT
+		  INTO TB_QNA 
+		  (
+		    QNA_NO
+		  , QNA_CATEGORY
+		  , QNA_SPACE_NO
+		  , QNA_TITLE
+		  , QNA_CONTENT
+		  , QNA_MEM_NO
+		  , QNA_GROUP
+		  , QNA_REF_NO
+		  , QNA_PUBLIC
+		  , QNA_PWD
+		  )
+		  VALUES
+		  (
+		    ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , 1
+		  , ?
+		  , 'N'
+		  , ?
+		  )
+	</entry>
 	<entry key="insertAttachment">
 	INSERT 
 	  INTO TB_FILE
@@ -103,6 +157,28 @@
 	  (
 	    SEQ_FINO.NEXTVAL
 	  , SEQ_QNNO.CURRVAL
+	  , 4
+	  , ?
+	  , ?
+	  , ?
+	  )
+	</entry>
+	
+	<entry key="insertRelpyAttachment">
+	INSERT 
+	  INTO TB_FILE
+	  (
+	    FILE_NO
+	  , REF_BNO
+	  , FILE_CATEGORY
+	  , FILE_ORIGIN_NAME
+	  , FILE_CHANGE_NAME
+	  , FILE_PATH
+	  )
+	  VALUES
+	  (
+	    SEQ_FINO.NEXTVAL
+	  , ?
 	  , 4
 	  , ?
 	  , ?
@@ -131,16 +207,20 @@
 	</entry>
 	
 		<entry key="selectQnA">
-      	SELECT
+        SELECT
 		       QNA_NO
 		     , QNA_CATEGORY
 		     , SPACE_CATEGORY
+		     , SPACE_NO
 		     , SPACE_NAME
 		     , QNA_TITLE
 		     , QNA_CONTENT
 		     , MEM_ID
 		     , QNA_COUNT
 		     , QNA_CREATE_DATE
+		     , QNA_PUBLIC
+             , QNA_PWD
+             , QNA_GROUP
 		  FROM TB_QNA
 		  JOIN TB_MEMBER ON(QNA_MEM_NO = MEM_NO)
 		  JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
