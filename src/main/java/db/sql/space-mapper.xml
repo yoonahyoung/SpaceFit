@@ -60,6 +60,8 @@
 		 WHERE SPACE_NO = ?
 	</entry>
 	
+	<!-- admin -->
+	
 	<entry key="insertSpace">
 		INSERT
 		  INTO TB_SPACE
@@ -121,12 +123,24 @@
 		   AND FILE_STATUS = 'Y'
 	</entry>
 	
+	<entry key="updateSpace">
+		UPDATE TB_SPACE
+		   SET SPACE_NAME = ?
+		     , SPACE_LIMIT = ?
+		     , SPACE_INFO = ?
+		     , SPACE_CATEGORY = ?
+		     , SPACE_PIC = ?
+		     , SPACE_PRICE = ?
+		 WHERE SPACE_NO = ?
+	</entry>
+	
 	<entry key="deleteSpace">
 		UPDATE TB_SPACE 
 		   SET SPACE_STATUS = 'N'
 		 WHERE SPACE_NO = ?
 	</entry>
 	
+	<!-- 캘린더 예약 조회용 -->
 	<entry key="selectCalBook">
 		SELECT
 		       BOOK_NO

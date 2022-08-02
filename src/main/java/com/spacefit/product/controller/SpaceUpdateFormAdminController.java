@@ -1,23 +1,27 @@
 package com.spacefit.product.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.spacefit.product.model.service.SpaceService;
+import com.spacefit.product.model.vo.Space;
+
 /**
  * Servlet implementation class SpaceUpdateAdminController
  */
-@WebServlet("/update.sp")
-public class SpaceUpdateAdminController extends HttpServlet {
+@WebServlet("/adUpdateForm.sp")
+public class SpaceUpdateFormAdminController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SpaceUpdateAdminController() {
+    public SpaceUpdateFormAdminController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +30,13 @@ public class SpaceUpdateAdminController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		int spNo = Integer.parseInt(request.getParameter("no"));
+		Space s = new SpaceService().spaceDetailView(spNo);
 		
+		
+		request.setAttribute("s", s);
+		request.getRequestDispatcher("views/admin/space/spaceUpdateManage.jsp").forward(request, response);
 		
 	}
 
