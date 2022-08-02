@@ -155,11 +155,19 @@
 	</entry>
 
 	<entry key="selectDownCoupon">
-		SELECT CP_END_DATE
+		SELECT 
+			   CP_NO
 		     , CP_NAME
 		     , CP_DISCOUNT
+		     , CP_END_DATE
   		  FROM TB_COUPON
  		 WHERE CP_END_DATE IS NOT NULL;
+	</entry>
+
+	<entry key="updateProfile">
+		UPDATE TB_MEMBER
+		   SET MEM_PROFILE = ?
+		 WHERE MEM_ID = ?
 	</entry>
 
 	<entry key="insertCart">
@@ -190,6 +198,20 @@
 		  , ?
 		  , ?
 		  , ?
+		  , ?
+		  )
+	</entry>
+	
+	<entry key="insertLove">
+		INSERT
+		  INTO TB_LOVE
+		  (
+		    SPACE_NO
+		  , MEM_NO
+		  )
+		  VALUES
+		  (
+		    ?
 		  , ?
 		  )
 	</entry>

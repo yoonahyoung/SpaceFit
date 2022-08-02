@@ -365,7 +365,6 @@ public class MemberDao {
 				list.add(new Mcp(rset.getInt("cp_no"),
 								 rset.getString("cp_name"),
 								 rset.getInt("cp_discount"),
-								 rset.getDate("cp_enroll_date"),
 								 rset.getDate("cp_end_date")
 						));
 			}
@@ -381,6 +380,29 @@ public class MemberDao {
 		
 	}
    
+   public int updateProfile(Connection conn, String memProfile, String memId) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateProfile");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memProfile);
+			pstmt.setString(2, memId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
    public int insertCart(Connection conn, Cart cart) {
 	   int result = 0;
 	   PreparedStatement pstmt = null;
@@ -407,6 +429,7 @@ public class MemberDao {
 	}
 	   return result;
    }
+   
    
    
    //---------ADMIN-----------//
