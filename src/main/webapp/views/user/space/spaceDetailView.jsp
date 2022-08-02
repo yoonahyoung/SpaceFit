@@ -473,7 +473,7 @@ body {
                                     <div id="ayBtn" style="text-align:center; margin-top:100px;">
                                         <button type="button" class="btn btn-primary" onclick="formSumbit(1);">바로결제</button>
                                         <button type="button" onclick="formSubmit(2);" class="btn btn-outline-dark">보관함</button>
-                                        <a href="<%=contextPath %>/zzim.sp" class="btn btn-outline-danger">찜하기</a>
+                                        <button type="button" onclick="insertLove();" class="btn btn-outline-danger">찜하기</button>
                                     </div>
                                 </div>
                             </div>
@@ -485,7 +485,7 @@ body {
         </form>
     </main>
     <script>
-    	function formSubmit(num){
+    	function formSubmit(num){ // num이 1일시 결제, num이 2일시 보관함
     		if(num == 1){
     			$("#detailForm").attr("action", "결제페이지");
 	    		$("#detailForm").submit();
@@ -511,9 +511,17 @@ body {
     				
     			})
     		}
-    		
+    	}
+    	
+    	function insertLove(){
+    		$.ajax({
+    			url:'<%=contextPath%>/insert/lo',
+    			data:{no:<%=s.getSpaceNo() %>},
+    			success:
+    		})
     	}
     </script>
+
     <script>
     
 	$(function(){
