@@ -183,10 +183,11 @@ body {
 	                                                <div class="col-lg-6" id="eachRvListHeader">
 	                                                    <h4><%=r.getSpaceName() %></h4>
 	                                                        <span id="commentSpan">
-	                                                            <span class="material-symbols-outlined forum">
-	                                                                forum 
-	                                                            </span>
-	                                                            <a id="showCom">후기댓글보기</a>
+	                                                            <button type="button" id="showCom" class="collapsed"
+	                                                             data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour"
+	                                                             data-value="<%= r.getReviewNo() %>" onclick="commentList(this);">
+		                                                            후기댓글보기
+		                                                         </button>
 	                                                        </span>
 	                                                    <hr>
 	                                                    <div id ="showStars">
@@ -218,7 +219,7 @@ body {
 	                                                    <br>
 	                                                    <div class="rvLikeAndReport">
 	                                                    	<% if (directMemNo == 0) { %>
-	                                                    		<span>테스트테스트</span>
+	                                                    		<button type="button" class="btn btn-primary btn-sm" id="login-btn" onclick="loginForm();">로그인하고 추천!</button>
 	                                                    	<% } else { %>
 		                                                        <button type="button" class="btn btn-primary btn-sm" data-value="<%= r.getReviewNo() %>" onclick="likeUpdate(this);">후기추천</button>
 		                                                        <button type="button" class="btn btn-danger btn-sm">후기신고</button>
@@ -229,7 +230,7 @@ body {
 	                                                </div>
 	                                            </div>
 	                                            <br><br>
-	                                            <div class="commentDiv">
+	                                            <div class="collapse commentDiv" id="flush-collapseFour"  aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
                                                     <div class="parentCommentAll">
                                                         <div class="commentMem row">
                                                             <div class="parentMem col-lg-6">
@@ -325,12 +326,37 @@ body {
 						                    			}
 						                    		})
 				                    		  }
-					                    		
+					                    
+				                       function loginForm(){
+				           	       		location.href="<%=contextPath%>/loginForm.me";
+				           				}
+				                       
+				                       
+				                       function commentList(){
+				                    	   let rvNo = $(e).data("value")
+				                    	   
+				                    	   $.ajax({
+				                    		   url : "<%=contextPath%>/comList.com"
+				                    		   data:{
+				                    			   rvNo : rvNo
+				                    		   },
+				                    		   success:function(result){
+				                    				if(result == "listOk"){
+				            							alert("추천해주셔서 감사합니다!");
+				                    					// 바로 표시되게 하는 걸 못하게씀 ㅜㅜ
+				            						} else {
+				            							// 후기 중복확인
+				            							alert("이미 추천한 후기입니다!");
+				            							}
+				                    			},
+				                    			error:function(){
+				                    				console.log("추천 +1 AJAX 통신 실패");
+				                    			}
+				                    	   })
+				                       }
 				                    	   
 									</script>
-                                    
-                                    
-                                         <!--  ~review보이는 공간~ -->
+                         <!--  ~review보이는 공간~ -->
                                     
                                     
                                     
