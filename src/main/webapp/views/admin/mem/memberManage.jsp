@@ -110,6 +110,8 @@
 	                                	changeSelect();
 	                                })
 	                                
+	                               
+	                                
 								  	function changeSelect(){
 											let orderBy = $("#orderBySel").val();
 											const memListTBody = $("#memListTBody");
@@ -127,15 +129,13 @@
 						       						} else {
 											  			let value = ""
 											  			for(let i = 0; i<memList.length; i++) {
-
-											  				$(function(){
-											  					if(memList[i].memAdmFlag == 65) {
-											  						$("#adminFlag").val("Admin").prop("selected", true);
-											  					} else {
-											  						$("#adminFlag").val("General").prop("selected", true);
-											  					}
-											  				})
-											  				
+											  				 $(function(){
+												  					if( memList[i].memAdmFlag == 'A') {
+												  						$("#adminFlag").val("Admin").attr('selected', 'selected');
+												  					} else {
+												  						$("#adminFlag").val("General").attr('selected', 'selected');
+												  					}
+												  				})
 											  				
 											  				
 											  			value += 
@@ -156,7 +156,7 @@
 					                                       + '     <td>' + memList[i].rptCount + '</td> '
 					                                       + '     <td>' + memList[i].likeCount + '</td> '
 					                                       + '     <td> '  //+ memList[i].memAdmFlag
-					                                       + '		<select id="admFlag"> '
+					                                       + '		<select id="adminFlag">'
 					                                       + '		  <option id ="General" value="General">일반</option> '
 					                                       + '		  <option id ="Admin" value="Admin">관리자</option> '
 					                                       + '		</select> '
@@ -171,6 +171,7 @@
 					                                       + '     <td>' + memList[i].bookCountMonth + '</td> '
 					                                       + '     <td><input type="button" class="btn btn-primary btn-sm" value="상세조회" onclick="location.href=' + '/memDetailView.me?no=' + memList[i].memNo + '"></td> '
 					                                       + '  </tr> '
+					                                       + '<input id="hiddenAdmFlag" type="hidden" value="' + memList[i].memAdmFlag + '">'
 										  					 }
 											  				memListTBody.html(value);
 											  				

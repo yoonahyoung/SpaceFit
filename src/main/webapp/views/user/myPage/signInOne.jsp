@@ -34,7 +34,7 @@
 		                           	<td>
 		                           		<label for="agree">
 		                           			<div class="agreeInput">
-		                           				 <input type="checkbox" name="agree" id="agree1" value="1">
+		                           				 <input type="checkbox" name="agree" id="agree1" value="1" required>
 		                                    	 <span style="font-size:13px;">이용약관 동의<strong>(필수)</strong></span>
 		                           			</div>
 		                                    <div class="agreeBox">
@@ -47,7 +47,7 @@
 		                           	<td>
 		                           		<label for="agree">
 			                            	<div class="agreeInput">
-				                                <input type="checkbox" name="agree" id="agree2" value="2">
+				                                <input type="checkbox" name="agree" id="agree2" value="2" required>
 				                                <span style="font-size:13px;">개인정보 수집, 이용 동의<strong>(필수)</strong></span>
 				                            </div>
 			                                <div class="agreeBox">
@@ -90,7 +90,7 @@
 		                          	<td class="phone">
 		                           		<label for="agree">
 				                            	<div class="agreeInput">
-				                            		  <input type="checkbox" name="phoneAgree" value="3">
+				                            		  <input type="checkbox" name="phoneAgree" value="3" required>
 				                                	  <span style="font-size:13px;">휴대폰 인증 이용약관 동의<strong>(필수)</strong></span>
 				                            	</div>
 												<div class="agreeBox">
@@ -107,7 +107,7 @@
                         	<div class="inputs">
                         		
                         		<label for="#phoneNameCheck" class="signInLabel">이름</label> <span class="memName"  style="text-align:rignt"></span>
-                                <input type="text" placeholder="가입하셨던 이름을 입력해주세요." class="signInInput" id="memName" name="memName" required>
+                                <input type="text" placeholder="가입하실 이름을 입력해주세요." class="signInInput" id="memName" name="memName" required>
                         		<br><br>
                         	
                         		<label for="#phoneIdNo" class="signInLabel">핸드폰번호</label> <span class="pHoneAnswer" style="text-align:rignt"></span>
