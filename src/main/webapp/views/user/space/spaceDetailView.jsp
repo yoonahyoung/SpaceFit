@@ -366,7 +366,7 @@ body {
                                     <div id="ayBtn" style="text-align:center; margin-top:100px;">
                                         <button type="button" class="btn btn-primary" onclick="formSumbit(1);">바로결제</button>
                                         <button type="button" onclick="formSubmit(2);" class="btn btn-outline-dark">보관함</button>
-                                        <button type="button" onclick="insertLove();" class="btn btn-outline-danger">찜하기</button>
+                                        <button type="button" onclick="love();" id="zzim" class="btn btn-outline-danger">찜하기</button>
                                     </div>
                                 </div>
                             </div>
@@ -406,12 +406,33 @@ body {
     		}
     	}
     	
+<<<<<<< HEAD
     	function insertLove(){
     		<%-- $.ajax({
     			url:'<%=contextPath%>/insert/lo',
     			data:{no:<%=s.getSpaceNo() %>},
     			success:
     		}) --%>
+=======
+    	function love(){
+    		if($("#zzim").val().equals('찜하기')){
+				$.ajax({
+					url:'<%=contextPath%>/wish.lo',
+					data:{no:<%=s.getSpaceNo() %>, status:'n'},
+					success:function(e){
+						$("#zzim").val("찜해제");
+					}
+				})
+			}else{
+				$.ajax({
+					url:'<%=contextPath%>/wish.lo',
+					data:{no:<%=s.getSpaceNo() %>, status:'y'},
+					success:function(e){
+						$("#zzim").val("찜하기");
+					}
+				})
+			}
+>>>>>>> 594b87e60f523536e1d848e4df19b365803dfef5
     	}
     </script>
 
