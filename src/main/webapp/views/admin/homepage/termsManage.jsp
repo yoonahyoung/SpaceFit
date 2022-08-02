@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.notice.model.vo.Terms"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +12,10 @@
 	
 	<%@ include file="../common/adminMenubar.jsp" %>
         
+    <%
+   		 ArrayList<Terms> list = (ArrayList<Terms>)request.getAttribute("list");
+    %>
+    
     <div class="outerRv">
     	<div class="container-fluid">
 		<br><br>
@@ -79,39 +83,31 @@
                                       </tr>
                                   </tfoot>
                                   <tbody>
-                                      <tr>
-                                      	<td><input type="radio"></td>
-                                      	  <td>0003</td>
-                                          <td>게시중</td>
-                                          <td>마이페이지 이용약관1</td>
-                                          <td>마이페이지</td>
-                                          <td>98/05/25</td>
-                                          <td>22.07.07</td>
-                                          <td>삭제 요망</td>
-                                          
-                                      </tr>
-                                      <tr>
-                                      	<td><input type="radio"></td>
-                                      	  <td>0002</td>
-                                          <td>게시중</td>
-                                          <td>마이페이지 이용약관1</td>
-                                          <td>마이페이지</td>
-                                          <td>02/11/15</td>
-                                           <td>22.07.07</td>
-                                          <td></td>
-                                          
-                                      </tr>
-                                       <tr>
-                                       	<td><input type="radio"></td>
-                                       	  <td>0001</td>
-                                          <td>게시중</td>
-                                          <td>마이페이지 이용약관1</td>
-                                          <td>마이페이지</td>
-                                          <td>85/09/30</td>
-                                          <td>22.07.07</td>
-                                          <td></td>
-                                          
-                                      </tr>
+                                  
+                                  	<% if(list.isEmpty()){ %>
+                                  	
+                                  		<tr>
+						                    <td colspan="8" align="center">조회 가능한 이용약관이 없습니다.</td>
+						                </tr>
+						                
+                                  	<% }else {%>
+                                  	
+	                                  	<% for(Terms t : list){ %>
+	                                      <tr>
+	                                      	<td><input type="radio"></td>
+	                                      	  <td><%= t.getTermsNo() %></td>
+	                                          <td><%= ( t.getTermsStatus().equals("N") ) ? "보류" : "게시중" %></td>
+	                                          <td><%= t.getTermsTitle() %></td>
+	                                          <td><%= t.getTermsPage() %></td>
+	                                          <td><%= t.getTermsEnrollDate() %></td>
+	                                          <td><%= t.getTermsModifyDate() %></td>
+	                                          <td><%= t.getTermsNote() %></td>
+	                                          
+	                                      </tr>
+	                                    <% } %>
+	                                    
+	                                 <% } %>
+                                      
                                   </tbody>
                               </table>
                           </div>
@@ -149,7 +145,7 @@
 				}
 		    	
 		    	function termsInsertDetailView(){
-		   			location.href="<%=contextPath%>/views/admin/homepage/termsInsertDetailView.jsp";
+		   			location.href="<%=contextPath%>/adTermsInsertDetail.no";
 				}
 		    </script>
 		    

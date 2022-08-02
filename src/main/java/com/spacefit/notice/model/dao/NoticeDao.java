@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.spacefit.common.model.vo.PageInfo;
+import com.spacefit.mem.model.vo.Mcp;
 import com.spacefit.notice.model.vo.Notice;
+import com.spacefit.notice.model.vo.Terms;
 
 public class NoticeDao {
 	private Properties prop = new Properties();
@@ -215,6 +217,71 @@ public class NoticeDao {
 		
 		return listCount;
 		
+	}
+	
+	
+	
+	// -------------------- admin ---------------------- //
+	
+	
+	public ArrayList<Terms> adminTermsList(Connection conn){
+		
+		ArrayList<Terms> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminTermsList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Terms(rset.getInt("terms_no"),
+								   rset.getString("terms_title"),
+								   rset.getString("terms_content"),
+								   rset.getString("terms_status"),
+								   rset.getString("terms_page"),
+								   rset.getString("terms_note"),
+								   rset.getDate("terms_enroll_date"),
+								   rset.getDate("terms_modify_date")
+						));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
+	
+	public int adminInsertTerms(Connection conn, Terms t) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("adminInsertTerms");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, t.getTermsTitle());
+			pstmt.setString(2, t.getTermsContent());
+			pstmt.setString(3, t.getTermsStatus());
+			pstmt.setString(4, t.getTermsPage());
+			pstmt.setString(5, t.getTermsNote());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 	
 }

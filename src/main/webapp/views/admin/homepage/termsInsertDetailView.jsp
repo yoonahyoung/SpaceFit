@@ -16,38 +16,38 @@
         <h1 class="h3 mb-2 text-gray-800" style="color: rgb(20, 18, 18)">약관 등록</h1>
         <br><br><br>
 
-        <form>
+        <form action="<%=contextPath %>/adTermsInsert.no" method="post">
 			<table class="table table-hover" id="dataTable">
 				
 				<tr>
 					<th>약관명</th>
-					<td><input type="text" value=""></td>
+					<td><input type="text" name="termsTitle"></td>
 				</tr>
 				<tr>
 					<th>상태</th>
-					<td><select>
-						  <option>게시중</option>
-						  <option>보류</option>
+					<td><select name="termsStatus">
+						  <option value="Y">게시중</option>
+						  <option value="N">보류</option>
 						</select>
 				 	</td>
 				</tr>
 				<tr>
 					<th>게시영역</th>
-					<td><input type="text" value=""></td>
+					<td><input type="text" name="termsPage"></td>
 				</tr>
 				<tr>
 					<th>약관내용</th>
-					<td><textarea rows="30" cols="90" style="resize:none" required></textarea></td>
+					<td><textarea rows="30" cols="90" style="resize:none" name="termsContent" required></textarea></td>
 				</tr>
 				<tr>
 					<th>비고</th>
-					<td><input type="text" value=""></td>
+					<td><input type="text" name="termsNote"></td>
 				</tr>
 				
 			</table>
 			<br><br>
 			<button type="button" class="btn btn-secondary">취소하기</button>&nbsp;
-			<button type="button" class="btn btn-primary">등록하기</button>
+			<button type="submit" class="btn btn-primary">등록하기</button>
 	        
 		</form>
 		        

@@ -83,4 +83,42 @@
 		  FROM TB_NOTICE
 		 WHERE NT_STATUS = 'Y'
 	</entry>
+	
+	
+	<!-- admin -->
+	
+	<entry key="adminTermsList">
+		SELECT
+		       TERMS_NO
+		     , TERMS_TITLE
+		     , TERMS_CONTENT
+		     , TERMS_STATUS
+		     , TERMS_PAGE
+		     , TERMS_NOTE
+		     , TERMS_ENROLL_DATE
+		     , TERMS_MODIFY_DATE
+		  FROM TB_TERMS
+	</entry>
+	
+	<entry key="adminInsertTerms">
+		INSERT
+		  INTO TB_TERMS
+		      (
+		       TERMS_NO
+		     , TERMS_TITLE
+		     , TERMS_CONTENT
+		     , TERMS_STATUS
+		     , TERMS_PAGE
+		     , TERMS_NOTE
+		      )
+		VALUES
+		     (
+		       SEQ_TENO.NEXTVAL
+		      , ?
+		      , ?
+		      , ?
+		      , ?
+		      , ?
+		      )
+	</entry>
 </properties>
