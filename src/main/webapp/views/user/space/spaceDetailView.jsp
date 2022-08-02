@@ -50,7 +50,7 @@ body {
 	<%@ include file="../common/userMenubar.jsp" %>
 
     <main id="main">
-    <form action="<%=contextPath%>/결제페이지" method="get">
+    <form action="<%=contextPath%>/결제페이지" method="get" id="detailForm">
         <!-- ======= space view ======= -->
         <section class="agent-single">
             <div class="container">
@@ -400,22 +400,22 @@ body {
                                     </select>
                                     <span class="col-sm-4"> 주차  </span>
                                     <select name="parking" required>
-                                        <option value="N">요청하지 않아요</option>
+                                        <option value="N" selected>요청하지 않아요</option>
                                         <option value="Y">요청할게요</option>
                                     </select>
                                     <span class="col-sm-4"> 반려동물  </span>
                                     <select name="animal" required>
-                                        <option value="N">동반하지 않아요</option>
+                                        <option value="N" selected>동반하지 않아요</option>
                                         <option value="Y">동반할게요</option>
                                     </select>
                                     <span class="col-sm-4"> 보면대  </span>
                                     <select name="stand" required>
-                                        <option value="N">필요하지 않아요</option>
+                                        <option value="N" selected>필요하지 않아요</option>
                                         <option value="Y">필요해요</option>
                                     </select>
                                     <span class="col-sm-4"> 미니의자  </span>
                                     <select name="chiar" required>
-                                        <option value="N">필요하지 않아요</option>
+                                        <option value="N" selected>필요하지 않아요</option>
                                         <option value="Y">필요해요</option>
                                     </select>
                                 </div>
@@ -428,8 +428,9 @@ body {
                                     </div>  
                                 </div>
                                 <br><br>
-                                <h5>선택 날짜 : <b id="chDate"><input type="hidden" class="chDate" name="date" value="nill" required></b></h5>
-
+                                <h5>선택 날짜 : <b id="chDate"></b></h5>
+                                <input type="hidden" class="chDate" name="date" required>
+	
                                 <div class="row">
                                     <h4 style="margin-top:40px; border-bottom:2px solid #0D6EFD">시간선택</h4>
                                     <span class="col-sm-4"> 체크인  </span>
@@ -454,13 +455,14 @@ body {
 
                                 <div class="row">
                                     <h4 style="margin-top:40px; border-bottom:2px solid #0D6EFD">총 금액</h4>
-                                    <span class="col-sm-4"><span id="price"><input type="hidden" name="price" class="price" required></span> <b>원</b></span>
+                                    <div><span class="col-sm-4" id="price"> </span><b>원</b></div>
+                                    <input type="hidden" name="price" class="price" required>
                                 </div>
                                 <script>
                                 	$(".detailCO").change(function(){
                                         const pp = $(".detailCO>option:selected").val() - $(".detailCI>option:selected").val();
                                         $("#price").text(pp * <%= s.getSpacePrice() %>);
-                                        $(".price").attr("value", (pp * <%= s.getSpacePrice() %>));
+                                        $(".price").val((pp * <%= s.getSpacePrice() %>));
                                 	})
                                 </script>
                                 
@@ -469,8 +471,8 @@ body {
                                 <!-- limit, parking, animal, stand, chair, date, detailCI, detailCO, price  -->
                                 	<input type="hidden" name="no" value="<%=s.getSpaceNo() %>">
                                     <div id="ayBtn" style="text-align:center; margin-top:100px;">
-                                        <button type="submit" class="btn btn-primary">바로결제</button>
-                                        <button onclick="goCart();" class="btn btn-outline-dark">보관함</button>
+                                        <button type="button" class="btn btn-primary" onclick="formSumbit(1);">바로결제</button>
+                                        <button type="button" onclick="formSubmit(2);" class="btn btn-outline-dark">보관함</button>
                                         <a href="<%=contextPath %>/zzim.sp" class="btn btn-outline-danger">찜하기</a>
                                     </div>
                                 </div>
@@ -483,12 +485,33 @@ body {
         </form>
     </main>
     <script>
-    	function goCart(){
-    		form.action='<%=contextPath %>/cart.sp';
-    		let viewCart = confirm('<%=request.getAttribute("alertMsg") %>');
-    		if(viewCart){
-    			location.href = "<%=contextPath%>/list.ca";
+    	function formSubmit(num){
+    		if(num == 1){
+    			$("#detailForm").attr("action", "결제페이지");
+	    		$("#detailForm").submit();
+    		}else{
+    			$.ajax({
+    				url:'<%=contextPath %>/cart.sp',
+    				data:{no:<%=s.getSpaceNo() %>
+    					, limit:$("select[name=limit]").val()
+    					, parking:$("select[name=parking]").val()
+    					, animal:$("select[name=animal]").val()
+    					, stand:$("select[name=stand]").val()
+    					, chair:$("select[name=chair]").val()
+    					, date:$("input[name=date]").val()
+    					, detailCI:$("select[name=detailCI]").val()
+    					, detailCO:$("select[name=detailCO]").val()
+    					, price:$("input[name=price]").val()
+    					},
+    				success:function(cfMsg){
+    					if(confirm(cfMsg)){
+    						location.href="<%=contextPath%>/views/user/myPage/cartListView.jsp";
+    					}
+    				}
+    				
+    			})
     		}
+    		
     	}
     </script>
     <script>
@@ -508,7 +531,7 @@ body {
 		    dateClick:function(info){
 		    	//console.log(info.dateStr); // 선택한 날짜 2022-08-02
 		    	$("#chDate").html(info.dateStr);
-		    	$(".chDate").attr("value", info.dateStr);
+		    	$(".chDate").val(info.dateStr);
 		    	
 			    	$.ajax({
 			    		url: '<%=contextPath%>/calender.sp',

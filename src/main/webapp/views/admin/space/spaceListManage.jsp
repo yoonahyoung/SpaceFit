@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <title>공간리스트</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/admin/css/spaceManage.css">
 <style>
 
@@ -114,9 +115,9 @@
 		        	
 		        	$(function(){
 		        		$("#studio").selected(function(){
-		        			$("studio")
-		        			$("#practice").attr(display, "none");
-		        			$("#party").attr(display, "none");
+		        			$("#studio").css("display", "block");
+		        			$("#practice").css("display", "none");
+		        			$("#party").css("display", "none");
 		        		})
 		        	})
         		</script>
