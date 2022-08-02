@@ -113,7 +113,7 @@ public class MemberService {
 		}else {
 			rollback(conn);
 		}
-		
+		close(conn);
 		return result;
 	}
    
@@ -126,7 +126,7 @@ public class MemberService {
 		}else {
 			rollback(conn);
 		}
-		
+		close(conn);
 		return result;
 	}
    
@@ -137,6 +137,22 @@ public class MemberService {
 	   return list;
    }
    
+   public Member updateProfile(String memProfile, String memId) {
+	   Connection conn = getConnection();
+		int result = new MemberDao().updateProfile(conn, memProfile, memId);
+		
+		Member updateMem = null;
+		if(result > 0) {
+			commit(conn);
+			updateMem = new MemberDao().selectMember(conn, memId);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		System.out.println(updateMem);
+		
+		return updateMem;
+   }
    
    
     // ----------------------- admin ------------------------- //
@@ -172,7 +188,7 @@ public class MemberService {
 		}else {
 			rollback(conn);
 		}
-		
+		close(conn);
 		return result;
 	}
 	
@@ -185,7 +201,7 @@ public class MemberService {
 		}else {
 			rollback(conn);
 		}
-		
+		close(conn);
 		return result;
 		
 	}
@@ -199,7 +215,7 @@ public class MemberService {
 		}else {
 			rollback(conn);
 		}
-		
+		close(conn);
 		return result;
 	}
 	
@@ -212,7 +228,7 @@ public class MemberService {
 		}else {
 			rollback(conn);
 		}
-		
+		close(conn);
 		return result;
 	}
 }
