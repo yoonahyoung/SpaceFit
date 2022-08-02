@@ -92,15 +92,6 @@ public class QnAInsertController extends HttpServlet {
 				result = new QnAService().insertSecretQnA(q , at);
 			}
 			
-			System.out.println(qnaCategory);
-			System.out.println(spaceNo);
-			System.out.println(title);
-			System.out.println(content);
-			System.out.println(userNo);
-			System.out.println(password);
-			
-			System.out.println(q);
-			
 			if(result > 0) { // 성공했을 경우 => QNA목록페이지
 				
 				session.setAttribute("alertMsg", "성공적으로 문의등록되었습니다!");

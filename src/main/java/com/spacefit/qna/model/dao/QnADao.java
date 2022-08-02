@@ -379,4 +379,35 @@ public class QnADao {
 		return at;
 	
 	}
+	
+	public int isSolved(Connection conn, int qnaNo) {
+		// select문 => ResultSet(숫자한개) => int
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("isSolved");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,  qnaNo);
+			pstmt.setInt(2,  qnaNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt("COUNT");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
 }

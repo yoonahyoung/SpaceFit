@@ -79,14 +79,14 @@
 		<% if (q.getQnaGroup() != 1){ %>
         <a href="<%=contextPath%>/reply.qa?no=<%=q.getQnaNo()%>" class="btn btn-sm btn-primary">답변하기</a> 
 	    <% } %>
-	    <a onclick="history.back();" class="btn btn-sm btn-secondary">목록가기</a>
+	    <a onclick="goQnAList();" class="btn btn-sm btn-secondary">목록가기</a>
     </div>
     <div style="height : 60px"></div>
  </div>
 
 <script>
-    function goQnAlist(){
-        location.href="<%=contextPath%>/list.qa?cpage=1";
+    function goQnAList(){
+        location.href="<%=contextPath%>/adminList.qa?cpage=1";
     }
 </script>
 </body>

@@ -76,7 +76,7 @@
 
     <br>
 	<div align="right">
-	    <a onclick="history.back();" class="btn btn-sm btn-secondary">목록가기</a>
+	    <a onclick="goQnAlist();" class="btn btn-sm btn-secondary">목록가기</a>
     </div>
     <div style="height : 60px"></div>
  </div>
