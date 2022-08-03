@@ -236,9 +236,10 @@ public class Review {
 	private String gradeName;
 	private String spaceName;
 	private int allLikeCount;
+	
 
 	public Review(int reviewNo, int bookNo, String spaceName, String memId, String reviewContent, Date reviewEnrollDdate,
-			Date reviewModifyDate, int reviewStar, String reviewStatus, String gradeName, int allLikeCount) {
+			Date reviewModifyDate, int reviewStar, String reviewStatus, String gradeName, int allLikeCount, String memNo) {
 		super();
 		this.reviewNo = reviewNo;
 		this.bookNo = bookNo;
@@ -251,6 +252,7 @@ public class Review {
 		this.reviewStatus = reviewStatus;
 		this.gradeName = gradeName;
 		this.allLikeCount = allLikeCount;
+		this.memNo = memNo;
 	}
 
 

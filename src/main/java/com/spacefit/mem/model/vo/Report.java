@@ -71,6 +71,16 @@ public class Report {
 		this.rptRefNo = rptRefNo;
 		this.rptDate = rptDate;
 	}
+	
+	
+	
+	public Report(int memNo, int rptMemNo, int rptReasonNo, int rptRefNo) {
+		super();
+		this.memNo = memNo;
+		this.rptMemNo = rptMemNo;
+		this.rptReasonNo = rptReasonNo;
+		this.rptRefNo = rptRefNo;
+	}
 	@Override
 	public String toString() {
 		return "Report [rptNo=" + rptNo + ", memNo=" + memNo + ", rptMemNo=" + rptMemNo + ", rptReasonNo=" + rptReasonNo

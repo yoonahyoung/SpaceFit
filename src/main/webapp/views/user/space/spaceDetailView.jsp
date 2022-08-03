@@ -209,8 +209,7 @@ body {
 		                                                        </div>
 		                                                        <span id="countLike"><span><%=r.getAllLikeCount() %></span>명이 이 후기를 추천했어요!</span><br>
 		                                                    </div>
-		                                                    <textarea id="rvContentDiv">
-		                                                        <%=r.getReviewContent() %>
+		                                                    <textarea id="rvContentDiv"><%=r.getReviewContent() %>
 		                                                    </textarea>
 		                                                </div>
 		                                                <div class="col-lg-3 memInfoDiv">
@@ -229,9 +228,10 @@ body {
 		                                                    		<button type="button" class="btn btn-primary btn-sm" id="login-btn" onclick="loginForm();">로그인하고 추천!</button>
 		                                                    	<% } else { %>
 			                                                        <button type="button" class="btn btn-primary btn-sm" data-value="<%= r.getReviewNo() %>" onclick="likeUpdate(this);">후기추천</button>
-			                                                        <button type="button" class="btn btn-danger btn-sm">후기신고</button>
+			                                                        <button type="button" class="btn btn-danger btn-sm"  data-bs-toggle="modal" data-bs-target="#myModal">후기신고</button>
 			                                                        <input type="hidden" value="<%= directMemNo %>" name="memNo" id="memNo">
 			                                        				<input type="hidden" value="<%= r.getReviewNo() %>" name="rvNo" id="rvNo">
+			                                        				<input type="hidden" value="<%= r.getMemNo() %>" name="rvMemNo" id="rvMemNo">
 			                                        			<% } %>
 		                                                    </div>
 		                                                </div>
@@ -258,6 +258,37 @@ body {
                                                         </div>
 		                                            </div>
 		                                        </div>
+		                                    
+												<!-- The Modal -->
+												<div class="modal" id="myModal">
+												  <div class="modal-dialog">
+												    <div class="modal-content">
+												
+												      <!-- Modal Header -->
+												      <div class="modal-header">
+												        <h4 class="modal-title" >후기 신고하기</h4>
+												      </div>
+													<div class="modal-body">
+												     <% if (directMemNo == 0) { %>
+												     	<br><h5>로그인해야 이용가능한 서비스입니다.</h5><br><br>
+												     	<button type="button" class="btn btn-primary" onclick="location.href='<%=contextPath%>/loginForm.me'">로그인하러가기</button>
+												     <% } else {%>
+														 <!-- Modal body -->
+												        <form method="get" action="form-action.html">
+															<br><h5>신고사유를 선택하세요.</h5><br><br>
+														      <label><input type="radio" name="reportCheck" value="1"> 욕설 및 비방</label><br>
+														      <label><input type="radio" name="reportCheck" value="2"> 성적이고 음란한 대화</label><br>
+														      <label><input type="radio" name="reportCheck" value="3"> 스팸 혹은 금전적요구</label><br><br><br>
+													      	<div>
+													      		<button type="button" class="btn btn-primary" onclick="reportReview();">신고하기</button>
+													      		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+													      	</div>
+													    </form>
+													<% } %>
+													</div>
+												    </div>
+												  </div>
+												</div>
 	                                        	<% } %>
 	                                        	
 	                                        	
@@ -268,7 +299,11 @@ body {
 										
 										
 									</div>
+										
+										
 									
+
+
                          <!--  ~review보이는 공간~ -->
                                     
                                
@@ -552,9 +587,9 @@ body {
         												+		'</span>'
         												+ '</div>'
         												+ '<div class="parentInfo col-lg-6">'
-        												+	'<button type="button" class="comBtn" id="reDelete" onclick="deleteComment(' + comList[i].comNo + ', $(this).parent().parent() ,' + comList[i].rvNo + ');">삭제하기</span>'
-        												+	'<button type="button" class="comBtn" id="reReport">신고하기</span>'
-        												+	'<button type="button" class="comBtn" id="reComment">대댓달기</span>'
+        												+	'<button type="button" class="comBtn" id="reDelete" onclick="deleteComment(' + comList[i].comNo + ', $(this).parent().parent() ,' + comList[i].rvNo + ');">삭제하기</button>'
+        												+	'<button type="button" class="comBtn openBtn" id="reReport">신고하기</button>'
+        												+	'<button type="button" class="comBtn" id="reComment">대댓달기</button>'
         												+	'<input type="hidden" value="' + comList[i].parentNo + '" id="hiddenPno">'
         												+ '</div>'
         												+ '<hr>'
@@ -647,6 +682,37 @@ body {
                 	  
                 	  
                   }
+                  
+                  function reportReview(){
+                	  
+                	  //console.log($("#rvMemNo").val());
+                	  //console.log($("#memNo").val());
+                	  //console.log($("#rvNo").val());
+                	  //console.log($("input:radio[name='reportCheck']:checked").val());
+
+                	  $.ajax({
+      	        		 url:"<%=contextPath%>/reportRv.rv",
+ 				  		 data:{
+ 				  			memNo:$("#memNo").val(),
+ 				  			rptMemNo:$("#rvMemNo").val(),
+ 				  			rptReasonNo:$("input:radio[name='reportCheck']:checked").val(),
+ 				  			rptRefNo:$("#rvNo").val()
+ 				  		 },
+ 				  		 type:"post",
+ 				  		 success:function(result){
+ 				  			 if(result > 0){
+ 				  				 // 신고 성공
+ 				  				 alert("신고완료! 스페이스핏 운영에 도움을 주셔서 감사합니다.");
+ 				  			 } else {
+ 				  				alert("신고실패ㅜㅜ");
+ 				  			 }
+ 				  		 },
+ 				  		 error:function(){
+ 				  			console.log("후기글 신고 ajax 통신 실패");
+ 				  		 }
+ 				  		 
+ 				  	 })
+                  }
      	   
 				</script>
 
@@ -655,7 +721,8 @@ body {
     <%@ include file="../common/userFooter.jsp" %>
 
 </body>
-
+<!-- jquery CDN -->  
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<%= thisPath %>/resources/user/templates/real_estate/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<%= thisPath %>/resources/user/templates/real_estate/assets/vendor/swiper/swiper-bundle.min.js"></script>
 <script src="<%= thisPath %>/resources/user/templates/real_estate/assets/vendor/php-email-form/validate.js"></script>
@@ -664,8 +731,6 @@ body {
 <script src="<%= thisPath %>/resources/user/templates/real_estate/assets/js/main.js"></script>
 
 
-<!-- jquery CDN -->  
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>  

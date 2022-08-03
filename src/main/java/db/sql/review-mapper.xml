@@ -263,6 +263,7 @@
              FROM TB_LIKE L
             WHERE L.RV_NO = R.RV_NO
              )  AS "ALL_LIKE_COUNT"
+             , MEM_NO
 		  FROM TB_REVIEW R
 		  JOIN TB_MEMBER USING (MEM_NO)
 		  JOIN TB_GRADE USING (GR_NO)
@@ -301,7 +302,7 @@
 	     , 1  <!-- 리뷰면 1 댓글이면 2 -->
 	     , ?
 	     , SYSDATE
-	    );
+	    )
 	</entry>
 
 </properties>

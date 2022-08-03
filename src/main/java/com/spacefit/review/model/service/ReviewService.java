@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import com.spacefit.attachment.model.vo.Attachment;
 import com.spacefit.common.model.vo.PageInfo;
+import com.spacefit.mem.model.vo.Report;
 import com.spacefit.review.model.dao.ReviewDao;
 import com.spacefit.review.model.vo.Review;
 
@@ -180,6 +181,18 @@ public class ReviewService {
 		int avgStars = new ReviewDao().selectAvgStars(conn, spNo);
 		close(conn);
 		return avgStars;
+	}
+	
+	public int reportReview(Report rpt) {
+		Connection conn = getConnection();
+		int result = new ReviewDao().reportReview(conn, rpt);
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 	}
 
 }

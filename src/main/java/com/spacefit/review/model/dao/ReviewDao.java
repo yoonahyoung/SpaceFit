@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.spacefit.attachment.model.vo.Attachment;
 import com.spacefit.common.model.vo.PageInfo;
+import com.spacefit.mem.model.vo.Report;
 import com.spacefit.review.model.vo.Review;
 
 /**
@@ -553,7 +554,8 @@ public class ReviewDao {
 							rset.getInt("rv_star"),
 							rset.getString("rv_status"),
 							rset.getString("gr_name"),
-							rset.getInt("all_like_count")
+							rset.getInt("all_like_count"),
+							rset.getString("mem_no")
 						));
 			}
 		} catch (SQLException e) {
@@ -596,6 +598,27 @@ public class ReviewDao {
 		
 	}
 	
+	
+	public int reportReview(Connection conn, Report rpt) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("reportReview");
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, rpt.getMemNo());
+			pstmt.setInt(2, rpt.getRptMemNo());
+			pstmt.setInt(3, rpt.getRptReasonNo());
+			pstmt.setInt(4, rpt.getRptRefNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
 }
