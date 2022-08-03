@@ -21,12 +21,26 @@ public class QnAService {
 		
 		return list;
 	}
+	public ArrayList<QnA> selectQnAListAll(PageInfo pi){
+		Connection conn = getConnection();
+		ArrayList<QnA> list = new QnADao().selectQnAListAll(conn, pi);
+		close(conn);
+		
+		return list;
+	}
 	
 	public int selectListCount() {
 		Connection conn = getConnection();
 		int listCount = new QnADao().selectListCount(conn);
 		close(conn);
 		return listCount;
+	}
+	
+	public ArrayList<Category> selectAllSpaceList( ){
+		Connection conn = getConnection();
+		ArrayList<Category> list = new QnADao().selectAllSpaceList(conn);
+		close(conn);
+		return list;
 	}
 	
 	public ArrayList<Category> selectCategoryList(String spaceCategory){
@@ -140,6 +154,14 @@ public class QnAService {
 		return result;
 	}
 	
+	public String selectSpaceName(String spaceNo) {
+		Connection conn = getConnection();
+		
+		String spaceName = new QnADao().selectSpaceName(conn, spaceNo);
+		close(conn);
+		return spaceName;
+	}
+	
 	public QnA selectQnA(int qnaNo) {
 		Connection conn = getConnection();
 		
@@ -159,5 +181,104 @@ public class QnAService {
 		int result = new QnADao().isSolved(conn, qnaNo);
 		close(conn);
 		return result;
+	}
+	
+	// 전체 전체 전체 선택 미완
+	public ArrayList<QnA> selectQnAList2(PageInfo pi, String isSolved){
+		Connection conn = getConnection();
+		ArrayList<QnA> list = null;
+		if(isSolved.equals("대기")) {//답변대기인경우
+			list = new QnADao().selectQnAList2Wait(conn, pi);
+		}else {//답변완료인경우
+			//ArrayList<QnA> list = new QnADao().selectQnAList16(conn, pi, qnaCategory, spaceCategory, spaceNo);
+		}
+
+		close(conn);
+		
+		return list;
+	}
+	// 전체 전체 선택 전체
+	public ArrayList<QnA> selectQnAList3(PageInfo pi, String spaceNo){
+		Connection conn = getConnection();
+		ArrayList<QnA> list = null;
+		list = new QnADao().selectQnAList3(conn, pi, spaceNo);
+
+		close(conn);
+		
+		return list;
+	}
+	// 전체 선택 전체 전체
+	public ArrayList<QnA> selectQnAList5(PageInfo pi, String spaceCategory){
+		Connection conn = getConnection();
+		ArrayList<QnA> list = null;
+		list = new QnADao().selectQnAList5(conn, pi, spaceCategory);
+
+		close(conn);
+		
+		return list;
+	}
+	// 전체 선택 선택 전체
+	public ArrayList<QnA> selectQnAList7(PageInfo pi, String spaceCategory, String spaceNo){
+		Connection conn = getConnection();
+		ArrayList<QnA> list = null;
+		list = new QnADao().selectQnAList7(conn, pi, spaceCategory, spaceNo);
+
+		close(conn);
+		
+		return list;
+	}
+	// 선택 전체 전체 전체
+	public ArrayList<QnA> selectQnAList9(PageInfo pi, String qnaCategory){
+		Connection conn = getConnection();
+		ArrayList<QnA> list = null;
+		list = new QnADao().selectQnAList9(conn, pi, qnaCategory);
+
+		close(conn);
+		
+		return list;
+	}
+	// 선택 전체 선택 전체
+	public ArrayList<QnA> selectQnAList11(PageInfo pi, String qnaCategory, String spaceNo){
+		Connection conn = getConnection();
+		ArrayList<QnA> list = null;
+		list = new QnADao().selectQnAList11(conn, pi, qnaCategory, spaceNo);
+
+		close(conn);
+		
+		return list;
+	}
+	// 선택 선택 전체 전체
+	public ArrayList<QnA> selectQnAList13(PageInfo pi, String qnaCategory, String spaceCategory){
+		Connection conn = getConnection();
+		ArrayList<QnA> list = null;
+		list = new QnADao().selectQnAList13(conn, pi, qnaCategory, spaceCategory);
+
+		close(conn);
+		
+		return list;
+	}
+	// 선택 선택 선택 전체
+	public ArrayList<QnA> selectQnAList15(PageInfo pi, String qnaCategory, String spaceCategory, String spaceNo){
+		Connection conn = getConnection();
+		ArrayList<QnA> list = null;
+		list = new QnADao().selectQnAList15(conn, pi, qnaCategory, spaceCategory, spaceNo);
+
+		close(conn);
+		
+		return list;
+	}
+	// 선택 선택 선택 선택 미완
+	public ArrayList<QnA> selectQnAList16(PageInfo pi, String qnaCategory, String spaceCategory, String spaceNo, String isSolved){
+		Connection conn = getConnection();
+		ArrayList<QnA> list = null;
+		if(isSolved.equals("대기")) {//답변대기인경우
+			list = new QnADao().selectQnAList16Wait(conn, pi, qnaCategory, spaceCategory, spaceNo);
+		}else {//답변완료인경우
+			//ArrayList<QnA> list = new QnADao().selectQnAList16(conn, pi, qnaCategory, spaceCategory, spaceNo);
+		}
+
+		close(conn);
+		
+		return list;
 	}
 }

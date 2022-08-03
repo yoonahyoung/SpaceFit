@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.spacefit.common.model.vo.PageInfo;
 import com.spacefit.qna.model.service.QnAService;
+import com.spacefit.qna.model.vo.Category;
 import com.spacefit.qna.model.vo.QnA;
 
 /**
@@ -73,17 +74,19 @@ public class AdminQnAListController extends HttpServlet {
 		// 3) 요청처리 (응답페이지에 필요한 데이터를 조회)
 		ArrayList<QnA> list = new QnAService().selectQnAList(pi);
 		
-		for(QnA q : list) {
-			if(q.getSpaceCategory().equals("practice")) {
-				q.setSpaceCategory("연습실");
-			} else if(q.getSpaceCategory().equals("studio")) {
-				q.setSpaceCategory("스튜디오");
-			}else if(q.getSpaceCategory().equals("party")) {
-				q.setSpaceCategory("파티룸");
-			}
-		}
+
 		
 		// 4) 응답뷰 => noticeListView.jsp
+		ArrayList<Category> allList = new QnAService().selectAllSpaceList();
+		ArrayList<Category> partyList = new QnAService().selectCategoryList("party");
+		ArrayList<Category> practiceList = new QnAService().selectCategoryList("practice");
+		ArrayList<Category> studioList = new QnAService().selectCategoryList("studio");
+		
+		request.setAttribute("allList", allList);
+		request.setAttribute("partyList", partyList);
+		request.setAttribute("practiceList", practiceList);
+		request.setAttribute("studioList", studioList);
+		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/admin/qna/qnaListView.jsp").forward(request, response);

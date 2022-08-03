@@ -68,7 +68,7 @@
 </head>
 <body>
 <%@ include file="../common/adminMenubar.jsp" %>
- <div class="outerRv">
+<div class="outerRv">
     <br>
     <h2 align="center">일대일 문의</h2>
     <br><br><br>
@@ -136,7 +136,15 @@
         </div>
     </form>
     <br><br>
+    <div align="center">
+        <h4>
+        <% if(keyword != null){%>
+            <%=keyword%>
+        <%}%>
+        </h4>
+    </div>
 
+    <br><br><br>
     <table class="table" align="center">
         <thead>
             <tr>
@@ -176,25 +184,6 @@
     </table>
 
     <br>
-    <div class="paging-area" align="center">    
-		        
-		<% if(currentPage != 1) { %>
-           <button class="btn btn-sm btn-outline-primary" onclick="location.href='<%=contextPath%>/adminList.no?cpage=<%=currentPage-1%>';">&lt;</button>
-           <% } %>
-		<% for(int p = startPage ; p <= endPage; p++) { %>
-			
-			<% if(p == currentPage) { %>
-				<button class="btn btn-sm btn-outline-primary" disabled><%=p %></button>
-			<% } else { %>
-          			<button class="btn btn-sm btn-outline-primary" onclick="location.href='<%=contextPath%>/adminList.qa?cpage=<%=p%>';"><%= p %></button>
-			<% } %>        
-			 
-		<% } %>
-		<% if(currentPage != maxPage){ %>
-           <button class="btn btn-sm btn-outline-primary" onclick="location.href='<%=contextPath%>/adminList.no?cpage=<%=currentPage+1%>';">&gt;</button>
-           <% } %>
-        
-    </div>
     <div style="height : 60px"></div>
  </div>
      <script>

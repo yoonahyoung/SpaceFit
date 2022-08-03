@@ -40,6 +40,13 @@
 		 WHERE SPACE_CATEGORY = ?
 	</entry>
 	
+	<entry key="selectAllSpaceList">
+		SELECT
+		       SPACE_NO
+		     , SPACE_NAME
+		  FROM TB_SPACE
+	</entry>
+	
 	<entry key="insertPublicQnA">
 	INSERT
 	  INTO TB_QNA 
@@ -60,6 +67,12 @@
 	  , ?
 	  , ?
 	  )
+	</entry>
+	
+	<entry key="selectSpaceName">
+	SELECT SPACE_NAME
+	  FROM TB_SPACE
+	 WHERE SPACE_NO = ?
 	</entry>
 	
 	<entry key="insertSecretQnA">
@@ -235,4 +248,207 @@
 	       OR QNA_REF_NO = ?
 	</entry>
 	
+	<!-- 검색 -->
+    <!-- 전체 전체 전체 전체 -->
+	<entry key="selectQnAListAll">
+	SELECT 
+	        QNA_NO
+	      , QNA_CATEGORY
+	      , SPACE_CATEGORY
+	            , SPACE_NAME
+	      , QNA_TITLE
+	      , MEM_ID
+	      , QNA_COUNT
+	      , QNA_CREATE_DATE
+	   FROM TB_QNA B
+	   JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
+	         JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+	  WHERE B.QNA_STATUS = 'Y'
+	  ORDER 
+	     BY QNA_NO DESC
+	</entry>
+		<!-- 선택 선택 선택 대기 -->
+		<entry key="selectQnAList16Wait">
+		SELECT 
+               QNA_NO
+             , QNA_CATEGORY
+             , SPACE_CATEGORY
+                   , SPACE_NAME
+             , QNA_TITLE
+             , MEM_ID
+             , QNA_COUNT
+             , QNA_CREATE_DATE
+          FROM TB_QNA B
+          JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
+                JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+         WHERE B.QNA_STATUS = 'Y'
+                    AND QNA_CATEGORY = ?
+                    AND SPACE_CATEGORY = ?
+                    AND SPACE_NO = ?
+                    AND QNA_REF_NO IS NULL
+         ORDER 
+            BY QNA_NO DESC
+	</entry>
+	
+	<!-- 전체 전체 전체 대기 미완-->
+	<entry key="selectQnAList2Wait">
+    SELECT 
+           QNA_NO
+         , QNA_CATEGORY
+         , SPACE_CATEGORY
+               , SPACE_NAME
+         , QNA_TITLE
+         , MEM_ID
+         , QNA_COUNT
+         , QNA_CREATE_DATE
+      FROM TB_QNA B
+      JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
+            JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+     WHERE B.QNA_STATUS = 'Y'
+                AND QNA_REF_NO IS NULL
+     ORDER 
+        BY QNA_NO DESC
+	</entry>
+	
+	<!-- 전체 전체 선택 전체-->
+	<entry key="selectQnAList3">
+    SELECT 
+           QNA_NO
+         , QNA_CATEGORY
+         , SPACE_CATEGORY
+               , SPACE_NAME
+         , QNA_TITLE
+         , MEM_ID
+         , QNA_COUNT
+         , QNA_CREATE_DATE
+      FROM TB_QNA B
+      JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
+            JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+     WHERE B.QNA_STATUS = 'Y'
+                AND SPACE_NO = ?
+     ORDER 
+        BY QNA_NO DESC
+	</entry>
+	
+	<!-- 전체 선택 전체 전체-->
+	<entry key="selectQnAList5">
+    SELECT 
+           QNA_NO
+         , QNA_CATEGORY
+         , SPACE_CATEGORY
+               , SPACE_NAME
+         , QNA_TITLE
+         , MEM_ID
+         , QNA_COUNT
+         , QNA_CREATE_DATE
+      FROM TB_QNA B
+      JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
+            JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+     WHERE B.QNA_STATUS = 'Y'
+                AND SPACE_CATEGORY = ?
+     ORDER 
+        BY QNA_NO DESC
+	</entry>
+	
+	<!-- 전체 선택 선택 전체-->
+	<entry key="selectQnAList7">
+    SELECT 
+           QNA_NO
+         , QNA_CATEGORY
+         , SPACE_CATEGORY
+               , SPACE_NAME
+         , QNA_TITLE
+         , MEM_ID
+         , QNA_COUNT
+         , QNA_CREATE_DATE
+      FROM TB_QNA B
+      JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
+            JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+     WHERE B.QNA_STATUS = 'Y'
+                AND SPACE_CATEGORY = ?
+                AND SPACE_NO = ?
+     ORDER 
+        BY QNA_NO DESC
+	</entry>
+	<!-- 선택 전체 전체 전체-->
+	<entry key="selectQnAList9">
+	SELECT 
+	        QNA_NO
+	      , QNA_CATEGORY
+	      , SPACE_CATEGORY
+	            , SPACE_NAME
+	      , QNA_TITLE
+	      , MEM_ID
+	      , QNA_COUNT
+	      , QNA_CREATE_DATE
+	   FROM TB_QNA B
+	   JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
+	         JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+	  WHERE B.QNA_STATUS = 'Y'
+	    AND QNA_CATEGORY = ?
+	  ORDER 
+	     BY QNA_NO DESC
+	</entry>
+	
+	<!-- 선택 전체 선택 전체-->
+	<entry key="selectQnAList11">
+    SELECT 
+           QNA_NO
+         , QNA_CATEGORY
+         , SPACE_CATEGORY
+               , SPACE_NAME
+         , QNA_TITLE
+         , MEM_ID
+         , QNA_COUNT
+         , QNA_CREATE_DATE
+      FROM TB_QNA B
+      JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
+            JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+     WHERE B.QNA_STATUS = 'Y'
+                AND QNA_CATEGORY = ?
+                AND SPACE_NO = ?
+     ORDER 
+        BY QNA_NO DESC
+	</entry>
+	<!-- 선택 선택 전체 전체-->
+	<entry key="selectQnAList13">
+    SELECT 
+           QNA_NO
+         , QNA_CATEGORY
+         , SPACE_CATEGORY
+               , SPACE_NAME
+         , QNA_TITLE
+         , MEM_ID
+         , QNA_COUNT
+         , QNA_CREATE_DATE
+      FROM TB_QNA B
+      JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
+            JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+     WHERE B.QNA_STATUS = 'Y'
+                AND QNA_CATEGORY = ?
+                AND SPACE_CATEGORY = ?
+     ORDER 
+        BY QNA_NO DESC
+	</entry>
+	<!-- 선택 선택 선택 전체-->
+	<entry key="selectQnAList15">
+	SELECT 
+           QNA_NO
+         , QNA_CATEGORY
+         , SPACE_CATEGORY
+               , SPACE_NAME
+         , QNA_TITLE
+         , MEM_ID
+         , QNA_COUNT
+         , QNA_CREATE_DATE
+      FROM TB_QNA B
+      JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
+            JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+     WHERE B.QNA_STATUS = 'Y'
+                AND QNA_CATEGORY = ?
+                AND SPACE_CATEGORY = ?
+                AND SPACE_NO = ?
+     ORDER 
+        BY QNA_NO DESC
+	</entry>
 </properties>
