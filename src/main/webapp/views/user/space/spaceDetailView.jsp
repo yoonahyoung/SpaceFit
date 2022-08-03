@@ -633,7 +633,9 @@ body {
 		 				  			 }
 		 				  		 },
 		 				  		 error:function(){
-		 				  			console.log("댓글삭제 ajax 통신 실패");
+		 				  			 alert("로그인 후 본인 댓글만 삭제할 수 있습니다.")
+		 				  			location.href="<%=contextPath%>/loginForm.me";
+		 				  			//console.log("댓글삭제 ajax 통신 실패");
 		 				  		// 로그인 안하면 삭제가 안되도록 처리 피
 		 				  		 }
 		 				  		 
