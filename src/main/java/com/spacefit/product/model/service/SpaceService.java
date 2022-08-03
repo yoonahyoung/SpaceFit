@@ -18,9 +18,9 @@ import com.spacefit.review.model.vo.Review;
 public class SpaceService {
 	
 	// 공간 리스트 불러오기
-	public ArrayList<Space> selectList(PageInfo pi) {
+	public ArrayList<Space> selectList() {
 		Connection conn = getConnection();
-		ArrayList<Space> list = new SpaceDao().selectList(conn, pi);
+		ArrayList<Space> list = new SpaceDao().selectList(conn);
 		close(conn);
 		return list;
 	}
@@ -39,6 +39,14 @@ public class SpaceService {
 		Space s = new SpaceDao().spaceDetailView(conn, spNo);
 		close(conn);
 		return s;
+	}
+	
+	// 관리자 공간 리스트 불러오기
+	public ArrayList<Space> selectAdminList(PageInfo pi) {
+		Connection conn = getConnection();
+		ArrayList<Space> list = new SpaceDao().selectAdminList(conn, pi);
+		close(conn);
+		return list;
 	}
 	
 	// 관리자 공간 추가

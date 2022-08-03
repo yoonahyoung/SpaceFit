@@ -2,26 +2,18 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<entry key="selectList">
-		SELECT *
-		  FROM(
-		        SELECT ROWNUM RNUM, S.*
-		          FROM(
-		          		SELECT 
-						       SPACE_NO
-						     , SPACE_NAME
-						     , SPACE_LIMIT
-						     , SPACE_CATEGORY
-						     , SPACE_PIC
-						     , SPACE_EN_DATE
-						     , SPACE_PRICE
-						  FROM TB_SPACE
-						 WHERE SPACE_STATUS = 'Y'
-						 ORDER
-							BY SPACE_NO DESC
-		            ) S
-		    )
-		WHERE RNUM BETWEEN ? AND ?
-		
+    	SELECT 
+		       SPACE_NO
+		     , SPACE_NAME
+		     , SPACE_LIMIT
+		     , SPACE_CATEGORY
+		     , SPACE_PIC
+		     , SPACE_EN_DATE
+		     , SPACE_PRICE
+		  FROM TB_SPACE
+		 WHERE SPACE_STATUS = 'Y'
+		 ORDER
+			BY SPACE_NO DESC
 	</entry>
 
 
@@ -69,6 +61,29 @@
 	</entry>
 	
 	<!-- admin -->
+	
+	<entry key="selectAdminList">
+		SELECT *
+		  FROM(
+		        SELECT ROWNUM RNUM, S.*
+		          FROM(
+		          		SELECT 
+						       SPACE_NO
+						     , SPACE_NAME
+						     , SPACE_LIMIT
+						     , SPACE_CATEGORY
+						     , SPACE_PIC
+						     , SPACE_EN_DATE
+						     , SPACE_PRICE
+						  FROM TB_SPACE
+						 WHERE SPACE_STATUS = 'Y'
+						 ORDER
+							BY SPACE_NO DESC
+		            ) S
+		    )
+		WHERE RNUM BETWEEN ? AND ?
+		
+	</entry>
 	
 	<entry key="insertSpace">
 		INSERT

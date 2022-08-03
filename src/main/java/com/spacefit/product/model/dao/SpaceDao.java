@@ -30,7 +30,7 @@ public class SpaceDao {
 		}
 	}
 
-	public ArrayList<Space> selectList(Connection conn, PageInfo pi) {
+	public ArrayList<Space> selectList(Connection conn) {
 		ArrayList<Space> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -38,12 +38,6 @@ public class SpaceDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
-			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
-			int endRow = startRow + pi.getBoardLimit() - 1;
-			
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -125,6 +119,43 @@ public class SpaceDao {
 		}
 		
 		return s;
+	}
+	
+	public ArrayList<Space> selectAdminList(Connection conn, PageInfo pi) {
+		ArrayList<Space> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectAdminList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Space(rset.getInt("space_no"),
+								   rset.getString("space_name"),
+								   rset.getInt("space_limit"),
+								   rset.getString("space_category"),
+								   rset.getString("space_pic"),
+								   rset.getDate("space_en_date"),
+								   rset.getInt("space_price")
+						));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 	public int insertSpace(Connection conn, Space s, ArrayList<Attachment> at) {

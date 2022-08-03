@@ -61,7 +61,7 @@ public class SpaceListAdminController extends HttpServlet {
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
 		
-		ArrayList<Space> list = new SpaceService().selectList(pi);
+		ArrayList<Space> list = new SpaceService().selectAdminList(pi);
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
