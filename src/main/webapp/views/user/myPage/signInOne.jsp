@@ -42,8 +42,8 @@
 		                                   	</div>
 		                            	</label>
 		                           	</td>
-		                           </tr>
-		                           <tr>
+		                        </tr>
+		                        <tr>
 		                           	<td>
 		                           		<label for="agree">
 			                            	<div class="agreeInput">
@@ -55,7 +55,7 @@
 			                                </div>
 		                            	</label>
 		                           	</td>
-		                           </tr>
+		                        </tr>
 		                         
 		                           <!-- 
 			                           <tr>
@@ -72,8 +72,8 @@
 			                           	</td>
 			                           </tr>
 			                        -->
-			                       <tr style="height:20px;"></tr>
-		                           <tr>
+			                    <tr style="height:20px;"></tr>
+		                        <tr>
 		                           	<td class="phone">
 		                           		<div class="phone box">
 				                            <span class="material-icons">
@@ -85,8 +85,9 @@
 				                            </span>
 	                       				 </div>
 		                           	</td>
-		                            <tr style="height:10px;"></tr>
-		                           </tr>
+								</tr>
+		                        <tr style="height:10px;"></tr>
+		                        <tr>
 		                          	<td class="phone">
 		                           		<label for="agree">
 				                            	<div class="agreeInput">
@@ -98,7 +99,7 @@
 				                                </div>
 	                            		</label>
 		                           	</td>
-		                           </tr>
+		                        </tr>
                             </table>
                     	</form>
                     	
@@ -139,10 +140,19 @@
                         	<input type="hidden" name="memPhone" value="" id="memPhoneSubmit">
                         	<input type="hidden" name="memName" value="" id="memNameSubmit">
                         </form>
-          <div style="height : 100px"></div>
-          <%@ include file="../common/userFooter.jsp" %>
-          
+					</div>
+        </div> 
+    </div>
+	<div style="height : 100px"></div>
+	<%@ include file="../common/userFooter.jsp" %>      
 	<!-- 자바스크립트 파일 연동 -->
+	<script>
+	 function signInTwo(){
+			$("#memPhoneSubmit").val($("#memPhone").val())
+			$("#memNameSubmit").val($("#memName").val())
+			$("#phoneForm").submit()
+	}
+	</script>
 	<script type="text/javascript" src="<%=contextPath %>/resources/user/js/member.js"></script>
 </body>
 </html>

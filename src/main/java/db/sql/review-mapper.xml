@@ -278,5 +278,30 @@
 		  FROM TB_REVIEW
 		 WHERE SPACE_NO = ?
 	</entry>
+	
+	<!-- 공간별 평균 별점 올림으로 구하기ㅇ -->
+	<entry key="reportReview">
+	INSERT
+	  INTO TB_REPORT
+	    (
+	       RPT_NO
+	     , MEM_NO
+	     , RPT_MEM_NO
+	     , RPT_REASON_NO
+	     , RPT_REF_CAT
+	     , RPT_REF_NO
+	     , RPT_DATE
+	    )
+	VALUES
+	    (
+	       SEQ_RPTNO.NEXTVAL
+	     , ?
+	     , ?
+	     , ?
+	     , 1  <!-- 리뷰면 1 댓글이면 2 -->
+	     , ?
+	     , SYSDATE
+	    );
+	</entry>
 
 </properties>

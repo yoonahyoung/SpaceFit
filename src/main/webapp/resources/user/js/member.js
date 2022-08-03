@@ -26,7 +26,7 @@ $(function(){
 })
 
 // 회원가입폼 1(SignInOne에서 회원약관 전체선택)
-/*
+
 $(function(){
 	 const agreeChkAll = document.querySelector('input[name=agree_all]');
         agreeChkAll.addEventListener('change', (e) => {
@@ -36,7 +36,7 @@ $(function(){
         }
     });
 })
-*/
+
 // js1-------------------------------------------------------
 
  // ajax로 인증번호 보내고 회원폰번호, 전송된 인증번호 기록
@@ -109,11 +109,7 @@ function checkSms(){
 
 
 // js3------------------------------------------------------- 휴대폰인증 공통메소드
- function signInTwo(){
-		$("#memPhoneSubmit").val($("#memPhone").val())
-		$("#memNameSubmit").val($("#memName").val())
-		$("#phoneForm").submit()
-}
+
 
 
 
@@ -128,36 +124,7 @@ function checkSms(){
 //--------------------------------------------SignInTwo//
 
 // 1. 아이디 중복체크용 js
-function idCheck(){
-				$.ajax({
-					url:"idCheck.me",
-					data:{
-						 memId:$("#memId").val()
-					},
-					success:function(result){ // 넘어오는 데이터를 받으려면 매개변수가 필요함
-						// console.log(result);
-						if(result == "NNNNN"){
-							// 사용 불가일 경우
-							alert("이미 존재하거나 탈퇴한 회원의 아이디입니다.");
-							$("#memId").focus();
-						} else {
-							// 사용 가능일경우
-							if(confirm("멋진 아이디네요! 사용하시겠습니까?")){
-								// 사용하겠다
-								$("#signInForm :submit").removeAttr("disabled");
-								$("#memId").attr("readOnly", true);
-							} else {
-								// 사용하지 않겠다
-								$("#memId").focus();
-							}
-						}
-						
-					},
-					error:function(){
-						console.log("아이디 중복체크용 ajax 통신 실패");
-					}
-				})
-			}
+
 
 
 // 2. 아이디 유효성검사

@@ -272,6 +272,36 @@ span.col-sm-4{
   margin-bottom: 6px;
   border-radius: 10px;
 }
+/*--------------------모달--------------------------*/
+.modal-header{
+	background-color:#0082FF;
+}
+
+.modal-header h4 {
+	font-weight:600;
+	color:white;
+	
+}
+
+.modal-body h5{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    color:#0082FF;
+}
+
+.modal-body div{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-body div button{
+	margin : 10px;
+}
+
+
+
 
 
 /* ------------ END spaceDetailView.jsp --------------- */

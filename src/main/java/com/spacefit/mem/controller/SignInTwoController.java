@@ -1,6 +1,7 @@
 package com.spacefit.mem.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,8 +26,11 @@ public class SignInTwoController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		String memPhone = request.getParameter("memPhone");
+		String memName = request.getParameter("memName");
 		request.setAttribute("memPhone", memPhone);
+		request.setAttribute("memName", memName);
 		request.getRequestDispatcher("views/user/myPage/signInTwo.jsp").forward(request, response);
 	}
 
