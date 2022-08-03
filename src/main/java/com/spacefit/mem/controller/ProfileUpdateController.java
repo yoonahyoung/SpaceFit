@@ -38,7 +38,6 @@ public class ProfileUpdateController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		
 		String memId = ((Member)session.getAttribute("loginUser")).getMemId();
 		
 		int maxSize = 10 * 1024 * 1024;
@@ -50,19 +49,19 @@ public class ProfileUpdateController extends HttpServlet {
 		String filePath = "resources/user/mem_upfiles/";
 		String memProfile = filePath + changeName;	
 		
-		System.out.println(memProfile + memId);
-		
 		Member updateMem = new MemberService().updateProfile(memProfile, memId);
-		
+
 		if(updateMem == null) {
 			
 			session.setAttribute("alertMsg", "프로필 사진 변경에 실패했습니다.");
 			
 		}else {
 			
-			request.setAttribute("originName", originName);
+			//request.setAttribute("memProfile", memProfile);
 			session.setAttribute("alertMsg", "프로필 사진이 변경되었습니다.");
 			session.setAttribute("loginUser", updateMem);
+			
+			System.out.println(memProfile);
 			
 		}
 		

@@ -50,6 +50,7 @@
  		String memPwd = loginUser.getMemPwd();
  		
  		String grName = (String)request.getAttribute("grName");
+ 		String memProfile = loginUser.getMemProfile();
  		
  	%>
   
@@ -58,12 +59,16 @@
     <div align="center">
        <div class="card memUpdateCard">
          <div class="card-body">
-           <form action="<%=contextPath %>/memUpdate.me" method="post" id="mem-update-form">
+           <form action="<%=contextPath %>/memUpdate.me" method="post" id="mem-update-form" enctype="multipart/form-data">
             <br>
             <div align="center">
               <br>
                 <div>
-                    <img src="<%=contextPath %>/resources/user/img/user.png" alt="" style="width:100px;">
+                	<% if(memProfile == null) { %>
+                    	<img src="<%=contextPath %>/resources/user/img/user.png" alt="" style="width:100px;">
+                    <% }else { %>
+                    	<img src="<%=contextPath %>/<%= memProfile %>" alt="" style="width:100px;">
+                    <% } %>
                 </div>
                 <div>
                     <span style="font-size:24px; font-weight: 500;"><%= memId %></span><br>

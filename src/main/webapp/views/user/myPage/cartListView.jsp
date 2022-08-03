@@ -260,7 +260,7 @@
 													if(result2 == null){
 														console.log("조회결과없음");
 													}else{
-														console.log(result2);
+														location.reload();
 													}
 													
 												},
@@ -409,9 +409,9 @@
 						  			<td class="column-2">
 					  					<div>
 					  						<div class="d-flex cartOptionCount">
-						                        <div><button id="modalMin">-</button></div>
+						                        <div><button type="button" id="modalMin">-</button></div>
 						                        <div id="modalLimit">1</div>
-						                        <div><button id="modalPlus">+</button></div>
+						                        <div><button type="button" id="modalPlus">+</button></div>
 					                      	</div>
 					  					</div>
 						  			</td>

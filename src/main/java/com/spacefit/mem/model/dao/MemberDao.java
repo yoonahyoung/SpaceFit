@@ -482,13 +482,13 @@ public class MemberDao {
 	   
 	   try {
 		pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, c.getMemNo());
-		pstmt.setInt(2, c.getSpaceNo());
-		pstmt.setInt(3, c.getCartLimit());
-		pstmt.setString(4, c.getCartParking());
-		pstmt.setString(5, c.getCartAnimal());
-		pstmt.setString(6, c.getCartStand());
-		pstmt.setString(7, c.getCartChair());
+		pstmt.setInt(1, c.getCartLimit());
+		pstmt.setString(2, c.getCartParking());
+		pstmt.setString(3, c.getCartAnimal());
+		pstmt.setString(4, c.getCartStand());
+		pstmt.setString(5, c.getCartChair());
+		pstmt.setInt(6, c.getMemNo());
+		pstmt.setInt(7, c.getSpaceNo());
 		
 		result = pstmt.executeUpdate();
 		
