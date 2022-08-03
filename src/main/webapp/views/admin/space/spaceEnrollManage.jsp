@@ -57,7 +57,6 @@
 					<th>추가사진</th>
                         <td><img id="contentImg1" width="200" height="150" onclick="chooseFile(2);"></td>
                         <td><img id="contentImg2" width="200" height="150" onclick="chooseFile(3);"></td>
-                        <td><img id="contentImg3" width="200" height="150" onclick="chooseFile(4);"></td>
 				</tr>
 			</table>
 			
@@ -66,7 +65,6 @@
                 <input type="file" name="file1" onchange="loadImg(this, 1);" required>
                 <input type="file" name="file2" onchange="loadImg(this, 2);">
                 <input type="file" name="file3" onchange="loadImg(this, 3);">
-                <input type="file" name="file4" onchange="loadImg(this, 4);">
             </div>
 	
 			<script>
@@ -85,7 +83,6 @@
 								case 1: $("#titleImg").attr("src", e.target.result); break;
 								case 2: $("#contentImg1").attr("src", e.target.result); break;
 								case 3: $("#contentImg2").attr("src", e.target.result); break;
-								case 4: $("#contentImg1").attr("src", e.target.result); break;
 							}
 						}
 					}else{ // 파일취소됐을 경우 => 미리보기된 것도 사라지게
@@ -93,7 +90,6 @@
 							case 1: $("#titleImg").attr("src", null); break;
 							case 2: $("#contentImg1").attr("src", null); break;
 							case 3: $("#contentImg2").attr("src", null); break;
-							case 4: $("#contentImg1").attr("src", null); break;
 						}
 					}
 				}

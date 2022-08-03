@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>   
 <%@ page import="com.spacefit.common.model.vo.PageInfo, java.util.ArrayList, com.spacefit.notice.model.vo.FAQ" %>
 <%
-	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<FAQ> list = (ArrayList<FAQ>)request.getAttribute("list");
 	
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();

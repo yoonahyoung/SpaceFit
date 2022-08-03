@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.spacefit.attachment.model.vo.Attachment;
+import com.spacefit.common.model.vo.PageInfo;
 import com.spacefit.mem.model.dao.MemberDao;
 import com.spacefit.product.model.vo.Space;
 import com.spacefit.reservation.model.vo.Book;
@@ -29,7 +30,7 @@ public class SpaceDao {
 		}
 	}
 
-	public ArrayList<Space> selectList(Connection conn) {
+	public ArrayList<Space> selectList(Connection conn, PageInfo pi) {
 		ArrayList<Space> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -37,6 +38,13 @@ public class SpaceDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
@@ -219,6 +227,80 @@ public class SpaceDao {
 		return result;
 	}
 
+	
+	public int updateSpace(Connection conn, Space s) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updateSpace");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, s.getSpaceName());
+			pstmt.setInt(2, s.getSpaceLimit());
+			pstmt.setString(3, s.getSpaceInfo());
+			pstmt.setString(4, s.getSpaceCategory());
+			pstmt.setString(5, s.getSpacePic());
+			pstmt.setInt(6, s.getSpacePrice());
+			pstmt.setInt(7, s.getSpaceNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateFile(Connection conn, Attachment at) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateFile");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, at.getFileOriginName());
+			pstmt.setString(2, at.getFileChangeName());
+			pstmt.setString(3, at.getFilePath());
+			pstmt.setInt(4, at.getFileNo());
+				
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	
+	public int insertNewFile(Connection conn, Attachment at) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertNewFile");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, at.getRefBoardNo());
+			pstmt.setString(2, at.getFileOriginName());
+			pstmt.setString(3, at.getFileChangeName());
+			pstmt.setString(4, at.getFilePath());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+	
+	
+	
+	
+	
 	public ArrayList<Book> selectCalBook(Connection conn, int spNo, String date) {
 		ArrayList<Book> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -248,12 +330,6 @@ public class SpaceDao {
 		}
 		return list;
 	}
-
-	
-	
-	
-	
-	
 
 	
 	

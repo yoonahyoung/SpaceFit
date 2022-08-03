@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.product.model.vo.Space"%>   
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.product.model.vo.Space, com.spacefit.common.model.vo.PageInfo"%>   
 <%
 	ArrayList<Space> list = (ArrayList<Space>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
 %>
 <!DOCTYPE html>
 <html>
@@ -90,13 +95,22 @@
                         </div>
                         <div class="paging-area" align="center">    
 		        
-                            <button class="btn btn-sm btn-outline-primary">&lt;</button>        
-                            <button disabled class="btn btn-sm btn-outline-primary">1</button>        
-                            <button class="btn btn-sm btn-outline-primary">2</button> 
-                            <button class="btn btn-sm btn-outline-primary">3</button>    
-                            <button class="btn btn-sm btn-outline-primary">4</button> 
-                            <button class="btn btn-sm btn-outline-primary">5</button>       
-                            <button class="btn btn-sm btn-outline-primary">&gt;</button>
+                            <% if(currentPage != 1){ %> <!-- 1번 페이지가 아닐 시에 이전페이지 버튼이 생기도록 -->
+				            <button onclick="location.href='<%=contextPath%>/adList.sp?cpage=<%=currentPage-1%>';" class="btn btn-sm btn-outline-primary">&lt;</button>
+							<%} %>
+							
+							<% for(int p=startPage; p<=endPage; p++){ %>
+							
+								<% if(p == currentPage){ %>
+									<button disabled class="btn btn-sm btn-outline-primary"><%= p %></button> <!-- 현재 페이지의 버튼은 비활성화 -->
+								<% }else{ %>
+				            		<button onclick="location.href='<%=contextPath%>/adList.sp?cpage=<%=p%>';"  class="btn btn-sm btn-outline-primary"><%= p %></button>
+				            	<% } %>
+							<%} %>
+							
+							<% if(currentPage != maxPage){ %> <!-- 마지막 페이지가 아닐 시에 다음페이지 버튼이 생기도록 -->
+				            <button onclick="location.href='<%=contextPath%>/adList.sp?cpage=<%=currentPage+1%>';" class="btn btn-sm btn-outline-primary">&gt;</button>
+				            <%} %>
                             
                         </div>
                     </div>
@@ -113,13 +127,13 @@
 		        		})
 		        	})
 		        	
-		        	$(function(){
+		        	/* $(function(){
 		        		$("#studio").selected(function(){
 		        			$("#studio").css("display", "block");
 		        			$("#practice").css("display", "none");
 		        			$("#party").css("display", "none");
 		        		})
-		        	})
+		        	}) */
         		</script>
         
             </div>

@@ -2,18 +2,26 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<entry key="selectList">
-		SELECT 
-		       SPACE_NO
-		     , SPACE_NAME
-		     , SPACE_LIMIT
-		     , SPACE_CATEGORY
-		     , SPACE_PIC
-		     , SPACE_EN_DATE
-		     , SPACE_PRICE
-		  FROM TB_SPACE
-		 WHERE SPACE_STATUS = 'Y'
-		 ORDER
-			BY SPACE_NO DESC
+		SELECT *
+		  FROM(
+		        SELECT ROWNUM RNUM, S.*
+		          FROM(
+		          		SELECT 
+						       SPACE_NO
+						     , SPACE_NAME
+						     , SPACE_LIMIT
+						     , SPACE_CATEGORY
+						     , SPACE_PIC
+						     , SPACE_EN_DATE
+						     , SPACE_PRICE
+						  FROM TB_SPACE
+						 WHERE SPACE_STATUS = 'Y'
+						 ORDER
+							BY SPACE_NO DESC
+		            ) S
+		    )
+		WHERE RNUM BETWEEN ? AND ?
+		
 	</entry>
 
 
@@ -138,6 +146,38 @@
 		UPDATE TB_SPACE 
 		   SET SPACE_STATUS = 'N'
 		 WHERE SPACE_NO = ?
+	</entry>
+	
+	<entry key="updateFile">
+		UPDATE TB_FILE
+		   SET FILE_ORIGIN_NAME = ?
+		     , FILE_CHANGE_NAME = ?
+		     , FILE_PATH = ?
+		 WHERE FILE_NO = ?
+	</entry>
+	
+	<entry key="insertNewFile">
+		INSERT 
+		  INTO TB_FILE
+		  (
+		    FILE_NO
+		  , REF_BNO
+		  , FILE_CATEGORY
+		  , FILE_ORIGIN_NAME
+		  , FILE_CHANGE_NAME
+		  , FILE_PATH
+		  , FILE_UPLOAD_DATE
+		  )
+		  VALUES
+		  (
+		    SEQ_FINO.NEXTVAL
+		  , ?
+		  , 1
+		  , ?
+		  , ?
+		  , ?
+		  , SYSDATE
+  		  )
 	</entry>
 	
 	<!-- 캘린더 예약 조회용 -->

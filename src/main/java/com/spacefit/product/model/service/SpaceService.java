@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.spacefit.attachment.model.vo.Attachment;
+import com.spacefit.common.model.vo.PageInfo;
 import com.spacefit.product.model.dao.SpaceDao;
 import com.spacefit.product.model.vo.Space;
 import com.spacefit.reservation.model.vo.Book;
@@ -17,9 +18,9 @@ import com.spacefit.review.model.vo.Review;
 public class SpaceService {
 	
 	// 공간 리스트 불러오기
-	public ArrayList<Space> selectList() {
+	public ArrayList<Space> selectList(PageInfo pi) {
 		Connection conn = getConnection();
-		ArrayList<Space> list = new SpaceDao().selectList(conn);
+		ArrayList<Space> list = new SpaceDao().selectList(conn, pi);
 		close(conn);
 		return list;
 	}
@@ -68,7 +69,30 @@ public class SpaceService {
 		return list;
 	}
 	
-	
+	// 관리자 공간 수정
+	public int updateSpace(Space s, ArrayList<Attachment> list) {
+		Connection conn = getConnection();
+		int result1 = new SpaceDao().updateSpace(conn, s);
+		
+		int result2 = 1;
+		for(int i=0; i<list.size(); i++) { 			
+			if(!list.isEmpty() && list.get(i).getFileNo() != 0) {
+				// 새로 넘어온 첨부파일 o, 기존의 파일 o
+				result2 = new SpaceDao().updateFile(conn, list.get(i));
+			}else if(!list.isEmpty() && list.get(i).getRefBoardNo() != 0) {
+				// 새로 넘어온 첨부파일 o, 기존의 파일 x
+				result2 = new SpaceDao().insertNewFile(conn, list.get(i));
+			}
+		}
+		
+		if(result1 > 0 && result2 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result1 * result2;
+	}
 
 	// 관리자 공간 삭제
 	public int deleteSpace(int spNo) {
