@@ -52,8 +52,6 @@ public class QnAReplyInsertController extends HttpServlet {
 						//    > 카테고리, 공간번호, 제목, 내용, 로그인한회원번호   => TB_QNA에 INSERT
 			int refNo = Integer.parseInt(multiRequest.getParameter("refNo"));
 			
-			System.out.println("참조글 번호 : " + refNo);
-			
 			String userNo = multiRequest.getParameter("userNo");
 			String spaceNo = multiRequest.getParameter("spaceNo");
 			String qnaCategory = multiRequest.getParameter("qnaCategory");
@@ -97,7 +95,6 @@ public class QnAReplyInsertController extends HttpServlet {
 				result = new QnAService().insertSecretReply(q , at);
 			}
 			
-			System.out.println(q);
 			if(result > 0) { // 성공했을 경우 => QNA목록페이지
 				
 				session.setAttribute("alertMsg", "성공적으로 답변등록되었습니다!");
