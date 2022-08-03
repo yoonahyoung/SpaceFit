@@ -48,7 +48,7 @@
 
                             </div>
                             <div style="width:100px; display:inline-block">
-                                <a type="button" class="btn btn-secondary" href="<%=contextPath%>/adEnroll.sp">글작성</a>
+                                <a type="button" class="btn btn-secondary" href="<%=contextPath%>/adEnroll.fa">글작성</a>
                             </div>
                         </div>
                         </div>

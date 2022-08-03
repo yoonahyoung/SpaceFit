@@ -49,8 +49,7 @@
 			</table>
 			<br><br>
 			<a href="<%=contextPath%>/list.fa?cpage=1" type="button" class="btn btn-secondary">목록가기</a>
-			<a href="<%=contextPath%>/adUpdate.fa?no=<%= f.getFaqNo() %>" type="button" class="btn btn-primary">수정</a>
-	        <a href="<%=contextPath%>/adDelete.fa?no=<%= f.getFaqNo() %>" type="button" class="btn btn-danger">삭제</a>
+			<a href="<%=contextPath%>/adUpdateForm.fa?no=<%= f.getFaqNo() %>" type="button" class="btn btn-primary">수정</a>
 		</form>
 		        
     </div>
