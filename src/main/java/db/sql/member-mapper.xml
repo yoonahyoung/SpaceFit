@@ -271,6 +271,19 @@
 		   AND MEM_NO = ?
 	</entry>
 	
+	<entry key="selectLoveList">
+		SELECT
+		       SPACE_NO
+		     , MEM_NO
+		     , LOVE_DATE
+		     , SPACE_NAME
+		     , SPACE_LIMIT
+		     , SPACE_PIC
+		  FROM TB_LOVE L
+		  JOIN TB_SPACE SP USING(SPACE_NO)
+		 WHERE MEM_NO = ?
+	</entry>
+	
 	<entry key="selectCartUpdateView">
 		SELECT 
 		       MEM_NO
