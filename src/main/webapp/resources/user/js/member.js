@@ -26,7 +26,7 @@ $(function(){
 })
 
 // 회원가입폼 1(SignInOne에서 회원약관 전체선택)
-
+/*
 $(function(){
 	 const agreeChkAll = document.querySelector('input[name=agree_all]');
         agreeChkAll.addEventListener('change', (e) => {
@@ -36,7 +36,7 @@ $(function(){
         }
     });
 })
-
+*/
 // js1-------------------------------------------------------
 
  // ajax로 인증번호 보내고 회원폰번호, 전송된 인증번호 기록

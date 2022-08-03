@@ -146,7 +146,7 @@
 					                                       + '     <td>' + memList[i].memName + '</td> '
 					                                       + '     <td>' + memList[i].memPhone + '</td> '
 					                                       + '     <td> '
-					                                       + '     	<select> '
+					                                       + '     	<select> ' // 반복문을 여기서 끊어가면서 돌린다
 					                                       + '		  <option selected>' + memList[i].grName + '</option> '
 					                                       + '		  <option>Basic</option> '
 					                                       + '		  <option>Silver</option> '

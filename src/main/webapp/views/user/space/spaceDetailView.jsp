@@ -191,7 +191,7 @@ body {
 		                                                        <span id="commentSpan">
 		                                                            <button type="button" id="showCom" class="collapsed"
 		                                                             data-bs-toggle="collapse" data-bs-target="#flush-collapse<%= r.getReviewNo() %>" aria-expanded="false" aria-controls="flush-collapse<%= r.getReviewNo() %>"
-		                                                              onclick="commentList(<%= r.getReviewNo() %>);">
+		                                                              onclick="commentList(<%= r.getReviewNo() %>, $(this).parents('.eachRvList').find('.parentCommentAll'));">
 			                                                            후기댓글보기
 			                                                            <input type="hidden" id="rvNo" value="<%=r.getReviewNo()%>">
 			                                                         </button>
@@ -250,7 +250,7 @@ body {
 	                                                                     <% } else { %>
 	                                                                     	<th id="justText">댓글작성</th>
 	                                                                        <th><textarea rows="3" cols="50" style="resize:none;" id="comContent"></textarea></th>
-	                                                                        <td><button class="btn btn-primary" type="button" onclick="insertComment();" >댓글등록</button></td>
+	                                                                        <td><button class="btn btn-primary" type="button" onclick="insertComment(<%= r.getReviewNo() %>, $(this).parents('#writeComment').prev(),  $(this).parent().prev().children().val());" >댓글등록</button></td>
 	                                                                     <% } %>
                                                                     </tr>
                                                                 </thead>
@@ -522,8 +522,8 @@ body {
 }
         
         
-        function commentList(e){
-     	   const commentDiv = $(window.event.target).parents(".eachRvList").find(".parentCommentAll");
+        function commentList(e, commentDiv){
+     	   //const commentDiv = $(window.event.target).parents(".eachRvList").find(".parentCommentAll");
      	   console.log(commentDiv);
      	   $.ajax({
      		   url : "<%=contextPath%>/comList.com",
@@ -577,21 +577,23 @@ body {
                   }
                   
                   // 대댓달기라는 버튼을 눌렀을때만 그 댓글의 hiddenPno를 가져오고, 대댓달기를 누르지 않으면 0이 되도록
-					// 그럼 대댓을 생각하지 말고 일단 댓글만 생각해보자				                       
-                  function insertComment(){
-     	        	 $.ajax({
+					// 그럼 대댓을 생각하지 말고 일단 댓글만 생각해보자	
+					
+                  function insertComment(e, commentDiv, comContent){
+                	  // 주번째 댓글에 대한 컨텐츠도 가져오기 //계층형시 스타트위드
+                	   $.ajax({
      	        		 url:"<%=contextPath%>/coInsert.com",
 				  		 data:{
-				  			 comContent:$("#comContent").val(),
+				  			 comContent:comContent,
 				  			 memNo:$("#memNo").val(),
-				  			 rvNo:$("#rvNo").val()
+				  			 rvNo:e
 				  		 },
 				  		 type:"post",
 				  		 success:function(result){
 				  			 if(result > 0){
 				  				 // 댓글작성 성공
 				  				 // => 내가 작성한 댓글이 보여지기 위해서는 갱신된 댓글리스트 조회필요
-				  				 commentList(rvNo);
+				  				 commentList(e, commentDiv);
 				  				 $("#comContent").val(""); //textarea 초기회
 				  			 }
 				  		 },
