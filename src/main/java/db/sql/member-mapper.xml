@@ -217,6 +217,7 @@
 		     , CART_PRICE
 		     , SPACE_NAME
 		     , SPACE_LIMIT
+		     , SPACE_PIC
 		  FROM TB_CART
 		  JOIN TB_SPACE USING(SPACE_NO)
 		 WHERE MEM_NO = ?

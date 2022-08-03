@@ -459,7 +459,8 @@ public class MemberDao {
 							rset.getString("cart_chair"),
 							rset.getInt("cart_price"),
 							rset.getString("space_name"),
-							rset.getInt("space_limit")
+							rset.getInt("space_limit"),
+							rset.getString("space_pic")
 						));
 			}
 			

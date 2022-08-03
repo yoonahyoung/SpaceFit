@@ -73,7 +73,7 @@
 											<tr class="table_row">
 												<td class="column-1">
 													<div class="how-itemcart1" align="center">
-														<img src="<%=contextPath%>/resources/user/img/파티룸.jpeg" alt="IMG">
+														<img src="<%=contextPath%>/<%= c.getSpacePic() %>" alt="IMG" width="55px;" height="55px;">
 													</div>
 												</td>
 												<td class="column-2"><%= c.getSpaceName() %></td>
@@ -98,46 +98,17 @@
 						</form>
 							
 						<script>
-						
 							
-							$('#cartModal').on('shown.bs.modal', function (e) {
+							/*
+							function empty(){
 								
-								var form = document.createElement('form');
-								form.action = '<%=contextPath %>/cartUpdateView.me';
-								form.method = 'post';
-
-								document.body.append(form);
-
-								form.submit();
-								
-							});
-							
-							function modal(){
-								
-								var form = document.createElement('form');
-								form.action = '<%=contextPath %>/cartUpdateView.me';
-								form.method = 'post';
-
-								document.body.append(form);
-
-								form.submit();
-								
+								if(list.isEmpty()){
+									alert("변경 가능한 상품이 없습니다.");
+									
+									$("#cartModal").modal('hide');
+								}
 							}
-							
-							
-							
-							function updateView(){
-								let form = document.createElement('form');
-								form.action = '<%=contextPath %>/cartUpdateView.me';
-								form.method = 'post';
-
-								document.body.append(form);
-
-								form.submit();
-								
-								$('#cartModal').modal('show');
-							}
-							
+							*/
 							
 							$("input:radio[name=cart-radio]").click(function(){
 								
@@ -158,11 +129,8 @@
 								
 								$.ajax({
 								url:"<%=contextPath%>/cartUpdateView.me",
-								async:false,
 								data:{spaceName:spaceName},
 								success:function(result){
-									
-									console.log(result); 
 									
 									if(result == null){
 										console.log("조회결과없음");
@@ -172,19 +140,76 @@
 										$("#modalPrice").text(result.cartPrice + "원");
 										$("#modalLimit").text(result.cartLimit);
 										$("#modalDate").val(result.cartDate + " " + result.cartIn + "~" + result.cartOut);
+										$("#modalPic").attr("src", "<%=contextPath%>/" + result.spacePic);
 										
-										const cartParking = $.trim(result.cartParking);
-										const cartStand = $.trim(result.cartStand);
+										let cartParking = $.trim(result.cartParking);
+										let cartAnimal = $.trim(result.cartAnimal);
+										let cartStand = $.trim(result.cartStand);
+										let cartChair = $.trim(result.cartChair);
 										
-										if(cartParking == "N"){
+										// ajax 결과값으로 선택된 옵션이 미리 보여짐
+										if(cartParking.includes("N")){
 											$("#optParking").css("display", "none");
 										}
 										
-										if(cartStand == "N"){
+										if(cartAnimal.includes("N")){
+											$("#optAnimal").css("display", "none");
+										}
+										
+										if(cartStand.includes("N")){
 											$("#optStand").css("display", "none");
 										}
 										
+										if(cartChair.includes("N")){
+											$("#optChair").css("display", "none");
+										}
 										
+										// select option 선택시 선택된 옵션으로 보여짐
+										$("#optSelect").change(function(){
+											let value = $("#optSelect option:selected").val();
+											
+											if(value == "parking"){
+												$("#optParking").css("display", "block");
+												cartParking = "Y";
+											}
+											
+											if(value == "animal"){
+												$("#optAnimal").css("display", "block");
+												cartAnimal = "Y";
+											}
+											
+											if(value == "stand"){
+												$("#optStand").css("display", "block");
+												cartStand = "Y";
+											}
+											
+											if(value == "chair"){
+												$("#optChair").css("display", "block");
+												cartChair = "Y";
+											}
+										});
+										
+										// x 버튼 클릭시 선택된 옵션에서 삭제됨
+										$('#btnParking').click(function(){
+											$("#optParking").css("display", "none");
+											cartParking = "N";
+										});
+										
+										$('#btnAnimal').click(function(){
+											$("#optAnimal").css("display", "none");
+											cartAnimal = "N";
+										});
+										
+										$('#btnStand').click(function(){
+											$("#optStand").css("display", "none");
+											cartStand = "N";
+										});
+										
+										$('#btnChair').click(function(){
+											$("#optChair").css("display", "none");
+											cartChair = "N";
+										});
+									
 									}
 								},
 								error:function(){
@@ -292,7 +317,7 @@
                          class="d-block rounded"
                          height="80"
                          width="80"
-                         id="uploadedAvatar"
+                         id="modalPic"
                        />
                        <div>
 					  <p style="font-size:18px; color:black;" id="modalName">파티룸 C</p>
@@ -306,15 +331,17 @@
 	       		</div><br>
 	       		<p style="font-weight:550; font-size:16px; margin-bottom:13px;">* 선택 가능 옵션</p>
 	       		<div>
-		          <select name="" id="" style="font-family:inherit; width:300px; height:35px;">
-		            <option value="">주차 이용</option>
-		            <option value="">반려동물 동반</option>
-		            <option value="">보면대</option>
-		            <option value="">미니의자</option>
+		          <select name="optSelect" id="optSelect" style="font-family:inherit; width:300px; height:35px;">
+		          	<option value="">선택안함</option>
+		            <option value="parking">주차 이용</option>
+		            <option value="animal">반려동물 동반</option>
+		            <option value="stand">보면대</option>
+		            <option value="chair">미니의자</option>
 		          </select>
 		        </div>
 	       		<br>
 	       		<p style="font-weight:550; font-size:16px; margin-bottom:13px;">* 선택된 옵션</p>
+	    
 	       			<div class="cartOptionDiv">
 					  	<table class="cartOptionTable" style="width:415px; height:55px;">
 						  		<tr class="table_row">
@@ -334,43 +361,46 @@
 						  		</tr>
 					  	 </table>
 					  </div>
-					  
-					  <div class="cartOptionDiv">
-					  
+					  <div class="cartOptionDiv" id="optParking">
 					  	<table class="" style="width:415px; height:55px;">
-					  			
-						  		<tr class="table_row" id="optParking">
+						  		<tr class="table_row">
 						  			<td><div style="width:10px;"></div></td>
 						  			<td class="column-2" style="text-align:left; color:black;">주차 이용</td>
 						  			<td><div style="width:25px;"></div></td>
-						  			<td class="column-4"><button type="button"><img src="<%= contextPath %>/resources/user/img/cartDelete.png" alt="" style="width:15px; margin-left:25px;"></button></td>
+						  			<td class="column-4 optBtn"><button type="button" id="btnParking" value="parking"><img src="<%= contextPath %>/resources/user/img/cartDelete.png" alt="" style="width:15px; margin-left:25px;"></button></td>
 						  		</tr>
 					  	</table>
+				  	</div>
+				  	 <div class="cartOptionDiv" id="optAnimal">
 					  	<table class="" style="width:415px; height:55px;">
-					  		<tr class="table_row" id="optAnimal">
-						  			<td><div style="width:10px;"></div></td>
+						  		<tr class="table_row">
+						  			<td><div style="width:11px;"></div></td>
 						  			<td class="column-2" style="text-align:left; color:black;">반려동물 동반</td>
-						  			<td><div style="width:25px;"></div></td>
-						  			<td class="column-4"><button type="button"><img src="<%= contextPath %>/resources/user/img/cartDelete.png" alt="" style="width:15px; margin-left:25px;"></button></td>
-					  		</tr>
-					  	</table>
-					  	<table class="" style="width:415px; height:55px;" id="optStand">
-					  		<tr class="table_row" id="optAnimal">
-						  			<td><div style="width:10px;"></div></td>
-						  			<td class="column-2" style="text-align:left; color:black;">보면대 사용</td>
-						  			<td><div style="width:25px;"></div></td>
-						  			<td class="column-4"><button type="button"><img src="<%= contextPath %>/resources/user/img/cartDelete.png" alt="" style="width:15px; margin-left:25px;"></button></td>
-					  		</tr>
-					  	</table>
-					  	<table class="" style="width:415px; height:55px;">
-					  		<tr class="table_row" id="optAnimal">
-						  			<td><div style="width:10px;"></div></td>
-						  			<td class="column-2" style="text-align:left; color:black;">미니의자 사용</td>
-						  			<td><div style="width:25px;"></div></td>
-						  			<td class="column-4"><button type="button"><img src="<%= contextPath %>/resources/user/img/cartDelete.png" alt="" style="width:15px; margin-left:25px;"></button></td>
-					  		</tr>
+						  			<td class="column-4 optBtn"><button type="button" id="btnAnimal" value="animal"><img src="<%= contextPath %>/resources/user/img/cartDelete.png" alt="" style="width:15px; margin-left:25px;"></button></td>
+						  		</tr>
 					  	</table>
 				  	</div>
+				  	<div class="cartOptionDiv" id="optStand">
+					  	<table class="" style="width:415px; height:55px;">
+						  		<tr class="table_row" id="">
+						  			<td><div style="width:9px;"></div></td>
+						  			<td class="column-2" style="text-align:left; color:black;">보면대 사용</td>
+						  			<td><div style="width:0px;"></div></td>
+						  			<td class="column-4 optBtn"><button type="button" id="btnStand"><img src="<%= contextPath %>/resources/user/img/cartDelete.png" alt="" style="width:15px; margin-left:15px;"></button></td>
+						  		</tr>
+					  	</table>
+				  	</div>
+				  	<div class="cartOptionDiv" id="optChair">
+					  	<table class="" style="width:415px; height:55px;">
+						  		<tr class="table_row" id="">
+						  			<td><div style="width:11px;"></div></td>
+						  			<td class="column-2" style="text-align:left; color:black;">미니의자 사용</td>
+						  			<td class="column-4 optBtn"><button type="button" id="btnChair"><img src="<%= contextPath %>/resources/user/img/cartDelete.png" alt="" style="width:15px; margin-left:25px;"></button></td>
+						  		</tr>
+					  	</table>
+				  	</div>
+				  	
+				  	<p style="font-size:12px;" class="text-muted">&nbsp; 선택된 옵션이 보이지 않을시 새로고침 해주세요.</p>
 		      	</div>
 	      
 	      <div class="modal-footer">

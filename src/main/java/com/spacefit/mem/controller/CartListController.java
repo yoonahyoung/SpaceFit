@@ -38,13 +38,16 @@ public class CartListController extends HttpServlet {
 		ArrayList<Cart> list = new MemberService().selectCartList(memNo);
 		
 		if(list.isEmpty()) {
-			System.out.println(memNo);
+			
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("views/user/myPage/cartListView.jsp").forward(request, response);
+			
 		}else {
+			
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("views/user/myPage/cartListView.jsp").forward(request, response);
 		}
+		
 		
 		
 	}
