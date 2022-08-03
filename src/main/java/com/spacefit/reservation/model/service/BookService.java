@@ -71,22 +71,21 @@ public class BookService {
 	/*
 	 * 관리자용
 	 */
-	
-	// 예약내역 리스트 -- 임시 지워질지모름
-	/*
-	public ArrayList<Book> adminSelectBookList(String category){
+		
+	// 예약내역리스트
+	public ArrayList<Book> searchSelectBook(String search, String booktype, String bookOrderBy, PageInfo pi){
 		Connection conn = getConnection();
-		ArrayList<Book> list = new BookDao().adminSelectBookList(conn, category);
+		ArrayList<Book> list = new BookDao().searchSelectBook(conn, search, booktype, bookOrderBy, pi);
 		close(conn);
 		return list;
 	}
-	*/
-	// 예약내역리스트
-	public ArrayList<Book> searchSelectBook(String search, String booktype, String bookOrderBy){
+	
+	// 내역리스트 listCount
+	public int selectAdminBookListCount(String booktype, String search) {
 		Connection conn = getConnection();
-		ArrayList<Book> list = new BookDao().searchSelectBook(conn, search, booktype, bookOrderBy);
+		int listCount = new BookDao().selectAdminBookListCount(conn, booktype, search);
 		close(conn);
-		return list;
+		return listCount;
 	}
 	
 	// 이번달 예약건수

@@ -177,8 +177,8 @@
 	<entry key="selectListCount">
 		SELECT COUNT(*) AS "COUNT"
 		  FROM TB_REVIEW
-		  WHERE RV_STATUS = 'Y'
-		    AND MEM_NO = ?
+		 WHERE RV_STATUS = 'Y'
+		   AND MEM_NO = ?
 	</entry>
 
 	

@@ -98,25 +98,43 @@
 	</entry>
 	
 	<!-- 관리자페이지 예약리스트 -->
-	<entry key="adminSelectBookList">
-		SELECT  BOOK_NO
-		      , SPACE_NAME		      
-              , MEM_ID
-              , BOOK_COUNT
-		      , BOOK_DATE
-		      , BOOK_IN
-		      , BOOK_OUT
-		      , BOOK_PRICE  
-              , BOOK_NAME
-		      , BOOK_PHONE
-		      , BOOK_EMAIL
-              , BOOK_CAR
-		      , BOOK_ANIMAL
-		      , BOOK_CHAIR
-		      , BOOK_STAND  
-		   FROM VW_BOOK
-		  		  
+	<entry key="adminSelectBookList1">
+		 SELECT *
+		   FROM (  
+			     SELECT ROWNUM RNUM, A.*
+			       FROM (
+			            	SELECT BOOK_NO
+	                             , SPACE_NAME		      
+                                 , MEM_ID
+                                 , BOOK_COUNT
+                                 , BOOK_DATE
+                                 , BOOK_IN
+                                 , BOOK_OUT
+                                 , BOOK_PRICE  
+                                 , BOOK_NAME
+                                 , BOOK_PHONE
+                                 , BOOK_EMAIL
+                                 , BOOK_CAR
+                                 , BOOK_ANIMAL
+                                 , BOOK_CHAIR
+                                 , BOOK_STAND  
+	                          FROM VW_BOOK	  		  
   
+	</entry>
+	
+	<entry key="adminSelectBookList2">
+		
+							 ) A
+						 )     
+		 WHERE RNUM BETWEEN ? AND ?	
+	
+	</entry>
+	
+	
+	<!-- 관리자용 listCount -->
+	<entry key="selectAdminBookListCount">
+		SELECT COUNT(*) AS "COUNT"
+		  FROM VW_BOOK
 	</entry>
 	
 	<!-- 예약통계 이번달건수 -->

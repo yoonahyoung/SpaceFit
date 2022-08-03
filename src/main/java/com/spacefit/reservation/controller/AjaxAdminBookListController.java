@@ -2,6 +2,7 @@ package com.spacefit.reservation.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -68,12 +69,31 @@ public class AjaxAdminBookListController extends HttpServlet {
 			
 		//System.out.println(search + booktype + bookOrderBy);
 		
-		ArrayList<Book> list = new BookService().searchSelectBook(search,booktype, bookOrderBy);
+		// ajax 페이징처리
+		int listCount = new BookService().selectAdminBookListCount(booktype, search);
+		int currentPage = Integer.parseInt( request.getParameter("cpage"));
+		int pageLimit = 5;
+		int boardLimit = 15;
+		int maxPage = (int)Math.ceil((double)listCount / boardLimit);
+		int startPage = (currentPage-1) / pageLimit * pageLimit + 1;
+		int endPage = startPage + pageLimit -1;
+		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		
+		ArrayList<Book> list = new BookService().searchSelectBook(search,booktype, bookOrderBy, pi);
 		
 		//System.out.println(list);
+		
+		HashMap<String, Object> hm = new HashMap<>();
+		hm.put("list", list);
+		hm.put("pi", pi);
 
 		response.setContentType("application/json; charset=UTF-8");
-		new Gson().toJson(list, response.getWriter());
+		new Gson().toJson(hm, response.getWriter());
 		
 			
 			

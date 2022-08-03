@@ -75,7 +75,7 @@ public class BookDao {
 			close(pstmt);
 		}
 		
-		System.out.println(list);
+		//System.out.println(list);
 		return list;
 	}
 	
@@ -238,18 +238,25 @@ public class BookDao {
 	 * @param bookOrderBy 예약번호순 | 대여날짜순
 	 * @return
 	 */
-	public ArrayList<Book> searchSelectBook(Connection conn, String search, String booktype, String bookOrderBy){
+	public ArrayList<Book> searchSelectBook(Connection conn, String search, String booktype, String bookOrderBy, PageInfo pi){
 		// select문 => ResultSet => ArrayList<Book>
 		ArrayList<Book> list = new ArrayList<>();
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("adminSelectBookList");
+		String sql = prop.getProperty("adminSelectBookList1");
 		sql += booktype; // 이용완료/예약취소/예약확정
 		sql += search;   // 검색
 		sql += bookOrderBy; // 정렬
+		sql += prop.getProperty("adminSelectBookList2");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() -1 ) * pi.getBoardLimit() +1;
+			int endRow = startRow + pi.getBoardLimit() -1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -281,6 +288,39 @@ public class BookDao {
 		
 	}
 	
+	public int selectAdminBookListCount(Connection conn, String booktype, String search) {
+		// select => ResurtSet(int)
+		int listCount = 0;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectAdminBookListCount");
+		sql += booktype;
+		sql += search;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("count");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+		
+		
+	}
+	
+	
+	/** 한달간 유효한 예약건수
+	 * @param conn
+	 * @return
+	 */
 	public int selectMonthCount(Connection conn) {
 		// select => ResultSet(int)
 		int thisMonth = 0;

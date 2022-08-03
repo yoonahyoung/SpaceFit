@@ -47,19 +47,7 @@
 
                
         <div class="rvlv1-footer" align="center">  
-             
-                        
-           <!--<div class="paging-area" align="center">    
-        
-                <button class="btn btn-sm btn-outline-primary" >&lt;</button>        
-                <button disabled class="btn btn-sm btn-outline-primary" onclick='selectBookList(1);'>1</button>        
-                <button class="btn btn-sm btn-outline-primary">2</button> 
-                <button class="btn btn-sm btn-outline-primary">3</button>  
-                <button class="btn btn-sm btn-outline-primary">4</button>     
-                <button class="btn btn-sm btn-outline-primary">5</button>             
-                <button class="btn btn-sm btn-outline-primary">&gt;</button>
-                
-            </div>--> 
+           <!-- 페이징 자리--> 
         </div>
         
                 
@@ -141,9 +129,9 @@
 	        				   
 	        		   			if(p == pi.currentPage) { 
 	        				   			pageValue += "<button class='btn btn-sm btn-outline-primary' disabled>"  + p  + "</button>"
-	        				   		} else {
+	        				   	}else {
 	        				   			pageValue += "<button class='btn btn-sm btn-outline-primary' onclick='selectBookList(" + p +")'>" + p + "</button>"
-	        		           		} 
+	        		           	} 
 	        		         }     
 	                 
 	        		         if(pi.currentPage != pi.maxPage) {
