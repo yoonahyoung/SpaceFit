@@ -129,13 +129,15 @@
 						       						} else {
 											  			let value = ""
 											  			for(let i = 0; i<memList.length; i++) {
-											  				 $(function(){
+											  				/* $(function(){
 												  					if( memList[i].memAdmFlag == 'A') {
 												  						$("#adminFlag").val("Admin").attr('selected', 'selected');
 												  					} else {
 												  						$("#adminFlag").val("General").attr('selected', 'selected');
 												  					}
-												  				})
+												  				}) */
+												  		let grNameSel = memList[i].memGrName;
+											  			
 											  				
 											  				
 											  			value += 
@@ -147,10 +149,10 @@
 					                                       + '     <td>' + memList[i].memPhone + '</td> '
 					                                       + '     <td> '
 					                                       + '     	<select> ' // 반복문을 여기서 끊어가면서 돌린다
-					                                       + '		  <option selected>' + memList[i].grName + '</option> '
-					                                       + '		  <option>Basic</option> '
-					                                       + '		  <option>Silver</option> '
-					                                       + '		  <option>Gold</option> '
+					                                     //  + '		  <option selected>' + memList[i].grName + '</option> '
+					                                       + '		  <option id="grNameSel" value="Basic" Basic.equals(grNameSel).selected>Basic</option> '
+					                                       + '		  <option id="grNameSel" value="Silver">Silver</option> '
+					                                       + '		  <option id="grNameSel" value="Gold">Gold</option> '
 					                                       + '		</select> '
 					                                       + '     </td> '
 					                                       + '     <td>' + memList[i].rptCount + '</td> '
@@ -174,6 +176,7 @@
 					                                       + '<input id="hiddenAdmFlag" type="hidden" value="' + memList[i].memAdmFlag + '">'
 										  					 }
 											  				memListTBody.html(value);
+											  				
 											  				
 												  		 }
 										  		 },
