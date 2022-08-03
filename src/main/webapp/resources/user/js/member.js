@@ -177,7 +177,19 @@ function pwdDBcheck(){
 memPwdCheck.addEventListener("blur", pwdDBcheck);
 
 
+// 5. 이메일 유효성체크
+/*
+let memMail = document.querySelector("#memMail");
+let mailSpan = document.querySelector("#mailSpan");
+let regMail = RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i);
 
-
-
-
+function mailCheck(){
+	if(regPwd.test(memMail.value)) {
+		mailSpan.style="color:#0082FF ;"
+		mailSpan.innerHTML = "올바른 이메일 형태입니다."
+	} else {
+		mailSpan.style="color:red;"
+		mailSpan.innerHTML = "올바른 이메일 형태로 적어주세요."
+	}
+}
+memMail.addEventListener("blur", mailCheck);*/
