@@ -254,6 +254,31 @@ public class NoticeDao {
 		return list;
 	}
 	
+	public ArrayList<FAQ> selectFAQUserList(Connection conn){
+		ArrayList<FAQ> list = new ArrayList<>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectFAQUserList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				FAQ f = new FAQ();
+				f.setFaqNo(rset.getInt("faq_no"));
+				f.setFaqTitle(rset.getString("faq_title"));
+				f.setFaqContent(rset.getString("faq_content"));
+				list.add(f);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 	
 	// -------------------- admin ---------------------- //
 	
@@ -318,11 +343,11 @@ public class NoticeDao {
 		return result;
 	}
 	
-	public FAQ adminSelectFAQ(Connection conn, int faNo) {
+	public FAQ adminDetailFAQ(Connection conn, int faNo) {
 		FAQ f = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("adminSelectFAQ");
+		String sql = prop.getProperty("adminDetailFAQ");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -346,6 +371,47 @@ public class NoticeDao {
 			close(pstmt);
 		}
 		return f;
+	}
+	
+	public int adminInsertFAQ(Connection conn, FAQ f) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("adminInsertFAQ");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, f.getFaqTitle());
+			pstmt.setString(2, f.getFaqContent());
+			pstmt.setInt(3, f.getMemNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int adminUpdateFAQ(Connection conn, FAQ f) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("adminUpdateFAQ");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, f.getFaqTitle());
+			pstmt.setString(2, f.getFaqContent());
+			pstmt.setInt(3, f.getMemNo());
+			pstmt.setString(4, f.getFaqStatus());
+			pstmt.setInt(5, f.getFaqNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 }

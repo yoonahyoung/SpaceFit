@@ -107,6 +107,12 @@ public class NoticeService {
 		return list;
 	}
 	
+	public ArrayList<FAQ> selectFAQUserList() {
+		Connection conn = getConnection();
+		ArrayList<FAQ> list = new NoticeDao().selectFAQUserList(conn);
+		close(conn);
+		return list;
+	}
 	
 	// -------------- admin ------------------ //
 	
@@ -130,10 +136,34 @@ public class NoticeService {
 		return result;
 	}
 	
-	public FAQ adminSelectFAQ(int faNo) {
+	public FAQ adminDetailFAQ(int faNo) {
 		Connection conn = getConnection();
-		FAQ faq = new NoticeDao().adminSelectFAQ(conn, faNo);
+		FAQ faq = new NoticeDao().adminDetailFAQ(conn, faNo);
 		close(conn);
 		return faq;
+	}
+	
+	public int adminInsertFAQ(FAQ f) {
+		Connection conn = getConnection();
+		int result = new NoticeDao().adminInsertFAQ(conn, f);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int adminUpdateFAQ(FAQ f) {
+		Connection conn = getConnection();
+		int result = new NoticeDao().adminUpdateFAQ(conn, f);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 	}
 }

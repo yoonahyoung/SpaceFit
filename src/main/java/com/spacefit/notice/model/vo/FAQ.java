@@ -38,6 +38,15 @@ public class FAQ {
 	}
 
 
+	public FAQ(int faqNo, String faqTitle, String faqContent, int memNo, String faqStatus) {
+		super();
+		this.faqNo = faqNo;
+		this.faqTitle = faqTitle;
+		this.faqContent = faqContent;
+		this.memNo = memNo;
+		this.faqStatus = faqStatus;
+	}
+
 	public int getFaqNo() {
 		return faqNo;
 	}

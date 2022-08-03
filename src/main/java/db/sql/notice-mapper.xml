@@ -105,6 +105,15 @@
 		
 	</entry>
 	
+	<entry key="selectFAQUserList">
+		SELECT
+		       FAQ_NO
+		     , FAQ_TITLE
+		     , FAQ_CONTENT
+		  FROM TB_FAQ
+		 WHERE FAQ_STATUS = 'Y'
+	</entry>
+	
 	
 	<!-- admin -->
 	
@@ -143,7 +152,7 @@
 		      )
 	</entry>
 	
-	<entry key="adminSelectFAQ">
+	<entry key="adminDetailFAQ">
 		SELECT 
 			   FAQ_NO
 		     , FAQ_TITLE
@@ -154,6 +163,34 @@
 		     , FAQ_STATUS
 		  FROM TB_FAQ
 		  JOIN TB_MEMBER ON(FAQ_MEM_NO = MEM_NO)
+		 WHERE FAQ_NO = ?
+	</entry>
+	
+	<entry key="adminInsertFAQ">
+		INSERT
+		  INTO TB_FAQ
+		  (
+		    FAQ_NO
+		  , FAQ_TITLE
+		  , FAQ_CONTENT
+		  , FAQ_MEM_NO
+		  )
+		  VALUES
+		  (
+		    SEQ_FANO.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  )
+	</entry>
+	
+	<entry key="adminUpdateFAQ">
+		UPDATE TB_FAQ
+		   SET FAQ_TITLE = ?
+		     , FAQ_CONTENT = ?
+		     , FAQ_MEM_NO = ?
+		     , FAQ_UPDATE_DATE = SYSDATE
+		     , FAQ_STATUS = ?
 		 WHERE FAQ_NO = ?
 	</entry>
 </properties>
