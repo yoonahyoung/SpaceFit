@@ -6,7 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.spacefit.mem.model.vo.Member;
 import com.spacefit.product.model.service.SpaceService;
 
 /**
@@ -28,16 +30,24 @@ public class SpaceDeleteAdminController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Member loginUser = ((Member)session.getAttribute("loginUser"));
 		
-		int spNo = Integer.parseInt(request.getParameter("no"));
-		
-		int result = new SpaceService().deleteSpace(spNo);
-		
-		if(result > 0) {
-			request.getSession().setAttribute("alertMsg", "성공적으로 삭제되었습니다.");
-			response.sendRedirect(request.getContextPath()+ "/adList.sp");
+		if(loginUser == null || loginUser.getMemAdmFlag().equals("U") ) {
+			session.setAttribute("alertMsg", "관리자 로그인이 필요합니다!");
+			response.sendRedirect(request.getContextPath() + "/loginForm.me");
 		}else {
-			request.setAttribute("errorMsg", "삭제에 실패하였습니다.");
+			
+			int spNo = Integer.parseInt(request.getParameter("no"));
+			
+			int result = new SpaceService().deleteSpace(spNo);
+			
+			if(result > 0) {
+				request.getSession().setAttribute("alertMsg", "성공적으로 삭제되었습니다.");
+				response.sendRedirect(request.getContextPath()+ "/adList.sp");
+			}else {
+				request.setAttribute("errorMsg", "삭제에 실패하였습니다.");
+			}
 		}
 		
 	}

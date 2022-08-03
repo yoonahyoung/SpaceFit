@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.spacefit.mem.model.vo.Member;
 import com.spacefit.notice.model.service.NoticeService;
 import com.spacefit.notice.model.vo.FAQ;
 
@@ -31,14 +32,22 @@ public class AdminFAQDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
+		Member loginUser = ((Member)session.getAttribute("loginUser"));
 		
-		int faNo = Integer.parseInt(request.getParameter("no"));
-		FAQ faq = new NoticeService().adminSelectFAQ(faNo);
-		
-		request.setAttribute("faq", faq);
-		request.getRequestDispatcher("views/admin/notice/FAQDetailManage.jsp").forward(request, response);
+		if(loginUser == null || loginUser.getMemAdmFlag().equals("U") ) {
+			session.setAttribute("alertMsg", "관리자 로그인이 필요합니다!");
+			response.sendRedirect(request.getContextPath() + "/loginForm.me");
+		}else {
+			
+			request.setCharacterEncoding("UTF-8");
+			
+			int faNo = Integer.parseInt(request.getParameter("no"));
+			FAQ faq = new NoticeService().adminDetailFAQ(faNo);
+			
+			request.setAttribute("faq", faq);
+			request.getRequestDispatcher("views/admin/notice/FAQDetailManage.jsp").forward(request, response);
+		}
 	}
 
 	/**
