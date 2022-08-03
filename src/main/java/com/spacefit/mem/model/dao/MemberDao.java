@@ -474,6 +474,33 @@ public class MemberDao {
 		return list;
 	}
    
+   public int updateCart(Connection conn, Cart c) {
+	   
+	   int result = 0;
+	   PreparedStatement pstmt = null;
+	   String sql = prop.getProperty("updateCart");
+	   
+	   try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, c.getMemNo());
+		pstmt.setInt(2, c.getSpaceNo());
+		pstmt.setInt(3, c.getCartLimit());
+		pstmt.setString(4, c.getCartParking());
+		pstmt.setString(5, c.getCartAnimal());
+		pstmt.setString(6, c.getCartStand());
+		pstmt.setString(7, c.getCartChair());
+		
+		result = pstmt.executeUpdate();
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+	}
+	   
+	   return result;
+   }
+   
    public Cart selectCartUpdateView(Connection conn, int memNo, String spaceName){
 		
 	    Cart c = null;

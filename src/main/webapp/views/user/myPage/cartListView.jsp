@@ -119,16 +119,17 @@
 							
 							function clickEvent(event){
 								
-								var row = $(event.target).closest("tr");
-								var col = row.find("td");
+								let row = $(event.target).closest("tr");
+								let col = row.find("td");
 								
-								var spaceName = col.eq(1).text();
-								var price = col.eq(2).text();
+								let spaceName = col.eq(1).text();
+								let price = col.eq(2).text();
 								
 								$("#total").text(price);
 								
 								$.ajax({
 								url:"<%=contextPath%>/cartUpdateView.me",
+								async:false,
 								data:{spaceName:spaceName},
 								success:function(result){
 									
@@ -136,6 +137,7 @@
 										console.log("조회결과없음");
 									}else{
 										
+										// 옵션변경 모달창에 선택된 공간정보 출력
 										$("#modalName").text(result.spaceName);
 										$("#modalPrice").text(result.cartPrice + "원");
 										$("#modalLimit").text(result.cartLimit);
@@ -146,6 +148,9 @@
 										let cartAnimal = $.trim(result.cartAnimal);
 										let cartStand = $.trim(result.cartStand);
 										let cartChair = $.trim(result.cartChair);
+										let cartLimit = $.trim(result.cartLimit);
+										let spaceLimit = $.trim(result.spaceLimit);
+										let spaceNo = $.trim(result.spaceNo);
 										
 										// ajax 결과값으로 선택된 옵션이 미리 보여짐
 										if(cartParking.includes("N")){
@@ -210,8 +215,62 @@
 											cartChair = "N";
 										});
 									
-									}
-								},
+										// 이용인원 값 변경
+											// 이용인원 '-' 클릭
+										cartLimit = $('#modalLimit').text();
+										$("#modalMin").click(function(){
+											cartLimit = parseInt(cartLimit) - 1;
+											
+											if(cartLimit < 2){
+												alert("최소 인원은 2명입니다.");
+												cartLimit = 2;
+											}
+											
+											$('#modalLimit').text(cartLimit);
+										});
+										
+											// 이용인원 '+' 클릭
+										$("#modalPlus").click(function(){
+											cartLimit = parseInt(cartLimit) + 1;
+											spaceLimit = parseInt(spaceLimit);
+											
+											if(cartLimit > spaceLimit){
+												alert("최대 수용인원입니다.");
+												cartLimit = spaceLimit;
+											}
+											
+											$('#modalLimit').text(cartLimit);
+										});
+											
+										// 변경하기 버튼 누르면 데이터 ajax로 넘겨서 cart update
+										$("#optUpdate").click(function(){
+											
+											$.ajax({
+												url:"<%=contextPath%>/cartUpdate.me",
+												async:false,
+												data:{cartLimit:cartLimit,
+													  cartParking:cartParking,
+													  cartAnimal:cartAnimal,
+													  cartStand:cartStand,
+													  cartChair:cartChair,
+													  spaceNo:spaceNo
+													  },
+												success:function(result2){
+													
+													if(result2 == null){
+														console.log("조회결과없음");
+													}else{
+														console.log(result2);
+													}
+													
+												},
+												error:function(){
+													console.log("ajax 통신 실패");
+												}
+											})
+										});
+									} 
+								}, // success function end
 								error:function(){
 									console.log("ajax 통신 실패");
 								}
@@ -308,7 +367,7 @@
 	        <p class="modal-title" id="cartModalLabel" style="margin-left:188px; font-weight:550; font-size:22px;">옵션 변경</p>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
-	   
+	   		<form action="<%=contextPath %>/cartUpdate.me" method="post">
 		      <div class="modal-body" style="padding:40px; color:black;">
 		        <div class="d-flex align-items-start align-items-sm-center gap-4">
                        <img
@@ -350,9 +409,9 @@
 						  			<td class="column-2">
 					  					<div>
 					  						<div class="d-flex cartOptionCount">
-						                        <div>-</div>
+						                        <div><button id="modalMin">-</button></div>
 						                        <div id="modalLimit">1</div>
-						                        <div>+</div>
+						                        <div><button id="modalPlus">+</button></div>
 					                      	</div>
 					  					</div>
 						  			</td>
@@ -405,8 +464,9 @@
 	      
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
-	        <button type="button" class="btn btn-primary" style="margin-right:140px;">변경하기</button>
+	        <button type="button" class="btn btn-primary" id="optUpdate" style="margin-right:140px;">변경하기</button>
 	      </div>
+	     </form>
 	    </div>
 	  </div>
 	</div>

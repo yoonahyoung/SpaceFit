@@ -176,6 +176,18 @@ public class MemberService {
 	   return list;
    }
    
+   public int updateCart(Cart c) {
+	   Connection conn = getConnection();
+	   int result = new MemberDao().updateCart(conn, c);
+	   if(result > 0) {
+		   commit(conn);
+	   }else {
+		   rollback(conn);
+	   }
+	   close(conn);
+	   return result;
+   }
+   
    // 찜하기(위시리스트)
    public int loveList(int spNo, int memNo, String status) {
 	   Connection conn = getConnection();

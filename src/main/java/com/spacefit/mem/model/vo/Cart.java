@@ -75,6 +75,18 @@ public class Cart {
 		this.spacePic = spacePic;
 	}
 
+	public Cart(int memNo, int spaceNo, int cartLimit, String cartParking, String cartAnimal, String cartStand,
+			String cartChair) {
+		super();
+		this.memNo = memNo;
+		this.spaceNo = spaceNo;
+		this.cartLimit = cartLimit;
+		this.cartParking = cartParking;
+		this.cartAnimal = cartAnimal;
+		this.cartStand = cartStand;
+		this.cartChair = cartChair;
+	}
+
 	public String getSpacePic() {
 		return spacePic;
 	}

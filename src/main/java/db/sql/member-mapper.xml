@@ -223,6 +223,17 @@
 		 WHERE MEM_NO = ?
 	</entry>
 	
+	<entry key="updateCart">
+		UPDATE TB_CART
+		   SET CART_LIMIT = ?
+		     , CART_PARKING = ?
+		     , CART_ANIMAL = ?
+		     , CART_STAND = ?
+		     , CART_CHAIR = ?
+		 WHERE MEM_NO = ?
+		   AND SPACE_NO = ?
+	</entry>
+	
 	<entry key="loveInsert">
 		INSERT
 		  INTO TB_LOVE
