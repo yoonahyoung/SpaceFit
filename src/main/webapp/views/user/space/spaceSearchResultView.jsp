@@ -50,7 +50,7 @@
             <div class="title-single-box">
               <h1 class="title-single">
                 <%if ( search == null ) {%>
-				검색결과가 없습니다.
+				"<%=keyword %>" 검색결과가 없습니다.
 				<br><br>
 				SPACEFIT을 둘러보세요!
 				<% } else if(keyword != null){ %>
