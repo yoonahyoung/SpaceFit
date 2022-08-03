@@ -557,14 +557,15 @@
 	      <a class="navbar-brand text-brand" href="<%=contextPath%>/index.jsp" style="margin-left:100px">SPACE<span class="color-b">FIT</span>
 	      </a>
 	      
+	      <form action="<%=contextPath%>/search.sp" method="post">
 	      <!-- search bar -->
 	      <div class="container" >
 	        <div class="d-flex align-items-center" style="line-height:20">
-         	  <input class="form-control" type="search" placeholder="#파티룸  #연습실  #스튜디오" aria-label="Search" style="width:300px; margin-left:150px; border:0px; border-bottom: 1px solid; border-radius:0" >
+         	  <input class="form-control" type="search" placeholder="#파티룸  #연습실  #스튜디오" name="keyword" style="width:300px; margin-left:150px; border:0px; border-bottom: 1px solid; border-radius:0" >
          	  <button id="searchBtn" class="btn btn-outline-success flex-shrink-0" type="submit" style="margin:auto; border:0px;">검색</button>
 	        </div>
-	      </div>  
-	
+	      </div>   
+		</form>
 	
 	      <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
 	        <ul class="navbar-nav" style="margin-left:200px">

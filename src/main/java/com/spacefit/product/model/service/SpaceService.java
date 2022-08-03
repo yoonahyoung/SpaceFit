@@ -120,5 +120,13 @@ public class SpaceService {
 		close(conn);
 		return list;
 	}
+	
+	// 검색결과 리스트
+	public ArrayList<Space> searchResultList(String keyword) {
+		Connection conn = getConnection();
+		ArrayList<Space> list = new SpaceDao().searchResultList(conn, keyword);
+		close(conn);
+		return list;
+	}
 
 }

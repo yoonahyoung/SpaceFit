@@ -361,8 +361,39 @@ public class SpaceDao {
 		}
 		return list;
 	}
-
 	
+	// 검색결과 리스트
+	public ArrayList<Space> searchResultList(Connection conn, String keyword) {
+		ArrayList<Space> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchResultList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, keyword);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Space(rset.getInt("space_no"),
+								   rset.getString("space_name"),
+								   rset.getInt("space_limit"),
+								   rset.getString("space_category"),
+								   rset.getString("space_pic"),
+								   rset.getDate("space_en_date"),
+								   rset.getInt("space_price")
+						));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 	
 	
 	

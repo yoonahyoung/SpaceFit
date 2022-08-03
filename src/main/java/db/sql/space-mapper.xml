@@ -208,5 +208,21 @@
 		   AND BOOK_DATE = ?
 	</entry>
 	
+	<!-- 검색 결과용 -->
+	<entry key="searchResultList">
+    	SELECT 
+		       SPACE_NO
+		     , SPACE_NAME
+		     , SPACE_LIMIT
+		     , SPACE_CATEGORY
+		     , SPACE_PIC
+		     , SPACE_EN_DATE
+		     , SPACE_PRICE
+		  FROM TB_SPACE
+		 WHERE SPACE_STATUS = 'Y'
+		   AND SPACE_CATEGORY = ?
+		 ORDER
+			BY SPACE_NO DESC
+	</entry>
 
 </properties>
