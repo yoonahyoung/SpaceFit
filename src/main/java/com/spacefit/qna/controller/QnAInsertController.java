@@ -53,7 +53,19 @@ public class QnAInsertController extends HttpServlet {
 						//    > 카테고리, 공간번호, 제목, 내용, 로그인한회원번호   => TB_QNA에 INSERT
 			String userNo = multiRequest.getParameter("userNo");
 			String qnaCategory = multiRequest.getParameter("category");
+			
 			String spaceNo = multiRequest.getParameter("spaceNo");
+			String studioSpaceNo = multiRequest.getParameter("studioSpaceNo"); // 공간
+			String practiceSpaceNo = multiRequest.getParameter("practiceSpaceNo"); // 공간
+			String partySpaceNo = multiRequest.getParameter("partySpaceNo"); // 공간
+			
+		
+			
+			if(!studioSpaceNo.equals("선택")) {spaceNo=studioSpaceNo;}
+			if(!practiceSpaceNo.equals("선택")) {spaceNo=practiceSpaceNo;}
+			if(!partySpaceNo.equals("선택")) {spaceNo=partySpaceNo;}
+			
+			
 			String title = multiRequest.getParameter("title");
 			String content = multiRequest.getParameter("content");
 			

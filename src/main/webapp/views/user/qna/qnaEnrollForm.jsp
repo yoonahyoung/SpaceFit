@@ -73,22 +73,25 @@
 
                 <!-- 기본선택 -->
                 
-                <select name="" id="basic">
+                <select name="spaceNo" id="basic">
                     <option value="선택">--선택--</option>
                 </select>
                 
                 <!-- 공간 목록이 나오도록 -->
-                <select name="spaceNo" id="studio" style="display: none;">
+                <select name="studioSpaceNo" id="studio" style="display: none;">
+                	<option value="선택">--선택--</option>
                     <% for(Category c : studioList) { %>
                     <option onchange="select();" value="<%=c.getSpaceNo()%>"><%= c.getSpaceName() %></option>
                     <% } %>
                 </select>
-                <select name="spaceNo" id="practice" style="display: none;">
+                <select name="practiceSpaceNo" id="practice" style="display: none;">
+                	<option value="선택">--선택--</option>
                     <% for(Category c : practiceList) { %>
                     <option onchange="select();" value="<%=c.getSpaceNo()%>"><%= c.getSpaceName() %></option>
                     <% } %>
                 </select>
-                <select name="spaceNo" id="party" style="display: none;">
+                <select name="partySpaceNo" id="party" style="display: none;">
+                	<option value="선택">--선택--</option>
                     <% for(Category c : partyList) { %>
                     <option onchange="select();" value="<%=c.getSpaceNo()%>"><%= c.getSpaceName() %></option>
                     <% } %>
