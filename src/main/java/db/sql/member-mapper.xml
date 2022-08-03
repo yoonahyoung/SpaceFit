@@ -113,6 +113,12 @@
 		  JOIN TB_MEMBER USING(GR_NO)
 		 WHERE MEM_ID = ?
 	</entry>
+	
+	<entry key="selectCouponCount">
+		SELECT COUNT(*) 
+		  FROM TB_MCP
+		 WHERE MEM_NO = ?
+	</entry>
 
 	<entry key="selectCouponList">
 		SELECT CP_NAME

@@ -99,6 +99,14 @@ public class MemberService {
 	   return grName;
    }
    
+   public int selectCouponCount(int memNo) {
+	   Connection conn = getConnection();
+	   int cpCount = new MemberDao().selectCouponCount(conn, memNo);
+	   close(conn);
+	   return cpCount;
+	   
+   }
+   
    public ArrayList<Mcp> selectCouponList(int memNo) {
 	   Connection conn = getConnection();
 	   ArrayList<Mcp> list = new MemberDao().selectCouponList(conn, memNo);

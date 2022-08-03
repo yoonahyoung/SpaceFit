@@ -444,6 +444,18 @@ body{
 	font-weight: 600;
 }
 
+#optSelect{
+	font-family:inherit; 
+	width:300px; 
+	height:35px;
+}
+
+#cartModalLabel{
+	margin-left:188px; 
+	font-weight:550; 
+	font-size:22px;
+}
+
 .cartOptionDiv{
 	width:415px;
 	height:55px;
@@ -462,5 +474,13 @@ body{
 
 .cartOptionTable{
 	border-spacing: 0px;
- 		border-collapse: separate;
+	border-collapse: separate;
+	width:415px; 
+	height:55px;
+}
+
+.cart-option-p{
+	font-weight:550; 
+	font-size:16px; 
+	margin-bottom:13px;
 }

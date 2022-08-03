@@ -48,9 +48,10 @@
  		String memName = loginUser.getMemName();
  		String memPhone = loginUser.getMemPhone();
  		String memPwd = loginUser.getMemPwd();
- 		
- 		String grName = (String)request.getAttribute("grName");
  		String memProfile = loginUser.getMemProfile();
+ 		
+ 		int cpCount = (int)request.getAttribute("cpCount");
+ 		String grName = (String)request.getAttribute("grName");
  		
  	%>
   
@@ -63,11 +64,11 @@
             <br>
             <div align="center">
               <br>
-                <div>
+                <div >
                 	<% if(memProfile == null) { %>
-                    	<img src="<%=contextPath %>/resources/user/img/user.png" alt="" style="width:100px;">
+                    	<img src="<%=contextPath %>/resources/user/img/user.png" style="width:100px; height:100px; border-radius:50%;">
                     <% }else { %>
-                    	<img src="<%=contextPath %>/<%= memProfile %>" alt="" style="width:100px;">
+                    	<img src="<%=contextPath %>/<%= memProfile %>" style="width:100px; height:100px; border-radius:50%;">
                     <% } %>
                 </div>
                 <div>
@@ -85,7 +86,7 @@
                 <label class="col-sm-2 col-form-label" for="basic-default-name">내 쿠폰</label>
                 <div class="col-sm-10">
                   <div style="margin-top:6px">
-                  <span style="color:#0D6EFD; font-weight:550;">1장</span>
+                  <span style="color:#0D6EFD; font-weight:550;"><%= cpCount %>장</span>
                   <a href="<%=contextPath%>/myCouponList.me"><img src="<%=contextPath %>/resources/user/img/myCoupon.png" alt="" width="20px" 
                     style="margin-left:15px; margin-right:260px; margin-bottom:2px;"></a>
                   </div>

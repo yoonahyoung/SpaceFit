@@ -260,7 +260,10 @@
 													if(result2 == null){
 														console.log("조회결과없음");
 													}else{
+														
+														alert("옵션이 변경되었습니다.");
 														location.reload();
+														
 													}
 													
 												},
@@ -364,31 +367,31 @@
 	  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <p class="modal-title" id="cartModalLabel" style="margin-left:188px; font-weight:550; font-size:22px;">옵션 변경</p>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	         <p class="modal-title" id="cartModalLabel" style="margin-left:188px; font-weight:550; font-size:22px;">옵션 변경</p>
+	         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
-	   		<form action="<%=contextPath %>/cartUpdate.me" method="post">
-		      <div class="modal-body" style="padding:40px; color:black;">
+		     <div class="modal-body" style="padding:40px; color:black;">
 		        <div class="d-flex align-items-start align-items-sm-center gap-4">
-                       <img
-                         src="<%= contextPath %>/resources/user/img/파티룸.jpeg"
-                         alt="user-avatar"
-                         class="d-block rounded"
-                         height="80"
-                         width="80"
-                         id="modalPic"
-                       />
-                       <div>
-					  <p style="font-size:18px; color:black;" id="modalName">파티룸 C</p>
-                         <p style="font-size:18px; color:crimson;" id="modalPrice">98,000원</p>
-                       </div>
-                    	</div>
-                    		<br>
-                    	<p style="font-weight:550; font-size:16px; margin-bottom:13px;">* 대여 날짜</p>
-                    	<div style="width:300px;">
+                   <img
+                     src="<%= contextPath %>/resources/user/img/파티룸.jpeg"
+                     alt="user-avatar"
+                     class="d-block rounded"
+                     height="80"
+                     width="80"
+                     id="modalPic"
+                   />
+                   <div>
+	  				  <p style="font-size:18px; color:black;" id="modalName">파티룸 C</p>
+                      <p style="font-size:18px; color:crimson;" id="modalPrice">98,000원</p>
+                   </div>
+               	</div>
+                <br>
+               	<p class="cart-option-p">* 대여 날짜</p>
+               	<div style="width:300px;">
 	       			<input type="text" class="form-control" value="2022.07.24(일) 15~19시" id="modalDate" style="font-size:13px;" disabled>
-	       		</div><br>
-	       		<p style="font-weight:550; font-size:16px; margin-bottom:13px;">* 선택 가능 옵션</p>
+	       		</div>
+	       		<br>
+	       		<p class="cart-option-p">* 선택 가능 옵션</p>
 	       		<div>
 		          <select name="optSelect" id="optSelect" style="font-family:inherit; width:300px; height:35px;">
 		          	<option value="">선택안함</option>
@@ -399,75 +402,74 @@
 		          </select>
 		        </div>
 	       		<br>
-	       		<p style="font-weight:550; font-size:16px; margin-bottom:13px;">* 선택된 옵션</p>
+	       		<p>* 선택된 옵션</p>
 	    
 	       			<div class="cartOptionDiv">
-					  	<table class="cartOptionTable" style="width:415px; height:55px;">
-						  		<tr class="table_row">
-						  			<td><div style="width:10px;"></div></td>
-						  			<td class="column-1" style="text-align:left; color:black; width:80px;">이용인원</td>
-						  			<td class="column-2">
-					  					<div>
-					  						<div class="d-flex cartOptionCount">
-						                        <div><button type="button" id="modalMin">-</button></div>
-						                        <div id="modalLimit">1</div>
-						                        <div><button type="button" id="modalPlus">+</button></div>
-					                      	</div>
-					  					</div>
-						  			</td>
-						  			<td class="column-3"></td>
-						  			<td class="column-4"><button type="button"><img src="<%= contextPath %>/resources/user/img/cartDelete.png" alt="" style="width:15px; margin-left:25px;"></button></td>
-						  		</tr>
+					   <table class="cartOptionTable" style="width:415px; height:55px;">
+					  		<tr class="table_row">
+					  			<td><div style="width:10px;"></div></td>
+					  			<td class="column-1" style="text-align:left; color:black; width:80px;">이용인원</td>
+					  			<td class="column-2">
+				  					<div>
+				  						<div class="d-flex cartOptionCount">
+					                        <div><button type="button" id="modalMin">-</button></div>
+					                        <div id="modalLimit">1</div>
+					                        <div><button type="button" id="modalPlus">+</button></div>
+				                      	</div>
+				  					</div>
+					  			</td>
+					  			<td class="column-3"></td>
+					  			<td class="column-4"><button type="button"><img src="<%= contextPath %>/resources/user/img/cartDelete.png" alt="" style="width:15px; margin-left:25px;"></button></td>
+					  		</tr>
 					  	 </table>
 					  </div>
 					  <div class="cartOptionDiv" id="optParking">
 					  	<table class="" style="width:415px; height:55px;">
-						  		<tr class="table_row">
-						  			<td><div style="width:10px;"></div></td>
-						  			<td class="column-2" style="text-align:left; color:black;">주차 이용</td>
-						  			<td><div style="width:25px;"></div></td>
-						  			<td class="column-4 optBtn"><button type="button" id="btnParking" value="parking"><img src="<%= contextPath %>/resources/user/img/cartDelete.png" alt="" style="width:15px; margin-left:25px;"></button></td>
-						  		</tr>
+					  		<tr class="table_row">
+					  			<td><div style="width:10px;"></div></td>
+					  			<td class="column-2" style="text-align:left; color:black;">주차 이용</td>
+					  			<td><div style="width:25px;"></div></td>
+					  			<td class="column-4 optBtn"><button type="button" id="btnParking" value="parking"><img src="<%= contextPath %>/resources/user/img/cartDelete.png" alt="" style="width:15px; margin-left:25px;"></button></td>
+					  		</tr>
 					  	</table>
 				  	</div>
 				  	 <div class="cartOptionDiv" id="optAnimal">
 					  	<table class="" style="width:415px; height:55px;">
-						  		<tr class="table_row">
-						  			<td><div style="width:11px;"></div></td>
-						  			<td class="column-2" style="text-align:left; color:black;">반려동물 동반</td>
-						  			<td class="column-4 optBtn"><button type="button" id="btnAnimal" value="animal"><img src="<%= contextPath %>/resources/user/img/cartDelete.png" alt="" style="width:15px; margin-left:25px;"></button></td>
-						  		</tr>
+					  		<tr class="table_row">
+					  			<td><div style="width:11px;"></div></td>
+					  			<td class="column-2" style="text-align:left; color:black;">반려동물 동반</td>
+					  			<td class="column-4 optBtn"><button type="button" id="btnAnimal" value="animal"><img src="<%= contextPath %>/resources/user/img/cartDelete.png" alt="" style="width:15px; margin-left:25px;"></button></td>
+					  		</tr>
 					  	</table>
 				  	</div>
 				  	<div class="cartOptionDiv" id="optStand">
 					  	<table class="" style="width:415px; height:55px;">
-						  		<tr class="table_row" id="">
-						  			<td><div style="width:9px;"></div></td>
-						  			<td class="column-2" style="text-align:left; color:black;">보면대 사용</td>
-						  			<td><div style="width:0px;"></div></td>
-						  			<td class="column-4 optBtn"><button type="button" id="btnStand"><img src="<%= contextPath %>/resources/user/img/cartDelete.png" alt="" style="width:15px; margin-left:15px;"></button></td>
-						  		</tr>
+					  		<tr class="table_row" id="">
+					  			<td><div style="width:9px;"></div></td>
+					  			<td class="column-2" style="text-align:left; color:black;">보면대 사용</td>
+					  			<td><div style="width:0px;"></div></td>
+					  			<td class="column-4 optBtn"><button type="button" id="btnStand"><img src="<%= contextPath %>/resources/user/img/cartDelete.png" alt="" style="width:15px; margin-left:15px;"></button></td>
+					  		</tr>
 					  	</table>
 				  	</div>
 				  	<div class="cartOptionDiv" id="optChair">
 					  	<table class="" style="width:415px; height:55px;">
-						  		<tr class="table_row" id="">
-						  			<td><div style="width:11px;"></div></td>
-						  			<td class="column-2" style="text-align:left; color:black;">미니의자 사용</td>
-						  			<td class="column-4 optBtn"><button type="button" id="btnChair"><img src="<%= contextPath %>/resources/user/img/cartDelete.png" alt="" style="width:15px; margin-left:25px;"></button></td>
-						  		</tr>
+					  		<tr class="table_row" id="">
+					  			<td><div style="width:11px;"></div></td>
+					  			<td class="column-2" style="text-align:left; color:black;">미니의자 사용</td>
+					  			<td class="column-4 optBtn"><button type="button" id="btnChair"><img src="<%= contextPath %>/resources/user/img/cartDelete.png" alt="" style="width:15px; margin-left:25px;"></button></td>
+					  		</tr>
 					  	</table>
 				  	</div>
 				  	
 				  	<p style="font-size:12px;" class="text-muted">&nbsp; 선택된 옵션이 보이지 않을시 새로고침 해주세요.</p>
 		      	</div>
 	      
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
-	        <button type="button" class="btn btn-primary" id="optUpdate" style="margin-right:140px;">변경하기</button>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
+		        <button type="button" class="btn btn-primary" id="optUpdate" style="margin-right:140px;">변경하기</button>
+		      </div>
 	      </div>
-	     </form>
-	    </div>
 	  </div>
 	</div>
 	<!-- 옵션변경 modal end -->

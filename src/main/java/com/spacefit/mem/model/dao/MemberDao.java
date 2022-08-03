@@ -272,6 +272,33 @@ public class MemberDao {
 	   
    }
    
+   public int selectCouponCount(Connection conn, int memNo) {
+	   
+	   int cpCount = 0;
+	   ResultSet rset = null;
+	   PreparedStatement pstmt = null;
+	   String sql = prop.getProperty("selectCouponCount");
+	   
+	   try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, memNo);
+		
+		rset = pstmt.executeQuery();
+		
+		if(rset.next()) {
+			cpCount = rset.getInt("count(*)");
+		}
+	   } catch (SQLException e) {
+		e.printStackTrace();
+	   } finally {
+		   close(rset);
+		   close(pstmt);
+	   }
+	   
+	   return cpCount;
+	   
+   }
+   
    public ArrayList<Mcp> selectCouponList(Connection conn, int memNo) {
 	   
 	   ArrayList<Mcp> list = new ArrayList<>();

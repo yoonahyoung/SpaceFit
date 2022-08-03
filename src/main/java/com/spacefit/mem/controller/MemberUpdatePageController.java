@@ -35,6 +35,9 @@ public class MemberUpdatePageController extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		String memId = ((Member)session.getAttribute("loginUser")).getMemId();
+		int memNo = ((Member)session.getAttribute("loginUser")).getMemNo();
+		
+		int cpCount = new MemberService().selectCouponCount(memNo);
 		String grName = new MemberService().selectGrade(memId);
 		
 		if(session.getAttribute("loginUser") == null) {
@@ -44,6 +47,7 @@ public class MemberUpdatePageController extends HttpServlet {
 			
 		}else {
 			
+			request.setAttribute("cpCount", cpCount);
 			request.setAttribute("grName", grName);
 			request.getRequestDispatcher("views/user/myPage/memberUpdateView.jsp").forward(request, response);
 		}
