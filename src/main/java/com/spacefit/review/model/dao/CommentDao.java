@@ -76,5 +76,30 @@ public class CommentDao {
 		}
 		return result;
 	}
+	
+	public int deleteComment(Connection conn, int comNo, int memNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("deleteComment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, comNo);
+			pstmt.setInt(2, memNo);
+			result = pstmt.executeUpdate();
+			//System.out.println("다오에서 출력해보자 뎃글번호 : " + comNo + "  멤버번호 : " + memNo + "결과 : " + result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
+	
+	
+	
+	
+	
+	
 }

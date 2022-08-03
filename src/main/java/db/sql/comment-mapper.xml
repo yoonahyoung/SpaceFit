@@ -14,6 +14,7 @@
 		     , COM_STATUS
 		  FROM TB_COMMENT
 		 WHERE RV_NO=?
+		   AND COM_STATUS = 'Y'
 		 ORDER BY COM_NO ASC
 	</entry>
 	
@@ -48,5 +49,12 @@
 		     , 0
 		     , 'Y'
 		     )
+	</entry>
+	
+	<entry key="deleteComment">
+		UPDATE TB_COMMENT
+		   SET COM_STATUS = 'N'
+		 WHERE COM_NO = ?
+		   AND MEM_NO = ?
 	</entry>
 </properties>

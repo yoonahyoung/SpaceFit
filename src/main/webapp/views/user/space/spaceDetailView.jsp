@@ -237,7 +237,7 @@ body {
 		                                                </div>
 		                                            </div>
 		                                            <br><br>
-		                                            <div class="collapse commentDiv" id="flush-collapse<%= r.getReviewNo() %>"  aria-labelledby="flush-heading<%= r.getReviewNo() %>" data-bs-parent="#accordionFlushExample">
+		                                            <div class="collapse commentDiv" id="flush-collapse<%= r.getReviewNo() %>" data-value="<%= r.getReviewNo() %>" aria-labelledby="flush-heading<%= r.getReviewNo() %>" data-bs-parent="#accordionFlushExample">
 	                                                    <div class="parentCommentAll" id="parentCommentAll"></div>
                                                         <div id="writeComment">
                                                             <table id="writeTable" align="center">
@@ -552,7 +552,7 @@ body {
         												+		'</span>'
         												+ '</div>'
         												+ '<div class="parentInfo col-lg-6">'
-        												+	'<button type="button" class="comBtn" id="reDelete">삭제하기</span>'
+        												+	'<button type="button" class="comBtn" id="reDelete" onclick="deleteComment(' + comList[i].comNo + ', $(this).parent().parent() ,' + comList[i].rvNo + ');">삭제하기</span>'
         												+	'<button type="button" class="comBtn" id="reReport">신고하기</span>'
         												+	'<button type="button" class="comBtn" id="reComment">대댓달기</span>'
         												+	'<input type="hidden" value="' + comList[i].parentNo + '" id="hiddenPno">'
@@ -603,6 +603,48 @@ body {
 				  		 
 				  	 })
 				   }
+                  
+                  
+                  function deleteComment(e, commentDiv, rvNo) {
+                	  
+                	 // let commentDiv = commentDiv;
+                	 // let rvNo = rvNo;
+
+                	  if(confirm("정말 삭제하시겠습니까??")){
+							// 사용하겠다
+							$.ajax({
+		      	        		 url:"<%=contextPath%>/comDelete.com",
+		 				  		 data:{
+		 				  			 //commentDiv : commentDiv,
+		 				  			 //rvNo : rvNo,
+		 				  			 comNo:e,
+		 				  			 memNo:$("#memNo").val()
+		 				  		 },
+		 				  		 type:"post",
+		 				  		 //processData:false,
+						  		 //contentType:false,
+		 				  		 success:function(result){
+		 				  			 if(result >0){
+		 				  				alert("댓글 삭제 성공");
+		 				  				 commentList(rvNo, commentDiv);
+		 				  			 } else {
+		 				  				alert("댓글 삭제에 실패했습니다!");
+		 				  				$(".commentDiv").focus();
+		 				  			 }
+		 				  		 },
+		 				  		 error:function(){
+		 				  			console.log("댓글삭제 ajax 통신 실패");
+		 				  		// 로그인 안하면 삭제가 안되도록 처리 피
+		 				  		 }
+		 				  		 
+		 				  	 })
+						} else {
+							// 삭제하지 않겠다
+							$(".commentDiv").focus();
+						}
+                	  
+                	  
+                  }
      	   
 				</script>
 
