@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.mem.model.vo.Love"%>
+<%
+	ArrayList<Love> list = (ArrayList<Love>)request.getAttribute("loveList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,34 +28,31 @@
 				  <option>오래된찜순</option>
 				</select>
 			</div>
-      <%for(int i=0;i<=list.size();i++){%>
-          <div class="col-md-4">
+      <%for(Love l : list){%>
+          <div class="col-md-4" style="margin: 0 0 50px 0">
             <div class="card-box-d">
               <div class="card-img-d">
-                <img src="<%=contextPath%>/resources/admin/space_upfiles/studio/studio3_2.jpg" alt="" class="img-d img-fluid">
+                <img src="<%=contextPath%>/<%= l.getSpacePic() %>" alt="" class="img-d img-fluid">
               </div>
-              <div class="card-overlay card-overlay-hover">
+              <div class="card-overlay card-overlay-hover" style="line-height:100px">
                 <div class="card-header-d">
-                  <div class="card-title-d">
+                  <div class="card-title-d" style="height:100px; margin-top:50px">
                     <h3 class="title-d">
-                      <a href="<%=contextPath%>/views/user/space/spaceDetailView.jsp" class="link-two">스튜디오3<br></a>
+                      <a href="<%=contextPath%>/list.sp?no=<%= l.getSpaceNo() %>" class="link-two"><%=l.getSpaceName() %><br></a>
                     </h3>
                   </div>
                 </div>
-                <div class="card-body-d">
+                <div class="card-body-d" style="height:50px">
                   <div class="info-agents color-a">
                     <p>
-                      <strong>촬영에 적합한 스튜디오</strong> 
-                    </p>
-                    <p>
-                      <strong> 최대 인원 : <span>n</span>명 </strong> 
+                      <strong> 최대 인원 : <span><%=l.getSpaceLimit() %></span>명 </strong> 
                     </p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
+          <%} %>
 
 
         </div>

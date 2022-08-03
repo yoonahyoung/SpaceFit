@@ -224,6 +224,13 @@ public class MemberService {
 	   
    }
    
+   public ArrayList<Love> selectLoveList(int memNo){
+	   Connection conn = getConnection();
+	   ArrayList<Love> list = new MemberDao().selectLoveList(conn,memNo);
+	   close(conn);
+	   return list;
+   }
+   
    public Cart selectCartUpdateView(int memNo, String spaceName) {
 		Connection conn = getConnection();
 		Cart c = new MemberDao().selectCartUpdateView(conn, memNo, spaceName);

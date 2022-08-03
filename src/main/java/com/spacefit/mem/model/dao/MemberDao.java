@@ -636,6 +636,34 @@ public class MemberDao {
 	   return count;
    }
    
+   public ArrayList<Love> selectLoveList(Connection conn, int memNo){
+	   ResultSet rset = null;
+	   PreparedStatement pstmt = null;
+	   ArrayList<Love> list = new ArrayList<>();
+	   String sql = prop.getProperty("selectLoveList");
+	   
+	   try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, memNo);
+		
+		rset = pstmt.executeQuery();
+		while(rset.next()) {
+			list.add(new Love(rset.getInt("space_no"),
+							  rset.getInt("mem_no"),
+							  rset.getString("love_date"),
+							  rset.getString("space_name"),
+							  rset.getInt("space_limit"),
+							  rset.getString("space_pic")));
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(rset);
+		close(pstmt);
+	}
+	 return list;  
+   }
+   
    //---------ADMIN-----------//
 	
 
