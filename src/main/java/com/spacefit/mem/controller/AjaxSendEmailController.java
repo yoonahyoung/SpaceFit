@@ -66,19 +66,19 @@ public class AjaxSendEmailController extends HttpServlet {
             //메일 제목
             msg.setSubject("SpaceFit 회원가입을 위한 인증메일입니다.");
             //메일 내용
-            msg.setText("안녕하세요. SpaceFit입니다. \n\n<br>"
-            			+ "회원님께서는 SpaceFit에 가입하고 계십니다.<br>"
-            			+ "SpaceFit에 가입하시면 좋은 혜택과 쿠폰이 회원님을 기다리고 있어요!<br>"
-            			+ "혹시라도 가입중이 아니시라면 070-8847-9500 SpaceFit으로 연락부탁드립니다.<br>"
-            			+ "회원가입 창에 인증번호를 적어주세요.<br><br><br>"
+            msg.setText("안녕하세요. SpaceFit입니다. \\n\\n"
+            			+ "회원님께서는 SpaceFit에 가입하고 계십니다.\\n"
+            			+ "SpaceFit에 가입하시면 좋은 혜택과 쿠폰이 회원님을 기다리고 있어요!\\n"
+            			+ "혹시라도 가입중이 아니시라면 070-8847-9500 SpaceFit으로 연락부탁드립니다.\\n"
+            			+ "회원가입 창에 인증번호를 적어주세요.\\n\\n\\n"
             			+  randomNo
-            			+ "<br><br><br>\n\n"
-            			+ "회원가입해주셔서 감사합니다. \n\n\n<br>"
-            			+ "------------------------------------------------\n<br>"
-            			+ "서울시 금천구 가산디지털2로 115 (대륭테크노타운 3차) 1109-1호\r\n<br>"
-            			+ "Tel 070-8847-9500(9513) Mobile +82 010-123-4567\r\n<br>"
-            			+ "Mail esy@goodee.co.kr Fax 02-2108-5909\r\n<br>"
-            			+ "Homepage http://localhost:8200/SpaceFit \r\n<br>"        			
+            			+ "\\n\\n\\n"
+            			+ "회원가입해주셔서 감사합니다. \\n\\n\\n"
+            			+ "------------------------------------------------\\n\\n\\n"
+            			+ "서울시 금천구 가산디지털2로 115 (대륭테크노타운 3차) 1109-1호\\n\\n"
+            			+ "Tel 070-8847-9500(9513) Mobile +82 010-123-4567\\n\\n"
+            			+ "Mail esy@goodee.co.kr Fax 02-2108-5909\\n\\n"
+            			+ "Homepage http://localhost:8200/SpaceFit \\n\\n"        			
             		
             		);
             

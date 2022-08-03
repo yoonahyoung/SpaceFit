@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.spacefit.common.controller.PwdHashController;
 import com.spacefit.mem.model.service.MemberService;
 import com.spacefit.mem.model.vo.Member;
 
@@ -36,7 +37,7 @@ public class MemberInsertForm extends HttpServlet {
 		
 		// 2. 요청시 전달값 받기
 		String memId = request.getParameter("memId");
-		String memPwd = request.getParameter("memPwd");
+		String beforeMemPwd = request.getParameter("memPwd");
 		String memName = request.getParameter("memName");
 		String memIdNo = request.getParameter("memIdNo");
 		String memPhone = request.getParameter("memPhone");
@@ -44,6 +45,8 @@ public class MemberInsertForm extends HttpServlet {
 		if(memMail == null) {
 			memMail = "";
 		}
+		
+		String memPwd = PwdHashController.encoding(beforeMemPwd);
 		
 		Member m = new Member(memId, memPwd, memName, memIdNo, memPhone, memMail);
 		
