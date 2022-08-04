@@ -25,5 +25,11 @@
 		     , ?
 		     )
 	</entry>
+	
+	<entry key="howManyRvPerSpace">
+		  SELECT COUNT(*) AS "RV_COUNT_PER_SPACE"
+		    FROM TB_REVIEW
+		   WHERE SPACE_NO = ?
+	</entry>
 
 </properties>

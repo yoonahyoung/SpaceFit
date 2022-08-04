@@ -27,4 +27,11 @@ public class LikeService {
 		close(conn);
 		return updateLike;
 	}
+	
+	public int howManyRvPerSpace(int spNo) {
+		Connection conn = getConnection();
+		int howManyRvPerSpace = new LikeDao().howManyRvPerSpace(conn, spNo);
+		close(conn);
+		return howManyRvPerSpace;
+	}
 }

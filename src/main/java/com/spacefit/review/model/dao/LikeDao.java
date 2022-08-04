@@ -64,4 +64,27 @@ public class LikeDao {
 		
 		return updateLike;
 	}
+	
+	public int howManyRvPerSpace(Connection conn, int spNo) {
+		int howManyRvPerSpace = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("howManyRvPerSpace");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, spNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				howManyRvPerSpace = rset.getInt("RV_COUNT_PER_SPACE");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return howManyRvPerSpace;
+	}
 }

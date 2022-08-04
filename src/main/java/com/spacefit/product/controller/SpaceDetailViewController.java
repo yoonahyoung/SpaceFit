@@ -17,6 +17,7 @@ import com.spacefit.product.model.service.SpaceService;
 import com.spacefit.product.model.vo.Space;
 import com.spacefit.reservation.model.service.BookService;
 import com.spacefit.reservation.model.vo.Book;
+import com.spacefit.review.model.service.LikeService;
 import com.spacefit.review.model.service.ReviewService;
 import com.spacefit.review.model.vo.Review;
 
@@ -71,9 +72,14 @@ public class SpaceDetailViewController extends HttpServlet {
 		int avgStars = new ReviewService().selectAvgStars(spNo);
 		request.setAttribute("avgStars", avgStars);
 		
+		
+		// 전체 후기갯수 가져오기 
+		int howManyRvPerSpace = new LikeService().howManyRvPerSpace(spNo);
+		
 		// 후기 부분 끝!
 		//System.out.println(spNo);
 		request.setAttribute("spNo", spNo);
+		request.setAttribute("howManyRvPerSpace", howManyRvPerSpace);
 		request.getRequestDispatcher("views/user/space/spaceDetailView.jsp").forward(request, response);
 	}
 

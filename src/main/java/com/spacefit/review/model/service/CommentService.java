@@ -54,5 +54,19 @@ public class CommentService {
 		close(conn);
 		return result;
 	}
+	
+	public int updateComment(int comNo, int memNo) {
+		Connection conn = getConnection();
+		int result = new CommentDao().deleteComment(conn, comNo, memNo);
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	
 
 }

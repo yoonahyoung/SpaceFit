@@ -58,6 +58,13 @@
 		   AND MEM_NO = ?
 	</entry>
 	
+		<entry key="updateComment">
+		UPDATE TB_COMMENT
+		   SET COM_CONTENT = ?
+		 WHERE COM_NO = ?
+		   AND MEM_NO = ?
+	</entry>
+	
 	
 
 </properties>

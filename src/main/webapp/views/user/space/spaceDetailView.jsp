@@ -14,6 +14,7 @@
    int loveCheck = (int)request.getAttribute("loveCheck");
    ArrayList<Attachment> atList = (ArrayList<Attachment>)request.getAttribute("at");
    
+   int howManyRvPerSpace = (int)request.getAttribute("howManyRvPerSpace");
    ArrayList<Comment> comList = new ArrayList<>();
    int spNo = (int)request.getAttribute("spNo");
 %>
@@ -159,7 +160,7 @@
                                 </div>
                                 <div class="row">
                                     <div id="miniSub">
-                                        <span>REVIEW ZONE</span> <span id="minisubSmall">전체상품평 15개</span>
+                                        <span>REVIEW ZONE</span> <span id="minisubSmall">전체상품평 <%=howManyRvPerSpace %>개</span>
                                     </div> 
                                 </div>
                                 <div class="row">
@@ -200,7 +201,7 @@
                                                   </tr>
                                               </div>
                                               <div id="rvOrderBy">
-                                                  <a>추천순</a>&ensp;|&ensp;<a>최신순</a>&ensp;|&ensp;<a>우수후기</a>
+                                                  <a>고객님들의 실제 이용 리뷰입니다!</a>
                                               </div>
                                               
                                               <% for(Review r : rvList) { %>  
@@ -259,7 +260,7 @@
 	                                                             <input type="hidden" value="<%= spNo %>" name="spNo" id="spNo">
                                                           <% } %>
                                                           </div>
-
+														  <span id="likeUpdateCountSpan"><%= r.getAllLikeCount() %>명이 이 후기를 추천했습니다!</span>
                                                       </div>
                                                   </div>
                                                   <br><br>
@@ -640,7 +641,7 @@
                                             +   '<button type="button" class="comBtn" id="reDelete" onclick="deleteComment(' + comList[i].comNo + ', $(this).parent().parent().parent() ,' + comList[i].rvNo + ');">삭제하기</button>'
                                             +   '<button type="button" class="comBtn openBtn" id="reReport" data-bs-toggle="modal" data-bs-target="#myCommentModal" onclick="reportCommentModal('+ comList[i].comNo + ',' + comList[i].memNo + ',' + spNo +');">신고하기</button>'
                                             
-                                            +   '<button type="button" class="comBtn" id="reComment">대댓달기</button>'
+                                            +   '<button type="button" class="comBtn" id="updateComment" data-bs-toggle="modal" data-bs-target="#myCommentModal2" onclick="updateCommentModal('+ comList[i].comNo + ',' + comList[i].memNo + ',' + spNo +');">댓글수정</button>'
                                             +   '<input type="hidden" value="' + comList[i].parentNo + '" id="hiddenPno">'
                                             + '</div>'
                                             + '<hr>'
@@ -698,6 +699,39 @@
                     </div>
                   </div>
            <!-- The Modal -->
+           
+            <!-- The Modal -->
+                  <div class="modal" id="myCommentModal2">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                  
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                          <h4 class="modal-title" >댓글 수정하기</h4>
+                        </div>
+                     <div class="modal-body">
+                       <% if (directMemNo == 0 /* && directMemNo == r.getMemNo()*/) { %>
+                          <br><h5>로그인해야 이용가능한 서비스입니다.</h5><br><br>
+                          <button type="button" class="btn btn-primary" onclick="location.href='<%=contextPath%>/loginForm.me'">로그인하러가기</button>
+                       <% } else {%>
+                         <!-- Modal body -->
+                          <form method="post" action="<%=contextPath%>/comUpdate.com">
+                           <br><h5>신고사유를 선택하세요.</h5><br><br>
+                              <textarea style="resize:none;" id="comContent"></textarea>
+                              <input type="hidden" name="memNo" value="">
+                              <input type="hidden" name="rptRefNo" value="">
+                              <input type="hidden" name="comContent" value="">
+                              <div>
+                                 <button type="submit" class="btn btn-primary">수정하기</button>
+                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                              </div>
+                         </form>
+                     <% } %>
+                     </div>
+                      </div>
+                    </div>
+                  </div>
+           <!-- The Modal -->
         
         <script>          
 	        function reportCommentModal(comNo,memNo, spNo) {
@@ -705,7 +739,13 @@
 		        $("#myCommentModal input[name=rptRefNo]").val(comNo);
 		        $("#myCommentModal input[name=spNo]").val(spNo);
 			}       
-	
+		
+	        
+	        function updateCommentModal2(comNo,memNo, spNo) {
+				$("#myCommentModal2 input[name=memNo]").val(memNo);
+		        $("#myCommentModal2 input[name=rptRefNo]").val(comNo);
+		        $("#myCommentModal2 input[name=comContent]").val(spNo);
+			} 
 			// 대댓달기라는 버튼을 눌렀을때만 그 댓글의 hiddenPno를 가져오고, 대댓달기를 누르지 않으면 0이 되도록
 	       // 그럼 대댓을 생각하지 말고 일단 댓글만 생각해보자   
 	       
@@ -778,6 +818,49 @@
                      
                   }
              
+                  
+                  function updateComment(e, commentDiv, rvNo) {
+                      
+                      // let commentDiv = commentDiv;
+                      // let rvNo = rvNo;
+
+                       //if(confirm("정말 삭제하시겠습니까??")){
+                       // 사용하겠다
+                       $.ajax({
+                                url:"<%=contextPath%>/comUpdate.com",
+                              data:{
+                                 //commentDiv : commentDiv,
+                                 //rvNo : rvNo,
+                                 comNo:e,
+                                 memNo:$("#memNo").val()
+                              },
+                              type:"post",
+                              //processData:false,
+                             //contentType:false,
+                              success:function(result){
+                                 if(result >0){
+                                   alert("댓글 삭제 성공");
+                                   commentList(rvNo, commentDiv);
+                                 } else {
+                                   alert("댓글 삭제에 실패했습니다!");
+                                   $(".commentDiv").focus();
+                                 }
+                              },
+                              error:function(){
+                                 alert("로그인 후 본인 댓글만 삭제할 수 있습니다.")
+                                location.href="<%=contextPath%>/loginForm.me";
+                                //console.log("댓글삭제 ajax 통신 실패");
+                             // 로그인 안하면 삭제가 안되도록 처리 피
+                              }
+                              
+                           })
+                    //} else {
+                       // 삭제하지 않겠다
+                     //  $(".commentDiv").focus();
+                   // }
+                       
+                       
+                    }
             </script>
             
             

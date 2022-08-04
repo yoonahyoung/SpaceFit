@@ -95,6 +95,25 @@ public class CommentDao {
 		}
 		return result;
 	}
+	
+	
+	public int updateComment(Connection conn, int comNo, int memNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updateComment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, comNo);
+			pstmt.setInt(2, memNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
 	
 	

@@ -254,6 +254,7 @@
 			      		
 			      		$("#dataTable").on("input", "click", function(){
 			      			console.log( $(this).parent().next().val() );
+			      			console.log( $(this).parent().next().val() );
 			      		})
 						
 			      	}

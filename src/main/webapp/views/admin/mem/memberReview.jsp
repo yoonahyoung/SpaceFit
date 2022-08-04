@@ -34,25 +34,27 @@
 							<div style="height : 60px"></div>
                         	  <div class="row" id="reviewChart">
 								  <div class="col-4" id="todaysReview">
-								  	<span>오늘 등록 후기</span><br>
-								  	<h4><%=todayRvCount  %>/<%=rvList.size() %></h4>	
+								  	<span>전체후기</span><br>
+								  	<h4><%=rvList.size() %></h4>	
 								  </div>
 								  <div class="col-4" id="avgStar">
-								  	<span>평균별점</span><br>
-								  	<h4><%=avgRoundOne %></h4>	
+								  	<span>오늘 등록 후기</span><br>
+								  	<h4><%=todayRvCount  %></h4>	
 								  </div>
 								  <div class="col-4" id="avgReview">
-								  	<span>후기작성률</span><br>
-								  	<h4>38%</h4>	
+								  	<span>평균별점</span><br>
+								  	<h4><%=avgRoundOne %></h4>	
 								  </div>
 								</div>
 							  <div style="height : 60px"></div>
 							  <div class="row" id="selectDivDate">
-							  	<form>
+							  <!-- 
+							  <form>
 								  <button class="btn-primary" id="selectAll">전체조회</button>
 								  <button class="btn-primary" id="selectMon">최근 1달</button>
 								  <button class="btn-primary" id="selectSixMon">최근 3개월</button>
 							  	</form>
+							   -->
 							  </div>
 							  <div id="selectExactDate">
 							  	<form>
@@ -62,12 +64,10 @@
 							  </div>
 							  <div id="selectSelection">
 							  	<form>
-							  		<select>
-									  <option selected>최신글 조회</option>
-									  <option>최신글 조회</option>
-									  <option>오래된 글 조회</option>
-									  <option>별점 높은 글</option>
-									  <option>별점 낮은 글</option>
+							  		<select id="orderBySel" name="orderBySel" onchange="changeSelect()">
+									  <option value="newest" selected>최신후기 조회</option>
+									  <option value="reported">누적신고순</option>
+									  <option value="like">누적추천순</option>
 									</select>
 							  	</form>
 							  </div>
@@ -124,18 +124,10 @@
 			                                            <td><%= r.getAllRptCount() %></td>
 			                                            <td>
 			                                            	<% if(r.getReviewStatus().equals("Y")) { %>
-																<input type="radio" name="revStatus" value="Y" checked>공개 &nbsp;
-									                     		<input type="radio" name="revStatus" value="N">비공개&nbsp;
-									                     		<input type="radio" name="revStatus" value="B">베스트&nbsp;
-															<% } else if (r.getReviewStatus().equals("B")) { %>
-																<input type="radio" name="revStatus" value="Y">공개 &nbsp;
-									                     		<input type="radio" name="revStatus" value="N" checked>비공개&nbsp;
-									                     		<input type="radio" name="revStatus" value="B">베스트&nbsp;
+																공개
 															<% } else { %>
-																<input type="radio" name="revStatus" value="Y">공개 &nbsp;
-									                     		<input type="radio" name="revStatus" value="N">비공개&nbsp;
-									                     		<input type="radio" name="revStatus" value="B" checked>베스트&nbsp;
-															<% } %>
+																비공개
+															<% }  %>
 			                                            </td>
 			                                            <td><input type="button" class="btn btn-primary btn-sm" value="상세조회" onclick="location.href='<%=contextPath%>/memRevDetailView.me?no=<%=r.getReviewNo()%>'"></td>
 			                                        </tr>
