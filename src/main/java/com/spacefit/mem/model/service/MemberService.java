@@ -289,7 +289,6 @@ public class MemberService {
 	public int adminCheck(String strAdminNo) {
 		Connection conn = getConnection();
 		String addSql = "WHERE MEM_NO IN (" + strAdminNo + ")";
-		System.out.println("서비스에서 확인하는 addSql" + addSql);
 		int howMany = new MemberDao().adminCheck(conn, addSql);
 		
 		if(howMany > 0) {
@@ -302,6 +301,20 @@ public class MemberService {
 		return howMany;
 	}
 	
+	public int todayMem() {
+		Connection conn = getConnection();
+		int todayMem  = new MemberDao().todayMem(conn);
+		close(conn);
+		return todayMem;
+	}
+	
+	
+	public int goldMem() {
+		Connection conn = getConnection();
+		int goldMem  = new MemberDao().goldMem(conn);
+		close(conn);
+		return goldMem;
+	}
 
 	public ArrayList<Mcp> selectAdminCouponList(){
 		Connection conn = getConnection();

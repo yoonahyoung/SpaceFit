@@ -326,7 +326,18 @@
 	</entry>
 
 	<!-- admin -->
-
+	<entry key = "todayMem">
+		SELECT COUNT(*) AS "TODAY_MEM"
+   			  FROM TB_MEMBER
+  			 WHERE TO_CHAR(MEM_ENROLL_DATE,'yy/mm/dd') = (SELECT TO_CHAR(SYSDATE,'yy/mm/dd') FROM DUAL)
+	</entry>
+	
+	
+	<entry key="goldMem">
+		SELECT COUNT(*) AS "GOLD"
+              FROM TB_MEMBER
+             WHERE GR_NO = 3
+	</entry>
 	
 	
 	<entry key="adminMemberManageListSelect">

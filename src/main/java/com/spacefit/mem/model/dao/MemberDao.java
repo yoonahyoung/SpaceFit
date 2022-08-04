@@ -895,6 +895,52 @@ public class MemberDao {
 		
 	}
 	
+	public int todayMem(Connection conn) {
+		int todayMem = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("todayMem");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				todayMem = rset.getInt("TODAY_MEM");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return todayMem;
+	}
+	
+	
+
+	public int goldMem(Connection conn) {
+		int goldMem = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("goldMem");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				goldMem = rset.getInt("GOLD");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return goldMem;
+	}
+	
 	
 	public int adminCheck(Connection conn, String addSql) {
 		
@@ -902,11 +948,9 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		//ResultSet rset = null;
 		String sql = prop.getProperty("adminCheck") + addSql;
-		System.out.println("다오에서 확인하는 sql : " + sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			howMany = pstmt.executeUpdate(); //2개 선택시 2
-			System.out.println("다오에서 확인하는 howMany" + howMany);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
