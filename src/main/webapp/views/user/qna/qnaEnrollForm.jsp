@@ -69,7 +69,7 @@
                     <option value="파티룸">파티룸</option>
                 </select>
             <th width="70">공간</th>
-            <td width="100">
+            <td width="100" align="center">
 
                 <!-- 기본선택 -->
                 
