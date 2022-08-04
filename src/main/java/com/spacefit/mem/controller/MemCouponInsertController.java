@@ -7,8 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.spacefit.mem.model.service.MemberService;
+import com.spacefit.mem.model.vo.Member;
 
 /**
  * Servlet implementation class MemCouponInsertController
@@ -31,10 +33,23 @@ public class MemCouponInsertController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
 		
-		String cpCode = request.getParameter("cpCode");
+		int memNo = ((Member)session.getAttribute("loginUser")).getMemNo();
+		String cpName = request.getParameter("cpCode");
 		
-		int result = new MemberService().insertMemCoupon(cpCode);
+		int result = new MemberService().insertMemCoupon(memNo, cpName);
+		
+		if(result > 0) {
+			
+			session.setAttribute("alertMsg", "쿠폰이 발급되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/myCouponList.me");
+			
+		}else {
+			
+			session.setAttribute("alertMsg", "쿠폰 발급에 실패했습니다.");
+			response.sendRedirect(request.getContextPath() + "/myCouponList.me");
+		}
 		
 	}
 
