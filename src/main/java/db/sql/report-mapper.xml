@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-
+	<!-- 댓글 신고 -->
+	<entry key="reportCommentReview">
+		INSERT
+		  INTO TB_REPORT
+		    (
+		       RPT_NO
+		     , MEM_NO
+		     , RPT_MEM_NO
+		     , RPT_REASON_NO
+		     , RPT_REF_CAT
+		     , RPT_REF_NO
+		     , RPT_DATE
+		    )
+		VALUES
+		    (
+		       SEQ_RPTNO.NEXTVAL
+		     , ?
+		     , ?
+		     , ?
+		     , 2  
+		     , ?
+		     , SYSDATE
+		    )
+	</entry>
 
 
 

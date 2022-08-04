@@ -50,12 +50,12 @@
 							  </div>
 							  <div id="selectSelection">
 							  	<form>
-							  		<select>
-									  <option selected>글 신고 조회</option>
-									  <option>댓글 신고 조회</option>
-									  <option>누적신고순</option>
-									  <option>최신 신고순</option>
-									  <option>오래된 신고순</option>
+							  		<select onchange="selectSearch();">
+									  <option value="reviewSearch" selected>글 신고 조회</option>
+									  <option value="commentSearch">댓글신고조회</option>
+									  <!--<option>누적신고순</option> -->
+									  <option value="creatDateDesc">최신 신고순</option>
+									  <option value="createDateAsc">오래된 신고순</option>
 									</select>
 							  	</form>
 							  </div>
@@ -90,9 +90,9 @@
 												<th>상세보기</th>
 	                                        </tr>
 	                                    </tfoot>
-	                                    <tbody>
+	                                    <tbody id="reportArea">
 	                                        <tr>
-	                                        	<td><input type="radio"></td>
+	                                        	<td><input type="checkBox"></td>
 	                                        	<td>003</td>
 	                                            <td>
 	                                            	<select>
@@ -112,42 +112,12 @@
 	                                	       		location.href="<%=contextPath%>/memRptDetailView.me";
 	                                				}
 	                                        </script>
-	                                        <tr>
-	                                        	<td><input type="radio"></td>
-	                                        	<td>>003</td>
-	                                            <td>
-	                                            	<select>
-														  <option selected>글</option>
-														  <option>댓글</option>
-													</select>
-	                                            </td>
-	                                            <td>15</td>
-	                                            <td>user01</td>
-	                                            <td>user02</td>
-	                                            <td>비방, 욕설신고</td>
-	                                            <td>22/08/30</td>
-												<td><input type="button" class="btn btn-primary btn-sm" value="상세조회"></td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td><input type="radio"></td>
-	                                        	<td>>003</td>
-	                                            <td>
-	                                            	<select>
-														  <option selected>글</option>
-														  <option>댓글</option>
-													</select>
-	                                            </td>
-	                                            <td>15</td>
-	                                            <td>user01</td>
-	                                            <td>user02</td>
-	                                            <td>비방, 욕설신고</td>
-	                                            <td>22/08/30</td>
-												<td><input type="button" class="btn btn-primary btn-sm" value="상세조회"></td>
-	                                        </tr>
+	                                       
 	                                    </tbody>
 	                                </table>
 	                            </div>
 	                        </div>
+	                        <!-- 
 							<div class="paging-area" align="center">    
 		        
 								<button class="btn btn-sm btn-outline-primary">&lt;</button>        
@@ -159,6 +129,8 @@
 								<button class="btn btn-sm btn-outline-primary">&gt;</button>
 								
 							</div>
+							
+							 -->
 							<div style="height : 60px"></div>
 	                    </div>
                 	</div>
