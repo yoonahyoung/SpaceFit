@@ -131,10 +131,13 @@ public class Report {
 	}
 	@Override
 	public String toString() {
-		return "Report [rptNo=" + rptNo + ", memNo=" + memNo + ", rptMemNo=" + rptMemNo + ", rptReasonNo=" + rptReasonNo
-				+ ", rptReason=" + rptReason + ", rptRefCat=" + rptRefCat + ", rptRefNo=" + rptRefNo + ", rptDate="
-				+ rptDate + "]";
+		return "Report [rptNo=" + rptNo + ", memNo=" + memNo + ", memId=" + memId + ", rptMemNo=" + rptMemNo
+				+ ", rptMemId=" + rptMemId + ", rptReasonNo=" + rptReasonNo + ", rptReason=" + rptReason
+				+ ", rptRefCat=" + rptRefCat + ", category=" + category + ", rptRefNo=" + rptRefNo + ", rptDate="
+				+ rptDate + ", count=" + count + "]";
 	}
+	
+	
 	
 	
 	

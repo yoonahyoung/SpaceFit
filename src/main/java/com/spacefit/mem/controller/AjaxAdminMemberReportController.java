@@ -35,12 +35,15 @@ public class AjaxAdminMemberReportController extends HttpServlet {
 		
 		String selectSearch = "";
 		switch(request.getParameter("selectSearch")) {
-		case "reviewSearch" : selectSearch += "WHERE RPT_REF_CAT = 1"; break;
-		case "commentSearch" : selectSearch += "WHERE RPT_REF_CAT = 2"; break;
+		case "total" : selectSearch += " ORDER BY R.RPT_REF_NO DESC"; break;
+		case "reviewSearch" : selectSearch += " WHERE R.RPT_REF_CAT = 1 ORDER BY R.RPT_REF_NO DESC"; break;
+		case "commentSearch" : selectSearch += " WHERE R.RPT_REF_CAT = 2 ORDER BY R.RPT_REF_NO DESC"; break;
 		case "countDesc" : selectSearch += " ORDER BY COUNT DESC"; break;		
 		}
+				
 		
 		ArrayList<Report> list = new ReportService().adminSelectList(selectSearch);
+		
 		
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(list, response.getWriter());

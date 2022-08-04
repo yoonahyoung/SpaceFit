@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>   
+<%
+	int todayReviewCount = (int)request.getAttribute("todayReviewCount");
+	int totalReviewCount = (int)request.getAttribute("totalReviewCount");
+	int todayCommentCount = (int)request.getAttribute("todayCommentCount");
+	int totalCommentCount = (int)request.getAttribute("totalCommentCount");
+	String memId = (String)request.getAttribute("memId");
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,34 +35,36 @@
 							<div style="height : 60px"></div>
                         	  <div class="row" id="reviewChart">
 								  <div class="col-4" id="todaysReview">
-								  	<span>오늘 신고된 글</span><br>
-								  	<h4>10/8563</h4>	
+								  	<span>오늘 후기신고 건수</span><br>
+								  	<h4><%=todayReviewCount %>/<%=totalReviewCount %></h4>	
 								  </div>
 								  <div class="col-4" id="avgStar">
-								  	<span>오늘 신고된 댓글</span><br>
-								  	<h4>3/546</h4>	
+								  	<span>오늘 댓글신고 건수</span><br>
+								  	<h4><%=todayCommentCount %>/<%= totalCommentCount%></h4>	
 								  </div>
 								  <div class="col-4" id="avgReview">
-								  	<span>최다신고회원</span><br>
-								  	<h4>user02</h4>	
+								  	<span>최다블랙리스트회원</span><br>
+								  	<h4><%= memId%></h4>	
 								  </div>
 								</div>
 							  <div style="height : 60px"></div>
 							  <div class="row" id="selectDivMem">
-							  	<form>
-								  <button class="btn btn-primary">글 / 댓글 복구</button>
-								  <button class="btn btn-secondary">비공개 설정</button>
-								  <button class="btn btn-dark">블랙리스트 등록</button>
-							  	</form>
+								  	<form>
+										  <button class="btn btn-primary">글 / 댓글 복구</button>
+										  <button class="btn btn-secondary">비공개 설정</button>
+										  <button class="btn btn-dark">블랙리스트 등록</button>
+								  	</form>
+							  
 							  </div>
-							  <div id="selectSelection">
-							  	<form>
-							  		<select onchange="selectSearch();">
-									  <option value="reviewSearch" selected>글 신고 조회</option>
-									  <option value="commentSearch">댓글신고조회</option>
-									  <option value="countDesc">누적신고순</option> 									  
-									</select>
-							  	</form>
+							  <div id="selectSelection">	
+								  	<form>					  	
+								  		<select name="selectSearch" id="selectSearch" onchange="selectList();">
+									  		  <option value="total" selected>전체</option>
+											  <option value="reviewSearch">후기신고 조회</option>
+											  <option value="commentSearch">댓글신고조회</option>
+											  <option value="countDesc">누적신고순</option> 									  
+										</select>	
+								 	</form>	
 							  </div>
 
 							<div style="height : 30px"></div>
@@ -65,43 +74,32 @@
 	                                    <thead>
 	                                        <tr>
 	                                        	<th>선택</th>
-	                                        	<th>신고번호</th>
-	                                            <th>글 / 댓글</th>
-	                                            <th>글 / 댓글 누적신고수</th>
+	                                        	<th>글번호</th>
+	                                            <th>종류</th>
+	                                            <th>누적신고수</th>
 	                                            <th>작성자</th>
-	                                            <th>신고자</th>
-	                                            <th>신고사유</th>
-	                                            <th>신고일</th>
+	                                            <th>글상태</th>	                                            	                                           	                                        
 												<th>상세보기</th>
 	                                        </tr>
 	                                    </thead>
+	                                    
+	                                    <tbody id="listArea">
+	                                                                          
+	                                       
+	                                    </tbody>
+	                                    
 	                                    <tfoot>
-	                                        <tr>
+	                                         <tr>
 	                                        	<th>선택</th>
-	                                        	<th>신고번호</th>
-	                                            <th>글 / 댓글</th>
-	                                            <th>글 / 댓글 누적신고수</th>
-	                                            <th>작성자</th>
-	                                            <th>신고자</th>
-	                                            <th>신고사유</th>
-	                                            <th>신고일</th>
+	                                        	<th>글번호</th>
+	                                            <th>종류</th>
+	                                            <th>누적신고수</th>
+	                                            <th>작성자</th>	
+	                                            <th>글상태</th>	                                                                                 
 												<th>상세보기</th>
 	                                        </tr>
 	                                    </tfoot>
-	                                    <tbody id="listArea">
-	                                        <tr>
-	                                        	<td><input type="checkBox"></td>
-	                                        	<td>003</td>
-	                                            <td>글</td>
-	                                            <td>15</td>
-	                                            <td>user01</td>
-	                                            <td>user02</td>
-	                                            <td>비방, 욕설신고</td>
-	                                            <td>22/08/30</td>
-												<td><input type="button" class="btn btn-primary btn-sm" value="상세조회" onclick="rptDetailView();"></td>
-	                                        </tr>	                                      
-	                                       
-	                                    </tbody>
+	                                    
 	                                </table>
 	                            </div>
 	                        </div>
@@ -129,17 +127,17 @@
 			<script>
 				$(function(){
 				
-				 selectSearch();
+				 selectList();
 				 
 				})
 				
-				function selectSearch(){
+				function  selectList(){
 					
 					$.ajax({
 						url : "<%= contextPath %>/ajAdminReport.re",
 						data : {
-							selectSearch: $("#selectSearch").val()
-							}
+							selectSearch: $("#selectSearch").val()						
+							},
 						type:"post",
 						success:function(list){
 							let contextPath = "<%= contextPath %>"
@@ -147,34 +145,27 @@
 							
 							if(list.length == 0){
 		      					value += "<tr>"
-		      					       + "<td colspan='9'> 신고내역이 없습니다. </td>"
-		                                 + "</tr>";
+		      					       + "<td colspan='6'> 신고내역이 없습니다. </td>"
+		                               + "</tr>";
 		      				}else{
 		      					
 		      					for(let i=0; i<list.length; i++){
 							
 									value += '<tr>'
 				                           + 	'<td><input type="checkBox"></td>'
-				                           + 	'<td>003</td>'
-				                           + 	'<td>'
-				                           + 	'	<select>'
-										   +			  '<option selected>글</option>''
-										   +			   '<option>댓글</option>'
-										   +		'</select>'
-				                           + 	'</td>'
-				                           + 	'<td>15</td>'
-				                           + 	'<td>user01</td>' //작성자
-				                           + 	'<td>user02</td>' // 신고자
-				                           +	'<td>비방, 욕설신고</td>'
-				                           +	'<td>22/08/30</td>'
-										   + 	'<td><input type="button" class="btn btn-primary btn-sm" value="상세조회" onclick="rptDetailView();"></td>'
+				                           + 	'<td>'+ list[i].rptRefNo +'</td>'
+				                           + 	'<td>'+ list[i].category +'</td>'
+				                           + 	'<td>'+ list[i].count +'</td>'
+				                           + 	'<td>'+ list[i].rptMemId +'</td>' //작성자	
+				                           +	'<td>글상태</td>'
+										   + 	'<td><a class="btn btn-primary btn-sm" href="'+contextPath+'/memRptDetailView.me?no='+ list[i].rptRefNo + '&category='+ list[i].category +'">상세조회</a></td>'
 				                           + '</tr>'
 			      						}
 		      					}
 							
 							$("#listArea").html(value);
 		      						      												
-						}
+						},
 						
 						error:function(){
 		      				console.log("관리자 예약내역리스트 조회용 ajax통신 실패");
@@ -183,9 +174,7 @@
 					});
 				}
 				
-				 function rptDetailView(){
-     	       		location.href="<%=contextPath%>/memRptDetailView.me";
-     				}
+				
 			
 			
 			</script>  
