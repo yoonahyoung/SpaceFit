@@ -3,6 +3,9 @@
 <%@ page import = "java.util.ArrayList, com.spacefit.mem.model.vo.Member" %>
 <%
 	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list");
+	String errorMsg = (String)session.getAttribute("errorMsg"); 
+
+
 	
 %> 
 <!DOCTYPE html>
@@ -49,11 +52,11 @@
 							  <div style="height : 60px"></div>
 							  <div id="selectSelection">
 								<div class="row" id="selectDivMem">
-							  		<form>
+							  		<div>
 								  	  <button class="btn btn-primary" onclick="gradeChange();">회원등급수정</button>
-									  <button class="btn btn-secondary" onclick="adminChange();">관리자로 변경</button>
+									  <button type="submit" class="btn btn-secondary" onclick="adminChange();">관리자로 변경</button>
 									  <button class="btn btn-danger">회원탈퇴</button>
-							  		</form>
+							  		</div>
 							  	</div>
 						  		<select id="orderBySel" name="orderBySel" onchange="changeSelect()">
 								  <option value="newest" selected>최신회원 조회</option>
@@ -93,8 +96,8 @@
 								</div>
 	                        </div>
 	                        
-	                        <form action="<%=contextPath%>/changeAdm.me" id="adminForm">
-	                        	<input type="hidden" name="strAdminCheck" value="" id="strAdminCheck">
+	                        <form action="<%= contextPath %>/changeAdm.me" id="adminForm" method="post">
+	                        	<input type="hidden" name="strAdminNo" value="" id="strAdminNo">
 	                        </form>
 	                               
                   <script>
@@ -117,17 +120,14 @@
                       	
                       	strAdminCheck = strAdminCheck.substring(0, strAdminCheck.lastIndexOf(","));
                       	
-                      	console.log("자바스크립트에서 확인하는 strAdminCheck : " + strAdminCheck);
+                      	//console.log("자바스크립트에서 확인하는 strAdminCheck : " + strAdminCheck);
                       	
-                      	$("#strAdminCheck").val(strAdminCheck);
+                      	$("#strAdminNo").val(strAdminCheck);
+                      	//console.log($("#strAdminNo").val());
                       	$("#adminForm").submit();
+                      	//console.dir(adminForm);
+
                       	
-                      	if(adminCheck > 0) {
-                      		alert("관리자로 수정이 완료되었습니다.");
-                          	changeSelect();
-                      	} else {
-                      		alert("관리자 수정 실패.");
-                      	}
                               
                       }
                       

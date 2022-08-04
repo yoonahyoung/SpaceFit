@@ -898,20 +898,20 @@ public class MemberDao {
 	
 	public int adminCheck(Connection conn, String addSql) {
 		
-		int adminCheck = 0;
+		int howMany = 0;
 		PreparedStatement pstmt = null;
 		//ResultSet rset = null;
 		String sql = prop.getProperty("adminCheck") + addSql;
 		System.out.println("다오에서 확인하는 sql : " + sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
-			adminCheck = pstmt.executeUpdate(); //2개 선택시 2
-			System.out.println("다오에서 확인하는 adminCheck" + adminCheck);
+			howMany = pstmt.executeUpdate(); //2개 선택시 2
+			System.out.println("다오에서 확인하는 howMany" + howMany);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
-		} return adminCheck;
+		} return howMany;
 	}
 	
 	

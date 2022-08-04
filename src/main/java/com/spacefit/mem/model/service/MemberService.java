@@ -286,20 +286,20 @@ public class MemberService {
 	}
 	
 	
-	public int adminCheck(String strAdminCheck) {
+	public int adminCheck(String strAdminNo) {
 		Connection conn = getConnection();
-		String addSql = "WHERE MEM_NO IN (" + strAdminCheck + ")";
+		String addSql = "WHERE MEM_NO IN (" + strAdminNo + ")";
 		System.out.println("서비스에서 확인하는 addSql" + addSql);
-		int adminCheck = new MemberDao().adminCheck(conn, addSql);
+		int howMany = new MemberDao().adminCheck(conn, addSql);
 		
-		if(adminCheck > 0) {
+		if(howMany > 0) {
 			commit(conn);
 		} else {
 			rollback(conn);
 		} 
 		close(conn);
 		
-		return adminCheck;
+		return howMany;
 	}
 	
 

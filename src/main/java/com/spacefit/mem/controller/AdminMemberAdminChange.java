@@ -30,12 +30,17 @@ public class AdminMemberAdminChange extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String strAdminCheck = request.getParameter("strAdminCheck");
-		// System.out.println("서블릿에서 확인하는 strAdminCheck " + strAdminCheck);
-		int adminCheck = new MemberService().adminCheck(strAdminCheck);
-		request.setAttribute("adminCheck", adminCheck);
-		//response.sendRedirect(request.getContextPath() + "/memManage.me");
-		request.getRequestDispatcher("views/admin/mem/memberManage.jsp").forward(request, response);
+		String strAdminNo = request.getParameter("strAdminNo");
+		 System.out.println("서블릿에서 확인하는 strAdminNo " + strAdminNo);
+		int howMany = new MemberService().adminCheck(strAdminNo);
+		
+		if(howMany > 0) {
+			request.getSession().setAttribute("alertMsg", howMany + "명의 관리자 변경이 완료되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/memManage.me");
+		} else {
+			request.setAttribute("errorMsg", "관리자 등록에 실패했습니다.");
+			request.getRequestDispatcher("views/user/common/backAlertErrorPage.jsp").forward(request, response);
+		}
 	}
 
 	/**
