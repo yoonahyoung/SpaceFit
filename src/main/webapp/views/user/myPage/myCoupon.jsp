@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.mem.model.vo.Mcp"%>
+    pageEncoding="UTF-8" %>
+<%@ page import="java.util.ArrayList, com.spacefit.mem.model.vo.Mcp, 
+	java.util.Date, java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,11 +15,14 @@
 	
 	<%
 		String memName = loginUser.getMemName();
-		
-		ArrayList<Mcp> list = (ArrayList<Mcp>)request.getAttribute("list");
 		String grName = (String)request.getAttribute("grName");
 		
+		ArrayList<Mcp> list = (ArrayList<Mcp>)request.getAttribute("list");
 		ArrayList<Mcp> cpList = (ArrayList<Mcp>)request.getAttribute("cpList");
+		
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String sysdate = sdf.format(date);
 	%>
   <br>
 
@@ -25,7 +30,6 @@
 
     <br><br>
 
-    <div >
       <div align="center">
         <div class="card" id="cp-div-card1" style="width:600px;">
             <div class="card-body">
@@ -53,7 +57,7 @@
 	        </div>
         </form>
       </div>
-        <br>
+       <br>
 
         <div style="margin-left:1355px; margin-bottom:7px">
           <select name="" id="">
@@ -62,57 +66,58 @@
           </select>
         </div>
 
-       <div align="center">
+      <div align="center">
        <div class="col-lg-6">
                 
-                    <table class="table" style="text-align:center;" id="cpTable">
-                        <thead class="table-light">
-                            <tr>
-                                <th>쿠폰명</th>
-                                <th>할인금액</th>
-                                <th>기간</th>
-                                <th>사용여부</th>
-                            </tr>
-                        </thead>
-                        <tbody style="border-top-color:lightgray; border-top-width:1px;">
-                        
-                        	<% if(list.isEmpty()){ %>
-                                  	
-                                  		<tr>
-						                    <td colspan="4" align="center">사용 가능한 쿠폰이 없습니다.</td>
-						                </tr>
-						                
-                           	<% }else {%>
-                        
-	                        	<% for(Mcp m : list) { %>
-	                            <tr>
-	                                <td><%= m.getCpName() %></td>
-	                                <td><%= m.getCpDiscount() %>원</td>
-	                                <td><%= m.getMcpEndDate() %>까지</td>
-	                                <td style="color:#0D6EFD;"><%= ( m.getMcpUse().equals("N") ) ? "미사용" : "사용" %></td>
-	                            </tr>
-	                            <% } %>
-	                            
-                           <% } %>
-                        </tbody>
-                    </table>
+           <table class="table" style="text-align:center;" id="cpTable">
+               <thead class="table-light">
+                   <tr>
+                       <th>쿠폰명</th>
+                       <th>할인금액</th>
+                       <th>기간</th>
+                       <th>사용여부</th>
+                   </tr>
+               </thead>
+               <tbody style="border-top-color:lightgray; border-top-width:1px;">
                
-            </div>
+               	<% if(list.isEmpty()){ %>
+                         	
+               		<tr>
+       					<td colspan="4" align="center">사용 가능한 쿠폰이 없습니다.</td>
+   					</tr>
+             
+              	<% }else {%>
+               
+                	<% for(Mcp m : list) { %>
+                    <tr>
+                        <td><%= m.getCpName() %></td>
+                        <td><%= m.getCpDiscount() %>원</td>
+                        <td><%= m.getMcpEndDate() %>까지</td>
+                        <td style="color:#0D6EFD;">
+                        	<%= ( m.getMcpUse().equals("N") ) ? "미사용" : "사용" %>
+                        </td>
+                    </tr>
+                    <% } %>
+                    
+                  <% } %>
+               </tbody>
+            </table>
+               
         </div>
+       </div>
    
-  
-
+	<!-- 쿠폰존 == 다운가능한 쿠폰 -->
   	<div id="cpZone">
 		<div style="margin-top:100px;">
 			<span style="margin-left:500px;">COUPON</span>&nbsp;
 			<span style="color:#0D6EFD;">ZONE</span>
-			
 		</div>
     </div>
     
     <br><br>
     <div  align="center">
-      <div id="cpZoneDiv" style="width:950px">
+     <div id="cpZoneDiv" style="width:950px">
+     
       <div class="row mb-5">
       
       <% if(cpList.isEmpty()){ %>
@@ -125,13 +130,15 @@
 	        <div class="col-md-6 col-lg-4 mb-3" id="cpZoneCard">
 	          <div class="card h-100" style="box-shadow: 2px 2px 10px 0px #0D6EFD;">
 	            <div class="card-body">
+	              <input type="hidden" value="<%= mc.getCpNo()%>">
 	              <br>
 	              <h4 class="card-title" ><%= mc.getCpName() %></h4>
 	              <br>
 	              <p class="card-text" style="font-size:26px; font-weight:600; color:#0D6EFD;"><%= mc.getCpDiscount() %>원</p>
-	              <p>2022.07.07~<%= mc.getCpEndDate() %></p>
-	              <br>
-	              <a href="javascript:void(0)" class="btn btn-outline-primary">쿠폰 다운 받기</a>
+	              <span><%= sysdate %>~</span>
+	              <span id="cpEndDate"><%= mc.getCpEndDate() %></span>
+	              <br><br>
+	              <button type="button" onclick="couponDown();" class="btn btn-outline-primary">쿠폰 다운 받기</button>
 	            </div>
 	          </div>
 	        </div>
@@ -139,8 +146,18 @@
 		   
 		<% } %>
       </div>
-    </div>
-</div>
+     </div>
+	</div>
+	
+	<script>
+		function couponDown(){
+			location.href="<%=contextPath%>/downCouponInsert.me?cpNo=" + $('input:hidden').val() 
+													   + "&cpEndDate=" + $('#cpEndDate').text();
+		}
+	</script>
+	
+	
+	
 <br><br><br>
 
 

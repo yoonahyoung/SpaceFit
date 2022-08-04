@@ -147,6 +147,19 @@ public class MemberService {
 	   return list;
    }
    
+	public int insertDownCoupon(int cpNo, int memNo, String cpEndDate) {
+		Connection conn = getConnection();
+		int result = new MemberDao().insertDownCoupon(conn, cpNo, memNo, cpEndDate);
+
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+   
    public Member updateProfile(String memProfile, String memId) {
 	   Connection conn = getConnection();
 		int result = new MemberDao().updateProfile(conn, memProfile, memId);

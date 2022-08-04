@@ -167,7 +167,22 @@
 		     , CP_DISCOUNT
 		     , CP_END_DATE
   		  FROM TB_COUPON
- 		 WHERE CP_END_DATE IS NOT NULL;
+ 		 WHERE CP_END_DATE IS NOT NULL
+	</entry>
+	
+	<entry key="insertDownCoupon">
+		INSERT
+		  INTO TB_MCP
+		      (MCP_NO
+		     , CP_NO 
+		     , MEM_NO 
+		     , MCP_END_DATE) 
+		VALUES(
+		       SEQ_MCNO.NEXTVAL
+		     , ?
+		     , ?
+		     , TO_DATE(?, 'YYYY-DD-MM')
+		      )
 	</entry>
 
 	<entry key="updateProfile">

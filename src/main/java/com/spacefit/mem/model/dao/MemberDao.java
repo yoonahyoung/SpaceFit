@@ -411,6 +411,30 @@ public class MemberDao {
 		
 	}
    
+	public int insertDownCoupon(Connection conn, int cpNo, int memNo, String cpEndDate) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertDownCoupon");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, cpNo);
+			pstmt.setInt(2, memNo);
+			pstmt.setString(3, cpEndDate);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+   
    public int updateProfile(Connection conn, String memProfile, String memId) {
 		
 		int result = 0;
