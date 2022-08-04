@@ -38,7 +38,7 @@ public class MemberCartController extends HttpServlet {
 		
 		int spNo = Integer.parseInt(request.getParameter("no"));
 		int limit = Integer.parseInt(request.getParameter("limit"));
-		String park = request.getParameter("park");
+		String park = request.getParameter("parking");
 		String animal = request.getParameter("animal");
 		String stand = request.getParameter("stand");
 		String chair = request.getParameter("chair");
