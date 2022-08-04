@@ -19,11 +19,6 @@
 			q.setSpaceCategory("파티룸");
 		}
 	}
-	
-	int currentPage = pi.getCurrentPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
-	int maxPage = pi.getMaxPage();
 %>
 <!DOCTYPE html>
 <html>
@@ -53,6 +48,7 @@
     select{
         text-align: center;
         width: 100px;
+        height:31px;
     }
     .list{
         display: inline;
@@ -64,6 +60,8 @@
         width: 100%;
         box-sizing: border-box;
     }
+    
+    
 </style>
 </head>
 <body>
@@ -130,7 +128,7 @@
                 <option value="전체">--전체--</option>
                 <option value="대기">답변대기</option>
                 <option value="완료">답변완료</option>
-            </select>
+            </select>&nbsp;&nbsp;
             <button class="btn btn-sm btn-primary">검색</button>
             <br><br>
         </div>

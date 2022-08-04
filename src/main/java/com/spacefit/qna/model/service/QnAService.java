@@ -21,13 +21,6 @@ public class QnAService {
 		
 		return list;
 	}
-	public ArrayList<QnA> selectQnAListAll(PageInfo pi){
-		Connection conn = getConnection();
-		ArrayList<QnA> list = new QnADao().selectQnAListAll(conn, pi);
-		close(conn);
-		
-		return list;
-	}
 	
 	public int selectListCount() {
 		Connection conn = getConnection();
@@ -183,102 +176,227 @@ public class QnAService {
 		return result;
 	}
 	
-	// 전체 전체 전체 선택 미완
-	public ArrayList<QnA> selectQnAList2(PageInfo pi, String isSolved){
+	public int changeSolvedStatus(int refNo) {
+		Connection conn = getConnection();
+		int result = new QnADao().changeSolvedStatus(conn, refNo);
+		close(conn);
+		return result;
+	}
+	public int selectMyListCount(int memNo) {
+		Connection conn = getConnection();
+		int result = new QnADao().selectMyListCount(conn, memNo);
+		close(conn);
+		return result;
+	}
+	// 내 글 리스트 + 답글 조회
+	public ArrayList<QnA> selectMyQnAList(PageInfo pi, int memNo){
+		Connection conn = getConnection();
+		ArrayList<QnA> list = new QnADao().selectMyQnAList(conn, pi, memNo);
+		close(conn);
+		
+		return list;
+	}
+	// 여기서부터 검색 메소드
+	// 전체 전체 전체 전체 1
+	public ArrayList<QnA> selectQnAListAll(){
+		Connection conn = getConnection();
+		ArrayList<QnA> list = new QnADao().selectQnAListAll(conn);
+		close(conn);
+		
+		return list;
+	}
+	// 전체 전체 전체 대기 2-1
+	public ArrayList<QnA> selectQnAList2Wait(){
 		Connection conn = getConnection();
 		ArrayList<QnA> list = null;
-		if(isSolved.equals("대기")) {//답변대기인경우
-			list = new QnADao().selectQnAList2Wait(conn, pi);
-		}else {//답변완료인경우
-			//ArrayList<QnA> list = new QnADao().selectQnAList16(conn, pi, qnaCategory, spaceCategory, spaceNo);
-		}
+		
+		list = new QnADao().selectQnAList2Wait(conn);
 
 		close(conn);
 		
 		return list;
 	}
-	// 전체 전체 선택 전체
-	public ArrayList<QnA> selectQnAList3(PageInfo pi, String spaceNo){
+	
+	// 전체 전체 전체 완료 2-2
+	public ArrayList<QnA> selectQnAList2Solved(String spaceNo){
 		Connection conn = getConnection();
 		ArrayList<QnA> list = null;
-		list = new QnADao().selectQnAList3(conn, pi, spaceNo);
+		
+		list = new QnADao().selectQnAList2Solved(conn, spaceNo);
 
 		close(conn);
 		
 		return list;
 	}
-	// 전체 선택 전체 전체
-	public ArrayList<QnA> selectQnAList5(PageInfo pi, String spaceCategory){
+	// 전체 전체 선택 전체 3
+	public ArrayList<QnA> selectQnAList3(String spaceNo){
 		Connection conn = getConnection();
 		ArrayList<QnA> list = null;
-		list = new QnADao().selectQnAList5(conn, pi, spaceCategory);
+		list = new QnADao().selectQnAList3(conn, spaceNo);
 
 		close(conn);
 		
 		return list;
 	}
-	// 전체 선택 선택 전체
-	public ArrayList<QnA> selectQnAList7(PageInfo pi, String spaceCategory, String spaceNo){
+	// 전체 전체 선택 대기 4-1
+	public ArrayList<QnA> selectQnAList4Wait(String spaceNo){
 		Connection conn = getConnection();
 		ArrayList<QnA> list = null;
-		list = new QnADao().selectQnAList7(conn, pi, spaceCategory, spaceNo);
+		list = new QnADao().selectQnAList4Wait(conn, spaceNo);
 
 		close(conn);
 		
 		return list;
 	}
-	// 선택 전체 전체 전체
-	public ArrayList<QnA> selectQnAList9(PageInfo pi, String qnaCategory){
+	
+	// 전체 전체 선택 완료 4-2
+	public ArrayList<QnA> selectQnAList4Solved(String spaceNo){
 		Connection conn = getConnection();
 		ArrayList<QnA> list = null;
-		list = new QnADao().selectQnAList9(conn, pi, qnaCategory);
+		list = new QnADao().selectQnAList4Solved(conn, spaceNo);
 
 		close(conn);
 		
 		return list;
 	}
-	// 선택 전체 선택 전체
-	public ArrayList<QnA> selectQnAList11(PageInfo pi, String qnaCategory, String spaceNo){
+	// 전체 선택 전체 전체 5
+	public ArrayList<QnA> selectQnAList5(String spaceCategory){
 		Connection conn = getConnection();
 		ArrayList<QnA> list = null;
-		list = new QnADao().selectQnAList11(conn, pi, qnaCategory, spaceNo);
+		list = new QnADao().selectQnAList5(conn, spaceCategory);
 
 		close(conn);
 		
 		return list;
 	}
-	// 선택 선택 전체 전체
-	public ArrayList<QnA> selectQnAList13(PageInfo pi, String qnaCategory, String spaceCategory){
+	// 전체 선택 전체 대기 6-1
+	public ArrayList<QnA> selectQnAList6Wait(String spaceCategory){
 		Connection conn = getConnection();
 		ArrayList<QnA> list = null;
-		list = new QnADao().selectQnAList13(conn, pi, qnaCategory, spaceCategory);
+		list = new QnADao().selectQnAList4Wait(conn, spaceCategory);
 
 		close(conn);
 		
 		return list;
 	}
-	// 선택 선택 선택 전체
-	public ArrayList<QnA> selectQnAList15(PageInfo pi, String qnaCategory, String spaceCategory, String spaceNo){
+	
+	// 전체 선택 전체 완료 6-2
+	public ArrayList<QnA> selectQnAList6Solved(String spaceCategory){
 		Connection conn = getConnection();
 		ArrayList<QnA> list = null;
-		list = new QnADao().selectQnAList15(conn, pi, qnaCategory, spaceCategory, spaceNo);
+		list = new QnADao().selectQnAList4Solved(conn, spaceCategory);
 
 		close(conn);
 		
 		return list;
 	}
-	// 선택 선택 선택 선택 미완
-	public ArrayList<QnA> selectQnAList16(PageInfo pi, String qnaCategory, String spaceCategory, String spaceNo, String isSolved){
+
+	// 전체 선택 선택 전체 7
+	public ArrayList<QnA> selectQnAList7(String spaceCategory, String spaceNo){
 		Connection conn = getConnection();
 		ArrayList<QnA> list = null;
-		if(isSolved.equals("대기")) {//답변대기인경우
-			list = new QnADao().selectQnAList16Wait(conn, pi, qnaCategory, spaceCategory, spaceNo);
-		}else {//답변완료인경우
-			//ArrayList<QnA> list = new QnADao().selectQnAList16(conn, pi, qnaCategory, spaceCategory, spaceNo);
-		}
+		list = new QnADao().selectQnAList7(conn, spaceCategory, spaceNo);
 
 		close(conn);
 		
 		return list;
 	}
+	// 선택 전체 전체 전체 9
+	public ArrayList<QnA> selectQnAList9(String qnaCategory){
+		Connection conn = getConnection();
+		ArrayList<QnA> list = null;
+		list = new QnADao().selectQnAList9(conn, qnaCategory);
+
+		close(conn);
+		
+		return list;
+	}
+	// 선택 전체 전체 대기 10-1
+	public ArrayList<QnA> selectQnAList10Wait(String spaceCategory){
+		Connection conn = getConnection();
+		ArrayList<QnA> list = null;
+		list = new QnADao().selectQnAList10Wait(conn, spaceCategory);
+
+		close(conn);
+		
+		return list;
+	}
+	
+	// 선택 전체 전체 완료 10-2
+	public ArrayList<QnA> selectQnAList10Solved(String spaceCategory){
+		Connection conn = getConnection();
+		ArrayList<QnA> list = null;
+		list = new QnADao().selectQnAList10Solved(conn, spaceCategory);
+
+		close(conn);
+		
+		return list;
+	}
+	
+	// 선택 전체 선택 전체 11
+	public ArrayList<QnA> selectQnAList11(String qnaCategory, String spaceNo){
+		Connection conn = getConnection();
+		ArrayList<QnA> list = null;
+		list = new QnADao().selectQnAList11(conn, qnaCategory, spaceNo);
+
+		close(conn);
+		
+		return list;
+	}
+	
+	// 선택 전체 선택 대기 12-1
+	public ArrayList<QnA> selectQnAList12Wait(String qnaCategory, String spaceNo){
+		Connection conn = getConnection();
+		ArrayList<QnA> list = null;
+		list = new QnADao().selectQnAList12Wait(conn, qnaCategory, spaceNo);
+
+		close(conn);
+		
+		return list;
+	}
+	
+	// 선택 전체 선택 완료 12-2
+	public ArrayList<QnA> selectQnAList12Solved(String qnaCategory, String spaceNo){
+		Connection conn = getConnection();
+		ArrayList<QnA> list = null;
+		list = new QnADao().selectQnAList12Solved(conn, qnaCategory, spaceNo);
+
+		close(conn);
+		
+		return list;
+	}
+
+	// 선택 선택 전체 전체 13
+	public ArrayList<QnA> selectQnAList13(String qnaCategory, String spaceCategory){
+		Connection conn = getConnection();
+		ArrayList<QnA> list = null;
+		list = new QnADao().selectQnAList13(conn, qnaCategory, spaceCategory);
+
+		close(conn);
+		
+		return list;
+	}
+	// 선택 선택 전체 대기 14-1
+	public ArrayList<QnA> selectQnAList14Wait(String qnaCategory, String spaceCategory){
+		Connection conn = getConnection();
+		ArrayList<QnA> list = null;
+		list = new QnADao().selectQnAList14Wait(conn, qnaCategory, spaceCategory);
+
+		close(conn);
+		
+		return list;
+	}
+	
+	// 선택 선택 전체 완료 14-2
+	public ArrayList<QnA> selectQnAList14Solved(String qnaCategory, String spaceCategory){
+		Connection conn = getConnection();
+		ArrayList<QnA> list = null;
+		list = new QnADao().selectQnAList14Solved(conn, qnaCategory, spaceCategory);
+
+		close(conn);
+		
+		return list;
+	}
+
+
 }

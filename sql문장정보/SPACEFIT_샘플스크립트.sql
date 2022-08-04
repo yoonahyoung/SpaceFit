@@ -470,7 +470,8 @@ END;
 	"QNA_COUNT" NUMBER DEFAULT 0, 
 	"QNA_STATUS" VARCHAR2(1 BYTE) DEFAULT 'Y', 
 	"QNA_PUBLIC" VARCHAR2(1 BYTE) DEFAULT 'Y', 
-	"QNA_PWD" VARCHAR2(30 BYTE)
+	"QNA_PWD" VARCHAR2(30 BYTE),
+    "QNA_SOLVED" VARCHAR2(1 BYTE)
    ) ;
 
    COMMENT ON COLUMN "TB_QNA"."QNA_NO" IS '글번호';
@@ -487,6 +488,7 @@ END;
    COMMENT ON COLUMN "TB_QNA"."QNA_STATUS" IS '활성화여부';
    COMMENT ON COLUMN "TB_QNA"."QNA_PUBLIC" IS '비밀글여부';
    COMMENT ON COLUMN "TB_QNA"."QNA_PWD" IS '비밀번호';
+   COMMENT ON COLUMN "TB_QNA"."QNA_SOLVED" IS '답변여부';
 --------------------------------------------------------
 --  DDL for Table TB_REPORT
 --------------------------------------------------------

@@ -496,7 +496,7 @@
 	          <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
 	            <div class="accordion-body container">
 	              <div class="row myPageRow">
-	                <button class="col myPageCol"> 1:1 문의답변 </button>
+	                <button class="col myPageCol" onclick="location.href='<%=contextPath%>/myList.qa?cpage=1'"> 1:1 문의답변 </button>
 	                <button class="col myPageCol" onclick="location.href='<%=contextPath%>/rlist.rv?cpage=1'"> 내 후기 </button>
 	              </div>
 	            </div>
