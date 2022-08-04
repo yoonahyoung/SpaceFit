@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.spacefit.mem.model.vo.Member;
 import com.spacefit.mem.model.vo.Report;
 import com.spacefit.review.model.service.ReviewService;
 
@@ -30,15 +31,28 @@ public class AjaxReportReviewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int memNo = Integer.parseInt(request.getParameter("memNo"));
+
+		request.setCharacterEncoding("UTF-8");
+		int sNo = Integer.parseInt(request.getParameter("sNo"));
+		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
 		int rptMemNo = Integer.parseInt(request.getParameter("rptMemNo"));
 		int rptReasonNo = Integer.parseInt(request.getParameter("rptReasonNo"));
 		int rptRefNo = Integer.parseInt(request.getParameter("rptRefNo"));
-		
+				
 		Report rpt = new Report(memNo, rptMemNo, rptReasonNo, rptRefNo);
 		
+		System.out.println(rpt);
+		System.out.println(sNo);
+		
 		int result = new ReviewService().reportReview(rpt);
-		response.getWriter().print(result);
+		if(result > 0){
+			 // 신고 성공
+			request.getSession().setAttribute("alertMsg","신고완료! 스페이스핏 운영에 도움을 주셔서 감사합니다." );
+			response.sendRedirect(request.getContextPath() + "/detail.sp?no=" + sNo);
+		 } else {
+			 request.setAttribute("errorMsg", "신고에 실패했습니다. 잠시후 다시 시도해주세요");
+				request.getRequestDispatcher("views/user/common/backAlertErrorPage.jsp").forward(request, response);
+		 }
 	}
 
 	/**

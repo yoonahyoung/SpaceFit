@@ -73,7 +73,7 @@ public class SpaceDetailViewController extends HttpServlet {
 		
 		// 후기 부분 끝!
 		
-		
+		request.setAttribute("spNo", spNo);
 		request.getRequestDispatcher("views/user/space/spaceDetailView.jsp").forward(request, response);
 	}
 

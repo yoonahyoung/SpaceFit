@@ -280,7 +280,7 @@
 		 WHERE SPACE_NO = ?
 	</entry>
 	
-	<!-- 공간별 평균 별점 올림으로 구하기ㅇ -->
+	<!-- 후기 신고 등록 -->
 	<entry key="reportReview">
 	INSERT
 	  INTO TB_REPORT
@@ -303,6 +303,10 @@
 	     , ?
 	     , SYSDATE
 	    )
+	</entry>
+	
+	<entry key="">
+		
 	</entry>
 
 </properties>
