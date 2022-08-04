@@ -208,7 +208,7 @@ body {
 		                                                            	<span id='starWhite'>★</span>
 		                                                            <% } %>
 		                                                        </div>
-		                                                        
+		                                                        <span id="countLike"><span><%=r.getAllLikeCount() %></span>명이 이 후기를 추천했어요!</span><br>
 		                                                    </div>
 		                                                    <textarea id="rvContentDiv"><%=r.getReviewContent() %>
 		                                                    </textarea>
@@ -225,7 +225,6 @@ body {
 		                                                    </div>
 		                                                    <br>
 		                                                    <div class="rvLikeAndReport">
-		                                                    	<span id="countLike"><span id="countPlusOne"><%=r.getAllLikeCount() %></span>명이 이 후기를 추천했어요!</span><br>
 		                                                    	<% if (directMemNo == 0) { %>
 		                                                    		<button type="button" class="btn btn-primary btn-sm" id="login-btn" onclick="loginForm();">로그인하고 추천!</button>
 		                                                    	<% } else { %>
@@ -557,11 +556,8 @@ body {
        					// 추천이 완료된 데이터, 예약번호가 넘어옴
 						alert("추천해주셔서 감사합니다!");
        					// 바로 표시되게 하는 걸 못하게씀 ㅜㅜ
-       					console.dir($('this').parent().children().val());
-       					$('this').parent().children().text( $("#countPlusOne").text()+1 );
 					} else {
 						// 후기 중복확인
-						console.dir($('this').parent().children().val());
 						alert("이미 추천한 후기입니다!");
 						}
        			},
@@ -648,7 +644,7 @@ body {
 				  				 // 댓글작성 성공
 				  				 // => 내가 작성한 댓글이 보여지기 위해서는 갱신된 댓글리스트 조회필요
 				  				 commentList(e, commentDiv);
-				  				 $("#comContent").val(" "); //textarea 초기회
+				  				 $("#comContent").val(""); //textarea 초기회
 				  			 }
 				  		 },
 				  		 error:function(){
@@ -680,7 +676,7 @@ body {
 		 				  		 success:function(result){
 		 				  			 if(result >0){
 		 				  				alert("댓글 삭제 성공");
-		 				  				commentList(rvNo, commentDiv);
+		 				  				 commentList(rvNo, commentDiv);
 		 				  			 } else {
 		 				  				alert("댓글 삭제에 실패했습니다!");
 		 				  				$(".commentDiv").focus();
