@@ -229,11 +229,11 @@ body {
 		                                                    		<button type="button" class="btn btn-primary btn-sm" id="login-btn" onclick="loginForm();">로그인하고 추천!</button>
 		                                                    	<% } else { %>
 			                                                        <button type="button" class="btn btn-primary btn-sm" data-value="<%= r.getReviewNo() %>" onclick="likeUpdate(this);">후기추천</button>
-			                                                        <button type="button" class="btn btn-danger btn-sm"  data-bs-toggle="modal" data-bs-target="#myModal" onclick="reportModal($(this).siblings('#rvNo').val(), $(this).siblings('#rvMemNo').val()), $(this).siblings('#sNo').val());">후기신고</button>
+			                                                        <button type="button" class="btn btn-danger btn-sm"  data-bs-toggle="modal" data-bs-target="#myModal" onclick="reportModal($(this).siblings('#rvNo').val(), $(this).siblings('#rvMemNo').val(), $(this).siblings('#spNo').val());">후기신고</button>
 			                                                        <input type="hidden" value="<%= directMemNo %>" name="memNo" id="memNo">
 			                                        				<input type="hidden" value="<%= r.getReviewNo() %>" name="rvNo" id="rvNo">
 			                                        				<input type="hidden" value="<%= r.getMemNo() %>" name="rvMemNo" id="rvMemNo">
-			                                        				<input type="hidden" value="<%= spNo %>" name="sNo" id="sNo">
+			                                        				<input type="hidden" value="<%= spNo %>" name="spNo" id="spNo">
 			                                        			<% } %>
 		                                                    </div>
 		                                                </div>
@@ -414,7 +414,7 @@ body {
 				      <label><input type="radio" name="rptReasonNo" value="3"> 스팸 혹은 금전적요구</label><br><br><br>
 				      <input type="hidden" name="rptMemNo" value="">
 				      <input type="hidden" name="rptRefNo" value="">
-				      <input type="hidden" name="sNo" value="">
+				      <input type="hidden" name="spNo" value="">
 			      	<div>
 			      		<button type="submit" class="btn btn-primary">신고하기</button>
 			      		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
@@ -427,11 +427,12 @@ body {
 		</div>
     </main>
     <script>
-    	function reportModal(rvNo, rvMemNo, sNo){
+    	function reportModal(rvNo, rvMemNo, spNo){
     		$("#myModal input[name=rptMemNo]").val(rvMemNo);
     		$("#myModal input[name=rptRefNo]").val(rvNo);
-    		$("#myModal input[name=sNo]").val(sNo);
-    		console.log(sNo);
+    		$("#myModal input[name=spNo]").val(spNo);
+    		//console.log(spNo);
+    		
     	}
     
     	function formSubmit(num){ // num이 1일시 결제, num이 2일시 보관함

@@ -33,7 +33,7 @@ public class AjaxReportReviewController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-		int sNo = Integer.parseInt(request.getParameter("sNo"));
+		int spNo = Integer.parseInt(request.getParameter("spNo"));
 		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
 		int rptMemNo = Integer.parseInt(request.getParameter("rptMemNo"));
 		int rptReasonNo = Integer.parseInt(request.getParameter("rptReasonNo"));
@@ -42,13 +42,13 @@ public class AjaxReportReviewController extends HttpServlet {
 		Report rpt = new Report(memNo, rptMemNo, rptReasonNo, rptRefNo);
 		
 		System.out.println(rpt);
-		System.out.println(sNo);
+		System.out.println(spNo);
 		
 		int result = new ReviewService().reportReview(rpt);
 		if(result > 0){
 			 // 신고 성공
 			request.getSession().setAttribute("alertMsg","신고완료! 스페이스핏 운영에 도움을 주셔서 감사합니다." );
-			response.sendRedirect(request.getContextPath() + "/detail.sp?no=" + sNo);
+			response.sendRedirect(request.getContextPath() + "/detail.sp?no=" + spNo);
 		 } else {
 			 request.setAttribute("errorMsg", "신고에 실패했습니다. 잠시후 다시 시도해주세요");
 				request.getRequestDispatcher("views/user/common/backAlertErrorPage.jsp").forward(request, response);
