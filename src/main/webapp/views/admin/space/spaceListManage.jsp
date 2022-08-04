@@ -162,22 +162,22 @@
 		          					
 		          					if(pi.currentPage != 1){ 
 		          						pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='selectPaging(" + (pi.currentPage-1) + ");'>&lt;</button>";
-		          						console.log(pageVal + '일');
+		          						
 									}
 									
 									for(let p=pi.startPage; p<=pi.endPage; p++){
 										if(p == pi.currentPage){
 											pageVal += "<button disabled class='btn btn-sm btn-outline-primary'>" +  p  + "</button>";
-											console.log(pageVal + '이');
+											
 										}else{ 
 											 pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='selectPaging("+ p +")';>"  + p + "</button>";
-											 console.log(pageVal + '삼');
+											
 						            	} 
 									} 
 									
 									 if(pi.currentPage != pi.maxPage){ 
 									 pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='selectPaging(" + (pi.currentPage+1) + ");'>&gt;</button>";
-									 console.log(pageVal + '사');
+									 
 						            } 
 		                             
 		          				}

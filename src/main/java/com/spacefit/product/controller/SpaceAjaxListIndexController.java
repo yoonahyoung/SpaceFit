@@ -14,16 +14,16 @@ import com.spacefit.product.model.service.SpaceService;
 import com.spacefit.product.model.vo.Space;
 
 /**
- * Servlet implementation class SpaceListView
+ * Servlet implementation class SpaceAjaxListIndexController
  */
-@WebServlet("/list.sp")
-public class SpaceListViewController extends HttpServlet {
+@WebServlet("/list.in")
+public class SpaceAjaxListIndexController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SpaceListViewController() {
+    public SpaceAjaxListIndexController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,18 +33,11 @@ public class SpaceListViewController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		// 인기공간 리스트
-		ArrayList<Space> topList = new SpaceService().selectTopList();
-		
-		// 모든 공간 리스트
 		ArrayList<Space> list = new SpaceService().selectList();
-		
-		
-		// 상품 리스트 받아서 넘기기
-		request.setAttribute("list", list);
-		request.setAttribute("topList", topList);
-		request.getRequestDispatcher("views/user/space/spaceListView.jsp").forward(request, response);
-		
+
+		// index.jsp에서 뿌려줄 리스트
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(list, response.getWriter());
 	}
 
 	/**

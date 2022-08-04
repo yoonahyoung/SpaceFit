@@ -92,101 +92,16 @@
 
     <!-- ======= space Section1 ======= -->
     <section class="section-agents section-t8">
-      <div class="container">
+    <div class="container">
         <div class="row">
           <div class="col-md-12">
             <div class="title-wrap d-flex justify-content-between">
-              <div class="title-box">
-                <h2 class="title-a">OUR SPACE</h2>
-              </div>
-              <div class="title-link">
-                <a href="<%=contextPath%>/list.sp">더 많은 상품보기
-                  <span class="bi bi-chevron-right"></span>
-                </a>
-              </div>
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card-box-d">
-              <div class="card-img-d">
-                <img src="resources/admin/space_upfiles/studio/studio3_2.jpg" alt="" class="img-d img-fluid">
-              </div>
-              <div class="card-overlay card-overlay-hover">
-                <div class="card-header-d">
-                  <div class="card-title-d align-self-center">
-                    <h3 class="title-d">
-                      <a href="<%=contextPath%>/views/user/space/spaceDetailView.jsp" class="link-two">스튜디오3<br></a>
-                    </h3>
-                  </div>
-                </div>
-                <div class="card-body-d">
-                  <div class="info-agents color-a">
-                    <p>
-                      <strong>촬영에 적합한 스튜디오</strong> 
-                    </p>
-                    <p>
-                      <strong> 최대 인원 : <span>n</span>명 </strong> 
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card-box-d">
-              <div class="card-img-d">
-                <img src="resources/admin/space_upfiles/studio/studio2_2.jpg" alt="" class="img-d img-fluid">
-              </div>
-              <div class="card-overlay card-overlay-hover">
-                <div class="card-header-d">
-                  <div class="card-title-d align-self-center">
-                    <h3 class="title-d">
-                      <a href="agent-single.html" class="link-two">스튜디오2<br></a>
-                    </h3>
-                  </div>
-                </div>
-                <div class="card-body-d">
-                  <div class="info-agents color-a">
-                    <p>
-                      <strong>패브릭한 느낌의 스튜디오</strong> 
-                    </p>
-                    <p>
-                      <strong> 최대 인원 : <span>n</span>명 </strong> 
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card-box-d">
-              <div class="card-img-d">
-                <img src="resources/admin/space_upfiles/practice/prac1_1.jpg" alt="" class="img-d img-fluid">
-              </div>
-              <div class="card-overlay card-overlay-hover">
-                <div class="card-header-d">
-                  <div class="card-title-d align-self-center">
-                    <h3 class="title-d">
-                      <a href="agent-single.html" class="link-two">연습실1<br></a>
-                    </h3>
-                  </div>
-                </div>
-                <div class="card-body-d">
-                  <div class="info-agents color-a">
-                    <p>
-                      <strong>다양한 조명 색을 조절할 수 있는 연습실 </strong> 
-                    </p>
-                    <p>
-                      <strong> 최대 인원 : <span>n</span>명 </strong> 
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="row" id="mainSp1">
+        <!-- 공간이 들어올 자리 -->
+       </div>
       </div>
     </section><!-- End Space Section -->
 
@@ -199,90 +114,70 @@
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card-box-d">
-              <div class="card-img-d">
-                <img src="resources/admin/space_upfiles/party/party2_4.jpg" alt="" class="img-d img-fluid">
-              </div>
-              <div class="card-overlay card-overlay-hover">
-                <div class="card-header-d">
-                  <div class="card-title-d align-self-center">
-                    <h3 class="title-d">
-                      <a href="agent-single.html" class="link-two">파티룸2 <br></a>
-                    </h3>
-                  </div>
-                </div>
-                <div class="card-body-d">
-                  <div class="info-agents color-a">
-                    <p>
-                      <strong>낭만있는 분위기가 준비된 파티룸 </strong> 
-                    </p>
-                    <p>
-                      <strong> 최대 인원 : <span>n</span>명 </strong> 
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card-box-d">
-              <div class="card-img-d">
-                <img src="resources/admin/space_upfiles/party/party1_4.jpg" alt="" class="img-d img-fluid">
-              </div>
-              <div class="card-overlay card-overlay-hover">
-                <div class="card-header-d">
-                  <div class="card-title-d align-self-center">
-                    <h3 class="title-d">
-                      <a href="agent-single.html" class="link-two">파티룸1<br></a>
-                    </h3>
-                  </div>
-                </div>
-                <div class="card-body-d">
-                  <div class="info-agents color-a">
-                    <p>
-                      <strong>생일파티, 이벤트 등에 적합한 파티룸 </strong> 
-                    </p>
-                    <p>
-                      <strong> 최대 인원 : <span>n</span>명 </strong> 
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card-box-d">
-              <div class="card-img-d">
-                <img src="resources/admin/space_upfiles/party/party2_2.jpg" alt="" class="img-d img-fluid">
-              </div>
-              <div class="card-overlay card-overlay-hover">
-                <div class="card-header-d">
-                  <div class="card-title-d align-self-center">
-                    <h3 class="title-d">
-                      <a href="agent-single.html" class="link-two">파티룸2<br></a>
-                    </h3>
-                  </div>
-                </div>
-                <div class="card-body-d">
-                  <div class="info-agents color-a">
-                    <p>
-                      <strong>스튜디오로 활용도 가능한 파티룸 </strong> 
-                    </p>
-                    <p>
-                      <strong> 최대 인원 : <span>n</span>명 </strong> 
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="row" id="mainSp2">
+       
         </div>
       </div>
     </section>
     <!-- End Space Section -->
-
+	 <script>
+          	$(function(){
+          		$.ajax({
+          			url:"<%=contextPath%>/list.in",
+          			success:function(list){
+          				let contextPath = "<%=contextPath%>";
+          				let sp1 = ""; // 공간뿌려주는 변수
+          				let sp2 = "";
+          				
+          				for(let i=3; i<6; i++){ // 위에 3개짜리 한줄
+          				   sp1 += "<div class='col-md-4'>"
+          					   + 	"<div class='card-box-d'>"
+          					   +		"<div class='card-img-d'>"
+          					   + 			"<img src='" + contextPath + "/" + list[i].spacePic + "' class='img-d img-fluid'>"
+		          	           + 		"</div>"
+		          	           +		"<div class='card-overlay card-overlay-hover'>"
+		          	           +			"<div class='card-header-d'>"
+		          	           + 				"<div class='card-title-d align-self-center'>"
+		          	           +					"<h3 class='title-d'>"
+		          	           + 						"<a href='" + contextPath + "/detail.sp?no=" + list[i].spaceNo + "' class='link-two'>" + list[i].spaceName + "<br></a>"
+		          	           + 					"</h3>"
+		          	           +				"</div>"
+		          	           +			"</div>"
+		          	           +		"<div class='card-body-d'>"
+		          	           +	"<div class='info-agents color-a'>"
+		          	           + "<p>"
+		          	           + 	"<strong> 최대 인원 : <span>" + list[i].spaceLimit +"</span>명 </strong>"
+		          	           + "</p>"
+		          	           + " </div></div></div></div></div>"
+          				}
+          				for(let i=6; i<9; i++){ // 밑에 3개짜리 한줄
+           				   sp2 += "<div class='col-md-4'>"
+           					   + 	"<div class='card-box-d'>"
+           					   +		"<div class='card-img-d'>"
+           					   + 			"<img src='" + contextPath + "/" + list[i].spacePic + "' class='img-d img-fluid'>"
+ 		          	           + 		"</div>"
+ 		          	           +		"<div class='card-overlay card-overlay-hover'>"
+ 		          	           +			"<div class='card-header-d'>"
+ 		          	           + 				"<div class='card-title-d align-self-center'>"
+ 		          	           +					"<h3 class='title-d'>"
+ 		          	           + 						"<a href='" + contextPath + "/detail.sp?no=" + list[i].spaceNo + "' class='link-two'>" + list[i].spaceName + "<br></a>"
+ 		          	           + 					"</h3>"
+ 		          	           +				"</div>"
+ 		          	           +			"</div>"
+ 		          	           +		"<div class='card-body-d'>"
+ 		          	           +	"<div class='info-agents color-a'>"
+ 		          	           + "<p>"
+ 		          	           + 	"<strong> 최대 인원 : <span>" + list[i].spaceLimit +"</span>명 </strong>"
+ 		          	           + "</p>"
+ 		          	           + " </div></div></div></div></div>"
+           				}
+          				$("#mainSp1").html(sp1);
+          				$("#mainSp2").html(sp2);
+          			}
+          		})
+          	})
+          	
+          </script>
    
 
     <!-- ======= Review Section ======= -->
@@ -364,7 +259,6 @@
 	
 	<%@ include file="views/user/common/userFooter.jsp" %>
 
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/7.3.0/swiper-bundle.esm.browser.js"></script> -->
 </body>
 	<script src="<%= contextPath %>/resources/user/templates/real_estate/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="<%= contextPath %>/resources/user/templates/real_estate/assets/vendor/swiper/swiper-bundle.min.js"></script>
