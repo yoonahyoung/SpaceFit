@@ -68,7 +68,7 @@
       <div class="container">
         <div class="row">
   
-  		  <%for(Space s : topList){ %>
+  		  <!--  <%for(Space s : topList){ %>
           <div class="col-md-4">
             <div class="card-box-a card-shadow">
               <div class="img-box-a">
@@ -112,7 +112,7 @@
       </div>
     </section>
 
-
+-->
 <!-- 쇼핑몰시작 -->
     <div class="bg0 m-t-23 p-b-140">
       <div class="container">
