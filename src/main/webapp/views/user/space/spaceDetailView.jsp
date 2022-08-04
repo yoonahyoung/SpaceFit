@@ -1,22 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList,
-    							 com.spacefit.review.model.vo.Review,
-    							 com.spacefit.product.model.vo.Space,
-    							 com.spacefit.attachment.model.vo.Attachment,
-    							 com.spacefit.review.model.vo.Comment,
-    							 com.spacefit.mem.model.vo.Member
-    							 "%>
+                          com.spacefit.review.model.vo.Review,
+                          com.spacefit.product.model.vo.Space,
+                          com.spacefit.attachment.model.vo.Attachment,
+                          com.spacefit.review.model.vo.Comment,
+                          com.spacefit.mem.model.vo.Member
+                          "%>
 <%
-	String thisPath = request.getContextPath();
-	ArrayList<Review> rvList = (ArrayList<Review>)request.getAttribute("rvList");
-	int avgStars = (Integer)request.getAttribute("avgStars");
-	Space s = (Space)request.getAttribute("s");
-	int loveCheck = (int)request.getAttribute("loveCheck");
-	ArrayList<Attachment> atList = (ArrayList<Attachment>)request.getAttribute("at");
-	
-	ArrayList<Comment> comList = new ArrayList<>();
-	int spNo = (int)request.getAttribute("spNo");
+   String thisPath = request.getContextPath();
+   ArrayList<Review> rvList = (ArrayList<Review>)request.getAttribute("rvList");
+   int avgStars = (Integer)request.getAttribute("avgStars");
+   Space s = (Space)request.getAttribute("s");
+   int loveCheck = (int)request.getAttribute("loveCheck");
+   ArrayList<Attachment> atList = (ArrayList<Attachment>)request.getAttribute("at");
+   
+   ArrayList<Comment> comList = new ArrayList<>();
+   int spNo = (int)request.getAttribute("spNo");
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +50,7 @@ body {
 
 
 
-	<%@ include file="../common/userMenubar.jsp" %>
+   <%@ include file="../common/userMenubar.jsp" %>
 
     <main id="main">
     <form action="<%=contextPath%>/결제페이지" method="get" id="detailForm">
@@ -66,10 +67,10 @@ body {
                                         <div class="col-lg-8">
                                             <div id="property-single-carousel" class="swiper">
                                                 <div class="swiper-wrapper">
-                                                	<div class="carousel-item-b swiper-slide">
+                                                   <div class="carousel-item-b swiper-slide">
                                                         <img src="<%=thisPath%>/<%= s.getSpacePic() %>" alt="">
                                                     </div>
-                                                	<%for(Attachment a : atList){ %>
+                                                   <%for(Attachment a : atList){ %>
                                                     <div class="carousel-item-b swiper-slide">
                                                         <img src="<%=thisPath%>/<%=a.getFilePath()%>/<%=a.getFileChangeName() %>" alt="">
                                                     </div>
@@ -144,144 +145,145 @@ body {
                                 
                                     <div id = "rvContentList">
                                         <!--  ~review보이는 공간~ -->
-	                                    <% if (!rvList.isEmpty()) { %> <!-- 리뷰리스트가 엠티가 아니면 -->
-	                                    
-		                                        <hr>
-		                                        <div class="introRv">
-		                                            <div class="stars" >
-		                                            	<% for(int i=0; i<avgStars; i++) { %>
-		                                                   <span id='starYellow'>★</span>
-	                                                   	<% } %>
-	                                                   	<% int whiteStar1 = 5-avgStars; %>
-	                                                   	<% for(int i=0; i<whiteStar1; i++){ %>
-	                                                       	<span id='starWhite'>★</span>
-	                                                    <% } %>
-		                                            </div>
-		                                            <h4>" 스페이스핏의 고객님들은 이 장소를 이렇게 평가하셨어요! "</h4><br>
-		                                        </div>
-		                                        <div class="rvPhotoZone">
-		                                            <tr class="rvPhotos"> 
-		                                                <td>
-		                                                    <span class="material-symbols-outlined">
-		                                                    arrow_back_ios
-		                                                    </span>
-		                                                </td>                       
-		                                                <td><img class="titleImg" width="200" height="160" onclick=""></td>
-		                                                <td><img class="titleImg" width="200" height="160" onclick=""></td>
-		                                                <td><img class="titleImg" width="200" height="160" onclick=""></td>
-		                                                <td>
-		                                                    <span class="material-symbols-outlined">
-		                                                    arrow_forward_ios
-		                                                    </span>
-		                                                </td>
-		                                            </tr>
-		                                        </div>
-		                                        <div id="rvOrderBy">
-		                                            <a>추천순</a>&ensp;|&ensp;<a>최신순</a>&ensp;|&ensp;<a>우수후기</a>
-		                                        </div>
-		                                        
-		                                        <% for(Review r : rvList) { %>  
-		                                        <div class="container-fluid eachRvList">
-		                                            <div class="row">
-		                                                <div class="col-lg-3"> 
-		                                                    <img class="titleImg" width="150" height="120" onclick="">
-		                                                    <span id="titleImgSpan">후기작성일 : <%=r.getReviewModifyDate() %></span>
-		                                                </div>
-		                                                <div class="col-lg-6" id="eachRvListHeader">
-		                                                    <h4><%=r.getSpaceName() %></h4>
-		                                                        <span id="commentSpan">
-		                                                            <button type="button" id="showCom" class="collapsed"
-		                                                             data-bs-toggle="collapse" data-bs-target="#flush-collapse<%= r.getReviewNo() %>" aria-expanded="false" aria-controls="flush-collapse<%= r.getReviewNo() %>"
-		                                                              onclick="commentList(<%= r.getReviewNo() %>, $(this).parents('.eachRvList').find('.parentCommentAll'));">
-			                                                            후기댓글보기
-			                                                            <input type="hidden" id="rvNo" value="<%=r.getReviewNo()%>">
-			                                                         </button>
-		                                                        </span>
-		                                                    <hr>
-		                                                    <div id ="showStars">
-		                                                        <div class="smallStars" >
-		                                                        	<% for(int i=0; i<r.getReviewStar(); i++) { %>
-		                                                        		<span id='starYellow'>★</span>
-		                                                        	<% } %>
-				                                                   	<% int whiteStar2 = 5-(r.getReviewStar()); %>
-				                                                   	<% for(int i=0; i<whiteStar2; i++){ %>
-		                                                            	<span id='starWhite'>★</span>
-		                                                            <% } %>
-		                                                        </div>
-		                                                        <span id="countLike"><span><%=r.getAllLikeCount() %></span>명이 이 후기를 추천했어요!</span><br>
-		                                                    </div>
-		                                                    <textarea id="rvContentDiv"><%=r.getReviewContent() %>
-		                                                    </textarea>
-		                                                </div>
-		                                                <div class="col-lg-3 memInfoDiv">
-		                                                    <div class="mem">
-		                                                        <span class="material-symbols-outlined memProfilePic" id="memProfilePic">
-		                                                            account_circle
-		                                                        </span>
-		                                                        <span id="memSpan">
-		                                                            <div><%=r.getMemId() %></div>
-		                                                            <span>회원등급 :</span><span><%=r.getGradeName() %></span>
-		                                                        </span>
-		                                                    </div>
-		                                                    <br>
-		                                                    <div class="rvLikeAndReport">
-		                                                    	<% if (directMemNo == 0) { %>
-		                                                    		<button type="button" class="btn btn-primary btn-sm" id="login-btn" onclick="loginForm();">로그인하고 추천!</button>
-		                                                    	<% } else { %>
-			                                                        <button type="button" class="btn btn-primary btn-sm" data-value="<%= r.getReviewNo() %>" onclick="likeUpdate(this);">후기추천</button>
-			                                                        <button type="button" class="btn btn-danger btn-sm"  data-bs-toggle="modal" data-bs-target="#myModal" onclick="reportModal($(this).siblings('#rvNo').val(), $(this).siblings('#rvMemNo').val(), $(this).siblings('#spNo').val());">후기신고</button>
-			                                                        <input type="hidden" value="<%= directMemNo %>" name="memNo" id="memNo">
-			                                        				<input type="hidden" value="<%= r.getReviewNo() %>" name="rvNo" id="rvNo">
-			                                        				<input type="hidden" value="<%= r.getMemNo() %>" name="rvMemNo" id="rvMemNo">
-			                                        				<input type="hidden" value="<%= spNo %>" name="spNo" id="spNo">
-			                                        			<% } %>
-		                                                    </div>
-		                                                </div>
-		                                            </div>
-		                                            <br><br>
-		                                            <div class="collapse commentDiv" id="flush-collapse<%= r.getReviewNo() %>" data-value="<%= r.getReviewNo() %>" aria-labelledby="flush-heading<%= r.getReviewNo() %>" data-bs-parent="#accordionFlushExample">
-	                                                    <div class="parentCommentAll" id="parentCommentAll"></div>
+                                       <% if (!rvList.isEmpty()) { %> <!-- 리뷰리스트가 엠티가 아니면 -->
+                                       
+                                              <hr>
+                                              <div class="introRv">
+                                                  <div class="stars" >
+                                                     <% for(int i=0; i<avgStars; i++) { %>
+                                                         <span id='starYellow'>★</span>
+                                                         <% } %>
+                                                         <% int whiteStar1 = 5-avgStars; %>
+                                                         <% for(int i=0; i<whiteStar1; i++){ %>
+                                                             <span id='starWhite'>★</span>
+                                                       <% } %>
+                                                  </div>
+                                                  <h4>" 스페이스핏의 고객님들은 이 장소를 이렇게 평가하셨어요! "</h4><br>
+                                              </div>
+                                              <div class="rvPhotoZone">
+                                                  <tr class="rvPhotos"> 
+                                                      <td>
+                                                          <span class="material-symbols-outlined">
+                                                          arrow_back_ios
+                                                          </span>
+                                                      </td>                       
+                                                      <td><img class="titleImg" width="200" height="160" onclick=""></td>
+                                                      <td><img class="titleImg" width="200" height="160" onclick=""></td>
+                                                      <td><img class="titleImg" width="200" height="160" onclick=""></td>
+                                                      <td>
+                                                          <span class="material-symbols-outlined">
+                                                          arrow_forward_ios
+                                                          </span>
+                                                      </td>
+                                                  </tr>
+                                              </div>
+                                              <div id="rvOrderBy">
+                                                  <a>추천순</a>&ensp;|&ensp;<a>최신순</a>&ensp;|&ensp;<a>우수후기</a>
+                                              </div>
+                                              
+                                              <% for(Review r : rvList) { %>  
+                                              <div class="container-fluid eachRvList">
+                                                  <div class="row">
+                                                      <div class="col-lg-3"> 
+                                                          <img class="titleImg" width="150" height="120" onclick="">
+                                                          <span id="titleImgSpan">후기작성일 : <%=r.getReviewModifyDate() %></span>
+                                                      </div>
+                                                      <div class="col-lg-6" id="eachRvListHeader">
+                                                          <h4><%=r.getSpaceName() %></h4>
+                                                              <span id="commentSpan">
+                                                                  <button type="button" id="showCom" class="collapsed"
+                                                                   data-bs-toggle="collapse" data-bs-target="#flush-collapse<%= r.getReviewNo() %>" aria-expanded="false" aria-controls="flush-collapse<%= r.getReviewNo() %>"
+                                                                    onclick="commentList(<%= r.getReviewNo() %>, $(this).parents('.eachRvList').find('.parentCommentAll'));">
+                                                                     후기댓글보기
+                                                                     <input type="hidden" id="rvNo" value="<%=r.getReviewNo()%>">
+                                                                  </button>
+                                                              </span>
+                                                          <hr>
+                                                          <div id ="showStars">
+                                                              <div class="smallStars" >
+                                                                 <% for(int i=0; i<r.getReviewStar(); i++) { %>
+                                                                    <span id='starYellow'>★</span>
+                                                                 <% } %>
+                                                                  <% int whiteStar2 = 5-(r.getReviewStar()); %>
+                                                                  <% for(int i=0; i<whiteStar2; i++){ %>
+                                                                     <span id='starWhite'>★</span>
+                                                                  <% } %>
+                                                              </div>
+                                                              
+                                                          </div>
+                                                          <textarea id="rvContentDiv"><%=r.getReviewContent() %>
+                                                          </textarea>
+                                                      </div>
+                                                      <div class="col-lg-3 memInfoDiv">
+                                                          <div class="mem">
+                                                              <span class="material-symbols-outlined memProfilePic" id="memProfilePic">
+                                                                  account_circle
+                                                              </span>
+                                                              <span id="memSpan">
+                                                                  <div><%=r.getMemId() %></div>
+                                                                  <span>회원등급 :</span><span><%=r.getGradeName() %></span>
+                                                              </span>
+                                                          </div>
+                                                          <br>
+                                                          <div class="rvLikeAndReport">
+                                                             <% if (directMemNo == 0) { %>
+                                                                <button type="button" class="btn btn-primary btn-sm" id="login-btn" onclick="loginForm();">로그인하고 추천!</button>
+                                                             <% } else { %>
+                                                                 <button type="button" class="btn btn-primary btn-sm" data-value="<%= r.getReviewNo() %>" onclick="likeUpdate(this);">후기추천</button>
+                                                                 <button type="button" class="btn btn-danger btn-sm"  data-bs-toggle="modal" data-bs-target="#myModal" onclick="reportModal($(this).siblings('#rvNo').val(), $(this).siblings('#rvMemNo').val(), $(this).siblings('#spNo').val());">후기신고</button>
+                                                                 <input type="hidden" value="<%= directMemNo %>" name="memNo" id="memNo">
+                                                             <input type="hidden" value="<%= r.getReviewNo() %>" name="rvNo" id="rvNo">
+                                                             <input type="hidden" value="<%= r.getMemNo() %>" name="rvMemNo" id="rvMemNo">
+                                                             <input type="hidden" value="<%= spNo %>" name="spNo" id="spNo">
+                                                          <% } %>
+                                                          </div>
+
+                                                      </div>
+                                                  </div>
+                                                  <br><br>
+                                                  <div class="collapse commentDiv" id="flush-collapse<%= r.getReviewNo() %>" data-value="<%= r.getReviewNo() %>" aria-labelledby="flush-heading<%= r.getReviewNo() %>" data-bs-parent="#accordionFlushExample">
+                                                       <div class="parentCommentAll" id="parentCommentAll"></div>
                                                         <div id="writeComment">
                                                             <table id="writeTable" align="center">
                                                                 <thead>
                                                                     <tr>
-                                                                    	<% if(directMemNo == 0) { %>
-	                                                                        <th id="justText">댓글작성</th>
-	                                                                        <th><textarea rows="3" cols="50" style="resize:none;"readonly>로그인 후 이용가능한 서비스입니다.</textarea></th>
-	                                                                        <td><button class="btn btn-primary" type="button">댓글등록</button></td>
-	                                                                     <% } else { %>
-	                                                                     	<th id="justText">댓글작성</th>
-	                                                                        <th><textarea rows="3" cols="50" style="resize:none;" id="comContent"></textarea></th>
-	                                                                        <td><button class="btn btn-primary" type="button" onclick="insertComment(<%= r.getReviewNo() %>, $(this).parents('#writeComment').prev(),  $(this).parent().prev().children().val());" >댓글등록</button></td>
-	                                                                     <% } %>
+                                                                       <% if(directMemNo == 0) { %>
+                                                                           <th id="justText">댓글작성</th>
+                                                                           <th><textarea rows="3" cols="50" style="resize:none;"readonly>로그인 후 이용가능한 서비스입니다.</textarea></th>
+                                                                           <td><button class="btn btn-primary" type="button">댓글등록</button></td>
+                                                                        <% } else { %>
+                                                                           <th id="justText">댓글작성</th>
+                                                                           <th><textarea rows="3" cols="50" style="resize:none;" id="comContent"></textarea></th>
+                                                                           <td><button class="btn btn-primary" type="button" onclick="insertComment(<%= r.getReviewNo() %>, $(this).parents('#writeComment').prev(),  $(this).parent().prev().children().val());" >댓글등록</button></td>
+                                                                        <% } %>
                                                                     </tr>
                                                                 </thead>
                                                             </table>
                                                         </div>
-		                                            </div>
-		                                        </div>
-		                                    
-												
-	                                        	<% } %>
-	                                        	
-	                                        	
-	                                    <% } else { %>
-	                                    	 <h4>" 아직 작성된 후기가 없습니다 "</h4><br>
-										<% } %>
-										
-										
-										
-									</div>
-										
-										
-									
+                                                  </div>
+                                              </div>
+                                          
+                                    
+                                              <% } %>
+                                              
+                                              
+                                       <% } else { %>
+                                           <h4>" 아직 작성된 후기가 없습니다 "</h4><br>
+                              <% } %>
+                              
+                              
+                              
+                           </div>
+                              
+                              
+                           
 
 
                          <!--  ~review보이는 공간~ -->
                                     
                                
-                            	</div>
-                        	</div>
+                               </div>
+                           </div>
                             
                             <div class="col-md-1"></div>
                             <div class="col-md-4">
@@ -297,7 +299,7 @@ body {
                                     <span class="col-sm-4"> 이용인원  </span>
                                     <select name="limit" required>
                                         <%for(int i=2; i<=s.getSpaceLimit(); i++){ %>
-                                        	<option value="<%=i%>"><%= i %>명</option>
+                                           <option value="<%=i%>"><%= i %>명</option>
                                         <%} %>
                                     </select>
                                     <span class="col-sm-4"> 주차  </span>
@@ -316,7 +318,7 @@ body {
                                         <option value="Y">필요해요</option>
                                     </select>
                                     <span class="col-sm-4"> 미니의자  </span>
-                                    <select name="chair" required>
+                                    <select name="chiar" required>
                                         <option value="N" selected>필요하지 않아요</option>
                                         <option value="Y">필요해요</option>
                                     </select>
@@ -332,25 +334,25 @@ body {
                                 <br><br>
                                 <h5>선택 날짜 : <b id="chDate"></b></h5>
                                 <input type="hidden" class="chDate" name="date" required>
-	
+   
                                 <div class="row">
                                     <h4 style="margin-top:40px; border-bottom:2px solid #0D6EFD">시간선택</h4>
                                     <span class="col-sm-4"> 체크인  </span>
                                     <select name="detailCI" class="detailCI" required>
-                                    	<%for(int i=9; i<22; i++){ %>
-                                        	<option value="<%=i%>">
-                                        		<% if(i==9){%>
-                                        			0<%= i %>:00
-                                        		<%}else{%>
-                                        			<%= i %>:00
-                                        		<%} %>
-                                        	</option>
+                                       <%for(int i=9; i<22; i++){ %>
+                                           <option value="<%=i%>">
+                                              <% if(i==9){%>
+                                                 0<%= i %>:00
+                                              <%}else{%>
+                                                 <%= i %>:00
+                                              <%} %>
+                                           </option>
                                         <%} %>
                                     </select>
                                     <span class="col-sm-4"> 체크아웃  </span>
                                     <select name="detailCO" class="detailCO" required>
                                        <%for(int i=10; i<22; i++){ %>
-                                        	<option value="<%=i%>"><%= i %>:00</option>
+                                           <option value="<%=i%>"><%= i %>:00</option>
                                         <%} %>
                                     </select>
                                 </div>
@@ -361,27 +363,27 @@ body {
                                     <input type="hidden" name="price" class="price" required>
                                 </div>
                                 <script>
-                                	$(".detailCO").change(function(){
+                                   $(".detailCO").change(function(){
                                         const pp = $(".detailCO>option:selected").val() - $(".detailCI>option:selected").val();
                                         $("#price").text(pp * <%= s.getSpacePrice() %>);
                                         $(".price").val((pp * <%= s.getSpacePrice() %>));
-                                	})
+                                   })
                                 </script>
                                 
 
                                 <div class="row">
                                 <!-- limit, parking, animal, stand, chair, date, detailCI, detailCO, price  -->
-                                	<input type="hidden" name="no" value="<%=s.getSpaceNo() %>">
+                                   <input type="hidden" name="no" value="<%=s.getSpaceNo() %>">
                                     <div id="ayBtn" style="text-align:center; margin-top:100px;">
                                         <button type="button" class="btn btn-primary" onclick="formSumbit(1);">바로결제</button>
                                         <button type="button" onclick="formSubmit(2);" class="btn btn-outline-dark">보관함</button>
                                         <% if(loginUser != null && loveCheck == 0){ %>
-                                        	<button type="button" onclick="love();" id="zzim" class="btn btn-outline-danger">찜하기</button>
-                                    	<%}else if(loginUser != null && loveCheck == 1){%>
-                                        	<button type="button" onclick="love();" id="zzim" class="btn btn-danger">찜해제</button>
+                                           <button type="button" onclick="love();" id="zzim" class="btn btn-outline-danger">찜하기</button>
+                                       <%}else if(loginUser != null && loveCheck == 1){%>
+                                           <button type="button" onclick="love();" id="zzim" class="btn btn-danger">찜해제</button>
                                         <%}else{ %>
-                                    		<button type="button" onclick="alert('로그인이 필요한 서비스입니다!');"  id="zzim" class="btn btn-outline-danger">찜하기</button>
-                                    	<%} %>
+                                          <button type="button" onclick="alert('로그인이 필요한 서비스입니다!');"  id="zzim" class="btn btn-outline-danger">찜하기</button>
+                                       <%} %>
                                     </div>
                                 </div>
                             </div>
@@ -391,345 +393,321 @@ body {
             </div>
         </section>
         </form>
-        
         <!-- The Modal -->
-		<div class="modal" id="myModal">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		
-		      <!-- Modal Header -->
-		      <div class="modal-header">
-		        <h4 class="modal-title" >후기 신고하기</h4>
-		      </div>
-			<div class="modal-body">
-		     <% if (directMemNo == 0) { %>
-		     	<br><h5>로그인해야 이용가능한 서비스입니다.</h5><br><br>
-		     	<button type="button" class="btn btn-primary" onclick="location.href='<%=contextPath%>/loginForm.me'">로그인하러가기</button>
-		     <% } else {%>
-				 <!-- Modal body -->
-		        <form method="post" action="<%=contextPath%>/reportRv.rv">
-					<br><h5>신고사유를 선택하세요.</h5><br><br>
-				      <label><input type="radio" name="rptReasonNo" value="1"> 욕설 및 비방</label><br>
-				      <label><input type="radio" name="rptReasonNo" value="2"> 성적이고 음란한 대화</label><br>
-				      <label><input type="radio" name="rptReasonNo" value="3"> 스팸 혹은 금전적요구</label><br><br><br>
-				      <input type="hidden" name="rptMemNo" value="">
-				      <input type="hidden" name="rptRefNo" value="">
-				      <input type="hidden" name="spNo" value="">
-			      	<div>
-			      		<button type="submit" class="btn btn-primary">신고하기</button>
-			      		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-			      	</div>
-			    </form>
-			<% } %>
-			</div>
-		    </div>
-		  </div>
-		</div>
+                 <!-- The Modal -->
+				      <div class="modal" id="myModal">
+				        <div class="modal-dialog">
+				          <div class="modal-content">
+				      
+				            <!-- Modal Header -->
+				            <div class="modal-header">
+				              <h4 class="modal-title" >후기 신고하기</h4>
+				            </div>
+				         <div class="modal-body">
+				           <% if (directMemNo == 0) { %>
+				              <br><h5>로그인해야 이용가능한 서비스입니다.</h5><br><br>
+				              <button type="button" class="btn btn-primary" onclick="location.href='<%=contextPath%>/loginForm.me'">로그인하러가기</button>
+				           <% } else {%>
+				             <!-- Modal body -->
+				              <form method="post" action="<%=contextPath%>/reportRv.rv">
+				               <br><h5>신고사유를 선택하세요.</h5><br><br>
+				                  <label><input type="radio" name="rptReasonNo" value="1"> 욕설 및 비방</label><br>
+				                  <label><input type="radio" name="rptReasonNo" value="2"> 성적이고 음란한 대화</label><br>
+				                  <label><input type="radio" name="rptReasonNo" value="3"> 스팸 혹은 금전적요구</label><br><br><br>
+				                  <input type="hidden" name="rptMemNo" value="">
+				                  <input type="hidden" name="rptRefNo" value="">
+				                  <input type="hidden" name="spNo" value="">
+				                  <div>
+				                     <button type="submit" class="btn btn-primary">신고하기</button>
+				                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+				                  </div>
+				             </form>
+				         <% } %>
+				         </div>
+				          </div>
+				        </div>
+				      </div>
+				       <!-- The Modal -->
+
     </main>
     <script>
-    	function reportModal(rvNo, rvMemNo, spNo){
-    		$("#myModal input[name=rptMemNo]").val(rvMemNo);
-    		$("#myModal input[name=rptRefNo]").val(rvNo);
-    		$("#myModal input[name=spNo]").val(spNo);
-    		//console.log(spNo);
-    		
-    	}
     
-    	function formSubmit(num){ // num이 1일시 결제, num이 2일시 보관함
-    		if(num == 1){
-    			$("#detailForm").attr("action", "결제페이지");
-	    		$("#detailForm").submit();
-    		}else{
-    			$.ajax({
-    				url:'<%=contextPath %>/cart.sp',
-    				data:{no:<%=s.getSpaceNo() %>
-    					, limit:$("select[name=limit]").val()
-    					, parking:$("select[name=parking]").val()
-    					, animal:$("select[name=animal]").val()
-    					, stand:$("select[name=stand]").val()
-    					, chair:$("select[name=chair]").val()
-    					, date:$("input[name=date]").val()
-    					, detailCI:$("select[name=detailCI]").val()
-    					, detailCO:$("select[name=detailCO]").val()
-    					, price:$("input[name=price]").val()
-    					},
-    				success:function(cfMsg){
-    					if(confirm(cfMsg)){
-    						location.href="<%=contextPath%>/views/user/myPage/cartListView.jsp";
-    					}
-    				}
-    				
-    			})
-    		}
-    	}
+    function reportModal(rvNo, rvMemNo, spNo){
+        $("#myModal input[name=rptMemNo]").val(rvMemNo);
+        $("#myModal input[name=rptRefNo]").val(rvNo);
+        $("#myModal input[name=spNo]").val(spNo);
+        //console.log(spNo);
+        
+     }
 
-    	// 찜하기
-    	
-    	function love(){
-    		if($("#zzim").text()==('찜하기')){
-				$.ajax({
-					url:'<%=contextPath%>/wish.lo',
-					data:{no:<%=s.getSpaceNo() %>, status:'n'},
-					success:function(result){
-						if(result == '1'){
-						$("#zzim").prop("class", "btn btn-danger").text("찜해제");
-						}
-					}
-				})
-			}else{
-				$.ajax({
-					url:'<%=contextPath%>/wish.lo',
-					data:{no:<%=s.getSpaceNo() %>, status:'y'},
-					success:function(result){
-						if(result == '1'){
-						$("#zzim").prop("class", "btn btn-outline-danger").text("찜하기");							
-						}
-					}
-				})
-			}
-    	}
+    
+       function formSubmit(num){ // num이 1일시 결제, num이 2일시 보관함
+          if(num == 1){
+             $("#detailForm").attr("action", "결제페이지");
+             $("#detailForm").submit();
+          }else{
+             $.ajax({
+                url:'<%=contextPath %>/cart.sp',
+                data:{no:<%=s.getSpaceNo() %>
+                   , limit:$("select[name=limit]").val()
+                   , parking:$("select[name=parking]").val()
+                   , animal:$("select[name=animal]").val()
+                   , stand:$("select[name=stand]").val()
+                   , chair:$("select[name=chair]").val()
+                   , date:$("input[name=date]").val()
+                   , detailCI:$("select[name=detailCI]").val()
+                   , detailCO:$("select[name=detailCO]").val()
+                   , price:$("input[name=price]").val()
+                   },
+                success:function(cfMsg){
+                   if(confirm(cfMsg)){
+                      location.href="<%=contextPath%>/views/user/myPage/cartListView.jsp";
+                   }
+                }
+                
+             })
+          }
+       }
+
+       // 찜하기
+       
+       function love(){
+          if($("#zzim").text()==('찜하기')){
+            $.ajax({
+               url:'<%=contextPath%>/wish.lo',
+               data:{no:<%=s.getSpaceNo() %>, status:'n'},
+               success:function(result){
+                  if(result == '1'){
+                  $("#zzim").prop("class", "btn btn-danger").text("찜해제");
+                  }
+               }
+            })
+         }else{
+            $.ajax({
+               url:'<%=contextPath%>/wish.lo',
+               data:{no:<%=s.getSpaceNo() %>, status:'y'},
+               success:function(result){
+                  if(result == '1'){
+                  $("#zzim").prop("class", "btn btn-outline-danger").text("찜하기");                     
+                  }
+               }
+            })
+         }
+       }
     </script>
 
     <script>
     
-	$(function(){
-		calendarRendering();
-	})
+   $(function(){
+      calendarRendering();
+   })
    
     function calendarRendering(){
-    	var calendarEl = document.getElementById('calendar');
-		
-		
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-		    locale: 'ko',
-		    
-		    selectable:true,
-		    dateClick:function(info){
-		    	//console.log(info.dateStr); // 선택한 날짜 2022-08-02
-		    	$("#chDate").html(info.dateStr);
-		    	$(".chDate").val(info.dateStr);
-		    	
-			    	$.ajax({
-			    		url: '<%=contextPath%>/calender.sp',
-			    		data:{no:<%=s.getSpaceNo()%>, date:info.dateStr},
-			    		success: function(list){
-			    			//console.log(list);
-			    			// 캘린더에서 클릭된 날짜를 토대로 시간 선택 할 수 있게 해주기
-			    			// 즉, 캘린더에 예약된 내역들을 굳이 뿌리지 않을 것임
-			    			
-			    			// 예약 없는 날은 disabled해제
-		    				$(".detailCI").children().each(function(){
-		    					$(this).attr('disabled',false).css("background", "white");
-		    				});
-		    				$(".detailCO").children().each(function(){
-		    					$(this).attr('disabled',false).css("background", "white");
-		    				});
-		    				
-			    			// 예약된 시간들은 disabled처리
-		    				for(let i=0; i<list.length; i++){
-		    					for(let j=list[i].bookInTime; j<=list[i].bookOutTime; j++){
-		    						$("select option[value*="+ j + "]").attr('disabled',true).css("background", "lightgrey");
-		    					}
-			    			}
-			    		},
-			    	});
-		    }
-		});
-		calendar.render();
-		
+       var calendarEl = document.getElementById('calendar');
+      
+      
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+          locale: 'ko',
+          
+          selectable:true,
+          dateClick:function(info){
+             //console.log(info.dateStr); // 선택한 날짜 2022-08-02
+             $("#chDate").html(info.dateStr);
+             $(".chDate").val(info.dateStr);
+             
+                $.ajax({
+                   url: '<%=contextPath%>/calender.sp',
+                   data:{no:<%=s.getSpaceNo()%>, date:info.dateStr},
+                   success: function(list){
+                      //console.log(list);
+                      // 캘린더에서 클릭된 날짜를 토대로 시간 선택 할 수 있게 해주기
+                      // 즉, 캘린더에 예약된 내역들을 굳이 뿌리지 않을 것임
+                      
+                      // 예약 없는 날은 disabled해제
+                      $(".detailCI").children().each(function(){
+                         $(this).attr('disabled',false).css("background", "white");
+                      });
+                      $(".detailCO").children().each(function(){
+                         $(this).attr('disabled',false).css("background", "white");
+                      });
+                      
+                      // 예약된 시간들은 disabled처리
+                      for(let i=0; i<list.length; i++){
+                         for(let j=list[i].bookInTime; j<=list[i].bookOutTime; j++){
+                            $("select option[value*="+ j + "]").attr('disabled',true).css("background", "lightgrey");
+                         }
+                      }
+                   },
+                });
+          }
+      });
+      calendar.render();
+      
     }
     </script>
     
     
     <script>
         function likeUpdate(e){
-     	   let rvNo = $(e).data("value")
-     		 
-     			  $.ajax({
-       			url:"<%=contextPath %>/likeUpdate.lk",
-       			data:{
-       				memNo:$("#memNo").val(),
-       				rvNo:rvNo
-       			},
-       			success:function(result){
-       				if(result == "likeOk"){
-       					// 추천이 완료된 데이터, 예약번호가 넘어옴
-						alert("추천해주셔서 감사합니다!");
-       					// 바로 표시되게 하는 걸 못하게씀 ㅜㅜ
-					} else {
-						// 후기 중복확인
-						alert("이미 추천한 후기입니다!");
-						}
-       			},
-       			error:function(){
-       				console.log("추천 +1 AJAX 통신 실패");
-       			}
-       		})
-     		  }
+           let rvNo = $(e).data("value")
+            
+                $.ajax({
+                url:"<%=contextPath %>/likeUpdate.lk",
+                data:{
+                   memNo:$("#memNo").val(),
+                   rvNo:rvNo
+                },
+                success:function(result){
+                   if(result == "likeOk"){
+                      // 추천이 완료된 데이터, 예약번호가 넘어옴
+                  alert("추천해주셔서 감사합니다!");
+                      // 바로 표시되게 하는 걸 못하게씀 ㅜㅜ
+                      console.dir($('this').parent().children().val());
+                      $('this').parent().children().text( $("#countPlusOne").text()+1 );
+               } else {
+                  // 후기 중복확인
+                  console.dir($('this').parent().children().val());
+                  alert("이미 추천한 후기입니다!");
+                  }
+                },
+                error:function(){
+                   console.log("추천 +1 AJAX 통신 실패");
+                }
+             })
+             }
       
         function loginForm(){
-    		location.href="<%=contextPath%>/loginForm.me";
+          location.href="<%=contextPath%>/loginForm.me";
 }
         
         
         function commentList(e, commentDiv){
-     	   //const commentDiv = $(window.event.target).parents(".eachRvList").find(".parentCommentAll");
-     	   console.log(commentDiv);
-     	   $.ajax({
-     		   url : "<%=contextPath%>/comList.com",
-               		   data:{
-               			   rvNo:e,
-                			},
-               		   success:function(comList){
-               				if(comList.length == 0){
-               					// 댓글리스트가 비어있다면
-       							let value ='<h4> 아직 작성된 댓글 없습니다 </h4><br>'
-       								commentDiv.html(value);
-       						} else {
-       							// 댓글리스트가 있다면
-       							let value = ""
-       								for(let i = 0; i<comList.length; i++) {
-       									value += ' <div class="commentMem row"> '
-        												+ '<div class="parentMem col-lg-6">'
-        												+ 	'<span class="material-symbols-outlined memProfilePic" id="memProfilePic">'
-        												+		'account_circle'
-        												+		'</span>'
-        												+		'<span id="memSpan">'
-        												+			comList[i].memId
-        												+		'</span>'
-        												+		'<span id="dateSpan">'
-        												+			comList[i].comEnrollDate
-        												+		'</span>'
-        												+ '</div>'
-        												+ '<div class="parentInfo col-lg-6">'
-        												+	'<button type="button" class="comBtn" id="reDelete" onclick="deleteComment(' + comList[i].comNo + ', $(this).parent().parent().parent() ,' + comList[i].rvNo + ');">삭제하기</button>'
-        												+	'<button type="button" class="comBtn openBtn" id="reReport" onclick="reportComment(' ');" >신고하기</button>'
-        												+	'<button type="button" class="comBtn" id="reComment">대댓달기</button>'
-        												+	'<input type="hidden" value="' + comList[i].parentNo + '" id="hiddenPno">'
-        												+ '</div>'
-        												+ '<hr>'
-        												+ '<div id="showComment">'
-        												+ 	'<div class="parentComment">'
-        												+		'<textarea id="commentArea">' + comList[i].comContent + '</textarea >'
-        												+	'</div>'
-        												+ '</div>'
-       												+ '</div>'
-       								}
-       							
-       							commentDiv.html(value);
-       							//$(".parentCommentAll").html(value);
-               			}
-               		   },
-               			error:function(){
-               				console.log("댓글조회용 AJAX 실패");
-               			}
-               	   })
+           //const commentDiv = $(window.event.target).parents(".eachRvList").find(".parentCommentAll");
+           console.log(commentDiv);
+           $.ajax({
+              url : "<%=contextPath%>/comList.com",
+                        data:{
+                           rvNo:e,
+                         },
+                        success:function(comList){
+                           if(comList.length == 0){
+                              // 댓글리스트가 비어있다면
+                            let value ='<h4> 아직 작성된 댓글 없습니다 </h4><br>'
+                               commentDiv.html(value);
+                         } else {
+                            // 댓글리스트가 있다면
+                            let value = ""
+                               for(let i = 0; i<comList.length; i++) {
+                                  value += ' <div class="commentMem row"> '
+                                            + '<div class="parentMem col-lg-6">'
+                                            +    '<span class="material-symbols-outlined memProfilePic" id="memProfilePic">'
+                                            +      'account_circle'
+                                            +      '</span>'
+                                            +      '<span id="memSpan">'
+                                            +         comList[i].memId
+                                            +      '</span>'
+                                            +      '<span id="dateSpan">'
+                                            +         comList[i].comEnrollDate
+                                            +      '</span>'
+                                            + '</div>'
+                                            + '<div class="parentInfo col-lg-6">'
+                                            +   '<button type="button" class="comBtn" id="reDelete" onclick="deleteComment(' + comList[i].comNo + ', $(this).parent().parent().parent() ,' + comList[i].rvNo + ');">삭제하기</button>'
+                                            +   '<button type="button" class="comBtn openBtn" id="reReport">신고하기</button>'
+                                            +   '<button type="button" class="comBtn" id="reComment">대댓달기</button>'
+                                            +   '<input type="hidden" value="' + comList[i].parentNo + '" id="hiddenPno">'
+                                            + '</div>'
+                                            + '<hr>'
+                                            + '<div id="showComment">'
+                                            +    '<div class="parentComment">'
+                                            +      '<textarea id="commentArea">' + comList[i].comContent + '</textarea >'
+                                            +   '</div>'
+                                            + '</div>'
+                                           + '</div>'
+                               }
+                            
+                            commentDiv.html(value);
+                            //$(".parentCommentAll").html(value);
+                        }
+                        },
+                        error:function(){
+                           console.log("댓글조회용 AJAX 실패");
+                        }
+                     })
                   }
                   
                   // 대댓달기라는 버튼을 눌렀을때만 그 댓글의 hiddenPno를 가져오고, 대댓달기를 누르지 않으면 0이 되도록
-					// 그럼 대댓을 생각하지 말고 일단 댓글만 생각해보자	
-					
+               // 그럼 대댓을 생각하지 말고 일단 댓글만 생각해보자   
+               
                   function insertComment(e, commentDiv, comContent){
-                	  // 주번째 댓글에 대한 컨텐츠도 가져오기 //계층형시 스타트위드
-                	   $.ajax({
-     	        		 url:"<%=contextPath%>/coInsert.com",
-				  		 data:{
-				  			 comContent:comContent,
-				  			 memNo:$("#memNo").val(),
-				  			 rvNo:e
-				  		 },
-				  		 type:"post",
-				  		 success:function(result){
-				  			 if(result > 0){
-				  				 // 댓글작성 성공
-				  				 // => 내가 작성한 댓글이 보여지기 위해서는 갱신된 댓글리스트 조회필요
-				  				 commentList(e, commentDiv);
-				  				 $("#comContent").val(""); //textarea 초기회
-				  			 }
-				  		 },
-				  		 error:function(){
-				  			console.log("댓글작성 ajax 통신 실패");
-				  		 }
-				  		 
-				  	 })
-				   }
+                     // 주번째 댓글에 대한 컨텐츠도 가져오기 //계층형시 스타트위드
+                      $.ajax({
+                       url:"<%=contextPath%>/coInsert.com",
+                     data:{
+                        comContent:comContent,
+                        memNo:$("#memNo").val(),
+                        rvNo:e
+                     },
+                     type:"post",
+                     success:function(result){
+                        if(result > 0){
+                           // 댓글작성 성공
+                           // => 내가 작성한 댓글이 보여지기 위해서는 갱신된 댓글리스트 조회필요
+                           commentList(e, commentDiv);
+                           $("#comContent").val(" "); //textarea 초기회
+                        }
+                     },
+                     error:function(){
+                       console.log("댓글작성 ajax 통신 실패");
+                     }
+                     
+                  })
+               }
                   
                   
                   function deleteComment(e, commentDiv, rvNo) {
-                	  
-                	 // let commentDiv = commentDiv;
-                	 // let rvNo = rvNo;
+                     
+                    // let commentDiv = commentDiv;
+                    // let rvNo = rvNo;
 
-                	  if(confirm("정말 삭제하시겠습니까??")){
-							// 사용하겠다
-							$.ajax({
-		      	        		 url:"<%=contextPath%>/comDelete.com",
-		 				  		 data:{
-		 				  			 //commentDiv : commentDiv,
-		 				  			 //rvNo : rvNo,
-		 				  			 comNo:e,
-		 				  			 memNo:$("#memNo").val()
-		 				  		 },
-		 				  		 type:"post",
-		 				  		 //processData:false,
-						  		 //contentType:false,
-		 				  		 success:function(result){
-		 				  			 if(result >0){
-		 				  				alert("댓글 삭제 성공");
-		 				  				 commentList(rvNo, commentDiv);
-		 				  			 } else {
-		 				  				alert("댓글 삭제에 실패했습니다!");
-		 				  				$(".commentDiv").focus();
-		 				  			 }
-		 				  		 },
-		 				  		 error:function(){
-		 				  			 alert("로그인 후 본인 댓글만 삭제할 수 있습니다.")
-		 				  			location.href="<%=contextPath%>/loginForm.me";
-		 				  			//console.log("댓글삭제 ajax 통신 실패");
-		 				  		// 로그인 안하면 삭제가 안되도록 처리 피
-		 				  		 }
-		 				  		 
-		 				  	 })
-						} else {
-							// 삭제하지 않겠다
-							$(".commentDiv").focus();
-						}
-                	  
-                	  
+                     if(confirm("정말 삭제하시겠습니까??")){
+                     // 사용하겠다
+                     $.ajax({
+                              url:"<%=contextPath%>/comDelete.com",
+                            data:{
+                               //commentDiv : commentDiv,
+                               //rvNo : rvNo,
+                               comNo:e,
+                               memNo:$("#memNo").val()
+                            },
+                            type:"post",
+                            //processData:false,
+                           //contentType:false,
+                            success:function(result){
+                               if(result >0){
+                                 alert("댓글 삭제 성공");
+                                 commentList(rvNo, commentDiv);
+                               } else {
+                                 alert("댓글 삭제에 실패했습니다!");
+                                 $(".commentDiv").focus();
+                               }
+                            },
+                            error:function(){
+                               alert("로그인 후 본인 댓글만 삭제할 수 있습니다.")
+                              location.href="<%=contextPath%>/loginForm.me";
+                              //console.log("댓글삭제 ajax 통신 실패");
+                           // 로그인 안하면 삭제가 안되도록 처리 피
+                            }
+                            
+                         })
+                  } else {
+                     // 삭제하지 않겠다
+                     $(".commentDiv").focus();
                   }
-                  
-                  function reportReview(){
-                	  
-                	  //console.log($("#rvMemNo").val());
-                	  //console.log($("#memNo").val());
-                	  //console.log($("#rvNo").val());
-                	  //console.log($("input:radio[name='reportCheck']:checked").val());
-
-                	  $.ajax({
-      	        		 url:"<%=contextPath%>/reportRv.rv",
- 				  		 data:{
- 				  			memNo:$("#memNo").val(),
- 				  			rptMemNo:$("#rvMemNo").val(),
- 				  			rptReasonNo:$("input:radio[name='reportCheck']:checked").val(),
- 				  			rptRefNo:$("#rvNo").val()
- 				  		 },
- 				  		 type:"post",
- 				  		 success:function(result){
- 				  			 if(result > 0){
- 				  				 // 신고 성공
- 				  				 alert("신고완료! 스페이스핏 운영에 도움을 주셔서 감사합니다.");
- 				  			 } else {
- 				  				alert("신고실패ㅜㅜ");
- 				  			 }
- 				  		 },
- 				  		 error:function(){
- 				  			console.log("후기글 신고 ajax 통신 실패");
- 				  		 }
- 				  		 
- 				  	 })
+                     
+                     
                   }
-     	   
-				</script>
+             
+            </script>
 
 
     <!-- footer -->

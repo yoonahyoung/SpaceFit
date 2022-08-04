@@ -271,11 +271,13 @@ public class MemberService {
 		String addSql = "";
 		
 		switch(orderBy) {
-		case "newest" : addSql = "ORDER BY MEM_ENROLL_DATE ASC"; break;
-		case "bestOrder" : addSql = "ORDER BY BOOK_AMOUNT_MONTH"; break;
-		case "reported" : addSql = "ORDER BY RPT_COUNT DESC"; break;
-		case "like" : addSql = "ORDER BY LIKE_COUNT DESC"; break;
-		default : addSql ="ORDER BY MEM_ENROLL_DATE ASC"; break;
+			case "newest" : addSql = "ORDER BY MEM_ENROLL_DATE DESC"; break;
+			case "bestOrder" : addSql = "ORDER BY BOOK_AMOUNT_MONTH"; break;
+			case "reported" : addSql = "ORDER BY RPT_COUNT DESC"; break;
+			case "like" : addSql = "ORDER BY LIKE_COUNT DESC"; break;
+			case "adminOnly" : addSql = "WHERE MEM_ADM_FLAG = 'A'"; break;
+			case "userOnly" : addSql = "WHERE MEM_ADM_FLAG = 'U'"; break;
+			default : addSql ="ORDER BY MEM_ENROLL_DATE ASC"; break;
 		}
 
 		ArrayList<Member> memList = new MemberDao().selectMemberListOrderBy(conn, addSql);

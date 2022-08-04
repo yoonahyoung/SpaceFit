@@ -47,8 +47,8 @@
 							  <div style="height : 60px"></div>
 							  <div class="row" id="selectDivMem">
 							  	<form>
-								  <button class="btn btn-primary">회원등급수정</button>
-								  <button class="btn btn-secondary">관리자로 변경</button>
+								  <button class="btn btn-primary" onclick="gradeChange();">회원등급수정</button>
+								  <button class="btn btn-secondary" onclick="adminChange();">관리자로 변경</button>
 								  <button class="btn btn-danger">회원탈퇴</button>
 							  	</form>
 							  </div>
@@ -58,7 +58,9 @@
 									  <option value="newest" selected>최신회원 조회</option>
 									  <option value="bestOrder">이번달주문건수</option>
 									  <option value="reported">누적신고순</option>
-									  <option alue="like">누적추천순</option>
+									  <option value="like">누적추천순</option>
+									  <option value="adminOnly">관리자 조회</option>
+									  <option value="userOnly">회원 조회</option>
 									</select>
 							  	</form>
 							  	
@@ -106,11 +108,23 @@
 	                                </table>
 	                                <script>
 	                                
+	                                
+	                                
 	                                $(function(){
 	                                	changeSelect();
 	                                })
 	                                
 	                               
+	                                function adminChange(){
+	                                	
+	                                        if ($("input:checkbox[name=choice]").is(":checked") == true) {
+	                                        	console.log("확인");
+	                                        } else {
+	                                        	console.log("확인");
+	                                        }
+	                                	
+	                                }
+	                                
 	                                
 								  	function changeSelect(){
 											let orderBy = $("#orderBySel").val();
@@ -136,35 +150,58 @@
 												  						$("#adminFlag").val("General").attr('selected', 'selected');
 												  					}
 												  				}) */
-												  		let grNameSel = memList[i].memGrName;
 											  			
-											  				
+												  		if (memList[i].memAdmFlag == "A") {
+										  					adminSelectVal = "<option selected value='A'>관리자</option>";
+										  				} else if  (memList[i].memAdmFlag == "U") {
+										  					adminSelectVal = "<option selected value='U'>일반</option>";
+										  				} else {
+										  					adminSelectVal = "<option selected value='U'>없음</option>";
+										  				}
+										  				
+												  		if (memList[i].grName == "Basic") {
+										  					grSelectVal = " <option selected id='Basic' value='Basic'>Basic</option>";
+										  				} else if  (memList[i].grName == "Silver") {
+										  					grSelectVal = "<option selected  id='Silver' value='Silver'>Silver</option>";
+										  				} else {
+										  					grSelectVal = "<option id='Gold' value='Gold'>Gold</option>";
+										  				}
+										  					
+												  		if (memList[i].memStatus == "Y") {
+										  					statusSelectVal = "<option id ='YesUser' value='YesUser'>회원</option>";
+										  				} else if  (memList[i].memStatus == "N") {
+										  					statusSelectVal = "<option id ='NotUser' value='NotUser'>탈퇴회원</option>";
+										  				} else {
+										  					statusSelectVal = "<option id ='Black' value='Black'>블랙리스트</option>";
+										  				}
 											  				
 											  			value += 
 												  			'<tr>'
-					                                       + ' 	<td><input type="radio"></td> '
+					                                       + ' 	   <td><input type="radio" name="choice" id="choice" value="' + memList[i].memNo + '"></td> '
 					                                       + '     <td>' + memList[i].memNo + '</td> '
 					                                       + '     <td>' + memList[i].memId + '</td> '
 					                                       + '     <td>' + memList[i].memName + '</td> '
 					                                       + '     <td>' + memList[i].memPhone + '</td> '
 					                                       + '     <td> '
-					                                       + '     	<select> ' // 반복문을 여기서 끊어가면서 돌린다
-					                                     //  + '		  <option selected>' + memList[i].grName + '</option> '
-					                                       + '		  <option id="grNameSel" value="Basic" Basic.equals(grNameSel).selected>Basic</option> '
-					                                       + '		  <option id="grNameSel" value="Silver">Silver</option> '
-					                                       + '		  <option id="grNameSel" value="Gold">Gold</option> '
+					                                       + '     	<select> ' 
+					                                       +			grSelectVal
+					                                       + '		  <option id="Basic" value="Basic">Basic</option> '
+					                                       + '		  <option id="Silver" value="Silver">Silver</option> '
+					                                       + '		  <option id="Gold" value="Gold">Gold</option> '
 					                                       + '		</select> '
 					                                       + '     </td> '
 					                                       + '     <td>' + memList[i].rptCount + '</td> '
 					                                       + '     <td>' + memList[i].likeCount + '</td> '
 					                                       + '     <td> '  //+ memList[i].memAdmFlag
 					                                       + '		<select id="adminFlag">'
+					                                       +			adminSelectVal
 					                                       + '		  <option id ="General" value="General">일반</option> '
 					                                       + '		  <option id ="Admin" value="Admin">관리자</option> '
 					                                       + '		</select> '
 					                                       + '	   </td> '
 					                                       + '     <td> '// + memList[i].memStatus 
 					                                       + '		<select id="statusFlag"> '
+					                                       +			statusSelectVal
 					                                       + '		  <option id ="YesUser" value="YesUser">회원</option> '
 					                                       + '		  <option id ="NotUser" value="NotUser">탈퇴회원</option> '
 					                                       + '		  <option id ="Black" value="Black">블랙리스트</option> '
