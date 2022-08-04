@@ -33,8 +33,12 @@ public class AdminMemberManageController extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		ArrayList <Member> list = new MemberService().adminMemberManageListSelect();
+		int todayMem = new MemberService().todayMem();
+		int goldMem = new MemberService().goldMem();
 		
 		request.setAttribute("list", list);
+		request.setAttribute("todayMem", todayMem);
+		request.setAttribute("goldMem", goldMem);
 		request.getRequestDispatcher("views/admin/mem/memberManage.jsp").forward(request, response);
 	}
 

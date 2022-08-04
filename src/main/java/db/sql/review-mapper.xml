@@ -248,7 +248,7 @@
    			  FROM TB_REVIEW
   			 WHERE TO_CHAR(RV_ENROLL_DATE,'yy/mm/dd') = (SELECT TO_CHAR(SYSDATE,'yy/mm/dd') FROM DUAL)    
 	</entry>
-
+	
 
 
 	<!-- 이 부분부터 공간별 후기리스트 관련 SQL 작성. 소희작성  --> 

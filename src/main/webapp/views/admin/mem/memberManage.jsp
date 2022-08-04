@@ -3,7 +3,9 @@
 <%@ page import = "java.util.ArrayList, com.spacefit.mem.model.vo.Member" %>
 <%
 	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list");
-	String errorMsg = (String)session.getAttribute("errorMsg"); 
+	String errorMsg = (String)session.getAttribute("errorMsg");
+	int todayMem = (int)request.getAttribute("todayMem");
+	int goldMem = (int)request.getAttribute("goldMem");
 
 
 	
@@ -37,15 +39,15 @@
                         	  <div class="row" id="reviewChart">
 								  <div class="col-4" id="todaysReview">
 								  	<span>오늘 가입한 회원</span><br>
-								  	<h4>10/<%=list.size() %></h4>	
+								  	<h4><%=todayMem %></h4>	
 								  </div>
 								  <div class="col-4" id="avgStar">
-								  	<span>방문자수</span><br>
-								  	<h4>4.3</h4>	
+								  	<span>전제회원</span><br>
+								  	<h4><%=list.size() %></h4>	
 								  </div>
 								  <div class="col-4" id="avgReview">
-								  	<span>후기작성률</span><br>
-								  	<h4>38%</h4>	
+								  	<span>골드회원</span><br>
+								  	<h4><%=goldMem %></h4>	
 								  </div>
 								</div>
 								
@@ -88,6 +90,22 @@
 	                                            <th>상세보기</th>
 	                                        </tr>
 	                                    </thead>
+	                                     <tfoot>
+	                                        <tr>
+	                                        	<th>선택</th>
+	                                        	<th>회원번호</th>
+	                                            <th>아이디</th>
+	                                            <th>이름</th>
+	                                            <th>전화번호</th>
+	                                            <th>회원등급</th>
+	                                            <th>누적신고</th>
+	                                            <th>누적추천</th>
+	                                            <th>관리자여부</th>
+	                                            <th>회원상태</th>
+	                                            <th>이번달 주문건수</th>
+	                                            <th>상세보기</th>
+	                                        </tr>
+	                                    </tfoot>
 	                                   
 	                                    <tbody id="memListTBody">
 	                                    	
@@ -183,7 +201,7 @@
 						  				
 						  			value += 
 							  			'<tr>'
-					                                  + ' 	   <th><input type="checkbox" name="choice" id="choice" value="' + memList[i].memNo + '"></th> '
+					                                  + ' 	  <td><input type="checkbox" name="choice" id="choice" value="' + memList[i].memNo + '"></td> '
 					                                  + '     <td>' + memList[i].memNo + '</td> '
 					                                  + '     <td>' + memList[i].memId + '</td> '
 					                                  + '     <td>' + memList[i].memName + '</td> '
@@ -214,9 +232,9 @@
 					                                  + '		</select> '
 					                                  + '	   </td> '
 					                                  + '     <td>' + memList[i].bookCountMonth + '</td> '
-					                                  + '     <td><input type="button" class="btn btn-primary btn-sm" value="상세조회" onclick="location.href=' + '/memDetailView.me?no=' + memList[i].memNo + '"></td> '
+					                                  + '     <th><input type="button" name="gotoBtn" class="btn btn-primary btn-sm" value="상세보기"></th>'
 					                                  + '  </tr> '
-					                                  + '<input id="hiddenAdmFlag" type="hidden" value="' + memList[i].memAdmFlag + '">'
+					                                  + '<input type="hidden" value="'+ memList[i].memNo +'">'
 					  					 }
 						  				memListTBody.html(value);
 						  				
@@ -229,6 +247,16 @@
 					  		 
 					  	 })
 					}
+					
+					
+					
+			      	function goToMemberDetailView(){
+			      		
+			      		$("#dataTable").on("input", "click", function(){
+			      			console.log( $(this).parent().next().val() );
+			      		})
+						
+			      	}
 					</script>
 	                            
 							<div class="paging-area" align="center">    
