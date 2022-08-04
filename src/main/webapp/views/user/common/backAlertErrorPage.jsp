@@ -7,7 +7,7 @@
 <title>Space Fit</title>
 </head>
 <body>
-	<%@ include file="../myPage/login.jsp" %>
+	
 	<script type="text/javascript">
 		alert("<%=request.getAttribute("errorMsg")%>");
 	function load(){
