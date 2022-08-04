@@ -62,7 +62,7 @@
 	
 	<!-- admin -->
 	
-	<entry key="selectAdminList">
+	<entry key="selectAdminList1">
 		SELECT *
 		  FROM(
 		        SELECT ROWNUM RNUM, S.*
@@ -77,6 +77,9 @@
 						     , SPACE_PRICE
 						  FROM TB_SPACE
 						 WHERE SPACE_STATUS = 'Y'
+	</entry>
+	
+	<entry key="selectAdminList2">
 						 ORDER
 							BY SPACE_NO DESC
 		            ) S

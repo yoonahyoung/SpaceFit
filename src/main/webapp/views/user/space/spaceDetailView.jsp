@@ -15,6 +15,7 @@
 	ArrayList<Attachment> atList = (ArrayList<Attachment>)request.getAttribute("at");
 	
 	ArrayList<Comment> comList = new ArrayList<>();
+	int spNo = (int)request.getAttribute("spNo");
 %>
 <!DOCTYPE html>
 <html>
@@ -229,10 +230,11 @@ body {
 		                                                    		<button type="button" class="btn btn-primary btn-sm" id="login-btn" onclick="loginForm();">로그인하고 추천!</button>
 		                                                    	<% } else { %>
 			                                                        <button type="button" class="btn btn-primary btn-sm" data-value="<%= r.getReviewNo() %>" onclick="likeUpdate(this);">후기추천</button>
-			                                                        <button type="button" class="btn btn-danger btn-sm"  data-bs-toggle="modal" data-bs-target="#myModal">후기신고</button>
+			                                                        <button type="button" class="btn btn-danger btn-sm"  data-bs-toggle="modal" data-bs-target="#myModal" onclick="reportModal($(this).siblings('#rvNo').val(), $(this).siblings('#rvMemNo').val(), $(this).siblings('#spNo').val());">후기신고</button>
 			                                                        <input type="hidden" value="<%= directMemNo %>" name="memNo" id="memNo">
 			                                        				<input type="hidden" value="<%= r.getReviewNo() %>" name="rvNo" id="rvNo">
 			                                        				<input type="hidden" value="<%= r.getMemNo() %>" name="rvMemNo" id="rvMemNo">
+			                                        				<input type="hidden" value="<%= spNo %>" name="spNo" id="spNo">
 			                                        			<% } %>
 		                                                    </div>
 		                                                </div>
@@ -260,36 +262,7 @@ body {
 		                                            </div>
 		                                        </div>
 		                                    
-												<!-- The Modal -->
-												<div class="modal" id="myModal">
-												  <div class="modal-dialog">
-												    <div class="modal-content">
 												
-												      <!-- Modal Header -->
-												      <div class="modal-header">
-												        <h4 class="modal-title" >후기 신고하기</h4>
-												      </div>
-													<div class="modal-body">
-												     <% if (directMemNo == 0) { %>
-												     	<br><h5>로그인해야 이용가능한 서비스입니다.</h5><br><br>
-												     	<button type="button" class="btn btn-primary" onclick="location.href='<%=contextPath%>/loginForm.me'">로그인하러가기</button>
-												     <% } else {%>
-														 <!-- Modal body -->
-												        <form method="get" action="form-action.html">
-															<br><h5>신고사유를 선택하세요.</h5><br><br>
-														      <label><input type="radio" name="reportCheck" value="1"> 욕설 및 비방</label><br>
-														      <label><input type="radio" name="reportCheck" value="2"> 성적이고 음란한 대화</label><br>
-														      <label><input type="radio" name="reportCheck" value="3"> 스팸 혹은 금전적요구</label><br><br><br>
-													      	<div>
-													      		<button type="button" class="btn btn-primary" onclick="reportReview();">신고하기</button>
-													      		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-													      	</div>
-													    </form>
-													<% } %>
-													</div>
-												    </div>
-												  </div>
-												</div>
 	                                        	<% } %>
 	                                        	
 	                                        	
@@ -344,7 +317,7 @@ body {
                                         <option value="Y">필요해요</option>
                                     </select>
                                     <span class="col-sm-4"> 미니의자  </span>
-                                    <select name="chiar" required>
+                                    <select name="chair" required>
                                         <option value="N" selected>필요하지 않아요</option>
                                         <option value="Y">필요해요</option>
                                     </select>
@@ -419,8 +392,50 @@ body {
             </div>
         </section>
         </form>
+        
+        <!-- The Modal -->
+		<div class="modal" id="myModal">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		
+		      <!-- Modal Header -->
+		      <div class="modal-header">
+		        <h4 class="modal-title" >후기 신고하기</h4>
+		      </div>
+			<div class="modal-body">
+		     <% if (directMemNo == 0) { %>
+		     	<br><h5>로그인해야 이용가능한 서비스입니다.</h5><br><br>
+		     	<button type="button" class="btn btn-primary" onclick="location.href='<%=contextPath%>/loginForm.me'">로그인하러가기</button>
+		     <% } else {%>
+				 <!-- Modal body -->
+		        <form method="post" action="<%=contextPath%>/reportRv.rv">
+					<br><h5>신고사유를 선택하세요.</h5><br><br>
+				      <label><input type="radio" name="rptReasonNo" value="1"> 욕설 및 비방</label><br>
+				      <label><input type="radio" name="rptReasonNo" value="2"> 성적이고 음란한 대화</label><br>
+				      <label><input type="radio" name="rptReasonNo" value="3"> 스팸 혹은 금전적요구</label><br><br><br>
+				      <input type="hidden" name="rptMemNo" value="">
+				      <input type="hidden" name="rptRefNo" value="">
+				      <input type="hidden" name="spNo" value="">
+			      	<div>
+			      		<button type="submit" class="btn btn-primary">신고하기</button>
+			      		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+			      	</div>
+			    </form>
+			<% } %>
+			</div>
+		    </div>
+		  </div>
+		</div>
     </main>
     <script>
+    	function reportModal(rvNo, rvMemNo, spNo){
+    		$("#myModal input[name=rptMemNo]").val(rvMemNo);
+    		$("#myModal input[name=rptRefNo]").val(rvNo);
+    		$("#myModal input[name=spNo]").val(spNo);
+    		//console.log(spNo);
+    		
+    	}
+    
     	function formSubmit(num){ // num이 1일시 결제, num이 2일시 보관함
     		if(num == 1){
     			$("#detailForm").attr("action", "결제페이지");
@@ -592,7 +607,7 @@ body {
         												+ '</div>'
         												+ '<div class="parentInfo col-lg-6">'
         												+	'<button type="button" class="comBtn" id="reDelete" onclick="deleteComment(' + comList[i].comNo + ', $(this).parent().parent().parent() ,' + comList[i].rvNo + ');">삭제하기</button>'
-        												+	'<button type="button" class="comBtn openBtn" id="reReport">신고하기</button>'
+        												+	'<button type="button" class="comBtn openBtn" id="reReport" onclick="reportComment(' ');" >신고하기</button>'
         												+	'<button type="button" class="comBtn" id="reComment">대댓달기</button>'
         												+	'<input type="hidden" value="' + comList[i].parentNo + '" id="hiddenPno">'
         												+ '</div>'

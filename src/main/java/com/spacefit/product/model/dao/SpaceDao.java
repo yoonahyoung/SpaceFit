@@ -121,12 +121,14 @@ public class SpaceDao {
 		return s;
 	}
 	
-	public ArrayList<Space> selectAdminList(Connection conn, PageInfo pi) {
+	public ArrayList<Space> selectAdminList(Connection conn, PageInfo pi, String selectSp) {
 		ArrayList<Space> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectAdminList");
-		
+		String sql1 = prop.getProperty("selectAdminList1");
+		String sql2 = prop.getProperty("selectAdminList2");
+		String sql = sql1 + selectSp + sql2;
+		System.out.println(sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
