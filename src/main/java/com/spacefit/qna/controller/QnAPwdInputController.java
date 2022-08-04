@@ -37,11 +37,21 @@ public class QnAPwdInputController extends HttpServlet {
 		int qnaNo = Integer.parseInt(request.getParameter("no"));
 		
 		QnA q = new QnAService().selectQnA(qnaNo);
+
 		String pwd = q.getQnaPwd();
-		if(inputPwd.equals(pwd)) {
+		
+		if(inputPwd.equals(pwd)) { // 입력한 비밀번호와 일치하는지 확인
 			
 			int result = new QnAService().increaseCount(qnaNo);
 			q = new QnAService().selectQnA(qnaNo);
+			
+			if(q.getSpaceCategory().equals("practice")) {
+				q.setSpaceCategory("연습실");
+			} else if(q.getSpaceCategory().equals("studio")) {
+				q.setSpaceCategory("스튜디오");
+			}else if(q.getSpaceCategory().equals("party")) {
+				q.setSpaceCategory("파티룸");
+			}
 			
 			if(result > 0) {
 			request.setAttribute("qna", q);
