@@ -50,7 +50,7 @@
 			<div class="row">
 				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
 					<div class="m-l-25 m-r--38 m-lr-0-xl">
-						<form action="<%=contextPath %>/cartUpdateView.me" method="post">
+					
 							<div class="wrap-table-shopping-cart">
 								<table class="table-shopping-cart">
 									<tr class="table_head">
@@ -73,7 +73,9 @@
 											<tr class="table_row">
 												<td class="column-1">
 													<div class="how-itemcart1" align="center">
-														<img src="<%=contextPath%>/<%= c.getSpacePic() %>" alt="IMG" width="55px;" height="55px;">
+														<button type="submit">
+															<img src="<%=contextPath%>/<%= c.getSpacePic() %>" alt="IMG" id="cart-pic" width="55px;" height="55px;">
+														</button>
 													</div>
 												</td>
 												<td class="column-2"><%= c.getSpaceName() %></td>
@@ -91,13 +93,29 @@
 							
 							<div class="bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm" align="center" id="div-mem-cart">
 								<br>
-								<button type="button" class="btn btn-secondary"  id="mem-cart-btn1">전체삭제</button>&nbsp;&nbsp;
+								<button type="button" class="btn btn-secondary" onclick="cartDelete();" id="mem-cart-btn1">전체삭제</button>&nbsp;&nbsp;
 	          					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cartModal">옵션/수량 변경</button>
 								<br><br>
 							</div>
-						</form>
 							
 						<script>
+						
+							function cartDelete(){
+								
+								let answer = confirm("정말 보관함을 비우시겠습니까?");
+								
+								if(answer == true){
+									location.href='<%=contextPath%>/cartDelete.me'
+								}
+								
+							}
+							
+							/*
+							$("input:radio[name=cart-pic]").click(function(){
+								
+								let row
+							})
+							
 							
 							/*
 							function empty(){

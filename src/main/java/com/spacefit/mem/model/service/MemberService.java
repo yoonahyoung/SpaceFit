@@ -196,6 +196,32 @@ public class MemberService {
 	   return result;
    }
    
+   // 장바구니 전체삭제
+   public int deleteCart(int memNo) {
+	   Connection conn = getConnection();
+	   int result = new MemberDao().deleteCart(conn, memNo);
+	   if(result > 0) {
+		   commit(conn);
+	   }else {
+		   rollback(conn);
+	   }
+	   close(conn);
+	   return result;
+   }
+   
+   // 장바구니 선택삭제
+   public int deleteSelectedCart(int memNo, int spaceNo) {
+	   Connection conn = getConnection();
+	   int result = new MemberDao().deleteSelectedCart(conn, memNo, spaceNo);
+	   if(result > 0) {
+		   commit(conn);
+	   }else {
+		   rollback(conn);
+	   }
+	   close(conn);
+	   return result;
+   }
+   
    // 찜하기(위시리스트)
    public int loveList(int spNo, int memNo, String status) {
 	   Connection conn = getConnection();
