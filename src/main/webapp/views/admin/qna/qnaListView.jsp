@@ -91,6 +91,7 @@
                 <option value="practice" id="practice">연습실</option>
                 <option value="party" id="party">파티룸</option>
             </select>
+            
             <span>공간</span>
             
             <div class="list" id="allList">
@@ -100,8 +101,8 @@
                     <option value="<%=c.getSpaceNo()%>"><%= c.getSpaceName() %></option>
                     <% } %>
                 </select>
-              
             </div>
+
             <div id="studioList" class="list" style="display: none;">
                 <select name="studioSpaceNo" id="studio">
                     <option value="전체">--전체--</option>
@@ -110,6 +111,7 @@
                     <% } %>
                 </select>
             </div>
+
             <div id="practiceList" class="list" style="display: none;">
                 <select name="practiceSpaceNo" id="practice">
                     <option value="전체">--전체--</option>
@@ -118,6 +120,7 @@
                     <% } %>
                 </select>
             </div>
+
             <div id="partyList" class="list" style="display: none;">
                 <select name="partySpaceNo" id="party">
                     <option value="전체">--전체--</option>
@@ -126,6 +129,7 @@
                     <% } %>
                 </select>
             </div>
+
             <span>답변여부</span>
             <select name="isSolved">
                 <option value="전체">--전체--</option>
@@ -211,31 +215,16 @@
     		})
     	})
 
-        // 공간분류가 전체면 모든 공간을 선택할 수 있도록
-        $("select[name=category]").change(function(){
-            const basicList2 = document.getElementById("basicList2");
-            const partyList = document.getElementById("partyList");
-            const practiceList = document.getElementById("practiceList");
-            const studioList = document.getElementById("studioList");
 
-                if($(this).val() == "전체"){
-                    basicList2.style.display = "block"; basicList2.style.display = "inline";
-                    partyList.style.display = "none";
-                    practiceList.style.display = "none";
-                    studioList.style.display = "none";
-                }
-        
-        });
-
-        // 공간분류 선택시 전체 or 선택된 공간분류의 공간만 선택할 수 있도록
+        // 공간분류 선택시 선택된 공간분류의 공간만 선택할 수 있도록
         $("select[name=spaceCategory]").change(function(){
             let tag = document.getElementsByClassName("list");
-            const basicList2 = document.getElementById("basicList2");
+            const allList = document.getElementById("allList");
 
             for(let i=0 ; i<tag.length ; i++){
                 if($(this).val() == "전체"){
-                    basicList2.style.display = "block";
-                    basicList2.style.display = "inline";
+                    allList.style.display = "block";
+                    allList.style.display = "inline";
                     tag[i].style.display = "none";
                 }
                 if($(this).val()+"List" == tag[i].id){
@@ -244,7 +233,6 @@
                 }else
                     tag[i].style.display = "none";
             }
-        
         });
         
     </script>
