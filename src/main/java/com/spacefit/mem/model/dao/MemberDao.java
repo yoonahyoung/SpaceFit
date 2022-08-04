@@ -335,7 +335,7 @@ public class MemberDao {
 	   
    }
    
-   public int insertMemCoupon(Connection conn, String cpCode) {
+   public int insertMemCoupon(Connection conn, int memNo, String cpName) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -344,8 +344,8 @@ public class MemberDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-//			pstmt.setString(1, cpName);
-//			pstmt.setInt(2, cpDiscount);
+			pstmt.setInt(1, memNo);
+			pstmt.setString(2, cpName);
 			
 			result = pstmt.executeUpdate();
 			

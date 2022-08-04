@@ -114,9 +114,9 @@ public class MemberService {
 	   return list;
    }
    
-   public int insertMemCoupon(String cpCode) {
+   public int insertMemCoupon(int memNo, String cpName) {
 		Connection conn = getConnection();
-		int result = new MemberDao().insertMemCoupon(conn, cpCode);
+		int result = new MemberDao().insertMemCoupon(conn, memNo, cpName);
 		
 		if(result > 0) {
 			commit(conn);
