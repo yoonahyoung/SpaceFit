@@ -29,6 +29,30 @@ public class SpaceDao {
 			e.printStackTrace();
 		}
 	}
+	
+	public int selectListCount(Connection conn, String selectSp) {
+		int listCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectListCount") + selectSp;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+
+			if(rset.next()) {
+				listCount = rset.getInt("count");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return listCount;
+	}
 
 	public ArrayList<Space> selectList(Connection conn) {
 		ArrayList<Space> list = new ArrayList<>();
@@ -128,7 +152,7 @@ public class SpaceDao {
 		String sql1 = prop.getProperty("selectAdminList1");
 		String sql2 = prop.getProperty("selectAdminList2");
 		String sql = sql1 + selectSp + sql2;
-		System.out.println(sql);
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			

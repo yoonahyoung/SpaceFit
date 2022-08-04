@@ -24,7 +24,7 @@
         height:85px;
         line-height:85px;
     }
-    tbody>tr>td{
+    td{
         display:none;
     }
     tbody p{
@@ -64,12 +64,12 @@
             </tr>
         <% } else{ %>
             <!-- case2. 글이 있을 경우 -->
-            	<% for(FAQ f : list) { %>
-		            <tr>
-		            	<th id="fTitle">Q. <%=f.getFaqTitle() %></th>
+            	<% for(int i=0; i<list.size(); i++) { %>
+		            <tr name="test">
+		            	<th>Q. <%=list.get(i).getFaqTitle() %></th>
 		            </tr>
 		            <tr>
-		            	<td id="fContent"><p><b>A. </b> <%=f.getFaqContent() %></p></td>
+		            	<td id="fContent<%=i%>"><p><b>A. </b> <%=list.get(i).getFaqContent() %></p></td>
 		            </tr>
 	            <% } %>
 			<% } %>     
@@ -84,18 +84,19 @@
 	
     <script>
         $(function(){
-            $("th").click(function(){
-                if($("td").css("display") == "none" ){
-                     
+	        $("tr[name=test]").click(function(){
+        		const $pEl = $(this).next().children();
+                if($pEl.css("display") == "none" ){
+                    
                     // 보여지게끔
-                    $("td").slideDown();
+                    $pEl.slideDown();
 
                     // 요 방식이 아코디언 형식
                 }else{
                     // 사라지게끔
-                    $("td").slideUp();
+                    $pEl.slideUp();
                 }
-            })
+	        })
         })
     </script>
 </body>

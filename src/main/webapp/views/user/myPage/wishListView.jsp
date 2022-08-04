@@ -22,12 +22,7 @@
 	
 	<div class="wishWrap"  align="center">
 		<div class="row" style="width:1200px;">
-			<div align="right" style="margin-bottom:30px;">
-				<select>
-				  <option>최신찜순</option>
-				  <option>오래된찜순</option>
-				</select>
-			</div>
+			
       <%for(Love l : list){%>
           <div class="col-md-4" style="margin: 0 0 50px 0">
             <div class="card-box-d">
@@ -38,7 +33,7 @@
                 <div class="card-header-d">
                   <div class="card-title-d" style="height:100px; margin-top:50px">
                     <h3 class="title-d">
-                      <a href="<%=contextPath%>/list.sp?no=<%= l.getSpaceNo() %>" class="link-two"><%=l.getSpaceName() %><br></a>
+                      <a href="<%=contextPath%>/detail.sp?no=<%= l.getSpaceNo() %>" class="link-two"><%=l.getSpaceName() %><br></a>
                     </h3>
                   </div>
                 </div>
@@ -52,11 +47,10 @@
               </div>
             </div>
           </div>
-          <%} %>
-
+       <%} %>
 
         </div>
 	</div>
-
+	
 </body>
 </html>

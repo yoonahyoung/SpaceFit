@@ -47,11 +47,11 @@
                             </div>
                             <div align="right" style="width:400px; display:inline-block">
                                 <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                                    <select name="selectSp" class="selectBox">
-                                    <option value="*" selected>전체</option>
-                                    <option value="studio">스튜디오</option>
-                                    <option value="practice">연습실</option>
-                                    <option value="party">파티룸</option>
+                                    <select name="selectSp" class="selectBox" onchange="selectPaging(1);">
+	                                    <option value="*" selected>전체</option>
+	                                    <option value="studio">스튜디오</option>
+	                                    <option value="practice">연습실</option>
+	                                    <option value="party">파티룸</option>
                                     </select>
                                 </form>
                             </div>
@@ -117,7 +117,6 @@
                 </div>
 
                 </div>
-                <!-- /.container-fluid -->
 				<br><br>
 				
 				 <script>
@@ -125,19 +124,25 @@
 		        		$(".spaceListTable>tbody>tr").click(function(){
 		        			location.href="<%=contextPath%>/adDetail.sp?no=" + $(this).children().eq(0).text();
 		        		})
+		        		
+		        		selectPaging(1);
 		        	})
+		        		
 		        	
-		        	$(".selectBox").change(function(){
+		        	function selectPaging(page){
 		        		$.ajax({
-		        			url:"<%=contextPath%>/ajaxList.sp?cpage=1&",
-		        			data:{selectSp:$("select[name=selectSp] option:selected").val()},
+		        			url:"<%=contextPath%>/ajaxList.sp",
+		        			data:{selectSp:$("select[name=selectSp] option:selected").val(),
+		        				  cpage:page},
 		        			success:function(h){
+		        				let contextPath = "<%=contextPath%>";
 		        				let pi = h.pi;
 		        				let list = h.list;
-		        				let el = "";
+		        				let el = ""; // 공간 뿌려주는 변수
+		        				let pageVal = ""; // paging처리해주는 변수
 		        				if(list.length == 0){
-		          					value += "<tr>"
-		          					       + "<td colspan='15'> 예약내역이 없습니다. </td>"
+		          					el += "<tr>"
+		          					       + "<td colspan='4'> 공간이 없습니다. </td>"
 		                                     + "</tr>";
 		          				}else{
 		          					for(let i=0; i<list.length; i++){
@@ -154,14 +159,34 @@
 			                                  + "</tr>";
 		                                 
 		        					}
+		          					
+		          					if(pi.currentPage != 1){ 
+		          						pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='selectPaging(" + (pi.currentPage-1) + ");'>&lt;</button>";
+		          						console.log(pageVal + '일');
+									}
+									
+									for(let p=pi.startPage; p<=pi.endPage; p++){
+										if(p == pi.currentPage){
+											pageVal += "<button disabled class='btn btn-sm btn-outline-primary'>" +  p  + "</button>";
+											console.log(pageVal + '이');
+										}else{ 
+											 pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='selectPaging("+ p +")';>"  + p + "</button>";
+											 console.log(pageVal + '삼');
+						            	} 
+									} 
+									
+									 if(pi.currentPage != pi.maxPage){ 
+									 pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='selectPaging(" + (pi.currentPage+1) + ");'>&gt;</button>";
+									 console.log(pageVal + '사');
+						            } 
+		                             
 		          				}
                                 	$("#areaList").html(el);
-		        				
+		        				 	$(".paging-area").html(pageVal); 
 		        			}
+			        		
 		        		})
-		        		
-		        	})
-		        	
+			        }
         		</script>
         
             </div>

@@ -17,6 +17,14 @@ import com.spacefit.review.model.vo.Review;
 
 public class SpaceService {
 	
+	// 공간 페이징바
+	public int selectListCount(String selectSp) {
+		Connection conn = getConnection();
+		int listCount = new SpaceDao().selectListCount(conn, selectSp);
+		close(conn);
+		return listCount;
+	}
+	
 	// 공간 리스트 불러오기
 	public ArrayList<Space> selectList() {
 		Connection conn = getConnection();
