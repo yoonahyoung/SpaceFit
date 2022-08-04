@@ -101,7 +101,7 @@
 	                                          <td><%= t.getTermsPage() %></td>
 	                                          <td><%= t.getTermsEnrollDate() %></td>
 	                                          <td><%= t.getTermsModifyDate() %></td>
-	                                          <td><%= t.getTermsNote() %></td>
+	                                          <td><%= ( t.getTermsNote() == null ) ? "" : t.getTermsNote() %></td>
 	                                          
 	                                      </tr>
 	                                    <% } %>
