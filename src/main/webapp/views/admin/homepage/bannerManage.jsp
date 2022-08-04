@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.event.model.vo.Banner"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +33,10 @@
 
 	<%@ include file="../common/adminMenubar.jsp" %>
 	
+	<%
+	 	ArrayList<Banner> list = (ArrayList<Banner>)request.getAttribute("list");
+	%>
+	
 	<br><br>
 	<h2 align="center" style="color:black;">배너 관리</h2>
 	<br><br><br>
@@ -42,122 +46,47 @@
 		<div class="btnWrap float-right" style="padding-right:10px;">
 	        <button type="button" class="btn btn-danger">삭제하기</button>
 	        <button type="button" class="btn btn-secondary" onclick="bannerUpdateDetailView();">수정하기</button>
-	        <button type="button" class="btn btn-primary" onclick="bannerInsertDetailView();">등록하기</button>
+	        <button type="button" class="btn btn-primary" onclick="location.href='<%=contextPath%>/adBannerInsertView.ev'">등록하기</button>
 	    </div>
 	    <br><br><br>
 	    
         <div class="row">
-            <div class="col-md-6 col-lg-3 ban-card-margin">
-                <div class="card ban-card">
-                    <img class="img-fluid" src="../../../resources/admin/img/main1.jpeg" alt="">
-                    <div class="card-body">
-                        <h5 class="ban-card-title">배너명 A</h5><br><br>
-                        <span class="card-text"><b>등록일 : </b></span>
-                        <span>&nbsp;2022.07.07</span><br>
-                        <span class="card-text"><b>수정일 : </b></span>
-                        <span>&nbsp;2022.07.08</span><br>
-                        <span class="card-text"><b>등록URL : </b></span>
-                        <span>&nbsp;링크 가져오기</span>
-                    </div>
-                    <div class="card-footer" style="background:white;">
-                        <span class="card-text d-inline float-left"><small>상태 : </small></span>
-                        <span class="float-left" style="color:#0D6EFD;"><small><b>&nbsp;게시중</b></small></span>
-                        <a href="#" class="card-link float-right text-muted"><small>해당 페이지로 이동</small></a>
-                    </div>
-                </div>
-                <br>
-                <input type="checkbox">
-            </div>
-            <!-- End Col -->
-            <div class="col-md-6 col-lg-3 ban-card-margin">
-                <div class="card ban-card">
-                    <img class="img-fluid" src="../../../resources/admin/img/main2.jpeg" alt="">
-                    <div class="card-body">
-                        <h5 class="ban-card-title">배너명 A</h5><br><br>
-                        <span class="card-text"><b>등록일 : </b></span>
-                        <span>&nbsp;2022.07.07</span><br>
-                        <span class="card-text"><b>수정일 : </b></span>
-                        <span>&nbsp;2022.07.08</span><br>
-                        <span class="card-text"><b>등록URL : </b></span>
-                        <span>&nbsp;링크 가져오기</span>
-                    </div>
-                    <div class="card-footer" style="background:white;">
-                        <span class="card-text d-inline float-left"><small>상태 : </small></span>
-                        <span class="float-left" style="color:#0D6EFD;"><small><b>&nbsp;게시중</b></small></span>
-                        <a href="#" class="card-link float-right text-muted"><small>해당 페이지로 이동</small></a>
-                    </div>
-                </div>
-                <br>
-                <input type="checkbox">
-            </div>
-            <!-- End Col -->
-            <div class="col-md-6 col-lg-3 ban-card-margin">
-                <div class="card ban-card">
-                    <img class="img-fluid" src="../../../resources/admin/img/main3.jpg" alt="">
-                    <div class="card-body">
-                        <h5 class="ban-card-title">배너명 A</h5><br><br>
-                        <span class="card-text"><b>등록일 : </b></span>
-                        <span>&nbsp;2022.07.07</span><br>
-                        <span class="card-text"><b>수정일 : </b></span>
-                        <span>&nbsp;2022.07.08</span><br>
-                        <span class="card-text"><b>등록URL : </b></span>
-                        <span>&nbsp;링크 가져오기</span>
-                    </div>
-                    <div class="card-footer" style="background:white;">
-                        <span class="card-text d-inline float-left"><small>상태 : </small></span>
-                        <span class="float-left" style="color:#0D6EFD;"><small><b>&nbsp;게시중</b></small></span>
-                        <a href="#" class="card-link float-right text-muted"><small>해당 페이지로 이동</small></a>
-                    </div>
-                </div>
-                <br>
-                <input type="checkbox">
-            </div>
-            <!-- End Col -->
-            <div class="col-md-6 col-lg-3 ban-card-margin">
-                <div class="card ban-card">
-                    <img class="img-fluid" src="../../../resources/admin/img/main1.jpeg" alt="">
-                    <div class="card-body">
-                        <h5 class="ban-card-title">배너명 A</h5><br><br>
-                        <span class="card-text"><b>등록일 : </b></span>
-                        <span>&nbsp;2022.07.07</span><br>
-                        <span class="card-text"><b>수정일 : </b></span>
-                        <span>&nbsp;2022.07.08</span><br>
-                        <span class="card-text"><b>등록URL : </b></span>
-                        <span>&nbsp;링크 가져오기</span>
-                    </div>
-                    <div class="card-footer" style="background:white;">
-                        <span class="card-text d-inline float-left"><small>상태 : </small></span>
-                        <span class="float-left" style="color:#0D6EFD;"><small><b>&nbsp;보류</b></small></span>
-                        <a href="#" class="card-link float-right text-muted"><small>해당 페이지로 이동</small></a>
-                    </div>
-                </div>
-                <br>
-                <input type="checkbox">
-            </div>
-            <!-- End Col -->
-            <div class="col-md-6 col-lg-3 ban-card-margin">
-                <div class="card ban-card">
-                    <img class="img-fluid" src="../../../resources/admin/img/main1.jpeg" alt="">
-                    <div class="card-body">
-                        <h5 class="ban-card-title">배너명 A</h5><br><br>
-                        <span class="card-text"><b>등록일 : </b></span>
-                        <span>&nbsp;2022.07.07</span><br>
-                        <span class="card-text"><b>수정일 : </b></span>
-                        <span>&nbsp;2022.07.08</span><br>
-                        <span class="card-text"><b>등록URL : </b></span>
-                        <span>&nbsp;링크 가져오기</span>
-                    </div>
-                    <div class="card-footer" style="background:white;">
-                        <span class="card-text d-inline float-left"><small>상태 : </small></span>
-                        <span class="float-left" style="color:#0D6EFD;"><small><b>&nbsp;보류</b></small></span>
-                        <a href="#" class="card-link float-right text-muted"><small>해당 페이지로 이동</small></a>
-                    </div>
-                 
-                </div>
-                <br>
-           		<input type="checkbox">
-            </div>
-            <!-- End Col -->
+        	
+        	<% if(list.isEmpty()) { %>
+        		<p align="center">조회 가능한 배너가 없습니다.</p>
+        	 <% }else { %>
+        	 
+        	 	<% for(Banner b : list) { %>
+		            <div class="col-md-6 col-lg-3 ban-card-margin">
+		                <div class="card ban-card">
+		                    <img class="img-fluid" src="../../../resources/admin/img/main1.jpeg" alt="">
+		                    <div class="card-body">
+		                        <h5 class="ban-card-title"><%= b.getBanName() %></h5><br><br>
+		                        <span class="card-text"><b>배너번호 : </b></span>
+		                        <span>&nbsp;<%= b.getBanNo() %></span><br>
+		                        <span class="card-text"><b>등록일 : </b></span>
+		                        <span>&nbsp;<%= b.getBanEnrollDate() %></span><br>
+		                        <span class="card-text"><b>수정일 : </b></span>
+		                        <span>&nbsp;<%= b.getBanModifyDate() %></span><br>
+		                        <span class="card-text"><b>등록URL : </b></span>
+		                        <span>&nbsp;<%= b.getBanURL() %></span>
+		                    </div>
+		                    <div class="card-footer" style="background:white;">
+		                        <span class="card-text d-inline float-left"><small>상태 : </small></span>
+		                        <span class="float-left" style="color:#0D6EFD;"><small><b>&nbsp;<%= ( b.getBanStatus().equals("N") ) ? "보류중" : "게시중" %></b></small></span>
+		                    </div>
+		                </div>
+		                <br>
+		                <input type="checkbox">
+		            </div>
+		        <% } %>
+		        
+	        <% } %>
+            <script>
+            	
+            </script>
+            
+           
         </div>
         
         
@@ -168,9 +97,6 @@
    			location.href="<%=contextPath%>/views/admin/homepage/bannerUpdateDetailView.jsp";
 		}
     	
-    	function bannerInsertDetailView(){
-   			location.href="<%=contextPath%>/views/admin/homepage/bannerInsertDetailView.jsp";
-		}
     </script>
     
     <br><br><br><br><br><br>

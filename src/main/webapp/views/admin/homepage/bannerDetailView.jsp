@@ -4,8 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>약관 등록</title>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/admin/css/member.css">
+<title>Insert title here</title>
 </head>
 <body>
 
@@ -46,15 +45,13 @@
 				
 			</table>
 			<br><br>
-			<button type="button" onclick="location.href='<%=contextPath%>/adTermsList.no'" class="btn btn-secondary">취소하기</button>&nbsp;
-			<button type="submit" class="btn btn-primary">등록하기</button>
+			<button type="button" onclick="location.href='<%=contextPath%>/adTermsList.no'" class="btn btn-secondary">배너목록</button>&nbsp;
+			<button type="submit" class="btn btn-primary">수정하기</button>
 	        
 		</form>
 		        
     </div>
 
 	<div style="height : 100px"></div>
-	
-
 </body>
 </html>

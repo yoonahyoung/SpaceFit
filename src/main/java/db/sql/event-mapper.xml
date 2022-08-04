@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="selectBannerList">
+		SELECT 
+		       BAN_NO
+		     , BAN_NAME
+		     , BAN_STATUS
+		     , BAN_ENROLL_DATE
+		     , BAN_MODIFY_DATE
+		     , BAN_URL
+		     , BAN_IMG
+		  FROM TB_BANNER
+	</entry>
+	
+	<entry key="adminInsertBanner">
+		INSERT 
+		  INTO TB_BANNER
+		      (BAN_NO
+		     , BAN_NAME
+		     , BAN_STATUS
+		     , BAN_URL
+		     , BAN_IMG
+		     )
+		VALUES(
+		       SEQ_BANNO.NEXTVAL
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		      )
+	</entry>
+
+</properties>
