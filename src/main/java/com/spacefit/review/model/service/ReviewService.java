@@ -161,6 +161,20 @@ public class ReviewService {
 	}
 	
 	
+	public int todayRvCount() {
+		Connection conn = getConnection();
+		int todayRvCount = new ReviewDao().todayRvCount(conn);
+		close(conn);
+		return todayRvCount;
+	}
+	
+	
+	public float avgRoundOne() {
+		Connection conn = getConnection();
+		float avgRoundOne = new ReviewDao().avgRoundOne(conn);
+		close(conn);
+		return avgRoundOne;
+	}
 	
 	
 	

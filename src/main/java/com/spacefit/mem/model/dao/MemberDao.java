@@ -8,14 +8,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Properties;
 
 import com.spacefit.mem.model.vo.Cart;
 import com.spacefit.mem.model.vo.Love;
 import com.spacefit.mem.model.vo.Mcp;
 import com.spacefit.mem.model.vo.Member;
-import com.spacefit.review.model.dao.CommentDao;
+import com.spacefit.review.model.vo.Review;
 
 public class MemberDao {
    
@@ -68,8 +70,9 @@ public class MemberDao {
       } catch (SQLException e) {
          e.printStackTrace();
       } finally {
+    	  close(rset);
          close(pstmt);
-         close(conn);
+        // close(conn);
       }
       return m;
    }
@@ -150,8 +153,8 @@ public class MemberDao {
       } catch (SQLException e) {
          e.printStackTrace();
       } finally {
+    	 close(rset);
          close(pstmt);
-         close(rset);
       }
       return searchM;
       
@@ -890,6 +893,25 @@ public class MemberDao {
 		
 		return memList;
 		
+	}
+	
+	
+	public int adminCheck(Connection conn, String addSql) {
+		
+		int adminCheck = 0;
+		PreparedStatement pstmt = null;
+		//ResultSet rset = null;
+		String sql = prop.getProperty("adminCheck") + addSql;
+		System.out.println("다오에서 확인하는 sql : " + sql);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			adminCheck = pstmt.executeUpdate(); //2개 선택시 2
+			System.out.println("다오에서 확인하는 adminCheck" + adminCheck);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return adminCheck;
 	}
 	
 	

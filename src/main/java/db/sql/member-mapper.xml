@@ -439,6 +439,11 @@
 		  FROM TB_COUPON
 	</entry>
 	
+	<entry key="adminCheck">
+		   UPDATE TB_MEMBER
+      SET MEM_ADM_FLAG = 'A'
+	</entry>
+	
 	<entry key="adminInsertCoupon">
 		INSERT 
 		  INTO TB_COUPON

@@ -8,7 +8,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Properties;
 
 import com.spacefit.attachment.model.vo.Attachment;
@@ -569,6 +571,55 @@ public class ReviewDao {
 		return rvList;
 		
 	}
+	
+	public int todayRvCount(Connection conn) {
+		int todayRvCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("todayRvCount");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				todayRvCount = rset.getInt("todayRvCount");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		} return todayRvCount;
+		
+		
+	}
+	
+	/**
+	 * @param conn
+	 * @param 전체 공간에 대한 전체 별점 평균 (소수점 1자리에서 올림처리)
+	 * @return
+	 */
+	public float avgRoundOne(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("avgRoundOne");
+		float avgRoundOne = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				avgRoundOne = rset.getFloat("avgRoundOne");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		} return avgRoundOne;
+		
+	}
+	
 	
 	
 	/**

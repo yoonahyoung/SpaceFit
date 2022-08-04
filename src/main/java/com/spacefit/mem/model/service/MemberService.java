@@ -196,32 +196,6 @@ public class MemberService {
 	   return result;
    }
    
-   // 장바구니 전체삭제
-   public int deleteCart(int memNo) {
-	   Connection conn = getConnection();
-	   int result = new MemberDao().deleteCart(conn, memNo);
-	   if(result > 0) {
-		   commit(conn);
-	   }else {
-		   rollback(conn);
-	   }
-	   close(conn);
-	   return result;
-   }
-   
-   // 장바구니 선택삭제
-   public int deleteSelectedCart(int memNo, int spaceNo) {
-	   Connection conn = getConnection();
-	   int result = new MemberDao().deleteSelectedCart(conn, memNo, spaceNo);
-	   if(result > 0) {
-		   commit(conn);
-	   }else {
-		   rollback(conn);
-	   }
-	   close(conn);
-	   return result;
-   }
-   
    // 찜하기(위시리스트)
    public int loveList(int spNo, int memNo, String status) {
 	   Connection conn = getConnection();
@@ -310,6 +284,24 @@ public class MemberService {
 		close(conn);
 		return memList;
 	}
+	
+	
+	public int adminCheck(String strAdminCheck) {
+		Connection conn = getConnection();
+		String addSql = "WHERE MEM_NO IN (" + strAdminCheck + ")";
+		System.out.println("서비스에서 확인하는 addSql" + addSql);
+		int adminCheck = new MemberDao().adminCheck(conn, addSql);
+		
+		if(adminCheck > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		} 
+		close(conn);
+		
+		return adminCheck;
+	}
+	
 
 	public ArrayList<Mcp> selectAdminCouponList(){
 		Connection conn = getConnection();

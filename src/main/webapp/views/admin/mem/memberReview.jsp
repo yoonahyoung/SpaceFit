@@ -3,6 +3,8 @@
 <%@ page import = "java.util.ArrayList, com.spacefit.review.model.vo.Review" %>
 <%
 	ArrayList<Review> rvList = (ArrayList<Review>)request.getAttribute("rvList");
+	int todayRvCount = (int)request.getAttribute("todayRvCount");
+	float avgRoundOne = (float)request.getAttribute("avgRoundOne");
 %>  
 <!DOCTYPE html>
 <html>
@@ -33,11 +35,11 @@
                         	  <div class="row" id="reviewChart">
 								  <div class="col-4" id="todaysReview">
 								  	<span>오늘 등록 후기</span><br>
-								  	<h4>51/<%=rvList.size() %></h4>	
+								  	<h4><%=todayRvCount  %>/<%=rvList.size() %></h4>	
 								  </div>
 								  <div class="col-4" id="avgStar">
 								  	<span>평균별점</span><br>
-								  	<h4>4.3</h4>	
+								  	<h4><%=avgRoundOne %></h4>	
 								  </div>
 								  <div class="col-4" id="avgReview">
 								  	<span>후기작성률</span><br>

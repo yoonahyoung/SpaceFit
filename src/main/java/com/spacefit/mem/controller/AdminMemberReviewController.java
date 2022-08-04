@@ -33,6 +33,13 @@ public class AdminMemberReviewController extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		ArrayList<Review> rvList = new ReviewService().adminReviewSelect();
+		
+		// String sql = "WHERE RV_ENROLL_DATE = SYSDATE";
+		int todayRvCount = new ReviewService().todayRvCount();
+		float avgRoundOne = new ReviewService().avgRoundOne();
+		
+		request.setAttribute("todayRvCount", todayRvCount);
+		request.setAttribute("avgRoundOne", avgRoundOne);
 		request.setAttribute("rvList", rvList);
 		request.getRequestDispatcher("views/admin/mem/memberReview.jsp").forward(request, response);
 	}

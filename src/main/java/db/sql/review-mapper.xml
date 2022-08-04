@@ -242,6 +242,12 @@
 		  JOIN TB_BOOK USING (BOOK_NO)
 		 WHERE RV_NO=?
 	</entry>
+	
+	<entry key="todayRvCount">
+     		SELECT COUNT(*) AS "todayRvCount"
+   			  FROM TB_REVIEW
+  			 WHERE TO_CHAR(RV_ENROLL_DATE,'yy/mm/dd') = (SELECT TO_CHAR(SYSDATE,'yy/mm/dd') FROM DUAL)    
+	</entry>
 
 
 
@@ -279,6 +285,11 @@
 		  FROM TB_REVIEW
 		 WHERE SPACE_NO = ?
 	</entry>
+	
+	<entry key="avgRoundOne">
+		  SELECT ROUND(AVG(RV_STAR), 2) AS "avgRoundOne" FROM TB_REVIEW
+	</entry>
+	
 	
 	<!-- 후기 신고 등록 -->
 	<entry key="reportReview">
