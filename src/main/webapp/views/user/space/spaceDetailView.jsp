@@ -318,7 +318,7 @@ body {
                                         <option value="Y">필요해요</option>
                                     </select>
                                     <span class="col-sm-4"> 미니의자  </span>
-                                    <select name="chiar" required>
+                                    <select name="chair" required>
                                         <option value="N" selected>필요하지 않아요</option>
                                         <option value="Y">필요해요</option>
                                     </select>
@@ -375,8 +375,13 @@ body {
                                 <!-- limit, parking, animal, stand, chair, date, detailCI, detailCO, price  -->
                                    <input type="hidden" name="no" value="<%=s.getSpaceNo() %>">
                                     <div id="ayBtn" style="text-align:center; margin-top:100px;">
-                                        <button type="button" class="btn btn-primary" onclick="formSumbit(1);">바로결제</button>
-                                        <button type="button" onclick="formSubmit(2);" class="btn btn-outline-dark">보관함</button>
+                                    	<% if(loginUser != null){ %>
+	                                        <button type="button" class="btn btn-primary" onclick="formSumbit(1);">바로결제</button>
+	                                        <button type="button" onclick="formSubmit(2);" class="btn btn-outline-dark">보관함</button>
+                                        <%}else{ %>
+                                        	<button type="button" class="btn btn-primary" onclick="alert('로그인이 필요한 서비스입니다!');">바로결제</button>
+	                                        <button type="button" onclick="alert('로그인이 필요한 서비스입니다!');" class="btn btn-outline-dark">보관함</button>
+                                        <%} %>
                                         <% if(loginUser != null && loveCheck == 0){ %>
                                            <button type="button" onclick="love();" id="zzim" class="btn btn-outline-danger">찜하기</button>
                                        <%}else if(loginUser != null && loveCheck == 1){%>
@@ -441,7 +446,7 @@ body {
 
     
        function formSubmit(num){ // num이 1일시 결제, num이 2일시 보관함
-          if(num == 1){
+    	   if(num == 1){
              $("#detailForm").attr("action", "결제페이지");
              $("#detailForm").submit();
           }else{

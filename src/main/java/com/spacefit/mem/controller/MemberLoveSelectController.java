@@ -33,17 +33,21 @@ public class MemberLoveSelectController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		HttpSession session = request.getSession();
 		Member loginUser = ((Member)session.getAttribute("loginUser"));
 		
-		int memNo = loginUser.getMemNo();
-		ArrayList<Love> list = new MemberService().selectLoveList(memNo);
-		
-		request.setAttribute("loveList", list);
-		request.getRequestDispatcher("views/user/myPage/wishListView.jsp").forward(request, response);
-		
-		
+		if(loginUser == null) {
+			session.setAttribute("alertMsg", "로그인이 필요합니다!");
+			response.sendRedirect(request.getContextPath() + "/loginForm.me");
+		}else {
+			
+			int memNo = loginUser.getMemNo();
+			ArrayList<Love> list = new MemberService().selectLoveList(memNo);
+			
+			request.setAttribute("loveList", list);
+			request.getRequestDispatcher("views/user/myPage/wishListView.jsp").forward(request, response);
+			
+		}
 	}
 
 	/**

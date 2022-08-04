@@ -33,19 +33,12 @@ public class FAQListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Member loginUser = ((Member)session.getAttribute("loginUser"));
 		
-		if(loginUser == null) {
-			session.setAttribute("alertMsg", "로그인이 필요한 서비스입니다!");
-			response.sendRedirect(request.getContextPath() + "/loginForm.me");
-		}else {
-			
-			ArrayList<FAQ> list = new NoticeService().selectFAQUserList();
-			
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("views/user/notice/FAQListView.jsp").forward(request, response);
-		}
+		ArrayList<FAQ> list = new NoticeService().selectFAQUserList();
+		
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("views/user/notice/FAQListView.jsp").forward(request, response);
+	
 	}
 
 	/**
