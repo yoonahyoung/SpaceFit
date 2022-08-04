@@ -42,9 +42,9 @@ public class SpaceService {
 	}
 	
 	// 관리자 공간 리스트 불러오기
-	public ArrayList<Space> selectAdminList(PageInfo pi) {
+	public ArrayList<Space> selectAdminList(PageInfo pi, String selectSp) {
 		Connection conn = getConnection();
-		ArrayList<Space> list = new SpaceDao().selectAdminList(conn, pi);
+		ArrayList<Space> list = new SpaceDao().selectAdminList(conn, pi, selectSp);
 		close(conn);
 		return list;
 	}

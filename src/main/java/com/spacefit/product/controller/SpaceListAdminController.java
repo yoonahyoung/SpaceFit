@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.spacefit.common.model.vo.PageInfo;
 import com.spacefit.mem.model.vo.Member;
 import com.spacefit.notice.model.service.NoticeService;
@@ -42,7 +43,7 @@ public class SpaceListAdminController extends HttpServlet {
 			session.setAttribute("alertMsg", "관리자 로그인이 필요합니다!");
 			response.sendRedirect(request.getContextPath() + "/loginForm.me");
 		}else {
-			
+		// ------------------ 페이징 처리 --------------------------------------------------------
 			int listCount;		
 			int currentPage;	
 			int pageLimit;		
@@ -70,8 +71,10 @@ public class SpaceListAdminController extends HttpServlet {
 			// * 페이징바를 만들 때 필요한 객체
 			PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 			
+		// ------------------------ 데이터 받고 넘기기 ----------------------------------------------------------------	
+			String selectSp = "";
 			
-			ArrayList<Space> list = new SpaceService().selectAdminList(pi);
+			ArrayList<Space> list = new SpaceService().selectAdminList(pi, selectSp);
 			
 			request.setAttribute("pi", pi);
 			request.setAttribute("list", list);

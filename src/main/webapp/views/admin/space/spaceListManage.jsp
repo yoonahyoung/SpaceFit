@@ -47,11 +47,11 @@
                             </div>
                             <div align="right" style="width:400px; display:inline-block">
                                 <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                                    <select>
-                                    <option selected id="all">전체</option>
-                                    <option id="stdio">스튜디오</option>
-                                    <option id="practice">연습실</option>
-                                    <option id="party">파티룸</option>
+                                    <select name="selectSp" class="selectBox">
+                                    <option value="*" selected>전체</option>
+                                    <option value="studio">스튜디오</option>
+                                    <option value="practice">연습실</option>
+                                    <option value="party">파티룸</option>
                                     </select>
                                 </form>
                             </div>
@@ -72,9 +72,9 @@
                                         <th width="100px">게시일</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                	<%for(Space s : list){ %>
-                                    <tr>
+                                <tbody id="areaList">
+                                	 <%for(Space s : list){ %>
+                                    <tr id="trId">
                                         <td><%= s.getSpaceNo() %></td>
                                         <td><%= s.getSpaceName() %></td>
                                         <td>
@@ -88,7 +88,7 @@
                                         </td>
                                         <td><%= s.getSpaceEnDate() %></td>
                                     </tr>
-                                    <%} %>
+                                    <%} %> 
                                     <tr>
                                 </tbody>
                             </table>
@@ -127,13 +127,41 @@
 		        		})
 		        	})
 		        	
-		        	/* $(function(){
-		        		$("#studio").selected(function(){
-		        			$("#studio").css("display", "block");
-		        			$("#practice").css("display", "none");
-		        			$("#party").css("display", "none");
+		        	$(".selectBox").change(function(){
+		        		$.ajax({
+		        			url:"<%=contextPath%>/ajaxList.sp?cpage=1&",
+		        			data:{selectSp:$("select[name=selectSp] option:selected").val()},
+		        			success:function(h){
+		        				let pi = h.pi;
+		        				let list = h.list;
+		        				let el = "";
+		        				if(list.length == 0){
+		          					value += "<tr>"
+		          					       + "<td colspan='15'> 예약내역이 없습니다. </td>"
+		                                     + "</tr>";
+		          				}else{
+		          					for(let i=0; i<list.length; i++){
+		          						switch(list[i].spaceCategory){
+		          						case"studio": list[i].spaceCategory = "스튜디오"; break;
+		          						case"practice": list[i].spaceCategory = "연습실"; break;
+		          						case"party": list[i].spaceCategory = "파티룸"; break;
+		          						}
+	                        			el +=	"<tr>"
+			                                  + 	"<td>"+ list[i].spaceNo +"</td>"
+			                                  + 	"<td>"+ list[i].spaceName +"</td>"
+			                                  + 	"<td>"+ list[i].spaceCategory +"</td>"
+			                                  + 	"<td>"+ list[i].spaceEnDate +"</td>"
+			                                  + "</tr>";
+		                                 
+		        					}
+		          				}
+                                	$("#areaList").html(el);
+		        				
+		        			}
 		        		})
-		        	}) */
+		        		
+		        	})
+		        	
         		</script>
         
             </div>
