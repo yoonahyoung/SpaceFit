@@ -50,8 +50,9 @@
 			<div class="row">
 				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
 					<div class="m-l-25 m-r--38 m-lr-0-xl">
-					
+						
 							<div class="wrap-table-shopping-cart">
+							
 								<table class="table-shopping-cart">
 									<tr class="table_head">
 										<th class="column-1">space</th>
@@ -70,12 +71,12 @@
 	                           		<% }else {%>
 	                           		
 										<% for(Cart c : list) { %>
+											
 											<tr class="table_row">
 												<td class="column-1">
 													<div class="how-itemcart1" align="center">
-														<button type="submit">
-															<img src="<%=contextPath%>/<%= c.getSpacePic() %>" alt="IMG" id="cart-pic" width="55px;" height="55px;">
-														</button>
+														<input type="hidden" name="no" value="<%= c.getSpaceNo() %>">
+														<img src="<%=contextPath%>/<%= c.getSpacePic() %>" alt="IMG" id="cart-pic" width="55px;" height="55px;">
 													</div>
 												</td>
 												<td class="column-2"><%= c.getSpaceName() %></td>
@@ -89,6 +90,7 @@
 										
 									<% } %>
 									</table>
+								
 								</div>
 							
 							<div class="bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm" align="center" id="div-mem-cart">
@@ -110,11 +112,9 @@
 								
 							}
 							
-							/*
-							$("input:radio[name=cart-pic]").click(function(){
-								
-								let row
-							})
+						
+							
+							
 							
 							
 							/*

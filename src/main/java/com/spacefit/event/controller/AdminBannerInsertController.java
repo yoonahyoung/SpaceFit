@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.spacefit.common.SpacefitFileRenamePolicy;
 import com.spacefit.event.model.service.EventService;
 import com.spacefit.event.model.vo.Banner;
 
@@ -35,26 +39,45 @@ public class AdminBannerInsertController extends HttpServlet {
 
 		request.setCharacterEncoding("utf-8");
 		
-		String banName = request.getParameter("banName");
-		String banStatus = request.getParameter("banStatus");
-		String banImg = request.getParameter("banImg");
-		String banURL = request.getParameter("banURL");
-		
-		Banner b = new Banner(banName, banStatus, banURL, banImg);
-		
-		int result = new EventService().adminInsertBanner(b);
-		
 		HttpSession session = request.getSession();
-		if(result > 0) {
+		
+		if(ServletFileUpload.isMultipartContent(request)) {
 			
-			session.setAttribute("alertMsg", "배너가 등록되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/adBannerList.ev");
+			int maxSize = 10 * 1024 * 1024;
+			String savePath = session.getServletContext().getRealPath("/resources/admin/homePage_upfiles/");
+			MultipartRequest multi = new MultipartRequest(request, savePath, maxSize, "UTF-8", new SpacefitFileRenamePolicy());
+	
+			String changeName = multi.getFilesystemName("banImg");
+			String filePath = "resources/admin/homePage_upfiles/";
+			String banImg = filePath + changeName;	
 			
-		}else {
+			String banName = multi.getParameter("banName");
+			String banStatus = multi.getParameter("banStatus");
+			String banURL = multi.getParameter("banURL");
 			
-			session.setAttribute("alertMsg", "배너 등록에 실패했습니다.");
-			response.sendRedirect(request.getContextPath() + "/adBannerInsertView.ev");
+			Banner b = new Banner(banName, banStatus, banURL, banImg);
+			
+			int result = new EventService().adminInsertBanner(b);
+			
+			
+			if(result > 0) {
+				
+				session.setAttribute("alertMsg", "배너가 등록되었습니다.");
+				response.sendRedirect(request.getContextPath() + "/adBannerList.ev");
+				
+			}else {
+				
+				session.setAttribute("alertMsg", "배너 등록에 실패했습니다.");
+				response.sendRedirect(request.getContextPath() + "/adBannerInsertView.ev");
+			}
+			
 		}
+		
+		
+		
+		
+		
+		
 	
 	
 	}

@@ -33,6 +33,15 @@ public class EventService {
 		return result;
 	}
 	
+	// 배너 상세조회 
+	public Banner selectBannerDetail(int banNo) {
+		Connection conn = getConnection();
+		Banner b = new EventDao().selectBannerDetail(conn, banNo);
+		close(conn);
+		return b;
+		
+	}
+	
 	
 
 }

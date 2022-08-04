@@ -16,7 +16,7 @@
         <h1 class="h3 mb-2 text-gray-800" style="color: rgb(20, 18, 18)">배너 등록</h1>
         <br><br><br>
 
-        <form action="<%=contextPath%>/adBannerInsert.ev" method="post">
+        <form action="<%=contextPath%>/adBannerInsert.ev" method="post" enctype="multipart/form-data">
         
 			<table class="table table-hover" id="dataTable">
 				<tr>

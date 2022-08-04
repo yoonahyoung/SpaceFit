@@ -1,7 +1,6 @@
-package com.spacefit.mem.controller;
+package com.spacefit.event.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,22 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.spacefit.mem.model.service.MemberService;
-import com.spacefit.mem.model.vo.Cart;
-import com.spacefit.mem.model.vo.Mcp;
-import com.spacefit.mem.model.vo.Member;
+import com.spacefit.event.model.service.EventService;
+import com.spacefit.event.model.vo.Banner;
 
 /**
- * Servlet implementation class CartListController
+ * Servlet implementation class AdminBannerDetailViewController
  */
-@WebServlet("/cartList.me")
-public class CartListController extends HttpServlet {
+@WebServlet("/adBannerDetail.ev")
+public class AdminBannerDetailViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CartListController() {
+    public AdminBannerDetailViewController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,24 +31,23 @@ public class CartListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
+		request.setCharacterEncoding("utf-8");
 		
-		ArrayList<Cart> list = new MemberService().selectCartList(memNo);
-		ArrayList<Mcp> cpList = new MemberService().selectDownCoupon();
+		int banNo = Integer.parseInt(request.getParameter("banNo"));
 		
-		if(list.isEmpty()) {
+		Banner b = new EventService().selectBannerDetail(banNo);
+		
+		if(b == null) {
 			
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("views/user/myPage/cartListView.jsp").forward(request, response);
+			request.setAttribute("b", b);
+			request.getRequestDispatcher("views/admin/homepage/bannerDetailView.jsp").forward(request, response);
 			
 		}else {
 			
-			request.setAttribute("cpList", cpList);
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("views/user/myPage/cartListView.jsp").forward(request, response);
+			request.setAttribute("b", b);
+			response.sendRedirect(request.getContextPath() + "/adBannerList.ev");
+			
 		}
-		
-		
 		
 	}
 
