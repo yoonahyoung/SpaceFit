@@ -64,7 +64,7 @@
         <%if(list.isEmpty()) { %>
             <!-- case1. 공지글이 없을 경우 -->
             <tr>
-                <td colspan="8">존재하는 문의사항이 없습니다.</td>
+                <td colspan="8" style="pointer-events: none;">존재하는 문의사항이 없습니다.</td>
             </tr>
 		<% } else{ %>
             <!-- case2. 공지글이 있을 경우 -->
