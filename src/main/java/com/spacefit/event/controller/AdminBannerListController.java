@@ -1,4 +1,4 @@
-package com.spacefit.notice.controller;
+package com.spacefit.event.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -57,13 +57,13 @@
         	 <% }else { %>
         	 
         	 	<% for(Banner b : list) { %>
-		            <div class="col-md-6 col-lg-3 ban-card-margin">
+		            <div class="col-md-6 col-lg-3 ban-card-margin" id="ban-card">
 		                <div class="card ban-card">
-		                    <img class="img-fluid" src="../../../resources/admin/img/main1.jpeg" alt="">
+		                    <img class="img-fluid" src="<%= b.getBanImg() %>" alt="">
 		                    <div class="card-body">
 		                        <h5 class="ban-card-title"><%= b.getBanName() %></h5><br><br>
 		                        <span class="card-text"><b>배너번호 : </b></span>
-		                        <span>&nbsp;<%= b.getBanNo() %></span><br>
+		                        <span id="banNo">&nbsp;<%= b.getBanNo() %></span><br>
 		                        <span class="card-text"><b>등록일 : </b></span>
 		                        <span>&nbsp;<%= b.getBanEnrollDate() %></span><br>
 		                        <span class="card-text"><b>수정일 : </b></span>
@@ -77,7 +77,7 @@
 		                    </div>
 		                </div>
 		                <br>
-		                <input type="checkbox">
+		                <input type="checkbox" id="ban-check">
 		            </div>
 		        <% } %>
 		        
@@ -93,9 +93,22 @@
     </div>
     
     <script>
-    	function bannerUpdateDetailView(){
-   			location.href="<%=contextPath%>/views/admin/homepage/bannerUpdateDetailView.jsp";
-		}
+    	
+    	$("#ban-card").click(function(){
+			
+    		location.href = "<%=contextPath%>/adBannerDetail.ev?no=" + $(this).find('#banNo').text();
+			
+		});
+		
+
+			
+			
+			
+		
+			
+			
+		
+   		
     	
     </script>
     

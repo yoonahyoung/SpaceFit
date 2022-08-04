@@ -34,8 +34,14 @@ public class DownCouponListController extends HttpServlet {
 
 		ArrayList<Mcp> list = new MemberService().selectDownCoupon();
 		
-		request.setAttribute("cpList", list);
-		response.sendRedirect(request.getContextPath() + "myCouponList.me");
+		if(list.isEmpty()) {
+			System.out.println("null임");
+		}else {
+			request.setAttribute("cpList", list);
+			request.getRequestDispatcher("views/user/myPage/cartListView.jsp").forward(request, response);
+		}
+		
+		
 	}
 
 	/**

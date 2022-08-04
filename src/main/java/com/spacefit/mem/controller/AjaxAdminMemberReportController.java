@@ -9,22 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.spacefit.mem.model.service.MemberService;
-import com.spacefit.mem.model.vo.Cart;
-import com.spacefit.mem.model.vo.Mcp;
-import com.spacefit.mem.model.vo.Member;
+import com.google.gson.Gson;
+import com.spacefit.mem.model.service.ReportService;
+import com.spacefit.mem.model.vo.Report;
 
 /**
- * Servlet implementation class CartListController
+ * Servlet implementation class AjaxAdminMemberReportController
  */
-@WebServlet("/cartList.me")
-public class CartListController extends HttpServlet {
+@WebServlet("/ajAdminReport.re")
+public class AjaxAdminMemberReportController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CartListController() {
+    public AjaxAdminMemberReportController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,26 +32,18 @@ public class CartListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
 		
-		ArrayList<Cart> list = new MemberService().selectCartList(memNo);
-		ArrayList<Mcp> cpList = new MemberService().selectDownCoupon();
-		
-		if(list.isEmpty()) {
-			
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("views/user/myPage/cartListView.jsp").forward(request, response);
-			
-		}else {
-			
-			request.setAttribute("cpList", cpList);
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("views/user/myPage/cartListView.jsp").forward(request, response);
+		String selectSearch = "";
+		switch(request.getParameter("selectSearch")) {
+		case "reviewSearch" : selectSearch += "WHERE RPT_REF_CAT = 1"; break;
+		case "commentSearch" : selectSearch += "WHERE RPT_REF_CAT = 2"; break;
+		case "countDesc" : selectSearch += " ORDER BY COUNT DESC"; break;		
 		}
 		
+		ArrayList<Report> list = new ReportService().adminSelectList(selectSearch);
 		
-		
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(list, response.getWriter());
 	}
 
 	/**

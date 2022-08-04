@@ -1,7 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-
+	<!-- 댓글 신고 -->
+	<entry key="reportCommentReview">
+		INSERT
+		  INTO TB_REPORT
+		    (
+		       RPT_NO
+		     , MEM_NO
+		     , RPT_MEM_NO
+		     , RPT_REASON_NO
+		     , RPT_REF_CAT
+		     , RPT_REF_NO
+		     , RPT_DATE
+		    )
+		VALUES
+		    (
+		       SEQ_RPTNO.NEXTVAL
+		     , ?
+		     , ?
+		     , ?
+		     , 2  
+		     , ?
+		     , SYSDATE
+		    )
+	</entry>
+	
+	<entry key="adminSelectList">
+		SELECT 
+		        DISTINCT MEM_ID  AS "RPT_MEM_ID",        
+		        R.RPT_REF_NO,   
+		        CASE WHEN RPT_REF_CAT = 1 THEN '후기'
+		            WHEN RPT_REF_CAT = 2 THEN '댓글'          
+		        END "CATEGORY",    
+		        COUNT
+		  FROM TB_REPORT R
+		  JOIN TB_MEMBER M ON (M.MEM_NO = R.RPT_MEM_NO) 
+		  JOIN VW_REPORTCOUNT RC ON(R.RPT_REF_NO = RC.RPT_REF_NO)
+	</entry>
 
 
 

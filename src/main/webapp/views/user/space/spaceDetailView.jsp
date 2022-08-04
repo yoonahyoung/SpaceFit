@@ -232,9 +232,9 @@ body {
                                                                  <button type="button" class="btn btn-primary btn-sm" data-value="<%= r.getReviewNo() %>" onclick="likeUpdate(this);">후기추천</button>
                                                                  <button type="button" class="btn btn-danger btn-sm"  data-bs-toggle="modal" data-bs-target="#myModal" onclick="reportModal($(this).siblings('#rvNo').val(), $(this).siblings('#rvMemNo').val(), $(this).siblings('#spNo').val());">후기신고</button>
                                                                  <input type="hidden" value="<%= directMemNo %>" name="memNo" id="memNo">
-                                                             <input type="hidden" value="<%= r.getReviewNo() %>" name="rvNo" id="rvNo">
-                                                             <input type="hidden" value="<%= r.getMemNo() %>" name="rvMemNo" id="rvMemNo">
-                                                             <input type="hidden" value="<%= spNo %>" name="spNo" id="spNo">
+	                                                             <input type="hidden" value="<%= r.getReviewNo() %>" name="rvNo" id="rvNo">
+	                                                             <input type="hidden" value="<%= r.getMemNo() %>" name="rvMemNo" id="rvMemNo">
+	                                                             <input type="hidden" value="<%= spNo %>" name="spNo" id="spNo">
                                                           <% } %>
                                                           </div>
 
@@ -394,42 +394,41 @@ body {
         </section>
         </form>
         <!-- The Modal -->
-                 <!-- The Modal -->
-				      <div class="modal" id="myModal">
-				        <div class="modal-dialog">
-				          <div class="modal-content">
-				      
-				            <!-- Modal Header -->
-				            <div class="modal-header">
-				              <h4 class="modal-title" >후기 신고하기</h4>
-				            </div>
-				         <div class="modal-body">
-				           <% if (directMemNo == 0) { %>
-				              <br><h5>로그인해야 이용가능한 서비스입니다.</h5><br><br>
-				              <button type="button" class="btn btn-primary" onclick="location.href='<%=contextPath%>/loginForm.me'">로그인하러가기</button>
-				           <% } else {%>
-				             <!-- Modal body -->
-				              <form method="post" action="<%=contextPath%>/reportRv.rv">
-				               <br><h5>신고사유를 선택하세요.</h5><br><br>
-				                  <label><input type="radio" name="rptReasonNo" value="1"> 욕설 및 비방</label><br>
-				                  <label><input type="radio" name="rptReasonNo" value="2"> 성적이고 음란한 대화</label><br>
-				                  <label><input type="radio" name="rptReasonNo" value="3"> 스팸 혹은 금전적요구</label><br><br><br>
-				                  <input type="hidden" name="rptMemNo" value="">
-				                  <input type="hidden" name="rptRefNo" value="">
-				                  <input type="hidden" name="spNo" value="">
-				                  <div>
-				                     <button type="submit" class="btn btn-primary">신고하기</button>
-				                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-				                  </div>
-				             </form>
-				         <% } %>
-				         </div>
-				          </div>
-				        </div>
-				      </div>
-				       <!-- The Modal -->
+                <!-- The Modal -->
+                  <div class="modal" id="myModal">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                  
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                          <h4 class="modal-title" >후기 신고하기</h4>
+                        </div>
+                     <div class="modal-body">
+                       <% if (directMemNo == 0) { %>
+                          <br><h5>로그인해야 이용가능한 서비스입니다.</h5><br><br>
+                          <button type="button" class="btn btn-primary" onclick="location.href='<%=contextPath%>/loginForm.me'">로그인하러가기</button>
+                       <% } else {%>
+                         <!-- Modal body -->
+                          <form method="post" action="<%=contextPath%>/reportRv.rv">
+                           <br><h5>신고사유를 선택하세요.</h5><br><br>
+                              <label><input type="radio" name="rptReasonNo" value="1"> 욕설 및 비방</label><br>
+                              <label><input type="radio" name="rptReasonNo" value="2"> 성적이고 음란한 대화</label><br>
+                              <label><input type="radio" name="rptReasonNo" value="3"> 스팸 혹은 금전적요구</label><br><br><br>
+                              <input type="hidden" name="rptMemNo" value="">
+                              <input type="hidden" name="rptRefNo" value="">
+                              <input type="hidden" name="spNo" value="">
+                              <div>
+                                 <button type="submit" class="btn btn-primary">신고하기</button>
+                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                              </div>
+                         </form>
+                     <% } %>
+                     </div>
+                      </div>
+                    </div>
+                  </div>
+           <!-- The Modal -->
 
-    </main>
     <script>
     
     function reportModal(rvNo, rvMemNo, spNo){
@@ -596,7 +595,8 @@ body {
                                commentDiv.html(value);
                          } else {
                             // 댓글리스트가 있다면
-                            let value = ""
+                            let value = "";
+                            let spNo = <%= spNo %>;
                                for(let i = 0; i<comList.length; i++) {
                                   value += ' <div class="commentMem row"> '
                                             + '<div class="parentMem col-lg-6">'
@@ -612,7 +612,8 @@ body {
                                             + '</div>'
                                             + '<div class="parentInfo col-lg-6">'
                                             +   '<button type="button" class="comBtn" id="reDelete" onclick="deleteComment(' + comList[i].comNo + ', $(this).parent().parent().parent() ,' + comList[i].rvNo + ');">삭제하기</button>'
-                                            +   '<button type="button" class="comBtn openBtn" id="reReport">신고하기</button>'
+                                            +   '<button type="button" class="comBtn openBtn" id="reReport" data-bs-toggle="modal" data-bs-target="#myCommentModal" onclick="reportCommentModal('+ comList[i].comNo + ',' + comList[i].memNo + ',' + spNo +');">신고하기</button>'
+                                            
                                             +   '<button type="button" class="comBtn" id="reComment">대댓달기</button>'
                                             +   '<input type="hidden" value="' + comList[i].parentNo + '" id="hiddenPno">'
                                             + '</div>'
@@ -634,22 +635,66 @@ body {
                         }
                      })
                   }
+        </script>
+                
+ 			<!-- The Modal -->
+                <!-- The Modal -->
+                  <div class="modal" id="myCommentModal">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
                   
-                  // 대댓달기라는 버튼을 눌렀을때만 그 댓글의 hiddenPno를 가져오고, 대댓달기를 누르지 않으면 0이 되도록
-               // 그럼 대댓을 생각하지 말고 일단 댓글만 생각해보자   
-               
-                  function insertComment(e, commentDiv, comContent){
-                     // 주번째 댓글에 대한 컨텐츠도 가져오기 //계층형시 스타트위드
-                      $.ajax({
-                       url:"<%=contextPath%>/coInsert.com",
-                     data:{
-                        comContent:comContent,
-                        memNo:$("#memNo").val(),
-                        rvNo:e
-                     },
-                     type:"post",
-                     success:function(result){
-                        if(result > 0){
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                          <h4 class="modal-title" >댓글 신고하기</h4>
+                        </div>
+                     <div class="modal-body">
+                       <% if (directMemNo == 0) { %>
+                          <br><h5>로그인해야 이용가능한 서비스입니다.</h5><br><br>
+                          <button type="button" class="btn btn-primary" onclick="location.href='<%=contextPath%>/loginForm.me'">로그인하러가기</button>
+                       <% } else {%>
+                         <!-- Modal body -->
+                          <form method="post" action="<%=contextPath%>/reportCom.rv">
+                           <br><h5>신고사유를 선택하세요.</h5><br><br>
+                              <label><input type="radio" name="rptReasonNo" value="1"> 욕설 및 비방</label><br>
+                              <label><input type="radio" name="rptReasonNo" value="2"> 성적이고 음란한 대화</label><br>
+                              <label><input type="radio" name="rptReasonNo" value="3"> 스팸 혹은 금전적요구</label><br><br><br>
+                              <input type="hidden" name="rptMemNo" value="">
+                              <input type="hidden" name="rptRefNo" value="">
+                              <input type="hidden" name="spNo" value="">
+                              <div>
+                                 <button type="submit" class="btn btn-primary">신고하기</button>
+                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                              </div>
+                         </form>
+                     <% } %>
+                     </div>
+                      </div>
+                    </div>
+                  </div>
+           <!-- The Modal -->
+        
+        <script>          
+	        function reportCommentModal(comNo,memNo, spNo) {
+				$("#myCommentModal input[name=rptMemNo]").val(memNo);
+		        $("#myCommentModal input[name=rptRefNo]").val(comNo);
+		        $("#myCommentModal input[name=spNo]").val(spNo);
+			}       
+	
+			// 대댓달기라는 버튼을 눌렀을때만 그 댓글의 hiddenPno를 가져오고, 대댓달기를 누르지 않으면 0이 되도록
+	       // 그럼 대댓을 생각하지 말고 일단 댓글만 생각해보자   
+	       
+	          function insertComment(e, commentDiv, comContent){
+	             // 주번째 댓글에 대한 컨텐츠도 가져오기 //계층형시 스타트위드
+	              $.ajax({
+	               url:"<%=contextPath%>/coInsert.com",
+	             data:{
+	                comContent:comContent,
+	                memNo:$("#memNo").val(),
+	                rvNo:e
+	             },
+	             type:"post",
+	             success:function(result){
+	                if(result > 0){
                            // 댓글작성 성공
                            // => 내가 작성한 댓글이 보여지기 위해서는 갱신된 댓글리스트 조회필요
                            commentList(e, commentDiv);
@@ -708,6 +753,9 @@ body {
                   }
              
             </script>
+            
+            
+    </main>
 
 
     <!-- footer -->

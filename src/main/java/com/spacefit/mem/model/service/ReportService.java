@@ -20,5 +20,28 @@ public class ReportService {
 		
 	}
 	
+	public int reportCommentReview(Report rpt) {
+		Connection conn = getConnection();
+		int result = new ReportDao().reportCommentReview(conn, rpt);
+		
+		if(result>0){
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+			
+			
+	}
+	
+	public ArrayList<Report> adminSelectList(String selectSearch){
+		Connection conn = getConnection();
+		ArrayList<Report> list = new ReportDao().adminSelectList(conn, selectSearch);
+		close(conn);
+		return list;
+	}
+	
 
 }

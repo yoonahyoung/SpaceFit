@@ -8,21 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.spacefit.mem.model.service.ReportService;
 import com.spacefit.mem.model.vo.Member;
 import com.spacefit.mem.model.vo.Report;
-import com.spacefit.review.model.service.ReviewService;
 
 /**
- * Servlet implementation class AjaxReportReviewController
+ * Servlet implementation class ReportCommentController
  */
-@WebServlet("/reportRv.rv")
-public class AjaxReportReviewController extends HttpServlet {
+@WebServlet("/reportCom.rv")
+public class ReportCommentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxReportReviewController() {
+    public ReportCommentController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,7 +31,6 @@ public class AjaxReportReviewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		request.setCharacterEncoding("UTF-8");
 		int spNo = Integer.parseInt(request.getParameter("spNo"));
 		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
@@ -44,7 +43,7 @@ public class AjaxReportReviewController extends HttpServlet {
 		//System.out.println(rpt);
 		//System.out.println(spNo);
 		
-		int result = new ReviewService().reportReview(rpt);
+		int result = new ReportService().reportCommentReview(rpt);
 		if(result > 0){
 			 // 신고 성공
 			request.getSession().setAttribute("alertMsg","신고완료! 스페이스핏 운영에 도움을 주셔서 감사합니다." );

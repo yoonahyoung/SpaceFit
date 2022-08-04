@@ -76,6 +76,10 @@
 
     <br>
 	<div align="right">
+		<% if(loginUser != null && loginUser.getMemId().equals(q.getQnaWriter())) { %>
+		<a href="<%=contextPath%>/updateForm.qa?no=<%=q.getQnaNo()%>" class="btn btn-sm btn-warning">수정하기</a>
+		<a href="" class="btn btn-sm btn-danger">삭제하기</a>
+		<% } %>
 	    <a onclick="goQnAlist();" class="btn btn-sm btn-secondary">목록가기</a>
     </div>
     <div style="height : 60px"></div>

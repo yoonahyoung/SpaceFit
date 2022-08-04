@@ -31,9 +31,9 @@ public class AdminMemberReportController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("UTF-8");
-		ArrayList <Report> rptList = new ReportDao().selectReportList();
-		request.setAttribute("rptList", rptList);
+		//request.setCharacterEncoding("UTF-8");
+		//ArrayList <Report> rptList = new ReportDao().selectReportList();
+		//request.setAttribute("rptList", rptList);
 		request.getRequestDispatcher("views/admin/mem/memberReport.jsp").forward(request, response);
 	}
 

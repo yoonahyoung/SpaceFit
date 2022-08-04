@@ -27,7 +27,7 @@ public class EventDao {
 		}
 	}
 	
-	// 사용자_배너 조회
+	// 관리자_배너 조회
 	public ArrayList<Banner> selectBannerList(Connection conn){
 		
 		ArrayList<Banner> list = new ArrayList<>();
@@ -60,9 +60,7 @@ public class EventDao {
 		return list;
 		
 	}
-	
-	// ---------- admin ----------- // 
-	
+		
 	// 관리자_배너 등록
 	public int adminInsertBanner(Connection conn, Banner b) {
 	      
@@ -90,7 +88,38 @@ public class EventDao {
 	      
 	   }
 	   
-	
-	
+	// 관리자_배너 상세조회
+	public Banner selectBannerDetail(Connection conn, int banNo){
+		
+		Banner b = null;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectBannerDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, banNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				b = new Banner(rset.getInt("ban_no"),
+								rset.getString("ban_name"),
+								rset.getString("ban_status"),
+								rset.getDate("ban_enroll_date"),
+								rset.getDate("ban_modify_date"),
+								rset.getString("ban_url"),
+								rset.getString("ban_img"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return b;
+		
+	}
 	
 }

@@ -31,5 +31,18 @@
 		     , ?
 		      )
 	</entry>
+	
+	<entry key="selectBannerDetail">
+		SELECT   
+		       BAN_NO
+		     , BAN_NAME
+		     , BAN_STATUS
+		     , BAN_ENROLL_DATE
+		     , BAN_MODIFY_DATE
+		     , BAN_URL
+		     , BAN_IMG
+		  FROM TB_BANNER
+		 WHERE BAN_NO = ?
+	</entry>
 
 </properties>

@@ -35,7 +35,7 @@ public class CartSelectedDeleteController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		int memNo = ((Member)session.getAttribute("loginUser")).getMemNo();
-		int spaceNo = Integer.parseInt(request.getParameter("spaceNo"));
+		int spaceNo = Integer.parseInt(request.getParameter("no"));
 		
 		int result = new MemberService().deleteSelectedCart(memNo, spaceNo);
 		
