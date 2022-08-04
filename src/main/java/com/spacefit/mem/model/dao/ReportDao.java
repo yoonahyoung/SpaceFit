@@ -58,8 +58,36 @@ public class ReportDao {
 			close(pstmt);
 		}
 		
-		return result;
+		return result;		
 		
+	}
+	
+	public ArrayList<Report> adminSelectList(Connection conn, String selectSearch){
+		// select => ResultSet => ArrayList<Report>
+		ArrayList<Report> list = new ArrayList<>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("adminSelectList");
+		sql += selectSearch;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				list.add(new Report( rset.getString("RPT_MEM_ID"),
+ 									 rset.getString("category"),
+									 rset.getInt("RPT_REF_NO"),
+									 rset.getInt("count")						
+						));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 		
 	}
 }

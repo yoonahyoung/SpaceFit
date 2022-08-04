@@ -53,9 +53,7 @@
 							  		<select onchange="selectSearch();">
 									  <option value="reviewSearch" selected>글 신고 조회</option>
 									  <option value="commentSearch">댓글신고조회</option>
-									  <!--<option>누적신고순</option> -->
-									  <option value="creatDateDesc">최신 신고순</option>
-									  <option value="createDateAsc">오래된 신고순</option>
+									  <option value="countDesc">누적신고순</option> 									  
 									</select>
 							  	</form>
 							  </div>
@@ -90,28 +88,18 @@
 												<th>상세보기</th>
 	                                        </tr>
 	                                    </tfoot>
-	                                    <tbody id="reportArea">
+	                                    <tbody id="listArea">
 	                                        <tr>
 	                                        	<td><input type="checkBox"></td>
 	                                        	<td>003</td>
-	                                            <td>
-	                                            	<select>
-														  <option selected>글</option>
-														  <option>댓글</option>
-													</select>
-	                                            </td>
+	                                            <td>글</td>
 	                                            <td>15</td>
 	                                            <td>user01</td>
 	                                            <td>user02</td>
 	                                            <td>비방, 욕설신고</td>
 	                                            <td>22/08/30</td>
 												<td><input type="button" class="btn btn-primary btn-sm" value="상세조회" onclick="rptDetailView();"></td>
-	                                        </tr>
-	                                         <script>
-	                                           		 function rptDetailView(){
-	                                	       		location.href="<%=contextPath%>/memRptDetailView.me";
-	                                				}
-	                                        </script>
+	                                        </tr>	                                      
 	                                       
 	                                    </tbody>
 	                                </table>
@@ -134,11 +122,75 @@
 							<div style="height : 60px"></div>
 	                    </div>
                 	</div>
-     			</div>  
-    
-                <!-- /.container-fluid -->
+     			</div>
 				<br><br>        		
             </div>
+     			
+			<script>
+				$(function(){
+				
+				 selectSearch();
+				 
+				})
+				
+				function selectSearch(){
+					
+					$.ajax({
+						url : "<%= contextPath %>/ajAdminReport.re",
+						data : {
+							selectSearch: $("#selectSearch").val()
+							}
+						type:"post",
+						success:function(list){
+							let contextPath = "<%= contextPath %>"
+		      				let value = "";
+							
+							if(list.length == 0){
+		      					value += "<tr>"
+		      					       + "<td colspan='9'> 신고내역이 없습니다. </td>"
+		                                 + "</tr>";
+		      				}else{
+		      					
+		      					for(let i=0; i<list.length; i++){
+							
+									value += '<tr>'
+				                           + 	'<td><input type="checkBox"></td>'
+				                           + 	'<td>003</td>'
+				                           + 	'<td>'
+				                           + 	'	<select>'
+										   +			  '<option selected>글</option>''
+										   +			   '<option>댓글</option>'
+										   +		'</select>'
+				                           + 	'</td>'
+				                           + 	'<td>15</td>'
+				                           + 	'<td>user01</td>' //작성자
+				                           + 	'<td>user02</td>' // 신고자
+				                           +	'<td>비방, 욕설신고</td>'
+				                           +	'<td>22/08/30</td>'
+										   + 	'<td><input type="button" class="btn btn-primary btn-sm" value="상세조회" onclick="rptDetailView();"></td>'
+				                           + '</tr>'
+			      						}
+		      					}
+							
+							$("#listArea").html(value);
+		      						      												
+						}
+						
+						error:function(){
+		      				console.log("관리자 예약내역리스트 조회용 ajax통신 실패");
+		      			}
+						
+					});
+				}
+				
+				 function rptDetailView(){
+     	       		location.href="<%=contextPath%>/memRptDetailView.me";
+     				}
+			
+			
+			</script>  
+    
+                <!-- /.container-fluid -->
     <div style="height : 100px"></div>
 	<!-- 자바스크립트 파일 연동 -->
 	<script type="text/javascript" src=""></script>

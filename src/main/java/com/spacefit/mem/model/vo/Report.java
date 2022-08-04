@@ -4,13 +4,25 @@ import java.sql.Date;
 
 public class Report {
 	private int rptNo; // 신고고유번호
-	private int memNo; // 신고한 회원번호
-	private int rptMemNo; // 신고당한 회원번호
+	
+	private int memNo; // 신고한 회원
+	private String memId; //신고한 회원아이디
+	
+	private int rptMemNo; // 글 작성자
+	private String rptMemId; // 작성자 아이디
+	
 	private int rptReasonNo; // rptRsn 테이블 - 신고사유번호 123
 	private String rptReason; // rptRsn 테이블 - 신고사유
+	
 	private int rptRefCat; // 글이면 1 | 댓글이면 2
+	private String category;
+	
 	private int rptRefNo; // 글 혹은 댓글 고유번호
 	private Date rptDate; // 신고당한날
+	
+	private int count; // 신고누적수
+		
+	
 	public int getRptNo() {
 		return rptNo;
 	}
@@ -59,6 +71,33 @@ public class Report {
 	public void setRptDate(Date rptDate) {
 		this.rptDate = rptDate;
 	}
+	
+	
+	public String getMemId() {
+		return memId;
+	}
+	public void setMemId(String memId) {
+		this.memId = memId;
+	}
+	public String getRptMemId() {
+		return rptMemId;
+	}
+	public void setRptMemId(String rptMemId) {
+		this.rptMemId = rptMemId;
+	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+		
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 	public Report(int rptNo, int memNo, int rptMemNo, int rptReasonNo, String rptReason, int rptRefCat, int rptRefNo,
 			Date rptDate) {
 		super();
@@ -80,6 +119,15 @@ public class Report {
 		this.rptMemNo = rptMemNo;
 		this.rptReasonNo = rptReasonNo;
 		this.rptRefNo = rptRefNo;
+	}
+	
+		
+	public Report(String rptMemId, String category, int rptRefNo, int count) {
+		super();
+		this.rptMemId = rptMemId;
+		this.category = category;
+		this.rptRefNo = rptRefNo;
+		this.count = count;
 	}
 	@Override
 	public String toString() {

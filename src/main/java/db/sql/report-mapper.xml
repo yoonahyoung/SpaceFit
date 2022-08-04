@@ -25,6 +25,19 @@
 		     , SYSDATE
 		    )
 	</entry>
+	
+	<entry key="adminSelectList">
+		SELECT 
+		        DISTINCT MEM_ID  AS "RPT_MEM_ID",        
+		        R.RPT_REF_NO,   
+		        CASE WHEN RPT_REF_CAT = 1 THEN '후기'
+		            WHEN RPT_REF_CAT = 2 THEN '댓글'          
+		        END "CATEGORY",    
+		        COUNT
+		  FROM TB_REPORT R
+		  JOIN TB_MEMBER M ON (M.MEM_NO = R.RPT_MEM_NO) 
+		  JOIN VW_REPORTCOUNT RC ON(R.RPT_REF_NO = RC.RPT_REF_NO)
+	</entry>
 
 
 
