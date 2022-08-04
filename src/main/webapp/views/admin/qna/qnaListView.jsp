@@ -53,6 +53,7 @@
     select{
         text-align: center;
         width: 100px;
+        height:31px;
     }
     .list{
         display: inline;

@@ -71,44 +71,6 @@ public class QnADao {
 		
 		return list;
 	}
-	public ArrayList<QnA> selectQnAListAll(Connection conn, PageInfo pi){
-		// select문 => ResultSet(여러행) => ArrayList<Notice>객체
-		ArrayList<QnA> list = new ArrayList<>();
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("selectQnAListAll");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
-			int endRow = startRow + pi.getBoardLimit() - 1;
-			
-			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
-				list.add(new QnA(rset.getInt("QNA_NO"),
-									rset.getString("QNA_CATEGORY"),
-									rset.getString("SPACE_CATEGORY"),
-									rset.getString("SPACE_NAME"),
-									rset.getString("QNA_TITLE"),
-									rset.getString("MEM_ID"),
-									rset.getInt("QNA_COUNT"),
-									rset.getDate("QNA_CREATE_DATE")
-									));
-						
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return list;
-	}
 	
 	public int selectListCount(Connection conn) {
 		// select문 => ResultSet(숫자한개) => int
@@ -507,8 +469,139 @@ public class QnADao {
 		return result;
 		
 	}
-	//전체 전체 전체 답변대기 미완
-	public ArrayList<QnA> selectQnAList2Wait(Connection conn, PageInfo pi){
+	
+	public int changeSolvedStatus(Connection conn, int refNo) {
+		int result = 0; 
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("changeSolvedStatus");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, refNo);
+
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	public int selectMyListCount(Connection conn, int memNo) {
+		// select문 => ResultSet(숫자한개) => int
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectMyListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,  memNo);
+			pstmt.setInt(2,  memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt("COUNT");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	//내 글 리스트 + 답글 조회
+	public ArrayList<QnA> selectMyQnAList(Connection conn, PageInfo pi, int memNo){
+		// select문 => ResultSet(여러행) => ArrayList<Notice>객체
+		ArrayList<QnA> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectMyQnAList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, memNo);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new QnA(rset.getInt("QNA_NO"),
+									rset.getString("QNA_CATEGORY"),
+									rset.getString("SPACE_CATEGORY"),
+									rset.getString("SPACE_NAME"),
+									rset.getString("QNA_TITLE"),
+									rset.getString("MEM_ID"),
+									rset.getInt("QNA_COUNT"),
+									rset.getDate("QNA_CREATE_DATE")
+									));
+						
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	// 여기서부터 검색 메소드
+	// 전체 전체 전체 전체 1
+	public ArrayList<QnA> selectQnAListAll(Connection conn){
+		// select문 => ResultSet(여러행) => ArrayList<Notice>객체
+		ArrayList<QnA> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectQnAListAll");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new QnA(rset.getInt("QNA_NO"),
+									rset.getString("QNA_CATEGORY"),
+									rset.getString("SPACE_CATEGORY"),
+									rset.getString("SPACE_NAME"),
+									rset.getString("QNA_TITLE"),
+									rset.getString("MEM_ID"),
+									rset.getInt("QNA_COUNT"),
+									rset.getDate("QNA_CREATE_DATE")
+									));
+						
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	//전체 전체 전체 답변대기 2-1
+	public ArrayList<QnA> selectQnAList2Wait(Connection conn){
 		// select문 => ResultSet(여러행) => ArrayList<Notice>객체
 		ArrayList<QnA> list = new ArrayList<>();
 		
@@ -519,9 +612,6 @@ public class QnADao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
-			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
-			int endRow = startRow + pi.getBoardLimit() - 1;
 
 			rset = pstmt.executeQuery();
 			
@@ -547,8 +637,45 @@ public class QnADao {
 		return list;
 	}
 	
-	// 전체 전체 선택 전체
-	public ArrayList<QnA> selectQnAList3(Connection conn, PageInfo pi, String spaceNo){
+	//전체 전체 전체 답변완료 2-2
+	public ArrayList<QnA> selectQnAList2Solved(Connection conn, String spaceNo){
+		// select문 => ResultSet(여러행) => ArrayList<Notice>객체
+		ArrayList<QnA> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectQnAList2Solved");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new QnA(rset.getInt("QNA_NO"),
+									rset.getString("QNA_CATEGORY"),
+									rset.getString("SPACE_CATEGORY"),
+									rset.getString("SPACE_NAME"),
+									rset.getString("QNA_TITLE"),
+									rset.getString("MEM_ID"),
+									rset.getInt("QNA_COUNT"),
+									rset.getDate("QNA_CREATE_DATE")
+									));
+						
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	// 전체 전체 선택 전체 3
+	public ArrayList<QnA> selectQnAList3(Connection conn, String spaceNo){
 		// select문 => ResultSet(여러행) => ArrayList<Notice>객체
 		ArrayList<QnA> list = new ArrayList<>();
 		
@@ -559,9 +686,6 @@ public class QnADao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
-			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
-			int endRow = startRow + pi.getBoardLimit() - 1;
 
 			pstmt.setString(1, spaceNo);
 			
@@ -588,8 +712,85 @@ public class QnADao {
 		
 		return list;
 	}
-	// 전체 선택 전체 전체
-	public ArrayList<QnA> selectQnAList5(Connection conn, PageInfo pi, String spaceCategory){
+	// 전체 전체 선택 대기 4-1
+	public ArrayList<QnA> selectQnAList4Wait(Connection conn, String spaceNo){
+		// select문 => ResultSet(여러행) => ArrayList<Notice>객체
+		ArrayList<QnA> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectQnAList4Wait");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, spaceNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new QnA(rset.getInt("QNA_NO"),
+									rset.getString("QNA_CATEGORY"),
+									rset.getString("SPACE_CATEGORY"),
+									rset.getString("SPACE_NAME"),
+									rset.getString("QNA_TITLE"),
+									rset.getString("MEM_ID"),
+									rset.getInt("QNA_COUNT"),
+									rset.getDate("QNA_CREATE_DATE")
+									));
+						
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	// 전체 전체 선택 완료 4-2
+	public ArrayList<QnA> selectQnAList4Solved(Connection conn, String spaceNo){
+		// select문 => ResultSet(여러행) => ArrayList<Notice>객체
+		ArrayList<QnA> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectQnAList4Solved");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, spaceNo);
+			pstmt.setString(2, spaceNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new QnA(rset.getInt("QNA_NO"),
+									rset.getString("QNA_CATEGORY"),
+									rset.getString("SPACE_CATEGORY"),
+									rset.getString("SPACE_NAME"),
+									rset.getString("QNA_TITLE"),
+									rset.getString("MEM_ID"),
+									rset.getInt("QNA_COUNT"),
+									rset.getDate("QNA_CREATE_DATE")
+									));
+						
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	// 전체 선택 전체 전체 5
+	public ArrayList<QnA> selectQnAList5(Connection conn, String spaceCategory){
 		// select문 => ResultSet(여러행) => ArrayList<Notice>객체
 		ArrayList<QnA> list = new ArrayList<>();
 		
@@ -600,9 +801,6 @@ public class QnADao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
-			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
-			int endRow = startRow + pi.getBoardLimit() - 1;
 
 			pstmt.setString(1, spaceCategory);
 			
@@ -629,8 +827,85 @@ public class QnADao {
 		
 		return list;
 	}
-	// 전체 선택 선택 전체
-	public ArrayList<QnA> selectQnAList7(Connection conn, PageInfo pi, String spaceCategory, String spaceNo){
+	// 전체 선택 전체 대기 6-1
+	public ArrayList<QnA> selectQnAList6Wait(Connection conn, String spaceCategory){
+		// select문 => ResultSet(여러행) => ArrayList<Notice>객체
+		ArrayList<QnA> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectQnAList6Wait");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, spaceCategory);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new QnA(rset.getInt("QNA_NO"),
+									rset.getString("QNA_CATEGORY"),
+									rset.getString("SPACE_CATEGORY"),
+									rset.getString("SPACE_NAME"),
+									rset.getString("QNA_TITLE"),
+									rset.getString("MEM_ID"),
+									rset.getInt("QNA_COUNT"),
+									rset.getDate("QNA_CREATE_DATE")
+									));
+						
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	// 전체 선택 전체 완료 6-2
+	public ArrayList<QnA> selectQnAList6Solved(Connection conn, String spaceCategory){
+		// select문 => ResultSet(여러행) => ArrayList<Notice>객체
+		ArrayList<QnA> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectQnAList6Solved");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, spaceCategory);
+			pstmt.setString(2, spaceCategory);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new QnA(rset.getInt("QNA_NO"),
+									rset.getString("QNA_CATEGORY"),
+									rset.getString("SPACE_CATEGORY"),
+									rset.getString("SPACE_NAME"),
+									rset.getString("QNA_TITLE"),
+									rset.getString("MEM_ID"),
+									rset.getInt("QNA_COUNT"),
+									rset.getDate("QNA_CREATE_DATE")
+									));
+						
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	// 전체 선택 선택 전체 7
+	public ArrayList<QnA> selectQnAList7(Connection conn, String spaceCategory, String spaceNo){
 		// select문 => ResultSet(여러행) => ArrayList<Notice>객체
 		ArrayList<QnA> list = new ArrayList<>();
 		
@@ -641,9 +916,6 @@ public class QnADao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
-			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
-			int endRow = startRow + pi.getBoardLimit() - 1;
 
 			pstmt.setString(1, spaceCategory);
 			pstmt.setString(2, spaceNo);
@@ -671,8 +943,8 @@ public class QnADao {
 		
 		return list;
 	}
-	// 선택 전체 전체 전체
-	public ArrayList<QnA> selectQnAList9(Connection conn, PageInfo pi, String qnaCategory){
+	// 선택 전체 전체 전체 9
+	public ArrayList<QnA> selectQnAList9(Connection conn, String qnaCategory){
 		// select문 => ResultSet(여러행) => ArrayList<Notice>객체
 		ArrayList<QnA> list = new ArrayList<>();
 		
@@ -683,9 +955,6 @@ public class QnADao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
-			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
-			int endRow = startRow + pi.getBoardLimit() - 1;
 
 			pstmt.setString(1, qnaCategory);
 			
@@ -712,8 +981,85 @@ public class QnADao {
 		
 		return list;
 	}
-	// 선택 전체 선택 전체
-	public ArrayList<QnA> selectQnAList11(Connection conn, PageInfo pi, String qnaCategory, String spaceNo){
+	// 선택 전체 전체 대기 10-1
+	public ArrayList<QnA> selectQnAList10Wait(Connection conn, String spaceCategory){
+		// select문 => ResultSet(여러행) => ArrayList<Notice>객체
+		ArrayList<QnA> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectQnAList10Wait");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, spaceCategory);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new QnA(rset.getInt("QNA_NO"),
+									rset.getString("QNA_CATEGORY"),
+									rset.getString("SPACE_CATEGORY"),
+									rset.getString("SPACE_NAME"),
+									rset.getString("QNA_TITLE"),
+									rset.getString("MEM_ID"),
+									rset.getInt("QNA_COUNT"),
+									rset.getDate("QNA_CREATE_DATE")
+									));
+						
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	// 선택 전체 전체 완료 10-2
+	public ArrayList<QnA> selectQnAList10Solved(Connection conn, String qnaCategory){
+		// select문 => ResultSet(여러행) => ArrayList<Notice>객체
+		ArrayList<QnA> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectQnAList10Solved");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, qnaCategory);
+			pstmt.setString(2, qnaCategory);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new QnA(rset.getInt("QNA_NO"),
+									rset.getString("QNA_CATEGORY"),
+									rset.getString("SPACE_CATEGORY"),
+									rset.getString("SPACE_NAME"),
+									rset.getString("QNA_TITLE"),
+									rset.getString("MEM_ID"),
+									rset.getInt("QNA_COUNT"),
+									rset.getDate("QNA_CREATE_DATE")
+									));
+						
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	// 선택 전체 선택 전체 11
+	public ArrayList<QnA> selectQnAList11(Connection conn, String qnaCategory, String spaceNo){
 		// select문 => ResultSet(여러행) => ArrayList<Notice>객체
 		ArrayList<QnA> list = new ArrayList<>();
 		
@@ -724,9 +1070,6 @@ public class QnADao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
-			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
-			int endRow = startRow + pi.getBoardLimit() - 1;
 
 			pstmt.setString(1, qnaCategory);
 			pstmt.setString(2, spaceNo);
@@ -754,8 +1097,89 @@ public class QnADao {
 		
 		return list;
 	}
-	// 선택 전체 선택 전체
-	public ArrayList<QnA> selectQnAList13(Connection conn, PageInfo pi, String qnaCategory, String spaceCategory){
+	// 선택 전체 선택 대기 12-1
+	public ArrayList<QnA> selectQnAList12Wait(Connection conn, String spaceCategory, String SpaceNo){
+		// select문 => ResultSet(여러행) => ArrayList<Notice>객체
+		ArrayList<QnA> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectQnAList12Wait");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, spaceCategory);
+			pstmt.setString(2, SpaceNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new QnA(rset.getInt("QNA_NO"),
+									rset.getString("QNA_CATEGORY"),
+									rset.getString("SPACE_CATEGORY"),
+									rset.getString("SPACE_NAME"),
+									rset.getString("QNA_TITLE"),
+									rset.getString("MEM_ID"),
+									rset.getInt("QNA_COUNT"),
+									rset.getDate("QNA_CREATE_DATE")
+									));
+						
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	// 선택 전체 선택 완료 12-2
+	public ArrayList<QnA> selectQnAList12Solved(Connection conn, String qnaCategory, String SpaceNo){
+		// select문 => ResultSet(여러행) => ArrayList<Notice>객체
+		ArrayList<QnA> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectQnAList12Solved");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, qnaCategory);
+			pstmt.setString(2, SpaceNo);
+			pstmt.setString(3, qnaCategory);
+			pstmt.setString(4, SpaceNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new QnA(rset.getInt("QNA_NO"),
+									rset.getString("QNA_CATEGORY"),
+									rset.getString("SPACE_CATEGORY"),
+									rset.getString("SPACE_NAME"),
+									rset.getString("QNA_TITLE"),
+									rset.getString("MEM_ID"),
+									rset.getInt("QNA_COUNT"),
+									rset.getDate("QNA_CREATE_DATE")
+									));
+						
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	// 선택 전체 선택 전체 13
+	public ArrayList<QnA> selectQnAList13(Connection conn, String qnaCategory, String spaceCategory){
 		// select문 => ResultSet(여러행) => ArrayList<Notice>객체
 		ArrayList<QnA> list = new ArrayList<>();
 		
@@ -766,9 +1190,6 @@ public class QnADao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
-			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
-			int endRow = startRow + pi.getBoardLimit() - 1;
 
 			pstmt.setString(1, qnaCategory);
 			pstmt.setString(2, spaceCategory);
@@ -796,25 +1217,21 @@ public class QnADao {
 		
 		return list;
 	}
-	// 선택 선택 선택 전체
-	public ArrayList<QnA> selectQnAList15(Connection conn, PageInfo pi, String qnaCategory, String spaceCategory, String spaceNo){
+	// // 선택 선택 전체 대기 14-1
+	public ArrayList<QnA> selectQnAList14Wait(Connection conn, String qnaCategory, String spaceCategory){
 		// select문 => ResultSet(여러행) => ArrayList<Notice>객체
 		ArrayList<QnA> list = new ArrayList<>();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectQnAList15");
+		String sql = prop.getProperty("selectQnAList14Wait");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
-			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
-			int endRow = startRow + pi.getBoardLimit() - 1;
 
 			pstmt.setString(1, qnaCategory);
 			pstmt.setString(2, spaceCategory);
-			pstmt.setString(3, spaceNo);
 			
 			rset = pstmt.executeQuery();
 			
@@ -839,25 +1256,23 @@ public class QnADao {
 		
 		return list;
 	}
-	//선택선택선택답변대기 미완
-	public ArrayList<QnA> selectQnAList16Wait(Connection conn, PageInfo pi, String qnaCategory, String spaceCategory, String spaceNo){
+	// // 선택 선택 전체 완료 14-2
+	public ArrayList<QnA> selectQnAList14Solved(Connection conn, String qnaCategory, String spaceCategory){
 		// select문 => ResultSet(여러행) => ArrayList<Notice>객체
 		ArrayList<QnA> list = new ArrayList<>();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectQnAList16Wait");
+		String sql = prop.getProperty("selectQnAList14Solved");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
-			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
-			int endRow = startRow + pi.getBoardLimit() - 1;
-			
+
 			pstmt.setString(1, qnaCategory);
 			pstmt.setString(2, spaceCategory);
-			pstmt.setString(3, spaceNo);
+			pstmt.setString(3, qnaCategory);
+			pstmt.setString(4, spaceCategory);
 			
 			rset = pstmt.executeQuery();
 			
@@ -882,4 +1297,5 @@ public class QnADao {
 		
 		return list;
 	}
+
 }

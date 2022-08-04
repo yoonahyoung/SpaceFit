@@ -43,7 +43,7 @@
     <h2 align="center">일대일 문의</h2>
     <br><br><br>
     <div align="right">
-        <a  href="<%=contextPath%>/myList.qa?cpage=1" class="btn btn-sm btn-secondary">내글조회</a>
+        <a  href="" class="btn btn-sm btn-secondary">내글조회</a>
         <a  href="<%=contextPath%>/enrollForm.qa" class="btn btn-sm btn-primary">문의등록</a>
     </div>
     <table class="table" align="center">

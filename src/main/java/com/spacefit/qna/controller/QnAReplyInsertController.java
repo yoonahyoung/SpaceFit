@@ -61,7 +61,8 @@ public class QnAReplyInsertController extends HttpServlet {
 			// 비밀글일시 생성
 			password = multiRequest.getParameter("password");
 			
-			int result = 0;			
+			int result1 = 0;
+			int result2 = 0;
 	
 			//    > 첨부파일의 원본명, 수정명(업로드된파일명), 저장경로   => ATTACHMENT에 INSERT
 			Attachment at = null; // 첨에는 null로 초기화, 넘어온 첨부파일이 있다면 생성
@@ -83,7 +84,8 @@ public class QnAReplyInsertController extends HttpServlet {
 				q.setQnaTitle(replyTitle);
 				q.setQnaContent(replyContent);
 				q.setQnaWriter(userNo);
-				result = new QnAService().insertPublicReply(q , at);
+				result1 = new QnAService().insertPublicReply(q , at);
+				result2 = new QnAService().changeSolvedStatus(refNo);
 			}else {
 				q.setQnaRefNo(refNo);
 				q.setQnaCategory(qnaCategory);
@@ -92,10 +94,11 @@ public class QnAReplyInsertController extends HttpServlet {
 				q.setQnaContent(replyContent);
 				q.setQnaWriter(userNo);
 				q.setQnaPwd(password);
-				result = new QnAService().insertSecretReply(q , at);
+				result1 = new QnAService().insertSecretReply(q , at);
+				result2 = new QnAService().changeSolvedStatus(refNo);
 			}
 			
-			if(result > 0) { // 성공했을 경우 => QNA목록페이지
+			if(result1 * result2 > 0) { // 성공했을 경우 => QNA목록페이지
 				
 				session.setAttribute("alertMsg", "성공적으로 답변등록되었습니다!");
 				
