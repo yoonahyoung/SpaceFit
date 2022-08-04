@@ -343,7 +343,7 @@ body {
                                         <option value="Y">필요해요</option>
                                     </select>
                                     <span class="col-sm-4"> 미니의자  </span>
-                                    <select name="chiar" required>
+                                    <select name="chair" required>
                                         <option value="N" selected>필요하지 않아요</option>
                                         <option value="Y">필요해요</option>
                                     </select>
