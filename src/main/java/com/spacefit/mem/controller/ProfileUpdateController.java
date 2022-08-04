@@ -62,16 +62,12 @@ public class ProfileUpdateController extends HttpServlet {
 				
 			}else {
 				
-				if(memProfile != null) {
-					new File(savePath + changeName).delete();
-				}
-				
 				session.setAttribute("alertMsg", "프로필 사진이 변경되었습니다.");
 				session.setAttribute("loginUser", updateMem);
 				
 			}
-		}
-			
+		
+		}	
 		response.sendRedirect(request.getContextPath() + "/updatePage.me");
 		
 	

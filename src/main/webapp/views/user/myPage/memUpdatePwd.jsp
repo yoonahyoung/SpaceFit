@@ -68,7 +68,7 @@
 	            
 	            <br><br>
 	            <div align="center">
-	                <button type="button" class="btn btn-secondary">취소하기</button>&nbsp;
+	                <button type="button" class="btn btn-secondary" onclick="location.href='<%=contextPath%>/updatePage.me'">취소하기</button>&nbsp;
 	                <button type="submit" class="btn btn-primary" onclick="return validatePwd();">변경하기</button>
 	                <br>
 	            </div>

@@ -150,6 +150,8 @@
 			      <div class="modal-body">
 			        <div class="input-group">
 	                       <input type="file" class="form-control" name="profile" style="color:black; border-color:lightgray;"/>
+	                       <br>
+	                       <input type="text" name="" value="">
 	                     </div>
 			      </div>
 			      <div class="modal-footer">
