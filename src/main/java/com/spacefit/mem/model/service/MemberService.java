@@ -114,9 +114,9 @@ public class MemberService {
 	   return list;
    }
    
-   public int insertMemCoupon(String cpCode) {
+   public int insertMemCoupon(int memNo, String cpName) {
 		Connection conn = getConnection();
-		int result = new MemberDao().insertMemCoupon(conn, cpCode);
+		int result = new MemberDao().insertMemCoupon(conn, memNo, cpName);
 		
 		if(result > 0) {
 			commit(conn);
@@ -146,6 +146,19 @@ public class MemberService {
 	   close(conn);
 	   return list;
    }
+   
+	public int insertDownCoupon(int cpNo, int memNo, String cpEndDate) {
+		Connection conn = getConnection();
+		int result = new MemberDao().insertDownCoupon(conn, cpNo, memNo, cpEndDate);
+
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
    
    public Member updateProfile(String memProfile, String memId) {
 	   Connection conn = getConnection();

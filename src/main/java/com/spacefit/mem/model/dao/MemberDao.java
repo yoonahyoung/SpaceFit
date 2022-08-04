@@ -335,7 +335,7 @@ public class MemberDao {
 	   
    }
    
-   public int insertMemCoupon(Connection conn, String cpCode) {
+   public int insertMemCoupon(Connection conn, int memNo, String cpName) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -344,8 +344,8 @@ public class MemberDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-//			pstmt.setString(1, cpName);
-//			pstmt.setInt(2, cpDiscount);
+			pstmt.setInt(1, memNo);
+			pstmt.setString(2, cpName);
 			
 			result = pstmt.executeUpdate();
 			
@@ -409,6 +409,30 @@ public class MemberDao {
 		
 		return list;
 		
+	}
+   
+	public int insertDownCoupon(Connection conn, int cpNo, int memNo, String cpEndDate) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertDownCoupon");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, cpNo);
+			pstmt.setInt(2, memNo);
+			pstmt.setString(3, cpEndDate);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
    
    public int updateProfile(Connection conn, String memProfile, String memId) {

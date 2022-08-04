@@ -43,5 +43,40 @@ public class ReportService {
 		return list;
 	}
 	
+	public int todayRvCount() {
+		Connection conn = getConnection();
+		int todayRvCount = new ReportDao().todayRvCount(conn);
+		close(conn);
+		return todayRvCount;
+	}
+	
+	public int totalRvCount() {
+		Connection conn = getConnection();
+		int totalRvCount = new ReportDao().totalRvCount(conn);
+		close(conn);
+		return totalRvCount;
+	}
+	
+	public int todayCmCount() {
+		Connection conn = getConnection();
+		int todayCmCount = new ReportDao().todayCmCount(conn);
+		close(conn);
+		return todayCmCount;
+	}
+	
+	public int totalCmCount() {
+		Connection conn = getConnection();
+		int totalCmCount = new ReportDao().totalCmCount(conn);
+		close(conn);
+		return totalCmCount;
+	}
+	
+	public String maxMemId() {
+		Connection conn = getConnection();
+		String maxMemId = new ReportDao().maxMemId(conn);
+		close(conn);
+		return maxMemId;
+	}
+	
 
 }

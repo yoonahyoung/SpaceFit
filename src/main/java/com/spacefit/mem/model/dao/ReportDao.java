@@ -81,6 +81,8 @@ public class ReportDao {
 									 rset.getInt("count")						
 						));
 			}
+			
+			//System.out.println(list);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -90,4 +92,126 @@ public class ReportDao {
 		return list;
 		
 	}
+	
+	// 오늘 후기신고건수
+	public int todayRvCount(Connection conn) {
+		// select => ResultSet (int)
+		int todayRvCount = 0;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("todayRvCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				todayRvCount = rset.getInt("TODAY_REVIEW_COUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return todayRvCount;				
+				
+	}
+	
+	// 총 후기신고건수
+	public int totalRvCount(Connection conn) {
+		// select => ResultSet (int)
+		int totalRvCount = 0;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("totalRvCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				totalRvCount = rset.getInt("TOTAL_REVIEW_COUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return totalRvCount;				
+				
+	}
+	
+	// 오늘 댓글 신고 건수
+	public int todayCmCount(Connection conn) {
+		// select => ResultSet (int)
+		int todayCmCount = 0;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("todayCmCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				todayCmCount = rset.getInt("TODAY_COMMENT_COUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return todayCmCount;				
+				
+	}
+	
+	// 총 댓글 신고 건수
+	public int totalCmCount(Connection conn) {
+		// select => ResultSet (int)
+		int totalCmCount = 0;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("totalCmCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				totalCmCount = rset.getInt("TOTAL_COMMECT_COUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return totalCmCount;				
+				
+	}
+	
+	public String maxMemId(Connection conn) {
+		String maxMemId = "";
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("maxMemId");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				maxMemId = rset.getString("MEM_ID");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return maxMemId;
+	}
+	
+	
 }

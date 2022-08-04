@@ -1,4 +1,4 @@
-package com.spacefit.mem.controller;
+package com.spacefit.product.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.spacefit.mem.model.service.ReportService;
-import com.spacefit.mem.model.vo.Report;
+import com.spacefit.product.model.service.SpaceService;
+import com.spacefit.product.model.vo.Space;
 
 /**
- * Servlet implementation class AjaxAdminMemberReportController
+ * Servlet implementation class SpaceAjaxListIndexController
  */
-@WebServlet("/ajAdminReport.re")
-public class AjaxAdminMemberReportController extends HttpServlet {
+@WebServlet("/list.in")
+public class SpaceAjaxListIndexController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxAdminMemberReportController() {
+    public SpaceAjaxListIndexController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,19 +32,10 @@ public class AjaxAdminMemberReportController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String selectSearch = "";
-		switch(request.getParameter("selectSearch")) {
-		case "total" : selectSearch += " ORDER BY R.RPT_REF_NO DESC"; break;
-		case "reviewSearch" : selectSearch += " WHERE R.RPT_REF_CAT = 1 ORDER BY R.RPT_REF_NO DESC"; break;
-		case "commentSearch" : selectSearch += " WHERE R.RPT_REF_CAT = 2 ORDER BY R.RPT_REF_NO DESC"; break;
-		case "countDesc" : selectSearch += " ORDER BY COUNT DESC"; break;		
-		}
-				
-		
-		ArrayList<Report> list = new ReportService().adminSelectList(selectSearch);
-		
-		
+		request.setCharacterEncoding("UTF-8");
+		ArrayList<Space> list = new SpaceService().selectList();
+
+		// index.jsp에서 뿌려줄 리스트
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(list, response.getWriter());
 	}

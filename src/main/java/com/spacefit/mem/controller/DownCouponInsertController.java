@@ -1,28 +1,28 @@
 package com.spacefit.mem.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.spacefit.mem.model.service.MemberService;
-import com.spacefit.mem.model.vo.Mcp;
+import com.spacefit.mem.model.vo.Member;
 
 /**
- * Servlet implementation class DownCouponListController
+ * Servlet implementation class DownCouponInsertController
  */
-@WebServlet("/downCouponList.me")
-public class DownCouponListController extends HttpServlet {
+@WebServlet("/downCouponInsert.me")
+public class DownCouponInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DownCouponListController() {
+    public DownCouponInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,16 +32,26 @@ public class DownCouponListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		ArrayList<Mcp> list = new MemberService().selectDownCoupon();
+		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
 		
-		if(list.isEmpty()) {
-			System.out.println("null임");
+		int memNo = ((Member)session.getAttribute("loginUser")).getMemNo();
+		int cpNo = Integer.parseInt(request.getParameter("cpNo"));
+		String cpEndDate = request.getParameter("cpEndDate");
+		
+		
+		int result = new MemberService().insertDownCoupon(cpNo, memNo, cpEndDate);
+		
+		if(result > 0) {
+			
+			session.setAttribute("alertMsg", "쿠폰이 발급되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/myCouponList.me");
+			
 		}else {
-			request.setAttribute("cpList", list);
-			request.getRequestDispatcher("views/user/myPage/cartListView.jsp").forward(request, response);
+			
+			session.setAttribute("alertMsg", "쿠폰 발급에 실패했습니다.");
+			response.sendRedirect(request.getContextPath() + "/myCouponList.me");
 		}
-		
-		
 	}
 
 	/**

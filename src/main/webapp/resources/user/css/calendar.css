@@ -42,6 +42,7 @@
   }
 .fc a[data-navlink] {
     cursor: pointer;
+    text-decoration: none;
   }
 .fc a[data-navlink]:hover {
     text-decoration: underline;
@@ -734,6 +735,8 @@ A HORIZONTAL event
     position: relative;
     z-index: 4;
     padding: 4px;
+    text-decoration: none;
+    color:black;
   }
 .fc {
 

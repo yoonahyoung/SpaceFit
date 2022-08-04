@@ -62,40 +62,47 @@
             </td>
             <th width="90">공간분류</th>
             <td width="100">
-                <select name="room" id="spaceCategory" onclick="spaceList();">
+                <select name="spaceCategory" id="spaceCategory">
                     <option value="선택">--선택--</option>
-                    <option value="스튜디오">스튜디오</option>
-                    <option value="연습실">연습실</option>
-                    <option value="파티룸">파티룸</option>
+                    <option value="studio" id="studio">스튜디오</option>
+                    <option value="practice" id="practice">연습실</option>
+                    <option value="party" id="party">파티룸</option>
                 </select>
             <th width="70">공간</th>
-            <td width="100">
+            <td width="100" align="center">
 
-                <!-- 기본선택 -->
-                
-                <select name="spaceNo" id="basic">
-                    <option value="선택">--선택--</option>
-                </select>
-                
-                <!-- 공간 목록이 나오도록 -->
-                <select name="studioSpaceNo" id="studio" style="display: none;">
-                	<option value="선택">--선택--</option>
-                    <% for(Category c : studioList) { %>
-                    <option onchange="select();" value="<%=c.getSpaceNo()%>"><%= c.getSpaceName() %></option>
-                    <% } %>
-                </select>
-                <select name="practiceSpaceNo" id="practice" style="display: none;">
-                	<option value="선택">--선택--</option>
-                    <% for(Category c : practiceList) { %>
-                    <option onchange="select();" value="<%=c.getSpaceNo()%>"><%= c.getSpaceName() %></option>
-                    <% } %>
-                </select>
-                <select name="partySpaceNo" id="party" style="display: none;">
-                	<option value="선택">--선택--</option>
-                    <% for(Category c : partyList) { %>
-                    <option onchange="select();" value="<%=c.getSpaceNo()%>"><%= c.getSpaceName() %></option>
-                    <% } %>
-                </select>
+                <div class="list" id="basic">
+                    <select name="spaceNo" id="basic">
+                        <option value="선택"selected>--선택--</option>
+                    </select>
+                </div>
+    
+                <div id="studioList" class="list" style="display: none;">
+                    <select name="studioSpaceNo" id="studio">
+                        <option value="선택"selected>--선택--</option>
+                        <% for(Category c : studioList) { %>
+                        <option value="<%=c.getSpaceNo()%>"><%= c.getSpaceName() %></option>
+                        <% } %>
+                    </select>
+                </div>
+    
+                <div id="practiceList" class="list" style="display: none;">
+                    <select name="practiceSpaceNo" id="practice">
+                        <option value="선택"selected>--선택--</option>
+                        <% for(Category c : practiceList) { %>
+                        <option value="<%=c.getSpaceNo()%>"><%= c.getSpaceName() %></option>
+                        <% } %>
+                    </select>
+                </div>
+    
+                <div id="partyList" class="list" style="display: none;">
+                    <select name="partySpaceNo" id="party">
+                        <option value="선택"selected>--선택--</option>
+                        <% for(Category c : partyList) { %>
+                        <option value="<%=c.getSpaceNo()%>"><%= c.getSpaceName() %></option>
+                        <% } %>
+                    </select>
+                </div>
 
             </td>
         <tr>
@@ -153,8 +160,8 @@
         $("#pwd").attr("disabled", false);
     }
     function check(){
-        if($("#qnaCategory").val()=='선택'||$("#space").val()=='선택'||$("#spaceCategory").val()=='선택'){
-            alert("유형 및 공간을 선택하세요");
+        if($("#qnaCategory").val()=='선택'||$("#spaceCategory").val()=='선택'){
+                alert("유형 및 공간을 선택하세요");
             return false;
         }
     }
@@ -165,28 +172,23 @@
     }
     */
 
-    function spaceList(){
-        if($("#spaceCategory").val()=='스튜디오'){
-            $("#basic").css("display", 'none');
-            $("#studio").css("display", 'block');
-            $("#practice").css("display", 'none');
-            $("#party").css("display", 'none');
-        }else if($("#spaceCategory").val()=='연습실'){
-            $("#basic").css("display", 'none');
-            $("#studio").css("display", 'none');
-            $("#practice").css("display", 'block');
-            $("#party").css("display", 'none');
-        }else if($("#spaceCategory").val()=='파티룸'){
-            $("#basic").css("display", 'none');
-            $("#studio").css("display", 'none');
-            $("#practice").css("display", 'none');
-            $("#party").css("display", 'block');
-        }else if($("#spaceCategory").val()=='선택'){
-            $("#basic").css("display", 'block');
-            $("#studio").css("display", 'none');
-            $("#practice").css("display", 'none');
-            $("#party").css("display", 'none');
-        }
-    }
+        // 공간분류 선택시 선택된 공간분류의 공간만 선택할 수 있도록
+        $("select[name=spaceCategory]").change(function(){
+            let tag = document.getElementsByClassName("list");
+            const basic = document.getElementById("basic");
+
+            for(let i=0 ; i<tag.length ; i++){
+                if($(this).val() == "선택"){
+                    basic.style.display = "block";
+                    basic.style.display = "inline";
+                    tag[i].style.display = "none";
+                }
+                if($(this).val()+"List" == tag[i].id){
+                    tag[i].style.display = "block";
+                    tag[i].style.display = "inline";
+                }else
+                    tag[i].style.display = "none";
+            }
+        });
 </script>
 </html>

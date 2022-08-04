@@ -27,23 +27,45 @@
 <!-- Swiper CDN -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/7.3.0/swiper-bundle.min.css"/>
 <!-- fullcalendar CDN -->  
-<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />  
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.css' rel='stylesheet' />  
 <link href='<%= request.getContextPath() %>/resources/user/css/calendar.css' rel="stylesheet" />
+
 
 
 <title>Insert title here</title>
 <style>
 /* 캘린더 */
-body {
+.calBody {
     margin: 40px 10px;
     padding: 0;
     font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
     font-size: 14px;
+    
   }
-  #calendar {
+#calendar:hover{
+    cursor: pointer;
+}
+.fc-view-harness.fc-view-harness-active a{
+    color:black;
+    text-decoration:none;
+}
+.fc-view-harness.fc-view-harness-active th{
+    background-color:#dbecff
+}
+#calendar {
     max-width: 1100px;
     margin: 0 auto;
+    text-decoration: none;
   }
+.fc-daygrid-day-number{
+    color:black;
+}
+.fc-col-header-cell.fc-day.fc-day-sun a{
+    color:red !important;
+}
+.fc-col-header-cell.fc-day.fc-day-sat a{
+    color:rgb(59, 142, 209) !important;
+}
 </style>
 </head>
 <body>
@@ -89,18 +111,18 @@ body {
                                 <div class="row">
                                     <div class="detailNav">
                                         <div class="col-md-12">
-                                            <ul class="nav nav-pills-a nav-pills mb-3 section-t3" id="pills-tab" role="tablist" style="background-color:lightgray; padding-top:0px;">
+                                            <ul class="nav nav-pills-a nav-pills mb-3 section-t3" id="pills-tab" role="tablist" style="padding-top:0px;">
                                             <li class="nav-item col-sm-3">
-                                                <a class="nav-link active" id="pills-gonggan-tab ayNav" data-bs-toggle="pill" href="#pills-gonggan" role="tab" aria-controls="pills-gonggan" aria-selected="true">공간소개</a>
+                                                <a class="nav-link active" id="pills-gonggan-tab ayNav" data-bs-toggle="pill" href="#pills-gonggan" role="tab" aria-controls="pills-gonggan" aria-selected="true" style="color:black;">공간소개</a>
                                             </li>
                                             <li class="nav-item col-sm-3">
-                                                <a class="nav-link" id="pills-sisul-tab ayNav" data-bs-toggle="pill" href="#pills-sisul" role="tab" aria-controls="pills-sisul" aria-selected="false">시설안내</a>
+                                                <a class="nav-link" id="pills-sisul-tab ayNav" data-bs-toggle="pill" href="#pills-sisul" role="tab" aria-controls="pills-sisul" aria-selected="false" style="color:black;">시설안내</a>
                                             </li>
                                             <li class="nav-item col-sm-3">
-                                                <a class="nav-link" id="pills-eyoung-tab ayNav" data-bs-toggle="pill" href="#pills-eyoung" role="tab" aria-controls="pills-eyoung" aria-selected="false">이용안내</a>
+                                                <a class="nav-link" id="pills-eyoung-tab ayNav" data-bs-toggle="pill" href="#pills-eyoung" role="tab" aria-controls="pills-eyoung" aria-selected="false" style="color:black;">이용안내</a>
                                             </li>
                                             <li class="nav-item col-sm-3">
-                                                <a class="nav-link" id="pills-sDetailQNA-tab ayNav" data-bs-toggle="pill" href="#pills-sDetailQNA" role="tab" aria-controls="pills-sDetailQNA" aria-selected="false">Q&A</a>
+                                                <a class="nav-link" id="pills-sDetailQNA-tab ayNav" data-bs-toggle="pill" href="#pills-sDetailQNA" role="tab" aria-controls="pills-sDetailQNA" aria-selected="false" style="color:black;">Q&A</a>
                                             </li>
                                             </ul>
                                             <div class="tab-content" id="pills-tabContent">
@@ -128,7 +150,7 @@ body {
                                                     </ol>
                                                 </div>
                                                 <div class="tab-pane fade" id="pills-sDetailQNA" role="tabpanel" aria-labelledby="pills-sDetailQNA-tab">
-                                                    testQNA
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -324,7 +346,7 @@ body {
                                     </select>
                                 </div>
 
-                                <div class="row">
+                                <div class="row calBody">
                                     <h4 style="margin-top:40px; border-bottom:2px solid #0D6EFD">날짜선택</h4>
                                     <!-- calendar 태그 -->  
                                     <div id='calendar-container'>    
@@ -501,10 +523,10 @@ body {
     </script>
 
     <script>
-    
-   $(function(){
-      calendarRendering();
-   })
+   
+    $(function(){
+        calendarRendering();
+    })
    
     function calendarRendering(){
        var calendarEl = document.getElementById('calendar');
@@ -518,7 +540,6 @@ body {
              //console.log(info.dateStr); // 선택한 날짜 2022-08-02
              $("#chDate").html(info.dateStr);
              $(".chDate").val(info.dateStr);
-             
                 $.ajax({
                    url: '<%=contextPath%>/calender.sp',
                    data:{no:<%=s.getSpaceNo()%>, date:info.dateStr},
@@ -777,10 +798,7 @@ body {
 <script src="<%= thisPath %>/resources/user/templates/real_estate/assets/js/main.js"></script>
 
 
-
-
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>  
-
 <!-- fullcalendar -->  
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
+
 </html>

@@ -153,9 +153,9 @@
 	
 	<!-- 오늘 예약건수 -->
 	<entry key="selectTodayCount">
-		 SELECT NVL(COUNT(*), 0) AS "TODAY_COUNT"
+		  SELECT NVL(COUNT(*), 0) AS "TODAY_COUNT"
 		   FROM TB_BOOK
-		  WHERE BOOK_CREATE_DATE = SYSDATE
+		  WHERE TO_CHAR(BOOK_CREATE_DATE, 'YY/MM/DD') = TO_CHAR(SYSDATE, 'YY/MM/DD')
 		   AND BOOK_STATUS = 'Y'  
 	</entry>
 	

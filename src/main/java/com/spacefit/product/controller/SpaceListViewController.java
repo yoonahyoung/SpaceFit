@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.spacefit.product.model.service.SpaceService;
 import com.spacefit.product.model.vo.Space;
 
@@ -31,7 +32,7 @@ public class SpaceListViewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.setCharacterEncoding("UTF-8");
 		// 인기공간 리스트
 		ArrayList<Space> topList = new SpaceService().selectTopList();
 		
