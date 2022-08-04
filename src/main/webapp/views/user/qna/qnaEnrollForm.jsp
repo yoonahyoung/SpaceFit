@@ -69,7 +69,7 @@
                     <option value="party" id="party">파티룸</option>
                 </select>
             <th width="70">공간</th>
-            <td width="100">
+            <td width="100" align="center">
 
                 <div class="list" id="basic">
                     <select name="spaceNo" id="basic">

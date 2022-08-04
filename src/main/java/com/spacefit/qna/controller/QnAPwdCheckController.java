@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.spacefit.attachment.model.vo.Attachment;
 import com.spacefit.qna.model.service.QnAService;
 import com.spacefit.qna.model.vo.QnA;
 
@@ -34,10 +35,11 @@ public class QnAPwdCheckController extends HttpServlet {
 		int qnaNo = Integer.parseInt(request.getParameter("no"));
 		
 		QnA q = new QnAService().selectQnA(qnaNo);
-		
+		Attachment at = new QnAService().selectAttachment(qnaNo);
 		
 		if(q.getQnaPublic().equals("N") && q.getQnaPwd() != null) {
 			request.setAttribute("qna", q);
+			request.setAttribute("at", at);
 			request.getRequestDispatcher("views/user/qna/qnaPwdCheck.jsp").forward(request, response);
 		}else {
 			response.sendRedirect(request.getContextPath()+"/detail.qa?no=" + qnaNo);

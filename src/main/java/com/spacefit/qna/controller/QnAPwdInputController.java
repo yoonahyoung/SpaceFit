@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.spacefit.attachment.model.vo.Attachment;
 import com.spacefit.qna.model.service.QnAService;
 import com.spacefit.qna.model.vo.QnA;
 
@@ -37,7 +38,7 @@ public class QnAPwdInputController extends HttpServlet {
 		int qnaNo = Integer.parseInt(request.getParameter("no"));
 		
 		QnA q = new QnAService().selectQnA(qnaNo);
-
+		Attachment at = new QnAService().selectAttachment(qnaNo);
 		String pwd = q.getQnaPwd();
 		
 		if(inputPwd.equals(pwd)) { // 입력한 비밀번호와 일치하는지 확인
@@ -55,6 +56,7 @@ public class QnAPwdInputController extends HttpServlet {
 			
 			if(result > 0) {
 			request.setAttribute("qna", q);
+			request.setAttribute("at", at);
 			request.getRequestDispatcher("views/user/qna/qnaDetailView.jsp").forward(request, response);		
 			}
 		}else {
