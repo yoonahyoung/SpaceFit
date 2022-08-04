@@ -208,6 +208,19 @@
 		  )
 	</entry>
 	
+	<entry key="deleteCart">
+		DELETE 
+		  FROM TB_CART
+		 WHERE MEM_NO = ?
+	</entry>
+	
+	<entry key="deleteSelectedCart">
+		 DELETE 
+		   FROM TB_CART
+		  WHERE MEM_NO = ?
+            AND SPACE_NO = ?
+	</entry>
+	
 	<entry key="selectCartList">
 		SELECT 
 		       MEM_NO

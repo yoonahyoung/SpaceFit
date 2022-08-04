@@ -528,6 +528,49 @@ public class MemberDao {
 	   return result;
    }
    
+   public int deleteCart(Connection conn, int memNo) {
+	   
+	   int result = 0;
+	   PreparedStatement pstmt = null;
+	   String sql = prop.getProperty("deleteCart");
+	   
+	   try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, memNo);
+		
+		result = pstmt.executeUpdate();
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+	}
+	   
+	   return result;
+   }
+   
+   public int deleteSelectedCart(Connection conn, int memNo, int spaceNo) {
+	   
+	   int result = 0;
+	   PreparedStatement pstmt = null;
+	   String sql = prop.getProperty("deleteSelectedCart");
+	   
+	   try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, memNo);
+		pstmt.setInt(2, spaceNo);
+		
+		result = pstmt.executeUpdate();
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+	}
+	   
+	   return result;
+   }
+   
    public Cart selectCartUpdateView(Connection conn, int memNo, String spaceName){
 		
 	    Cart c = null;
