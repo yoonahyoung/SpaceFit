@@ -77,7 +77,7 @@ public class QnAReplyInsertController extends HttpServlet {
 			
 			QnA q = new QnA();
 			
-			if(password == null) {
+			if(password.equals("null")) {
 				q.setQnaRefNo(refNo);
 				q.setQnaCategory(qnaCategory);
 				q.setQnaSpaceNo(spaceNo);
