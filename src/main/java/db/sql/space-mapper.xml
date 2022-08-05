@@ -235,4 +235,27 @@
 			BY SPACE_NO DESC
 	</entry>
 
+	<!-- QnA리스트 조회용 -->
+	<entry key="selectQnAList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT 
+		                       QNA_NO
+						     , QNA_TITLE
+						     , MEM_ID
+						     , QNA_CONTENT
+						     , QNA_CREATE_DATE
+		                  FROM TB_QNA B
+		                  JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
+                          JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+		                 WHERE B.QNA_STATUS = 'Y'
+		                   AND SPACE_NO = ?
+		                 ORDER 
+		                    BY QNA_NO DESC
+		               ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
 </properties>

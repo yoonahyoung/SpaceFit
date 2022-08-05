@@ -78,6 +78,8 @@
 }
 #dataTable{
     text-align: left;
+    margin:0px;
+    border-bottom-color:white;
 }
 th{
     font-size: 18px;
@@ -94,6 +96,17 @@ background:#E1F0FF;
 }
 #faqTr{
     padding-top:50px;
+}
+#dataTable tr, #dataTable td{
+	cursor:none;
+	background:white;
+}
+#dataTable tr, #dataTable td:hover{
+	cursor:none;
+	background:white;
+}
+.paging-area{
+	width:100%;
 }
 </style>
 </head>
@@ -180,7 +193,12 @@ background:#E1F0FF;
                                                 </div>
                                                 <div class="tab-pane fade" id="pills-sDetailQNA" role="tabpanel" aria-labelledby="pills-sDetailQNA-tab" onclick="loadQna();">
                                                     <table id="dataTable" class="table">
-                                                    
+                                                    	<tbody id="listArea">
+                                                    	
+                                                    	</tbody>
+	                                                	<tr>
+	                                                		<td colspan="2" id="pgQna"><div class="paging-area" align="center"></div><td>
+	                                                	<tr>
                                                     </table>
                                                 </div>
                                             </div>
@@ -942,13 +960,20 @@ background:#E1F0FF;
           					       + "<td colspan='2'> 문의가 없습니다. </td>"
                                    + "</tr>";
 	          				}else{
-	          					
-                       			el +=	"<tr>"
-	                                  + 	"<td>"+ list[i].qnaWriter +"</td>"
-	                                  + 	"<td>"+ list[i].qnaContent +"</td>"
-	                                  + "</tr>";
+	          					for(let i=0; i<list.length; i++){
+	          						
+	                       			el +=	"<tr>"      // 질문
+		                                  + 	"<td>"+ list[i].qnaWriter +"</td>"
+		                                  + 	"<td>Q."+ list[i].qnaContent +"</td>"
+		                                  + "</tr>"     // 답변
+		                                  + "<tr style='border-bottom:1px solid black;'>"
+		                                  + 	"<td>"+ list[i+1].qnaWriter +"</td>"
+		                                  + 	"<td>A."+ list[i+1].qnaContent +"</td>"
+		                                  + "</tr>";
+		                            i++;
+	          					}
 	                                 
-	        					}
+	        				}
 	          					
 	          					if(pi.currentPage != 1){ 
 	          						pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='selectPaging(" + (pi.currentPage-1) + ");'>&lt;</button>";
@@ -970,34 +995,12 @@ background:#E1F0FF;
 								 
 					            } 
 	                             
-	          				}
-                            	$("#areaList").html(el);
+                            	$("#listArea").html(el);
 	        				 	$(".paging-area").html(pageVal); 
+	          				}
 	        		
-            				
-            				<%-- <div class="outer">
-
-            			    <table class="table" align="center">
-            					<tbody>
-            			            <tr>
-            			                <td>아직 공간에 대한 질문이 없어요.</td>
-            			            </tr>
-            					            <tr name="test">
-            					            	<th>Q. <%=list.get(i).getFaqTitle() %></th>
-            					            </tr>
-            					            <tr>
-            					            	<td id="fContent<%=i%>"><p><b>A. </b> <%=list.get(i).getFaqContent() %></p></td>
-            					            </tr> 
-            			        </tbody>
-            			    </table>
-
-            			    <br>
-            			    
-            			    <div style="height : 60px"></div> --%>
-            			}
-            		})
-            	} 
-	            
+            			})
+                    }
             </script>
             
     </main>

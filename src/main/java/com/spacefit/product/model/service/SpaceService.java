@@ -12,6 +12,8 @@ import com.spacefit.attachment.model.vo.Attachment;
 import com.spacefit.common.model.vo.PageInfo;
 import com.spacefit.product.model.dao.SpaceDao;
 import com.spacefit.product.model.vo.Space;
+import com.spacefit.qna.model.dao.QnADao;
+import com.spacefit.qna.model.vo.QnA;
 import com.spacefit.reservation.model.vo.Book;
 import com.spacefit.review.model.vo.Review;
 
@@ -134,6 +136,15 @@ public class SpaceService {
 		Connection conn = getConnection();
 		ArrayList<Space> list = new SpaceDao().searchResultList(conn, keyword);
 		close(conn);
+		return list;
+	}
+
+	// 상품 상세페이지에서 QnA리스트 불러오기
+	public ArrayList<QnA> selectQnAList(PageInfo pi, int spNo) {
+		Connection conn = getConnection();
+		ArrayList<QnA> list = new SpaceDao().selectQnAList(conn, pi, spNo);
+		close(conn);
+		
 		return list;
 	}
 

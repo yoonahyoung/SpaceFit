@@ -15,6 +15,7 @@ import com.spacefit.attachment.model.vo.Attachment;
 import com.spacefit.common.model.vo.PageInfo;
 import com.spacefit.mem.model.dao.MemberDao;
 import com.spacefit.product.model.vo.Space;
+import com.spacefit.qna.model.vo.QnA;
 import com.spacefit.reservation.model.vo.Book;
 
 public class SpaceDao {
@@ -419,6 +420,47 @@ public class SpaceDao {
 		}
 		
 		return list;
+	}
+
+	//상품 상세 페이지에서 QnA불러오기
+	public ArrayList<QnA> selectQnAList(Connection conn, PageInfo pi, int spNo) {
+		ArrayList<QnA> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectQnAList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, spNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				QnA q = new QnA();
+				q.setQnaNo(rset.getInt("qna_no"));
+				q.setQnaTitle(rset.getString("qna_title"));
+				q.setQnaWriter(rset.getString("mem_id"));
+				q.setQnaContent(rset.getString("qna_content"));
+				q.setQnaCreateDate(rset.getDate("qna_create_date"));
+				list.add(q);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	
 	}
 	
 	
