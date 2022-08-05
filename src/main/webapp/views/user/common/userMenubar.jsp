@@ -438,8 +438,10 @@
 	      
 	      <div class="container profileContainer">
 	        <div class="row profile">
+	          <div id="header-areaSize" style="height:10px"></div>
 	          <button class="profile icon"> <img src="<%= contextPath %>/resources/user/templates/real_estate/img/icon/userIcon.svg" id="userIcon"> </button>
-	          <button class="profile text"><p><br><b><%=loginUser.getMemName() %></b> 님, 환영합니다. <br> 예약일 <b>D-7</b> 남았네요!</p> </button>
+	          <div id="header-areaSize" style="height:10px"></div>
+	          <button class="profile text"><p><br><b><%=loginUser.getMemName() %></b> 님, 환영합니다! <br></button>
 	        </div>
 	      </div>
 	  

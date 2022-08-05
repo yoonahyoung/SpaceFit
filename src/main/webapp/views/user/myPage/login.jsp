@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>   
+    pageEncoding="UTF-8"%>
+       
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,7 @@
                         <input type="text" placeholder="아이디" class="login-input" name="memId" required><br>
                         <input type="password" placeholder="비밀번호" class="login-input" name="memPwd" required><br>
                         <button class="btn btn-primary basicLogin" type="submit">로그인</button><br>
-                        <input type="radio" id="always-login"><label for="always-login" class="always-login">&nbsp 로그인 상태 유지</label><br>
+                        <!--  <input type="radio" id="always-login"><label for="always-login" class="always-login">&nbsp 로그인 상태 유지</label><br> -->
                         <hr style="color:  #0D6EFD;">
                         <h4>
                         <br>	
@@ -31,6 +32,7 @@
                         </h4>
                         <hr style="color:  #0D6EFD;"><br>
                     </form>
+                    <!-- 
                     <div class="easy-login">
                         <h4 class="h4forLgnNSign">SNS 간편로그인</h4>
                         <button class="goggle-login btn" type="button">구글 로그인</button><br>
@@ -39,6 +41,7 @@
                         <hr style="color:  #0D6EFD;">
                         <br>
                     </div>
+                     -->
                     <div class="sign-in">
                         <span style="color: #0D6EFD;">스페이스핏이 처음이신가요?</span><br>
                         <button class="btn btn-primary signInBtn" type="button" onclick="signIn();">회원가입</button><br>
