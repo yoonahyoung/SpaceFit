@@ -150,7 +150,7 @@
 			      <div class="modal-body">
 			        <div class="input-group">
 	                       <input type="file" class="form-control" name="profile" style="color:black; border-color:lightgray;"/>
-	                     </div>
+                     </div>
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>

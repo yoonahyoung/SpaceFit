@@ -47,7 +47,7 @@ public class MemCouponInsertController extends HttpServlet {
 			
 		}else {
 			
-			session.setAttribute("alertMsg", "쿠폰 발급에 실패했습니다.");
+			session.setAttribute("alertMsg", "존재하지 않는 쿠폰입니다.");
 			response.sendRedirect(request.getContextPath() + "/myCouponList.me");
 		}
 		

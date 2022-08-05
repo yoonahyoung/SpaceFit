@@ -132,13 +132,13 @@
 	            <div class="card-body">
 	              <input type="hidden" value="<%= mc.getCpNo()%>">
 	              <br>
-	              <h4 class="card-title" id="cpName"><%= mc.getCpName() %></h4>
+	              <h4 class="card-title"><%= mc.getCpName() %></h4>
 	              <br>
 	              <p class="card-text" style="font-size:26px; font-weight:600; color:#0D6EFD;"><%= mc.getCpDiscount() %>원</p>
-	              <span><%= sysdate %>~</span>
-	              <span id="cpEndDate"><%= mc.getCpEnrollDate() %></span>
+	              <span><%= sysdate %>&nbsp;~</span>
+	              <label><%= mc.getCpEnrollDate() %></label>
 	              <br><br>
-	              <button type="button" onclick="couponDown();" class="btn btn-outline-primary">쿠폰 다운 받기</button>
+	              <button type="button" class="btn btn-outline-primary down-btn">쿠폰 다운 받기</button>
 	            </div>
 	          </div>
 	        </div>
@@ -150,9 +150,20 @@
 	</div>
 	
 	<script>
-		function couponDown(){
-			location.href="<%=contextPath%>/downCouponInsert.me?cpName=" + $('#cpName').text() 
-													   + "&cpEndDate=" + $('#cpEndDate').text();
+	
+
+			
+		$('.down-btn').on("click", function(e){
+			
+			location.href="<%=contextPath%>/downCouponInsert.me?cpName=" + $(e.target).parent().find('h4').text()
+			  											 + "&cpEndDate=" + $(e.target).parent().find('label').text();
+			$(this).off(e);
+		});
+			
+		
+		
+			
+			//$(this).attr('disabled', true);
 		}
 	</script>
 	
