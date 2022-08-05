@@ -150,7 +150,7 @@
                                                         <li>시간엄수 부탁드리며, 퇴실전 뒷정리 부탁드립니다.</li>
                                                     </ol>
                                                 </div>
-                                                <div class="tab-pane fade" id="pills-sDetailQNA" role="tabpanel" aria-labelledby="pills-sDetailQNA-tab">
+                                                <div class="tab-pane fade" id="pills-sDetailQNA" role="tabpanel" aria-labelledby="pills-sDetailQNA-tab" onclick="loadQna();">
                                                     
                                                 </div>
                                             </div>
@@ -869,6 +869,21 @@
                     }
             </script>
             
+            <!-- QNA뿌려주는 script -->
+            <script>
+          	//enter => <br>
+            var text = $('textarea').val();
+            text = text.replace(/(?:\r\n|\r|\n)/g, '<br>');
+            	<%-- function loadQna(cpage){
+            		$.ajax({
+            			url:"<%=contextPath%>/list.qa",
+            			data:{'page':cpage},
+            			success:function(){
+            				
+            			}
+            		})
+            	} --%>
+            </script>
             
     </main>
 
