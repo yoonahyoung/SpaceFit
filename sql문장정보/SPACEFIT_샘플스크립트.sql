@@ -97,7 +97,7 @@ END;
 --  DDL for Sequence SEQ_QNNO
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "SEQ_QNNO"  MINVALUE 2 MAXVALUE 9999999999999999999999999999 INCREMENT BY 2 START WITH 2 NOCACHE  NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "SEQ_QNNO"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 NOCACHE  NOORDER  NOCYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence SEQ_RPTNO
 --------------------------------------------------------
@@ -254,15 +254,13 @@ END;
    (	"CP_NO" NUMBER, 
 	"CP_NAME" VARCHAR2(30 BYTE), 
 	"CP_DISCOUNT" NUMBER, 
-	"CP_ENROLL_DATE" DATE DEFAULT SYSDATE,
-  "CP_END_DATE" DATE
+	"CP_ENROLL_DATE" DATE DEFAULT SYSDATE
    ) ;
 
    COMMENT ON COLUMN "TB_COUPON"."CP_NO" IS '쿠폰번호';
    COMMENT ON COLUMN "TB_COUPON"."CP_NAME" IS '쿠폰명';
    COMMENT ON COLUMN "TB_COUPON"."CP_DISCOUNT" IS '할인금액';
    COMMENT ON COLUMN "TB_COUPON"."CP_ENROLL_DATE" IS '등록일';
-   COMMENT ON COLUMN "TB_COUPON"."CP_END_DATE" IS '만료일';
 --------------------------------------------------------
 --  DDL for Table TB_FAQ
 --------------------------------------------------------
@@ -302,7 +300,7 @@ END;
 
    COMMENT ON COLUMN "TB_FILE"."FILE_NO" IS '파일번호';
    COMMENT ON COLUMN "TB_FILE"."REF_BNO" IS '참조게시글번호';
-   COMMENT ON COLUMN "TB_FILE"."FILE_CATEGORY" IS '참조게시글카테고리(1공간/2:후기/3.홈페이지관리/4.일대일문의)';
+   COMMENT ON COLUMN "TB_FILE"."FILE_CATEGORY" IS '참조게시글카테고리(1공간/2:후기/3.홈페이지관리)';
    COMMENT ON COLUMN "TB_FILE"."FILE_ORIGIN_NAME" IS '파일원본명';
    COMMENT ON COLUMN "TB_FILE"."FILE_CHANGE_NAME" IS '파일수정명';
    COMMENT ON COLUMN "TB_FILE"."FILE_PATH" IS '저장폴더경로';
@@ -470,8 +468,7 @@ END;
 	"QNA_COUNT" NUMBER DEFAULT 0, 
 	"QNA_STATUS" VARCHAR2(1 BYTE) DEFAULT 'Y', 
 	"QNA_PUBLIC" VARCHAR2(1 BYTE) DEFAULT 'Y', 
-	"QNA_PWD" VARCHAR2(30 BYTE),
-    "QNA_SOLVED" VARCHAR2(1 BYTE)
+	"QNA_PWD" VARCHAR2(30 BYTE)
    ) ;
 
    COMMENT ON COLUMN "TB_QNA"."QNA_NO" IS '글번호';
@@ -488,7 +485,6 @@ END;
    COMMENT ON COLUMN "TB_QNA"."QNA_STATUS" IS '활성화여부';
    COMMENT ON COLUMN "TB_QNA"."QNA_PUBLIC" IS '비밀글여부';
    COMMENT ON COLUMN "TB_QNA"."QNA_PWD" IS '비밀번호';
-   COMMENT ON COLUMN "TB_QNA"."QNA_SOLVED" IS '답변여부';
 --------------------------------------------------------
 --  DDL for Table TB_REPORT
 --------------------------------------------------------
@@ -1110,3 +1106,730 @@ SET DEFINE OFF;
 	  REFERENCES "TB_SPACE" ("SPACE_NO") ENABLE;
 
 commit;
+
+
+ALTER TABLE TB_LIKE ADD RV_NO NUMBER;
+ALTER TABLE TB_LIKE DROP COLUMN SPACE_NO;
+COMMIT;
+
+
+CREATE OR REPLACE VIEW VW_BOOK
+AS SELECT 
+        BOOK_NO
+      , SPACE_NAME
+         , SPACE_NO
+      , MEM_NO
+      , MEM_ID
+      , PL_ID
+      , BOOK_COUNT
+      , BOOK_DATE
+      , BOOK_IN
+      , BOOK_OUT
+      , BOOK_PRICE
+      , BOOK_NAME
+      , BOOK_PHONE
+      , BOOK_EMAIL
+      , NVL(BOOK_PURPOSE, '없음') "BOOK_PURPOSE"
+      , NVL(BOOK_ADD_CONTENT, '없음') "BOOK_ADD_CONTENT"
+      , BOOK_CAR
+      , BOOK_ANIMAL
+      , BOOK_CHAIR
+      , BOOK_STAND
+      , BOOK_CREATE_DATE
+      , BOOK_MODIFY_DATE
+      , BOOK_STATUS       
+      , NVL(BOOK_CANCEL_REASON, '없음') "BOOK_CANCEL_REASON"
+      , NVL(BOOK_CANCEL_CONTENT, '없음') "BOOK_CANSEL_CONTENT"
+      , CASE WHEN BOOK_STATUS = 'N' THEN '예약취소'
+            WHEN TO_DATE(BOOK_DATE) > SYSDATE THEN '예약확정'
+            WHEN TO_DATE(BOOK_DATE) < SYSDATE THEN '이용완료'
+        END "BOOK_CATEGORY"
+      , PL_AMOUNT
+      , SPACE_PIC
+         , CEIL( TO_DATE(BOOK_DATE) - SYSDATE) AS "BOOK_D_DAY"
+         , SPACE_LIMIT -- 공간예약인원 -> 수정할때 그거까지만 받도록
+  FROM TB_BOOK 
+   JOIN TB_SPACE USING(SPACE_NO)
+   JOIN TB_PAYLIST USING(PL_ID)
+   JOIN TB_MEMBER USING(MEM_NO);
+   
+   COMMIT;
+   
+ALTER TABLE TB_COUPON ADD CP_END_DATE DATE;
+COMMENT ON COLUMN "TB_COUPON"."CP_END_DATE" IS '만료일';
+
+DROP SEQUENCE SEQ_QNNO;
+CREATE SEQUENCE  "SEQ_QNNO"  MINVALUE 2 MAXVALUE 9999999999999999999999999999 INCREMENT BY 2 START WITH 2 NOCACHE  NOORDER  NOCYCLE ;
+
+COMMENT ON COLUMN "TB_FILE"."FILE_CATEGORY" IS '참조게시글카테고리(1공간/2:후기/3.홈페이지관리/4.일대일문의)';
+
+COMMIT;
+------8/4
+DROP TABLE TB_QNA;
+  CREATE TABLE "TB_QNA" 
+   (   "QNA_NO" NUMBER, 
+   "QNA_CATEGORY" VARCHAR2(6 BYTE), 
+   "QNA_SPACE_NO" NUMBER, 
+   "QNA_TITLE" VARCHAR2(100 BYTE), 
+   "QNA_CONTENT" VARCHAR2(4000 BYTE), 
+   "QNA_MEM_NO" NUMBER, 
+   "QNA_GROUP" NUMBER DEFAULT 0, 
+   "QNA_REF_NO" NUMBER, 
+   "QNA_CREATE_DATE" DATE DEFAULT SYSDATE, 
+   "QNA_UPDATE_DATE" DATE DEFAULT SYSDATE, 
+   "QNA_COUNT" NUMBER DEFAULT 0, 
+   "QNA_STATUS" VARCHAR2(1 BYTE) DEFAULT 'Y', 
+   "QNA_PUBLIC" VARCHAR2(1 BYTE) DEFAULT 'Y', 
+   "QNA_PWD" VARCHAR2(30 BYTE),
+    "QNA_SOLVED" VARCHAR2(1 BYTE)
+   ) ;
+
+   COMMENT ON COLUMN "TB_QNA"."QNA_NO" IS '글번호';
+   COMMENT ON COLUMN "TB_QNA"."QNA_CATEGORY" IS '분류';
+   COMMENT ON COLUMN "TB_QNA"."QNA_SPACE_NO" IS '공간번호';
+   COMMENT ON COLUMN "TB_QNA"."QNA_TITLE" IS '제목';
+   COMMENT ON COLUMN "TB_QNA"."QNA_CONTENT" IS '내용';
+   COMMENT ON COLUMN "TB_QNA"."QNA_MEM_NO" IS '회원번호';
+   COMMENT ON COLUMN "TB_QNA"."QNA_GROUP" IS '글깊이';
+   COMMENT ON COLUMN "TB_QNA"."QNA_REF_NO" IS '참조글번호';
+   COMMENT ON COLUMN "TB_QNA"."QNA_CREATE_DATE" IS '작성날짜';
+   COMMENT ON COLUMN "TB_QNA"."QNA_UPDATE_DATE" IS '수정일';
+   COMMENT ON COLUMN "TB_QNA"."QNA_COUNT" IS '조회수';
+   COMMENT ON COLUMN "TB_QNA"."QNA_STATUS" IS '활성화여부';
+   COMMENT ON COLUMN "TB_QNA"."QNA_PUBLIC" IS '비밀글여부';
+   COMMENT ON COLUMN "TB_QNA"."QNA_PWD" IS '비밀번호';
+   COMMENT ON COLUMN "TB_QNA"."QNA_SOLVED" IS '답변여부';
+
+ALTER TABLE TB_COUPON ADD CP_END_DATE DATE;
+COMMENT ON COLUMN "TB_COUPON"."CP_END_DATE" IS '만료일';
+----------------------------- 신고를 위해 필요한 db -----------------------------
+INSERT
+  INTO TB_RPT_RSN
+      (
+        RPT_REASON_NO
+      , RPT_REASON  
+        )
+VALUES (
+       1
+     , '욕설 및 비방' 
+     );
+INSERT
+  INTO TB_RPT_RSN
+      (
+        RPT_REASON_NO
+      , RPT_REASON  
+        )
+VALUES (
+       2
+     , '성적이고 음란한 대화' 
+     );
+     
+INSERT
+  INTO TB_RPT_RSN
+      (
+        RPT_REASON_NO
+      , RPT_REASON  
+        )
+VALUES (
+       3
+     , '스팸, 금전적 요구' 
+     );
+
+    
+    COMMIT;
+
+-------------------------------------지미님이 주신 샘플데이터-------------------
+INSERT
+  INTO TB_PAYLIST
+   (
+      PL_ID
+    , PL_STATUS
+    , PL_TID
+    , PL_MEM_NO
+    , PL_TYPE   
+    , PL_AMOUNT 
+    , PL_DISCOUNT_AMOUNT
+    , PL_REQUEST_TIME
+    , PL_APPROVED_TIME    
+   )
+VALUES
+   ( 
+      SEQ_PLNO.NEXTVAL
+     , 'Y'
+     , '123456DF'
+     , 2
+     , 'CARD'
+     , '56000'
+     , '51000'
+     , SYSDATE
+     , SYSDATE     
+   );
+-- 예약테이블 (1)
+INSERT
+  INTO TB_BOOK
+    (
+      BOOK_NO
+    , SPACE_NO
+    , MEM_NO
+    , PL_ID
+    , BOOK_COUNT
+    , BOOK_DATE
+    , BOOK_IN
+    , BOOK_OUT
+    , BOOK_PRICE
+    , BOOK_NAME
+    , BOOK_PHONE
+    , BOOK_EMAIL
+    , BOOK_PURPOSE
+    , BOOK_ADD_CONTENT
+    , BOOK_CAR
+    , BOOK_ANIMAL
+    , BOOK_CHAIR
+    , BOOK_STAND
+    , BOOK_CREATE_DATE
+    , BOOK_MODIFY_DATE
+    , BOOK_STATUS
+    , BOOK_CATEGORY
+    , BOOK_CANCEL_REASON
+    , BOOK_CANCEL_CONTENT
+      
+    )
+ VALUES
+    (
+       SEQ_BONO.nextval
+     , 2
+     , 2
+     , SEQ_PLNO.CURRVAL
+     , 5
+     , '2022.07.27'
+     , '09'
+     , '17'
+     , '51000'
+     , '홍길동'
+     , '01056265892'
+     , 'wlalcjstk789@naver.com'
+     , '프로필사진촬영'
+     , '코로나땜에 걱정되어서요. 환기30분 부탁해요. 감사해요'
+     , 'Y'
+     , 'N'
+     , 'Y'
+     , 'N'
+     , SYSDATE
+     , SYSDATE
+     , 'Y'
+     , '예약확정'
+     , NULL
+     , NULL
+     );
+   
+ -- 결제 (2)  
+   INSERT
+  INTO TB_PAYLIST
+   (
+      PL_ID
+    , PL_STATUS
+    , PL_TID
+    , PL_MEM_NO
+    , PL_TYPE   
+    , PL_AMOUNT
+    , PL_DISCOUNT_AMOUNT
+    , PL_REQUEST_TIME
+    , PL_APPROVED_TIME    
+   )
+VALUES
+   ( 
+       SEQ_PLNO.NEXTVAL
+     , 'Y'
+     , '123456DF'
+     , 2
+     , 'CARD'
+     , '10000'
+     , '10000'
+     , SYSDATE
+     , SYSDATE     
+   );
+   
+  -- 예약 (2)
+  INSERT
+  INTO TB_BOOK
+    (
+      BOOK_NO
+    , SPACE_NO
+    , MEM_NO
+    , PL_ID
+    , BOOK_COUNT
+    , BOOK_DATE
+    , BOOK_IN
+    , BOOK_OUT
+    , BOOK_PRICE
+    , BOOK_NAME
+    , BOOK_PHONE
+    , BOOK_EMAIL
+    , BOOK_PURPOSE
+    , BOOK_ADD_CONTENT
+    , BOOK_CAR
+    , BOOK_ANIMAL
+    , BOOK_CHAIR
+    , BOOK_STAND
+    , BOOK_CREATE_DATE
+    , BOOK_MODIFY_DATE
+    , BOOK_STATUS
+    , BOOK_CATEGORY
+    , BOOK_CANCEL_REASON
+    , BOOK_CANCEL_CONTENT
+      
+    )
+ VALUES
+    (
+       SEQ_BONO.nextval
+     , 3
+     , 2
+     , SEQ_PLNO.CURRVAL
+     , 8
+     , '2022.05.27'
+     , '12'
+     , '13'
+     , '10000'
+     , '김지민'
+     , '01056265892'
+     , 'wlalcjstk789@naver.com'
+     , '프로필사진촬영'
+     , '의자3개필요해요'
+     , 'N'
+     , 'N'
+     , 'Y'
+     , 'Y'
+     , '2022.05.26'
+     , '2022.05.26'
+     , 'Y'
+     , '예약확정'
+     , NULL
+     , NULL
+     );
+     
+     
+     -- 결제(3)   
+   INSERT
+  INTO TB_PAYLIST
+   (
+      PL_ID
+    , PL_STATUS
+    , PL_TID
+    , PL_MEM_NO
+    , PL_TYPE   
+    , PL_AMOUNT   
+    , PL_DISCOUNT_AMOUNT
+    , PL_REQUEST_TIME
+    , PL_APPROVED_TIME    
+   )
+VALUES
+   ( 
+       SEQ_PLNO.NEXTVAL
+     , 'Y'
+     , '12DFG6DF'
+     , 2
+     , 'CARD'
+     , '65000'
+     , '60000'
+     , SYSDATE
+     , SYSDATE     
+   );
+   -- 예약(3)
+   INSERT
+  INTO TB_BOOK
+    (
+      BOOK_NO
+    , SPACE_NO
+    , MEM_NO
+    , PL_ID
+    , BOOK_COUNT
+    , BOOK_DATE
+    , BOOK_IN
+    , BOOK_OUT
+    , BOOK_PRICE
+    , BOOK_NAME
+    , BOOK_PHONE
+    , BOOK_EMAIL
+    , BOOK_PURPOSE
+    , BOOK_ADD_CONTENT
+    , BOOK_CAR
+    , BOOK_ANIMAL
+    , BOOK_CHAIR
+    , BOOK_STAND
+    , BOOK_CREATE_DATE
+    , BOOK_MODIFY_DATE
+    , BOOK_STATUS
+    , BOOK_CATEGORY
+    , BOOK_CANCEL_REASON
+    , BOOK_CANCEL_CONTENT
+      
+    )
+ VALUES
+    (
+       SEQ_BONO.nextval
+     , 8
+     , 2
+     , SEQ_PLNO.CURRVAL
+     , 8
+     , '2022.08.27'
+     , '12'
+     , '13'
+     , '60000'
+     , '강민'
+     , '01056265892'
+     , 'wlalcjstk789@naver.com'
+     , '바디프로필사진촬영'
+     , '의자3개필요해요'
+     , 'N'
+     , 'N'
+     , 'Y'
+     , 'N'
+     , '2022.06.26'
+     , '2022.07.26'
+     , 'N'
+     , '예약취소'
+     , '일정취소및변경'
+     , '다이어트포기로 인해 바디프로필사진은 취소했습니다 ㅎㅎ'
+     );
+   
+   
+   -- 결제(4)   
+     INSERT
+  INTO TB_PAYLIST
+   (
+      PL_ID
+    , PL_STATUS
+    , PL_TID
+    , PL_MEM_NO
+    , PL_TYPE   
+    , PL_AMOUNT 
+    , PL_DISCOUNT_AMOUNT
+    , PL_REQUEST_TIME
+    , PL_APPROVED_TIME    
+   )
+VALUES
+   ( 
+       SEQ_PLNO.NEXTVAL
+     , 'Y'
+     , '56DGGDF'
+     , 2
+     , 'CARD'
+     , '50800'
+     , '50800'
+     , SYSDATE
+     , SYSDATE     
+   );
+   
+-- 예약(4)
+    INSERT
+  INTO TB_BOOK
+    (
+      BOOK_NO
+    , SPACE_NO
+    , MEM_NO
+    , PL_ID
+    , BOOK_COUNT
+    , BOOK_DATE
+    , BOOK_IN
+    , BOOK_OUT
+    , BOOK_PRICE
+    , BOOK_NAME
+    , BOOK_PHONE
+    , BOOK_EMAIL
+    , BOOK_PURPOSE
+    , BOOK_ADD_CONTENT
+    , BOOK_CAR
+    , BOOK_ANIMAL
+    , BOOK_CHAIR
+    , BOOK_STAND
+    , BOOK_CREATE_DATE
+    , BOOK_MODIFY_DATE
+    , BOOK_STATUS
+    , BOOK_CATEGORY
+    , BOOK_CANCEL_REASON
+    , BOOK_CANCEL_CONTENT
+      
+    )
+ VALUES
+    (
+       SEQ_BONO.nextval
+     , 10
+     , 2
+     , SEQ_PLNO.CURRVAL
+     , 3
+     , '2022.07.07'
+     , '10'
+     , '13'
+     , '50800'
+     , '김개식'
+     , '01056265892'
+     , 'wlal0512@naver.com'
+     , '가족사진'
+     , null
+     , 'Y'
+     , 'Y'
+     , 'Y'
+     , 'N'
+     , '2022.06.26'
+     , '2022.06.26'
+     , 'Y'
+     , '예약확정'
+     , NULL
+     , NULL
+     );
+   
+-- 결제(5)   
+     INSERT
+  INTO TB_PAYLIST
+   (
+      PL_ID
+    , PL_STATUS
+    , PL_TID
+    , PL_MEM_NO
+    , PL_TYPE   
+    , PL_AMOUNT 
+    , PL_DISCOUNT_AMOUNT
+    , PL_REQUEST_TIME
+    , PL_APPROVED_TIME    
+   )
+VALUES
+   ( 
+       SEQ_PLNO.NEXTVAL
+     , 'Y'
+     , '86DGGDF'
+     , 2
+     , 'CARD'
+     , '80000'
+     , '70000'
+     , SYSDATE
+     , SYSDATE     
+   );
+   
+    INSERT
+  INTO TB_BOOK
+    (
+      BOOK_NO
+    , SPACE_NO
+    , MEM_NO
+    , PL_ID
+    , BOOK_COUNT
+    , BOOK_DATE
+    , BOOK_IN
+    , BOOK_OUT
+    , BOOK_PRICE
+    , BOOK_NAME
+    , BOOK_PHONE
+    , BOOK_EMAIL
+    , BOOK_PURPOSE
+    , BOOK_ADD_CONTENT
+    , BOOK_CAR
+    , BOOK_ANIMAL
+    , BOOK_CHAIR
+    , BOOK_STAND
+    , BOOK_CREATE_DATE
+    , BOOK_MODIFY_DATE
+    , BOOK_STATUS
+    , BOOK_CATEGORY
+    , BOOK_CANCEL_REASON
+    , BOOK_CANCEL_CONTENT
+      
+    )
+ VALUES
+    (
+       SEQ_BONO.nextval
+     , 9
+     , 2
+     , SEQ_PLNO.CURRVAL
+     , 3
+     , '2022.08.07'
+     , '10'
+     , '13'
+     , '70000'
+     , '김개식'
+     , '01056265892'
+     , 'wlal0512@naver.com'
+     , '친구들과의 모임'
+     , null
+     , 'Y'
+     , 'Y'
+     , 'Y'
+     , 'N'
+     , '2022.07.27'
+     , '2022.07.27'
+     , 'Y'
+     , '예약확정'
+     , NULL
+     , NULL
+     );
+     
+     
+     -- 결제(6)   
+     INSERT
+  INTO TB_PAYLIST
+   (
+      PL_ID
+    , PL_STATUS
+    , PL_TID
+    , PL_MEM_NO
+    , PL_TYPE   
+    , PL_AMOUNT 
+    , PL_DISCOUNT_AMOUNT
+    , PL_REQUEST_TIME
+    , PL_APPROVED_TIME    
+   )
+VALUES
+   ( 
+       SEQ_PLNO.NEXTVAL
+     , 'Y'
+     , '135fgcvDF'
+     , 2
+     , 'CARD'
+     , '80000'
+     , '70000'
+     , SYSDATE
+     , SYSDATE     
+   );
+   
+    INSERT
+  INTO TB_BOOK
+    (
+      BOOK_NO
+    , SPACE_NO
+    , MEM_NO
+    , PL_ID
+    , BOOK_COUNT
+    , BOOK_DATE
+    , BOOK_IN
+    , BOOK_OUT
+    , BOOK_PRICE
+    , BOOK_NAME
+    , BOOK_PHONE
+    , BOOK_EMAIL
+    , BOOK_PURPOSE
+    , BOOK_ADD_CONTENT
+    , BOOK_CAR
+    , BOOK_ANIMAL
+    , BOOK_CHAIR
+    , BOOK_STAND
+    , BOOK_CREATE_DATE
+    , BOOK_MODIFY_DATE
+    , BOOK_STATUS
+    , BOOK_CATEGORY
+    , BOOK_CANCEL_REASON
+    , BOOK_CANCEL_CONTENT
+      
+    )
+ VALUES
+    (
+       SEQ_BONO.nextval
+     , 4
+     , 2
+     , SEQ_PLNO.CURRVAL
+     , 3
+     , '2022.09.07'
+     , '13'
+     , '19'
+     , '80000'
+     , '김개식'
+     , '01056265892'
+     , 'wlal0512@naver.com'
+     , '친구들과의 모임'
+     , null
+     , 'Y'
+     , 'N'
+     , 'Y'
+     , 'N'
+     , '2022.07.27'
+     , '2022.07.27'
+     , 'Y'
+     , '예약확정'
+     , NULL
+     , NULL
+     );
+     
+     
+        -- 결제(7)   
+     INSERT
+  INTO TB_PAYLIST
+   (
+      PL_ID
+    , PL_STATUS
+    , PL_TID
+    , PL_MEM_NO
+    , PL_TYPE   
+    , PL_AMOUNT 
+    , PL_DISCOUNT_AMOUNT
+    , PL_REQUEST_TIME
+    , PL_APPROVED_TIME    
+   )
+VALUES
+   ( 
+       SEQ_PLNO.NEXTVAL
+     , 'Y'
+     , '535fgcvDF'
+     , 2
+     , 'CARD'
+     , '30000'
+     , '30000'
+     , SYSDATE
+     , SYSDATE     
+   );
+   
+    INSERT
+  INTO TB_BOOK
+    (
+      BOOK_NO
+    , SPACE_NO
+    , MEM_NO
+    , PL_ID
+    , BOOK_COUNT
+    , BOOK_DATE
+    , BOOK_IN
+    , BOOK_OUT
+    , BOOK_PRICE
+    , BOOK_NAME
+    , BOOK_PHONE
+    , BOOK_EMAIL
+    , BOOK_PURPOSE
+    , BOOK_ADD_CONTENT
+    , BOOK_CAR
+    , BOOK_ANIMAL
+    , BOOK_CHAIR
+    , BOOK_STAND
+    , BOOK_CREATE_DATE
+    , BOOK_MODIFY_DATE
+    , BOOK_STATUS
+    , BOOK_CATEGORY
+    , BOOK_CANCEL_REASON
+    , BOOK_CANCEL_CONTENT
+      
+    )
+ VALUES
+    (
+       SEQ_BONO.nextval
+     , 4
+     , 2
+     , SEQ_PLNO.CURRVAL
+     , 3
+     , '2022.08.17'
+     , '10'
+     , '12'
+     , '30000'
+     , '김개식'
+     , '01056265892'
+     , 'wlal0512@naver.com'
+     , '친구들과의 모임'
+     , null
+     , 'Y'
+     , 'N'
+     , 'Y'
+     , 'N'
+     , '2022.07.27'
+     , '2022.07.27'
+     , 'Y'
+     , '예약확정'
+     , NULL
+     , NULL
+     );
+   
+   COMMIT;
