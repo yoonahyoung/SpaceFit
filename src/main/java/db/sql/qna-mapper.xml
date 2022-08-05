@@ -474,10 +474,7 @@
 	</entry>
 	<!-- 전체 선택 전체 대기 6-1 -->
 	<entry key="selectQnAList6Wait">
-     ORDER 
-        BY QNA_NO DESC;
-        
-            SELECT 
+    SELECT 
            QNA_NO
          , QNA_CATEGORY
          , SPACE_CATEGORY
@@ -488,7 +485,7 @@
          , QNA_CREATE_DATE
       FROM TB_QNA B
       JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
-      JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+            JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
      WHERE B.QNA_STATUS = 'Y'
        AND SPACE_CATEGORY = ?
        AND QNA_SOLVED = 'N'
@@ -497,7 +494,7 @@
 	</entry>
 	<!-- 전체 선택 전체 완료 6-2 -->
 	<entry key="selectQnAList6Solved">
-            SELECT 
+    SELECT 
            QNA_NO
          , QNA_CATEGORY
          , SPACE_CATEGORY
@@ -520,7 +517,7 @@
                             AND SPACE_CATEGORY = ?
                             AND QNA_SOLVED = 'Y')
      ORDER 
-        BY QNA_NO DESC
+        BY QNA_NO DESC;
 	</entry>
 	
 	<!-- 전체 선택 선택 전체 7-->
@@ -564,10 +561,7 @@
 	</entry>
 	<!-- 선택 전체 전체 대기 10-1 -->
 	<entry key="selectQnAList10Wait">
-     ORDER 
-        BY QNA_NO DESC;
-        
-            SELECT 
+	SELECT 
            QNA_NO
          , QNA_CATEGORY
          , SPACE_CATEGORY
@@ -634,10 +628,7 @@
 	</entry>
 	<!-- 선택 전체 선택 대기 12-1 -->
 	<entry key="selectQnAList12Wait">
-     ORDER 
-        BY QNA_NO DESC;
-        
-            SELECT 
+    SELECT 
            QNA_NO
          , QNA_CATEGORY
          , SPACE_CATEGORY
@@ -648,7 +639,7 @@
          , QNA_CREATE_DATE
       FROM TB_QNA B
       JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
-      JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+            JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
      WHERE B.QNA_STATUS = 'Y'
        AND QNA_CATEGORY = ?
        AND SPACE_NO = ?
@@ -658,7 +649,7 @@
 	</entry>
 	<!-- 선택 전체 선택 완료 12-2 -->
 	<entry key="selectQnAList12Solved">
-            SELECT 
+    SELECT 
            QNA_NO
          , QNA_CATEGORY
          , SPACE_CATEGORY
@@ -707,10 +698,7 @@
 	</entry>
 		<!-- 선택 선택 전체 대기 14-1 -->
 	<entry key="selectQnAList14Wait">
-     ORDER 
-        BY QNA_NO DESC;
-        
-            SELECT 
+	SELECT 
            QNA_NO
          , QNA_CATEGORY
          , SPACE_CATEGORY
