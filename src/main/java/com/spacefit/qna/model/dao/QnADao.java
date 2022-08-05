@@ -1109,7 +1109,6 @@ public class QnADao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-
 			pstmt.setString(1, spaceCategory);
 			pstmt.setString(2, SpaceNo);
 			
