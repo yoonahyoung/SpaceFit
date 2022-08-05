@@ -60,7 +60,7 @@
         <tr>
             <th>내용</th>
             <td colspan="5">
-                <textarea rows="10" name="content" style="resize: none;" required><%=n.getNoticeContent()%></textarea>
+                <textarea rows="10" name="content" style="resize: none;white-space:pre;" required><%=n.getNoticeContent()%></textarea>
             </td>
         </tr>
     </table>

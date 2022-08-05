@@ -25,6 +25,7 @@
 	h2{
 		color: #0d6efd !important; 
 	}
+	.pre{white-space:pre;}
 </style>
 </head>
 <body>
@@ -57,7 +58,7 @@
         <tr>
             <th>내용</th>
             <td colspan="11" align="left">
-                <p style="height: 400px;"><%=q.getQnaContent() %></p>
+                <pre style="height: 400px;font-family: 'Noto Sans KR', sans-serif; font-family: 'Poppins', sans-serif;"><%=q.getQnaContent() %></pre>
             </td>
         </tr>
         <tr>

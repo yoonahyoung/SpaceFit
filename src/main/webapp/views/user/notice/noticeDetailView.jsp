@@ -24,6 +24,9 @@
 	h2{
 		color: #0d6efd !important; 
 	}
+	.pre{
+		white-space:pre;
+      }
 </style>
 </head>
 <body>
@@ -52,7 +55,7 @@
         <tr>
             <th>내용</th>
             <td colspan="7" align="left">
-                <p style="height: 400px;"><%=n.getNoticeContent() %></p>
+                <pre style="height: 400px;font-family: 'Noto Sans KR', sans-serif; font-family: 'Poppins', sans-serif;"><%=n.getNoticeContent() %></pre>
             </td>
         </tr>
     </table>

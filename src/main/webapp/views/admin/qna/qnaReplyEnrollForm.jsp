@@ -86,7 +86,7 @@
         <tr>
             <th>내용</th>
             <td colspan="7">
-                <textarea rows="10" name="replyContent" required style="resize: none;"></textarea>
+                <textarea rows="10" name="replyContent" required style="resize: none;white-space:pre;"></textarea>
             </td>
         </tr>
         <tr>
