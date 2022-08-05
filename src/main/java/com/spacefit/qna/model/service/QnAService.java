@@ -7,8 +7,6 @@ import java.util.ArrayList;
 
 import com.spacefit.attachment.model.vo.Attachment;
 import com.spacefit.common.model.vo.PageInfo;
-import com.spacefit.notice.model.dao.NoticeDao;
-import com.spacefit.notice.model.vo.Notice;
 import com.spacefit.qna.model.dao.QnADao;
 import com.spacefit.qna.model.vo.Category;
 import com.spacefit.qna.model.vo.QnA;

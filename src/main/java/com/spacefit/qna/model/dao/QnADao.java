@@ -1,6 +1,6 @@
 package com.spacefit.qna.model.dao;
 
-import static com.spacefit.common.JDBCTemplate.close;
+import static com.spacefit.common.JDBCTemplate.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -13,7 +13,6 @@ import java.util.Properties;
 
 import com.spacefit.attachment.model.vo.Attachment;
 import com.spacefit.common.model.vo.PageInfo;
-import com.spacefit.notice.model.vo.Notice;
 import com.spacefit.qna.model.vo.Category;
 import com.spacefit.qna.model.vo.QnA;
 
