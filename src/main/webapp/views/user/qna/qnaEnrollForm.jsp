@@ -128,7 +128,7 @@
             <td colspan="7" align="left">
                 <input type="radio" name="public" id="pu" checked onclick="publi();"><label for="pu">&nbsp;공개글</label>&nbsp;
                 <input type="radio" name="public" id="sc" onclick="secret();"><label for="sc">&nbsp;비밀글</label> &nbsp;
-                <input type="password" name="password" maxlength="8" placeholder="8자리 이내로 입력해주세요" id="pwd">
+                <input type="password" name="password" maxlength="8" placeholder="8자리 이내로 입력해주세요" id="pwd" required>
             </td>
         </tr>
     </table>
@@ -152,6 +152,7 @@
         $("#pwd").attr("disabled", true);
     }else{
         $("#pwd").attr("disabled", false);
+        document.getElementById("pwd").required;
     }
     function publi(){
         $("#pwd").attr("disabled", true);
