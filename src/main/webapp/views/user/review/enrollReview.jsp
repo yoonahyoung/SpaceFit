@@ -79,6 +79,9 @@
                         <td><img id="contentImg1" width="100" height="80" onclick="chooseFile(2);"></td>
                         <td><img id="contentImg2" width="100" height="80" onclick="chooseFile(3);"></td>                       
                     </tr>
+                    <tr>
+                        <td class="blueColor" colspan="3">사진은 최소 한장이상 등록해주세요</td>
+                    </tr>
                 </table>
 
                 <div id="file-area" style="display: none">   <!--this : 변화가 생긴 input요소-->

@@ -62,13 +62,15 @@ public class ReportDao {
 		
 	}
 	
-	public ArrayList<Report> adminSelectList(Connection conn, String selectSearch){
+	public ArrayList<Report> adminSelectList(Connection conn, String selectSearch, String selectorderBy){
 		// select => ResultSet => ArrayList<Report>
 		ArrayList<Report> list = new ArrayList<>();
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("adminSelectList");
+		String sql = prop.getProperty("adminSelectList1");
 		sql += selectSearch;
+		sql += prop.getProperty("adminSelectList2");
+		sql += selectorderBy;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -78,7 +80,9 @@ public class ReportDao {
 				list.add(new Report( rset.getString("RPT_MEM_ID"),
  									 rset.getString("category"),
 									 rset.getInt("RPT_REF_NO"),
-									 rset.getInt("count")						
+									 rset.getInt("count"),
+									 rset.getString("RV_STATUS"),
+									 rset.getString("COM_STATUS")
 						));
 			}
 			
