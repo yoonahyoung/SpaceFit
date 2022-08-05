@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>   
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.notice.model.vo.Terms"%>
+<%
+	ArrayList<Terms> tList = (ArrayList<Terms>)request.getAttribute("tList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,14 +47,16 @@
 	                       				 </div>
 		                           	</td>
 		                           </tr>
+		                           <tr>
 		                          	<td class="phone">
+		                          	<div style="height : 20px"></div>
 		                           		<label for="agree">
 				                            	<div class="agreeInput">
 				                            		  <input type="checkbox" name="phoneAgree" value="4">
 				                                	  <span>휴대폰 인증 이용약관 동의<strong>(필수)</strong></span>
 				                            	</div>
 												<div class="agreeBox">
-				                                    <span>나중에 민아님 페이지에서 얻어올 휴대폰 이용약관</span>    
+				                                    <div><%=tList.get(2).getTermsContent() %></div>
 				                                </div>
 	                            		</label>
 		                           	</td>
@@ -86,6 +91,13 @@
                         	<input type="hidden" name="memPhone" value="" id="memPhoneSubmit">
                         	<input type="hidden" name="memName" value="" id="memNameSubmit">
                        </form>
+                       <script>
+		                  	 function signInTwo(){
+		             			$("#memPhoneSubmit").val($("#memPhone").val())
+		             			$("#memNameSubmit").val($("#memName").val())
+		             			$("#phoneForm").submit()
+		             	}
+                       </script>
             	</div> 
           	</div>	
           </div>

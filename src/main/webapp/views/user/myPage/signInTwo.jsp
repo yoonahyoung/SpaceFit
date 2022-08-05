@@ -40,7 +40,7 @@
 	                                <span id="pwdSpan">영문 대문자와 소문자, 숫자, 특수문자를 하나 이상 포함하여 8~16자</span>
 	                            <br><br>
 	                                <label for="#memPwd-check">비밀번호 확인</label>
-	                                <input type="password" placeholder="비밀번호를 입력해주세요" class="account-input" id="memPwd-check" required>
+	                                <input type="password" placeholder="비밀번호를 입력해주세요" class="account-input" id="memPwdCheck" required>
 	                                <span id="pwdCheckSpan">비밀번호를 한번 더 입력해주세요.</span>
 	                            <br><br>
 	                                <label for="#memName">이름</label>
