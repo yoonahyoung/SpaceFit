@@ -209,6 +209,18 @@ public class MemberService {
 	   return result;
    }
    
+   public int deleteCart(int memNo) {
+	   Connection conn = getConnection();
+	   int result = new MemberDao().deleteCart(conn, memNo);
+	   if(result > 0) {
+		   commit(conn);
+	   }else {
+		   rollback(conn);
+	   }
+	   close(conn);
+	   return result;
+   }
+   
    // 찜하기(위시리스트)
    public int loveList(int spNo, int memNo, String status) {
 	   Connection conn = getConnection();

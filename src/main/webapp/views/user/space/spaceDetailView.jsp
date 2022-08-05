@@ -488,7 +488,7 @@
                    },
                 success:function(cfMsg){
                    if(confirm(cfMsg)){
-                      location.href="<%=contextPath%>/views/user/myPage/cartListView.jsp";
+                      location.href="<%=contextPath%>/cartList.me";
                    }
                 }
                 
