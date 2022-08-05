@@ -470,29 +470,35 @@
     
        function formSubmit(num){ // num이 1일시 결제, num이 2일시 보관함
     	   if(num == 1){
+    		  
              $("#detailForm").attr("action", "결제페이지");
              $("#detailForm").submit();
-          }else{
-             $.ajax({
-                url:'<%=contextPath %>/cart.sp',
-                data:{no:<%=s.getSpaceNo() %>
-                   , limit:$("select[name=limit]").val()
-                   , parking:$("select[name=parking]").val()
-                   , animal:$("select[name=animal]").val()
-                   , stand:$("select[name=stand]").val()
-                   , chair:$("select[name=chair]").val()
-                   , date:$("input[name=date]").val()
-                   , detailCI:$("select[name=detailCI]").val()
-                   , detailCO:$("select[name=detailCO]").val()
-                   , price:$("input[name=price]").val()
-                   },
-                success:function(cfMsg){
-                   if(confirm(cfMsg)){
-                      location.href="<%=contextPath%>/cartList.me";
-                   }
-                }
-                
-             })
+    		   
+          }else if(num == 2){
+        	  console.log($("input[name=date]").val());
+        	  if($("input[name=date]").val() == '' || $("input[name=price]").val() == '' || $("select[name=detailCO]") == ''){
+   			   	alert("날짜와 시간을 선택해주세요!");
+   		   	  }else{
+	             $.ajax({
+	                url:'<%=contextPath %>/cart.sp',
+	                data:{no:<%=s.getSpaceNo() %>
+	                   , limit:$("select[name=limit]").val()
+	                   , parking:$("select[name=parking]").val()
+	                   , animal:$("select[name=animal]").val()
+	                   , stand:$("select[name=stand]").val()
+	                   , chair:$("select[name=chair]").val()
+	                   , date:$("input[name=date]").val()
+	                   , detailCI:$("select[name=detailCI]").val()
+	                   , detailCO:$("select[name=detailCO]").val()
+	                   , price:$("input[name=price]").val()
+	                   },
+	                success:function(cfMsg){
+	                   if(confirm(cfMsg)){
+	                      location.href="<%=contextPath%>/cartList.me";
+	                   }
+	                }
+	             })
+   		   	   }
           }
        }
 

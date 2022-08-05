@@ -121,11 +121,12 @@
 				
 				 <script>
 		        	$(function(){
-		        		$(".spaceListTable>tbody>tr").click(function(){
+		        		selectPaging(1);
+		        		
+		        		$("#areaList").on("click", "tr", function(){
 		        			location.href="<%=contextPath%>/adDetail.sp?no=" + $(this).children().eq(0).text();
 		        		})
 		        		
-		        		selectPaging(1);
 		        	})
 		        		
 		        	

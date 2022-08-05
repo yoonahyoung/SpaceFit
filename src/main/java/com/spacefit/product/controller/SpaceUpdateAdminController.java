@@ -70,13 +70,10 @@ public class SpaceUpdateAdminController extends HttpServlet {
 			if(multiRequest.getOriginalFileName("file1")!=null) {
 				// 대표이미지가 다른 걸로 변경 됐을때(update)
 				s.setSpacePic("resources/admin/space_upfiles/" + multiRequest.getFilesystemName("file1"));
-				System.out.println("대표 변경");
-				System.out.println("resources/admin/space_upfiles/" + multiRequest.getFilesystemName("file1"));
+
 			}else {
 				// 대표이미지가 다른 걸로 변경 안됐을때(update)
 				s.setSpacePic(multiRequest.getParameter("originFile1"));
-				System.out.println(multiRequest.getParameter("originFile1"));
-				System.out.println("대표변경x");
 			}
 			
 			// ------------------ 위에까지 공간수정, 밑에는 첨부파일 수정 ----------------------
@@ -122,7 +119,7 @@ public class SpaceUpdateAdminController extends HttpServlet {
 			
 			if(result > 0) { // 성공 => 공간목록페이지
 				session.setAttribute("alertMsg", "성공적으로 공간이 수정되었습니다.");
-				response.sendRedirect(request.getContextPath() + "/adList.sp");
+				response.sendRedirect(request.getContextPath() + "/adDetail.sp?no=" + spNo);
 			}else {
 				response.sendRedirect("views/admin/common/errorManager.jsp");
 			}
