@@ -55,7 +55,7 @@
                     <br><br>
                     <tr>                        
                         <td colspan="3" id="rvContentArea">
-                            <textarea name="reviewContent" id="reviewContents" maxlength="500" placeholder="수강평을 남겨주세요!! :)" rows="8" style="width: 100%" required></textarea>   
+                            <textarea name="reviewContent" id="reviewContents" maxlength="500" placeholder="후기를 남겨주세요!! :)" rows="8" style="width: 100%" required></textarea>   
                         </td>
                     </tr>
                     <tr>

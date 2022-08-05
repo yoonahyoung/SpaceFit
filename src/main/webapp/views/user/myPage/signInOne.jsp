@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%> 
-
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.spacefit.notice.model.vo.Terms"%>
+<%
+	ArrayList<Terms> tList = (ArrayList<Terms>)request.getAttribute("tList");
+%>
 
 <!DOCTYPE html>
 <html>
@@ -38,11 +40,12 @@
 		                                    	 <span style="font-size:13px;">이용약관 동의<strong>(필수)</strong></span>
 		                           			</div>
 		                                    <div class="agreeBox">
-		                                    	<span>나중에 민아님 페이지에서 얻어올 이용약관 1</span>
+		                                    	<div><%=tList.get(0).getTermsContent() %></div>
 		                                   	</div>
 		                            	</label>
 		                           	</td>
 		                        </tr>
+		                        <tr height="10px"></tr>
 		                        <tr>
 		                           	<td>
 		                           		<label for="agree">
@@ -51,7 +54,7 @@
 				                                <span style="font-size:13px;">개인정보 수집, 이용 동의<strong>(필수)</strong></span>
 				                            </div>
 			                                <div class="agreeBox">
-			                                    <span>나중에 민아님 페이지에서 얻어올 이용약관 2</span>
+			                                    <div><%=tList.get(1).getTermsContent() %></div>
 			                                </div>
 		                            	</label>
 		                           	</td>
@@ -95,7 +98,7 @@
 				                                	  <span style="font-size:13px;">휴대폰 인증 이용약관 동의<strong>(필수)</strong></span>
 				                            	</div>
 												<div class="agreeBox">
-				                                    <span>나중에 민아님 페이지에서 얻어올 휴대폰 이용약관</span>    
+				                                    <div><%=tList.get(2).getTermsContent() %></div>
 				                                </div>
 	                            		</label>
 		                           	</td>

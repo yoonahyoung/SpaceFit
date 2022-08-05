@@ -316,6 +316,16 @@
 	    )
 	</entry>
 	
+	<!-- 후기신고 중복불가 -->
+	<entry key="selectRvExist">
+		SELECT  COUNT(*)
+		  FROM TB_REPORT
+		 WHERE MEM_NO = ?
+	       AND RPT_REF_NO = ?
+	       AND RPT_REF_CAT =1
+	
+	</entry>
+	
 	
 
 </properties>

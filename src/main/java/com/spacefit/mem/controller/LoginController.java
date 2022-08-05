@@ -71,7 +71,7 @@ public class LoginController extends HttpServlet {
 		if(loginUser == null) {
 			// 조회결과 없이 로그인 실패 => 에러페이지
 			
-			RequestDispatcher view = request.getRequestDispatcher("views/user/common/backAlertErrorPage.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("views/user/myPage/loginAgain.jsp");
 			request.setAttribute("errorMsg", "로그인 실패! 아이디와 비밀번호를 확인해주세요.");
 			view.forward(request, response);
 			// 포워딩방식 : 해당 경로로 선택된 뷰가 보여질 뿐 url은 변경되지 않음

@@ -26,7 +26,7 @@ $(function(){
 })
 
 // 회원가입폼 1(SignInOne에서 회원약관 전체선택)
-
+/*
 $(function(){
 	 const agreeChkAll = document.querySelector('input[name=agree_all]');
         agreeChkAll.addEventListener('change', (e) => {
@@ -35,7 +35,7 @@ $(function(){
         agreeChk[i].checked = e.target.checked;
         }
     });
-})
+})*/
 
 // js1-------------------------------------------------------
 
@@ -138,7 +138,7 @@ function idCheck() {
     idSpan.innerHTML = "안전한 아이디입니다!";
   } else {
 	idSpan.style="color:red;"
-    idSpan.innerHTML = "아이디는 영문 대소문자, 숫자 5~20자리까지 입력해주세요.";
+    idSpan.innerHTML = "사용불가. 올바른 형식의 아이디를 입력해주세요.";
   }
 }
 memId.addEventListener("blur", idCheck);
@@ -156,13 +156,13 @@ function pwdCheck(){
 		pwdSpan.innerHTML = "안전한 비밀번호입니다!"
 	} else {
 		pwdSpan.style="color:red;"
-		pwdSpan.innerHTML = "비밀번호는 영문 대-소문자, 숫자, 특수문자를 하나 이상 포함하여 8~16자 입력해주세요."
+		pwdSpan.innerHTML = "사용불가. 비밀번호는 영문 대-소문자, 숫자, 특수문자를 하나 이상 포함하여 8~16자 입력해주세요."
 	}
 }
 memPwd.addEventListener("blur", pwdCheck);
 
 // 4. 비밀번호 확인
-let memPwdCheck = document.querySelector("#memPwd-check");
+let memPwdCheck = document.querySelector("#pwdCheck");
 let pwdCheckSpan = document.querySelector("#pwdCheckSpan");
 function pwdDBcheck(){
 	if(memPwd.value === memPwdCheck.value) {
@@ -170,7 +170,7 @@ function pwdDBcheck(){
 		pwdCheckSpan.innerHTML = "비밀번호 확인 완료"
 	} else {
 		pwdCheckSpan.style="color:red;"
-		pwdCheckSpan.innerHTML = "비밀번호를 확인해주세요."
+		pwdCheckSpan.innerHTML = "사용불가. 비밀번호를 확인해주세요."
 	}
 }
 
@@ -193,3 +193,22 @@ function mailCheck(){
 	}
 }
 memMail.addEventListener("blur", mailCheck);*/
+
+
+// 6. 생년월일 유효성체크
+let memIdNo = document.querySelector("#memIdNo");
+let memIdNoSpan = document.querySelector("#memIdNoSpan");
+let regBirth = RegExp(/^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/);
+//RegExp(/^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/);
+
+
+function memIdNoCheck() {
+  if (regBirth.test(memIdNo.value)) {
+	memIdNoSpan.style="color:#0082FF;"
+    memIdNoSpan.innerHTML = "좋은 날 태어난 좋은 분 이시네요!";
+  } else {
+	memIdNoSpan.style="color:red;"
+    memIdNoSpan.innerHTML = "사용불가. 올바른 형태의 생년월일 8자리를 입력해주세요.";
+  }
+}
+memIdNo.addEventListener("blur", memIdNoCheck);

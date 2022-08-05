@@ -62,6 +62,30 @@ public class ReportDao {
 		
 	}
 	
+	public int selectCmExist(Connection conn, Report rpt) {
+		int reportCmExist  = 0;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectCmExist");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, rpt.getMemNo());
+			pstmt.setInt(2, rpt.getRptRefNo());
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				reportCmExist = rset.getInt("COUNT(*)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return reportCmExist;
+	}
+	
 	public ArrayList<Report> adminSelectList(Connection conn, String selectSearch, String selectorderBy){
 		// select => ResultSet => ArrayList<Report>
 		ArrayList<Report> list = new ArrayList<>();

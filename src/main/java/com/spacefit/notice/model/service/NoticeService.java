@@ -166,4 +166,16 @@ public class NoticeService {
 		close(conn);
 		return result;
 	}
+	
+	
+	public ArrayList<Terms> selectTerm() {
+		Connection conn = getConnection();
+		ArrayList<Terms> tList =  new NoticeDao().adminTermsList(conn);
+		close(conn);
+		return tList;
+	}
 }
+
+
+
+

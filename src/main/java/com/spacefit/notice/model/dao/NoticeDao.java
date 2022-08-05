@@ -414,4 +414,26 @@ public class NoticeDao {
 		return result;
 	}
 	
+	/*
+	public ArrayList<Terms> selectTerm(Connection conn) {
+		ArrayList<Terms> tList = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectTerm");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		return tList;
+	}*/
+	
 }

@@ -26,6 +26,14 @@
 		    )
 	</entry>
 	
+	<entry key="selectCmExist">
+		SELECT  COUNT(*)
+	      FROM TB_REPORT
+	 	 WHERE MEM_NO = ?
+		   AND RPT_REF_NO = ?
+		   AND RPT_REF_CAT =2
+	</entry>
+	
 	<entry key="adminSelectList1">
 		SELECT R.RPT_REF_NO, R.RPT_REF_CAT, M.MEM_ID AS "RPT_MEM_ID"
 		      , DECODE (R.RPT_REF_CAT, 1, '후기', 2, '댓글') AS "CATEGORY"
