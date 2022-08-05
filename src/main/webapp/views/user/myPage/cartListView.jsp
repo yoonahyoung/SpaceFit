@@ -112,22 +112,6 @@
 								
 							}
 							
-						
-							
-							
-							
-							
-							/*
-							function empty(){
-								
-								if(list.isEmpty()){
-									alert("변경 가능한 상품이 없습니다.");
-									
-									$("#cartModal").modal('hide');
-								}
-							}
-							*/
-							
 							$("input:radio[name=cart-radio]").click(function(){
 								
 								if($("input:radio[name=cart-radio]").is(":checked")){

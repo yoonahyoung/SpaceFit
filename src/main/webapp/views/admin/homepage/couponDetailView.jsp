@@ -75,7 +75,7 @@
 					<th>개별회원쿠폰 발급</th>
 					<td>
 						<input type="radio" name="cpGroup" value="개별회원">&nbsp;&nbsp;&nbsp;
-						<input type="text" name="cpGroup_3">
+						<input type="text" name="cpGroup_3" placeholder="회원아이디 입력">
 					</td>
 				</tr>
 				

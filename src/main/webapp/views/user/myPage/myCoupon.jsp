@@ -59,13 +59,6 @@
       </div>
        <br>
 
-        <div style="margin-left:1355px; margin-bottom:7px">
-          <select name="" id="">
-            <option value="">미사용</option>
-            <option value="">사용</option>
-          </select>
-        </div>
-
       <div align="center">
        <div class="col-lg-6">
                 
@@ -151,20 +144,17 @@
 	
 	<script>
 	
+		$(function(){
+			
+			$('.down-btn').on('click', function(){
+				location.href='<%=contextPath%>/downCouponInsert.me?cpName=' + $(this).parent().find('h4').text()
+    			 + '&cpEndDate=' + $(this).parent().find('label').text();
+			})
+		})
+		
 
 			
-		$('.down-btn').on("click", function(e){
-			
-			location.href="<%=contextPath%>/downCouponInsert.me?cpName=" + $(e.target).parent().find('h4').text()
-			  											 + "&cpEndDate=" + $(e.target).parent().find('label').text();
-			$(this).off(e);
-		});
-			
 		
-		
-			
-			//$(this).attr('disabled', true);
-		}
 	</script>
 	
 	

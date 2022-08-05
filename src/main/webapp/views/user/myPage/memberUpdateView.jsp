@@ -154,7 +154,7 @@
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-			        <button type="button" class="btn btn-danger">사진 삭제</button>
+			        <button type="button" onclick="location.href='<%= contextPath %>/profileDelete.me'" class="btn btn-danger">사진 삭제</button>
 			        <button type="submit" class="btn btn-primary">사진 등록</button>
 			      </div>
 			   </form>

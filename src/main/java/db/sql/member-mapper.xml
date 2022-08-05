@@ -168,6 +168,7 @@
 		     , CP_END_DATE
   		  FROM TB_COUPON
  		 WHERE CP_END_DATE IS NOT NULL
+ 		   AND CP_DOWN = 'Y'
 	</entry>
 	
 	<!-- 쿠폰존의 쿠폰 다운 받기 -->
@@ -191,6 +192,13 @@
 	<entry key="updateProfile">
 		UPDATE TB_MEMBER
 		   SET MEM_PROFILE = ?
+		 WHERE MEM_ID = ?
+	</entry>
+	
+	<!-- 프로필사진 삭제 -->
+	<entry key="deleteProfile">
+		UPDATE TB_MEMBER
+		   SET MEM_PROFILE = ''
 		 WHERE MEM_ID = ?
 	</entry>
 

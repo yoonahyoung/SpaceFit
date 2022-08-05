@@ -160,6 +160,7 @@ public class MemberService {
 		return result;
 	}
    
+	// 프로필사진 변경
    public Member updateProfile(String memProfile, String memId) {
 	   Connection conn = getConnection();
 		int result = new MemberDao().updateProfile(conn, memProfile, memId);
@@ -176,6 +177,24 @@ public class MemberService {
 		
 		return updateMem;
    }
+   
+   public Member deleteProfile(String memId) {
+	   Connection conn = getConnection();
+		int result = new MemberDao().deleteProfile(conn, memId);
+		
+		Member updateMem = null;
+		if(result > 0) {
+			commit(conn);
+			updateMem = new MemberDao().selectMember(conn, memId);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return updateMem;
+   }
+   
+   
    
    // 보관함(장바구니)
    public int insertCart(Cart cart) {

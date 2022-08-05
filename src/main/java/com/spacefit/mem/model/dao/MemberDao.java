@@ -434,6 +434,7 @@ public class MemberDao {
 		return result;
 	}
    
+	// 프로필사진 변경
    public int updateProfile(Connection conn, String memProfile, String memId) {
 		
 		int result = 0;
@@ -445,6 +446,28 @@ public class MemberDao {
 			
 			pstmt.setString(1, memProfile);
 			pstmt.setString(2, memId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+   
+   public int deleteProfile(Connection conn, String memId) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteProfile");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memId);
 			
 			result = pstmt.executeUpdate();
 			
