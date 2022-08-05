@@ -252,7 +252,7 @@
                                                              <% if (directMemNo == 0) { %>
                                                                 <button type="button" class="btn btn-primary btn-sm" id="login-btn" onclick="loginForm();">로그인하고 추천!</button>
                                                              <% } else { %>
-                                                             		<%if( !loginUser.getMemId().equals(r.getMemNo())){ %>
+                                                             		<%if( !loginUser.getMemId().equals(r.getMemId())){ %>
                                                              		
 		                                                                 <button type="button" class="btn btn-primary btn-sm" data-value="<%= r.getReviewNo() %>" onclick="likeUpdate(this);">후기추천</button>
 		                                                                 <button type="button" class="btn btn-danger btn-sm"  data-bs-toggle="modal" data-bs-target="#myModal" onclick="reportModal($(this).siblings('#rvNo').val(), $(this).siblings('#rvMemNo').val(), $(this).siblings('#spNo').val());">후기신고</button>
@@ -459,6 +459,13 @@
                     </div>
                   </div>
            <!-- The Modal -->
+           
+           <% 
+           	String loginUserId = "";
+           if(loginUser != null){
+        	   loginUserId = loginUser.getMemId();
+           }
+           %>
 
     <script>
     
@@ -646,20 +653,33 @@
                                             +         comList[i].comEnrollDate
                                             +      '</span>'
                                             + '</div>'
-                                            + '<div class="parentInfo col-lg-6">'
-                                            +   '<button type="button" class="comBtn" id="reDelete" onclick="deleteComment(' + comList[i].comNo + ', $(this).parent().parent().parent() ,' + comList[i].rvNo + ');">삭제하기</button>'
-                                            +   '<button type="button" class="comBtn openBtn" id="reReport" data-bs-toggle="modal" data-bs-target="#myCommentModal" onclick="reportCommentModal('+ comList[i].comNo + ',' + comList[i].memNo + ',' + spNo +');">신고하기</button>'
+                                            + '<div class="parentInfo col-lg-6">';
                                             
-                                            +   '<button type="button" class="comBtn" id="updateComment" data-bs-toggle="modal" data-bs-target="#myCommentModal2" onclick="updateCommentModal('+ comList[i].comNo + ',' + comList[i].memNo + ',' + spNo +');">댓글수정</button>'
-                                            +   '<input type="hidden" value="' + comList[i].parentNo + '" id="hiddenPno">'
-                                            + '</div>'
-                                            + '<hr>'
-                                            + '<div id="showComment">'
-                                            +    '<div class="parentComment">'
-                                            +      '<textarea id="commentArea">' + comList[i].comContent + '</textarea >'
-                                            +   '</div>'
-                                            + '</div>'
-                                           + '</div>'
+                                            if(comList[i].memId == '<%=loginUserId%>'){
+                                            	
+	                                        	value +=   '<button type="button" class="comBtn" id="reDelete" onclick="deleteComment(' + comList[i].comNo + ', $(this).parent().parent().parent() ,' + comList[i].rvNo + ');">삭제하기</button>';
+                                            }
+                                            
+                                            
+                                            if('<%=loginUserId%>' != "" && comList[i].memId != '<%=loginUserId%>'){
+                                            	value +=   '<button type="button" class="comBtn openBtn" id="reReport" data-bs-toggle="modal" data-bs-target="#myCommentModal" onclick="reportCommentModal('+ comList[i].comNo + ',' + comList[i].memNo + ',' + spNo +');">신고하기</button>'
+                                            	
+                                            }
+                                            
+                                            if(comList[i].memId == '<%=loginUserId%>'){
+                                            	value +=   '<button type="button" class="comBtn" id="updateComment" data-bs-toggle="modal" data-bs-target="#myCommentModal2" onclick="updateCommentModal('+ comList[i].comNo + ',' + comList[i].memNo + ',' + spNo +');">댓글수정</button>'
+                                            
+                                            }
+                                            
+                                        value +=   '<input type="hidden" value="' + comList[i].parentNo + '" id="hiddenPno">'
+                                          + '</div>'
+                                          + '<hr>'
+                                          + '<div id="showComment">'
+                                          +    '<div class="parentComment">'
+                                          +      '<textarea id="commentArea">' + comList[i].comContent + '</textarea >'
+                                          +   '</div>'
+                                          + '</div>'
+                                         + '</div>'
                                }
                             
                             commentDiv.html(value);
