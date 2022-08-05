@@ -259,7 +259,7 @@
 	</entry>
 	
 	<!-- 내 글 갯수조회 -->
-	<entry key="selectListCount">
+	<entry key="selectMyListCount">
     SELECT COUNT(*) AS COUNT
       FROM TB_QNA
       WHERE QNA_MEM_NO = ?
