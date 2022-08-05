@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-
+	<!-- 로그인용 셀렉문 -->
 	<entry key="loginMember">
 		SELECT MEM_NO
 			 , GR_NO
@@ -22,7 +22,7 @@
 		   AND MEM_PWD = ?
 	</entry>
 	
-	
+	<!-- 아이디 중복검사 -->
 	<entry key="idCheck">
 		SELECT
 			   COUNT(*) AS "COUNT"
@@ -30,6 +30,7 @@
 		 WHERE MEM_ID = ?
 	</entry>
 	
+	<!-- 회원가입 insert -->
 	<entry key="insertMember">
 		INSERT
 		  INTO TB_MEMBER
@@ -63,6 +64,7 @@
      )
 	</entry>
 	
+	<!-- 아이디 찾기 -->
 	<entry key="idSearch">
 		SELECT MEM_ID
 		  FROM TB_MEMBER
@@ -70,6 +72,7 @@
            AND MEM_PHONE= ?
 	</entry>
 	
+	<!-- 회원정보 수정 -->
 	<entry key="updateMember">
 		UPDATE TB_MEMBER
 		   SET MEM_NAME = ?
@@ -79,6 +82,7 @@
 		 WHERE MEM_ID = ?
 	</entry>
 	
+	<!-- 어드민 회원조회 -->
 	<entry key="selectMember">
 		SELECT 
 			   MEM_NO
@@ -98,6 +102,26 @@
 		 WHERE MEM_STATUS = 'Y'  
 		   AND MEM_ID = ? 
 	</entry>
+	
+	<!-- 비밀번호 모를때 비밀번호 재설정 -->
+	<entry key="updateUnknownPwd">
+	UPDATE TB_MEMBER
+	   SET MEM_PWD = ?
+	 WHERE MEM_PHONE = ?
+	</entry>
+	
+	<!-- 비밀번호 모를때 핸드폰인증 -->
+	<entry key="selectPhone">
+	SELECT MEM_NO
+	  FROM TB_MEMBER
+	  WHERE MEM_PHONE = ?
+	</entry>
+
+
+
+
+
+
 
 	<!-- 회원정보의 비밀번호 변경 -->
 	<entry key="updatePwdMember">

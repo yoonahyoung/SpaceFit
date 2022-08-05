@@ -194,6 +194,30 @@ public class MemberService {
 		return updateMem;
    }
    
+   public int selectPhone(String memPhone) {
+	   Connection conn = getConnection();
+	   int memNo = new MemberDao().selectPhone(conn,memPhone);
+	   if(memNo > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return memNo;
+   }
+   
+   public int updateUnknownPwd(String memPwd, String memPhone) {
+	   Connection conn = getConnection();
+	   int result = new MemberDao().updateUnknownPwd(conn, memPwd, memPhone);
+	   if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+   }
+   
    
    
    // 보관함(장바구니)

@@ -25,6 +25,11 @@ public class MemberPwdChangeTwoController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int memNo = Integer.parseInt(request.getParameter("hideMemNo"));
+		String memPhone = request.getParameter("memPhone");
+		
+		request.setAttribute("memNo", memNo);
+		request.setAttribute("memPhone", memPhone);
 		request.getRequestDispatcher("views/user/myPage/pwdChangeTwo.jsp").forward(request, response);
 	}
 
