@@ -9,6 +9,11 @@
 <head>
 <meta charset="UTF-8">
 <title>공간 정보</title>
+<style>
+*{font-family: 'Noto Sans KR','Noto Sans KR';}
+.pre{white-space:pre;}
+#test{font-family: 'Noto Sans KR','Noto Sans KR';}
+</style>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/admin/css/spaceManage.css">
 </head>
 <body>
@@ -48,7 +53,7 @@
 				</tr>
 				<tr>
 					<th>공간소개</th>
-                    <td><%= s.getSpaceInfo() %></td>
+                    <td><pre id="test"><%= s.getSpaceInfo() %></pre></td>
 				</tr>
 				<tr>
 					<th>대표사진</th>
@@ -76,7 +81,7 @@
 			<a href="<%=contextPath%>/adUpdateForm.sp?no=<%= s.getSpaceNo() %>" type="button" class="btn btn-primary">공간수정</a>
 	        <a href="<%=contextPath%>/adDelete.sp?no=<%=s.getSpaceNo() %>" type="button" class="btn btn-danger">공간삭제</a>
 		</form>
-		        
+		 
     </div>
 
 	<div style="height : 100px"></div>

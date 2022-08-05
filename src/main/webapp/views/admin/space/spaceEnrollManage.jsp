@@ -44,7 +44,7 @@
 				<tr>
 					<th>공간소개</th>
                     <td colspan="3">
-                        <textarea name="spInfo" id="" cols="100" rows="20" style="resize:none" required></textarea>
+                        <textarea name="spInfo" id="" cols="100" rows="20" style="resize:none; white-space:pre;" required ></textarea>
                     </td>
 				</tr>
 				<tr>
