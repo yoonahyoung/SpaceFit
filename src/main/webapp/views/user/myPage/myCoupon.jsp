@@ -132,11 +132,11 @@
 	            <div class="card-body">
 	              <input type="hidden" value="<%= mc.getCpNo()%>">
 	              <br>
-	              <h4 class="card-title" ><%= mc.getCpName() %></h4>
+	              <h4 class="card-title" id="cpName"><%= mc.getCpName() %></h4>
 	              <br>
 	              <p class="card-text" style="font-size:26px; font-weight:600; color:#0D6EFD;"><%= mc.getCpDiscount() %>원</p>
 	              <span><%= sysdate %>~</span>
-	              <span id="cpEndDate"><%= mc.getCpEndDate() %></span>
+	              <span id="cpEndDate"><%= mc.getCpEnrollDate() %></span>
 	              <br><br>
 	              <button type="button" onclick="couponDown();" class="btn btn-outline-primary">쿠폰 다운 받기</button>
 	            </div>
@@ -151,7 +151,7 @@
 	
 	<script>
 		function couponDown(){
-			location.href="<%=contextPath%>/downCouponInsert.me?cpNo=" + $('input:hidden').val() 
+			location.href="<%=contextPath%>/downCouponInsert.me?cpName=" + $('#cpName').text() 
 													   + "&cpEndDate=" + $('#cpEndDate').text();
 		}
 	</script>

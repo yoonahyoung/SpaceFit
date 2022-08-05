@@ -411,7 +411,7 @@ public class MemberDao {
 		
 	}
    
-	public int insertDownCoupon(Connection conn, int cpNo, int memNo, String cpEndDate) {
+	public int insertDownCoupon(Connection conn, String cpName, int memNo, String cpEndDate) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -420,10 +420,10 @@ public class MemberDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, cpNo);
-			pstmt.setInt(2, memNo);
-			pstmt.setString(3, cpEndDate);
-			
+			pstmt.setInt(1, memNo);
+			pstmt.setString(2, cpEndDate);
+			pstmt.setString(3, cpName);
+
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {

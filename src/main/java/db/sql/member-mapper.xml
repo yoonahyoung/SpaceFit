@@ -99,6 +99,7 @@
 		   AND MEM_ID = ? 
 	</entry>
 
+	<!-- 회원정보의 비밀번호 변경 -->
 	<entry key="updatePwdMember">
 		UPDATE TB_MEMBER
 		   SET MEM_PWD = ?
@@ -107,6 +108,7 @@
 		   AND MEM_PWD = ?   
 	</entry>
 	
+	<!-- 회원정보의 회원등급 조회 -->
 	<entry key="selectGrade">
 		SELECT GR_NAME
 		  FROM TB_GRADE 
@@ -114,12 +116,14 @@
 		 WHERE MEM_ID = ?
 	</entry>
 	
+	<!-- 회원정보의 쿠폰장수 조회 -->
 	<entry key="selectCouponCount">
 		SELECT COUNT(*) 
 		  FROM TB_MCP
 		 WHERE MEM_NO = ?
 	</entry>
 
+	<!-- 내쿠폰 조회 -->
 	<entry key="selectCouponList">
 		SELECT CP_NAME
 		     , CP_DISCOUNT
@@ -130,6 +134,7 @@
 		 WHERE MEM_NO = ?
 	</entry>
 
+	<!-- 내쿠폰 페이지에서 회원의 쿠폰 등록 -->
 	<entry key="insertMemCoupon">
 		INSERT
       	  INTO TB_MCP
@@ -146,6 +151,7 @@
     			 WHERE CP_NAME = ?)
 	</entry>
 	
+	<!-- 회원 탈퇴 -->
 	<entry key="updateMemberStatus">
 		UPDATE TB_MEMBER
 		   SET MEM_STATUS = 'N'
@@ -153,6 +159,7 @@
 		   AND MEM_PWD = ?
 	</entry>
 
+	<!-- 쿠폰존의 다운가능한 쿠폰 조회 -->
 	<entry key="selectDownCoupon">
 		SELECT 
 			   CP_NO
@@ -163,21 +170,24 @@
  		 WHERE CP_END_DATE IS NOT NULL
 	</entry>
 	
+	<!-- 쿠폰존의 쿠폰 다운 받기 -->
 	<entry key="insertDownCoupon">
 		INSERT
-		  INTO TB_MCP
-		      (MCP_NO
-		     , CP_NO 
-		     , MEM_NO 
-		     , MCP_END_DATE) 
-		VALUES(
-		       SEQ_MCNO.NEXTVAL
-		     , ?
-		     , ?
-		     , ?
-		      )
+      	  INTO TB_MCP
+              (MCP_NO
+	         , CP_NO
+	         , MEM_NO
+	         , MCP_END_DATE)
+    	SELECT SEQ_MCNO.NEXTVAL
+	         , CP_NO 
+	         , ?
+	         , ?
+      	  FROM (SELECT CP_NO
+     			  FROM TB_COUPON
+    			 WHERE CP_NAME = ?)
 	</entry>
 
+	<!-- 프로필 변경 -->
 	<entry key="updateProfile">
 		UPDATE TB_MEMBER
 		   SET MEM_PROFILE = ?
@@ -216,12 +226,14 @@
 		  )
 	</entry>
 	
+	<!-- 장바구니 전체삭제 -->
 	<entry key="deleteCart">
 		DELETE 
 		  FROM TB_CART
 		 WHERE MEM_NO = ?
 	</entry>
 	
+	<!-- 장바구니 선택삭제 -->
 	<entry key="deleteSelectedCart">
 		 DELETE 
 		   FROM TB_CART
@@ -229,6 +241,7 @@
             AND SPACE_NO = ?
 	</entry>
 	
+	<!-- 장바구니 조회 -->
 	<entry key="selectCartList">
 		SELECT 
 		       MEM_NO
@@ -250,6 +263,7 @@
 		 WHERE MEM_NO = ?
 	</entry>
 	
+	<!-- 장바구니 옵션 변경 -->
 	<entry key="updateCart">
 		UPDATE TB_CART
 		   SET CART_LIMIT = ?
@@ -311,6 +325,7 @@
 		 WHERE MEM_NO = ?
 	</entry>
 	
+	<!-- 장바구니 옵션변경창 조회 -->
 	<entry key="selectCartUpdateView">
 		SELECT 
 		       MEM_NO
@@ -450,6 +465,7 @@
 		 WHERE MEM_NO = ?
 	</entry>
 	
+	<!-- 관리자 쿠폰 조회 -->
 	<entry key="selectAdminCouponList">
 		SELECT CP_NO
 		     , CP_NAME
@@ -463,6 +479,7 @@
       SET MEM_ADM_FLAG = 'A'
 	</entry>
 	
+	<!-- 관리자 쿠폰 등록 -->
 	<entry key="adminInsertCoupon">
 		INSERT 
 		  INTO TB_COUPON
@@ -480,6 +497,7 @@
 		       )
 	</entry>
 	
+	<!-- 관리자 그룹회원쿠폰 발급 -->
 	<entry key="adminInsertGroupCoupon">
 		INSERT
 		  INTO TB_MCP
@@ -496,6 +514,7 @@
                   WHERE GR_NO = ?)
 	</entry>
 	
+	<!-- 관리자 개별회원쿠폰 발급 -->
 	<entry key="adminInsertOneCoupon">
 		INSERT
 		  INTO TB_MCP
@@ -512,6 +531,7 @@
                   WHERE MEM_ID = ?)
 	</entry>
 	
+	<!-- 관리자 전체회원쿠폰 발급 -->
 	<entry key="adminInsertAllCoupon">
 		INSERT
 		  INTO TB_MCP

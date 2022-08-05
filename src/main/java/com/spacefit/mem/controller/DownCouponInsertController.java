@@ -36,11 +36,12 @@ public class DownCouponInsertController extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		int memNo = ((Member)session.getAttribute("loginUser")).getMemNo();
-		int cpNo = Integer.parseInt(request.getParameter("cpNo"));
+		String cpName = request.getParameter("cpName");
 		String cpEndDate = request.getParameter("cpEndDate");
 		
+		System.out.println(cpName + cpEndDate);
 		
-		int result = new MemberService().insertDownCoupon(cpNo, memNo, cpEndDate);
+		int result = new MemberService().insertDownCoupon(cpName, memNo, cpEndDate);
 		
 		if(result > 0) {
 			

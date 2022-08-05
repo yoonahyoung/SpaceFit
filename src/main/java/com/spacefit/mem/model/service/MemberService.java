@@ -147,9 +147,9 @@ public class MemberService {
 	   return list;
    }
    
-	public int insertDownCoupon(int cpNo, int memNo, String cpEndDate) {
+	public int insertDownCoupon(String cpName, int memNo, String cpEndDate) {
 		Connection conn = getConnection();
-		int result = new MemberDao().insertDownCoupon(conn, cpNo, memNo, cpEndDate);
+		int result = new MemberDao().insertDownCoupon(conn, cpName, memNo, cpEndDate);
 
 		if(result > 0) {
 			commit(conn);
