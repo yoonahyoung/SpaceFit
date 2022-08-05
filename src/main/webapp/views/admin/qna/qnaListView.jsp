@@ -184,7 +184,7 @@
     <div class="paging-area" align="center">    
 		        
 		<% if(currentPage != 1) { %>
-           <button class="btn btn-sm btn-outline-primary" onclick="location.href='<%=contextPath%>/adminList.no?cpage=<%=currentPage-1%>';">&lt;</button>
+           <button class="btn btn-sm btn-outline-primary" onclick="location.href='<%=contextPath%>/adminList.qa?cpage=<%=currentPage-1%>';">&lt;</button>
            <% } %>
 		<% for(int p = startPage ; p <= endPage; p++) { %>
 			
@@ -196,7 +196,7 @@
 			 
 		<% } %>
 		<% if(currentPage != maxPage){ %>
-           <button class="btn btn-sm btn-outline-primary" onclick="location.href='<%=contextPath%>/adminList.no?cpage=<%=currentPage+1%>';">&gt;</button>
+           <button class="btn btn-sm btn-outline-primary" onclick="location.href='<%=contextPath%>/adminList.qa?cpage=<%=currentPage+1%>';">&gt;</button>
            <% } %>
         
     </div>
