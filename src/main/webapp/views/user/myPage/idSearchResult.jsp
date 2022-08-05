@@ -21,7 +21,7 @@
 	<link rel="stylesheet" href="<%=contextPath %>/resources/user/css/member.css?ver=1">
 	
 	
-	<div style="height : 200px"></div>
+	<div style="height : 100px"></div>
         
     <div class="outer">
         <div class="blueShadow text-center">
@@ -55,13 +55,19 @@
                         	<div class="inputs">
                         	
                         		<label for="#pwdBtn" class="inputLabel">혹시 비밀번호도 모르시나요?</label>
-		                        <button type="submit" class="btn btn-secondary" id="pwdBtn" onclick="pwdChangeOne()">비밀번호 재설정</button><br>
+                        		<a href="<%=contextPath %>/pwdChangeOne.me" id="pwdSearch" class="btn btn-secondary pwdChangeBtn">비밀번호 재설정</a>
 		                        <br>
-		                        <script>
-		                        	function pwdChangeOne(){
-		                        		location.href="<%=contextPath%>/pwdChangeOne.me";
+		                        <style>
+		                        	.pwdChangeBtn{
+		                        		font-size:15px;
+		                        		color : white
 		                        	}
-		                        </script>
+		                        	.pwdChangeBtn:hover{
+		                        		font-size:15px;
+		                        		font-size:12px;
+		                        		color : white
+		                        	}
+		                        </style>
 		
 		                        <label for="#pwdBtn" class="inputLabel">이제 로그인하러 가요!</label>
 		                        <button type="submit" class="btn btn-primary" id="pwdBtn" onclick="loginForm();">로그인</button><br>

@@ -26,7 +26,7 @@ $(function(){
 })
 
 // 회원가입폼 1(SignInOne에서 회원약관 전체선택)
-
+/*
 $(function(){
 	 const agreeChkAll = document.querySelector('input[name=agree_all]');
         agreeChkAll.addEventListener('change', (e) => {
@@ -35,7 +35,7 @@ $(function(){
         agreeChk[i].checked = e.target.checked;
         }
     });
-})
+})*/
 
 // js1-------------------------------------------------------
 
@@ -162,7 +162,7 @@ function pwdCheck(){
 memPwd.addEventListener("blur", pwdCheck);
 
 // 4. 비밀번호 확인
-let memPwdCheck = document.querySelector("#memPwd-check");
+let memPwdCheck = document.querySelector("#pwdCheck");
 let pwdCheckSpan = document.querySelector("#pwdCheckSpan");
 function pwdDBcheck(){
 	if(memPwd.value === memPwdCheck.value) {
