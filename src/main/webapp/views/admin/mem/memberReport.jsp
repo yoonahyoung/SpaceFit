@@ -49,10 +49,9 @@
 								</div>
 							  <div style="height : 60px"></div>
 							  <div class="row" id="selectDivMem">
-								  	<form>
-										  <button class="btn btn-primary">글 / 댓글 복구</button>
-										  <button class="btn btn-secondary">비공개 설정</button>
-										  <button class="btn btn-dark">블랙리스트 등록</button>
+								  	<form>										
+										  <button class="btn btn-secondary">비공개 설정</button>										 
+										  <button class="btn btn-primary">블랙리스트 설정</button>										 
 								  	</form>
 							  
 							  </div>
@@ -64,6 +63,7 @@
 											  <option value="commentSearch">댓글신고조회</option>
 											  <option value="countDesc">누적신고순</option> 									  
 										</select>	
+										
 								 	</form>	
 							  </div>
 
@@ -145,11 +145,19 @@
 							
 							if(list.length == 0){
 		      					value += "<tr>"
-		      					       + "<td colspan='6'> 신고내역이 없습니다. </td>"
+		      					       + "<td colspan='7'> 신고내역이 없습니다. </td>"
 		                               + "</tr>";
 		      				}else{
 		      					
 		      					for(let i=0; i<list.length; i++){
+		      						
+		      						let status = "";
+		      						
+		      						if(list[i].reviewStatus == 'X'){
+		      							status += '<td>'+ list[i].commentStatus+ '</td>';
+		      					   }else{
+		      						    status += '<td>'+ list[i].reviewStatus+ '</td>'
+			                           }
 							
 									value += '<tr>'
 				                           + 	'<td><input type="checkBox"></td>'
@@ -157,7 +165,7 @@
 				                           + 	'<td>'+ list[i].category +'</td>'
 				                           + 	'<td>'+ list[i].count +'</td>'
 				                           + 	'<td>'+ list[i].rptMemId +'</td>' //작성자	
-				                           +	'<td>글상태</td>'
+				                           +   status
 										   + 	'<td><a class="btn btn-primary btn-sm" href="'+contextPath+'/memRptDetailView.me?no='+ list[i].rptRefNo + '&category='+ list[i].category +'">상세조회</a></td>'
 				                           + '</tr>'
 			      						}

@@ -21,6 +21,9 @@ public class Report {
 	private Date rptDate; // 신고당한날
 	
 	private int count; // 신고누적수
+	
+	private String reviewStatus;
+	private String commentStatus;
 		
 	
 	public int getRptNo() {
@@ -98,6 +101,20 @@ public class Report {
 	public void setCount(int count) {
 		this.count = count;
 	}
+			
+	public String getReviewStatus() {
+		return reviewStatus;
+	}
+	public void setReviewStatus(String reviewStatus) {
+		this.reviewStatus = reviewStatus;
+	}
+	public String getCommentStatus() {
+		return commentStatus;
+	}
+	public void setCommentStatus(String commentStatus) {
+		this.commentStatus = commentStatus;
+	}
+	
 	public Report(int rptNo, int memNo, int rptMemNo, int rptReasonNo, String rptReason, int rptRefCat, int rptRefNo,
 			Date rptDate) {
 		super();
@@ -122,19 +139,23 @@ public class Report {
 	}
 	
 		
-	public Report(String rptMemId, String category, int rptRefNo, int count) {
+	
+	public Report(String rptMemId, String category, int rptRefNo, int count, String reviewStatus, String commentStatus) {
 		super();
 		this.rptMemId = rptMemId;
 		this.category = category;
 		this.rptRefNo = rptRefNo;
 		this.count = count;
+		this.reviewStatus = reviewStatus;
+		this.commentStatus = commentStatus;
 	}
 	@Override
 	public String toString() {
 		return "Report [rptNo=" + rptNo + ", memNo=" + memNo + ", memId=" + memId + ", rptMemNo=" + rptMemNo
 				+ ", rptMemId=" + rptMemId + ", rptReasonNo=" + rptReasonNo + ", rptReason=" + rptReason
 				+ ", rptRefCat=" + rptRefCat + ", category=" + category + ", rptRefNo=" + rptRefNo + ", rptDate="
-				+ rptDate + ", count=" + count + "]";
+				+ rptDate + ", count=" + count + ", reviewStatus=" + reviewStatus + ", commentStatus=" + commentStatus
+				+ "]";
 	}
 	
 	

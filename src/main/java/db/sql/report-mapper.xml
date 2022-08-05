@@ -26,17 +26,22 @@
 		    )
 	</entry>
 	
-	<entry key="adminSelectList">
-		SELECT 
-		        DISTINCT M.MEM_ID  AS "RPT_MEM_ID",        
-		        R.RPT_REF_NO AS "RPT_REF_NO",   
-		        CASE WHEN R.RPT_REF_CAT = 1 THEN '후기'
-		            WHEN R.RPT_REF_CAT = 2 THEN '댓글'          
-		        END "CATEGORY",    
-		        COUNT
+	<entry key="adminSelectList1">
+		SELECT R.RPT_REF_NO, R.RPT_REF_CAT, M.MEM_ID AS "RPT_MEM_ID"
+		      , DECODE (R.RPT_REF_CAT, 1, '후기', 2, '댓글') AS "CATEGORY"
+		      , COUNT(*) AS "COUNT"
+		      , NVL(RE.RV_STATUS, 'X') AS "RV_STATUS"
+      		  , NVL(CO.COM_STATUS, 'X') AS "COM_STATUS"
 		  FROM TB_REPORT R
-		  JOIN TB_MEMBER M ON (M.MEM_NO = R.RPT_MEM_NO) 
-		  JOIN VW_REPORTCOUNT RC ON(R.RPT_REF_NO = RC.RPT_REF_NO)
+		  JOIN TB_MEMBER M ON (R.RPT_MEM_NO = M.MEM_NO)
+		  LEFT JOIN TB_REVIEW RE ON (R.RPT_REF_CAT = 1 AND R.RPT_REF_NO = RE.RV_NO)
+		  LEFT JOIN TB_COMMENT CO ON (R.RPT_REF_CAT = 2 AND R.RPT_REF_NO = CO.COM_NO)
+	</entry>
+	
+	<entry key="adminSelectList2">
+		 GROUP 
+	    	BY R.RPT_REF_NO, R.RPT_REF_CAT, M.MEM_ID, RE.RV_STATUS, CO.COM_STATUS
+	
 	</entry>
 	
 	<!-- 오늘 후기신고 건수 -->

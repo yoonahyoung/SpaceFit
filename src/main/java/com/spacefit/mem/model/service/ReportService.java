@@ -36,9 +36,9 @@ public class ReportService {
 			
 	}
 	
-	public ArrayList<Report> adminSelectList(String selectSearch){
+	public ArrayList<Report> adminSelectList(String selectSearch, String selectorderBy){
 		Connection conn = getConnection();
-		ArrayList<Report> list = new ReportDao().adminSelectList(conn, selectSearch);
+		ArrayList<Report> list = new ReportDao().adminSelectList(conn, selectSearch, selectorderBy);
 		close(conn);
 		return list;
 	}

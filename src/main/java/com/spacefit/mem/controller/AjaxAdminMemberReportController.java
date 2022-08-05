@@ -34,15 +34,16 @@ public class AjaxAdminMemberReportController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String selectSearch = "";
+		String selectorderBy = "";
 		switch(request.getParameter("selectSearch")) {
-		case "total" : selectSearch += " ORDER BY R.RPT_REF_NO DESC"; break;
-		case "reviewSearch" : selectSearch += " WHERE R.RPT_REF_CAT = 1 ORDER BY R.RPT_REF_NO DESC"; break;
-		case "commentSearch" : selectSearch += " WHERE R.RPT_REF_CAT = 2 ORDER BY R.RPT_REF_NO DESC"; break;
-		case "countDesc" : selectSearch += " ORDER BY COUNT DESC"; break;		
+		case "total" : break;
+		case "reviewSearch" : selectSearch += " WHERE R.RPT_REF_CAT = 1"; break;
+		case "commentSearch" : selectSearch += " WHERE R.RPT_REF_CAT = 2"; break;
+		case "countDesc" : selectorderBy += " ORDER BY COUNT DESC"; break;		
 		}
 				
 		
-		ArrayList<Report> list = new ReportService().adminSelectList(selectSearch);
+		ArrayList<Report> list = new ReportService().adminSelectList(selectSearch, selectorderBy);
 		
 		
 		response.setContentType("application/json; charset=UTF-8");
