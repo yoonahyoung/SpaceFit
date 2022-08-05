@@ -35,6 +35,8 @@
 
 <title>Insert title here</title>
 <style>
+.pre{white-space:pre;}
+#preTag{font-family: 'Noto Sans KR','Noto Sans KR';}
 /* 캘린더 */
 .calBody {
     margin: 40px 10px;
@@ -66,6 +68,32 @@
 }
 .fc-col-header-cell.fc-day.fc-day-sat a{
     color:rgb(59, 142, 209) !important;
+}
+
+/* QNA */
+.outer{
+    width: 100%;
+    margin: auto;
+    margin-top: 50px;
+}
+#dataTable{
+    text-align: left;
+}
+th{
+    font-size: 18px;
+}
+#datatable>tr>th{
+    height:85px;
+    line-height:85px;
+}
+tbody p{
+    padding:35px 0 25px 0;
+}
+#dataTable>tbody>tr:hover{
+background:#E1F0FF;
+}
+#faqTr{
+    padding-top:50px;
 }
 </style>
 </head>
@@ -128,7 +156,7 @@
                                             </ul>
                                             <div class="tab-content" id="pills-tabContent">
                                                 <div class="tab-pane fade show active" id="pills-gonggan" role="tabpanel" aria-labelledby="pills-gonggan-tab">
-                                                    <%= s.getSpaceInfo() %>
+                                                    <pre id="preTag"><%= s.getSpaceInfo() %></pre>
                                                 </div>
                                                 <div class="tab-pane fade" id="pills-sisul" role="tabpanel" aria-labelledby="pills-sisul-tab">
                                                     <ol>
@@ -151,7 +179,9 @@
                                                     </ol>
                                                 </div>
                                                 <div class="tab-pane fade" id="pills-sDetailQNA" role="tabpanel" aria-labelledby="pills-sDetailQNA-tab" onclick="loadQna();">
+                                                    <table id="dataTable" class="table">
                                                     
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
@@ -874,18 +904,80 @@
             
             <!-- QNA뿌려주는 script -->
             <script>
-          	//enter => <br>
-            var text = $('textarea').val();
-            text = text.replace(/(?:\r\n|\r|\n)/g, '<br>');
-            	<%-- function loadQna(cpage){
+	            $(function(){
+	          		loadQna(1);
+	    		})
+            	function loadQna(page){
             		$.ajax({
-            			url:"<%=contextPath%>/list.qa",
-            			data:{'page':cpage},
-            			success:function(){
+            			url:"<%=contextPath%>/loadQna.sp",
+            			data:{cpage:page, no:'<%=s.getSpaceNo()%>'},
+            			success:function(h){
+            				let contextPath = "<%=contextPath%>";
+	        				let pi = h.pi;
+	        				let list = h.list;
+            				let el = ""; // 공간 뿌려주는 변수
+	        				let pageVal = ""; // paging처리해주는 변수
+	        				if(list.length == 0){
+	          					el += "<tr>"
+          					       + "<td colspan='2'> 문의가 없습니다. </td>"
+                                   + "</tr>";
+	          				}else{
+	          					
+                       			el +=	"<tr>"
+	                                  + 	"<td>"+ list[i].qnaWriter +"</td>"
+	                                  + 	"<td>"+ list[i].qnaContent +"</td>"
+	                                  + "</tr>";
+	                                 
+	        					}
+	          					
+	          					if(pi.currentPage != 1){ 
+	          						pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='selectPaging(" + (pi.currentPage-1) + ");'>&lt;</button>";
+	          						
+								}
+								
+								for(let p=pi.startPage; p<=pi.endPage; p++){
+									if(p == pi.currentPage){
+										pageVal += "<button disabled class='btn btn-sm btn-outline-primary'>" +  p  + "</button>";
+										
+									}else{ 
+										 pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='selectPaging("+ p +")';>"  + p + "</button>";
+										
+					            	} 
+								} 
+								
+								 if(pi.currentPage != pi.maxPage){ 
+								 pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='selectPaging(" + (pi.currentPage+1) + ");'>&gt;</button>";
+								 
+					            } 
+	                             
+	          				}
+                            	$("#areaList").html(el);
+	        				 	$(".paging-area").html(pageVal); 
+	        		
             				
+            				<%-- <div class="outer">
+
+            			    <table class="table" align="center">
+            					<tbody>
+            			            <tr>
+            			                <td>아직 공간에 대한 질문이 없어요.</td>
+            			            </tr>
+            					            <tr name="test">
+            					            	<th>Q. <%=list.get(i).getFaqTitle() %></th>
+            					            </tr>
+            					            <tr>
+            					            	<td id="fContent<%=i%>"><p><b>A. </b> <%=list.get(i).getFaqContent() %></p></td>
+            					            </tr> 
+            			        </tbody>
+            			    </table>
+
+            			    <br>
+            			    
+            			    <div style="height : 60px"></div> --%>
             			}
             		})
-            	} --%>
+            	} 
+	            
             </script>
             
     </main>
