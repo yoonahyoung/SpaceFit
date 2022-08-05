@@ -42,16 +42,17 @@ public class AjaxReportReviewController extends HttpServlet {
 		Report rpt = new Report(memNo, rptMemNo, rptReasonNo, rptRefNo);
 		
 		//System.out.println(rpt);
-		//System.out.println(spNo);
-		
+		//System.out.println(spNo);	
+				
+		int reportRvExist = new ReviewService().selectRvExist(rpt);
 		int result = new ReviewService().reportReview(rpt);
-		if(result > 0){
+		if(result > 0 && reportRvExist < 1){
 			 // 신고 성공
 			request.getSession().setAttribute("alertMsg","신고완료! 스페이스핏 운영에 도움을 주셔서 감사합니다." );
 			response.sendRedirect(request.getContextPath() + "/detail.sp?no=" + spNo);
 		 } else {
-			 request.setAttribute("errorMsg", "신고에 실패했습니다. 잠시후 다시 시도해주세요");
-				request.getRequestDispatcher("views/user/common/backAlertErrorPage.jsp").forward(request, response);
+			 request.getSession().setAttribute("alertMsg","이미 신고한 후기는 추가로 신고 불가합니다.");			 
+			 response.sendRedirect(request.getContextPath() + "/detail.sp?no=" + spNo);
 		 }
 	}
 

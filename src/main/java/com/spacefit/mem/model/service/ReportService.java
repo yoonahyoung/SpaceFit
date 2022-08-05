@@ -8,6 +8,7 @@ import static com.spacefit.common.JDBCTemplate.getConnection;
 import static com.spacefit.common.JDBCTemplate.rollback;
 import com.spacefit.mem.model.dao.ReportDao;
 import com.spacefit.mem.model.vo.Report;
+import com.spacefit.review.model.dao.ReviewDao;
 
 public class ReportService {
 	
@@ -22,9 +23,10 @@ public class ReportService {
 	
 	public int reportCommentReview(Report rpt) {
 		Connection conn = getConnection();
+		int reportCmExist = new ReportDao().selectCmExist(conn,rpt);
 		int result = new ReportDao().reportCommentReview(conn, rpt);
 		
-		if(result>0){
+		if(result>0 && reportCmExist < 1){
 			commit(conn);
 		}else {
 			rollback(conn);
@@ -34,6 +36,15 @@ public class ReportService {
 		return result;
 			
 			
+	}
+	
+	public int selectCmExist(Report rpt) {
+		Connection conn = getConnection();
+		int reportCmExist  = new ReportDao().selectCmExist(conn, rpt);
+		close(conn);
+		//System.out.println(reportRvExist);
+		return reportCmExist;
+		
 	}
 	
 	public ArrayList<Report> adminSelectList(String selectSearch, String selectorderBy){

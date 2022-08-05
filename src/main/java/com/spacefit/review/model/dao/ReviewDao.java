@@ -672,4 +672,29 @@ public class ReviewDao {
 	}
 	
 	
+	public int selectRvExist(Connection conn, Report rpt) {
+		// select => ResultSet(int)
+		int reportRvExist =0;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectRvExist");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, rpt.getMemNo());
+			pstmt.setInt(2, rpt.getRptRefNo());
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				reportRvExist = rset.getInt("COUNT(*)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return reportRvExist;
+	}
+	
 }

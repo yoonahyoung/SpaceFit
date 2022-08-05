@@ -252,12 +252,15 @@
                                                              <% if (directMemNo == 0) { %>
                                                                 <button type="button" class="btn btn-primary btn-sm" id="login-btn" onclick="loginForm();">로그인하고 추천!</button>
                                                              <% } else { %>
-                                                                 <button type="button" class="btn btn-primary btn-sm" data-value="<%= r.getReviewNo() %>" onclick="likeUpdate(this);">후기추천</button>
-                                                                 <button type="button" class="btn btn-danger btn-sm"  data-bs-toggle="modal" data-bs-target="#myModal" onclick="reportModal($(this).siblings('#rvNo').val(), $(this).siblings('#rvMemNo').val(), $(this).siblings('#spNo').val());">후기신고</button>
-                                                                 <input type="hidden" value="<%= directMemNo %>" name="memNo" id="memNo">
-	                                                             <input type="hidden" value="<%= r.getReviewNo() %>" name="rvNo" id="rvNo">
-	                                                             <input type="hidden" value="<%= r.getMemNo() %>" name="rvMemNo" id="rvMemNo">
-	                                                             <input type="hidden" value="<%= spNo %>" name="spNo" id="spNo">
+                                                             		<%if( !loginUser.getMemId().equals(r.getMemNo())){ %>
+                                                             		
+		                                                                 <button type="button" class="btn btn-primary btn-sm" data-value="<%= r.getReviewNo() %>" onclick="likeUpdate(this);">후기추천</button>
+		                                                                 <button type="button" class="btn btn-danger btn-sm"  data-bs-toggle="modal" data-bs-target="#myModal" onclick="reportModal($(this).siblings('#rvNo').val(), $(this).siblings('#rvMemNo').val(), $(this).siblings('#spNo').val());">후기신고</button>
+		                                                                 <input type="hidden" value="<%= directMemNo %>" name="memNo" id="memNo">
+			                                                             <input type="hidden" value="<%= r.getReviewNo() %>" name="rvNo" id="rvNo">
+			                                                             <input type="hidden" value="<%= r.getMemNo() %>" name="rvMemNo" id="rvMemNo">
+			                                                             <input type="hidden" value="<%= spNo %>" name="spNo" id="spNo">
+                                                        			<%} %>
                                                           <% } %>
                                                           </div>
 														  <span id="likeUpdateCountSpan"><%= r.getAllLikeCount() %>명이 이 후기를 추천했습니다!</span>

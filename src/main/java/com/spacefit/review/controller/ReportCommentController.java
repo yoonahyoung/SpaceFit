@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.spacefit.mem.model.service.ReportService;
 import com.spacefit.mem.model.vo.Member;
 import com.spacefit.mem.model.vo.Report;
+import com.spacefit.review.model.service.ReviewService;
 
 /**
  * Servlet implementation class ReportCommentController
@@ -42,15 +43,15 @@ public class ReportCommentController extends HttpServlet {
 		
 		//System.out.println(rpt);
 		//System.out.println(spNo);
-		
+		int reportCmExist = new ReportService().selectCmExist(rpt);
 		int result = new ReportService().reportCommentReview(rpt);
-		if(result > 0){
+		if(result > 0  && reportCmExist < 1){
 			 // 신고 성공
 			request.getSession().setAttribute("alertMsg","신고완료! 스페이스핏 운영에 도움을 주셔서 감사합니다." );
 			response.sendRedirect(request.getContextPath() + "/detail.sp?no=" + spNo);
 		 } else {
-			 request.setAttribute("errorMsg", "신고에 실패했습니다. 잠시후 다시 시도해주세요");
-				request.getRequestDispatcher("views/user/common/backAlertErrorPage.jsp").forward(request, response);
+			 request.getSession().setAttribute("alertMsg","이미 신고한 댓글은 추가로 신고 불가합니다.");			 
+			 response.sendRedirect(request.getContextPath() + "/detail.sp?no=" + spNo);
 		 }
 	}
 

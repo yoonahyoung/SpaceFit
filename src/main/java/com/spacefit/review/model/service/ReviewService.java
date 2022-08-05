@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import com.spacefit.attachment.model.vo.Attachment;
 import com.spacefit.common.model.vo.PageInfo;
+import com.spacefit.mem.model.dao.ReportDao;
 import com.spacefit.mem.model.vo.Report;
 import com.spacefit.review.model.dao.ReviewDao;
 import com.spacefit.review.model.vo.Review;
@@ -199,14 +200,25 @@ public class ReviewService {
 	
 	public int reportReview(Report rpt) {
 		Connection conn = getConnection();
+		int reportRvExist  = new ReviewDao().selectRvExist(conn, rpt);
 		int result = new ReviewDao().reportReview(conn, rpt);
-		if(result > 0) {
+		
+		if(result > 0 && reportRvExist < 1) {
 			commit(conn);
 		} else {
 			rollback(conn);
 		}
 		close(conn);
-		return result;
+		return result ;
+	}
+	
+	public int selectRvExist(Report rpt) {
+		Connection conn = getConnection();
+		int reportRvExist  = new ReviewDao().selectRvExist(conn, rpt);
+		close(conn);
+		//System.out.println(reportRvExist);
+		return reportRvExist;
+		
 	}
 
 }
