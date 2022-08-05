@@ -30,6 +30,7 @@
 		  SELECT COUNT(*) AS "RV_COUNT_PER_SPACE"
 		    FROM TB_REVIEW
 		   WHERE SPACE_NO = ?
+		    AND RV_STATUS = 'Y'
 	</entry>
 
 </properties>

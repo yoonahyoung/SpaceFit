@@ -246,7 +246,8 @@
 	<entry key="todayRvCount">
      		SELECT COUNT(*) AS "todayRvCount"
    			  FROM TB_REVIEW
-  			 WHERE TO_CHAR(RV_ENROLL_DATE,'yy/mm/dd') = (SELECT TO_CHAR(SYSDATE,'yy/mm/dd') FROM DUAL)    
+  			 WHERE TO_CHAR(RV_ENROLL_DATE,'yy/mm/dd') = (SELECT TO_CHAR(SYSDATE,'yy/mm/dd') FROM DUAL)
+  			   AND RV_STATUS = 'Y';   
 	</entry>
 	
 

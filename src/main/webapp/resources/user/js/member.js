@@ -162,7 +162,7 @@ function pwdCheck(){
 memPwd.addEventListener("blur", pwdCheck);
 
 // 4. 비밀번호 확인
-let memPwdCheck = document.querySelector("#pwdCheck");
+let memPwdCheck = document.querySelector("memPwdCheck");
 let pwdCheckSpan = document.querySelector("#pwdCheckSpan");
 function pwdDBcheck(){
 	if(memPwd.value === memPwdCheck.value) {
@@ -212,3 +212,9 @@ function memIdNoCheck() {
   }
 }
 memIdNo.addEventListener("blur", memIdNoCheck);
+
+
+
+
+
+//-------------비밀번호 찾기용 번호재확인 + 메일저농
