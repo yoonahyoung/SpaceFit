@@ -105,7 +105,7 @@
 			<button type="button" class="btn btn-primary">베스트 후기 등록</button>
 			<button type="button" class="btn btn-warning">후기 수정</button>
 			 -->
-	        <button type="button" class="btn btn-secondary">후기목록</button>
+	         <a class="btn btn-primary" href="<%=contextPath %>/memReview.me">후기목록</a>
 		</form>
 		        
     </div>
