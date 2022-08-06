@@ -1,6 +1,8 @@
 package com.spacefit.pay.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,7 +44,11 @@ public class BookInsertController extends HttpServlet {
 		// payView에서 cart 객체 만들값들
 		int spaceNo = Integer.parseInt(request.getParameter("spaceNo"));
 		int limit = Integer.parseInt(request.getParameter("limit"));
+		
 		String date = request.getParameter("date");
+		String arr[] = date.split("-");
+		date = arr[0]+"."+arr[1]+"."+arr[2];
+		
 		String detailCI = request.getParameter("in");
 		String detailCO = request.getParameter("out");
 		String park = request.getParameter("park");
@@ -76,9 +82,6 @@ public class BookInsertController extends HttpServlet {
 		if( !bookContent.equals("")) {
 			book.setBookAddContent(bookContent);
 		}
-		
-		System.out.println(quickPay);
-		System.out.println(book);
 		//
 		int result = 0;
 		

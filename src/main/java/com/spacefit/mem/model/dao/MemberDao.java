@@ -191,7 +191,7 @@ public class MemberDao {
 	   PreparedStatement pstmt = null;
 	   String sql = prop.getProperty("updateUnknownPwd");
 	   try {
-		   System.out.println("가짜비번 실행중 다오");
+		   //System.out.println("가짜비번 실행중 다오");
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, memPwd);
 		pstmt.setString(2, memPhone);
@@ -213,7 +213,7 @@ public class MemberDao {
 	   PreparedStatement pstmt = null;
 	   String sql = prop.getProperty("updateRealUnknownPwd");
 	   try {
-		 System.out.println("진짜비번 실행중 다오");
+		 //System.out.println("진짜비번 실행중 다오");
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, memRealPwd);
 		pstmt.setString(2, memPhone);
@@ -226,6 +226,46 @@ public class MemberDao {
        
 	   return result2;
    }
+   
+   
+   public int hashPwdChange(Connection conn, String memId, String hashPwd) {
+	   int result1 = 0;
+	   PreparedStatement pstmt = null;
+	   String sql = prop.getProperty("hashPwdChange");
+	   
+	   try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, hashPwd);
+		pstmt.setString(2, memId);
+		result1 = pstmt.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+	}
+	 return result1;  
+   }
+   
+   public int realPwdChange(Connection conn, String memId, String updatePwd) {
+	   int result2 = 0;
+	   PreparedStatement pstmt = null;
+	   String sql = prop.getProperty("realPwdChange");
+	   
+	   try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, updatePwd);
+		pstmt.setString(2, memId);
+		result2 = pstmt.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+	}
+	   
+	   
+	   return result2;
+	   }
+   
    
    public int updateMember(Connection conn, Member m) {
       

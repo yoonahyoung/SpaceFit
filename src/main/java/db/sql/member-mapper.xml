@@ -126,7 +126,19 @@
 	  WHERE MEM_PHONE = ?
 	</entry>
 
-
+	
+	<entry key="hashPwdChange">
+	UPDATE TB_MEMBER
+	   SET MEM_PWD = ?
+	 WHERE MEM_ID = ?
+	</entry>
+	
+	
+	<entry key="realPwdChange">
+	UPDATE TB_MEMBER
+	   SET MEM_REAL_PWD = ?
+	 WHERE MEM_ID = ?
+	</entry>
 
 
 
