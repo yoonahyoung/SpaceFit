@@ -231,10 +231,14 @@ background:#E1F0FF;
                                                        <% } %>
                                                   </div>
                                                   <h4>" 스페이스핏의 고객님들은 이 장소를 이렇게 평가하셨어요! "</h4><br>
-                                             
-                                              <div id="rvOrderBy">
-                                                  <a>고객님들의 실제 이용 리뷰입니다!</a>
-                                              </div>
+                                        
+                                                </div>
+                                                <div class="rvPhotoZone">
+                                                 
+                                                </div>
+                                                  <div id="rvOrderBy">
+                                                        <a>고객님들의 실제 이용 리뷰입니다!</a>
+                                                  </div>
                                               
                                               <% for(Review r : rvList) { %>  
                                               <div class="container-fluid eachRvList">
@@ -264,7 +268,6 @@ background:#E1F0FF;
                                                                      <span id='starWhite'>★</span>
                                                                   <% } %>
                                                               </div>
-                                                              
                                                           </div>
                                                           <textarea id="rvContentDiv"><%=r.getReviewContent() %>
                                                           </textarea>
@@ -293,14 +296,13 @@ background:#E1F0FF;
 			                                                             <input type="hidden" value="<%= r.getMemNo() %>" name="rvMemNo" id="rvMemNo">
 			                                                             <input type="hidden" value="<%= spNo %>" name="spNo" id="spNo">
                                                         			<%} %>
-                                                          <% } %>
+                                                             <% } %>
                                                           </div>
 														  <span id="likeUpdateCountSpan"><%= r.getAllLikeCount() %>명이 이 후기를 추천했습니다!</span>
                                                       </div>
                                                   </div>
                                                   <br><br>
                                                   <div class="collapse commentDiv" id="flush-collapse<%= r.getReviewNo() %>" data-value="<%= r.getReviewNo() %>" aria-labelledby="flush-heading<%= r.getReviewNo() %>" data-bs-parent="#accordionFlushExample">
-                                                       <div class="parentCommentAll" id="parentCommentAll"></div>
                                                         <div id="writeComment">
                                                             <table id="writeTable" align="center">
                                                                 <thead>
@@ -320,18 +322,14 @@ background:#E1F0FF;
                                                         </div>
                                                   </div>
                                               </div>
-                                          
-                                    
                                               <% } %>
-                                              
-                                              
                                        <% } else { %>
                                            <h4>" 아직 작성된 후기가 없습니다 "</h4><br>
-                              <% } %>
+                                        <% } %>
+                                    </div>
                               
                               
-                              
-                           </div>
+                           
                               
                               
                            
