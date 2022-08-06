@@ -171,4 +171,29 @@ INSERT INTO TB_BOOK
 	 WHERE MEM_NO = ?
 	   AND CP_NO = ?
 	</entry>
+	
+	<!-- 장바구니 조회 -->
+	<entry key="selectCart">
+	 SELECT MEM_NO
+	      , SPACE_NO
+	      , CART_LIMIT
+	      , CART_DATE
+	      , CART_IN
+	      , CART_OUT
+	      , CART_PARKING
+	      , CART_ANIMAL
+	      , CART_STAND
+	      , CART_CHAIR
+	      , CART_PRICE
+	  FROM TB_CART
+	 WHERE SPACE_NO = ?
+	</entry>
+	
+		<!-- 장바구니 조회 -->
+	<entry key="deleteCart">
+    DELETE FROM TB_CART
+     WHERE SPACE_NO = ?
+	</entry>
+
+
 </properties>

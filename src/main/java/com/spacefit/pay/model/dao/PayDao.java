@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import com.spacefit.mem.model.vo.Cart;
+import com.spacefit.notice.model.vo.Notice;
 import com.spacefit.reservation.model.vo.Book;
 
 
@@ -199,6 +200,67 @@ private Properties prop = new Properties();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, memNo);
 			pstmt.setString(2, cpNo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public Cart selectCart(Connection conn, int spaceNo) {
+		// select문 => ResultSet (한행) => Notice
+		Cart cartPay = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectCart");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,  spaceNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				cartPay = new Cart(rset.getInt("MEM_NO"),
+						       rset.getInt("SPACE_NO"),
+								rset.getInt("CART_LIMIT"),
+								rset.getString("CART_DATE"),
+								rset.getString("CART_IN"),
+								rset.getString("CART_OUT"),
+								rset.getString("CART_PARKING"),
+								rset.getString("CART_ANIMAL"),
+								rset.getString("CART_STAND"),
+								rset.getString("CART_CHAIR"),
+								rset.getInt("CART_PRICE")
+							   );
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return cartPay;
+	}
+	
+	public int deleteCart(Connection conn, int spaceNo) { 
+		// update문 => 처리된 행수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteCart"); 
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, spaceNo);
 			
 			result = pstmt.executeUpdate();
 			

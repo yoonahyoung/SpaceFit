@@ -45,7 +45,7 @@
 		
 
 	<!-- Shoping Cart -->
-	<form class="bg0 p-t-75 p-b-85">
+	<form class="bg0 p-t-75 p-b-85" action="pay.cart" method="post">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
@@ -83,7 +83,7 @@
 												<td class="column-3"><%= c.getCartPrice() %>원</td>
 												<td class="column-4" style="text-align:center;">1</td>
 												<td class="column-5">
-													<input type="radio" name="cart-radio" id="cart-radio1">
+													<input type="radio" name="spaceNo" id="cart-radio1" value="<%= c.getSpaceNo() %>">
 												</td>
 											</tr>
 										<% } %>
