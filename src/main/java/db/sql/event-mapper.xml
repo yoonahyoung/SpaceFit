@@ -44,5 +44,16 @@
 		  FROM TB_BANNER
 		 WHERE BAN_NO = ?
 	</entry>
+	
+	<!-- 관리자_배너 수정 -->
+	<entry key="adminUpdateBanner">
+		UPDATE TB_BANNER
+		   SET BAN_NAME = ?
+		   	 , BAN_STATUS = ?
+		     , BAN_MODIFY_DATE = SYSDATE
+		     , BAN_URL = ?
+		     , BAN_IMG = ?
+		 WHERE BAN_NO = ?
+	</entry>
 
 </properties>

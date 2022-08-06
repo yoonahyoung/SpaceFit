@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>배너 상세페이지</title>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/admin/css/member.css">
 </head>
 <body>
 
@@ -12,6 +13,7 @@
 	
 	<% 
 		Banner b = (Banner)request.getAttribute("b");
+		String originName = (String)request.getAttribute("originName");
 	%>
 	
      <div class="outerRv">
@@ -19,12 +21,12 @@
         <h1 class="h3 mb-2 text-gray-800" style="color: rgb(20, 18, 18)">배너 관리</h1>
         <br><br><br>
 
-        <form action="<%=contextPath%>/adBannerInsert.ev" method="post" enctype="multipart/form-data">
-        
+        <form action="<%=contextPath%>/adBannerUpdate.ev" method="post" enctype="multipart/form-data">
+        	<input type="hidden" name="banNo" value="<%=b.getBanNo()%>">
 			<table class="table table-hover" id="dataTable">
 				<tr>
 					<th>배너번호</th>
-					<td><input type="text" name="banName" value="<%=b.getBanNo()%>"></td>
+					<td><%=b.getBanNo()%></td>
 				</tr>
 				<tr>
 					<th>배너명</th>
@@ -32,14 +34,19 @@
 				</tr>
 				<tr>
 					<th>상태</th>
-					<td><input type="text" name="banName" value="<%=b.getBanStatus()%>"></td>
+					<td><select name="banStatus">
+						  <option value="Y" <%="Y".equals(b.getBanStatus())?"selected":""%>>게시중</option>
+						  <option value="N" <%="N".equals(b.getBanStatus())?"selected":""%>>보류</option>
+						</select>
+				 	</td>
 				</tr>
 				<tr>
 					<th>배너이미지</th>
 					<td>
 						<div>
                         	<img src="<%=contextPath %>/<%=b.getBanImg()%>" width="500" height="300">
-                    	</div>
+                    	</div><br>
+                        <input type="file" name="banImg">
 					</td>
 				</tr>
 				<tr>
@@ -50,7 +57,7 @@
 			</table>
 			<br><br>
 			<button type="button" onclick="location.href='<%=contextPath%>/adBannerList.ev'" class="btn btn-secondary">배너목록</button>&nbsp;
-			<button type="submit" class="btn btn-primary">등록하기</button>
+			<button type="submit" class="btn btn-primary">수정하기</button>
 	        
 		</form>
 		        

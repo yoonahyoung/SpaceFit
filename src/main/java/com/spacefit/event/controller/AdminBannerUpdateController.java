@@ -1,6 +1,5 @@
-package com.spacefit.mem.controller;
+package com.spacefit.event.controller;
 
-import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -14,20 +13,20 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.spacefit.common.SpacefitFileRenamePolicy;
-import com.spacefit.mem.model.service.MemberService;
-import com.spacefit.mem.model.vo.Member;
+import com.spacefit.event.model.service.EventService;
+import com.spacefit.event.model.vo.Banner;
 
 /**
- * Servlet implementation class ProfileUpdateController
+ * Servlet implementation class AdminBannerUpdateController
  */
-@WebServlet("/profileUpdate.me")
-public class ProfileUpdateController extends HttpServlet {
+@WebServlet("/adBannerUpdate.ev")
+public class AdminBannerUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProfileUpdateController() {
+    public AdminBannerUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,36 +39,37 @@ public class ProfileUpdateController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		
-		String memId = ((Member)session.getAttribute("loginUser")).getMemId();
-		
 		if(ServletFileUpload.isMultipartContent(request)) {
 			
 			int maxSize = 10 * 1024 * 1024;
-			String savePath = session.getServletContext().getRealPath("/resources/user/mem_upfiles/");
+			String savePath = session.getServletContext().getRealPath("/resources/admin/homePage_upfiles/");
 			MultipartRequest multi = new MultipartRequest(request, savePath, maxSize, "UTF-8", new SpacefitFileRenamePolicy());
 	
-			String originName = multi.getOriginalFileName("profile");
-			String changeName = multi.getFilesystemName("profile");
-			String filePath = "resources/user/mem_upfiles/";
-			String memProfile = filePath + changeName;	
+			String changeName = multi.getFilesystemName("banImg");
+			String filePath = "resources/admin/homePage_upfiles/";
+			String banImg = filePath + changeName;	
 			
-			Member updateMem = new MemberService().updateProfile(memProfile, memId);
-	
-			if(updateMem == null) {
+			int banNo = Integer.parseInt(multi.getParameter("banNo"));
+			String banName = multi.getParameter("banName");
+			String banStatus = multi.getParameter("banStatus");
+			String banURL = multi.getParameter("banURL");
+			
+			Banner b = new Banner(banNo, banName, banStatus, banURL, banImg);
+			
+			int result = new EventService().adminUpdateBanner(b);
+			
+			if(result > 0) {
 				
-				session.setAttribute("alertMsg", "프로필 사진 변경에 실패했습니다.");
+				session.setAttribute("alertMsg", "배너가 수정되었습니다.");
+				response.sendRedirect(request.getContextPath() + "/adBannerDetail.ev?banNo=" + banNo);
 				
 			}else {
 				
-				session.setAttribute("alertMsg", "프로필 사진이 변경되었습니다.");
-				session.setAttribute("loginUser", updateMem);
-				
+				session.setAttribute("alertMsg", "배너 수정에 실패했습니다.");
+				response.sendRedirect(request.getContextPath() + "/adBannerDetail.ev?banNo=" + banNo);
 			}
-		
-		}	
-		response.sendRedirect(request.getContextPath() + "/updatePage.me");
-		
-	
+		}
+			
 	}
 
 	/**

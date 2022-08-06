@@ -33,6 +33,16 @@ public class Banner {
 		BanURL = banURL;
 		this.banImg = banImg;
 	}
+	
+
+	public Banner(int banNo, String banName, String banStatus, String banURL, String banImg) {
+		super();
+		this.banNo = banNo;
+		this.banName = banName;
+		this.banStatus = banStatus;
+		BanURL = banURL;
+		this.banImg = banImg;
+	}
 
 	public int getBanNo() {
 		return banNo;

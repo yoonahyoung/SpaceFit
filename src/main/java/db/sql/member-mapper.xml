@@ -141,6 +141,28 @@
 		   AND MEM_PWD = ?   
 	</entry>
 	
+	<!-- 배너 1번이미지 조회 -->
+	<entry key="selectBannerOne">
+		SELECT BAN_IMG
+		  FROM TB_BANNER
+		 WHERE BAN_NUM = 1
+		   AND BAN_STATUS = 'Y'
+	</entry>
+	
+	<entry key="selectBannerTwo">
+		SELECT BAN_IMG
+		  FROM TB_BANNER
+		 WHERE BAN_NUM = 2
+		   AND BAN_STATUS = 'Y'
+	</entry>
+	
+	<entry key="selectBannerThree">
+		SELECT BAN_IMG
+		  FROM TB_BANNER
+		 WHERE BAN_NUM = 3
+		   AND BAN_STATUS = 'Y'
+	</entry>
+	
 	<!-- 회원정보의 회원등급 조회 -->
 	<entry key="selectGrade">
 		SELECT GR_NAME
@@ -165,6 +187,8 @@
 		  FROM TB_COUPON
 		  JOIN TB_MCP USING(CP_NO)
 		 WHERE MEM_NO = ?
+		 ORDER
+		    BY MCP_END_DATE
 	</entry>
 
 	<!-- 내쿠폰 페이지에서 회원의 쿠폰 등록 -->
@@ -614,5 +638,17 @@
 				  FROM TB_MEMBER)
 	</entry>
 	
-	
+	<!-- 민주작성 - 사용가능한 쿠폰 조회 -->
+		<!-- 내쿠폰 조회 -->
+	<entry key="selectMyCouponList">
+		SELECT MCP_NO
+		     , CP_NO
+		     , CP_NAME
+		     , CP_DISCOUNT
+		  FROM TB_MCP
+		  JOIN TB_COUPON USING(CP_NO)
+		 WHERE MEM_NO = ?
+		   AND MCP_STATUS = 'Y'
+		   AND MCP_USE = 'N'
+	</entry>
 </properties>

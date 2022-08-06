@@ -122,4 +122,32 @@ public class EventDao {
 		
 	}
 	
+	// 관리자_배너 수정
+	public int adminUpdateBanner(Connection conn, Banner b) {
+	      
+	      PreparedStatement pstmt = null;
+	      String sql = prop.getProperty("adminUpdateBanner");
+	      int result = 0;
+	      
+	      try {
+	         pstmt = conn.prepareStatement(sql);
+	         
+	         pstmt.setString(1, b.getBanName());
+	         pstmt.setString(2, b.getBanStatus());
+	         pstmt.setString(3, b.getBanURL());
+	         pstmt.setString(4, b.getBanImg());
+	         pstmt.setInt(5, b.getBanNo());
+	         
+	         result = pstmt.executeUpdate();
+	         
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(pstmt);
+	      }
+	      
+	      return result;
+	      
+	   }
+	
 }

@@ -47,6 +47,7 @@ public class AdminBannerInsertController extends HttpServlet {
 			String savePath = session.getServletContext().getRealPath("/resources/admin/homePage_upfiles/");
 			MultipartRequest multi = new MultipartRequest(request, savePath, maxSize, "UTF-8", new SpacefitFileRenamePolicy());
 	
+			String originName = multi.getOriginalFileName("banImg");
 			String changeName = multi.getFilesystemName("banImg");
 			String filePath = "resources/admin/homePage_upfiles/";
 			String banImg = filePath + changeName;	
@@ -62,6 +63,7 @@ public class AdminBannerInsertController extends HttpServlet {
 			
 			if(result > 0) {
 				
+				session.setAttribute("originName", originName);
 				session.setAttribute("alertMsg", "배너가 등록되었습니다.");
 				response.sendRedirect(request.getContextPath() + "/adBannerList.ev");
 				
