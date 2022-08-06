@@ -1,6 +1,7 @@
 package com.spacefit.pay.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,7 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.spacefit.mem.model.vo.Cart;
 import com.spacefit.mem.model.vo.Member;
+import com.spacefit.pay.model.service.PayService;
+import com.spacefit.reservation.model.vo.Book;
 
 /**
  * Servlet implementation class BookInsertController
@@ -31,20 +35,77 @@ public class BookInsertController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
+		request.setCharacterEncoding("UTF-8");
 		
 		int memNo = ((Member)session.getAttribute("loginUser")).getMemNo();
-		String spaceNo = request.getParameter("spaceNo");
+        
+		// payView에서 cart 객체 만들값들
+		int spaceNo = Integer.parseInt(request.getParameter("spaceNo"));
+		int limit = Integer.parseInt(request.getParameter("limit"));
+		String date = request.getParameter("date");
+		String detailCI = request.getParameter("in");
+		String detailCO = request.getParameter("out");
+		String park = request.getParameter("park");
+		String animal = request.getParameter("animal");
+		String stand = request.getParameter("stand");
+		String chair = request.getParameter("chair");
+
+		int amount = Integer.parseInt(request.getParameter("beforeDiscount"));
+		int discountAmount = amount;
+		String name = request.getParameter("name");
 		String cpNo = request.getParameter("cpNo");
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
-		String rsvFor = request.getParameter("rsvFor");
+		String purpose = request.getParameter("purpose");
 		String bookContent = request.getParameter("bookContent");
-		String beforeDiscount = request.getParameter("beforeDiscount");
+		
+		// 쿠폰 사용하는 경우 총 금액 변경해줌
+		if( !cpNo.equals("")) {
+			int discount = new PayService().getDiscount(cpNo);
+			discountAmount -= discount;
+		}
+		//
+		
+		Cart quickPay = new Cart(memNo, spaceNo, limit, date, detailCI, detailCO, park, animal, stand, chair, discountAmount);
+		
+		Book book = new Book();
+		book.setBookName(name);
+		book.setBookPhone(phone);
+		book.setBookEmail(email);
+		book.setBookPurpose(purpose);
+		if( !bookContent.equals("")) {
+			book.setBookAddContent(bookContent);
+		}
+		
+		System.out.println(quickPay);
+		System.out.println(book);
+		//
+		int result = 0;
+		
+		if(cpNo.equals("")) {
+				if(bookContent.equals("")) { // 쿠폰 x, 요청 x 1
+					result = new PayService().insertBook1(quickPay, book, amount);
+				}else { // 쿠폰 x,요청 o 2
+					result = new PayService().insertBook2(quickPay, book, amount);
+				}
+			//result = new PayService().insertBook(memNo);
+
+		}else {
+			
+			if(bookContent.equals("")) { // 쿠폰 o, 요청 x 3
+				result = new PayService().insertBook3(cpNo, quickPay, book, amount, discountAmount);
+			}else { // 쿠폰 o,요청 o 4
+				result = new PayService().insertBook4(cpNo, quickPay, book, amount, discountAmount);
+			}
+			
+		}
 		
 		
-		if(rsvFor.equals("") || bookContent.equals("") || cpNo.equals("")) {
-			System.out.println("미입력");
-			//int result = new PayService().insertPaylist(memNo);
+		
+		
+		if(result > 0) {
+			request.getRequestDispatcher("views/user/myPage/reservationListView.jsp").forward(request, response);
+			//response.sendRedirect(request.getContextPath()+"/bolist.bo");
 		}
 
 	}

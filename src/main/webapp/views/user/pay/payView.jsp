@@ -14,10 +14,18 @@
 	%>
 <%@ include file="../common/userMenubar.jsp" %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/user/css/pay.css">
-<form action="insert.book" type="post">
-<input type="hidden" id="spaceNo" name="spaceNo" value="<%=s.getSpaceNo()%>">
-<input type="hidden" id="cpNo" name="cpNo" value="">
-<input type="hidden" id="beforeDiscount" name="beforeDiscount" value="<%=c.getCartPrice()%>">
+<form action="insert.book" method="post">
+	<input type="hidden" id="spaceNo" name="spaceNo" value="<%=s.getSpaceNo()%>">
+	<input type="hidden" id="cpNo" name="cpNo" value="">
+	<input type="hidden" id="beforeDiscount" name="beforeDiscount" value="<%=c.getCartPrice()%>">
+	<input type="hidden" id="date" name="date" value="<%=c.getCartDate()%>">
+	<input type="hidden" id="limit" name="limit" value="<%=c.getCartLimit()%>">
+	<input type="hidden" id="in" name="in" value="<%=c.getCartIn()%>">
+	<input type="hidden" id="out" name="out" value="<%=c.getCartOut()%>">
+	<input type="hidden" id="park" name="park" value="<%=c.getCartParking()%>">
+	<input type="hidden" id="animal" name="animal" value="<%=c.getCartAnimal()%>">
+	<input type="hidden" id="stand" name="stand" value="<%=c.getCartStand()%>">
+	<input type="hidden" id="chair" name="chair" value="<%=c.getCartChair()%>">
 <div class="rvlvd">
 
     <div class="rvlvd-header" align="center">
@@ -77,43 +85,43 @@
             미니의자
             </td>
             <td class="right" width="150">
-                  <input type="radio" name="optionCar" id="optionCarY" disabled>요청 &emsp;
-                  <input type="radio" name="optionCar" id="optionCarN" disabled>미요청 <br>
-                  <input type="radio" name="optionAnimal" id="optionAnimalY" disabled>요청 &emsp;
-                  <input type="radio" name="optionAnimal" id="optionAnimalN" disabled>미요청 <br>
-                  <input type="radio" name="optionStand" id="optionStandY" disabled>요청 &emsp;
-                  <input type="radio" name="optionStand" id="optionStandN" disabled>미요청 <br>
-                  <input type="radio" name="optionChair" id="optionChairY" disabled>요청 &emsp;
-                  <input type="radio" name="optionChair" id="optionChairN" disabled>미요청 <br>
+                  <input type="radio" name="optionCar" id="optionCarY" value="Y" disabled>요청 &emsp;
+                  <input type="radio" name="optionCar" id="optionCarN" value="N" disabled>미요청 <br>
+                  <input type="radio" name="optionAnimal" id="optionAnimalY" value="Y" disabled>요청 &emsp;
+                  <input type="radio" name="optionAnimal" id="optionAnimalN" value="N" disabled>미요청 <br>
+                  <input type="radio" name="optionStand" id="optionStandY" value="Y" disabled>요청 &emsp;
+                  <input type="radio" name="optionStand" id="optionStandN" value="N" disabled>미요청 <br>
+                  <input type="radio" name="optionChair" id="optionChairY" value="Y" disabled>요청 &emsp;
+                  <input type="radio" name="optionChair" id="optionChairN" value="N" disabled>미요청 <br>
             </td>
         </tr>
       </table>
 
       <br><br>
         <br>
-        <table class="table">
+        <table class="table" id="book">
          <tr>
             <td colspan="2"><h5 style="display:inline"><b>예약자정보</b></h5><h6 style="display:inline"> * 예약자 정보로 이메일이 발송됩니다. 정확한 정보인지 확인해주세요</h6></td>
          </tr>
            <tr>
               <th>예약자 *</th>    
-              <td><input type="text" size="69%" id="rsvName" readonly value="<%=loginUser.getMemName() %>" style="background-color: #EEEEEE;" required></td>                        
+              <td><input type="text" size="68%" id="name" name="name" readonly value="<%=loginUser.getMemName() %>" style="background-color: #EEEEEE;"></td>                        
            </tr>
            <tr>
               <th>연락처 *</th>    
-              <td><input type="text" size="69%" id="rsvPhone" name="phone" class="phone" maxlength="13" value="<%= loginUser.getMemPhone() %>" placeholder="숫자만 입력해주세요" required></td>                        
+              <td><input type="text" size="68%" id="phone" name="phone" class="phone" maxlength="13" value="<%= loginUser.getMemPhone() %>" placeholder="숫자만 입력해주세요" required></td>                        
            </tr>
            <tr>
               <th>이메일 *</th>    
-              <td><input type="text" size="69%" id="rsvEmail" name="email" value="<%= loginUser.getMemMail() %>" required placeholder="예약자 정보로 이메일이 발송됩니다. 정확한 정보인지 확인해주세요"></td>                        
+              <td><input type="text" size="68%" id="email" name="email" value="<%= loginUser.getMemMail() %>" required placeholder="예약자 정보로 이메일이 발송됩니다. 정확한 정보인지 확인해주세요"></td>                        
            </tr>
            <tr>
-              <th>사용목적</th>    
-              <td><input type="text" size="69%" name="rsvFor" placeholder="촬영, 파티, 모임, 수업 등 공간의 사용 목적을 입력해주세요"></td>                        
+              <th>사용목적 *</th>    
+              <td><input type="text" size="68%" id="purpose" name="purpose" placeholder="촬영, 파티, 모임, 수업 등 공간의 사용 목적을 입력해주세요" required></td>                        
            </tr>
            <tr>
               <th>요청사항</th>    
-              <td><textarea name="bookContent" id="rsvMsg" rows="10" cols="72" style="resize:none; white-space:pre;" placeholder="남기고 싶은말을 적어주세요 (최대 500자)"></textarea></td>                        
+              <td><textarea name="bookContent" id="rsvMsg" rows="10" cols="71" style="resize:none; white-space:pre;" placeholder="남기고 싶은말을 적어주세요 (최대 500자)"></textarea></td>                        
               
            </tr>
 
@@ -167,13 +175,24 @@
       <br><br>
 
       <div align="center">               
-         <button type="submit" class="btn btn-sm btn-primary" onclick="">결제하기</button> &nbsp;
+         <button type="submit" class="btn btn-sm btn-primary" onclick=" return checkRequired();">결제하기</button> &nbsp;
          <button type="button" onclick="history.back();" class="btn btn-sm btn-secondary">뒤로가기</button>
       </div>
       
   </div>
 
 <script>
+
+      function checkRequired(){
+         if($("#phone").val() == '' || $("#email").val() == '' || $("#purpose").val() == ''){
+   			   	alert("필수사항을 입력해주세요!");
+                  return false;
+   		   }else{
+               alert("결제완료되었습니다! 예약내역리스트로 이동합니다.");
+               return true;
+            }
+      }
+
 
 		$(function(){
 			<% if( c.getCartParking().equals("N") ) { %>

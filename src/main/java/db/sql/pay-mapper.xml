@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="getDiscount">
+		SELECT CP_DISCOUNT
+		  FROM TB_MCP
+		  JOIN TB_COUPON USING(CP_NO)
+		 WHERE CP_NO = ?
+	</entry>
+	
+	<!-- 쿠폰 없을 때 PAYLIST INSERT -->
+	<entry key="insertPayListNo">
+	INSERT
+	  INTO TB_PAYLIST
+	     (
+	       PL_ID
+	     , PL_STATUS
+	     , PL_TID
+	     , PL_MEM_NO
+	     , PL_TYPE
+	     , PL_AMOUNT
+	     , PL_DISCOUNT_AMOUNT
+	     , PL_REQUEST_TIME
+	     , PL_APPROVED_TIME
+	     )
+	VALUES
+	     (
+	       SEQ_PLNO.NEXTVAL
+	     , 'Y'
+	     , '123456DF'
+	     , ?
+	     , 'CARD'
+	     , ?
+	     , ?
+	     , SYSDATE
+	     , SYSDATE
+	     )
+	</entry>
+	
+	<!-- 쿠폰 있을 때 PAYLIST INSERT -->
+	<entry key="insertPayListCoupon">
+	INSERT
+	  INTO TB_PAYLIST
+	     (
+	       PL_ID
+	     , PL_STATUS
+	     , PL_TID
+	     , PL_MEM_NO
+	     , PL_TYPE
+	     , PL_CP_NO
+	     , PL_AMOUNT
+	     , PL_DISCOUNT_AMOUNT
+	     , PL_REQUEST_TIME
+	     , PL_APPROVED_TIME
+	     )
+	VALUES
+	     (
+	       SEQ_PLNO.NEXTVAL
+	     , 'Y'
+	     , '123456DF'
+	     , ?
+	     , 'CARD'
+	     , ?
+	     , ?
+	     , ?
+	     , SYSDATE
+	     , SYSDATE
+	     )
+	</entry>
+	
+	<!-- 요청없을때 BOOK INSERT -->
+	<entry key="insertBookNo">
+INSERT INTO TB_BOOK
+          ( BOOK_NO
+          , SPACE_NO
+          , MEM_NO
+          , PL_ID
+          , BOOK_COUNT
+          , BOOK_DATE
+          , BOOK_IN
+          , BOOK_OUT
+          , BOOK_PRICE
+          , BOOK_NAME
+          , BOOK_PHONE
+          , BOOK_EMAIL
+          , BOOK_PURPOSE
+          , BOOK_CAR
+          , BOOK_ANIMAL
+          , BOOK_CHAIR
+          , BOOK_STAND
+          , BOOK_CREATE_DATE
+          , BOOK_MODIFY_DATE
+          )
+     VALUES
+          (
+            SEQ_BONO.NEXTVAL
+          , ?
+          , ?
+          , SEQ_PLNO.CURRVAL
+          , ?
+          , ?
+          , ?
+          , ?
+          , ?
+          , ?
+          , ?
+          , ?
+          , ?
+          , ?
+          , ?
+          , ?
+          , ?
+          , SYSDATE
+          , SYSDATE
+          )
+	</entry>
+	
+	<!-- 요청있을때 BOOK INSERT -->
+	<entry key="insertBookContent">
+	INSERT INTO TB_BOOK
+	          ( BOOK_NO
+	          , SPACE_NO
+	          , MEM_NO
+	          , PL_ID
+	          , BOOK_COUNT
+	          , BOOK_DATE
+	          , BOOK_IN
+	          , BOOK_OUT
+	          , BOOK_PRICE
+	          , BOOK_NAME
+	          , BOOK_PHONE
+	          , BOOK_EMAIL
+	          , BOOK_PURPOSE
+	          , BOOK_ADD_CONTENT
+	          , BOOK_CAR
+	          , BOOK_ANIMAL
+	          , BOOK_CHAIR
+	          , BOOK_STAND
+	          , BOOK_CREATE_DATE
+	          , BOOK_MODIFY_DATE
+	          )
+	     VALUES
+	          (
+	            SEQ_BONO.NEXTVAL
+	          , ?
+	          , ?
+	          , SEQ_PLNO.CURRVAL
+	          , ?
+	          , ?
+	          , ?
+	          , ?
+	          , ?
+	          , ?
+	          , ?
+	          , ?
+	          , ?
+	          , ?
+	          , ?
+	          , ?
+	          , ?
+	          , ?
+	          , SYSDATE
+	          , SYSDATE
+	          )
+	</entry>
+	
+	<!-- 쿠폰 사용 후 삭제 -->
+	<entry key="deleteCoupon">
+	UPDATE TB_MCP
+	   SET MCP_USE = 'Y'
+	 WHERE MEM_NO = ?
+	   AND CP_NO = ?
+	</entry>
+</properties>
