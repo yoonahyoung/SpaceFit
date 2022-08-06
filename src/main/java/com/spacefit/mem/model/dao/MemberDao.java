@@ -1236,8 +1236,39 @@ public int blackCheck(Connection conn, String addSql) {
 		return result;
 	}
 	
-	
-	
+	   // 민주작성 - 사용가능한 쿠폰 조회
+	   public ArrayList<Mcp> selectMyCouponList(Connection conn, int memNo) {
+		   
+		   ArrayList<Mcp> list = new ArrayList<>();
+		   ResultSet rset = null;
+		   PreparedStatement pstmt = null;
+		   String sql = prop.getProperty("selectMyCouponList");
+		   
+		   try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add( new Mcp(rset.getInt("MCP_NO"),
+								  rset.getInt("CP_NO"),
+								  rset.getString("CP_NAME"),
+								  rset.getInt("CP_DISCOUNT")
+						));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		   
+		 return list;
+		   
+	   }
 	
 	
 	

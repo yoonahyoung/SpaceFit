@@ -605,5 +605,17 @@
 				  FROM TB_MEMBER)
 	</entry>
 	
-	
+	<!-- 민주작성 - 사용가능한 쿠폰 조회 -->
+		<!-- 내쿠폰 조회 -->
+	<entry key="selectMyCouponList">
+		SELECT MCP_NO
+		     , CP_NO
+		     , CP_NAME
+		     , CP_DISCOUNT
+		  FROM TB_MCP
+		  JOIN TB_COUPON USING(CP_NO)
+		 WHERE MEM_NO = ?
+		   AND MCP_STATUS = 'Y'
+		   AND MCP_USE = 'N'
+	</entry>
 </properties>

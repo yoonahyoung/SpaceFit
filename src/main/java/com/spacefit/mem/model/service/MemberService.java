@@ -507,4 +507,12 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+	
+       // 민주작성 - 사용가능한 쿠폰 조회
+	   public ArrayList<Mcp> selectMyCouponList(int memNo) {
+		   Connection conn = getConnection();
+		   ArrayList<Mcp> list = new MemberDao().selectMyCouponList(conn, memNo);
+		   close(conn);
+		   return list;
+	   }
 }

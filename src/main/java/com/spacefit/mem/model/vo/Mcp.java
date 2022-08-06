@@ -19,6 +19,18 @@ public class Mcp {
 	
 	public Mcp() {}
 
+	
+	// 민주 작성
+	public Mcp(int mcpNo,  int cpNo, String cpName, int cpDiscount) {
+		super();
+		this.cpNo = cpNo;
+		this.cpName = cpName;
+		this.cpDiscount = cpDiscount;
+		this.mcpNo = mcpNo;
+	}
+
+
+
 	public Mcp(int cpNo, String cpName, int cpDiscount, Date cpEnrollDate, int mcpNo, int memNo, String mcpStatus,
 			String mcpUse, Date mcpStartDate, Date mcpEndDate) {
 		super();
