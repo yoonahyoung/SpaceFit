@@ -408,13 +408,16 @@ background:#E1F0FF;
                                     </select>
                                     <span class="col-sm-4"> 체크아웃  </span>
                                     <select name="detailCO" class="detailCO" required>
-                                       
+                                       <%for(int i=10; i<22; i++){ %>
+                                           <option value="<%=i%>"><%= i %>:00</option>
+                                        <%} %>
                                     </select>
                                 </div>
 
                                 <div class="row">
                                     <h4 style="margin-top:40px; border-bottom:2px solid #0D6EFD">총 금액</h4>
                                     <div><span class="col-sm-4" id="price"> </span><b>원</b></div>
+                                    <div>(시간당 이용금액 : <%=s.getSpacePrice() %>원)</div>
                                     <input type="hidden" name="price" class="price" required>
                                 </div>
                                 <script>
@@ -616,7 +619,7 @@ background:#E1F0FF;
                       // 체크인 시간에 따른 체크아웃 시간 막아두기
                       let el = "";
                       $(".detailCI").on("change", function(){
-	                      el = "<option>시간선택</option>"
+	                      el = "<option value='" + $(this).val() + "'>시간선택</option>"
 	                      $(".detailCO").html(el);
 	                      
                     	  let checkIn = parseInt($(this).val()) + 1;
