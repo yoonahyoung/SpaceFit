@@ -412,8 +412,10 @@
 		        SELECT COUNT(*) AS "BOOK_COUNT_MONTH"
 		                       FROM TB_BOOK B2
 		                      WHERE B2.MEM_NO = MEM.MEM_NO
-		                        AND BOOK_DATE BETWEEN TO_DATE('2022.05.01', 'YYYY.MM.DD') 
-		                                          AND TO_DATE('2022-07-28', 'YYYY.MM.DD')
+  		                        AND BOOK_DATE BETWEEN TO_DATE(TRUNC(sysdate,'MM')) 
+                        		AND TO_DATE(LAST_DAY(sysdate)) 
+		                        <!--  AND BOOK_DATE BETWEEN TO_DATE('2022.05.01', 'YYYY.MM.DD') 
+		                                          AND TO_DATE('2022-07-28', 'YYYY.MM.DD') -->
 		        )AS "BOOK_COUNT_MONTH"
 		     , (
 		            SELECT SUM(BOOK_PRICE)
@@ -424,8 +426,10 @@
 		         SELECT SUM(BOOK_PRICE)
 		           FROM TB_BOOK B4
 		          WHERE B4.MEM_NO = MEM.MEM_NO
-		            AND BOOK_DATE BETWEEN TO_DATE('2022.05.01', 'YYYY.MM.DD') 
-		                              AND TO_DATE('2022-07-28', 'YYYY.MM.DD')
+		             AND BOOK_DATE BETWEEN TO_DATE(TRUNC(sysdate,'MM')) 
+                        		AND TO_DATE(LAST_DAY(sysdate))  
+		                        <!--  AND BOOK_DATE BETWEEN TO_DATE('2022.05.01', 'YYYY.MM.DD') 
+		                                          AND TO_DATE('2022-07-28', 'YYYY.MM.DD') -->
 		        )AS "BOOK_AMOUNT_MONTH"
 		     , (
 		        SELECT COUNT(*) AS "RPT_COUNT"
@@ -511,6 +515,25 @@
       SET MEM_ADM_FLAG = 'A'
 	</entry>
 	
+	<entry key="gradeUp">
+		   UPDATE TB_MEMBER
+     		  SET GR_NO = (GR_NO + 1)
+	</entry>
+	
+	<entry key="gradeDown">
+		   UPDATE TB_MEMBER
+     		  SET GR_NO = (GR_NO - 1)
+	</entry>
+	
+	<entry key="generalCheck">
+    	UPDATE TB_MEMBER
+    	   SET MEM_ADM_FLAG = 'U'
+	</entry>
+	
+	<entry key="blackCheck">
+	   UPDATE TB_MEMBER
+     	  SET MEM_STATUS = 'Y'
+	</entry>
 	<!-- 관리자 쿠폰 등록 -->
 	<entry key="adminInsertCoupon">
 		INSERT 

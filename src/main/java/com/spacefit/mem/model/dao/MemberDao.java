@@ -1042,6 +1042,70 @@ public class MemberDao {
 		} return howMany;
 	}
 	
+public int generalCheck(Connection conn, String addSql) {
+		
+		int howMany = 0;
+		PreparedStatement pstmt = null;
+		//ResultSet rset = null;
+		String sql = prop.getProperty("generalCheck") + addSql;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			howMany = pstmt.executeUpdate(); //2개 선택시 2
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return howMany;
+	}
+
+public int gradeUp(Connection conn, String addSql) {
+	
+	int howMany = 0;
+	PreparedStatement pstmt = null;
+	//ResultSet rset = null;
+	String sql = prop.getProperty("gradeUp") + addSql;
+	try {
+		pstmt = conn.prepareStatement(sql);
+		howMany = pstmt.executeUpdate(); //2개 선택시 2
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+	} return howMany;
+}
+
+public int gradeDown(Connection conn, String addSql) {
+	
+	int howMany = 0;
+	PreparedStatement pstmt = null;
+	//ResultSet rset = null;
+	String sql = prop.getProperty("gradeDown") + addSql;
+	try {
+		pstmt = conn.prepareStatement(sql);
+		howMany = pstmt.executeUpdate(); //2개 선택시 2
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+	} return howMany;
+}
+
+public int blackCheck(Connection conn, String addSql) {
+	
+	int howMany = 0;
+	PreparedStatement pstmt = null;
+	//ResultSet rset = null;
+	String sql = prop.getProperty("blackCheck") + addSql;
+	try {
+		pstmt = conn.prepareStatement(sql);
+		howMany = pstmt.executeUpdate(); //2개 선택시 2
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+	} return howMany;
+}
+	
 	
 	
 	

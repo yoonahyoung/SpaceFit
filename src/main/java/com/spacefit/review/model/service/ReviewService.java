@@ -160,7 +160,13 @@ public class ReviewService {
 		close(conn);
 		return rv;
 	}
-	
+
+	public ArrayList<Review> selectRvPhotoList(int reviewNo){
+		Connection conn = getConnection();
+		ArrayList<Review> rvPhotoList = new ReviewDao().selectRvPhotoList(conn, reviewNo);
+		close(conn);
+		return rvPhotoList;
+	}
 	
 	public int todayRvCount() {
 		Connection conn = getConnection();

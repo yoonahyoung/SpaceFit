@@ -477,6 +477,11 @@ public class ReviewDao {
 	}
 	
 	
+	/** admin-리뷰리스트 디테일조회
+	 * @param conn
+	 * @param reviewNo
+	 * @return
+	 */
 	public Review adminSelectEachReview(Connection conn, int reviewNo) {
 		
 		Review rv = null;
@@ -504,7 +509,6 @@ public class ReviewDao {
 								rset.getInt("all_like_count"),
 								rset.getInt("all_rpt_count"),
 								rset.getString("rv_status")
-								// rset.getString("space_no")
 						);
 						
 			}
@@ -517,6 +521,34 @@ public class ReviewDao {
 		} return rv;
 		
 	}
+	
+	
+	public ArrayList<Review> selectRvPhotoList(Connection conn, int reviewNo) {
+		ArrayList<Review> rvPhotoList = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectReviewPhoto");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				rvPhotoList.add(new Review(
+						rset.getString("file_path"),
+						rset.getString("file_change_name")
+						));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return rvPhotoList;
+	}
+	
+	
 	
 	
 	

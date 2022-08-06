@@ -345,6 +345,10 @@ public class MemberService {
 			case "like" : addSql = "ORDER BY LIKE_COUNT DESC"; break;
 			case "adminOnly" : addSql = "WHERE MEM_ADM_FLAG = 'A'"; break;
 			case "userOnly" : addSql = "WHERE MEM_ADM_FLAG = 'U'"; break;
+			case "black" : addSql = "WHERE MEM_STATUS = 'B'"; break;
+			//case "forBasic" : addSql = "WHERE BOOK_COUNT_MONTH IN (0,1,2)"; break;
+			//case "forSilver" : addSql = "WHERE BOOK_COUNT_MONTH IN (3,4)"; break;
+			//case "forGold" : addSql = "WHERE BOOK_COUNT_MONTH >= 5"; break;
 			default : addSql ="ORDER BY MEM_ENROLL_DATE ASC"; break;
 		}
 
@@ -358,6 +362,66 @@ public class MemberService {
 		Connection conn = getConnection();
 		String addSql = "WHERE MEM_NO IN (" + strAdminNo + ")";
 		int howMany = new MemberDao().adminCheck(conn, addSql);
+		
+		if(howMany > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		} 
+		close(conn);
+		
+		return howMany;
+	}
+	
+	public int generalCheck(String strGenNo) {
+		Connection conn = getConnection();
+		String addSql = "WHERE MEM_NO IN (" + strGenNo + ")";
+		int howMany = new MemberDao().generalCheck(conn, addSql);
+		
+		if(howMany > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		} 
+		close(conn);
+		
+		return howMany;
+	}
+	
+	public int gradeUp(String strGradeUpNo) {
+		Connection conn = getConnection();
+		String addSql = "WHERE MEM_NO IN (" + strGradeUpNo + ")";
+		int howMany = new MemberDao().gradeUp(conn, addSql);
+		
+		if(howMany > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		} 
+		close(conn);
+		
+		return howMany;
+	}
+	
+	public int gradeDown(String strGradeDownNo) {
+		Connection conn = getConnection();
+		String addSql = "WHERE MEM_NO IN (" + strGradeDownNo + ")";
+		int howMany = new MemberDao().gradeDown(conn, addSql);
+		
+		if(howMany > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		} 
+		close(conn);
+		
+		return howMany;
+	}
+	
+	public int blackCheck(String strBlackNo) {
+		Connection conn = getConnection();
+		String addSql = "WHERE MEM_NO IN (" + strBlackNo + ")";
+		int howMany = new MemberDao().blackCheck(conn, addSql);
 		
 		if(howMany > 0) {
 			commit(conn);

@@ -250,19 +250,19 @@
      		SELECT COUNT(*) AS "todayRvCount"
    			  FROM TB_REVIEW
   			 WHERE TO_CHAR(RV_ENROLL_DATE,'yy/mm/dd') = (SELECT TO_CHAR(SYSDATE,'yy/mm/dd') FROM DUAL)
-  			   AND RV_STATUS = 'Y';   
+  			   AND RV_STATUS = 'Y'
 	</entry>
 	
-	
+	<!-- 관리자 리뷰 디테일 페이지에서 해당 리뷰사진만 확인 -->
 	<entry key="selectReviewPhoto">
-		SELECT RV_NO
-             , FILE_PATH || FILE_CHANGE_NAME AS "REVIEW_MAINIMG"
+		 SELECT FILE_PATH
+              , FILE_CHANGE_NAME
           FROM TB_REVIEW R
           JOIN TB_FILE ON (REF_BNO = RV_NO)
-         WHERE R.MEM_NO = 2
-           AND FILE_CATEGORY = 2
+         WHERE FILE_CATEGORY = 2
            AND FILE_LEVEL = 1
-           AND FILE_STATUS = 'Y';
+           AND FILE_STATUS = 'Y'
+           AND RV_NO = ?
 	</entry>
 	
 
