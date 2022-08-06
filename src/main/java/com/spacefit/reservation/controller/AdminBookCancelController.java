@@ -44,7 +44,7 @@ public class AdminBookCancelController extends HttpServlet {
 		
 		if(result > 0) {
 			request.getSession().setAttribute("alertMsg", "예약삭제되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/aBookList.bo");
+			response.sendRedirect(request.getContextPath() + "/abdetail.bo?no=" + bookNo);
 		} else {
 			request.setAttribute("errorMsg", "예약삭제에 실패했습니다");
 			request.getRequestDispatcher("views/user/common/backAlertErrorPage.jsp").forward(request, response);
