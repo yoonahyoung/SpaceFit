@@ -49,10 +49,9 @@ public class SpaceAjaxQnAListController extends HttpServlet {
 		int startPage;		
 		int endPage;		
 		
-		String selectSp = ""; // 그냥 무관함. 페이징 처리를 하기 위해 보낸 것.
-		listCount = new SpaceService().selectListCount(selectSp);
+		listCount = new SpaceService().selectListQnACount(spNo);
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
-		pageLimit = 5;
+		pageLimit = 3;
 		boardLimit = 6;
 		maxPage = (int)Math.ceil( (double)listCount / boardLimit );
 		startPage = (currentPage-1) / pageLimit * pageLimit + 1;

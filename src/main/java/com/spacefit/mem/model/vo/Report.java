@@ -115,6 +115,8 @@ public class Report {
 		this.commentStatus = commentStatus;
 	}
 	
+	public Report() {};
+	
 	public Report(int rptNo, int memNo, int rptMemNo, int rptReasonNo, String rptReason, int rptRefCat, int rptRefNo,
 			Date rptDate) {
 		super();

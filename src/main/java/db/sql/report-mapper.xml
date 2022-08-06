@@ -82,19 +82,59 @@
 		  WHERE RPT_REF_CAT = '2'
 	</entry>
 	
-	<!-- 가장 많은 신고를 당한 작성자 -->
+	<!-- 가장 많은 신고를 당한 작성자(유효한 글상태) -->
 	<entry key="maxMemId">
-		SELECT MEM_ID 
-		  FROM (SELECT RPT_MEM_NO 
-		          FROM TB_REPORT
-		         GROUP
-		            BY RPT_MEM_NO
-		        HAVING COUNT(*) = (SELECT MAX(COUNT)
-		                             FROM ( SELECT COUNT(*) AS "COUNT", RPT_MEM_NO
-		                                      FROM TB_REPORT
-		                                     GROUP BY RPT_MEM_NO))) 
-		 JOIN TB_MEMBER M ON (RPT_MEM_NO = M.MEM_NO)  
+		SELECT MEM_ID
+			  FROM (  
+			    SELECT ROWNUM RNUM, A.*
+			      FROM (
+			            SELECT M.MEM_ID AS "MEM_ID"		    
+                              , COUNT(*) AS "COUNT"		    
+                          FROM TB_REPORT R
+                          JOIN TB_MEMBER M ON (R.RPT_MEM_NO = M.MEM_NO)
+                          LEFT JOIN TB_REVIEW RE ON (R.RPT_REF_CAT = 1 AND R.RPT_REF_NO = RE.RV_NO)
+                          LEFT JOIN TB_COMMENT CO ON (R.RPT_REF_CAT = 2 AND R.RPT_REF_NO = CO.COM_NO)
+                          WHERE RV_STATUS = 'Y' OR COM_STATUS = 'Y'
+                          GROUP 
+                            BY R.RPT_REF_NO, R.RPT_REF_CAT, M.MEM_ID, RE.RV_STATUS, CO.COM_STATUS
+                         HAVING COUNT(*) >= 1 
+                         ORDER BY COUNT DESC
+                          ) A
+					 )     
+			  WHERE RNUM = 1	
+	</entry>
+	
+	<entry key="selectRvContent">
+		SELECT RV_CONTENT
+		  FROM TB_REVIEW
+		 WHERE RV_NO = ?
+	
+	</entry>
+	
+	<entry key="selectCmContent">
+		 SELECT COM_CONTENT
+		   FROM TB_COMMENT
+		  WHERE COM_NO = ?
 	</entry>
 
+	<entry key="updateRvStatus">
+		UPDATE TB_REVIEW
+		   SET RV_STATUS = 'N'
+		 WHERE RV_NO = ?
+	
+	</entry>
+	
+	<entry key="updateCmStatus">
+		 UPDATE TB_COMMENT
+		    SET COM_STATUS = 'N'
+		  WHERE COM_NO = ?  	
+	</entry>
+	
+	<entry key="blackListUpdate">
+		UPDATE TB_MEMBER
+	       SET MEM_STATUS = 'B'
+	     WHERE MEM_ID = ?
+		
+	</entry>
 
 </properties>

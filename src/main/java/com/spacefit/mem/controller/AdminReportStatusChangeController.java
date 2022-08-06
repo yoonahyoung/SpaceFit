@@ -1,7 +1,6 @@
 package com.spacefit.mem.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,53 +8,49 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.spacefit.mem.model.service.ReportService;
-import com.spacefit.mem.model.vo.Report;
 
 /**
- * Servlet implementation class AdminMemberReportDetailViewController
+ * Servlet implementation class AdminReportStatusChangeController
  */
-@WebServlet("/memRptDetailView.me")
-public class AdminMemberReportDetailViewController extends HttpServlet {
+@WebServlet("/statusChange.rp")
+public class AdminReportStatusChangeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminMemberReportDetailViewController() {
+    public AdminReportStatusChangeController() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		int rptRefNo = Integer.parseInt(request.getParameter("no"));
-		String rptMemId = request.getParameter("rptMemId");
+		int rptRefNo = Integer.parseInt(request.getParameter("rno"));		
 	    String category = request.getParameter("category");
-	    String content = "";
+		
+	    int result = 0;
 	    
-		switch(category) {
-		case "후기" : content += new ReportService().selectRvContent(rptRefNo); break;
-		case "댓글" : content += new ReportService().selectCmContent(rptRefNo); break;
+	    switch(category) {
+		case "후기" : result = new ReportService().updateRvStatus(rptRefNo); break;
+		case "댓글" : result = new ReportService().updateCmStatus(rptRefNo); break;
 		}
 		
-		Report r = new Report();
-		r.setRptRefNo(rptRefNo);
-		r.setRptMemId(rptMemId);
-		r.setCategory(category);
+		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "비공개설정되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/memReport.me");
+		} 
 		
-		request.setAttribute("r", r);
-		request.setAttribute("content", content);
 		
-		request.getRequestDispatcher("views/admin/mem/memberReportDetailView.jsp").forward(request, response);
-	
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

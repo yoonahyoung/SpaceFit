@@ -48,13 +48,7 @@
 								  </div>
 								</div>
 							  <div style="height : 60px"></div>
-							  <div class="row" id="selectDivMem">
-								  	<form>										
-										  <button class="btn btn-secondary">비공개 설정</button>										 
-										  <button class="btn btn-primary">블랙리스트 설정</button>										 
-								  	</form>
-							  
-							  </div>
+						
 							  <div id="selectSelection">	
 								  	<form>					  	
 								  		<select name="selectSearch" id="selectSearch" onchange="selectList();">
@@ -73,7 +67,7 @@
 	                                <table class="table table-bordered memberListTable" id="dataTable" width="100%" cellspacing="0">
 	                                    <thead>
 	                                        <tr>
-	                                        	<th>선택</th>
+	                                        
 	                                        	<th>글번호</th>
 	                                            <th>종류</th>
 	                                            <th>누적신고수</th>
@@ -89,8 +83,7 @@
 	                                    </tbody>
 	                                    
 	                                    <tfoot>
-	                                         <tr>
-	                                        	<th>선택</th>
+	                                         <tr>	                                        	
 	                                        	<th>글번호</th>
 	                                            <th>종류</th>
 	                                            <th>누적신고수</th>
@@ -102,36 +95,23 @@
 	                                    
 	                                </table>
 	                            </div>
-	                        </div>
-	                        <!-- 
-							<div class="paging-area" align="center">    
-		        
-								<button class="btn btn-sm btn-outline-primary">&lt;</button>        
-								<button disabled class="btn btn-sm btn-outline-primary">1</button>        
-								<button class="btn btn-sm btn-outline-primary">2</button> 
-								<button class="btn btn-sm btn-outline-primary">3</button>    
-								<button class="btn btn-sm btn-outline-primary">4</button> 
-								<button class="btn btn-sm btn-outline-primary">5</button>       
-								<button class="btn btn-sm btn-outline-primary">&gt;</button>
-								
-							</div>
-							
-							 -->
+	                        </div>	                     
 							<div style="height : 60px"></div>
 	                    </div>
                 	</div>
      			</div>
-				<br><br>        		
+				<br><br>   	
             </div>
      			
 			<script>
 				$(function(){
 				
-				 selectList();
+				 selectList();						 
 				 
 				})
-				
-				function  selectList(){
+								
+							
+				function selectList(){
 					
 					$.ajax({
 						url : "<%= contextPath %>/ajAdminReport.re",
@@ -145,7 +125,7 @@
 							
 							if(list.length == 0){
 		      					value += "<tr>"
-		      					       + "<td colspan='7'> 신고내역이 없습니다. </td>"
+		      					       + "<td colspan='6'> 신고내역이 없습니다. </td>"
 		                               + "</tr>";
 		      				}else{
 		      					
@@ -159,14 +139,13 @@
 		      						    status += '<td>'+ list[i].reviewStatus+ '</td>'
 			                           }
 							
-									value += '<tr>'
-				                           + 	'<td><input type="checkBox"></td>'
+									value += '<tr>'				                          	
 				                           + 	'<td>'+ list[i].rptRefNo +'</td>'
 				                           + 	'<td>'+ list[i].category +'</td>'
 				                           + 	'<td>'+ list[i].count +'</td>'
 				                           + 	'<td>'+ list[i].rptMemId +'</td>' //작성자	
 				                           +   status
-										   + 	'<td><a class="btn btn-primary btn-sm" href="'+contextPath+'/memRptDetailView.me?no='+ list[i].rptRefNo + '&category='+ list[i].category +'">상세조회</a></td>'
+										   + 	'<td><a class="btn btn-primary btn-sm" href="'+contextPath+'/memRptDetailView.me?no='+ list[i].rptRefNo + '&category='+ list[i].category + '&rptMemId='+ list[i].rptMemId +'">상세조회</a></td>'
 				                           + '</tr>'
 			      						}
 		      					}
@@ -182,8 +161,6 @@
 					});
 				}
 				
-				
-			
 			
 			</script>  
     

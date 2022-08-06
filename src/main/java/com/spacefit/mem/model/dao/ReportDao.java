@@ -241,5 +241,112 @@ public class ReportDao {
 		return maxMemId;
 	}
 	
+	public String selectRvContent(Connection conn, int rptRefNo) {
+		// select => ResultSet(String)
+		String content = "";
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectRvContent");
+		try {
+			pstmt= conn.prepareStatement(sql);
+			pstmt.setInt(1, rptRefNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				content = rset.getString("RV_CONTENT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return content;
+	}
+	
+	public String selectCmContent(Connection conn, int rptRefNo) {
+		// select => ResultSet(String)
+		String content = "";
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectCmContent");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, rptRefNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				content = rset.getString("com_content");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+				close(rset);
+				close(pstmt);
+		}
+		
+		return content;
+		
+	}
+	
+	public int updateRvStatus(Connection conn, int rptRefNo) {
+		// update => int
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateRvStatus");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, rptRefNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
+	public int updateCmStatus(Connection conn, int rptRefNo) {
+		// update => int
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateCmStatus");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, rptRefNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
+	public int blackListUpdate(Connection conn, String memId) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("blackListUpdate");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memId);
+			
+			result = pstmt.executeUpdate();
+					
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
 	
 }

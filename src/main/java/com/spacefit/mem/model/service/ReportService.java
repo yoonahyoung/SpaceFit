@@ -89,5 +89,62 @@ public class ReportService {
 		return maxMemId;
 	}
 	
+	public String selectRvContent(int rptRefNo) {
+		Connection conn = getConnection();
+		String content = new ReportDao().selectRvContent(conn, rptRefNo);
+		close(conn);
+		return content;
+	}
+	
+	public String selectCmContent(int rptRefNo) {
+		Connection conn = getConnection();
+		String content = new ReportDao().selectCmContent(conn, rptRefNo);
+		close(conn);
+		return content;
+		
+	}
+	
+	public int updateRvStatus(int rptRefNo) {
+		Connection conn = getConnection();
+		int result = new ReportDao().updateRvStatus(conn, rptRefNo);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	public int updateCmStatus(int rptRefNo) {
+		Connection conn = getConnection();
+		int result = new ReportDao().updateCmStatus(conn, rptRefNo);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	public int blackListUpdate(String memId) {
+		Connection conn = getConnection();
+		int result = new ReportDao().blackListUpdate(conn, memId);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
 
 }
