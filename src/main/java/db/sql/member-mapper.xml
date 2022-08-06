@@ -244,6 +244,13 @@
      			  FROM TB_COUPON
     			 WHERE CP_NAME = ?)
 	</entry>
+	
+	<!-- 쿠폰 삭제 -->
+	<entry key="deleteCoupon">
+		DELETE 
+		  FROM TB_COUPON
+		 WHERE CP_NO = ?
+	</entry>
 
 	<!-- 프로필 변경 -->
 	<entry key="updateProfile">
@@ -541,6 +548,8 @@
 		     , CP_DISCOUNT
 		     , CP_ENROLL_DATE
 		  FROM TB_COUPON
+		 ORDER
+		    BY CP_NO DESC
 	</entry>
 	
 	<entry key="adminCheck">

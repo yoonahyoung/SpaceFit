@@ -26,28 +26,6 @@
                      <div class="card-header py-3">
                       <div class="row">
                         <div class="col-lg" align="left">
-				  	 <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-           			</form>
-				  </div>
-				  <div class="col-lg float-right">
-				  	 <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                       <select style="margin-left:290px; margin-top:12px; width:120px;">
-						  <option>최신등록순</option>
-						  <option>오래된순</option>
-						  <option>할인금액순</option>
-					   </select>
-           			</form>
-	                		
 				  </div>
 			
 				</div>
@@ -85,7 +63,7 @@
                                   	
 	                                  	<% for(Mcp mc : list){ %>
 	                                      <tr>
-	                                      	<td><input type="radio"></td>
+	                                      	<td><input type="radio" class="mc-radio"></td>
 	                                          <td><%= mc.getCpNo() %></td>
 	                                          <td><%= mc.getCpName() %></td>
 	                                          <td><%= mc.getCpDiscount() %>원</td>
@@ -100,35 +78,38 @@
                           </div>
                           <div>
 						  	<br><br>
-						  	<button type="button" class="btn btn-danger">전체삭제</button>
-                            <button type="button" class="btn btn-secondary">선택삭제</button>
+						  	
+                            <button type="button" id="btn1" class="btn btn-secondary delete-btn">선택삭제</button>
                             <button type="button" class="btn btn-primary" onclick="couponDetailView();">등록 및 발급</button>
                            
 						  </div>
 						  
                       </div>
 					   <br>
-                     <div class="paging-area" align="center">    
-       
-			           <button class="btn btn-sm btn-outline-primary">&lt;</button>        
-			           <button disabled class="btn btn-sm btn-outline-primary">1</button>        
-			           <button class="btn btn-sm btn-outline-primary">2</button> 
-			           <button class="btn btn-sm btn-outline-primary">3</button>    
-			           <button class="btn btn-sm btn-outline-primary">4</button> 
-			           <button class="btn btn-sm btn-outline-primary">5</button>       
-			           <button class="btn btn-sm btn-outline-primary">&gt;</button>
-			           
-			         </div>
+                     
                   </div>
 			
              </div>
-             <!-- /.container-fluid -->
             </div>
             
             <script>
 		    	function couponDetailView(){
 		   			location.href="<%=contextPath%>/adCouponDetail.me";
 				}
+		    	
+		    	
+	    		$('#btn1').click(function(){
+					
+					if($('.mc-radio').is(":checked")){
+	    				
+						clickEvent(event);
+					}
+	    		})
+	    		
+	    		function clickEvent(event){
+	    		
+	    			location.href='<%=contextPath%>/adCouponDelete.me?cpNo=' + $('tbody').find('td').eq(1).text();
+	    		}
 		    	
     		</script>
 	<br><br>

@@ -49,6 +49,8 @@
  		String memPhone = loginUser.getMemPhone();
  		String memPwd = loginUser.getMemPwd();
  		String memProfile = loginUser.getMemProfile();
+ 		String memIdNo = loginUser.getMemIdNo();
+ 		String memRealPwd = loginUser.getMemRealPwd();
  		
  		int cpCount = (int)request.getAttribute("cpCount");
  		String grName = (String)request.getAttribute("grName");
@@ -181,7 +183,7 @@
 			       	<span style="color:red; font-size:13px;">위의 내용을 숙지했으며 서비스 탈퇴에 동의합니다</span><br><br>
 			       		
 			       	<div style="width:300px;">
-			       		<input type="password" class="form-control" placeholder="비밀번호 입력" name="inputPwd" style="font-size:13px; border-color:lightgray;">
+			       		<input type="password" class="form-control" id="pwdChk" placeholder="비밀번호 입력" value="" name="inputPwd" style="font-size:13px; border-color:lightgray;">
 			       	</div>
 			      </div>
 			      <div class="modal-footer" align="center">
@@ -201,10 +203,20 @@
 					
 					return false;
 					
-				}else if( $("input[name=inputPwd]").val() != <%= memPwd %> ){
+				}
+				
+				if( $("#pwdchk").val() != <%= memPwd %> ){
 					alert("비밀번호가 일치하지 않습니다.");
 					
 					return false;
+					
+				}
+				
+				if( $("#pwdchk").val() == null ){
+					alert("비밀번호를 입력해주세요.");
+					
+					return false;
+					
 				}
 			}
 		</script>
