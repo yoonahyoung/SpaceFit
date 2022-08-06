@@ -413,9 +413,7 @@ tbody p{
                                     </select>
                                     <span class="col-sm-4"> 체크아웃  </span>
                                     <select name="detailCO" class="detailCO" required>
-                                       <%for(int i=10; i<22; i++){ %>
-                                           <option value="<%=i%>"><%= i %>:00</option>
-                                        <%} %>
+                                       <option value="">체크인 시간 및 날짜 선택<option>
                                     </select>
                                 </div>
 
