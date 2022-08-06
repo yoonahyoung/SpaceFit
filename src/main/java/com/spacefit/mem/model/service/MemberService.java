@@ -367,9 +367,9 @@ public class MemberService {
 		return list;
 	}
 
-	public int adminInsertCoupon(String cpName, int cpDiscount, String cpEndDate) {
+	public int adminInsertCoupon(String cpName, int cpDiscount, String cpEndDate , String cpDown) {
 		Connection conn = getConnection();
-		int result = new MemberDao().adminInsertCoupon(conn, cpName, cpDiscount, cpEndDate);
+		int result = new MemberDao().adminInsertCoupon(conn, cpName, cpDiscount, cpEndDate, cpDown);
 		
 		if(result > 0) {
 			commit(conn);

@@ -1,7 +1,6 @@
-package com.spacefit.mem.controller;
+package com.spacefit.notice.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,19 +8,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.spacefit.mem.model.service.MemberService;
+import com.spacefit.notice.model.service.NoticeService;
+import com.spacefit.notice.model.vo.Terms;
 
 /**
- * Servlet implementation class AdminCouponInsertController
+ * Servlet implementation class AdminTermsDeleteController
  */
-@WebServlet("/adCouponInsert.me")
-public class AdminCouponInsertController extends HttpServlet {
+@WebServlet("/adTermsDelete.no")
+public class AdminTermsDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminCouponInsertController() {
+    public AdminTermsDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,25 +31,22 @@ public class AdminCouponInsertController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		request.setCharacterEncoding("utf-8");
-		
-		String cpName = request.getParameter("cpName");
-		int cpDiscount = Integer.parseInt(request.getParameter("cpDiscount"));
-		String cpEndDate = request.getParameter("cpEndDate");
-		String cpDown = request.getParameter("cpDown");
-		
-		int result = new MemberService().adminInsertCoupon(cpName, cpDiscount, cpEndDate, cpDown);
-		
 		HttpSession session = request.getSession();
+		request.setCharacterEncoding("UTF-8");
+		
+		int termsNo = Integer.parseInt(request.getParameter("termsNo"));
+		
+		int result = new NoticeService().adminDeleteTerms(termsNo);
+		
 		if(result > 0) {
 			
-			session.setAttribute("alertMsg", "쿠폰이 등록되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/adCouponDetail.me");
+			session.setAttribute("alertMsg", "이용약관이 삭제되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/adTermsList.no");
 			
 		}else {
 			
-			session.setAttribute("alertMsg", "쿠폰 등록에 실패했습니다.");
-			response.sendRedirect(request.getContextPath() + "/adCouponDetail.me");
+			session.setAttribute("alertMsg", "이용약관 삭제에 실패했습니다.");
+			response.sendRedirect(request.getContextPath() + "/adTermsDetail.no?termsNo=" + termsNo);
 		}
 		
 	}

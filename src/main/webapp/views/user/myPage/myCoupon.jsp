@@ -149,6 +149,7 @@
 			$('.down-btn').on('click', function(){
 				location.href='<%=contextPath%>/downCouponInsert.me?cpName=' + $(this).parent().find('h4').text()
     			 + '&cpEndDate=' + $(this).parent().find('label').text();
+				
 			})
 		})
 		

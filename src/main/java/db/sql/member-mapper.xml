@@ -495,12 +495,14 @@
 		     , CP_NAME
 		     , CP_DISCOUNT
 		     , CP_ENROLL_DATE
-		     , CP_END_DATE)
+		     , CP_END_DATE
+		     , CP_DOWN)
 		VALUES(
 		       SEQ_CPNO.NEXTVAL
 		     , ?
 		     , ?
 		     , SYSDATE
+		     , ?
 		     , ?
 		       )
 	</entry>

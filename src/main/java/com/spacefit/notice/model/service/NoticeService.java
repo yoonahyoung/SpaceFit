@@ -116,6 +116,7 @@ public class NoticeService {
 	
 	// -------------- admin ------------------ //
 	
+	// 이용약관 목록 조회
 	public ArrayList<Terms> adminTermsList(){
 		Connection conn = getConnection();
 		ArrayList<Terms> list = new NoticeDao().adminTermsList(conn);
@@ -123,9 +124,47 @@ public class NoticeService {
 		return list;
 	}
 	
+	// 이용약관 등록
 	public int adminInsertTerms(Terms t) {
 		Connection conn = getConnection();
 		int result = new NoticeDao().adminInsertTerms(conn, t);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	// 이용약관 상세페이지
+	public Terms adminSelectTerms(int termsNo) {
+		Connection conn = getConnection();
+		
+		Terms t = new NoticeDao().adminSelectTerms(conn, termsNo);
+		close(conn);
+		return t;
+	}
+	
+	// 이용약관 수정
+	public int adminUpdateTerms(Terms t) {
+		Connection conn = getConnection();
+		int result = new NoticeDao().adminUpdateTerms(conn, t);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	// 이용약관 삭제
+	public int adminDeleteTerms(int termsNo) {
+		Connection conn = getConnection();
+		int result = new NoticeDao().adminDeleteTerms(conn, termsNo);
 		
 		if(result > 0) {
 			commit(conn);

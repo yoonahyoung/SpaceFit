@@ -282,7 +282,7 @@ public class NoticeDao {
 	
 	// -------------------- admin ---------------------- //
 	
-	
+	// 이용약관 목록 조회
 	public ArrayList<Terms> adminTermsList(Connection conn){
 		
 		ArrayList<Terms> list = new ArrayList<>();
@@ -317,6 +317,7 @@ public class NoticeDao {
 		
 	}
 	
+	// 이용약관 등록
 	public int adminInsertTerms(Connection conn, Terms t) {
 		
 		int result = 0;
@@ -331,6 +332,92 @@ public class NoticeDao {
 			pstmt.setString(3, t.getTermsStatus());
 			pstmt.setString(4, t.getTermsPage());
 			pstmt.setString(5, t.getTermsNote());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	// 이용약관 상세페이지
+	public Terms adminSelectTerms(Connection conn, int termsNo){
+		
+		Terms t = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminSelectTerms");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, termsNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				t = new Terms(rset.getInt("terms_no"),
+							   rset.getString("terms_title"),
+							   rset.getString("terms_content"),
+							   rset.getString("terms_status"),
+							   rset.getString("terms_page"),
+							   rset.getString("terms_note"),
+							   rset.getDate("terms_enroll_date"),
+							   rset.getDate("terms_modify_date")
+							);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return t;
+		
+	}
+	
+	// 이용약관 수정
+	public int adminUpdateTerms(Connection conn, Terms t) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("adminUpdateTerms");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, t.getTermsTitle());
+			pstmt.setString(2, t.getTermsContent());
+			pstmt.setString(3, t.getTermsStatus());
+			pstmt.setString(4, t.getTermsPage());
+			pstmt.setString(5, t.getTermsNote());
+			pstmt.setInt(6, t.getTermsNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int adminDeleteTerms(Connection conn, int termsNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("adminDeleteTerms");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, termsNo);
 			
 			result = pstmt.executeUpdate();
 			

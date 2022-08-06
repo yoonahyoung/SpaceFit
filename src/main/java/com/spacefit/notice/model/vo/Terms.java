@@ -38,6 +38,17 @@ public class Terms {
 		this.termsNote = termsNote;
 	}
 
+	public Terms(int termsNo, String termsTitle, String termsContent, String termsStatus, String termsPage,
+			String termsNote) {
+		super();
+		this.termsNo = termsNo;
+		this.termsTitle = termsTitle;
+		this.termsContent = termsContent;
+		this.termsStatus = termsStatus;
+		this.termsPage = termsPage;
+		this.termsNote = termsNote;
+	}
+
 	public int getTermsNo() {
 		return termsNo;
 	}

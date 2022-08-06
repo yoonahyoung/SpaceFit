@@ -9,6 +9,7 @@ public class Mcp {
 	private int cpDiscount;
 	private Date cpEnrollDate;
 	private Date cpEndDate;
+	private String cpDown;
 	private int mcpNo;
 	private int memNo;
 	private String mcpStatus;
@@ -44,6 +45,13 @@ public class Mcp {
 	}
 	
 	
+	public String getCpDown() {
+		return cpDown;
+	}
+
+	public void setCpDown(String cpDown) {
+		this.cpDown = cpDown;
+	}
 
 	public Mcp(int cpNo, String cpName, int cpDiscount, Date cpEnrollDate) {
 		super();

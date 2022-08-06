@@ -1062,7 +1062,7 @@ public class MemberDao {
 		return result;
 	}
 	
-	public int adminInsertCoupon(Connection conn, String cpName, int cpDiscount, String cpEndDate) {
+	public int adminInsertCoupon(Connection conn, String cpName, int cpDiscount, String cpEndDate, String cpDown) {
 	
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -1074,6 +1074,7 @@ public class MemberDao {
 			pstmt.setString(1, cpName);
 			pstmt.setInt(2, cpDiscount);
 			pstmt.setString(3, cpEndDate);
+			pstmt.setString(4, cpDown);
 			
 			result = pstmt.executeUpdate();
 			

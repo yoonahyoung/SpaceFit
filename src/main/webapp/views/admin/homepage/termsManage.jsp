@@ -60,7 +60,6 @@
                               <table class="table table-bordered memberListTable" id="dataTable" width="100%" cellspacing="0">
                                   <thead>
                                       <tr>
-                                      	  <th>선택</th>
                                       	  <th>약관번호</th>
                                           <th>상태</th>
                                           <th>이용약관명</th>
@@ -72,7 +71,6 @@
                                   </thead>
                                   <tfoot>
                                       <tr>
-                                      	<th>선택</th>
                                       	  <th>약관번호</th>
                                           <th>상태</th>
                                           <th>이용약관명</th>
@@ -94,7 +92,6 @@
                                   	
 	                                  	<% for(Terms t : list){ %>
 	                                      <tr>
-	                                      	<td><input type="radio"></td>
 	                                      	  <td><%= t.getTermsNo() %></td>
 	                                          <td><%= ( t.getTermsStatus().equals("N") ) ? "보류" : "게시중" %></td>
 	                                          <td><%= t.getTermsTitle() %></td>
@@ -102,7 +99,6 @@
 	                                          <td><%= t.getTermsEnrollDate() %></td>
 	                                          <td><%= t.getTermsModifyDate() %></td>
 	                                          <td><%= ( t.getTermsNote() == null ) ? "" : t.getTermsNote() %></td>
-	                                          
 	                                      </tr>
 	                                    <% } %>
 	                                    
@@ -111,12 +107,9 @@
                                   </tbody>
                               </table>
                           </div>
-                          <br><br>
+                          
                           <div>
-						  	
-						  	<button type="button" class="btn btn-danger">선택삭제</button>
-                            <button type="button" class="btn btn-secondary" onclick="termsUpdateDetailView();">수정하기</button>
-                            <button type="button" class="btn btn-primary" onclick="termsInsertDetailView();">등록하기</button>
+                            <button type="button" class="btn btn-primary float-right" onclick="termsInsertDetailView();">등록하기</button>
 						  </div>
 						
                       </div>
@@ -147,6 +140,12 @@
 		    	function termsInsertDetailView(){
 		   			location.href="<%=contextPath%>/adTermsInsertDetail.no";
 				}
+		    	
+		    	$(function(){
+	        		$(".memberListTable>tbody>tr").click(function(){
+	        			location.href = "<%=contextPath%>/adTermsDetail.no?termsNo=" + $(this).children().eq(0).text(); 
+	        		})
+	        	})
 		    </script>
 		    
     

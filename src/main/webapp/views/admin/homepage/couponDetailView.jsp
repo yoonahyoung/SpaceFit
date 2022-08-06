@@ -31,7 +31,17 @@
 				</tr>
 				<tr>
 					<th>만료일</th>
-					<td><input type="date" name="cpEndDate">&nbsp;&nbsp;(회원등록가능쿠폰일시 입력)</td>
+					<td><input type="date" name="cpEndDate">&nbsp;&nbsp;(회원직접등록쿠폰일시 입력)</td>
+				</tr>
+				<tr>
+					<th>다운 가능 여부</th>
+					<td>
+						<select name="cpDown">
+						  <option value="Y">가능</option>
+						  <option value="N">불가능</option>
+						</select>
+						&nbsp;&nbsp;(코드등록가능쿠폰일시 입력)
+					</td>
 				</tr>
 				
 			</table>
