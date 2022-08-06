@@ -34,7 +34,7 @@
                         </h4>
                         <br>
                         
-                        <form class="agreement">
+                        <form class="agreement" method="post">
                             <table align="center">
 		                           <tr>
 			                           	<td>
@@ -69,7 +69,7 @@
 		                        </style>
 								<div style="height : 20px"></div>
 		                        <label for="#pwdBtn" class="inputLabel">이제 로그인하러 가요!</label>
-		                        <button type="submit" class="btn btn-primary" id="pwdBtn" onclick="loginForm();">로그인</button><br>
+		                        <button type="button" class="btn btn-primary" id="" onclick="loginForm();">로그인</button><br>
 		                        <br>
                             	
                         	</div>

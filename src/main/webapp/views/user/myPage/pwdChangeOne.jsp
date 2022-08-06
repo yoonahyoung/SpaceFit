@@ -28,7 +28,7 @@
                         </h4>
                         <br>
                         
-                        <form class="agreement">
+                        <form class="agreement" method="post">
                     	
                     		
                             <table align="center">

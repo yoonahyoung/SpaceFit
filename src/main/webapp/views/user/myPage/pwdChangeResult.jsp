@@ -44,11 +44,11 @@
                     	</form>
                     	
 	                    <br>
-                        <form class="signInForm">
+                        <form class="signInForm" method="post">
                         	<div class="inputs">
                         	
                         		<label for="#pwdBtn" class="inputLabel">혹시 아이디도 모르시나요?</label>
-		                        <button type="submit" class="btn btn-secondary" id="pwdBtn" onclick="idSearch();">아이디 찾기</button><br>
+		                        <button type="button" class="btn btn-secondary" id="pwdBtn" onclick="idSearch();">아이디 찾기</button><br>
 		                        <br>
 		                        <script>
 		                        	function idSearch(){
@@ -57,7 +57,7 @@
 		                        </script>
 		
 		                        <label for="#pwdBtn" class="inputLabel">이제 로그인하러 가요!</label>
-		                        <button type="submit" class="btn btn-primary" id="pwdBtn"  onclick="loginForm();">로그인</button><br>
+		                        <button type="button" class="btn btn-primary" id="pwdBtn"  onclick="loginForm();">로그인</button><br>
 		                        <br>
                             
                         	</div>
