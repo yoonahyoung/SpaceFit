@@ -981,7 +981,7 @@ public class QnADao {
 		return list;
 	}
 	// 선택 전체 전체 대기 10-1
-	public ArrayList<QnA> selectQnAList10Wait(Connection conn, String spaceCategory){
+	public ArrayList<QnA> selectQnAList10Wait(Connection conn, String qnaCategory){
 		// select문 => ResultSet(여러행) => ArrayList<Notice>객체
 		ArrayList<QnA> list = new ArrayList<>();
 		
@@ -993,7 +993,7 @@ public class QnADao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, spaceCategory);
+			pstmt.setString(1, qnaCategory);
 			
 			rset = pstmt.executeQuery();
 			

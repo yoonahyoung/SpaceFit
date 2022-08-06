@@ -230,72 +230,72 @@
 	</entry>
 	
 	<entry key="selectQnA">
-        SELECT
-		       QNA_NO
-		     , QNA_CATEGORY
-		     , SPACE_CATEGORY
-		     , SPACE_NO
-		     , SPACE_NAME
-		     , QNA_TITLE
-		     , QNA_CONTENT
-		     , MEM_ID
-		     , QNA_COUNT
-		     , QNA_CREATE_DATE
-		     , QNA_PUBLIC
-             , QNA_PWD
-             , QNA_GROUP
-		  FROM TB_QNA
-		  JOIN TB_MEMBER ON(QNA_MEM_NO = MEM_NO)
-		  JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
-		 WHERE QNA_NO = ?
+       SELECT
+	       QNA_NO
+	     , QNA_CATEGORY
+	     , SPACE_CATEGORY
+	     , SPACE_NO
+	     , SPACE_NAME
+	     , QNA_TITLE
+	     , QNA_CONTENT
+	     , MEM_ID
+	     , QNA_COUNT
+	     , QNA_CREATE_DATE
+	     , QNA_PUBLIC
+         , QNA_PWD
+         , QNA_GROUP
+	  FROM TB_QNA
+	  JOIN TB_MEMBER ON(QNA_MEM_NO = MEM_NO)
+	  JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+	 WHERE QNA_NO = ?
 	</entry>
 	
 	<entry key="isSolved">
-		SELECT
-			   COUNT(*) AS COUNT
-		 FROM TB_QNA
-	    WHERE QNA_NO = ?
-	       OR QNA_REF_NO = ?
+	SELECT
+		   COUNT(*) AS COUNT
+	 FROM TB_QNA
+    WHERE QNA_NO = ?
+       OR QNA_REF_NO = ?
 	</entry>
 	
 	<!-- 내 글 갯수조회 -->
 	<entry key="selectMyListCount">
     SELECT COUNT(*) AS COUNT
       FROM TB_QNA
-      WHERE QNA_MEM_NO = ?
+     WHERE QNA_MEM_NO = ?
         OR QNA_REF_NO = ANY(SELECT QNA_NO
-		                  FROM TB_QNA
-                         WHERE QNA_STATUS = 'Y'
-                           AND QNA_MEM_NO = ?)
+		                      FROM TB_QNA
+                             WHERE QNA_STATUS = 'Y'
+                               AND QNA_MEM_NO = ?)
 	</entry>
 	<entry key="selectMyQnAList">
-			SELECT *
-			  FROM (
-			        SELECT ROWNUM RNUM, A.*
-			          FROM (
-			                SELECT 
-			                       QNA_NO
-			                     , QNA_CATEGORY
-			                     , SPACE_CATEGORY
-	                             , SPACE_NAME
-			                     , QNA_TITLE
-			                     , MEM_ID
-			                     , QNA_COUNT
-			                     , QNA_CREATE_DATE
-			                  FROM TB_QNA B
-			                  JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
-	                          JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
-			                 WHERE B.QNA_STATUS = 'Y'
-                               AND QNA_MEM_NO = ?
-                                OR QNA_REF_NO = ANY(SELECT QNA_NO
-                                                      FROM TB_QNA
-                                                     WHERE QNA_STATUS = 'Y'
-                                                       AND QNA_MEM_NO = ?)
-                            ORDER 
-                               BY QNA_NO DESC
-                                ) A
-			        )
-			 WHERE RNUM BETWEEN ? AND ?
+	SELECT *
+	  FROM (
+	        SELECT ROWNUM RNUM, A.*
+	          FROM (
+	                SELECT 
+	                       QNA_NO
+	                     , QNA_CATEGORY
+	                     , SPACE_CATEGORY
+                            , SPACE_NAME
+	                     , QNA_TITLE
+	                     , MEM_ID
+	                     , QNA_COUNT
+	                     , QNA_CREATE_DATE
+	                  FROM TB_QNA B
+	                  JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
+                         JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+	                 WHERE B.QNA_STATUS = 'Y'
+                             AND QNA_MEM_NO = ?
+                              OR QNA_REF_NO = ANY(SELECT QNA_NO
+                                                    FROM TB_QNA
+                                                   WHERE QNA_STATUS = 'Y'
+                                                     AND QNA_MEM_NO = ?)
+                          ORDER 
+                             BY QNA_NO DESC
+                              ) A
+	        )
+	 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	<!-- 검색 -->
     <!-- 전체 전체 전체 전체 -->
@@ -304,14 +304,14 @@
 	        QNA_NO
 	      , QNA_CATEGORY
 	      , SPACE_CATEGORY
-	            , SPACE_NAME
+	      , SPACE_NAME
 	      , QNA_TITLE
 	      , MEM_ID
 	      , QNA_COUNT
 	      , QNA_CREATE_DATE
 	   FROM TB_QNA B
 	   JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
-	         JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+	   JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
 	  WHERE B.QNA_STATUS = 'Y'
 	  ORDER 
 	     BY QNA_NO DESC
@@ -322,19 +322,19 @@
                QNA_NO
              , QNA_CATEGORY
              , SPACE_CATEGORY
-                   , SPACE_NAME
+             , SPACE_NAME
              , QNA_TITLE
              , MEM_ID
              , QNA_COUNT
              , QNA_CREATE_DATE
           FROM TB_QNA B
           JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
-                JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+          JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
          WHERE B.QNA_STATUS = 'Y'
-                    AND QNA_CATEGORY = ?
-                    AND SPACE_CATEGORY = ?
-                    AND SPACE_NO = ?
-                    AND QNA_REF_NO IS NULL
+           AND QNA_CATEGORY = ?
+           AND SPACE_CATEGORY = ?
+           AND SPACE_NO = ?
+           AND QNA_REF_NO IS NULL
          ORDER 
             BY QNA_NO DESC
 	</entry>
@@ -352,7 +352,7 @@
          , QNA_CREATE_DATE
       FROM TB_QNA B
       JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
-            JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+      JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
      WHERE B.QNA_STATUS = 'Y'
        AND QNA_SOLVED = 'N'
      ORDER 
@@ -376,11 +376,11 @@
      WHERE B.QNA_STATUS = 'Y'
        AND QNA_SOLVED = 'Y'
         OR QNA_REF_NO = ANY(SELECT 
-                               QNA_NO
-                           FROM TB_QNA
-                           JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
-                          WHERE QNA_STATUS = 'Y'
-                            AND QNA_SOLVED = 'Y')
+                                   QNA_NO
+                              FROM TB_QNA
+                              JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+                             WHERE QNA_STATUS = 'Y'
+                               AND QNA_SOLVED = 'Y')
      ORDER 
         BY QNA_NO DESC
 	</entry>
@@ -399,9 +399,9 @@
          , QNA_CREATE_DATE
       FROM TB_QNA B
       JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
-            JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+      JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
      WHERE B.QNA_STATUS = 'Y'
-                AND SPACE_NO = ?
+       AND SPACE_NO = ?
      ORDER 
         BY QNA_NO DESC
 	</entry>
@@ -412,14 +412,14 @@
            QNA_NO
          , QNA_CATEGORY
          , SPACE_CATEGORY
-               , SPACE_NAME
+         , SPACE_NAME
          , QNA_TITLE
          , MEM_ID
          , QNA_COUNT
          , QNA_CREATE_DATE
       FROM TB_QNA B
       JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
-            JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+      JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
      WHERE B.QNA_STATUS = 'Y'
        AND SPACE_NO = ?
        AND QNA_SOLVED = 'N'
@@ -444,12 +444,12 @@
        AND SPACE_NO = ?
        AND QNA_SOLVED = 'Y'
         OR QNA_REF_NO = ANY(SELECT 
-                               QNA_NO
-                           FROM TB_QNA
-                           JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
-                          WHERE QNA_STATUS = 'Y'
-                            AND SPACE_NO = ?
-                            AND QNA_SOLVED = 'Y')
+                                   QNA_NO
+                              FROM TB_QNA
+                              JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+                             WHERE QNA_STATUS = 'Y'
+                               AND SPACE_NO = ?
+                               AND QNA_SOLVED = 'Y')
      ORDER 
         BY QNA_NO DESC
 	</entry>
@@ -459,33 +459,33 @@
            QNA_NO
          , QNA_CATEGORY
          , SPACE_CATEGORY
-               , SPACE_NAME
+         , SPACE_NAME
          , QNA_TITLE
          , MEM_ID
          , QNA_COUNT
          , QNA_CREATE_DATE
       FROM TB_QNA B
       JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
-            JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+      JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
      WHERE B.QNA_STATUS = 'Y'
-                AND SPACE_CATEGORY = ?
+       AND SPACE_CATEGORY = ?
      ORDER 
         BY QNA_NO DESC
 	</entry>
 	<!-- 전체 선택 전체 대기 6-1 -->
 	<entry key="selectQnAList6Wait">
-    SELECT 
+	SELECT 
            QNA_NO
          , QNA_CATEGORY
          , SPACE_CATEGORY
-               , SPACE_NAME
+         , SPACE_NAME
          , QNA_TITLE
          , MEM_ID
          , QNA_COUNT
          , QNA_CREATE_DATE
       FROM TB_QNA B
       JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
-            JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+      JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
      WHERE B.QNA_STATUS = 'Y'
        AND SPACE_CATEGORY = ?
        AND QNA_SOLVED = 'N'
@@ -510,14 +510,14 @@
        AND SPACE_CATEGORY = ?
        AND QNA_SOLVED = 'Y'
         OR QNA_REF_NO = ANY(SELECT 
-                               QNA_NO
-                           FROM TB_QNA
-                           JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
-                          WHERE QNA_STATUS = 'Y'
-                            AND SPACE_CATEGORY = ?
-                            AND QNA_SOLVED = 'Y')
+                                   QNA_NO
+                              FROM TB_QNA
+                              JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+                             WHERE QNA_STATUS = 'Y'
+                               AND SPACE_CATEGORY = ?
+                               AND QNA_SOLVED = 'Y')
      ORDER 
-        BY QNA_NO DESC;
+        BY QNA_NO DESC
 	</entry>
 	
 	<!-- 전체 선택 선택 전체 7-->
@@ -526,17 +526,17 @@
            QNA_NO
          , QNA_CATEGORY
          , SPACE_CATEGORY
-               , SPACE_NAME
+         , SPACE_NAME
          , QNA_TITLE
          , MEM_ID
          , QNA_COUNT
          , QNA_CREATE_DATE
       FROM TB_QNA B
       JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
-            JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+      JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
      WHERE B.QNA_STATUS = 'Y'
-                AND SPACE_CATEGORY = ?
-                AND SPACE_NO = ?
+       AND SPACE_CATEGORY = ?
+       AND SPACE_NO = ?
      ORDER 
         BY QNA_NO DESC
 	</entry>
@@ -546,14 +546,14 @@
 	        QNA_NO
 	      , QNA_CATEGORY
 	      , SPACE_CATEGORY
-	            , SPACE_NAME
+	      , SPACE_NAME
 	      , QNA_TITLE
 	      , MEM_ID
 	      , QNA_COUNT
 	      , QNA_CREATE_DATE
 	   FROM TB_QNA B
 	   JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
-	         JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+	   JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
 	  WHERE B.QNA_STATUS = 'Y'
 	    AND QNA_CATEGORY = ?
 	  ORDER 
@@ -565,7 +565,7 @@
            QNA_NO
          , QNA_CATEGORY
          , SPACE_CATEGORY
-               , SPACE_NAME
+         , SPACE_NAME
          , QNA_TITLE
          , MEM_ID
          , QNA_COUNT
@@ -581,7 +581,7 @@
 	</entry>
 	<!-- 선택 전체 전체 완료 10-2 -->
 	<entry key="selectQnAList10Solved">
-            SELECT 
+    SELECT 
            QNA_NO
          , QNA_CATEGORY
          , SPACE_CATEGORY
@@ -597,12 +597,12 @@
        AND QNA_CATEGORY = ?
        AND QNA_SOLVED = 'Y'
         OR QNA_REF_NO = ANY(SELECT 
-                               QNA_NO
-                           FROM TB_QNA
-                           JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
-                          WHERE QNA_STATUS = 'Y'
-                            AND QNA_CATEGORY = ?
-                            AND QNA_SOLVED = 'Y')
+                                   QNA_NO
+                              FROM TB_QNA
+                              JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+                             WHERE QNA_STATUS = 'Y'
+                               AND QNA_CATEGORY = ?
+                               AND QNA_SOLVED = 'Y')
      ORDER 
         BY QNA_NO DESC
 	</entry>
@@ -612,17 +612,17 @@
            QNA_NO
          , QNA_CATEGORY
          , SPACE_CATEGORY
-               , SPACE_NAME
+         , SPACE_NAME
          , QNA_TITLE
          , MEM_ID
          , QNA_COUNT
          , QNA_CREATE_DATE
       FROM TB_QNA B
       JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
-            JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+      JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
      WHERE B.QNA_STATUS = 'Y'
-                AND QNA_CATEGORY = ?
-                AND SPACE_NO = ?
+       AND QNA_CATEGORY = ?
+       AND SPACE_NO = ?
      ORDER 
         BY QNA_NO DESC
 	</entry>
@@ -632,14 +632,14 @@
            QNA_NO
          , QNA_CATEGORY
          , SPACE_CATEGORY
-               , SPACE_NAME
+         , SPACE_NAME
          , QNA_TITLE
          , MEM_ID
          , QNA_COUNT
          , QNA_CREATE_DATE
       FROM TB_QNA B
       JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
-            JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+      JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
      WHERE B.QNA_STATUS = 'Y'
        AND QNA_CATEGORY = ?
        AND SPACE_NO = ?
@@ -666,13 +666,13 @@
        AND SPACE_NO = ?
        AND QNA_SOLVED = 'Y'
         OR QNA_REF_NO = ANY(SELECT 
-                               QNA_NO
-                           FROM TB_QNA
-                           JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
-                          WHERE QNA_STATUS = 'Y'
-                            AND QNA_CATEGORY = ?
-                            AND SPACE_NO = ?
-                            AND QNA_SOLVED = 'Y')
+                                   QNA_NO
+                              FROM TB_QNA
+                              JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+                             WHERE QNA_STATUS = 'Y'
+                               AND QNA_CATEGORY = ?
+                               AND SPACE_NO = ?
+                               AND QNA_SOLVED = 'Y')
      ORDER 
         BY QNA_NO DESC
 	</entry>
@@ -682,17 +682,17 @@
            QNA_NO
          , QNA_CATEGORY
          , SPACE_CATEGORY
-               , SPACE_NAME
+         , SPACE_NAME
          , QNA_TITLE
          , MEM_ID
          , QNA_COUNT
          , QNA_CREATE_DATE
       FROM TB_QNA B
       JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
-            JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+      JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
      WHERE B.QNA_STATUS = 'Y'
-                AND QNA_CATEGORY = ?
-                AND SPACE_CATEGORY = ?
+       AND QNA_CATEGORY = ?
+       AND SPACE_CATEGORY = ?
      ORDER 
         BY QNA_NO DESC
 	</entry>
@@ -702,7 +702,7 @@
            QNA_NO
          , QNA_CATEGORY
          , SPACE_CATEGORY
-               , SPACE_NAME
+         , SPACE_NAME
          , QNA_TITLE
          , MEM_ID
          , QNA_COUNT
@@ -719,7 +719,7 @@
 	</entry>
 	<!-- 선택 선택 전체 완료 14-2 -->
 	<entry key="selectQnAList14Solved">
-            SELECT 
+    SELECT 
            QNA_NO
          , QNA_CATEGORY
          , SPACE_CATEGORY
@@ -736,13 +736,13 @@
        AND SPACE_CATEGORY = ?
        AND QNA_SOLVED = 'Y'
         OR QNA_REF_NO = ANY(SELECT 
-                               QNA_NO
-                           FROM TB_QNA
-                           JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
-                          WHERE QNA_STATUS = 'Y'
-                            AND QNA_CATEGORY = ?
-                            AND SPACE_CATEGORY = ?
-                            AND QNA_SOLVED = 'Y')
+	                               QNA_NO
+	                          FROM TB_QNA
+	                          JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+	                         WHERE QNA_STATUS = 'Y'
+	                           AND QNA_CATEGORY = ?
+	                           AND SPACE_CATEGORY = ?
+	                           AND QNA_SOLVED = 'Y')
      ORDER 
         BY QNA_NO DESC
 	</entry>
