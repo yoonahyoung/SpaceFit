@@ -259,7 +259,6 @@ background:#E1F0FF;
                                                                   </button>
                                                               </span>
                                                           <hr>
-                                                          <span id="likeUpdateCountSpan" class ="like" style="font:10px; color:#0082FF"><%= r.getAllLikeCount() %>명이 이 후기를 추천했어요🥰</span>
                                                           <div id ="showStars">
                                                               <div class="smallStars" >
                                                                  <% for(int i=0; i<r.getReviewStar(); i++) { %>
@@ -270,9 +269,9 @@ background:#E1F0FF;
                                                                      <span id='starWhite'>★</span>
                                                                   <% } %>
                                                               </div>
-                                                              
                                                           </div>
-                                                         
+                                                          <textarea id="rvContentDiv"><%=r.getReviewContent() %>
+                                                          </textarea>
                                                       </div>
                                                       <div class="col-lg-3 memInfoDiv">
                                                           <div class="mem">
@@ -299,17 +298,12 @@ background:#E1F0FF;
 			                                                             <input type="hidden" value="<%= spNo %>" name="spNo" id="spNo">
                                                         			<%} %>
                                                              <% } %>
-                                                             
                                                           </div>
-														  
+														  <span id="likeUpdateCountSpan"><%= r.getAllLikeCount() %>명이 이 후기를 추천했습니다!</span>
                                                       </div>
-                                                   <textarea id="rvContentDiv" style="height:80px; margin-top:20px; margin-bottom:20px;"><%=r.getReviewContent() %>
-                                                   </textarea>
-                                                      
                                                   </div>
                                                   <br><br>
                                                   <div class="collapse commentDiv" id="flush-collapse<%= r.getReviewNo() %>" data-value="<%= r.getReviewNo() %>" aria-labelledby="flush-heading<%= r.getReviewNo() %>" data-bs-parent="#accordionFlushExample">
-                                                        <div class="parentCommentAll" id="parentCommentAll"></div>
                                                         <div id="writeComment">
                                                             <table id="writeTable" align="center">
                                                                 <thead>
@@ -328,9 +322,7 @@ background:#E1F0FF;
                                                             </table>
                                                         </div>
                                                   </div>
-                                                   
                                               </div>
-                                              
                                               <% } %>
                                        <% } else { %>
                                            <h4>" 아직 작성된 후기가 없습니다 "</h4><br>
@@ -416,9 +408,7 @@ background:#E1F0FF;
                                     </select>
                                     <span class="col-sm-4"> 체크아웃  </span>
                                     <select name="detailCO" class="detailCO" required>
-                                       <%for(int i=10; i<22; i++){ %>
-                                           <option value="<%=i%>"><%= i %>:00</option>
-                                        <%} %>
+                                       
                                     </select>
                                 </div>
 
@@ -624,13 +614,16 @@ background:#E1F0FF;
                       }
                       
                       // 체크인 시간에 따른 체크아웃 시간 막아두기
-                      el = "";
+                      let el = "";
                       $(".detailCI").on("change", function(){
-                    	 let checkIn = parseInt($(this).val()) + 1;
-                    	 console.log(checkIn);
-	                     for(let i=checkIn; i<22; i++){
-                          el += "<option value='" +  i + "'>" +  i + " :00</option>"
-	                     }
+	                      el = "<option>시간선택</option>"
+	                      $(".detailCO").html(el);
+	                      
+                    	  let checkIn = parseInt($(this).val()) + 1;
+                    	  console.log(checkIn);
+	                      for(let i=checkIn; i<22; i++){
+                           el += "<option value='" +  i + "'>" +  i + " :00</option>"
+	                      }
 	                     
 	                     $(".detailCO").html(el);
                       })
@@ -660,9 +653,7 @@ background:#E1F0FF;
                   alert("추천해주셔서 감사합니다!");
                       // 바로 표시되게 하는 걸 못하게씀 ㅜㅜ
                       console.dir($('this').parent().children().val());
-                      $(e).children().siblings('.like').val() ="ddd";
-                      //$('this').parent().children().text( $("#countPlusOne").text()+1 );
-                      
+                      $('this').parent().children().text( $("#countPlusOne").text()+1 );
                } else {
                   // 후기 중복확인
                   console.dir($('this').parent().children().val());
@@ -724,7 +715,7 @@ background:#E1F0FF;
                                             }
                                             
                                             if(comList[i].memId == '<%=loginUserId%>'){
-                                            	//value +=   '<button type="button" class="comBtn" id="updateComment" data-bs-toggle="modal" data-bs-target="#myCommentModal2" onclick="updateCommentModal('+ comList[i].comNo + ',' + comList[i].memNo + ',' + spNo +');">댓글수정</button>'
+                                            	value +=   '<button type="button" class="comBtn" id="updateComment" data-bs-toggle="modal" data-bs-target="#myCommentModal2" onclick="updateCommentModal('+ comList[i].comNo + ',' + comList[i].memNo + ',' + spNo +');">댓글수정</button>'
                                             
                                             }
                                             
@@ -787,7 +778,36 @@ background:#E1F0FF;
            <!-- The Modal -->
            
             <!-- The Modal -->
-                 
+                  <div class="modal" id="myCommentModal2">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                  
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                          <h4 class="modal-title" >댓글 수정하기</h4>
+                        </div>
+                     <div class="modal-body">
+                       <% if (directMemNo == 0 /* && directMemNo == r.getMemNo()*/) { %>
+                          <br><h5>로그인해야 이용가능한 서비스입니다.</h5><br><br>
+                          <button type="button" class="btn btn-primary" onclick="location.href='<%=contextPath%>/loginForm.me'">로그인하러가기</button>
+                       <% } else {%>
+                         <!-- Modal body -->
+                          <form method="post" action="<%=contextPath%>/comUpdate.com">
+                           <br><h5>신고사유를 선택하세요.</h5><br><br>
+                              <textarea style="resize:none;" id="comContent"></textarea>
+                              <input type="hidden" name="memNo" value="">
+                              <input type="hidden" name="rptRefNo" value="">
+                              <input type="hidden" name="comContent" value="">
+                              <div>
+                                 <button type="submit" class="btn btn-primary">수정하기</button>
+                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                              </div>
+                         </form>
+                     <% } %>
+                     </div>
+                      </div>
+                    </div>
+                  </div>
            <!-- The Modal -->
         
         <script>          
