@@ -243,7 +243,7 @@ public class MemberService {
    
    public int updateUnknownPwd(String memPwd, String memPhone) {
 	   Connection conn = getConnection();
-	   System.out.println("가짜비번 실행중 서비스");
+	   //System.out.println("가짜비번 실행중 서비스");
 	   int result1 = new MemberDao().updateUnknownPwd(conn, memPwd, memPhone);
 	   if(result1 == 1) {
 			commit(conn);
@@ -258,7 +258,7 @@ public class MemberService {
    
    public int updateRealUnknownPwd(String memRealPwd, String memPhone) {
 	   Connection conn = getConnection();
-	   System.out.println("진짜비번 실행중 서비스");
+	   //System.out.println("진짜비번 실행중 서비스");
 	   int result2 = new MemberDao().updateRealUnknownPwd(conn, memRealPwd, memPhone);
 	   if(result2 == 1) {
 			commit(conn);
@@ -272,7 +272,42 @@ public class MemberService {
    }
    
    
+   public int hashPwdChange(String memId, String hashPwd) {
+	   Connection conn = getConnection();
+	   int result1 = new MemberDao().hashPwdChange(conn, memId, hashPwd);
+	   
+	   if(result1 == 1) {
+		   commit(conn);
+	   } else {
+		   rollback(conn);
+	   }
+	   
+	   close(conn);
+	   return result1;
+   }
    
+   public int realPwdChange(String memId, String updatePwd) {
+	   Connection conn = getConnection();
+	   int result2 = new MemberDao().realPwdChange(conn, memId, updatePwd);
+	   if(result2 == 1) {
+		   commit(conn);
+	   } else {
+		   rollback(conn);
+	   } return result2;
+   }
+  
+   
+   /*
+   public Member SHupdatePwdMember(String memId, String updatePwd, String hashPwd) {
+	   Connection conn = getConnection();
+	   Member updateMem = new MemberDao().SHupdatePwdMember(conn, memId,  updatePwd, hashPwd);
+	   if(result2 == 1) {
+		   commit(conn);
+	   } else {
+		   rollback(conn);
+	   } return result2;
+   }
+   */
    // 보관함(장바구니)
    public int insertCart(Cart cart) {
 	   Connection conn = getConnection();
