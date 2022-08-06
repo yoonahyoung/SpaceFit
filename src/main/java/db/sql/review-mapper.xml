@@ -181,7 +181,18 @@
 		   AND MEM_NO = ?
 	</entry>
 
-	
+
+	<!-- 스페이스디테일뷰에서 전체 썸네일보기 -->
+	<entry key="selectPhotoListForSpace">
+		 SELECT FILE_PATH
+              , FILE_CHANGE_NAME
+          FROM TB_REVIEW 
+          JOIN TB_FILE ON (REF_BNO = RV_NO)
+         WHERE FILE_CATEGORY = 2
+           AND SPACE_NO = ?
+           AND FILE_LEVEL = 1
+           AND FILE_STATUS = 'Y'
+	</entry>
 	
 	
 	

@@ -34,7 +34,7 @@ public class MemberDao {
 		}
 	}
    
-   public Member loginMember(Connection conn, String memId, String memPwd) {
+   public Member loginMember(Connection conn, String memId, String memRealPwd) {
       
       Member m = null;
       PreparedStatement pstmt = null;
@@ -45,7 +45,7 @@ public class MemberDao {
          
          pstmt = conn.prepareStatement(sql);
          pstmt.setString(1, memId);
-         pstmt.setString(2, memPwd);
+         pstmt.setString(2, memRealPwd);
          
          rset = pstmt.executeQuery();
          
@@ -119,6 +119,7 @@ public class MemberDao {
          pstmt.setString(4, m.getMemIdNo());
          pstmt.setString(5, m.getMemPhone());
          pstmt.setString(6, m.getMemMail());
+         pstmt.setString(7, m.getMemRealPwd());
          
          result = pstmt.executeUpdate();
       } catch (SQLException e) {
@@ -177,25 +178,53 @@ public class MemberDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
 	       
 		   return memNo;
    }
    
    public int updateUnknownPwd(Connection conn, String memPwd, String memPhone) {
-	   int result = 0;
+	   int result1 = 0;
 	   PreparedStatement pstmt = null;
 	   String sql = prop.getProperty("updateUnknownPwd");
 	   try {
+		   System.out.println("가짜비번 실행중 다오");
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, memPwd);
 		pstmt.setString(2, memPhone);
-		result = pstmt.executeUpdate();
+		result1 = pstmt.executeUpdate();
+		System.out.println("dao result" + result1);
 	} catch (SQLException e) {
 		e.printStackTrace();
+	} finally {
+		close(pstmt);
 	}
        
-	   return result;
+	   return result1;
+	   
+
+   }
+   
+   public int updateRealUnknownPwd(Connection conn, String memRealPwd, String memPhone) {
+	   int result2 = 0;
+	   PreparedStatement pstmt = null;
+	   String sql = prop.getProperty("updateRealUnknownPwd");
+	   try {
+		 System.out.println("진짜비번 실행중 다오");
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, memRealPwd);
+		pstmt.setString(2, memPhone);
+		result2 = pstmt.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(pstmt);
+	}
+       
+	   return result2;
    }
    
    public int updateMember(Connection conn, Member m) {
@@ -284,6 +313,84 @@ public class MemberDao {
 		
 		return result;
 	}
+   
+   public String selectBannerOne(Connection conn) {
+	   
+	   String banImg1 = null;
+	   ResultSet rset = null;
+	   PreparedStatement pstmt = null;
+	   String sql = prop.getProperty("selectBannerOne");
+	   
+	   try {
+		pstmt = conn.prepareStatement(sql);
+		rset = pstmt.executeQuery();
+		
+		if(rset.next()) {
+			banImg1 = rset.getString("ban_img");
+		}
+		
+	   } catch (SQLException e) {
+		e.printStackTrace();
+	   } finally {
+		   close(rset);
+		   close(pstmt);
+	   }
+	   
+	   return banImg1;
+	   
+   }
+   
+   public String selectBannerTwo(Connection conn) {
+	   
+	   String banImg2 = null;
+	   ResultSet rset = null;
+	   PreparedStatement pstmt = null;
+	   String sql = prop.getProperty("selectBannerTwo");
+	   
+	   try {
+		pstmt = conn.prepareStatement(sql);
+		rset = pstmt.executeQuery();
+		
+		if(rset.next()) {
+			banImg2 = rset.getString("ban_img");
+		}
+		
+	   } catch (SQLException e) {
+		e.printStackTrace();
+	   } finally {
+		   close(rset);
+		   close(pstmt);
+	   }
+	   
+	   return banImg2;
+	   
+   }
+   
+   public String selectBannerThree(Connection conn) {
+	   
+	   String banImg3 = null;
+	   ResultSet rset = null;
+	   PreparedStatement pstmt = null;
+	   String sql = prop.getProperty("selectBannerThree");
+	   
+	   try {
+		pstmt = conn.prepareStatement(sql);
+		rset = pstmt.executeQuery();
+		
+		if(rset.next()) {
+			banImg3 = rset.getString("ban_img");
+		}
+		
+	   } catch (SQLException e) {
+		e.printStackTrace();
+	   } finally {
+		   close(rset);
+		   close(pstmt);
+	   }
+	   
+	   return banImg3;
+	   
+   }
    
    public String selectGrade(Connection conn, String memId) {
 	   
@@ -1236,8 +1343,39 @@ public int blackCheck(Connection conn, String addSql) {
 		return result;
 	}
 	
-	
-	
+	   // 민주작성 - 사용가능한 쿠폰 조회
+	   public ArrayList<Mcp> selectMyCouponList(Connection conn, int memNo) {
+		   
+		   ArrayList<Mcp> list = new ArrayList<>();
+		   ResultSet rset = null;
+		   PreparedStatement pstmt = null;
+		   String sql = prop.getProperty("selectMyCouponList");
+		   
+		   try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add( new Mcp(rset.getInt("MCP_NO"),
+								  rset.getInt("CP_NO"),
+								  rset.getString("CP_NAME"),
+								  rset.getInt("CP_DISCOUNT")
+						));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		   
+		 return list;
+		   
+	   }
 	
 	
 	

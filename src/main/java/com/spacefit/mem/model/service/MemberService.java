@@ -18,10 +18,10 @@ import com.spacefit.mem.model.vo.Member;
 
 public class MemberService {
    
-   public Member loginMember(String memId, String memPwd) {
+   public Member loginMember(String memId, String memRealPwd) {
       
       Connection conn = getConnection();
-      Member m = new MemberDao().loginMember(conn, memId, memPwd);
+      Member m = new MemberDao().loginMember(conn, memId, memRealPwd);
       close(conn);
       return m;
    
@@ -91,6 +91,28 @@ public class MemberService {
 		close(conn);
 		return updateMem;
 	}
+   
+   // 배너 첫번째이미지
+   public String selectBannerOne() {
+	   Connection conn = getConnection();
+	   String banImg1 = new MemberDao().selectBannerOne(conn);
+	   close(conn);
+	   return banImg1;
+   }
+   
+   public String selectBannerTwo() {
+	   Connection conn = getConnection();
+	   String banImg2 = new MemberDao().selectBannerTwo(conn);
+	   close(conn);
+	   return banImg2;
+   }
+   
+   public String selectBannerThree() {
+	   Connection conn = getConnection();
+	   String banImg3 = new MemberDao().selectBannerThree(conn);
+	   close(conn);
+	   return banImg3;
+   }
    
    public String selectGrade(String memId) {
 	   Connection conn = getConnection();
@@ -208,14 +230,32 @@ public class MemberService {
    
    public int updateUnknownPwd(String memPwd, String memPhone) {
 	   Connection conn = getConnection();
-	   int result = new MemberDao().updateUnknownPwd(conn, memPwd, memPhone);
-	   if(result > 0) {
+	   System.out.println("가짜비번 실행중 서비스");
+	   int result1 = new MemberDao().updateUnknownPwd(conn, memPwd, memPhone);
+	   if(result1 == 1) {
 			commit(conn);
 		}else {
 			rollback(conn);
 		}
 		close(conn);
-		return result;
+		
+	
+		return result1;
+   }
+   
+   public int updateRealUnknownPwd(String memRealPwd, String memPhone) {
+	   Connection conn = getConnection();
+	   System.out.println("진짜비번 실행중 서비스");
+	   int result2 = new MemberDao().updateRealUnknownPwd(conn, memRealPwd, memPhone);
+	   if(result2 == 1) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+	
+		return result2;
    }
    
    
@@ -507,4 +547,12 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+	
+       // 민주작성 - 사용가능한 쿠폰 조회
+	   public ArrayList<Mcp> selectMyCouponList(int memNo) {
+		   Connection conn = getConnection();
+		   ArrayList<Mcp> list = new MemberDao().selectMyCouponList(conn, memNo);
+		   close(conn);
+		   return list;
+	   }
 }

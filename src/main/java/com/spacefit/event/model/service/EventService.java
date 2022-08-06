@@ -42,6 +42,20 @@ public class EventService {
 		
 	}
 	
+	// 배너 수정
+	public int adminUpdateBanner(Banner b){
+		Connection conn = getConnection();
+		int result = new EventDao().adminUpdateBanner(conn, b);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
 	
 
 }

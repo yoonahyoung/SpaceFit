@@ -9,6 +9,7 @@
 <%
    String thisPath = request.getContextPath();
    ArrayList<Review> rvList = (ArrayList<Review>)request.getAttribute("rvList");
+   //ArrayList<Review> ptList = (ArrayList<Review>)request.getAttribute("ptList")
    int avgStars = (Integer)request.getAttribute("avgStars");
    Space s = (Space)request.getAttribute("s");
    int loveCheck = (int)request.getAttribute("loveCheck");
@@ -117,7 +118,7 @@ background:#E1F0FF;
    <%@ include file="../common/userMenubar.jsp" %>
 
     <main id="main">
-    <form action="<%=contextPath%>/결제페이지" method="get" id="detailForm">
+    <form action="<%=contextPath%>/pay.me" method="post" id="detailForm">
         <!-- ======= space view ======= -->
         <section class="agent-single">
             <div class="container">
@@ -231,24 +232,7 @@ background:#E1F0FF;
                                                        <% } %>
                                                   </div>
                                                   <h4>" 스페이스핏의 고객님들은 이 장소를 이렇게 평가하셨어요! "</h4><br>
-                                              </div>
-                                              <div class="rvPhotoZone">
-                                                  <tr class="rvPhotos"> 
-                                                      <td>
-                                                          <span class="material-symbols-outlined">
-                                                          arrow_back_ios
-                                                          </span>
-                                                      </td>                       
-                                                      <td><img class="titleImg" width="200" height="160" onclick=""></td>
-                                                      <td><img class="titleImg" width="200" height="160" onclick=""></td>
-                                                      <td><img class="titleImg" width="200" height="160" onclick=""></td>
-                                                      <td>
-                                                          <span class="material-symbols-outlined">
-                                                          arrow_forward_ios
-                                                          </span>
-                                                      </td>
-                                                  </tr>
-                                              </div>
+                                             
                                               <div id="rvOrderBy">
                                                   <a>고객님들의 실제 이용 리뷰입니다!</a>
                                               </div>
@@ -451,7 +435,7 @@ background:#E1F0FF;
                                    <input type="hidden" name="no" value="<%=s.getSpaceNo() %>">
                                     <div id="ayBtn" style="text-align:center; margin-top:100px;">
                                     	<% if(loginUser != null){ %>
-	                                        <button type="button" class="btn btn-primary" onclick="formSumbit(1);">바로결제</button>
+	                                        <button type="submit" class="btn btn-primary" onclick="return checkVal();">바로결제</button>
 	                                        <button type="button" onclick="formSubmit(2);" class="btn btn-outline-dark">보관함</button>
                                         <%}else{ %>
                                         	<button type="button" class="btn btn-primary" onclick="alert('로그인이 필요한 서비스입니다!');">바로결제</button>
@@ -525,12 +509,18 @@ background:#E1F0FF;
         //console.log(spNo);
         
      }
-
+    
+     function checkVal(){
+        if($("input[name=date]").val() == '' || $("input[name=price]").val() == '' || $("select[name=detailCO]") == ''){
+   			   	alert("날짜와 시간을 선택해주세요!");
+                return false;
+            }
+        }
     
        function formSubmit(num){ // num이 1일시 결제, num이 2일시 보관함
     	   if(num == 1){
     		  
-             $("#detailForm").attr("action", "결제페이지");
+             $("#detailForm").attr("action", "<%=contextPath %>/pay.me");
              $("#detailForm").submit();
     		   
           }else if(num == 2){

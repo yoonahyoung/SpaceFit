@@ -66,7 +66,7 @@
 			                        <input type="text" placeholder="인증번호를 입력해주세요" class="account-input" id="memMailCheck" name="memMailCheck">
 			                        <input type="button" class="btn btn-primary" style="color:white;" onclick="checkEmail();" value="인증번호확인" >
 			                        <span id="mailCheckSpan" style="font-size:11px;"></span><br>
-			                        <input type="hidden" id="randomNo">
+			                        <input type="hidden" id="randomNo" name="randomNo">
 			                        <span id="mailSpan"></span>
 			                        <br><br><br><br>
 			                        <hr>

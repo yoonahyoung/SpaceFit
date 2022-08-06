@@ -1,27 +1,26 @@
-package com.spacefit.event.controller;
+package com.spacefit.pay.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.spacefit.event.model.service.EventService;
-import com.spacefit.event.model.vo.Banner;
+import com.spacefit.mem.model.vo.Member;
 
 /**
- * Servlet implementation class AdminBannerDetailViewController
+ * Servlet implementation class BookInsertController
  */
-@WebServlet("/adBannerDetail.ev")
-public class AdminBannerDetailViewController extends HttpServlet {
+@WebServlet("/insert.book")
+public class BookInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminBannerDetailViewController() {
+    public BookInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,16 +29,24 @@ public class AdminBannerDetailViewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession session = request.getSession();
+		
+		int memNo = ((Member)session.getAttribute("loginUser")).getMemNo();
+		String spaceNo = request.getParameter("spaceNo");
+		String cpNo = request.getParameter("cpNo");
+		String phone = request.getParameter("phone");
+		String email = request.getParameter("email");
+		String rsvFor = request.getParameter("rsvFor");
+		String bookContent = request.getParameter("bookContent");
+		String beforeDiscount = request.getParameter("beforeDiscount");
+		
+		
+		if(rsvFor.equals("") || bookContent.equals("") || cpNo.equals("")) {
+			System.out.println("미입력");
+			//int result = new PayService().insertPaylist(memNo);
+		}
 
-		request.setCharacterEncoding("utf-8");
-		
-		int banNo = Integer.parseInt(request.getParameter("banNo"));
-		
-		Banner b = new EventService().selectBannerDetail(banNo);
-		
-		request.setAttribute("b", b);
-		request.getRequestDispatcher("views/admin/homepage/bannerDetailView.jsp").forward(request, response);
-			
 	}
 
 	/**

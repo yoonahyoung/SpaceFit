@@ -151,7 +151,17 @@ public class ReviewService {
 		return rvList;
 		
 	}
+	/*
 	
+	public ArrayList<Review> selectPhotoListForSpace(int spNo){
+			
+			Connection conn = getConnection();
+			ArrayList<Review> ptList = new ReviewDao().selectPhotoListForSpace(conn, spNo);
+			close(conn);
+			return ptList;
+			
+		}
+	*/	
 	
 	public Review adminSelectEachReview( int reviewNo) {
 		
@@ -160,7 +170,7 @@ public class ReviewService {
 		close(conn);
 		return rv;
 	}
-
+	
 	public ArrayList<Review> selectRvPhotoList(int reviewNo){
 		Connection conn = getConnection();
 		ArrayList<Review> rvPhotoList = new ReviewDao().selectRvPhotoList(conn, reviewNo);

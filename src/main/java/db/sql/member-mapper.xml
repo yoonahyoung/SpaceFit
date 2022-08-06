@@ -19,7 +19,7 @@
 		  FROM TB_MEMBER
 		 WHERE MEM_STATUS = 'Y'
 		   AND MEM_ID = ?
-		   AND MEM_PWD = ?
+		   AND MEM_REAL_PWD = ?
 	</entry>
 	
 	<!-- 아이디 중복검사 -->
@@ -46,7 +46,8 @@
 		     , MEM_ENROLL_DATE
 		     , MEM_MODIFY_DATE
 		     , MEM_STATUS
-		     , MEM_ADM_FLAG)
+		     , MEM_ADM_FLAG
+		     , MEM_REAL_PWD)
 		VALUES (
 		       SEQ_MEMNO.NEXTVAL
 		     , 1
@@ -61,6 +62,7 @@
 		     , sysdate
 		     , 'Y'
 		     , 'U'
+		     , ?
      )
 	</entry>
 	
@@ -103,10 +105,17 @@
 		   AND MEM_ID = ? 
 	</entry>
 	
-	<!-- 비밀번호 모를때 비밀번호 재설정 -->
+	<!-- 비밀번호 모를때 비밀번호 재설정 해쉬용-->
 	<entry key="updateUnknownPwd">
 	UPDATE TB_MEMBER
 	   SET MEM_PWD = ?
+	 WHERE MEM_PHONE = ?
+	</entry>
+	
+	<!-- 비밀번호 모를때 비밀번호 재설정 -->
+	<entry key="updateRealUnknownPwd">
+	UPDATE TB_MEMBER
+	   SET MEM_REAL_PWD = ?
 	 WHERE MEM_PHONE = ?
 	</entry>
 	
@@ -130,6 +139,28 @@
 		     , MEM_MODIFY_DATE = SYSDATE
 		 WHERE MEM_ID = ?
 		   AND MEM_PWD = ?   
+	</entry>
+	
+	<!-- 배너 1번이미지 조회 -->
+	<entry key="selectBannerOne">
+		SELECT BAN_IMG
+		  FROM TB_BANNER
+		 WHERE BAN_NUM = 1
+		   AND BAN_STATUS = 'Y'
+	</entry>
+	
+	<entry key="selectBannerTwo">
+		SELECT BAN_IMG
+		  FROM TB_BANNER
+		 WHERE BAN_NUM = 2
+		   AND BAN_STATUS = 'Y'
+	</entry>
+	
+	<entry key="selectBannerThree">
+		SELECT BAN_IMG
+		  FROM TB_BANNER
+		 WHERE BAN_NUM = 3
+		   AND BAN_STATUS = 'Y'
 	</entry>
 	
 	<!-- 회원정보의 회원등급 조회 -->
@@ -156,6 +187,8 @@
 		  FROM TB_COUPON
 		  JOIN TB_MCP USING(CP_NO)
 		 WHERE MEM_NO = ?
+		 ORDER
+		    BY MCP_END_DATE
 	</entry>
 
 	<!-- 내쿠폰 페이지에서 회원의 쿠폰 등록 -->
@@ -605,5 +638,17 @@
 				  FROM TB_MEMBER)
 	</entry>
 	
-	
+	<!-- 민주작성 - 사용가능한 쿠폰 조회 -->
+		<!-- 내쿠폰 조회 -->
+	<entry key="selectMyCouponList">
+		SELECT MCP_NO
+		     , CP_NO
+		     , CP_NAME
+		     , CP_DISCOUNT
+		  FROM TB_MCP
+		  JOIN TB_COUPON USING(CP_NO)
+		 WHERE MEM_NO = ?
+		   AND MCP_STATUS = 'Y'
+		   AND MCP_USE = 'N'
+	</entry>
 </properties>

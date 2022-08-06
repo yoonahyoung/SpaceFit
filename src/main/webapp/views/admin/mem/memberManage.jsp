@@ -25,7 +25,7 @@
 </head>
 <body>
 	<%@ include file="../common/adminMenubar.jsp" %>
-     <!--  <div class="outerRv"> -->
+      <div class="outerRv">
      
      	<div class="container-fluid">
 		<br><br><br>
@@ -72,12 +72,13 @@
 								  <option value="userOnly">회원 조회</option>
 								  <option value="black">블랙리스트 조회</option>
 								</select>
+								<!-- 
 								<select id="orderBySel" name="orderBySel" onchange="changeSelect()">
 								  <option value="" selected>이번달 주문건수별</option>
 								  <option value="forBasic">0건이상 3건미만</option>
 								  <option value="forSilver">3건이상 5건미만</option>
 								  <option value="forGold">5건이상 7건미만</option>
-								</select>
+								</select> -->
 							  </div>
 
 							<div style="height : 30px"></div>
@@ -345,7 +346,7 @@
     
                 <!-- /.container-fluid -->
 				<br><br>        		
-          <!--  </div>-->  
+          </div>  
     <div style="height : 100px"></div>
 	<!-- 자바스크립트 파일 연동 -->
 	<script type="text/javascript" src="<%=contextPath %>/resources/admin/js/member.js"></script>

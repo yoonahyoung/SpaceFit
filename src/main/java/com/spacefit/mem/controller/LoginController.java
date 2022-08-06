@@ -39,10 +39,9 @@ public class LoginController extends HttpServlet {
 		
 		// 2) 요청시 전달값 뽑아서 변수 또는 객체에 기록하기
 		String memId = request.getParameter("memId");
-		String memPwd = request.getParameter("memPwd");
-		
+		String memRealPwd = request.getParameter("memPwd");
 		// 3) 요청처리 (db에 sql문 실행) => 해당 요청 처리하는 서비스 클래스 메소드 호출 결과 받기
-		Member loginUser = new MemberService().loginMember(memId, memPwd);
+		Member loginUser = new MemberService().loginMember(memId, memRealPwd);
 		// System.out.println(loginUser);
 		
 		// 4) 돌려받은 결과를 가지고 사용자가 보게될 응답화면 제시

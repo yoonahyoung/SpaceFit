@@ -18,7 +18,18 @@ public class Member {
 	public String memStatus;
 	public String memAdmFlag;
 	
+	private String memRealPwd;
 	
+	public String getMemRealPwd() {
+		return memRealPwd;
+	}
+
+
+	public void setMemRealPwd(String memRealPwd) {
+		this.memRealPwd = memRealPwd;
+	}
+
+
 	//------------------- 테이블에는 없지만 추가된 리스트
 	private String randomNo; // 핸드폰 앤덤메시지 인증 위한 핸덤메시지 
 	private String grName; // 관리자 회원조회를 위한 등급이름
@@ -102,6 +113,18 @@ public class Member {
 		this.memAdmFlag = memAdmFlag;
 		this.memEnrollDate = memEnrollDate;
 		this.memModifyDate = memModifyDate;
+	}
+
+
+	public Member(String memId, String memPwd, String memName, String memIdNo, String memPhone, String memMail,
+			String memRealPwd) {
+		this.memId = memId;
+		this.memPwd = memPwd;
+		this.memName = memName;
+		this.memIdNo = memIdNo;
+		this.memPhone = memPhone;
+		this.memMail = memMail;
+		this.memRealPwd = memRealPwd;
 	}
 
 
