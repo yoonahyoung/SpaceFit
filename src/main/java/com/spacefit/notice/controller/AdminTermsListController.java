@@ -32,10 +32,33 @@ public class AdminTermsListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<Terms> list = new NoticeService().adminTermsList();	
+		request.setCharacterEncoding("utf-8");
 		
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/admin/homepage/termsManage.jsp").forward(request, response);
+		String termsStatus = request.getParameter("opt");
+
+		if(termsStatus != null) { // selected 되었을 경우
+			
+				ArrayList<Terms> list = new ArrayList<>();
+				if(termsStatus.equals("Y")) {
+					
+					list = new NoticeService().adminTermsYList();	
+					
+				}else {
+					
+					list = new NoticeService().adminTermsNList();	
+				}
+				
+				request.setAttribute("list", list);
+				request.getRequestDispatcher("views/admin/homepage/termsManage.jsp").forward(request, response);
+				
+		}else { // selected 없이 전체 조회
+			
+			ArrayList<Terms> list = new NoticeService().adminTermsList();	
+			
+			request.setAttribute("list", list);
+			request.getRequestDispatcher("views/admin/homepage/termsManage.jsp").forward(request, response);
+		}
+		
 		
 	}
 

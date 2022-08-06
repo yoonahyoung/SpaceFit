@@ -317,6 +317,74 @@ public class NoticeDao {
 		
 	}
 	
+	public ArrayList<Terms> adminTermsYList(Connection conn){
+		
+		ArrayList<Terms> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminTermsYList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Terms(rset.getInt("terms_no"),
+								   rset.getString("terms_title"),
+								   rset.getString("terms_content"),
+								   rset.getString("terms_status"),
+								   rset.getString("terms_page"),
+								   rset.getString("terms_note"),
+								   rset.getDate("terms_enroll_date"),
+								   rset.getDate("terms_modify_date")
+						));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
+	
+	public ArrayList<Terms> adminTermsNList(Connection conn){
+		
+		ArrayList<Terms> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminTermsNList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Terms(rset.getInt("terms_no"),
+								   rset.getString("terms_title"),
+								   rset.getString("terms_content"),
+								   rset.getString("terms_status"),
+								   rset.getString("terms_page"),
+								   rset.getString("terms_note"),
+								   rset.getDate("terms_enroll_date"),
+								   rset.getDate("terms_modify_date")
+						));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
+	
 	// 이용약관 등록
 	public int adminInsertTerms(Connection conn, Terms t) {
 		

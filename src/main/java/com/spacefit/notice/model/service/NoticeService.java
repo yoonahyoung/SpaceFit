@@ -124,6 +124,20 @@ public class NoticeService {
 		return list;
 	}
 	
+	public ArrayList<Terms> adminTermsYList(){
+		Connection conn = getConnection();
+		ArrayList<Terms> list = new NoticeDao().adminTermsYList(conn);
+		close(conn);
+		return list;
+	}
+	
+	public ArrayList<Terms> adminTermsNList(){
+		Connection conn = getConnection();
+		ArrayList<Terms> list = new NoticeDao().adminTermsNList(conn);
+		close(conn);
+		return list;
+	}
+	
 	// 이용약관 등록
 	public int adminInsertTerms(Terms t) {
 		Connection conn = getConnection();

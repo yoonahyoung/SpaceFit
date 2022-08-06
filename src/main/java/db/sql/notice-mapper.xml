@@ -130,6 +130,38 @@
 		    BY TERMS_NO DESC
 	</entry>
 	
+	<entry key="adminTermsYList">
+		SELECT
+		       TERMS_NO
+		     , TERMS_TITLE
+		     , TERMS_CONTENT
+		     , TERMS_STATUS
+		     , TERMS_PAGE
+		     , TERMS_NOTE
+		     , TERMS_ENROLL_DATE
+		     , TERMS_MODIFY_DATE
+		  FROM TB_TERMS
+		 WHERE TERMS_STATUS = 'Y'
+		 ORDER
+		    BY TERMS_NO DESC
+	</entry>
+	
+	<entry key="adminTermsNList">
+		SELECT
+		       TERMS_NO
+		     , TERMS_TITLE
+		     , TERMS_CONTENT
+		     , TERMS_STATUS
+		     , TERMS_PAGE
+		     , TERMS_NOTE
+		     , TERMS_ENROLL_DATE
+		     , TERMS_MODIFY_DATE
+		  FROM TB_TERMS
+		 WHERE TERMS_STATUS = 'N'
+		 ORDER
+		    BY TERMS_NO DESC
+	</entry>
+	
 	<!-- 이용약관 등록 -->
 	<entry key="adminInsertTerms">
 		INSERT

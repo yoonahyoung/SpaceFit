@@ -247,7 +247,7 @@ public class MemberDao {
       } finally {
          close(pstmt);
       }
-      
+      System.out.println(result);
       return result;
    }
    
@@ -490,6 +490,28 @@ public class MemberDao {
 			
 			pstmt.setInt(1, memNo);
 			pstmt.setString(2, cpName);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+   
+   public int deleteCoupon(Connection conn, int cpNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteCoupon");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, cpNo);
 			
 			result = pstmt.executeUpdate();
 			

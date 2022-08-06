@@ -44,7 +44,7 @@ public class MemberUpdateController extends HttpServlet {
 		Member m = new Member(memId, memName, memPhone, memMail);
 		
 		Member updateMem = new MemberService().updateMember(m);
-		
+		System.out.println(updateMem);
 		if(updateMem == null) { 
 			
 			session.setAttribute("alertMsg", "회원정보 수정에 실패하였습니다.");

@@ -383,14 +383,14 @@
                      id="modalPic"
                    />
                    <div>
-	  				  <p style="font-size:18px; color:black;" id="modalName">파티룸 C</p>
-                      <p style="font-size:18px; color:crimson;" id="modalPrice">98,000원</p>
+	  				  <p style="font-size:18px; color:black;" id="modalName">공간을 선택해주세요</p>
+                      <p style="font-size:18px; color:crimson;" id="modalPrice">0원</p>
                    </div>
                	</div>
                 <br>
                	<p class="cart-option-p">* 대여 날짜</p>
                	<div style="width:300px;">
-	       			<input type="text" class="form-control" value="2022.07.24(일) 15~19시" id="modalDate" style="font-size:13px;" disabled>
+	       			<input type="text" class="form-control" value="00시 00분" id="modalDate" style="font-size:13px;" disabled>
 	       		</div>
 	       		<br>
 	       		<p class="cart-option-p">* 선택 가능 옵션</p>
@@ -404,7 +404,7 @@
 		          </select>
 		        </div>
 	       		<br>
-	       		<p>* 선택된 옵션</p>
+	       		<p class="cart-option-p">* 선택된 옵션</p>
 	    
 	       			<div class="cartOptionDiv">
 					   <table class="cartOptionTable" style="width:415px; height:55px;">
@@ -440,7 +440,7 @@
 					  		<tr class="table_row">
 					  			<td><div style="width:11px;"></div></td>
 					  			<td class="column-2" style="text-align:left; color:black;">반려동물 동반</td>
-					  			<td class="column-4 optBtn"><button type="button" id="btnAnimal" value="animal"><img src="<%= contextPath %>/resources/user/img/cartDelete.png" alt="" style="width:15px; margin-left:25px;"></button></td>
+					  			<td class="column-4 optBtn"><button type="button" id="btnAnimal" value="animal"><img src="<%= contextPath %>/resources/user/img/cartDelete.png" alt="" style="width:15px; margin-left:25px; margin-right:1px;"></button></td>
 					  		</tr>
 					  	</table>
 				  	</div>
@@ -475,7 +475,8 @@
 	  </div>
 	</div>
 	<!-- 옵션변경 modal end -->
-
+	
+	<!-- 
 	<div id="cart-div-span">
 		<div>
 			<span style="margin-left:160px">회원님이</span>&nbsp;
@@ -489,6 +490,8 @@
 			<span>관련된 다른 상품</span>
 		</div>
 	</div>
+	 -->
+	
 	
 		
 

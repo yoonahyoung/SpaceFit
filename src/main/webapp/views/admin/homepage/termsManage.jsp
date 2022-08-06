@@ -27,7 +27,9 @@
                 <div class="row">
                   <div class="col-lg" align="left">
 	 				<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-
+					
+						 
+					<!-- 
 	                  <div class="input-group">
 	                      <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
 	                          aria-label="Search" aria-describedby="basic-addon2">
@@ -38,20 +40,19 @@
 	                      </div>
 	                      
 	                  </div>
+	                  -->
 	             
            			</form>
 				  </div>
-				  <div class="col-lg float-right">
+				  <div class="col-lg float-left">
 				  	 <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                       <select style="margin-left:300px; margin-top:12px; width:100px;">
-						  <option>게시중</option>
-						  <option>보류중</option>
+                       <select id="select-opt" style="margin-left:300px; margin-top:30px; width:100px;">
+                       	  <option>선택</option>
+						  <option value="Y">게시중</option>
+						  <option value="N">보류중</option>
 					   </select>
            			</form>
-	                		
 				  </div>
-
-
 				</div>
 				
                       <div class="card-body">
@@ -108,24 +109,13 @@
                               </table>
                           </div>
                           
-                          <div>
-                            <button type="button" class="btn btn-primary float-right" onclick="termsInsertDetailView();">등록하기</button>
+                           <div>
+                            <button type="button" class="btn btn-primary" style="margin-top:40px; width:150px; height:40px;" onclick="termsInsertDetailView();">새로 등록하기</button>
 						  </div>
 						
                       </div>
                       <br>
 
-                     <div class="paging-area" align="center">    
-       
-			           <button class="btn btn-sm btn-outline-primary">&lt;</button>        
-			           <button disabled class="btn btn-sm btn-outline-primary">1</button>        
-			           <button class="btn btn-sm btn-outline-primary">2</button> 
-			           <button class="btn btn-sm btn-outline-primary">3</button>    
-			           <button class="btn btn-sm btn-outline-primary">4</button> 
-			           <button class="btn btn-sm btn-outline-primary">5</button>       
-			           <button class="btn btn-sm btn-outline-primary">&gt;</button>
-			           
-			         </div>
                   </div>
 			
              </div>
@@ -146,6 +136,11 @@
 	        			location.href = "<%=contextPath%>/adTermsDetail.no?termsNo=" + $(this).children().eq(0).text(); 
 	        		})
 	        	})
+	        	
+	        	$('#select-opt').change(function(){
+				 
+	        		location.href = '<%=contextPath%>/adTermsList.no?opt=' + $("#select-opt option:selected").val();
+				});
 		    </script>
 		    
     
