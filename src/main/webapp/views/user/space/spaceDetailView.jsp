@@ -302,7 +302,7 @@ background:#E1F0FF;
                                                              <% } %>
                                                           </div>
                                                       </div>
-                                                   <textarea id="rvContentDiv" style="height:80px; margin-top:20px; margin-bottom:20px;"><%=r.getReviewContent() %>
+                                                   <textarea id="rvContentDiv" style="height:80px; margin-top:20px; margin-bottom:20px;" readonly><%=r.getReviewContent() %>
                                                    </textarea>
                                                       
                                                   </div>
@@ -732,7 +732,7 @@ background:#E1F0FF;
                                           + '<hr>'
                                           + '<div id="showComment">'
                                           +    '<div class="parentComment">'
-                                          +      '<textarea id="commentArea">' + comList[i].comContent + '</textarea >'
+                                          +      '<textarea id="commentArea" readonly>' + comList[i].comContent + '</textarea >'
                                           +   '</div>'
                                           + '</div>'
                                          + '</div>'
