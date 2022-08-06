@@ -260,6 +260,7 @@ background:#E1F0FF;
                                                                   </button>
                                                               </span>
                                                           <hr>
+                                                          <span id="likeUpdateCountSpan" class ="like" style="font:10px; color:#0082FF"><%= r.getAllLikeCount() %>명이 이 후기를 추천했어요🥰</span>
                                                           <div id ="showStars">
                                                               <div class="smallStars" >
                                                                  <% for(int i=0; i<r.getReviewStar(); i++) { %>
@@ -300,8 +301,10 @@ background:#E1F0FF;
                                                         			<%} %>
                                                              <% } %>
                                                           </div>
-														  <span id="likeUpdateCountSpan"><%= r.getAllLikeCount() %>명이 이 후기를 추천했습니다!</span>
                                                       </div>
+                                                   <textarea id="rvContentDiv" style="height:80px; margin-top:20px; margin-bottom:20px;"><%=r.getReviewContent() %>
+                                                   </textarea>
+                                                      
                                                   </div>
                                                   <br><br>
                                                   <div class="collapse commentDiv" id="flush-collapse<%= r.getReviewNo() %>" data-value="<%= r.getReviewNo() %>" aria-labelledby="flush-heading<%= r.getReviewNo() %>" data-bs-parent="#accordionFlushExample">
