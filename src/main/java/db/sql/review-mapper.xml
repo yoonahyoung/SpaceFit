@@ -298,10 +298,23 @@
             WHERE L.RV_NO = R.RV_NO
              )  AS "ALL_LIKE_COUNT"
              , MEM_NO
+             , (
+             SELECT FILE_PATH
+            FROM TB_FILE F
+            WHERE FILE_CATEGORY=2
+            AND R.RV_NO = F.REF_BNO
+             ) AS "FILE_PATH"
+             ,  (
+             SELECT FILE_CHANGE_NAME
+            FROM TB_FILE F
+            WHERE FILE_CATEGORY=2
+            AND R.RV_NO = F.REF_BNO
+             ) AS "FILE_CHANGE_NAME"
 		  FROM TB_REVIEW R
 		  JOIN TB_MEMBER USING (MEM_NO)
 		  JOIN TB_GRADE USING (GR_NO)
 		  JOIN TB_SPACE USING (SPACE_NO)
+          JOIN TB_FILE F ON (R.RV_NO = F.REF_BNO)
          WHERE RV_STATUS = 'Y'
            AND SPACE_NO =?
 	</entry>

@@ -102,8 +102,8 @@
 	<!-- 쿠폰존 == 다운가능한 쿠폰 -->
   	<div id="cpZone">
 		<div style="margin-top:100px;">
-			<span style="margin-left:500px;">COUPON</span>&nbsp;
-			<span style="color:#0D6EFD;">ZONE</span>
+			<span style="margin-left:540px;">회원님이</span>&nbsp;
+			<span style="color:#0D6EFD;">다운 가능한 쿠폰</span>
 		</div>
     </div>
     

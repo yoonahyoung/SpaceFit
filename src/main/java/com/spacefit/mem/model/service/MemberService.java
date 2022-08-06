@@ -149,6 +149,19 @@ public class MemberService {
 		return result;
 	}
    
+   public int deleteCoupon(int cpNo) {
+		Connection conn = getConnection();
+		int result = new MemberDao().deleteCoupon(conn, cpNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+   
    public int updateMemberStatus(String memId, String memPwd) {
 		Connection conn = getConnection();
 		int result = new MemberDao().updateMemberStatus(conn, memId, memPwd);

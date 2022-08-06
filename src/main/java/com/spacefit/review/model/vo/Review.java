@@ -288,6 +288,26 @@ public class Review {
 		this.allLikeCount = allLikeCount;
 		this.memNo = memNo;
 	}
+	
+	public Review(int reviewNo, int bookNo, String spaceName, String memId, String reviewContent, Date reviewEnrollDdate,
+			Date reviewModifyDate, int reviewStar, String reviewStatus, String gradeName, int allLikeCount, String memNo, String filePath, String fileChangeName) {
+		super();
+		this.reviewNo = reviewNo;
+		this.bookNo = bookNo;
+		this.spaceName = spaceName;
+		this.memId = memId;
+		this.reviewContent = reviewContent;
+		ReviewEnrollDdate = reviewEnrollDdate;
+		ReviewModifyDate = reviewModifyDate;
+		this.reviewStar = reviewStar;
+		this.reviewStatus = reviewStatus;
+		this.gradeName = gradeName;
+		this.allLikeCount = allLikeCount;
+		this.memNo = memNo;
+		this.filePath = filePath;
+		this.fileChangeName = fileChangeName;
+	}
+
 
 
 	public String getMemId() {

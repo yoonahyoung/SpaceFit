@@ -244,8 +244,9 @@ background:#E1F0FF;
                                               <% for(Review r : rvList) { %>  
                                               <div class="container-fluid eachRvList">
                                                   <div class="row">
-                                                      <div class="col-lg-3"> 
-                                                          <img class="titleImg" width="150" height="120" onclick="">
+                                                      <div class="col-lg-3">
+                                                      		<img src="<%=r.getFilePath()%>/<%= r.getFileChangeName() %>" width="150" height="120"> 
+                                                          <!--  <img class="titleImg" width="150" height="120" onclick="">-->
                                                           <span id="titleImgSpan">후기작성일 : <%=r.getReviewModifyDate() %></span>
                                                       </div>
                                                       <div class="col-lg-6" id="eachRvListHeader">
@@ -259,6 +260,7 @@ background:#E1F0FF;
                                                                   </button>
                                                               </span>
                                                           <hr>
+                                                          <span id="likeUpdateCountSpan" class ="like" style="font:10px; color:#0082FF"><%= r.getAllLikeCount() %>명이 이 후기를 추천했어요🥰</span>
                                                           <div id ="showStars">
                                                               <div class="smallStars" >
                                                                  <% for(int i=0; i<r.getReviewStar(); i++) { %>
@@ -299,8 +301,10 @@ background:#E1F0FF;
                                                         			<%} %>
                                                              <% } %>
                                                           </div>
-														  <span id="likeUpdateCountSpan"><%= r.getAllLikeCount() %>명이 이 후기를 추천했습니다!</span>
                                                       </div>
+                                                   <textarea id="rvContentDiv" style="height:80px; margin-top:20px; margin-bottom:20px;"><%=r.getReviewContent() %>
+                                                   </textarea>
+                                                      
                                                   </div>
                                                   <br><br>
                                                   <div class="collapse commentDiv" id="flush-collapse<%= r.getReviewNo() %>" data-value="<%= r.getReviewNo() %>" aria-labelledby="flush-heading<%= r.getReviewNo() %>" data-bs-parent="#accordionFlushExample">
