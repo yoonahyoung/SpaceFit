@@ -617,7 +617,9 @@ public class ReviewDao {
 							rset.getString("rv_status"),
 							rset.getString("gr_name"),
 							rset.getInt("all_like_count"),
-							rset.getString("mem_no")
+							rset.getString("mem_no"),
+							rset.getString("file_path"),
+							rset.getString("FILE_CHANGE_NAME")
 						));
 			}
 		} catch (SQLException e) {
