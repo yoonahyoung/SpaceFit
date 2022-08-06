@@ -52,7 +52,7 @@
     <div class="card pwdChangeCard">
         <div class="pwdChangeDiv">
         	<!--  <form action="<%=contextPath %>/updatePwd.me" method="post" id="mem-updatePwd-form">-->
-        	<form action="<%=contextPath %>/Sohee" method="post" id="mem-updatePwd-form">
+        	<form action="<%=contextPath %>/memUpdatePwd.me" method="post" id="mem-updatePwd-form">
         		<input type="hidden" name="memId" value="<%=memId%>">
 	            <div class="mb-3">
 	                <label for="exampleFormControlInput1" class="form-label">현재 비밀번호</label>

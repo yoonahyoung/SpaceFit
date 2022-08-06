@@ -13,16 +13,16 @@ import com.spacefit.mem.model.service.MemberService;
 import com.spacefit.mem.model.vo.Member;
 
 /**
- * Servlet implementation class Sohee
+ * Servlet implementation class MemUpdatePwd2Controller
  */
-@WebServlet("/Sohee")
-public class Sohee extends HttpServlet {
+@WebServlet("/memUpdatePwd.me")
+public class MemUpdatePwd2Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Sohee() {
+    public MemUpdatePwd2Controller() {
         super();
         // TODO Auto-generated constructor stub
     }
