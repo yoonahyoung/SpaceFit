@@ -462,6 +462,32 @@ public class SpaceDao {
 		return list;
 	
 	}
+
+	//상품 상세 페이지에서 QnA 페이징
+	public int selectListQnACount(Connection conn, int spNo) {
+		int listCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectListQnACount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, spNo);
+			rset = pstmt.executeQuery();
+
+			if(rset.next()) {
+				listCount = rset.getInt("count");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return listCount;
+	}
 	
 	
 	

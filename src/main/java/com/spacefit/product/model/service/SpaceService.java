@@ -147,5 +147,13 @@ public class SpaceService {
 		
 		return list;
 	}
+	
+	// 상품 상세페이지 QnA리스트 페이징바
+		public int selectListQnACount(int spNo) {
+			Connection conn = getConnection();
+			int listCount = new SpaceDao().selectListQnACount(conn, spNo);
+			close(conn);
+			return listCount;
+		}
 
 }
