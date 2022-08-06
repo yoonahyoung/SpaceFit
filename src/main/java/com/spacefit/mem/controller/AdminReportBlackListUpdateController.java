@@ -34,7 +34,7 @@ public class AdminReportBlackListUpdateController extends HttpServlet {
 		int result = new ReportService().blackListUpdate(memId);
 		
 		if(result > 0) {
-			request.getSession().setAttribute("alertMsg", "블랙리스트설정되었습니다.");
+			request.getSession().setAttribute("alertMsg", "블랙리스트설정되었습니다. 회원정보조회메뉴에 가시면 확인가능합니다.");
 			response.sendRedirect(request.getContextPath() + "/memReport.me");
 		}
 		
