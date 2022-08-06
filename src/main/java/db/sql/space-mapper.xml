@@ -236,24 +236,50 @@
 	</entry>
 
 	<!-- QnA리스트 조회용 -->
-	<entry key="selectQnAList">
+	<entry key="selectQList">
 		SELECT *
 		  FROM (
 		        SELECT ROWNUM RNUM, A.*
 		          FROM (
 		                SELECT 
-		                       QNA_NO
-						     , QNA_TITLE
-						     , MEM_ID
-						     , QNA_CONTENT
-						     , QNA_CREATE_DATE
-		                  FROM TB_QNA B
-		                  JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
+                               QNA_NO
+                             , MEM_ID
+                             , QNA_CONTENT
+                             , QNA_CREATE_DATE
+                          FROM TB_QNA B
+                          JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
                           JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
-		                 WHERE B.QNA_STATUS = 'Y'
-		                   AND SPACE_NO = ?
-		                 ORDER 
-		                    BY QNA_NO DESC
+                         WHERE B.QNA_STATUS = 'Y'
+                           AND QNA_GROUP = 0
+                           AND QNA_SOLVED = 'Y'
+                           AND QNA_SPACE_NO = ?
+                           AND QNA_CATEGORY = '공간'
+                         ORDER 
+                            BY QNA_NO DESC
+		               ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="selectAList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT 
+                               QNA_NO
+                             , MEM_ID
+                             , QNA_CONTENT
+                             , QNA_CREATE_DATE
+                          FROM TB_QNA B
+                          JOIN TB_MEMBER ON (QNA_MEM_NO = MEM_NO)
+                          JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
+                         WHERE B.QNA_STATUS = 'Y'
+                           AND QNA_GROUP = 1
+                           AND QNA_SPACE_NO = ?
+                           AND QNA_CATEGORY = '공간'
+                         ORDER 
+                            BY QNA_NO DESC
 		               ) A
 		        )
 		 WHERE RNUM BETWEEN ? AND ?

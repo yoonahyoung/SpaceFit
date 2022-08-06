@@ -63,9 +63,11 @@ public class SpaceAjaxQnAListController extends HttpServlet {
 		
 	// ------------------------ 데이터 받고 넘기기 ----------------------------------------------------------------	
 		
-		ArrayList<QnA> list = new SpaceService().selectQnAList(pi, spNo);
+		ArrayList<QnA> Qlist = new SpaceService().selectQList(pi, spNo); // 질문
+		ArrayList<QnA> Alist = new SpaceService().selectAList(pi, spNo); // 답변
 		HashMap<String, Object> h = new HashMap<>();
-		h.put("list", list);
+		h.put("Qlist", Qlist);
+		h.put("Alist", Alist);
 		h.put("pi", pi);
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(h, response.getWriter());
