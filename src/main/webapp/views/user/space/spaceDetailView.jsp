@@ -260,6 +260,7 @@ background:#E1F0FF;
                                                                   </button>
                                                               </span>
                                                           <hr>
+                                                          <span id="likeUpdateCountSpan" class ="like" style="font:10px; color:#0082FF"><%= r.getAllLikeCount() %>명이 이 후기를 추천했어요🥰</span>
                                                           <div id ="showStars">
                                                               <div class="smallStars" >
                                                                  <% for(int i=0; i<r.getReviewStar(); i++) { %>
@@ -271,8 +272,8 @@ background:#E1F0FF;
                                                                   <% } %>
                                                               </div>
                                                           </div>
-                                                          <textarea id="rvContentDiv"><%=r.getReviewContent() %>
-                                                          </textarea>
+                                                          <!--  <textarea id="rvContentDiv"><%=r.getReviewContent() %>
+                                                          </textarea>-->
                                                       </div>
                                                       <div class="col-lg-3 memInfoDiv">
                                                           <div class="mem">
@@ -300,11 +301,14 @@ background:#E1F0FF;
                                                         			<%} %>
                                                              <% } %>
                                                           </div>
-														  <span id="likeUpdateCountSpan"><%= r.getAllLikeCount() %>명이 이 후기를 추천했습니다!</span>
                                                       </div>
+                                                   <textarea id="rvContentDiv" style="height:80px; margin-top:20px; margin-bottom:20px;"><%=r.getReviewContent() %>
+                                                   </textarea>
+                                                      
                                                   </div>
                                                   <br><br>
                                                   <div class="collapse commentDiv" id="flush-collapse<%= r.getReviewNo() %>" data-value="<%= r.getReviewNo() %>" aria-labelledby="flush-heading<%= r.getReviewNo() %>" data-bs-parent="#accordionFlushExample">
+                                                        <div class="parentCommentAll" id="parentCommentAll"></div>
                                                         <div id="writeComment">
                                                             <table id="writeTable" align="center">
                                                                 <thead>
@@ -409,13 +413,16 @@ background:#E1F0FF;
                                     </select>
                                     <span class="col-sm-4"> 체크아웃  </span>
                                     <select name="detailCO" class="detailCO" required>
-                                       
+                                       <%for(int i=10; i<22; i++){ %>
+                                           <option value="<%=i%>"><%= i %>:00</option>
+                                        <%} %>
                                     </select>
                                 </div>
 
                                 <div class="row">
                                     <h4 style="margin-top:40px; border-bottom:2px solid #0D6EFD">총 금액</h4>
                                     <div><span class="col-sm-4" id="price"> </span><b>원</b></div>
+                                    <div>(시간당 이용금액 : <%=s.getSpacePrice() %>원)</div>
                                     <input type="hidden" name="price" class="price" required>
                                 </div>
                                 <script>
@@ -617,7 +624,7 @@ background:#E1F0FF;
                       // 체크인 시간에 따른 체크아웃 시간 막아두기
                       let el = "";
                       $(".detailCI").on("change", function(){
-	                      el = "<option>시간선택</option>"
+	                      el = "<option value='" + $(this).val() + "'>시간선택</option>"
 	                      $(".detailCO").html(el);
 	                      
                     	  let checkIn = parseInt($(this).val()) + 1;
@@ -698,7 +705,7 @@ background:#E1F0FF;
                                             +      '<span id="memSpan">'
                                             +         comList[i].memId
                                             +      '</span>'
-                                            +      '<span id="dateSpan">'
+                                            +      '<span id="dateSpan" style="margin-left:20px;">'
                                             +         comList[i].comEnrollDate
                                             +      '</span>'
                                             + '</div>'
@@ -716,7 +723,7 @@ background:#E1F0FF;
                                             }
                                             
                                             if(comList[i].memId == '<%=loginUserId%>'){
-                                            	value +=   '<button type="button" class="comBtn" id="updateComment" data-bs-toggle="modal" data-bs-target="#myCommentModal2" onclick="updateCommentModal('+ comList[i].comNo + ',' + comList[i].memNo + ',' + spNo +');">댓글수정</button>'
+                                            	//value +=   '<button type="button" class="comBtn" id="updateComment" data-bs-toggle="modal" data-bs-target="#myCommentModal2" onclick="updateCommentModal('+ comList[i].comNo + ',' + comList[i].memNo + ',' + spNo +');">댓글수정</button>'
                                             
                                             }
                                             
