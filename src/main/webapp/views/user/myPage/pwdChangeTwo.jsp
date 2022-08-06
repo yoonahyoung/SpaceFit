@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>   
+<% 
+	int memNo = (int)request.getAttribute("memNo");
+	String memPhone = (String)request.getAttribute("memPhone");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +19,7 @@
 	<%@ include file="../common/userMenubar.jsp" %>
 	<link rel="stylesheet" href="<%=contextPath %>/resources/user/css/member.css?ver=1">
 	
-	<div style="height : 200px"></div>
+	<div style="height : 100px"></div>
         
     <div class="outer">
         <div class="blueShadow text-center">
@@ -37,29 +41,30 @@
 									        	<div class="inputs">
 									        		<br><br>
 						                                <label for="#password">비밀번호</label>
-						                                <input type="password" placeholder="새 비밀밀번호를 입력해주세요" class="account-input" id="memPwd">
+						                                <input type="password" placeholder="새 비밀밀번호를 입력해주세요" class="account-input" id="memPwd" name="memPwd">
 						                                <span id="pwdSpan">비밀번호는 영문 대소문자+숫자+특수문자로 10자 이상입니다.</span>
+						                                <input type="hidden" value="<%=memNo%>" name ="memNo">
+						                                <input type="hidden" value="<%=memPhone%>" name ="memPhone">
 						                            <br><br>
 						                                <label for="#password-check" id="memPwdCheck">비밀번호</label>
 						                                <input type="password" placeholder="새 비밀번호를 다시 입력해주세요" class="account-input" id="pwdCheckSpan">
 						                                <span id="pwdCheckSpan">비밀번호를 한번 더 입력해주세요.</span>
-						                            <br><br>
+						                            <br><br><br>
 									        	</div>
+									        	<hr>
+									        	<div class="inputs">
+							                        <label for="#pwdBtn" class="inputLabel">이제는 잊지마세요! :)</label>
+							                        <button type="submit" class="btn btn-primary" id="pwdBtn">비밀번호 재설정</button><br>
+		                       					<br>
+                        						</div>
 								       		</form>
-	                        				<hr>
+	                        				
 			                           	</td>
 		                           </tr>
                             </table>
                     	</div>
                     	
 	                    <br>
-                        <form class="signInForm">
-                        	<div class="inputs">
-		                        <label for="#pwdBtn" class="inputLabel">이제는 잊지마세요! :)</label>
-		                        <button type="submit" class="btn btn-primary" id="pwdBtn">비밀번호 재설정</button><br>
-		                        <br>
-                        	</div>
-	                   </form>
 	                   
 	                   <script>
 	                        	// 3. 비밀번호 유효성 체크

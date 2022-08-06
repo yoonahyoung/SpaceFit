@@ -162,7 +162,7 @@ function pwdCheck(){
 memPwd.addEventListener("blur", pwdCheck);
 
 // 4. 비밀번호 확인
-let memPwdCheck = document.querySelector("memPwdCheck");
+let memPwdCheck = document.querySelector("#memPwdCheck");
 let pwdCheckSpan = document.querySelector("#pwdCheckSpan");
 function pwdDBcheck(){
 	if(memPwd.value === memPwdCheck.value) {

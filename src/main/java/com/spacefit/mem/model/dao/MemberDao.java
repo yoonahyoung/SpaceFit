@@ -160,6 +160,44 @@ public class MemberDao {
       
    }
    
+   public int selectPhone(Connection conn, String memPhone) {
+	   int memNo = 0;
+	   PreparedStatement pstmt = null;
+	   ResultSet rset = null;
+	   String sql = prop.getProperty("selectPhone");
+	   try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memPhone);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				memNo = rset.getInt("mem_no");
+			} else {
+				memNo = 0;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	       
+		   return memNo;
+   }
+   
+   public int updateUnknownPwd(Connection conn, String memPwd, String memPhone) {
+	   int result = 0;
+	   PreparedStatement pstmt = null;
+	   String sql = prop.getProperty("updateUnknownPwd");
+	   try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, memPwd);
+		pstmt.setString(2, memPhone);
+		result = pstmt.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+       
+	   return result;
+   }
+   
    public int updateMember(Connection conn, Member m) {
       
       int result = 0;

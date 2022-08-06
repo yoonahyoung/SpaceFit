@@ -56,12 +56,14 @@
 							  	</form>
 							   -->
 							  </div>
+							  <!--  
 							  <div id="selectExactDate">
 							  	<form>
 							  		<input type="date" class="dateInput"> ~ <input type="date" class="dateInput">
 							  		<button type="button" class = "btn btn-primary">조회</button>
 							  	</form>
 							  </div>
+							   -->
 							  <div id="selectSelection">
 							  	<form>
 							  		<select id="orderBySel" name="orderBySel" onchange="changeSelect()">
@@ -78,7 +80,7 @@
 	                                <table class="table table-bordered memberListTable" id="dataTable" width="100%" cellspacing="0">
 	                                    <thead>
 	                                        <tr>
-	                                        	<th>선택</th>
+	                                        	<!-- <th>선택</th> -->
 	                                        	<th>후기번호</th>
 	                                            <th>작성자</th>
 	                                            <th>공간명</th>
@@ -92,7 +94,7 @@
 	                                    </thead>
 	                                    <tfoot>
 	                                        <tr>
-	                                        	<th>선택</th>
+	                                        	<!-- <th>선택</th> -->
 	                                        	<th>후기번호</th>
 	                                            <th>작성자</th>
 	                                            <th>공간명</th>
@@ -114,7 +116,7 @@
 	                                    	<!-- 후기가 있을경우 -->
 	                                    		<% for(Review r : rvList) { %>
 			                                        <tr>
-			                                        	<td><input type="radio"></td>
+			                                        	<!-- <td><input type="radio"></td> -->
 			                                            <td><%= r.getReviewNo()%></td>
 			                                            <td><%= r.getMemId() %></td>
 			                                            <td><%= r.getSpaceName() %></td>
@@ -140,6 +142,7 @@
 	                        <div style="height : 20px"></div>
 	                        <button type="button" class = "btn btn-danger">추천 조작프로그램 실행</button>
 	                       	<div style="height : 40px"></div>
+							 <!-- 
 							<div class="paging-area" align="center">    
 		        
 								<button class="btn btn-sm btn-outline-primary">&lt;</button>        
@@ -151,6 +154,7 @@
 								<button class="btn btn-sm btn-outline-primary">&gt;</button>
 								
 							</div>
+							-->
 							<div style="height : 60px"></div>
 	                    </div>
                 	</div>

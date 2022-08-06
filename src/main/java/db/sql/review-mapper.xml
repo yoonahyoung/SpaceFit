@@ -186,6 +186,7 @@
 	
 	
 	<!-- 이 부분부터 ADMIN 쪽 SQL 소희작성 -->
+	<!-- 관리자 리뷰 조회 -->
 	<entry key="adminReviewSelect">
 		SELECT 
 		       RV_NO
@@ -212,6 +213,7 @@
 		  JOIN TB_BOOK USING (BOOK_NO)
 	</entry>
 	
+	<!-- 관리자 리뷰 디테일뷰 조회 -->
 	<entry key="adminSelectEachReview">
 		SELECT
 		       RV_NO
@@ -243,6 +245,7 @@
 		 WHERE RV_NO=?
 	</entry>
 	
+	<!-- 관리자 오늘 올라온 리뷰 갯수 확인 -->
 	<entry key="todayRvCount">
      		SELECT COUNT(*) AS "todayRvCount"
    			  FROM TB_REVIEW
@@ -250,10 +253,23 @@
   			   AND RV_STATUS = 'Y';   
 	</entry>
 	
+	
+	<entry key="selectReviewPhoto">
+		SELECT RV_NO
+             , FILE_PATH || FILE_CHANGE_NAME AS "REVIEW_MAINIMG"
+          FROM TB_REVIEW R
+          JOIN TB_FILE ON (REF_BNO = RV_NO)
+         WHERE R.MEM_NO = 2
+           AND FILE_CATEGORY = 2
+           AND FILE_LEVEL = 1
+           AND FILE_STATUS = 'Y';
+	</entry>
+	
 
 
 	<!-- 이 부분부터 공간별 후기리스트 관련 SQL 작성. 소희작성  --> 
 	
+	<!-- 사용자 / 각 공간별 리뷰 확인 -->
 	<entry key="selectRvListForSpace">
 		SELECT RV_NO
 		     , BOOK_NO
@@ -287,6 +303,7 @@
 		 WHERE SPACE_NO = ?
 	</entry>
 	
+	<!-- 공간별 평균 별점 소수점 2번째 올림으로 구하기ㅇ -->
 	<entry key="avgRoundOne">
 		  SELECT ROUND(AVG(RV_STAR), 2) AS "avgRoundOne" FROM TB_REVIEW
 	</entry>
