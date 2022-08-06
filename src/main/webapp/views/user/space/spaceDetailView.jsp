@@ -578,19 +578,17 @@ background:#E1F0FF;
        }
     </script>
 
+	
     <script>
-   
+    // 캘린더 부분
     $(function(){
         calendarRendering();
     })
    
     function calendarRendering(){
-       var calendarEl = document.getElementById('calendar');
-      
-      
+      var calendarEl = document.getElementById('calendar');
       var calendar = new FullCalendar.Calendar(calendarEl, {
           locale: 'ko',
-          
           selectable:true,
           dateClick:function(info){
              //console.log(info.dateStr); // 선택한 날짜 2022-08-02
@@ -604,7 +602,7 @@ background:#E1F0FF;
                       // 캘린더에서 클릭된 날짜를 토대로 시간 선택 할 수 있게 해주기
                       // 즉, 캘린더에 예약된 내역들을 굳이 뿌리지 않을 것임
                       
-                      // 예약 없는 날은 disabled해제
+                      // 새로 로딩 됐을 때 disabled되어있던 시간들 해제
                       $(".detailCI").children().each(function(){
                          $(this).attr('disabled',false).css("background", "white");
                       });
@@ -620,7 +618,7 @@ background:#E1F0FF;
                       }
                    },
                 });
-          }
+          	}
       });
       calendar.render();
       
