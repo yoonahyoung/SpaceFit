@@ -183,15 +183,15 @@
 					            <table class="table" style="color: rgb(20, 18, 18);">
 					                <tr>
 					                    <th>취소사유</th>
-					                    <td>일정취소및변경</td>
+					                    <td><%= b.getBookCancleReason() %></td>
 					               </tr>
 					               <tr>
 					                    <th>자세한사유</th>
-					                    <td><textarea name="bCancelContent" id="bCancelContent" cols="32" rows="10" style="resize:none" maxlength="500" readonly>변경된일정으로 다시 신청할게요</textarea></td>
+					                    <td><textarea name="bCancelContent" id="bCancelContent" cols="32" rows="10" style="resize:none" maxlength="500" readonly><%= b.getBookCancelContent() %></textarea></td>
 					               </tr>            
 					            </table>          
 					            <div align="end">               
-					               <button type="button" onclick="history.back();" class="btn btn-sm btn-secondary">뒤로가기</button>
+					               <button type="button" onclick="location.href='<%= contextPath %>/aBookList.bo'" class="btn btn-sm btn-secondary">뒤로가기</button>
 					            </div> 
 				            <%} %>
 				

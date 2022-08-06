@@ -1,7 +1,6 @@
-package com.spacefit.mem.controller;
+package com.spacefit.event.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,19 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.spacefit.mem.model.service.MemberService;
-import com.spacefit.mem.model.vo.Member;
 
 /**
- * Servlet implementation class MemUpdatePwdController
+ * Servlet implementation class AdminCouponDeleteController
  */
-@WebServlet("/updatePwd.me")
-public class MemUpdatePwdController extends HttpServlet {
+@WebServlet("/adCouponDelete.me")
+public class AdminCouponDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemUpdatePwdController() {
+    public AdminCouponDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,24 +30,24 @@ public class MemUpdatePwdController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String memId = request.getParameter("memId");
-		String memPwd = request.getParameter("memPwd");
-		String updatePwd = request.getParameter("updatePwd");
+		request.setCharacterEncoding("utf-8");
 		
-		Member updateMem = new MemberService().updatePwdMember(memId, memPwd, updatePwd);
+		int cpNo = Integer.parseInt(request.getParameter("cpNo"));
+		
+		int result = new MemberService().deleteCoupon(cpNo);
 		
 		HttpSession session = request.getSession();
-		if(updateMem == null) {
+		if(result > 0) {
 			
-			session.setAttribute("alertMsg", "비밀번호를 다시 확인해주세요.");
+			session.setAttribute("alertMsg", "쿠폰을 삭제했습니다.");
+			response.sendRedirect(request.getContextPath() + "/adCouponList.me");
 			
 		}else {
 			
-			session.setAttribute("alertMsg", "비밀번호 변경에 성공했습니다.");
-			session.setAttribute("loginUser", updateMem);
+			session.setAttribute("alertMsg", "해당 쿠폰을 보유한 회원이 있습니다.");
+			response.sendRedirect(request.getContextPath() + "/adCouponList.me");
 		}
-		
-		response.sendRedirect(request.getContextPath() + "/updatePwdForm.me");
+	
 	}
 
 	/**
