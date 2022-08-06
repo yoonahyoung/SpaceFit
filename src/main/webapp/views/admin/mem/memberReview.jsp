@@ -65,13 +65,11 @@
 							  </div>
 							   -->
 							  <div id="selectSelection">
-							  	<form>
-							  		<select id="orderBySel" name="orderBySel" onchange="changeSelect()">
-									  <option value="newest" selected>최신후기 조회</option>
-									  <option value="reported">누적신고순</option>
-									  <option value="like">누적추천순</option>
-									</select>
-							  	</form>
+							  	<select id="orderBySel" name="orderBySel" onchange="changeSelect()">
+								  <option value="newest" selected>최신후기 조회</option>
+								  <option value="reported">누적신고순</option>
+								  <option value="like">누적추천순</option>
+								</select>
 							  </div>
 
 							<div style="height : 30px"></div>
@@ -107,6 +105,9 @@
 	                                        </tr>
 	                                    </tfoot>
 	                                    <tbody>
+	                                    <tbody id="memListTBody">
+	                                    	
+	                                    </tbody>
 	                                    <% if(rvList.isEmpty()) { %>
 	                                    	<!-- 후기글 없을경우 -->
 	                                    	<tr>
@@ -164,6 +165,83 @@
 				<br><br>        		
             </div>
     <div style="height : 100px"></div>
+    
+    <script>
+    function changeSelect(){
+		let orderBy = $("#orderBySel").val();
+		let contextPath = "<%= contextPath %>"
+		const memListTBody = $("#memListTBody");
+		 $.ajax({
+			       url:"<%=contextPath%>/orderByMem.me",
+		  		 data:{
+		  			orderBy:orderBy
+		  		 },
+		  		 type:"post",
+		  		 success:function(memList){
+		  			if(memList.length == 0){
+		           					// 회원리스트가 비어있다면
+		   							let value ='<tr><td colspan="11">존재하는 회원이 없습니다.</td></tr>'
+		   							memListTBody.html(value);
+		   						} else {
+			  			let value = ""
+			  			for(let i = 0; i<memList.length; i++) {
+			  				/* $(function(){
+				  					if( memList[i].memAdmFlag == 'A') {
+				  						$("#adminFlag").val("Admin").attr('selected', 'selected');
+				  					} else {
+				  						$("#adminFlag").val("General").attr('selected', 'selected');
+				  					}
+				  				}) */
+			  	if(memList[i].memAdmFlag == 'A') {
+			  		memAdmFlag = "관리자"
+			  	} else {
+			  		memAdmFlag = "일반"
+			  	}
+  				
+		  		if (memList[i].grName == "Basic") {
+  					grSelectVal = "Basic";
+  				} else if  (memList[i].grName == "Silver") {
+  					grSelectVal = "Silver";
+  				} else {
+  					grSelectVal = "Gold";
+  				}
+  					
+		  		if (memList[i].memStatus == "Y") {
+		  			memStatus = "회원"
+  				} else if  (memList[i].memStatus == "N") {
+  					memStatus = "탈퇴회원"
+  				} else {
+  					memStatus = "블랙리스트"
+  				}
+	  				
+	  			value += 
+		  			'<tr>'
+                                  + ' 	  <td><input type="checkbox" name="choice" id="choice" value="' + memList[i].memNo + '"></td> '
+                                  + '     <td>' + memList[i].memNo + '</td> '
+                                  + '     <td>' + memList[i].memId + '</td> '
+                                  + '     <td>' + memList[i].memName + '</td> '
+                                  + '     <td>' + memList[i].memPhone + '</td> '
+                                  + '     <td>' + grSelectVal  + '</td> '
+                                  + '     <td>' + memList[i].rptCount + '</td> '
+                                  + '     <td>' + memList[i].likeCount + '</td> '
+                                  + '     <td>' + memAdmFlag + '</td> '
+                                  + '     <td>' + memStatus + '</td> '
+                                  + '     <td>' + memList[i].bookCountMonth + '</td> '
+                                  + '     <td><a class="btn btn-primary btn-sm" href="'+contextPath+'/memDetailView.me?no='+ memList[i].memNo +'">상세조회</a></td>'
+                                  + '  </tr> '
+                                  + '<input type="hidden" value="'+ memList[i].memNo +'">'
+  					 }
+	  				memListTBody.html(value);
+	  				
+		  		 }
+  		 },
+  		 error:function(){
+  			console.log("회원목록 조회용 ajax 통신 실패");
+  		 }
+  		 
+  	 })
+}
+    </script>
 	<!-- 자바스크립트 파일 연동 -->
 	<script type="text/javascript" src=""></script>
 </body>

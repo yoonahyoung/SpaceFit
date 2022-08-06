@@ -304,6 +304,7 @@ background:#E1F0FF;
                                                   </div>
                                                   <br><br>
                                                   <div class="collapse commentDiv" id="flush-collapse<%= r.getReviewNo() %>" data-value="<%= r.getReviewNo() %>" aria-labelledby="flush-heading<%= r.getReviewNo() %>" data-bs-parent="#accordionFlushExample">
+                                                        <div class="parentCommentAll" id="parentCommentAll"></div>
                                                         <div id="writeComment">
                                                             <table id="writeTable" align="center">
                                                                 <thead>
