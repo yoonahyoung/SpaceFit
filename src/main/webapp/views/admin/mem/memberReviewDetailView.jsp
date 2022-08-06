@@ -64,17 +64,11 @@
 					<th>회원등급</th>
 					<td>
 						<% if(rv.getGrNo() == 1) { %>
-							<input type="radio" name="grNo" value="1" checked>Basic &nbsp;
-                     		<input type="radio" name="grNo" value="2">Silver&nbsp;
-                     		<input type="radio" name="grNo" value="3">Gold&nbsp;
+							Basic
 						<% } else if (rv.getGrNo() == 2) { %>
-							<input type="radio" name="grNo" value="1">Basic &nbsp;
-                     		<input type="radio" name="grNo" value="2" checked>Silver&nbsp;
-                     		<input type="radio" name="grNo" value="3">Gold&nbsp;
+							Silver
 						<% } else { %>
-							<input type="radio" name="grNo" value="1">Basic &nbsp;
-                     		<input type="radio" name="grNo" value="2">Silver&nbsp;
-                     		<input type="radio" name="grNo" value="3" checked>Gold&nbsp;
+							Gold
 						<% } %>
 					</td>
 				</tr>
@@ -90,32 +84,28 @@
 					<th>후기글 상태</th>
 					<td>
 						<% if(rv.getReviewStatus().equals("Y")) { %>
-							<input type="radio" name="revStatus" value="Y" checked>공개 &nbsp;
-                     		<input type="radio" name="revStatus" value="N">비공개&nbsp;
-                     		<input type="radio" name="revStatus" value="B">베스트&nbsp;
+							공개
 						<% } else if (rv.getReviewStatus().equals("B")) { %>
-							<input type="radio" name="revStatus" value="Y">공개 &nbsp;
-                     		<input type="radio" name="revStatus" value="N" checked>비공개&nbsp;
-                     		<input type="radio" name="revStatus" value="B">베스트&nbsp;
+							비공개
 						<% } else { %>
-							<input type="radio" name="revStatus" value="Y">공개 &nbsp;
-                     		<input type="radio" name="revStatus" value="N">비공개&nbsp;
-                     		<input type="radio" name="revStatus" value="B" checked>베스트&nbsp;
+							베스트
 						<% } %>
 					</td>
 				</tr>
 				<tr>
-					<th>게시글 주소로 이동</th>
+					<th><!-- 게시글 주소로 이동 --></th>
 					<td>
-						<input type="button" class="btn btn-primary btn-sm" value="goToReview" onclick="location.href='<%=contextPath%>/detail.sp?no=<%=rv.getSpaceNo()%>'">
+						<!--<input type="button" class="btn btn-primary btn-sm" value="goToReview" onclick="location.href='<%=contextPath%>/detail.sp?no=<%=rv.getSpaceNo()%>'">  -->
 					</td>
 				</tr>
 				<tr>
 			</table>
 			<br><br>
+			<!-- 
 			<button type="button" class="btn btn-primary">베스트 후기 등록</button>
 			<button type="button" class="btn btn-warning">후기 수정</button>
-	        <button type="button" class="btn btn-secondary">후기목록</button>
+			 -->
+	         <a class="btn btn-primary" href="<%=contextPath %>/memReview.me">후기목록</a>
 		</form>
 		        
     </div>

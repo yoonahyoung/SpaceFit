@@ -39,6 +39,7 @@ public class AjaxLikeUpdateController extends HttpServlet {
 		} else {
 			int updateLike = new LikeService().updateLike(memNo, rvNo);
 			if(updateLike == 1) {
+				
 				response.getWriter().print("likeOk");
 			} else {
 				response.getWriter().print("likeNo");
