@@ -151,7 +151,7 @@ public class ReviewService {
 		return rvList;
 		
 	}
-	
+	/*
 	
 	public ArrayList<Review> selectPhotoListForSpace(int spNo){
 			
@@ -161,7 +161,7 @@ public class ReviewService {
 			return ptList;
 			
 		}
-		
+	*/	
 	
 	public Review adminSelectEachReview( int reviewNo) {
 		

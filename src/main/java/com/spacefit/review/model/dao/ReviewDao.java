@@ -430,6 +430,8 @@ public class ReviewDao {
 		return listCount;		
 		
 	}
+	
+	/*
 	public ArrayList<Review> selectPhotoListForSpace(Connection conn, int spNo){
 		ArrayList<Review> ptList = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -457,7 +459,7 @@ public class ReviewDao {
 	}
 	
 	
-	
+	*/
 	
 	
 	
