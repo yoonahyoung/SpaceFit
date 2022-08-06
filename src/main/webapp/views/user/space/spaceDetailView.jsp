@@ -37,7 +37,7 @@
 <title>Insert title here</title>
 <style>
 .pre{white-space:pre;}
-#preTag{font-family: 'Noto Sans KR','Noto Sans KR';}
+#preTag{font-family: 'Noto Sans KR','Noto Sans KR'; font-size:16px}
 /* 캘린더 */
 .calBody {
     margin: 40px 10px;
@@ -93,7 +93,7 @@ tbody p{
     padding:35px 0 25px 0;
 }
 #dataTable>tbody>tr:hover{
-background:#E1F0FF;
+	background:#E1F0FF;
 }
 #faqTr{
     padding-top:50px;
@@ -960,26 +960,28 @@ background:#E1F0FF;
             			success:function(h){
             				let contextPath = "<%=contextPath%>";
 	        				let pi = h.pi;
-	        				let list = h.list;
+	        				let Qlist = h.Qlist; // 질문 리스트
+	        				let Alist = h.Alist; // 답변 리스트
             				let el = ""; // 공간 뿌려주는 변수
 	        				let pageVal = ""; // paging처리해주는 변수
-	        				if(list.length == 0){
+	        				if(Qlist.length == 0){
 	          					el += "<tr>"
-          					       + "<td colspan='2'> 문의가 없습니다. </td>"
+          					       + "<td colspan='3' align='center' style='font-size:17px'> 공간에 대한 문의가 없습니다. </td>"
                                    + "</tr>";
                     		
 	          				}else{
-	          					for(let i=0; i<list.length; i++){
+	          					for(let i=0; i<Qlist.length; i++){
 	          						
 	                       			el +=	"<tr>"      // 질문
-		                                  + 	"<td>"+ list[i].qnaWriter +"</td>"
-		                                  + 	"<td>Q."+ list[i].qnaContent +"</td>"
+		                                  + 	"<td>"+ Qlist[i].qnaWriter +"</td>"
+		                                  + 	"<td style='font-size:16px'>Q."+ Qlist[i].qnaContent +"</td>"
+		                                  +		"<td width='100px' align='right' style='font-size:12px'>" + Qlist[i].qnaCreateDate + "</td>"
 		                                  + "</tr>"     // 답변
 		                                  + "<tr style='border-bottom:1px solid black;'>"
-		                                  + 	"<td>"+ list[i+1].qnaWriter +"</td>"
-		                                  + 	"<td>A."+ list[i+1].qnaContent +"</td>"
+		                                  + 	"<td>"+ Alist[i].qnaWriter +"</td>"
+		                                  + 	"<td><pre id='preTag' style='font-size:16px'>A."+ Alist[i].qnaContent +"</pre></td>"
+		                                  +		"<td width='100px' align='right' style='font-size:12px'>" + Alist[i].qnaCreateDate + "</td>"
 		                                  + "</tr>";
-		                            i++;
 	          					}
 	          					
 	          				

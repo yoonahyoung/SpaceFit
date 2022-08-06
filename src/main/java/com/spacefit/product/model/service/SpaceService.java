@@ -140,20 +140,30 @@ public class SpaceService {
 	}
 
 	// 상품 상세페이지에서 QnA리스트 불러오기
-	public ArrayList<QnA> selectQnAList(PageInfo pi, int spNo) {
+	// 질문
+	public ArrayList<QnA> selectQList(PageInfo pi, int spNo) {
 		Connection conn = getConnection();
-		ArrayList<QnA> list = new SpaceDao().selectQnAList(conn, pi, spNo);
+		ArrayList<QnA> list = new SpaceDao().selectQList(conn, pi, spNo);
+		close(conn);
+		
+		return list;
+	}
+	
+	// 답변
+	public ArrayList<QnA> selectAList(PageInfo pi, int spNo) {
+		Connection conn = getConnection();
+		ArrayList<QnA> list = new SpaceDao().selectAList(conn, pi, spNo);
 		close(conn);
 		
 		return list;
 	}
 	
 	// 상품 상세페이지 QnA리스트 페이징바
-		public int selectListQnACount(int spNo) {
-			Connection conn = getConnection();
-			int listCount = new SpaceDao().selectListQnACount(conn, spNo);
-			close(conn);
-			return listCount;
-		}
+	public int selectListQnACount(int spNo) {
+		Connection conn = getConnection();
+		int listCount = new SpaceDao().selectListQnACount(conn, spNo);
+		close(conn);
+		return listCount;
+	}
 
 }

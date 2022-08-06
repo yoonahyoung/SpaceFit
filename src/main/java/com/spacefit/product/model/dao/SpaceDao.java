@@ -423,13 +423,14 @@ public class SpaceDao {
 	}
 
 	//상품 상세 페이지에서 QnA불러오기
-	public ArrayList<QnA> selectQnAList(Connection conn, PageInfo pi, int spNo) {
+	// 질문
+	public ArrayList<QnA> selectQList(Connection conn, PageInfo pi, int spNo) {
 		ArrayList<QnA> list = new ArrayList<>();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectQnAList");
+		String sql = prop.getProperty("selectQList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -446,7 +447,46 @@ public class SpaceDao {
 			while(rset.next()) {
 				QnA q = new QnA();
 				q.setQnaNo(rset.getInt("qna_no"));
-				q.setQnaTitle(rset.getString("qna_title"));
+				q.setQnaWriter(rset.getString("mem_id"));
+				q.setQnaContent(rset.getString("qna_content"));
+				q.setQnaCreateDate(rset.getDate("qna_create_date"));
+				list.add(q);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	
+	}
+	
+	// 답변
+	public ArrayList<QnA> selectAList(Connection conn, PageInfo pi, int spNo) {
+		ArrayList<QnA> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, spNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				QnA q = new QnA();
+				q.setQnaNo(rset.getInt("qna_no"));
 				q.setQnaWriter(rset.getString("mem_id"));
 				q.setQnaContent(rset.getString("qna_content"));
 				q.setQnaCreateDate(rset.getDate("qna_create_date"));
