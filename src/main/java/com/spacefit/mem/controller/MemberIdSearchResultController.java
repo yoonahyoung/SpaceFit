@@ -47,9 +47,12 @@ public class MemberIdSearchResultController extends HttpServlet {
 			request.getRequestDispatcher("views/user/myPage/idSearchResult.jsp").forward(request, response);
 		} else {
 			// 조회에 실패한 것임
-			RequestDispatcher view = request.getRequestDispatcher("views/user/common/backAlertErrorPage.jsp");
-			request.setAttribute("errorMsg", "가입하지 않은 회원이거나 회원명과 핸드폰번호가 일치하지 않습니다! 다시 확인해주세요.");
-			view.forward(request, response);
+			//RequestDispatcher view = request.getRequestDispatcher("views/user/common/backAlertErrorPage.jsp");
+			//request.setAttribute("errorMsg", "가입하지 않은 회원이거나 회원명과 핸드폰번호가 일치하지 않습니다! 다시 확인해주세요.");
+			//view.forward(request, response);
+			
+			request.getSession().setAttribute("alertMsg", "가입하지 않은 회원이거나 회원명과 핸드폰번호가 일치하지 않습니다! 다시 확인해주세요");
+			response.sendRedirect(request.getContextPath() + "/idSearch.me");
             
 		}
 	}

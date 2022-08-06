@@ -6,6 +6,7 @@
 	// 로그인 시도전 loginUser == null / 로그인 성공시 : Member객체 있음
 			
 	String alertMsg = (String)session.getAttribute("alertMsg");
+	String errorMsg = (String)session.getAttribute("errorMsg");
  	// 서비스 요청 전 menubar.jsp 로딩시 : null
  	// 서비스 요청 후 menubar.jsp 로딩시 : alert로 띄워줄 메세지 문구 String 
  	int directMemNo = 0;

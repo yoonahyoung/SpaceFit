@@ -65,7 +65,7 @@
                     	</form>
                     	
 	                    <br>
-                        <form class="signInForm">
+                        <form class="signInForm" action="<%=contextPath%>/idSearchResult.me">
                         	<div class="inputs">
                         	
                         		<label for="#phoneNameCheck" class="signInLabel">이름</label> <span class="memName"  style="text-align:rignt"></span>
@@ -74,9 +74,10 @@
                         		
                         		<label for="#phoneIdNo" class="signInLabel">핸드폰번호</label> <span class="pHoneAnswer" style="text-align:rignt"></span>
                                 <input type="text" placeholder="핸드폰번호를 입력해주세요 (-제외)" class="signInInput" id="memPhone" name="memPhone" required>
-                                <button type="button" class="btn btn-secondary getIdNoBtn" onclick="sms();">인증번호 받기</button><br><br>
+                                <button type="button" class="btn btn-secondary getIdNoBtn" onclick="phoneSearch();">인증번호 받기</button><br><br>
                                 <input type="hidden" id="hideRandomNo" name="hideRandomNo">
-
+								<input type="hidden" id="hideMemNo" name="hideMemNo">
+								
                                 <label for="#phoneIdNoCheck" class="signInLabel">인증번호 작성</label> <span class="accountAnswer"  style="text-align:rignt"></span>
                                 <input type="text" placeholder="인증번호를 입력해주세요" class="signInInput" id="smsNoCheck" name="smsNoCheck" required>
                                 <button type="button" class="btn btn-primary getIdNoBtn" name="phoneIdNoCheck" onclick="checkSms();">확인</button><br><br>
@@ -97,6 +98,74 @@
 		             			$("#memNameSubmit").val($("#memName").val())
 		             			$("#phoneForm").submit()
 		             	}
+		                  	 
+                        	 function phoneSearch(){
+                        		 let memPhoneVal = document.getElementById("memPhone").value;
+                        		 
+                        		 
+                        		 $.ajax({
+                    	    		 url:"phoneSearch.me",
+                    	    		 data:{
+                    	    			 memPhone:memPhoneVal //$("#memPhone").val()
+                    	    		 },
+                    	    		 type:"post",
+                    	    		 success:function(memNo){
+                    	    			if (memNo > 0) {
+                    	    				// 비밀번호 재설정할 때 memNo 가 필요함!
+                    	    				let value= memNo
+                        	    			$('input[name=hideMemNo]').attr('value',value);
+                    	    				sms()
+                    	    			} else {
+                    	    				alert("일치하는 회원이 없습니다. 다시 확인해주세요.");
+                    	    			}
+                    	    		 },
+                    	    		 error:function(){
+                    	    			console.log("인증번호 전송통신 ajax 실패")
+                    	    		 }
+                    	    		 
+                    	    	 })
+                        	 }
+                        	 
+                        	 function sms(){
+                        		 //const divEl = document.getElementById("memPhone");
+                        		
+                        		 
+                        		 let memPhoneVal = document.getElementById("memPhone").value;
+                        		 //let memNoInputVal = document.getElementById("memNoInput").value;
+                        		 //let memNoInputVal = document.getElementById("#memNoInput").value;
+                        		 const regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+                        		 
+                        	     if (regPhone.test(memPhoneVal) === true) {
+                        	    	let value=" <span id='validPhone' style='font-size:11px;'>핸드폰으로 인증문자 전송완료!</span>"
+                        			$(".signInForm .pHoneAnswer").html(value)
+                        	    	 
+                        	    	 
+                        	    	 $.ajax({
+                        	    		 url:"sms.me",
+                        	    		 data:{
+                        	    			 memPhone:memPhoneVal //$("#memPhone").val()
+                        	    			 
+                        	    		 },
+                        	    		 type:"post",
+                        	    		 success:function(randomNo){
+                        	    			let value= randomNo
+                        	    			$('input[name=hideRandomNo]').attr('value',value);
+                        	    		 },
+                        	    		 error:function(){
+                        	    			console.log("인증번호 전송통신 ajax 실패")
+                        	    		 }
+                        	    		 
+                        	    	 })
+                        	    	$("#memPhone").removeAttr("disabled");
+                        	    	$("#memPhone").attr("readOnly", true);
+                        	    	 
+                        	     } else {
+                        	    	 let value=" <span id='validPhone' style='font-size:11px; color : red;'>올바른 형태의 핸드폰번호를 입력해주세요!</span>"
+                        	         $(".signInForm .pHoneAnswer").html(value)
+                        	         $("#memPhone").focus();
+                        	     }
+
+                        	 }
                        </script>
             	</div> 
           	</div>	
@@ -104,6 +173,6 @@
 	<div style="height : 100px"></div>
     <%@ include file="../common/userFooter.jsp" %>
 	<!-- 자바스크립트 파일 연동 -->
-	<script type="text/javascript" src="<%=contextPath %>/resources/user/js/member.js"></script>
+	<script type="text/javascript" src="<%=contextPath %>/resources/user/js/member.js"></script> 
 </body>
 </html>

@@ -37,7 +37,7 @@ public class AdminMemberGeneralChange extends HttpServlet {
 			request.getSession().setAttribute("alertMsg", howMany + "명이 일반회원으로 변경되었습니다.");
 			response.sendRedirect(request.getContextPath() + "/memManage.me");
 		} else {
-			request.setAttribute("errorMsg", "이미 일반 회원입니다.");
+			request.setAttribute("alertMsg", "이미 일반 회원입니다.");
 			response.sendRedirect(request.getContextPath() + "/memManage.me");
 		}
 	}

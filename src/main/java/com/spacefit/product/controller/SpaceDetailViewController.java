@@ -69,6 +69,11 @@ public class SpaceDetailViewController extends HttpServlet {
 		ArrayList<Review> rvList = new ReviewService().selectRvListForSpace(spNo);
 		request.setAttribute("rvList", rvList);
 		
+		// 해당 공간넘버에 해당하는 포토리스트 불러오기
+		ArrayList<Review> ptList = new ReviewService().selectPhotoListForSpace(spNo);
+		request.setAttribute("ptList", ptList);
+		
+		// 평균 별점 알아보기
 		int avgStars = new ReviewService().selectAvgStars(spNo);
 		request.setAttribute("avgStars", avgStars);
 		

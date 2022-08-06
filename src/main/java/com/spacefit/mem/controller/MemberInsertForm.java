@@ -37,7 +37,7 @@ public class MemberInsertForm extends HttpServlet {
 		
 		// 2. 요청시 전달값 받기
 		String memId = request.getParameter("memId");
-		String beforeMemPwd = request.getParameter("memPwd");
+		String memRealPwd = request.getParameter("memPwd"); // 진짜 비밀번호는 따로 저장해서 로그인 할때만 쓸거임
 		String memName = request.getParameter("memName");
 		String memIdNo = request.getParameter("memIdNo");
 		String memPhone = request.getParameter("memPhone");
@@ -46,9 +46,9 @@ public class MemberInsertForm extends HttpServlet {
 			memMail = "";
 		}
 		
-		String memPwd = PwdHashController.encoding(beforeMemPwd);
+		String memPwd = PwdHashController.encoding(memRealPwd);
 		
-		Member m = new Member(memId, memPwd, memName, memIdNo, memPhone, memMail);
+		Member m = new Member(memId, memPwd, memName, memIdNo, memPhone, memMail, memRealPwd);
 		
 		// 3. jdbc 실행
 		int result = new MemberService().insertMember(m);

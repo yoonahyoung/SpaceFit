@@ -9,6 +9,7 @@
 <%
    String thisPath = request.getContextPath();
    ArrayList<Review> rvList = (ArrayList<Review>)request.getAttribute("rvList");
+   //ArrayList<Review> ptList = (ArrayList<Review>)request.getAttribute("ptList")
    int avgStars = (Integer)request.getAttribute("avgStars");
    Space s = (Space)request.getAttribute("s");
    int loveCheck = (int)request.getAttribute("loveCheck");
@@ -230,24 +231,7 @@ background:#E1F0FF;
                                                        <% } %>
                                                   </div>
                                                   <h4>" 스페이스핏의 고객님들은 이 장소를 이렇게 평가하셨어요! "</h4><br>
-                                              </div>
-                                              <div class="rvPhotoZone">
-                                                  <tr class="rvPhotos"> 
-                                                      <td>
-                                                          <span class="material-symbols-outlined">
-                                                          arrow_back_ios
-                                                          </span>
-                                                      </td>                       
-                                                      <td><img class="titleImg" width="200" height="160" onclick=""></td>
-                                                      <td><img class="titleImg" width="200" height="160" onclick=""></td>
-                                                      <td><img class="titleImg" width="200" height="160" onclick=""></td>
-                                                      <td>
-                                                          <span class="material-symbols-outlined">
-                                                          arrow_forward_ios
-                                                          </span>
-                                                      </td>
-                                                  </tr>
-                                              </div>
+                                             
                                               <div id="rvOrderBy">
                                                   <a>고객님들의 실제 이용 리뷰입니다!</a>
                                               </div>

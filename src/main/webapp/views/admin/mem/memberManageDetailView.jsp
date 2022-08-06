@@ -41,22 +41,15 @@
 				</tr>
 				<tr>
 					<th>전화번호</th>
-					<td><input type="text" value="<%=m.getMemPhone() %>"></td>
+					<td><%=m.getMemPhone() %></td>
 				</tr>
 				<tr>
 					<th>이메일</th>
-					<td><input type="text" value="<%=m.getMemMail() %>"></td>
+					<td><%=m.getMemMail() %></td>
 				</tr>
 				<tr>
 					<th>회원등급</th>
-					<td>
-						<select>
-						  <option selected><%=m.getGrName() %></option>
-						  <option>Basic</option>
-						  <option>Silver</option>
-						  <option>Gold</option>
-						</select>
-					</td>
+					<td><%=m.getGrName() %></td>
 				</tr>
 				<tr>
 					<th>총 주문건</th>
@@ -85,48 +78,36 @@
 				<tr>
 					<th>회원상태</th>
 					<td>
-						<select>
-						  <option selected>
 						  <% if(m.getMemStatus().equals("Y")) { %>
-						  	<option selected>회원</option>
+						  	회원
 						  <% } else if (m.getMemStatus().equals("N")) { %>
-						  	<option selected>탈퇴회원</option>
+						  	탈퇴회원
 						  <% } else { %>
-						  	<option selected>블랙리스트</option>
+						  	블랙리스트
 						  <% } %>
-						  <option>회원</option>
-						  <option>탈퇴회원</option>
-						  <option>블랙리스트</option>
-						</select>
 					</td>
 				</tr>
 				<tr>
 					<th>운영자여부</th>
 					<td>
-						<select>
-						  <option selected>
 						  <% if(m.getMemAdmFlag().equals("A")) { %>
-						  	<option selected>관리자</option>
+						  	관리자
 						  <% } else {  %>
-						  	<option selected>일반</option>
+						  	일반
 						  <% } %>
-						  <option>일반</option>
-						  <option>관리자</option>
-						</select>
 					</td>
 				</tr>
 				<tr>
 					<th>회원가입일</th>
-					<td><input type="text" value="<%=m.getMemEnrollDate() %>" readOnly></td>
+					<td><%=m.getMemEnrollDate() %></td>
 				</tr>
 				<tr>
 					<th>정보수정일</th>
-					<td><input type="text" value="<%=m.getMemModifyDate() %>"></td>
+					<td><%=m.getMemModifyDate() %></td>
 				</tr>
 			</table>
 			<br><br>
-			<button type="button" class="btn btn-primary">회원수정</button>
-	        <button type="button" class="btn btn-secondary">회원목록</button>
+	        <a class="btn btn-primary" href="<%=contextPath %>/memManage.me">회원목록</a>
 		</form>
 		        
     </div>

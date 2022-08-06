@@ -430,6 +430,32 @@ public class ReviewDao {
 		return listCount;		
 		
 	}
+	public ArrayList<Review> selectPhotoListForSpace(Connection conn, int spNo){
+		ArrayList<Review> ptList = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectPhotoListForSpace");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, spNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				ptList.add(new Review(
+					rset.getString("file_path"),
+					rset.getString("fileChangeName")
+					));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return ptList;
+	}
+	
 	
 	
 	
@@ -446,8 +472,8 @@ public class ReviewDao {
 	public ArrayList<Review> adminReviewSelect(Connection conn) {
 		// select => ResultSet(한행) => ArrayList<Attachment>
 		ArrayList<Review> rvList = new ArrayList<>();
-		ResultSet rset = null;
 		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		String sql = prop.getProperty("adminReviewSelect");
 		
 		try {

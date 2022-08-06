@@ -18,10 +18,10 @@ import com.spacefit.mem.model.vo.Member;
 
 public class MemberService {
    
-   public Member loginMember(String memId, String memPwd) {
+   public Member loginMember(String memId, String memRealPwd) {
       
       Connection conn = getConnection();
-      Member m = new MemberDao().loginMember(conn, memId, memPwd);
+      Member m = new MemberDao().loginMember(conn, memId, memRealPwd);
       close(conn);
       return m;
    
@@ -208,14 +208,32 @@ public class MemberService {
    
    public int updateUnknownPwd(String memPwd, String memPhone) {
 	   Connection conn = getConnection();
-	   int result = new MemberDao().updateUnknownPwd(conn, memPwd, memPhone);
-	   if(result > 0) {
+	   System.out.println("가짜비번 실행중 서비스");
+	   int result1 = new MemberDao().updateUnknownPwd(conn, memPwd, memPhone);
+	   if(result1 == 1) {
 			commit(conn);
 		}else {
 			rollback(conn);
 		}
 		close(conn);
-		return result;
+		
+	
+		return result1;
+   }
+   
+   public int updateRealUnknownPwd(String memRealPwd, String memPhone) {
+	   Connection conn = getConnection();
+	   System.out.println("진짜비번 실행중 서비스");
+	   int result2 = new MemberDao().updateRealUnknownPwd(conn, memRealPwd, memPhone);
+	   if(result2 == 1) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+	
+		return result2;
    }
    
    
