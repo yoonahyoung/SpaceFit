@@ -27,6 +27,7 @@
         	  <%} %>
 			</div>
 			<div style="height : 30px"></div>
+			
 			<table class="table table-hover" id="dataTable">
 				<tr>
 					<th>후기번호</th>

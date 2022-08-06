@@ -244,8 +244,9 @@ background:#E1F0FF;
                                               <% for(Review r : rvList) { %>  
                                               <div class="container-fluid eachRvList">
                                                   <div class="row">
-                                                      <div class="col-lg-3"> 
-                                                          <img class="titleImg" width="150" height="120" onclick="">
+                                                      <div class="col-lg-3">
+                                                      		<img src="<%=r.getFilePath()%>/<%= r.getFileChangeName() %>" width="150" height="120"> 
+                                                          <!--  <img class="titleImg" width="150" height="120" onclick="">-->
                                                           <span id="titleImgSpan">후기작성일 : <%=r.getReviewModifyDate() %></span>
                                                       </div>
                                                       <div class="col-lg-6" id="eachRvListHeader">
