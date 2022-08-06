@@ -26,8 +26,8 @@
 				<tr>
 					<th>상태</th>
 					<td><select name="banStatus">
-						  <option value="Y">게시중</option>
 						  <option value="N">보류</option>
+						  <option value="Y">게시중</option>
 						</select>
 				 	</td>
 				</tr>

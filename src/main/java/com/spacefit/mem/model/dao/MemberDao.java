@@ -285,6 +285,84 @@ public class MemberDao {
 		return result;
 	}
    
+   public String selectBannerOne(Connection conn) {
+	   
+	   String banImg1 = null;
+	   ResultSet rset = null;
+	   PreparedStatement pstmt = null;
+	   String sql = prop.getProperty("selectBannerOne");
+	   
+	   try {
+		pstmt = conn.prepareStatement(sql);
+		rset = pstmt.executeQuery();
+		
+		if(rset.next()) {
+			banImg1 = rset.getString("ban_img");
+		}
+		
+	   } catch (SQLException e) {
+		e.printStackTrace();
+	   } finally {
+		   close(rset);
+		   close(pstmt);
+	   }
+	   
+	   return banImg1;
+	   
+   }
+   
+   public String selectBannerTwo(Connection conn) {
+	   
+	   String banImg2 = null;
+	   ResultSet rset = null;
+	   PreparedStatement pstmt = null;
+	   String sql = prop.getProperty("selectBannerTwo");
+	   
+	   try {
+		pstmt = conn.prepareStatement(sql);
+		rset = pstmt.executeQuery();
+		
+		if(rset.next()) {
+			banImg2 = rset.getString("ban_img");
+		}
+		
+	   } catch (SQLException e) {
+		e.printStackTrace();
+	   } finally {
+		   close(rset);
+		   close(pstmt);
+	   }
+	   
+	   return banImg2;
+	   
+   }
+   
+   public String selectBannerThree(Connection conn) {
+	   
+	   String banImg3 = null;
+	   ResultSet rset = null;
+	   PreparedStatement pstmt = null;
+	   String sql = prop.getProperty("selectBannerThree");
+	   
+	   try {
+		pstmt = conn.prepareStatement(sql);
+		rset = pstmt.executeQuery();
+		
+		if(rset.next()) {
+			banImg3 = rset.getString("ban_img");
+		}
+		
+	   } catch (SQLException e) {
+		e.printStackTrace();
+	   } finally {
+		   close(rset);
+		   close(pstmt);
+	   }
+	   
+	   return banImg3;
+	   
+   }
+   
    public String selectGrade(Connection conn, String memId) {
 	   
 	   String grName = null;

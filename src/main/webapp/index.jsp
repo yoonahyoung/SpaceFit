@@ -74,13 +74,13 @@
   <div class="intro intro-carousel swiper position-relative">
 
     <div class="swiper-wrapper">
-      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(resources/admin/space_upfiles/studio/main2.jpg)">
+      <div class="swiper-slide carousel-item-a intro-item bg-image img1" style="background-image: url(resources/admin/space_upfiles/studio/main2.jpg)">
       <a href=""></a>
       </div>
-      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(resources/admin/space_upfiles/studio/main3.jpg)">
+      <div class="swiper-slide carousel-item-a intro-item bg-image img2" style="background-image: url(resources/admin/space_upfiles/studio/main3.jpg)">
       <a href=""></a>
       </div>
-      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(resources/admin/space_upfiles/studio/main1.jpg)">
+      <div class="swiper-slide carousel-item-a intro-item bg-image img3" style="background-image: url(resources/admin/space_upfiles/studio/main1.jpg)">
       <a href=""></a>
       </div>
     </div>
@@ -177,6 +177,33 @@
           		})
           	})
           	
+          	$(function(){
+          		
+          		$.ajax({
+          			url:"<%=contextPath%>/spacefitBanner.co",
+          			success:function(img){
+          				
+          				if(img == null){
+							console.log("조회결과없음");
+						}else{
+							
+							let img1 = "url(" + img[0] + ")";
+							let img2 = "url(" + img[1] + ")";
+							let img3 = "url(" + img[2] + ")";
+							
+							$(".img1").css("background-image", img1);
+							$(".img2").css("background-image", img2);
+							$(".img3").css("background-image", img3);
+							
+						}
+          				
+					}, // success function end
+					error:function(){
+						console.log("ajax 통신 실패");
+					}
+				})
+          				
+          	})
           </script>
    
 

@@ -92,6 +92,28 @@ public class MemberService {
 		return updateMem;
 	}
    
+   // 배너 첫번째이미지
+   public String selectBannerOne() {
+	   Connection conn = getConnection();
+	   String banImg1 = new MemberDao().selectBannerOne(conn);
+	   close(conn);
+	   return banImg1;
+   }
+   
+   public String selectBannerTwo() {
+	   Connection conn = getConnection();
+	   String banImg2 = new MemberDao().selectBannerTwo(conn);
+	   close(conn);
+	   return banImg2;
+   }
+   
+   public String selectBannerThree() {
+	   Connection conn = getConnection();
+	   String banImg3 = new MemberDao().selectBannerThree(conn);
+	   close(conn);
+	   return banImg3;
+   }
+   
    public String selectGrade(String memId) {
 	   Connection conn = getConnection();
 	   String grName = new MemberDao().selectGrade(conn, memId);
