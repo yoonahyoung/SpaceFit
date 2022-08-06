@@ -196,6 +196,7 @@ background:#E1F0FF;
                                                     <table id="dataTable" class="table">
                                                     	<tbody id="listArea">
                                                     	
+                                                    	
                                                     	</tbody>
 	                                                	<tr>
 	                                                		<td colspan="2" id="pgQna"><div class="paging-area" align="center"></div><td>
@@ -947,6 +948,7 @@ background:#E1F0FF;
 	          					el += "<tr>"
           					       + "<td colspan='2'> 문의가 없습니다. </td>"
                                    + "</tr>";
+                    		
 	          				}else{
 	          					for(let i=0; i<list.length; i++){
 	          						
@@ -960,11 +962,11 @@ background:#E1F0FF;
 		                                  + "</tr>";
 		                            i++;
 	          					}
-	                                 
-	        				}
+	          					
+	          				
 	          					
 	          					if(pi.currentPage != 1){ 
-	          						pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='selectPaging(" + (pi.currentPage-1) + ");'>&lt;</button>";
+	          						pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='loadQna(" + (pi.currentPage-1) + ");'>&lt;</button>";
 	          						
 								}
 								
@@ -973,16 +975,16 @@ background:#E1F0FF;
 										pageVal += "<button disabled class='btn btn-sm btn-outline-primary'>" +  p  + "</button>";
 										
 									}else{ 
-										 pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='selectPaging("+ p +")';>"  + p + "</button>";
+										 pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='loadQna('" + p + ")';>" + p + "</button>";
 										
 					            	} 
-								} 
+								}   
 								
-								 if(pi.currentPage != pi.maxPage){ 
-								 pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='selectPaging(" + (pi.currentPage+1) + ");'>&gt;</button>";
+								if(pi.currentPage != pi.maxPage){ 
+								 pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='loadQna(" + (pi.currentPage+1) + ");'>&gt;</button>";
 								 
 					            } 
-	                             
+	          				}
                             	$("#listArea").html(el);
 	        				 	$(".paging-area").html(pageVal); 
 	          				}
