@@ -272,8 +272,8 @@ background:#E1F0FF;
                                                                   <% } %>
                                                               </div>
                                                           </div>
-                                                          <textarea id="rvContentDiv"><%=r.getReviewContent() %>
-                                                          </textarea>
+                                                          <!--  <textarea id="rvContentDiv"><%=r.getReviewContent() %>
+                                                          </textarea>-->
                                                       </div>
                                                       <div class="col-lg-3 memInfoDiv">
                                                           <div class="mem">
@@ -308,6 +308,7 @@ background:#E1F0FF;
                                                   </div>
                                                   <br><br>
                                                   <div class="collapse commentDiv" id="flush-collapse<%= r.getReviewNo() %>" data-value="<%= r.getReviewNo() %>" aria-labelledby="flush-heading<%= r.getReviewNo() %>" data-bs-parent="#accordionFlushExample">
+                                                        <div class="parentCommentAll" id="parentCommentAll"></div>
                                                         <div id="writeComment">
                                                             <table id="writeTable" align="center">
                                                                 <thead>
@@ -704,7 +705,7 @@ background:#E1F0FF;
                                             +      '<span id="memSpan">'
                                             +         comList[i].memId
                                             +      '</span>'
-                                            +      '<span id="dateSpan">'
+                                            +      '<span id="dateSpan" style="margin-left:20px;">'
                                             +         comList[i].comEnrollDate
                                             +      '</span>'
                                             + '</div>'
@@ -722,7 +723,7 @@ background:#E1F0FF;
                                             }
                                             
                                             if(comList[i].memId == '<%=loginUserId%>'){
-                                            	value +=   '<button type="button" class="comBtn" id="updateComment" data-bs-toggle="modal" data-bs-target="#myCommentModal2" onclick="updateCommentModal('+ comList[i].comNo + ',' + comList[i].memNo + ',' + spNo +');">댓글수정</button>'
+                                            	//value +=   '<button type="button" class="comBtn" id="updateComment" data-bs-toggle="modal" data-bs-target="#myCommentModal2" onclick="updateCommentModal('+ comList[i].comNo + ',' + comList[i].memNo + ',' + spNo +');">댓글수정</button>'
                                             
                                             }
                                             
