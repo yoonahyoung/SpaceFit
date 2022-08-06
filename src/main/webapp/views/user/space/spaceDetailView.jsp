@@ -614,6 +614,18 @@ background:#E1F0FF;
                             $("select option[value*="+ j + "]").attr('disabled',true).css("background", "lightgrey");
                          }
                       }
+                      
+                      // 체크인 시간에 따른 체크아웃 시간 막아두기
+                      el = "";
+                      $(".detailCI").on("change", function(){
+                    	 let checkIn = parseInt($(this).val()) + 1;
+                    	 console.log(checkIn);
+	                     for(let i=checkIn; i<22; i++){
+                          el += "<option value='" +  i + "'>" +  i + " :00</option>"
+	                     }
+	                     
+	                     $(".detailCO").html(el);
+                      })
                    },
                 });
           	}
