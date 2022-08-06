@@ -1,51 +1,50 @@
 package com.spacefit.mem.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.spacefit.attachment.model.vo.Attachment;
-import com.spacefit.review.model.service.ReviewService;
-import com.spacefit.review.model.vo.Review;
+import com.spacefit.mem.model.service.MemberService;
 
 /**
- * Servlet implementation class AdminReviewDetailView
+ * Servlet implementation class AdminMemberGradeDownChange
  */
-@WebServlet("/memRevDetailView.me")
-public class AdminMemberReviewDetailViewController extends HttpServlet {
+@WebServlet("/gradeDown.me")
+public class AdminMemberGradeDownChange extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminMemberReviewDetailViewController() {
+    public AdminMemberGradeDownChange() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String strGradeDownNo = request.getParameter("strGradeDownNo");
+		int howMany = new MemberService().gradeDown(strGradeDownNo);
 		
-		int reviewNo = Integer.parseInt(request.getParameter("no"));
-		Review rv = new ReviewService().adminSelectEachReview(reviewNo);
-		
-		ArrayList<Review> rvPhotoList = new ReviewService().selectRvPhotoList(reviewNo);
-		
-		request.setAttribute("rv", rv);
-		request.setAttribute("rvPhotoList", rvPhotoList);
-		request.getRequestDispatcher("views/admin/mem/memberReviewDetailView.jsp").forward(request, response);
+		if(howMany > 0) {
+			request.getSession().setAttribute("alertMsg", howMany + "명의 등급이 하향되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/memManage.me");
+		} else {
+			request.setAttribute("errorMsg", "이미 가장 낮은 등급입니다.");
+			response.sendRedirect(request.getContextPath() + "/memManage.me");
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

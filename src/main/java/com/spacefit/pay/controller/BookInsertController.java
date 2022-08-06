@@ -1,26 +1,26 @@
-package com.spacefit.mem.controller;
+package com.spacefit.pay.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.spacefit.mem.model.service.MemberService;
+import com.spacefit.mem.model.vo.Member;
 
 /**
- * Servlet implementation class AdminMemberReviewAdminChange
+ * Servlet implementation class BookInsertController
  */
-@WebServlet("/changeAdm.me")
-public class AdminMemberAdminChange extends HttpServlet {
+@WebServlet("/insert.book")
+public class BookInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminMemberAdminChange() {
+    public BookInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,18 +29,24 @@ public class AdminMemberAdminChange extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String strAdminNo = request.getParameter("strAdminNo");
-		// System.out.println("서블릿에서 확인하는 strAdminNo " + strAdminNo);
-		int howMany = new MemberService().adminCheck(strAdminNo);
 		
-		if(howMany > 0) {
-			request.getSession().setAttribute("alertMsg", howMany + "명이 관리자로 변경되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/memManage.me");
-		} else {
-			request.setAttribute("errorMsg", "관리자 등록에 실패했습니다.");
-			request.getRequestDispatcher("views/user/common/backAlertErrorPage.jsp").forward(request, response);
+		HttpSession session = request.getSession();
+		
+		int memNo = ((Member)session.getAttribute("loginUser")).getMemNo();
+		String spaceNo = request.getParameter("spaceNo");
+		String cpNo = request.getParameter("cpNo");
+		String phone = request.getParameter("phone");
+		String email = request.getParameter("email");
+		String rsvFor = request.getParameter("rsvFor");
+		String bookContent = request.getParameter("bookContent");
+		String beforeDiscount = request.getParameter("beforeDiscount");
+		
+		
+		if(rsvFor.equals("") || bookContent.equals("") || cpNo.equals("")) {
+			System.out.println("미입력");
+			//int result = new PayService().insertPaylist(memNo);
 		}
+
 	}
 
 	/**

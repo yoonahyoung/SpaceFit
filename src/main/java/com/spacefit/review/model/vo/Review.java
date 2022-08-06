@@ -207,7 +207,7 @@ public class Review {
 		this.reviewStatus = reviewStatus;
 		this.ReviewEnrollDdate = reviewEnrollDate;
 	}
-
+	
 	
 
 	public Review(int reviewNo, int bookNo, String spaceName, String memId, int reviewStar, String reviewContent,
@@ -236,7 +236,41 @@ public class Review {
 	private String gradeName;
 	private String spaceName;
 	private int allLikeCount;
+	private String filePath;
+	private String fileChangeName;
 	
+	
+	
+	
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	
+	
+
+	public Review(String filePath, String fileChangeName) {
+		super();
+		this.filePath = filePath;
+		this.fileChangeName = fileChangeName;
+	}
+
+
+	public String getFileChangeName() {
+		return fileChangeName;
+	}
+
+
+	public void setFileChangeName(String fileChangeName) {
+		this.fileChangeName = fileChangeName;
+	}
+
 
 	public Review(int reviewNo, int bookNo, String spaceName, String memId, String reviewContent, Date reviewEnrollDdate,
 			Date reviewModifyDate, int reviewStar, String reviewStatus, String gradeName, int allLikeCount, String memNo) {

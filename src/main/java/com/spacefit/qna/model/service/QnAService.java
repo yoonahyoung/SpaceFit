@@ -271,7 +271,7 @@ public class QnAService {
 	public ArrayList<QnA> selectQnAList6Wait(String spaceCategory){
 		Connection conn = getConnection();
 		ArrayList<QnA> list = null;
-		list = new QnADao().selectQnAList4Wait(conn, spaceCategory);
+		list = new QnADao().selectQnAList6Wait(conn, spaceCategory);
 
 		close(conn);
 		
@@ -282,7 +282,7 @@ public class QnAService {
 	public ArrayList<QnA> selectQnAList6Solved(String spaceCategory){
 		Connection conn = getConnection();
 		ArrayList<QnA> list = null;
-		list = new QnADao().selectQnAList4Solved(conn, spaceCategory);
+		list = new QnADao().selectQnAList6Solved(conn, spaceCategory);
 
 		close(conn);
 		
@@ -310,10 +310,10 @@ public class QnAService {
 		return list;
 	}
 	// 선택 전체 전체 대기 10-1
-	public ArrayList<QnA> selectQnAList10Wait(String spaceCategory){
+	public ArrayList<QnA> selectQnAList10Wait(String qnaCategory){
 		Connection conn = getConnection();
 		ArrayList<QnA> list = null;
-		list = new QnADao().selectQnAList10Wait(conn, spaceCategory);
+		list = new QnADao().selectQnAList10Wait(conn, qnaCategory);
 
 		close(conn);
 		

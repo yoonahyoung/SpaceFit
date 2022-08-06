@@ -117,7 +117,7 @@ background:#E1F0FF;
    <%@ include file="../common/userMenubar.jsp" %>
 
     <main id="main">
-    <form action="<%=contextPath%>/결제페이지" method="get" id="detailForm">
+    <form action="<%=contextPath%>/pay.me" method="post" id="detailForm">
         <!-- ======= space view ======= -->
         <section class="agent-single">
             <div class="container">
@@ -450,7 +450,7 @@ background:#E1F0FF;
                                    <input type="hidden" name="no" value="<%=s.getSpaceNo() %>">
                                     <div id="ayBtn" style="text-align:center; margin-top:100px;">
                                     	<% if(loginUser != null){ %>
-	                                        <button type="button" class="btn btn-primary" onclick="formSumbit(1);">바로결제</button>
+	                                        <button type="submit" class="btn btn-primary" onclick="return checkVal();">바로결제</button>
 	                                        <button type="button" onclick="formSubmit(2);" class="btn btn-outline-dark">보관함</button>
                                         <%}else{ %>
                                         	<button type="button" class="btn btn-primary" onclick="alert('로그인이 필요한 서비스입니다!');">바로결제</button>
@@ -524,12 +524,18 @@ background:#E1F0FF;
         //console.log(spNo);
         
      }
-
+    
+     function checkVal(){
+        if($("input[name=date]").val() == '' || $("input[name=price]").val() == '' || $("select[name=detailCO]") == ''){
+   			   	alert("날짜와 시간을 선택해주세요!");
+                return false;
+            }
+        }
     
        function formSubmit(num){ // num이 1일시 결제, num이 2일시 보관함
     	   if(num == 1){
     		  
-             $("#detailForm").attr("action", "결제페이지");
+             $("#detailForm").attr("action", "<%=contextPath %>/pay.me");
              $("#detailForm").submit();
     		   
           }else if(num == 2){

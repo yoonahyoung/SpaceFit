@@ -55,8 +55,11 @@
 							  <div id="selectSelection">
 								<div class="row" id="selectDivMem">
 							  		<div>
-								  	  <button class="btn btn-primary" onclick="gradeChange();">회원등급수정</button>
+								  	  <button class="btn btn-success" onclick="gradeUp();">등급상향</button>
+								  	  <button class="btn btn-warning" onclick="gradeDown();">등급하향</button>
+								  	  <button class="btn btn-primary" onclick="generalChange();">회원으로 변경</button>
 									  <button type="submit" class="btn btn-secondary" onclick="adminChange();">관리자로 변경</button>
+									  <button type="submit" class="btn btn-dark" onclick="blackChange();">블랙리스트 해제</button>
 									  <!-- <button class="btn btn-danger">회원탈퇴</button> -->
 							  		</div>
 							  	</div>
@@ -67,6 +70,13 @@
 								  <option value="like">누적추천순</option>
 								  <option value="adminOnly">관리자 조회</option>
 								  <option value="userOnly">회원 조회</option>
+								  <option value="black">블랙리스트 조회</option>
+								</select>
+								<select id="orderBySel" name="orderBySel" onchange="changeSelect()">
+								  <option value="" selected>이번달 주문건수별</option>
+								  <option value="forBasic">0건이상 3건미만</option>
+								  <option value="forSilver">3건이상 5건미만</option>
+								  <option value="forGold">5건이상 7건미만</option>
 								</select>
 							  </div>
 
@@ -76,7 +86,7 @@
 	                                <table class="table table-bordered memberListTable" id="dataTable" width="100%" cellspacing="0">
 	                                    <thead>
 	                                        <tr>
-	                                        	<th>선택</th>
+	                                        	<th><input type="checkbox" name="choiceAll" id="choiceAll"></th>
 	                                        	<th>회원번호</th>
 	                                            <th>아이디</th>
 	                                            <th>이름</th>
@@ -117,6 +127,23 @@
 	                        <form action="<%= contextPath %>/changeAdm.me" id="adminForm" method="post">
 	                        	<input type="hidden" name="strAdminNo" value="" id="strAdminNo">
 	                        </form>
+	                        
+	                        <form action="<%= contextPath %>/changeGen.me" id="genForm" method="post">
+	                        	<input type="hidden" name="strGenNo" value="" id="strGenNo">
+	                        </form>
+	                        
+	                        
+	                        <form action="<%= contextPath %>/gradeUp.me" id="gradeUpForm" method="post"> 
+	                        	<input type="hidden" name="strGradeUpNo" value="" id="strGradeUpNo">
+	                        </form>
+	                        
+	                        <form action="<%= contextPath %>/gradeDown.me" id="gradeDownForm" method="post"> 
+	                        	<input type="hidden" name="strGradeDownNo" value="" id="strGradeDownNo">
+	                        </form>
+	                        
+	                        <form action="<%= contextPath %>/changeBlack.me" id="blackForm" method="post">
+	                        	<input type="hidden" name="strBlackNo" value="" id="strBlackNo">
+	                        </form>
 	                               
                   <script>
                       
@@ -127,8 +154,7 @@
                       })
                       
                      
-                      function adminChange(){
-                      	
+                  function adminChange(){
                       	let strAdminCheck = "";
                       	
                       	$("#memListTBody :checkbox:checked").each(function(){
@@ -144,93 +170,157 @@
                       	//console.log($("#strAdminNo").val());
                       	$("#adminForm").submit();
                       	//console.dir(adminForm);
-
-                      	
-                              
                       }
+                 
+                 function generalChange(){
+                   	let strGenCheck = "";
+                   	
+                   	$("#memListTBody :checkbox:checked").each(function(){
+                   		
+                   		strGenCheck += $(this).val() + ",";
+                   	})
+                   	
+                   	strGenCheck = strGenCheck.substring(0, strGenCheck.lastIndexOf(","));
+                   	
+                   	
+                   	$("#strGenNo").val(strGenCheck);
+                   	$("#genForm").submit();
+                   }
+                 
+                 
+                 function gradeUp(){
+                    	let strGradeUpCheck = "";
+                    	
+                    	$("#memListTBody :checkbox:checked").each(function(){
+                    		
+                    		strGradeUpCheck += $(this).val() + ",";
+                    	})
+                    	
+                    	strGradeUpCheck = strGradeUpCheck.substring(0, strGradeUpCheck.lastIndexOf(","));
+                    	
+                    	
+                    	$("#strGradeUpNo").val(strGradeUpCheck);
+                    	$("#gradeUpForm").submit();
+                    }
+                 
+                 function gradeDown(){
+                 	let strGradeDownCheck = "";
+                 	
+                 	$("#memListTBody :checkbox:checked").each(function(){
+                 		
+                 		strGradeDownCheck += $(this).val() + ",";
+                 	})
+                 	
+                 	strGradeDownCheck = strGradeDownCheck.substring(0, strGradeDownCheck.lastIndexOf(","));
+                 	
+                 	
+                 	$("#strGradeDownNo").val(strGradeDownCheck);
+                 	$("#gradeDownForm").submit();
+                 }
+                 
+                 function blackChange(){
+                    	let strBlackCheck = "";
+                    	
+                    	$("#memListTBody :checkbox:checked").each(function(){
+                    		
+                    		strBlackCheck += $(this).val() + ",";
+                    	})
+                    	
+                    	strBlackCheck = strBlackCheck.substring(0, strBlackCheck.lastIndexOf(","));
+                    	
+                    	
+                    	$("#strBlackNo").val(strBlackCheck);
+                    	$("#blackForm").submit();
+                    }
+                     
+                 
+                 
+                 
+                 
+                 
+     function checkAll() {
+   		if($("#choiceAll").is(':checked')) {
+   			$("#memListTBody :checkbox").prop("checked", true);
+   		} else {
+   			$("#memListTBody :checkbox").prop("checked", false);
+   		}
+   	}           
+                 
                       
-                      
-					function changeSelect(){
-							let orderBy = $("#orderBySel").val();
-							let contextPath = "<%= contextPath %>"
-							const memListTBody = $("#memListTBody");
-							 $.ajax({
-								       url:"<%=contextPath%>/orderByMem.me",
-							  		 data:{
-							  			orderBy:orderBy
-							  		 },
-							  		 type:"post",
-							  		 success:function(memList){
-							  			if(memList.length == 0){
-							           					// 회원리스트가 비어있다면
-							   							let value ='<tr><td colspan="11">존재하는 회원이 없습니다.</td></tr>'
-							   							memListTBody.html(value);
-							   						} else {
-								  			let value = ""
-								  			for(let i = 0; i<memList.length; i++) {
-								  				/* $(function(){
-									  					if( memList[i].memAdmFlag == 'A') {
-									  						$("#adminFlag").val("Admin").attr('selected', 'selected');
-									  					} else {
-									  						$("#adminFlag").val("General").attr('selected', 'selected');
-									  					}
-									  				}) */
-								  	if(memList[i].memAdmFlag == 'A') {
-								  		memAdmFlag = "관리자"
-								  	} else {
-								  		memAdmFlag = "일반"
-								  	}
-					  				
-							  		if (memList[i].grName == "Basic") {
-					  					grSelectVal = " <option selected id='Basic' value='Basic'>Basic</option>";
-					  				} else if  (memList[i].grName == "Silver") {
-					  					grSelectVal = "<option selected  id='Silver' value='Silver'>Silver</option>";
-					  				} else {
-					  					grSelectVal = "<option id='Gold' value='Gold'>Gold</option>";
-					  				}
-					  					
-							  		if (memList[i].memStatus == "Y") {
-							  			memStatus = "회원"
-					  				} else if  (memList[i].memStatus == "N") {
-					  					memStatus = "탈퇴회원"
-					  				} else {
-					  					memStatus = "블랙리스트"
-					  				}
-						  				
-						  			value += 
-							  			'<tr>'
-					                                  + ' 	  <td><input type="checkbox" name="choice" id="choice" value="' + memList[i].memNo + '"></td> '
-					                                  + '     <td>' + memList[i].memNo + '</td> '
-					                                  + '     <td>' + memList[i].memId + '</td> '
-					                                  + '     <td>' + memList[i].memName + '</td> '
-					                                  + '     <td>' + memList[i].memPhone + '</td> '
-					                                  + '     <td> '
-					                                  + '     	<select> ' 
-					                                  +			grSelectVal
-					                                  + '		  <option id="Basic" value="Basic">Basic</option> '
-					                                  + '		  <option id="Silver" value="Silver">Silver</option> '
-					                                  + '		  <option id="Gold" value="Gold">Gold</option> '
-					                                  + '		</select> '
-					                                  + '     </td> '
-					                                  + '     <td>' + memList[i].rptCount + '</td> '
-					                                  + '     <td>' + memList[i].likeCount + '</td> '
-					                                  + '     <td>' + memAdmFlag + '</td> '
-					                                  + '     <td>' + memStatus + '</td> '
-					                                  + '     <td>' + memList[i].bookCountMonth + '</td> '
-					                                  + '     <td><a class="btn btn-primary btn-sm" href="'+contextPath+'/memDetailView.me?no='+ memList[i].memNo +'">상세조회</a></td>'
-					                                  + '  </tr> '
-					                                  + '<input type="hidden" value="'+ memList[i].memNo +'">'
-					  					 }
-						  				memListTBody.html(value);
-						  				
-							  		 }
-					  		 },
-					  		 error:function(){
-					  			console.log("회원목록 조회용 ajax 통신 실패");
-					  		 }
-					  		 
-					  	 })
-					}
+	function changeSelect(){
+			let orderBy = $("#orderBySel").val();
+			let contextPath = "<%= contextPath %>"
+			const memListTBody = $("#memListTBody");
+			 $.ajax({
+				       url:"<%=contextPath%>/orderByMem.me",
+			  		 data:{
+			  			orderBy:orderBy
+			  		 },
+			  		 type:"post",
+			  		 success:function(memList){
+			  			if(memList.length == 0){
+			           					// 회원리스트가 비어있다면
+			   							let value ='<tr><td colspan="11">존재하는 회원이 없습니다.</td></tr>'
+			   							memListTBody.html(value);
+			   						} else {
+				  			let value = ""
+				  			for(let i = 0; i<memList.length; i++) {
+				  				/* $(function(){
+					  					if( memList[i].memAdmFlag == 'A') {
+					  						$("#adminFlag").val("Admin").attr('selected', 'selected');
+					  					} else {
+					  						$("#adminFlag").val("General").attr('selected', 'selected');
+					  					}
+					  				}) */
+				  	if(memList[i].memAdmFlag == 'A') {
+				  		memAdmFlag = "관리자"
+				  	} else {
+				  		memAdmFlag = "일반"
+				  	}
+	  				
+			  		if (memList[i].grName == "Basic") {
+	  					grSelectVal = "Basic";
+	  				} else if  (memList[i].grName == "Silver") {
+	  					grSelectVal = "Silver";
+	  				} else {
+	  					grSelectVal = "Gold";
+	  				}
+	  					
+			  		if (memList[i].memStatus == "Y") {
+			  			memStatus = "회원"
+	  				} else if  (memList[i].memStatus == "N") {
+	  					memStatus = "탈퇴회원"
+	  				} else {
+	  					memStatus = "블랙리스트"
+	  				}
+		  				
+		  			value += 
+			  			'<tr>'
+	                                  + ' 	  <td><input type="checkbox" name="choice" id="choice" value="' + memList[i].memNo + '"></td> '
+	                                  + '     <td>' + memList[i].memNo + '</td> '
+	                                  + '     <td>' + memList[i].memId + '</td> '
+	                                  + '     <td>' + memList[i].memName + '</td> '
+	                                  + '     <td>' + memList[i].memPhone + '</td> '
+	                                  + '     <td>' + grSelectVal  + '</td> '
+	                                  + '     <td>' + memList[i].rptCount + '</td> '
+	                                  + '     <td>' + memList[i].likeCount + '</td> '
+	                                  + '     <td>' + memAdmFlag + '</td> '
+	                                  + '     <td>' + memStatus + '</td> '
+	                                  + '     <td>' + memList[i].bookCountMonth + '</td> '
+	                                  + '     <td><a class="btn btn-primary btn-sm" href="'+contextPath+'/memDetailView.me?no='+ memList[i].memNo +'">상세조회</a></td>'
+	                                  + '  </tr> '
+	                                  + '<input type="hidden" value="'+ memList[i].memNo +'">'
+	  					 }
+		  				memListTBody.html(value);
+		  				
+			  		 }
+	  		 },
+	  		 error:function(){
+	  			console.log("회원목록 조회용 ajax 통신 실패");
+	  		 }
+	  		 
+	  	 })
+	}
 					
 					
 					

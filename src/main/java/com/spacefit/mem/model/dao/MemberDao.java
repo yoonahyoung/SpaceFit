@@ -1120,6 +1120,70 @@ public class MemberDao {
 		} return howMany;
 	}
 	
+public int generalCheck(Connection conn, String addSql) {
+		
+		int howMany = 0;
+		PreparedStatement pstmt = null;
+		//ResultSet rset = null;
+		String sql = prop.getProperty("generalCheck") + addSql;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			howMany = pstmt.executeUpdate(); //2개 선택시 2
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} return howMany;
+	}
+
+public int gradeUp(Connection conn, String addSql) {
+	
+	int howMany = 0;
+	PreparedStatement pstmt = null;
+	//ResultSet rset = null;
+	String sql = prop.getProperty("gradeUp") + addSql;
+	try {
+		pstmt = conn.prepareStatement(sql);
+		howMany = pstmt.executeUpdate(); //2개 선택시 2
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+	} return howMany;
+}
+
+public int gradeDown(Connection conn, String addSql) {
+	
+	int howMany = 0;
+	PreparedStatement pstmt = null;
+	//ResultSet rset = null;
+	String sql = prop.getProperty("gradeDown") + addSql;
+	try {
+		pstmt = conn.prepareStatement(sql);
+		howMany = pstmt.executeUpdate(); //2개 선택시 2
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+	} return howMany;
+}
+
+public int blackCheck(Connection conn, String addSql) {
+	
+	int howMany = 0;
+	PreparedStatement pstmt = null;
+	//ResultSet rset = null;
+	String sql = prop.getProperty("blackCheck") + addSql;
+	try {
+		pstmt = conn.prepareStatement(sql);
+		howMany = pstmt.executeUpdate(); //2개 선택시 2
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+	} return howMany;
+}
+	
 	
 	
 	
@@ -1250,8 +1314,39 @@ public class MemberDao {
 		return result;
 	}
 	
-	
-	
+	   // 민주작성 - 사용가능한 쿠폰 조회
+	   public ArrayList<Mcp> selectMyCouponList(Connection conn, int memNo) {
+		   
+		   ArrayList<Mcp> list = new ArrayList<>();
+		   ResultSet rset = null;
+		   PreparedStatement pstmt = null;
+		   String sql = prop.getProperty("selectMyCouponList");
+		   
+		   try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add( new Mcp(rset.getInt("MCP_NO"),
+								  rset.getInt("CP_NO"),
+								  rset.getString("CP_NAME"),
+								  rset.getInt("CP_DISCOUNT")
+						));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		   
+		 return list;
+		   
+	   }
 	
 	
 	
