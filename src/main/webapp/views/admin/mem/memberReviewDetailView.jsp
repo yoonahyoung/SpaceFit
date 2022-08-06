@@ -49,7 +49,7 @@
 				</tr>
 				<tr>
 					<th>후기내용</th>
-					<td><input type="textarea" value="<%=rv.getReviewContent() %>" style="width:600px; height:300px;" readOnly></td>
+<td><input type="textarea" value="<%=rv.getReviewContent() %>" style="width:600px; height:300px;" readOnly></td>
 				</tr>
 				<tr>
 					<th>작성일</th>

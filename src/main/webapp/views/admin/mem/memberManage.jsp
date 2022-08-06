@@ -57,7 +57,7 @@
 							  		<div>
 								  	  <button class="btn btn-primary" onclick="gradeChange();">회원등급수정</button>
 									  <button type="submit" class="btn btn-secondary" onclick="adminChange();">관리자로 변경</button>
-									  <button class="btn btn-danger">회원탈퇴</button>
+									  <!-- <button class="btn btn-danger">회원탈퇴</button> -->
 							  		</div>
 							  	</div>
 						  		<select id="orderBySel" name="orderBySel" onchange="changeSelect()">
@@ -152,6 +152,7 @@
                       
 					function changeSelect(){
 							let orderBy = $("#orderBySel").val();
+							let contextPath = "<%= contextPath %>"
 							const memListTBody = $("#memListTBody");
 							 $.ajax({
 								       url:"<%=contextPath%>/orderByMem.me",
@@ -174,14 +175,11 @@
 									  						$("#adminFlag").val("General").attr('selected', 'selected');
 									  					}
 									  				}) */
-								  			
-							  		if (memList[i].memAdmFlag == "A") {
-					  					adminSelectVal = "<option selected value='A'>관리자</option>";
-					  				} else if  (memList[i].memAdmFlag == "U") {
-					  					adminSelectVal = "<option selected value='U'>일반</option>";
-					  				} else {
-					  					adminSelectVal = "<option selected value='U'>없음</option>";
-					  				}
+								  	if(memList[i].memAdmFlag == 'A') {
+								  		memAdmFlag = "관리자"
+								  	} else {
+								  		memAdmFlag = "일반"
+								  	}
 					  				
 							  		if (memList[i].grName == "Basic") {
 					  					grSelectVal = " <option selected id='Basic' value='Basic'>Basic</option>";
@@ -192,11 +190,11 @@
 					  				}
 					  					
 							  		if (memList[i].memStatus == "Y") {
-					  					statusSelectVal = "<option id ='YesUser' value='YesUser'>회원</option>";
+							  			memStatus = "회원"
 					  				} else if  (memList[i].memStatus == "N") {
-					  					statusSelectVal = "<option id ='NotUser' value='NotUser'>탈퇴회원</option>";
+					  					memStatus = "탈퇴회원"
 					  				} else {
-					  					statusSelectVal = "<option id ='Black' value='Black'>블랙리스트</option>";
+					  					memStatus = "블랙리스트"
 					  				}
 						  				
 						  			value += 
@@ -216,28 +214,14 @@
 					                                  + '     </td> '
 					                                  + '     <td>' + memList[i].rptCount + '</td> '
 					                                  + '     <td>' + memList[i].likeCount + '</td> '
-					                                  + '     <td> '  //+ memList[i].memAdmFlag
-					                                  + '		<select id="adminFlag">'
-					                                  +			adminSelectVal
-					                                  + '		  <option id ="General" value="General">일반</option> '
-					                                  + '		  <option id ="Admin" value="Admin">관리자</option> '
-					                                  + '		</select> '
-					                                  + '	   </td> '
-					                                  + '     <td> '// + memList[i].memStatus 
-					                                  + '		<select id="statusFlag"> '
-					                                  +			statusSelectVal
-					                                  + '		  <option id ="YesUser" value="YesUser">회원</option> '
-					                                  + '		  <option id ="NotUser" value="NotUser">탈퇴회원</option> '
-					                                  + '		  <option id ="Black" value="Black">블랙리스트</option> '
-					                                  + '		</select> '
-					                                  + '	   </td> '
+					                                  + '     <td>' + memAdmFlag + '</td> '
+					                                  + '     <td>' + memStatus + '</td> '
 					                                  + '     <td>' + memList[i].bookCountMonth + '</td> '
-					                                  + '     <th><input type="button" name="gotoBtn" class="btn btn-primary btn-sm" value="상세보기"></th>'
+					                                  + '     <td><a class="btn btn-primary btn-sm" href="'+contextPath+'/memDetailView.me?no='+ memList[i].memNo +'">상세조회</a></td>'
 					                                  + '  </tr> '
 					                                  + '<input type="hidden" value="'+ memList[i].memNo +'">'
 					  					 }
 						  				memListTBody.html(value);
-						  				
 						  				
 							  		 }
 					  		 },
@@ -250,16 +234,8 @@
 					
 					
 					
-			      	function goToMemberDetailView(){
-			      		
-			      		$("#dataTable").on("input", "click", function(){
-			      			console.log( $(this).parent().next().val() );
-			      			console.log( $(this).parent().next().val() );
-			      		})
-						
-			      	}
 					</script>
-	                            
+	                      <!-- 
 							<div class="paging-area" align="center">    
 		        
 								<button class="btn btn-sm btn-outline-primary">&lt;</button>        
@@ -271,6 +247,7 @@
 								<button class="btn btn-sm btn-outline-primary">&gt;</button>
 								
 							</div>
+							-->
 							<div style="height : 60px"></div>
 	                    </div>
                 	</div>
