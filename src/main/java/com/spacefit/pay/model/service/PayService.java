@@ -121,11 +121,11 @@ public class PayService {
 	}
 	
 	// 결제 후 장바구니에서 삭제
-	public int deleteCart(int spaceNo) { 
+	public int deleteCart(Cart quickPay) { 
 		Connection conn = getConnection();
 		
 		int result = 0;
-		result = new PayDao().deleteCart(conn, spaceNo);
+		result = new PayDao().deleteCart(conn, quickPay);
 		
 		if(result > 0) {
 			commit(conn);

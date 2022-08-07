@@ -250,7 +250,7 @@ private Properties prop = new Properties();
 		return cartPay;
 	}
 	
-	public int deleteCart(Connection conn, int spaceNo) { 
+	public int deleteCart(Connection conn, Cart quickPay) { 
 		// update문 => 처리된 행수
 		int result = 0;
 		
@@ -260,7 +260,17 @@ private Properties prop = new Properties();
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, spaceNo);
+			pstmt.setInt(1, quickPay.getMemNo());
+			pstmt.setInt(2, quickPay.getSpaceNo());
+			pstmt.setInt(3, quickPay.getCartLimit());
+			pstmt.setString(4, quickPay.getCartDate());
+			pstmt.setString(5, quickPay.getCartIn());
+			pstmt.setString(6, quickPay.getCartOut());
+			pstmt.setString(7, quickPay.getCartParking());
+			pstmt.setString(8, quickPay.getCartAnimal());
+			pstmt.setString(9, quickPay.getCartStand());
+			pstmt.setString(10, quickPay.getCartChair());
+			pstmt.setInt(11, quickPay.getCartPrice());
 			
 			result = pstmt.executeUpdate();
 			

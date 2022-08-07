@@ -83,7 +83,7 @@
 												<td class="column-3"><%= c.getCartPrice() %>원</td>
 												<td class="column-4" style="text-align:center;">1</td>
 												<td class="column-5">
-													<input type="radio" name="spaceNo" id="cart-radio1" value="<%= c.getSpaceNo() %>">
+													<input type="radio" name="cart-radio1" id="cart-radio1" value="<%= c.getSpaceNo() %>">
 												</td>
 											</tr>
 										<% } %>

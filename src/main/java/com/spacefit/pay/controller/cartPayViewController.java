@@ -39,13 +39,13 @@ public class cartPayViewController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
-		int no = Integer.parseInt(request.getParameter("spaceNo"));
+		int no = Integer.parseInt(request.getParameter("cart-radio1"));
 		
 		Cart quickPay = new PayService().selectCart(no);
 		Space s = new SpaceService().spaceDetailView(no);
 		ArrayList<Mcp> list = new MemberService().selectMyCouponList(quickPay.getMemNo());
 		
-		int result = new PayService().deleteCart(no);
+		int result = new PayService().deleteCart(quickPay);
 		
 		if(result > 0) {
 			request.setAttribute("quickPay", quickPay);

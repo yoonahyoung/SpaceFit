@@ -192,7 +192,17 @@ INSERT INTO TB_BOOK
 		<!-- 장바구니 조회 -->
 	<entry key="deleteCart">
     DELETE FROM TB_CART
-     WHERE SPACE_NO = ?
+     WHERE MEM_NO = ?
+       AND SPACE_NO = ?
+       AND CART_LIMIT = ?
+       AND CART_DATE = ?
+       AND CART_IN = ?
+       AND CART_OUT = ?
+       AND CART_PARKING = ?
+       AND CART_ANIMAL = ?
+       AND CART_STAND = ?
+       AND CART_CHAIR = ?
+       AND CART_PRICE = ?
 	</entry>
 
 

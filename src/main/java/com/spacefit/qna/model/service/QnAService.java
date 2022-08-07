@@ -194,6 +194,15 @@ public class QnAService {
 		
 		return list;
 	}
+	
+	// QnA 삭제
+	public int deleteQnA(int no) {
+		Connection conn = getConnection();
+		int result = new QnADao().deleteQnA(conn, no);
+		close(conn);
+		return result;
+	}
+	
 	// 여기서부터 검색 메소드
 	// 전체 전체 전체 전체 1
 	public ArrayList<QnA> selectQnAListAll(){
