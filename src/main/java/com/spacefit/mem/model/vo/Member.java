@@ -44,6 +44,13 @@ public class Member {
 		
 	}
 
+	
+	public Member(String memId, String memMail) {
+		super();
+		this.memId = memId;
+		this.memMail = memMail;
+	}
+
 
 	public Member(int memNo, int grNo, String memId, String memPwd, String memName, String memIdNo, String memPhone,
 			String memMail, String memProfile, Date memEnrollDate, Date memModifyDate, String memStatus,

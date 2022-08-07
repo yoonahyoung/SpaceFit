@@ -35,13 +35,10 @@ public class MemberUpdateController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		
-		
 		String memId = ((Member)session.getAttribute("loginUser")).getMemId();
-		String memName = ((Member)session.getAttribute("loginUser")).getMemName();
-		String memPhone = ((Member)session.getAttribute("loginUser")).getMemPhone();
-		String memMail = ((Member)session.getAttribute("loginUser")).getMemMail();
+		String memMail = request.getParameter("memMail");
 
-		Member m = new Member(memId, memName, memPhone, memMail);
+		Member m = new Member(memId, memMail);
 		
 		Member updateMem = new MemberService().updateMember(m);
 		System.out.println(updateMem);
