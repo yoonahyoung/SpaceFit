@@ -44,7 +44,7 @@ public class SpaceDeleteAdminController extends HttpServlet {
 			
 			if(result > 0) {
 				request.getSession().setAttribute("alertMsg", "성공적으로 삭제되었습니다.");
-				response.sendRedirect(request.getContextPath()+ "/adList.sp");
+				response.sendRedirect(request.getContextPath()+ "/adList.sp?cpage=1");
 			}else {
 				request.setAttribute("errorMsg", "삭제에 실패하였습니다.");
 			}

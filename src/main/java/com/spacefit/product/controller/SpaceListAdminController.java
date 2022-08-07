@@ -68,7 +68,6 @@ public class SpaceListAdminController extends HttpServlet {
 			}
 			// * 페이징바를 만들 때 필요한 객체
 			PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
-			
 		// ------------------------ 데이터 받고 넘기기 ----------------------------------------------------------------	
 			
 			ArrayList<Space> list = new SpaceService().selectAdminList(pi, selectSp);

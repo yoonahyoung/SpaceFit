@@ -93,18 +93,13 @@ tbody p{
     padding:35px 0 25px 0;
 }
 
-#QnATable>tbody>tr:hover{
+#QnATable>tbody>tr>th{
 	background:#E1F0FF;
 }
 #faqTr{
     padding-top:50px;
 }
 #QnATable tr, #dataTable td{
-	cursor:none;
-	background:white;
-}
-#QnATable tr, #QnATable td:hover{
-	cursor:none;
 	background:white;
 }
 .paging-area{
@@ -119,7 +114,7 @@ tbody p{
    <%@ include file="../common/userMenubar.jsp" %>
 
     <main id="main">
-    <form action="<%=contextPath%>/pay.me" method="post" id="detailForm">
+    <form method="post" id="detailForm">
         <!-- ======= space view ======= -->
         <section class="agent-single">
             <div class="container">
@@ -157,16 +152,16 @@ tbody p{
                                         <div class="col-md-12">
                                             <ul class="nav nav-pills-a nav-pills mb-3 section-t3" id="pills-tab" role="tablist" style="padding-top:0px;">
                                             <li class="nav-item col-sm-3">
-                                                <a class="nav-link active" id="pills-gonggan-tab ayNav" data-bs-toggle="pill" href="#pills-gonggan" role="tab" aria-controls="pills-gonggan" aria-selected="true" style="color:black;">공간소개</a>
+                                                <a class="nav-link active" id="pills-gonggan-tab" data-bs-toggle="pill" href="#pills-gonggan" role="tab" aria-controls="pills-gonggan" aria-selected="true" style="color:black;">공간소개</a>
                                             </li>
                                             <li class="nav-item col-sm-3">
-                                                <a class="nav-link" id="pills-sisul-tab ayNav" data-bs-toggle="pill" href="#pills-sisul" role="tab" aria-controls="pills-sisul" aria-selected="false" style="color:black;">시설안내</a>
+                                                <a class="nav-link" id="pills-sisul-tab" data-bs-toggle="pill" href="#pills-sisul" role="tab" aria-controls="pills-sisul" aria-selected="false" style="color:black;">시설안내</a>
                                             </li>
                                             <li class="nav-item col-sm-3">
-                                                <a class="nav-link" id="pills-eyoung-tab ayNav" data-bs-toggle="pill" href="#pills-eyoung" role="tab" aria-controls="pills-eyoung" aria-selected="false" style="color:black;">이용안내</a>
+                                                <a class="nav-link" id="pills-eyoung-tab" data-bs-toggle="pill" href="#pills-eyoung" role="tab" aria-controls="pills-eyoung" aria-selected="false" style="color:black;">이용안내</a>
                                             </li>
                                             <li class="nav-item col-sm-3">
-                                                <a class="nav-link" id="pills-sDetailQNA-tab ayNav" data-bs-toggle="pill" href="#pills-sDetailQNA" role="tab" aria-controls="pills-sDetailQNA" aria-selected="false" style="color:black;">Q&A</a>
+                                                <a class="nav-link QnAPaging" id="pills-sDetailQNA-tab" data-bs-toggle="pill" href="#pills-sDetailQNA" role="tab" aria-controls="pills-sDetailQNA" aria-selected="false" style="color:black;">Q&A</a>
                                             </li>
                                             </ul>
                                             <div class="tab-content" id="pills-tabContent">
@@ -193,10 +188,10 @@ tbody p{
                                                         <li>시간엄수 부탁드리며, 퇴실전 뒷정리 부탁드립니다.</li>
                                                     </ol>
                                                 </div>
-                                                <div class="tab-pane fade" id="pills-sDetailQNA" role="tabpanel" aria-labelledby="pills-sDetailQNA-tab" onclick="loadQna(1);">
+                                                <div class="tab-pane fade" id="pills-sDetailQNA" role="tabpanel" aria-labelledby="pills-sDetailQNA-tab">
                                                     <table id="QnATable" class="table">
                                                     	<tbody id="listArea">
-                                                    	
+                                                    	<!-- QnA뿌려주는 공간 -->
                                                     	</tbody>
 	                                                	<tr>
 	                                                		<td colspan="2" id="pgQna"><div class="paging-area" align="center"></div><td>
@@ -414,7 +409,7 @@ tbody p{
                                         <%} %>
                                     </select>
                                     <span class="col-sm-4"> 체크아웃  </span>
-                                    <select name="detailCO" class="detailCO" required>
+                                    <select name="detailCO" class="detailCO">
                                        <option value="">체크인 시간 및 날짜 선택<option>
                                     </select>
                                 </div>
@@ -952,14 +947,17 @@ tbody p{
             
             <!-- QNA뿌려주는 script -->
             <script>
-               $(function(){
-                   loadQna(1);
-             })
+            $("#pills-sDetailQNA-tab").on("click", function(){
+            	loadQna(1);
+            })
                function loadQna(page){
+            	console.log("성공");
+            	console.log(page);
                   $.ajax({
                      url:"<%=contextPath%>/loadQna.sp",
                      data:{cpage:page, no:'<%=s.getSpaceNo()%>'},
                      success:function(h){
+                    	 console.log("실행");
                         let contextPath = "<%=contextPath%>";
                        let pi = h.pi;
                        let Qlist = h.Qlist; // 질문 리스트
@@ -975,14 +973,14 @@ tbody p{
                             for(let i=0; i<Qlist.length; i++){
                                
                                    el +=   "<tr>"      // 질문
-                                        +    "<td>"+ Qlist[i].qnaWriter +"</td>"
-                                        +    "<td style='font-size:16px'>Q."+ Qlist[i].qnaContent +"</td>"
-                                        +      "<td width='100px' align='right' style='font-size:12px'>" + Qlist[i].qnaCreateDate + "</td>"
+                                        +    "<th>"+ Qlist[i].qnaWriter +"</th>"
+                                        +    "<th style='font-size:16px'>Q."+ Qlist[i].qnaContent +"</th>"
+                                        +    "<th width='100px' align='right' style='font-size:12px'>" + Qlist[i].qnaCreateDate + "</th>"
                                         + "</tr>"     // 답변
                                         + "<tr style='border-bottom:1px solid black;'>"
                                         +    "<td>"+ Alist[i].qnaWriter +"</td>"
                                         +    "<td><pre id='preTag' style='font-size:16px'>A."+ Alist[i].qnaContent +"</pre></td>"
-                                        +      "<td width='100px' align='right' style='font-size:12px'>" + Alist[i].qnaCreateDate + "</td>"
+                                        +    "<td width='100px' align='right' style='font-size:12px'>" + Alist[i].qnaCreateDate + "</td>"
                                         + "</tr>";
                             }
                             
@@ -993,7 +991,7 @@ tbody p{
                                
                         }
                         
-                        for(let p=pi.startPage; p<=pi.endPage; p++){
+                       /*  for(let p=pi.startPage; p<=pi.endPage; p++){
                            if(p == pi.currentPage){
                               pageVal += "<button disabled class='btn btn-sm btn-outline-primary'>" +  p  + "</button>";
                               
@@ -1001,7 +999,7 @@ tbody p{
                                pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='loadQna('" + p + ")';>" + p + "</button>";
                               
                               } 
-                        }   
+                        }    */
                         
                         if(pi.currentPage != pi.maxPage){ 
                          pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='loadQna(" + (pi.currentPage+1) + ");'>&gt;</button>";
@@ -1014,6 +1012,7 @@ tbody p{
                  
                      })
                     }
+            
             </script>
             
     </main>
