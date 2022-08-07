@@ -77,7 +77,7 @@
     margin: auto;
     margin-top: 50px;
 }
-#dataTable{
+#QnATable{
     text-align: left;
     margin:0px;
     border-bottom-color:white;
@@ -85,24 +85,24 @@
 th{
     font-size: 18px;
 }
-#datatable>tr>th{
+#QnAtable>tr>th{
     height:85px;
     line-height:85px;
 }
 tbody p{
     padding:35px 0 25px 0;
 }
-#dataTable>tbody>tr:hover{
+#QnATable>tbody>tr:hover{
 	background:#E1F0FF;
 }
 #faqTr{
     padding-top:50px;
 }
-#dataTable tr, #dataTable td{
+#QnATable tr, #dataTable td{
 	cursor:none;
 	background:white;
 }
-#dataTable tr, #dataTable td:hover{
+#QnATable tr, #QnATable td:hover{
 	cursor:none;
 	background:white;
 }
@@ -193,7 +193,7 @@ tbody p{
                                                     </ol>
                                                 </div>
                                                 <div class="tab-pane fade" id="pills-sDetailQNA" role="tabpanel" aria-labelledby="pills-sDetailQNA-tab" onclick="loadQna();">
-                                                    <table id="dataTable" class="table">
+                                                    <table id="QnATable" class="table">
                                                     	<tbody id="listArea">
                                                     	
                                                     	
