@@ -114,7 +114,7 @@ tbody p{
    <%@ include file="../common/userMenubar.jsp" %>
 
     <main id="main">
-    <form method="post" id="detailForm">
+    <form action="<%=contextPath %>/pay.me" method="post" id="detailForm">
         <!-- ======= space view ======= -->
         <section class="agent-single">
             <div class="container">
@@ -951,14 +951,11 @@ tbody p{
             	loadQna(1);
             })
                function loadQna(page){
-            	console.log("성공");
-            	console.log(page);
                   $.ajax({
                      url:"<%=contextPath%>/loadQna.sp",
                      data:{cpage:page, no:'<%=s.getSpaceNo()%>'},
                      success:function(h){
-                    	 console.log("실행");
-                        let contextPath = "<%=contextPath%>";
+                       let contextPath = "<%=contextPath%>";
                        let pi = h.pi;
                        let Qlist = h.Qlist; // 질문 리스트
                        let Alist = h.Alist; // 답변 리스트
@@ -966,8 +963,8 @@ tbody p{
                        let pageVal = ""; // paging처리해주는 변수
                        if(Qlist.length == 0){
                             el += "<tr>"
-                                + "<td colspan='3' align='center' style='font-size:17px'> 공간에 대한 문의가 없습니다. </td>"
-                                   + "</tr>";
+                               + "<td colspan='3' align='center' style='font-size:17px'> 공간에 대한 문의가 없습니다. </td>"
+                               + "</tr>";
                           
                          }else{
                             for(let i=0; i<Qlist.length; i++){
@@ -991,7 +988,7 @@ tbody p{
                                
                         }
                         
-                       /*  for(let p=pi.startPage; p<=pi.endPage; p++){
+                         for(let p=pi.startPage; p<=pi.endPage; p++){
                            if(p == pi.currentPage){
                               pageVal += "<button disabled class='btn btn-sm btn-outline-primary'>" +  p  + "</button>";
                               
@@ -999,7 +996,7 @@ tbody p{
                                pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='loadQna('" + p + ")';>" + p + "</button>";
                               
                               } 
-                        }    */
+                        }    
                         
                         if(pi.currentPage != pi.maxPage){ 
                          pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='loadQna(" + (pi.currentPage+1) + ");'>&gt;</button>";
