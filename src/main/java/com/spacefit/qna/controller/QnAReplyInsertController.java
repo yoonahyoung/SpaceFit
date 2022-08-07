@@ -45,7 +45,7 @@ public class QnAReplyInsertController extends HttpServlet {
 		
 		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize = 10 * 1024 * 1024;
-			String savePath =  session.getServletContext().getRealPath("/resources/user/qna_upfiles/");
+			String savePath =  session.getServletContext().getRealPath("/resources/admin/qna_upfiles/");
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new SpacefitFileRenamePolicy());
 			
 			// 2. DB에 데이터 insert
