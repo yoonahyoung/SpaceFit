@@ -59,14 +59,14 @@ public class cartPayViewController extends HttpServlet {
 		Space s = new SpaceService().spaceDetailView(spaceNo);
 		ArrayList<Mcp> list = new MemberService().selectMyCouponList(quickPay.getMemNo());
 		
-		int result = new PayService().deleteCart(quickPay);
+		//int result = new PayService().deleteCart(quickPay);
 		
-		if(result > 0) {
+		//if(result > 0) {
 			request.setAttribute("quickPay", quickPay);
 			request.setAttribute("s", s);
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("views/user/pay/payView.jsp").forward(request, response);
-		}
+		//}
 	}
 
 	/**
