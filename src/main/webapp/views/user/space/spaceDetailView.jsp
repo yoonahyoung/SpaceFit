@@ -279,15 +279,12 @@ tbody p{
                                                       </div>
                                                       <div class="col-lg-3 memInfoDiv">
                                                           <div class="mem">
-			                                                     <% if(loginUser.getMemProfile() == null) { %>
-				                                                         <img src="<%=contextPath %>/resources/user/img/user.png" style="width:40px; height:40px; border-radius:50%; margin: auto;">
-				                                                <% }else { %>
-				                                                         <img src="<%=contextPath %>/<%= loginUser.getMemProfile() %>" style="width:30px; height:30px; border-radius:50%; margin: auto;">
-				                                                <% } %>
-                                                              <span id="memSpan" style="width:90px;">
-                                                                  <span style="font-size:17px;"><b><%=r.getMemId() %></b></span><br>
-                                                                  <span style="font-size:15px;">회원등급 :</span><br>
-                                                                  <span style="font-size:15px;"><%=r.getGradeName() %></span>
+			                                                     <span class="material-symbols-outlined memProfilePic" id="memProfilePic">
+                                                                  account_circle
+                                                              </span>
+                                                              <span id="memSpan">
+                                                                  <div><%=r.getMemId() %></div>
+                                                                  <span>회원등급 :</span><span><%=r.getGradeName() %></span>
                                                               </span>
                                                           </div>
                                                           <br>
