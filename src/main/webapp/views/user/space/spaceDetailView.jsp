@@ -92,6 +92,7 @@ th{
 tbody p{
     padding:35px 0 25px 0;
 }
+
 #QnATable>tbody>tr:hover{
 	background:#E1F0FF;
 }
@@ -107,7 +108,7 @@ tbody p{
 	background:white;
 }
 .paging-area{
-	width:100%;
+   width:100%;
 }
 </style>
 </head>
@@ -196,7 +197,6 @@ tbody p{
                                                     <table id="QnATable" class="table">
                                                     	<tbody id="listArea">
                                                     	
-                                                    	
                                                     	</tbody>
 	                                                	<tr>
 	                                                		<td colspan="2" id="pgQna"><div class="paging-area" align="center"></div><td>
@@ -221,6 +221,7 @@ tbody p{
                                        <% if (!rvList.isEmpty()) { %> <!-- 리뷰리스트가 엠티가 아니면 -->
                                        
                                               <hr>
+                                              <div style="height:30px;"></div>
                                               <div class="introRv">
                                                   <div class="stars" >
                                                      <% for(int i=0; i<avgStars; i++) { %>
@@ -240,12 +241,13 @@ tbody p{
                                                   <div id="rvOrderBy">
                                                         <a>고객님들의 실제 이용 리뷰입니다!</a>
                                                   </div>
+                                                  <div style="height:30px;"></div>
                                               
                                               <% for(Review r : rvList) { %>  
                                               <div class="container-fluid eachRvList">
                                                   <div class="row">
                                                       <div class="col-lg-3">
-                                                      		<img src="<%=r.getFilePath()%>/<%= r.getFileChangeName() %>" width="150" height="120"> 
+                                                            <img src="<%=r.getFilePath()%>/<%= r.getFileChangeName() %>" width="150" height="120"> 
                                                           <!--  <img class="titleImg" width="150" height="120" onclick="">-->
                                                           <span id="titleImgSpan">후기작성일 : <%=r.getReviewModifyDate() %></span>
                                                       </div>
@@ -290,15 +292,15 @@ tbody p{
                                                              <% if (directMemNo == 0) { %>
                                                                 <button type="button" class="btn btn-primary btn-sm" id="login-btn" onclick="loginForm();">로그인하고 추천!</button>
                                                              <% } else { %>
-                                                             		<%if( !loginUser.getMemId().equals(r.getMemId())){ %>
-                                                             		
-		                                                                 <button type="button" class="btn btn-primary btn-sm" data-value="<%= r.getReviewNo() %>" onclick="likeUpdate(this);">후기추천</button>
-		                                                                 <button type="button" class="btn btn-danger btn-sm"  data-bs-toggle="modal" data-bs-target="#myModal" onclick="reportModal($(this).siblings('#rvNo').val(), $(this).siblings('#rvMemNo').val(), $(this).siblings('#spNo').val());">후기신고</button>
-		                                                                 <input type="hidden" value="<%= directMemNo %>" name="memNo" id="memNo">
-			                                                             <input type="hidden" value="<%= r.getReviewNo() %>" name="rvNo" id="rvNo">
-			                                                             <input type="hidden" value="<%= r.getMemNo() %>" name="rvMemNo" id="rvMemNo">
-			                                                             <input type="hidden" value="<%= spNo %>" name="spNo" id="spNo">
-                                                        			<%} %>
+                                                                   <%if( !loginUser.getMemId().equals(r.getMemId())){ %>
+                                                                   
+                                                                       <button type="button" class="btn btn-primary btn-sm" data-value="<%= r.getReviewNo() %>" onclick="likeUpdate(this);">후기추천</button>
+                                                                       <button type="button" class="btn btn-danger btn-sm"  data-bs-toggle="modal" data-bs-target="#myModal" onclick="reportModal($(this).siblings('#rvNo').val(), $(this).siblings('#rvMemNo').val(), $(this).siblings('#spNo').val());">후기신고</button>
+                                                                       <input type="hidden" value="<%= directMemNo %>" name="memNo" id="memNo">
+                                                                      <input type="hidden" value="<%= r.getReviewNo() %>" name="rvNo" id="rvNo">
+                                                                      <input type="hidden" value="<%= r.getMemNo() %>" name="rvMemNo" id="rvMemNo">
+                                                                      <input type="hidden" value="<%= spNo %>" name="spNo" id="spNo">
+                                                                 <%} %>
                                                              <% } %>
                                                           </div>
                                                       </div>
@@ -436,12 +438,12 @@ tbody p{
                                 <!-- limit, parking, animal, stand, chair, date, detailCI, detailCO, price  -->
                                    <input type="hidden" name="no" value="<%=s.getSpaceNo() %>">
                                     <div id="ayBtn" style="text-align:center; margin-top:100px;">
-                                    	<% if(loginUser != null){ %>
-	                                        <button type="submit" class="btn btn-primary" onclick="return checkVal();">바로결제</button>
-	                                        <button type="button" onclick="formSubmit(2);" class="btn btn-outline-dark">보관함</button>
+                                       <% if(loginUser != null){ %>
+                                           <button type="submit" class="btn btn-primary" onclick="return checkVal();">바로결제</button>
+                                           <button type="button" onclick="formSubmit(2);" class="btn btn-outline-dark">보관함</button>
                                         <%}else{ %>
-                                        	<button type="button" class="btn btn-primary" onclick="alert('로그인이 필요한 서비스입니다!');">바로결제</button>
-	                                        <button type="button" onclick="alert('로그인이 필요한 서비스입니다!');" class="btn btn-outline-dark">보관함</button>
+                                           <button type="button" class="btn btn-primary" onclick="alert('로그인이 필요한 서비스입니다!');">바로결제</button>
+                                           <button type="button" onclick="alert('로그인이 필요한 서비스입니다!');" class="btn btn-outline-dark">보관함</button>
                                         <%} %>
                                         <% if(loginUser != null && loveCheck == 0){ %>
                                            <button type="button" onclick="love();" id="zzim" class="btn btn-outline-danger">찜하기</button>
@@ -496,9 +498,9 @@ tbody p{
            <!-- The Modal -->
            
            <% 
-           	String loginUserId = "";
+              String loginUserId = "";
            if(loginUser != null){
-        	   loginUserId = loginUser.getMemId();
+              loginUserId = loginUser.getMemId();
            }
            %>
 
@@ -514,42 +516,42 @@ tbody p{
     
      function checkVal(){
         if($("input[name=date]").val() == '' || $("input[name=price]").val() == '' || $("select[name=detailCO]") == ''){
-   			   	alert("날짜와 시간을 선택해주세요!");
+                  alert("날짜와 시간을 선택해주세요!");
                 return false;
             }
         }
     
        function formSubmit(num){ // num이 1일시 결제, num이 2일시 보관함
-    	   if(num == 1){
-    		  
+          if(num == 1){
+            
              $("#detailForm").attr("action", "<%=contextPath %>/pay.me");
              $("#detailForm").submit();
-    		   
+             
           }else if(num == 2){
-        	  console.log($("input[name=date]").val());
-        	  if($("input[name=date]").val() == '' || $("input[name=price]").val() == '' || $("select[name=detailCO]") == ''){
-   			   	alert("날짜와 시간을 선택해주세요!");
-   		   	  }else{
-	             $.ajax({
-	                url:'<%=contextPath %>/cart.sp',
-	                data:{no:<%=s.getSpaceNo() %>
-	                   , limit:$("select[name=limit]").val()
-	                   , parking:$("select[name=parking]").val()
-	                   , animal:$("select[name=animal]").val()
-	                   , stand:$("select[name=stand]").val()
-	                   , chair:$("select[name=chair]").val()
-	                   , date:$("input[name=date]").val()
-	                   , detailCI:$("select[name=detailCI]").val()
-	                   , detailCO:$("select[name=detailCO]").val()
-	                   , price:$("input[name=price]").val()
-	                   },
-	                success:function(cfMsg){
-	                   if(confirm(cfMsg)){
-	                      location.href="<%=contextPath%>/cartList.me";
-	                   }
-	                }
-	             })
-   		   	   }
+             console.log($("input[name=date]").val());
+             if($("input[name=date]").val() == '' || $("input[name=price]").val() == '' || $("select[name=detailCO]") == ''){
+                  alert("날짜와 시간을 선택해주세요!");
+                 }else{
+                $.ajax({
+                   url:'<%=contextPath %>/cart.sp',
+                   data:{no:<%=s.getSpaceNo() %>
+                      , limit:$("select[name=limit]").val()
+                      , parking:$("select[name=parking]").val()
+                      , animal:$("select[name=animal]").val()
+                      , stand:$("select[name=stand]").val()
+                      , chair:$("select[name=chair]").val()
+                      , date:$("input[name=date]").val()
+                      , detailCI:$("select[name=detailCI]").val()
+                      , detailCO:$("select[name=detailCO]").val()
+                      , price:$("input[name=price]").val()
+                      },
+                   success:function(cfMsg){
+                      if(confirm(cfMsg)){
+                         location.href="<%=contextPath%>/cartList.me";
+                      }
+                   }
+                })
+                  }
           }
        }
 
@@ -580,7 +582,7 @@ tbody p{
        }
     </script>
 
-	
+   
     <script>
     // 캘린더 부분
     $(function(){
@@ -622,20 +624,20 @@ tbody p{
                       // 체크인 시간에 따른 체크아웃 시간 막아두기
                       let el = "";
                       $(".detailCI").on("change", function(){
-	                      el = "<option value='" + $(this).val() + "'>시간선택</option>"
-	                      $(".detailCO").html(el);
-	                      
-                    	  let checkIn = parseInt($(this).val()) + 1;
-                    	  console.log(checkIn);
-	                      for(let i=checkIn; i<22; i++){
+                         el = "<option value='" + $(this).val() + "'>시간선택</option>"
+                         $(".detailCO").html(el);
+                         
+                         let checkIn = parseInt($(this).val()) + 1;
+                         console.log(checkIn);
+                         for(let i=checkIn; i<22; i++){
                            el += "<option value='" +  i + "'>" +  i + " :00</option>"
-	                      }
-	                     
-	                     $(".detailCO").html(el);
+                         }
+                        
+                        $(".detailCO").html(el);
                       })
                    },
                 });
-          	}
+             }
       });
       calendar.render();
       
@@ -654,12 +656,13 @@ tbody p{
                    rvNo:rvNo
                 },
                 success:function(result){
-                   if(result == "likeOk"){
-                      // 추천이 완료된 데이터, 예약번호가 넘어옴
-                  alert("추천해주셔서 감사합니다!");
-                      // 바로 표시되게 하는 걸 못하게씀 ㅜㅜ
-                      console.dir($('this').parent().children().val());
-                      $('this').parent().children().text( $("#countPlusOne").text()+1 );
+                    if(result != "likeNO"){
+                       // 추천이 완료된 데이터, 예약번호가 넘어옴
+                   alert("추천해주셔서 감사합니다!");
+                       // 바로 표시되게 하는 걸 못하게씀 ㅜㅜ
+                       console.dir($('this').parent().children().val());
+                       $(e).nextAll()[5].innerText = result + "명이 이 후기를 추천했습니다!";
+
                } else {
                   // 후기 중복확인
                   console.dir($('this').parent().children().val());
@@ -710,18 +713,18 @@ tbody p{
                                             + '<div class="parentInfo col-lg-6">';
                                             
                                             if(comList[i].memId == '<%=loginUserId%>'){
-                                            	
-	                                        	value +=   '<button type="button" class="comBtn" id="reDelete" onclick="deleteComment(' + comList[i].comNo + ', $(this).parent().parent().parent() ,' + comList[i].rvNo + ');">삭제하기</button>';
+                                               
+                                              value +=   '<button type="button" class="comBtn" id="reDelete" onclick="deleteComment(' + comList[i].comNo + ', $(this).parent().parent().parent() ,' + comList[i].rvNo + ');">삭제하기</button>';
                                             }
                                             
                                             
                                             if('<%=loginUserId%>' != "" && comList[i].memId != '<%=loginUserId%>'){
-                                            	value +=   '<button type="button" class="comBtn openBtn" id="reReport" data-bs-toggle="modal" data-bs-target="#myCommentModal" onclick="reportCommentModal('+ comList[i].comNo + ',' + comList[i].memNo + ',' + spNo +');">신고하기</button>'
-                                            	
+                                               value +=   '<button type="button" class="comBtn openBtn" id="reReport" data-bs-toggle="modal" data-bs-target="#myCommentModal" onclick="reportCommentModal('+ comList[i].comNo + ',' + comList[i].memNo + ',' + spNo +');">신고하기</button>'
+                                               
                                             }
                                             
                                             if(comList[i].memId == '<%=loginUserId%>'){
-                                            	//value +=   '<button type="button" class="comBtn" id="updateComment" data-bs-toggle="modal" data-bs-target="#myCommentModal2" onclick="updateCommentModal('+ comList[i].comNo + ',' + comList[i].memNo + ',' + spNo +');">댓글수정</button>'
+                                               //value +=   '<button type="button" class="comBtn" id="updateComment" data-bs-toggle="modal" data-bs-target="#myCommentModal2" onclick="updateCommentModal('+ comList[i].comNo + ',' + comList[i].memNo + ',' + spNo +');">댓글수정</button>'
                                             
                                             }
                                             
@@ -747,7 +750,7 @@ tbody p{
                   }
         </script>
                 
- 			<!-- The Modal -->
+          <!-- The Modal -->
                 <!-- The Modal -->
                   <div class="modal" id="myCommentModal">
                     <div class="modal-dialog">
@@ -817,33 +820,33 @@ tbody p{
            <!-- The Modal -->
         
         <script>          
-	        function reportCommentModal(comNo,memNo, spNo) {
-				$("#myCommentModal input[name=rptMemNo]").val(memNo);
-		        $("#myCommentModal input[name=rptRefNo]").val(comNo);
-		        $("#myCommentModal input[name=spNo]").val(spNo);
-			}       
-		
-	        
-	        function updateCommentModal2(comNo,memNo, spNo) {
-				$("#myCommentModal2 input[name=memNo]").val(memNo);
-		        $("#myCommentModal2 input[name=rptRefNo]").val(comNo);
-		        $("#myCommentModal2 input[name=comContent]").val(spNo);
-			} 
-			// 대댓달기라는 버튼을 눌렀을때만 그 댓글의 hiddenPno를 가져오고, 대댓달기를 누르지 않으면 0이 되도록
-	       // 그럼 대댓을 생각하지 말고 일단 댓글만 생각해보자   
-	       
-	          function insertComment(e, commentDiv, comContent){
-	             // 주번째 댓글에 대한 컨텐츠도 가져오기 //계층형시 스타트위드
-	              $.ajax({
-	               url:"<%=contextPath%>/coInsert.com",
-	             data:{
-	                comContent:comContent,
-	                memNo:$("#memNo").val(),
-	                rvNo:e
-	             },
-	             type:"post",
-	             success:function(result){
-	                if(result > 0){
+           function reportCommentModal(comNo,memNo, spNo) {
+            $("#myCommentModal input[name=rptMemNo]").val(memNo);
+              $("#myCommentModal input[name=rptRefNo]").val(comNo);
+              $("#myCommentModal input[name=spNo]").val(spNo);
+         }       
+      
+           
+           function updateCommentModal2(comNo,memNo, spNo) {
+            $("#myCommentModal2 input[name=memNo]").val(memNo);
+              $("#myCommentModal2 input[name=rptRefNo]").val(comNo);
+              $("#myCommentModal2 input[name=comContent]").val(spNo);
+         } 
+         // 대댓달기라는 버튼을 눌렀을때만 그 댓글의 hiddenPno를 가져오고, 대댓달기를 누르지 않으면 0이 되도록
+          // 그럼 대댓을 생각하지 말고 일단 댓글만 생각해보자   
+          
+             function insertComment(e, commentDiv, comContent){
+                // 주번째 댓글에 대한 컨텐츠도 가져오기 //계층형시 스타트위드
+                 $.ajax({
+                  url:"<%=contextPath%>/coInsert.com",
+                data:{
+                   comContent:comContent,
+                   memNo:$("#memNo").val(),
+                   rvNo:e
+                },
+                type:"post",
+                success:function(result){
+                   if(result > 0){
                            // 댓글작성 성공
                            // => 내가 작성한 댓글이 보여지기 위해서는 갱신된 댓글리스트 조회필요
                            commentList(e, commentDiv);
@@ -948,67 +951,67 @@ tbody p{
             
             <!-- QNA뿌려주는 script -->
             <script>
-	            $(function(){
-	          		loadQna(1);
-	    		})
-            	function loadQna(page){
-            		$.ajax({
-            			url:"<%=contextPath%>/loadQna.sp",
-            			data:{cpage:page, no:'<%=s.getSpaceNo()%>'},
-            			success:function(h){
-            				let contextPath = "<%=contextPath%>";
-	        				let pi = h.pi;
-	        				let Qlist = h.Qlist; // 질문 리스트
-	        				let Alist = h.Alist; // 답변 리스트
-            				let el = ""; // 공간 뿌려주는 변수
-	        				let pageVal = ""; // paging처리해주는 변수
-	        				if(Qlist.length == 0){
-	          					el += "<tr>"
-          					       + "<td colspan='3' align='center' style='font-size:17px'> 공간에 대한 문의가 없습니다. </td>"
+               $(function(){
+                   loadQna(1);
+             })
+               function loadQna(page){
+                  $.ajax({
+                     url:"<%=contextPath%>/loadQna.sp",
+                     data:{cpage:page, no:'<%=s.getSpaceNo()%>'},
+                     success:function(h){
+                        let contextPath = "<%=contextPath%>";
+                       let pi = h.pi;
+                       let Qlist = h.Qlist; // 질문 리스트
+                       let Alist = h.Alist; // 답변 리스트
+                        let el = ""; // 공간 뿌려주는 변수
+                       let pageVal = ""; // paging처리해주는 변수
+                       if(Qlist.length == 0){
+                            el += "<tr>"
+                                + "<td colspan='3' align='center' style='font-size:17px'> 공간에 대한 문의가 없습니다. </td>"
                                    + "</tr>";
-                    		
-	          				}else{
-	          					for(let i=0; i<Qlist.length; i++){
-	          						
-	                       			el +=	"<tr>"      // 질문
-		                                  + 	"<td>"+ Qlist[i].qnaWriter +"</td>"
-		                                  + 	"<td style='font-size:16px'>Q."+ Qlist[i].qnaContent +"</td>"
-		                                  +		"<td width='100px' align='right' style='font-size:12px'>" + Qlist[i].qnaCreateDate + "</td>"
-		                                  + "</tr>"     // 답변
-		                                  + "<tr style='border-bottom:1px solid black;'>"
-		                                  + 	"<td>"+ Alist[i].qnaWriter +"</td>"
-		                                  + 	"<td><pre id='preTag' style='font-size:16px'>A."+ Alist[i].qnaContent +"</pre></td>"
-		                                  +		"<td width='100px' align='right' style='font-size:12px'>" + Alist[i].qnaCreateDate + "</td>"
-		                                  + "</tr>";
-	          					}
-	          					
-	          				
-	          					
-	          					if(pi.currentPage != 1){ 
-	          						pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='loadQna(" + (pi.currentPage-1) + ");'>&lt;</button>";
-	          						
-								}
-								
-								for(let p=pi.startPage; p<=pi.endPage; p++){
-									if(p == pi.currentPage){
-										pageVal += "<button disabled class='btn btn-sm btn-outline-primary'>" +  p  + "</button>";
-										
-									}else{ 
-										 pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='loadQna('" + p + ")';>" + p + "</button>";
-										
-					            	} 
-								}   
-								
-								if(pi.currentPage != pi.maxPage){ 
-								 pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='loadQna(" + (pi.currentPage+1) + ");'>&gt;</button>";
-								 
-					            } 
-	          				}
-                            	$("#listArea").html(el);
-	        				 	$(".paging-area").html(pageVal); 
-	          				}
-	        		
-            			})
+                          
+                         }else{
+                            for(let i=0; i<Qlist.length; i++){
+                               
+                                   el +=   "<tr>"      // 질문
+                                        +    "<td>"+ Qlist[i].qnaWriter +"</td>"
+                                        +    "<td style='font-size:16px'>Q."+ Qlist[i].qnaContent +"</td>"
+                                        +      "<td width='100px' align='right' style='font-size:12px'>" + Qlist[i].qnaCreateDate + "</td>"
+                                        + "</tr>"     // 답변
+                                        + "<tr style='border-bottom:1px solid black;'>"
+                                        +    "<td>"+ Alist[i].qnaWriter +"</td>"
+                                        +    "<td><pre id='preTag' style='font-size:16px'>A."+ Alist[i].qnaContent +"</pre></td>"
+                                        +      "<td width='100px' align='right' style='font-size:12px'>" + Alist[i].qnaCreateDate + "</td>"
+                                        + "</tr>";
+                            }
+                            
+                         
+                            
+                            if(pi.currentPage != 1){ 
+                               pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='loadQna(" + (pi.currentPage-1) + ");'>&lt;</button>";
+                               
+                        }
+                        
+                        for(let p=pi.startPage; p<=pi.endPage; p++){
+                           if(p == pi.currentPage){
+                              pageVal += "<button disabled class='btn btn-sm btn-outline-primary'>" +  p  + "</button>";
+                              
+                           }else{ 
+                               pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='loadQna('" + p + ")';>" + p + "</button>";
+                              
+                              } 
+                        }   
+                        
+                        if(pi.currentPage != pi.maxPage){ 
+                         pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='loadQna(" + (pi.currentPage+1) + ");'>&gt;</button>";
+                         
+                           } 
+                         }
+                               $("#listArea").html(el);
+                           $(".paging-area").html(pageVal); 
+                         }
+                 
+                     })
                     }
             </script>
             

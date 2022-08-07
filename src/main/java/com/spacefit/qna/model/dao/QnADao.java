@@ -562,6 +562,28 @@ public class QnADao {
 		
 		return list;
 	}
+	
+	public int deleteQnA(Connection conn, int qnaNo) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteQnA");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,  qnaNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 	// 여기서부터 검색 메소드
 	// 전체 전체 전체 전체 1
 	public ArrayList<QnA> selectQnAListAll(Connection conn){

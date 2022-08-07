@@ -69,6 +69,8 @@
 								  <option value="newest" selected>최신후기 조회</option>
 								  <option value="reported">누적신고순</option>
 								  <option value="like">누적추천순</option>
+								  <option value="open">공개후기</option>
+								  <option value="close">비공개후기</option>
 								</select>
 							  </div>
 
@@ -78,7 +80,7 @@
 	                                <table class="table table-bordered memberListTable" id="dataTable" width="100%" cellspacing="0">
 	                                    <thead>
 	                                        <tr>
-	                                        	<!-- <th>선택</th> -->
+	                                        	<th>선택</th>
 	                                        	<th>후기번호</th>
 	                                            <th>작성자</th>
 	                                            <th>공간명</th>
@@ -92,7 +94,7 @@
 	                                    </thead>
 	                                    <tfoot>
 	                                        <tr>
-	                                        	<!-- <th>선택</th> -->
+	                                        	<th>선택</th>
 	                                        	<th>후기번호</th>
 	                                            <th>작성자</th>
 	                                            <th>공간명</th>
@@ -104,44 +106,14 @@
 	                                            <th>상세보기</th>
 	                                        </tr>
 	                                    </tfoot>
-	                                    <tbody>
 	                                    <tbody id="memListTBody">
 	                                    	
-	                                    </tbody>
-	                                    <% if(rvList.isEmpty()) { %>
-	                                    	<!-- 후기글 없을경우 -->
-	                                    	<tr>
-	                                    		<td colspan="10">아직 후기가 없습니다.</td>
-	                                    	</tr>
-	                                    	<% } else { %>
-	                                    	<!-- 후기가 있을경우 -->
-	                                    		<% for(Review r : rvList) { %>
-			                                        <tr>
-			                                        	<!-- <td><input type="radio"></td> -->
-			                                            <td><%= r.getReviewNo()%></td>
-			                                            <td><%= r.getMemId() %></td>
-			                                            <td><%= r.getSpaceName() %></td>
-			                                            <td><%= r.getReviewStar() %></td>
-			                                            <td><%= r.getBookDate() %></td>
-			                                            <td><%= r.getAllLikeCount() %></td>
-			                                            <td><%= r.getAllRptCount() %></td>
-			                                            <td>
-			                                            	<% if(r.getReviewStatus().equals("Y")) { %>
-																공개
-															<% } else { %>
-																비공개
-															<% }  %>
-			                                            </td>
-			                                            <td><input type="button" class="btn btn-primary btn-sm" value="상세조회" onclick="location.href='<%=contextPath%>/memRevDetailView.me?no=<%=r.getReviewNo()%>'"></td>
-			                                        </tr>
-			                                   <% } %>
-											<% } %>
 	                                    </tbody>
 	                                </table>
 	                            </div>
 	                        </div>
 	                        <div style="height : 20px"></div>
-	                        <button type="button" class = "btn btn-danger">추천 조작프로그램 실행</button>
+	                       <!-- <button type="button" class = "btn btn-danger">추천 조작프로그램 실행</button> --> 
 	                       	<div style="height : 40px"></div>
 							 <!-- 
 							<div class="paging-area" align="center">    
@@ -167,76 +139,59 @@
     <div style="height : 100px"></div>
     
     <script>
+    
+    
+    $(function(){
+   	 changeSelect();
+         })
+         
+         
     function changeSelect(){
 		let orderBy = $("#orderBySel").val();
 		let contextPath = "<%= contextPath %>"
 		const memListTBody = $("#memListTBody");
 		 $.ajax({
-			       url:"<%=contextPath%>/orderByMem.me",
+			       url:"<%=contextPath%>/orderByRev.me",
 		  		 data:{
 		  			orderBy:orderBy
 		  		 },
 		  		 type:"post",
-		  		 success:function(memList){
-		  			if(memList.length == 0){
+		  		 success:function(rvList){
+		  			if(rvList.length == 0){
 		           					// 회원리스트가 비어있다면
-		   							let value ='<tr><td colspan="11">존재하는 회원이 없습니다.</td></tr>'
+		   							let value ='<tr><td colspan="10">리뷰가 없습니다.</td></tr>'
 		   							memListTBody.html(value);
 		   						} else {
 			  			let value = ""
-			  			for(let i = 0; i<memList.length; i++) {
-			  				/* $(function(){
-				  					if( memList[i].memAdmFlag == 'A') {
-				  						$("#adminFlag").val("Admin").attr('selected', 'selected');
-				  					} else {
-				  						$("#adminFlag").val("General").attr('selected', 'selected');
-				  					}
-				  				}) */
-			  	if(memList[i].memAdmFlag == 'A') {
-			  		memAdmFlag = "관리자"
-			  	} else {
-			  		memAdmFlag = "일반"
-			  	}
-  				
-		  		if (memList[i].grName == "Basic") {
-  					grSelectVal = "Basic";
-  				} else if  (memList[i].grName == "Silver") {
-  					grSelectVal = "Silver";
-  				} else {
-  					grSelectVal = "Gold";
-  				}
-  					
-		  		if (memList[i].memStatus == "Y") {
-		  			memStatus = "회원"
-  				} else if  (memList[i].memStatus == "N") {
-  					memStatus = "탈퇴회원"
-  				} else {
-  					memStatus = "블랙리스트"
-  				}
-	  				
-	  			value += 
-		  			'<tr>'
-                                  + ' 	  <td><input type="checkbox" name="choice" id="choice" value="' + memList[i].memNo + '"></td> '
-                                  + '     <td>' + memList[i].memNo + '</td> '
-                                  + '     <td>' + memList[i].memId + '</td> '
-                                  + '     <td>' + memList[i].memName + '</td> '
-                                  + '     <td>' + memList[i].memPhone + '</td> '
-                                  + '     <td>' + grSelectVal  + '</td> '
-                                  + '     <td>' + memList[i].rptCount + '</td> '
-                                  + '     <td>' + memList[i].likeCount + '</td> '
-                                  + '     <td>' + memAdmFlag + '</td> '
-                                  + '     <td>' + memStatus + '</td> '
-                                  + '     <td>' + memList[i].bookCountMonth + '</td> '
-                                  + '     <td><a class="btn btn-primary btn-sm" href="'+contextPath+'/memDetailView.me?no='+ memList[i].memNo +'">상세조회</a></td>'
+			  			for(let i = 0; i<rvList.length; i++) {
+			  				
+						  	if(rvList[i].reviewStatus == 'Y') {
+						  		reviewStatus = "공개"
+						  	} else {
+						  		reviewStatus = "비공개"
+						  	}
+			  				
+				  			value += 
+					  			'<tr>'
+                                  + ' 	  <td><input type="checkbox" name="choice" id="choice" value="' + rvList[i].reviewNo + '"></td> '
+                                  + '     <td>' + rvList[i].reviewNo + '</td> '
+                                  + '     <td>' + rvList[i].memId + '</td> '
+                                  + '     <td>' + rvList[i].spaceName + '</td> '
+                                  + '     <td>' + rvList[i].reviewStar + '</td> '
+                                  + '     <td>' + rvList[i].bookDate  + '</td> '
+                                  + '     <td>' + rvList[i].allRptCount + '</td> '
+                                  + '     <td>' + rvList[i].allLikeCount + '</td> '
+                                  + '     <td>' + reviewStatus + '</td> '
+                                  + '     <td><a class="btn btn-primary btn-sm" href="'+contextPath+'/memRevDetailView.me?no='+ rvList[i].reviewNo +'">상세조회</a></td>'
                                   + '  </tr> '
-                                  + '<input type="hidden" value="'+ memList[i].memNo +'">'
+                                  + '<input type="hidden" value="'+ rvList[i].reviewNo +'">'
   					 }
 	  				memListTBody.html(value);
 	  				
 		  		 }
   		 },
   		 error:function(){
-  			console.log("회원목록 조회용 ajax 통신 실패");
+  			console.log("리뷰목록 조회용 ajax 통신 실패");
   		 }
   		 
   	 })

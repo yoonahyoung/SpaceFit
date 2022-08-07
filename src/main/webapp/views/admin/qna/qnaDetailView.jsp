@@ -47,7 +47,7 @@
             <th>공간분류</th>
             <td><%=q.getSpaceCategory() %></td>
             <th width="80">공간</th>
-            <td><%=q.getQnaSpaceNo() %></td>
+            <td><%=q.getQnaSpaceName() %></td>
             <th width="80">작성자</th>
             <td><%=q.getQnaWriter() %></td>
             <th width="80">작성일</th>
@@ -80,6 +80,7 @@
 		<% if (q.getQnaGroup() != 1){ %>
         <a href="<%=contextPath%>/reply.qa?no=<%=q.getQnaNo()%>" class="btn btn-sm btn-primary">답변하기</a> 
 	    <% } %>
+	    <a href="<%=contextPath%>/adminDelete.qa?no=<%=q.getQnaNo()%>" class="btn btn-sm btn-outline-primary" onclick="return deleteConfirm();">삭제하기</a>
 	    <a onclick="goQnAList();" class="btn btn-sm btn-secondary">목록가기</a>
     </div>
     <div style="height : 60px"></div>
@@ -88,6 +89,12 @@
 <script>
     function goQnAList(){
         location.href="<%=contextPath%>/adminList.qa?cpage=1";
+    }
+    function deleteConfirm(){
+        
+        let result = confirm('정말 삭제하시겠습니까?');
+
+        return result;
     }
 </script>
 </body>

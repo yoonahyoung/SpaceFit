@@ -248,6 +248,7 @@
 	  JOIN TB_MEMBER ON(QNA_MEM_NO = MEM_NO)
 	  JOIN TB_SPACE ON (QNA_SPACE_NO = SPACE_NO)
 	 WHERE QNA_NO = ?
+	   AND QNA_STATUS = 'Y'
 	</entry>
 	
 	<entry key="isSolved">
@@ -297,6 +298,13 @@
 	        )
 	 WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	
+	<entry key="deleteQnA">
+	DELETE
+	  FROM TB_QNA
+	 WHERE QNA_NO = ?
+	</entry>
+	
 	<!-- 검색 -->
     <!-- 전체 전체 전체 전체 -->
 	<entry key="selectQnAListAll">

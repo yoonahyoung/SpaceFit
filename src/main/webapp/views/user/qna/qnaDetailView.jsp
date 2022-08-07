@@ -47,7 +47,7 @@
             <th>공간분류</th>
             <td><%=q.getSpaceCategory() %></td>
             <th width="80">공간</th>
-            <td><%=q.getQnaSpaceNo() %></td>
+            <td><%=q.getQnaSpaceName() %></td>
             <th width="80">작성자</th>
             <td><%=q.getQnaWriter() %></td>
             <th width="80">작성일</th>
@@ -78,8 +78,7 @@
     <br>
 	<div align="right">
 		<% if(loginUser != null && loginUser.getMemId().equals(q.getQnaWriter())) { %>
-		<a href="<%=contextPath%>/updateForm.qa?no=<%=q.getQnaNo()%>" class="btn btn-sm btn-warning">수정하기</a>
-		<a href="" class="btn btn-sm btn-danger">삭제하기</a>
+		<a href="<%=contextPath%>/delete.qa?no=<%=q.getQnaNo()%>" class="btn btn-sm btn-outline-primary" onclick="return deleteConfirm();">삭제하기</a>
 		<% } %>
 	    <a onclick="goQnAlist();" class="btn btn-sm btn-secondary">목록가기</a>
     </div>
@@ -90,6 +89,13 @@
 <script>
     function goQnAlist(){
         location.href="<%=contextPath%>/list.qa?cpage=1";
+    }
+    
+    function deleteConfirm(){
+        
+        let result = confirm('정말 삭제하시겠습니까?');
+
+        return result;
     }
 </script>
 </body>

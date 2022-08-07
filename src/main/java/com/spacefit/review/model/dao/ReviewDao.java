@@ -15,6 +15,7 @@ import java.util.Properties;
 
 import com.spacefit.attachment.model.vo.Attachment;
 import com.spacefit.common.model.vo.PageInfo;
+import com.spacefit.mem.model.vo.Member;
 import com.spacefit.mem.model.vo.Report;
 import com.spacefit.review.model.vo.Review;
 
@@ -502,6 +503,40 @@ public class ReviewDao {
 		}
 		
 		return rvList;
+	}
+	
+	public ArrayList<Review> selectReviewListOrderBy(Connection conn, String addSql) {
+		ArrayList<Review>  rvList = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminReviewSelect") + addSql;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+					rvList.add(new Review( rset.getInt("rv_no"),
+										   rset.getString("mem_id"),
+										   rset.getString("space_name"),
+										   rset.getInt("rv_star"),
+										   rset.getString("book_date"),
+										   rset.getInt("all_like_count"),
+										   rset.getInt("all_rpt_count"),
+										   rset.getString("rv_status"),
+										   rset.getDate("rv_enroll_date")
+							));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return rvList;
+		
 	}
 	
 	

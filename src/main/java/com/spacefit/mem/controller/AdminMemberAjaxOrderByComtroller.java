@@ -35,7 +35,26 @@ public class AdminMemberAjaxOrderByComtroller extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");	
 		String orderBy = request.getParameter("orderBy");
 		
-		ArrayList<Member> memList = new MemberService().selectMemberListOrderBy(orderBy);
+		String search1 = "";
+		String search2 = "";
+		String searchText = request.getParameter("searchText");
+		
+		// 검색이 없을 경우제외
+		if(searchText != null && !searchText.equals("")) {
+			
+			switch(request.getParameter("searchType")) {
+				case "userId" : search1 += " WHERE MEM_ID LIKE '%"+ searchText + "%'"; 
+								search2 += " AND MEM_ID LIKE '%"+ searchText + "%'";
+								break;
+				case "gradeName" : search1 += " WHERE GR_NAME LIKE '%"+ searchText + "%'";
+								   search2 += " AND GR_NAME LIKE '%"+ searchText + "%'";
+								   break;
+			
+			} 
+			
+		}
+		
+		ArrayList<Member> memList = new MemberService().selectMemberListOrderBy(orderBy, search1, search2);
 		
 		
 		response.setContentType("application/json; charset=UTF-8");

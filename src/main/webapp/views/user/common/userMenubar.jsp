@@ -370,7 +370,7 @@
 	<% } %>
 
 
-		<div class="wrap">
+	<div class="wrap">
 	
 	  <% if(loginUser == null) { %> 
 	  <!--/ 로그인 전 마이페이지 /-->
@@ -433,20 +433,22 @@
 
 	  <% } else { %>
 		<div class="box-collapse">
-	    <div class="offcanvas-header">
-	      <div id="logo">SPACEFIT</div>
-	      <span class="close-box-collapse right-boxed bi bi-x"></span>
-	      
-	      <div class="container profileContainer">
-	        <div class="row profile">
-	          <div id="header-areaSize" style="height:10px"></div>
-	          <button class="profile icon"> <img src="<%= contextPath %>/resources/user/templates/real_estate/img/icon/userIcon.svg" id="userIcon"> </button>
-	          <div id="header-areaSize" style="height:10px"></div>
-	          <button class="profile text"><p><br><b><%=loginUser.getMemName() %></b> 님, 환영합니다! <br></button>
-	        </div>
-	      </div>
-	  
-	    </div>
+	    	<div class="offcanvas-header">
+	      		<div id="logo">SPACEFIT</div>
+	      		<span class="close-box-collapse right-boxed bi bi-x"></span>
+	    		<div class="container profileContainer">
+	    		<div style="height:60px;"></div>
+				<div class="profile" style="margin: auto; display:flex; align-items:center; justify-content:center;">
+					<% if(loginUser.getMemProfile() == null) { %>
+								<img src="<%=contextPath %>/resources/user/img/user.png" style="width:60px; height:60px; border-radius:50%; margin: auto; margin-top:50px;">
+					<% }else { %>
+								<img src="<%=contextPath %>/<%= loginUser.getMemProfile() %>" style="width:50px; height:50px; border-radius:50%; margin: auto;">
+					<% } %>
+					<div class="profile text" style="font-size:17px; margin-left:20px;"><p><br><b><%=loginUser.getMemName() %></b> 님, 환영합니다! <br></div>
+				</div>
+	    	</div>
+		</div>
+	    
 	    <div class="offcanvas-body">
 	      <div class="row iconRow" style="width:100%">
 	        <a class="col iconCol" href="<%= contextPath %>/bolist.bo"><img src="<%= contextPath %>/resources/user/templates/real_estate/img/icon/reserve.svg" id="icon1"><br><span>예약조회</span></a>
@@ -499,8 +501,8 @@
 	          <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
 	            <div class="accordion-body container">
 	              <div class="row myPageRow">
-	                <button class="col myPageCol" onclick="location.href='<%=contextPath%>/myList.qa?cpage=1'"> 1:1 문의답변 </button>
-	                <button class="col myPageCol" onclick="location.href='<%=contextPath%>/rlist.rv?cpage=1'"> 내 후기 </button>
+	                <button class="col myPageCol" onclick="location.href='<%=contextPath%>/myList.qa?cpage=1'" style="height:80px;"> 1:1 문의답변 </button>
+	                <button class="col myPageCol" onclick="location.href='<%=contextPath%>/rlist.rv?cpage=1'" style="height:80px;"> 내 후기 </button>
 	              </div>
 	            </div>
 	          </div>
@@ -628,6 +630,7 @@
 	<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 	
 	<!-- Vendor JS Files -->
+	<script src = "https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 	 <script src="<%= contextPath %>/resources/user/templates/real_estate/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="<%= contextPath %>/resources/user/templates/real_estate/assets/vendor/swiper/swiper-bundle.min.js"></script>
 	<script src="<%= contextPath %>/resources/user/templates/real_estate/assets/vendor/php-email-form/validate.js"></script>

@@ -83,7 +83,7 @@ public class BookInsertController extends HttpServlet {
 			book.setBookAddContent(bookContent);
 		}
 		//
-		int result = 0;
+		int result = 1;
 		
 		if(cpNo.equals("")) {
 				if(bookContent.equals("")) { // 쿠폰 x, 요청 x 1
@@ -104,9 +104,9 @@ public class BookInsertController extends HttpServlet {
 		}
 		
 		
+		int result2 = new PayService().deleteCart(quickPay);
 		
-		
-		if(result > 0) {
+		if(result * result2 > 0) {
 			request.getRequestDispatcher("views/user/myPage/reservationListView.jsp").forward(request, response);
 			//response.sendRedirect(request.getContextPath()+"/bolist.bo");
 		}

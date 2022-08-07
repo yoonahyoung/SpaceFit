@@ -422,22 +422,26 @@ public class MemberService {
 	}
 	
 	
-	public ArrayList<Member> selectMemberListOrderBy(String orderBy){
+	public ArrayList<Member> selectMemberListOrderBy(String orderBy, String search1, String search2){
 		Connection conn = getConnection();
 		String addSql = "";
 		
-		switch(orderBy) {
-			case "newest" : addSql = "ORDER BY MEM_ENROLL_DATE DESC"; break;
-			case "bestOrder" : addSql = "ORDER BY BOOK_AMOUNT_MONTH"; break;
-			case "reported" : addSql = "ORDER BY RPT_COUNT DESC"; break;
-			case "like" : addSql = "ORDER BY LIKE_COUNT DESC"; break;
-			case "adminOnly" : addSql = "WHERE MEM_ADM_FLAG = 'A'"; break;
-			case "userOnly" : addSql = "WHERE MEM_ADM_FLAG = 'U'"; break;
-			case "black" : addSql = "WHERE MEM_STATUS = 'B'"; break;
-			//case "forBasic" : addSql = "WHERE BOOK_COUNT_MONTH IN (0,1,2)"; break;
-			//case "forSilver" : addSql = "WHERE BOOK_COUNT_MONTH IN (3,4)"; break;
-			//case "forGold" : addSql = "WHERE BOOK_COUNT_MONTH >= 5"; break;
-			default : addSql ="ORDER BY MEM_ENROLL_DATE ASC"; break;
+		
+		if(orderBy.equals("newest") || orderBy.equals("bestOrder") || orderBy.equals("reported") || orderBy.equals("like")) {
+			switch(orderBy) {
+				case "newest" : addSql = search1 + "ORDER BY MEM_ENROLL_DATE DESC"; break;
+				case "bestOrder" : addSql = search1 + "ORDER BY BOOK_AMOUNT_MONTH"; break;
+				case "reported" : addSql = search1 + "ORDER BY RPT_COUNT DESC"; break;
+				case "like" : addSql = search1 + "ORDER BY LIKE_COUNT DESC"; break;
+				default : addSql = "ORDER BY MEM_ENROLL_DATE ASC"; break;
+			}
+		} else {
+			switch(orderBy) {
+				case "adminOnly" : addSql = "WHERE MEM_ADM_FLAG = 'A'" + search2; break;
+				case "userOnly" : addSql = "WHERE MEM_ADM_FLAG = 'U'" + search2; break;
+				case "black" : addSql = "WHERE MEM_STATUS = 'B'" + search2; break;
+				default : addSql = "ORDER BY MEM_ENROLL_DATE ASC"; break;
+			}
 		}
 
 		ArrayList<Member> memList = new MemberDao().selectMemberListOrderBy(conn, addSql);

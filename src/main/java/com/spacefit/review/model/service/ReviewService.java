@@ -10,7 +10,9 @@ import java.util.ArrayList;
 
 import com.spacefit.attachment.model.vo.Attachment;
 import com.spacefit.common.model.vo.PageInfo;
+import com.spacefit.mem.model.dao.MemberDao;
 import com.spacefit.mem.model.dao.ReportDao;
+import com.spacefit.mem.model.vo.Member;
 import com.spacefit.mem.model.vo.Report;
 import com.spacefit.review.model.dao.ReviewDao;
 import com.spacefit.review.model.vo.Review;
@@ -169,6 +171,24 @@ public class ReviewService {
 		Review rv = new ReviewDao().adminSelectEachReview(conn, reviewNo);
 		close(conn);
 		return rv;
+	}
+	
+	public ArrayList<Review> selectReviewListOrderBy(String orderBy){
+		Connection conn = getConnection();
+		String addSql = "";
+		
+		switch(orderBy) {
+			case "newest" : addSql = "ORDER BY RV_ENROLL_DATE DESC"; break;
+			case "like" : addSql = "ORDER BY ALL_LIKE_COUNT DESC"; break;
+			case "reported" : addSql = "ORDER BY ALL_RPT_COUNT DESC"; break;
+			case "open" : addSql = "WHERE RV_STATUS = 'Y'"; break;
+			case "close" : addSql = "WHERE RV_STATUS = 'N'"; break;
+			default : addSql ="ORDER BY RV_ENROLL_DATE DESC"; break;
+		}
+
+		ArrayList<Review> rvList = new ReviewDao().selectReviewListOrderBy(conn, addSql);
+		close(conn);
+		return rvList;
 	}
 	
 	public ArrayList<Review> selectRvPhotoList(int reviewNo){

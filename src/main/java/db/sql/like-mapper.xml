@@ -32,5 +32,10 @@
 		   WHERE SPACE_NO = ?
 		    AND RV_STATUS = 'Y'
 	</entry>
+	
+	<entry key="getLikeCount">
+        select count(*) AS "LIKE" from tb_like where rv_no = ?
+   </entry>
+	
 
 </properties>

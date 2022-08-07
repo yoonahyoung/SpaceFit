@@ -39,20 +39,34 @@ public class cartPayViewController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
-		int no = Integer.parseInt(request.getParameter("spaceNo"));
+		String cart = request.getParameter("cart-radio1");
 		
-		Cart quickPay = new PayService().selectCart(no);
-		Space s = new SpaceService().spaceDetailView(no);
+		System.out.println(cart);
+		String arr[] = cart.split(",");
+		int memNo = Integer.parseInt(arr[0]);
+		int spaceNo = Integer.parseInt(arr[1]);
+		int limit = Integer.parseInt(arr[2]);
+		String date = arr[3];
+		String detailCI = arr[4];
+		String detailCO = arr[5];
+		String park = arr[6];
+		String animal = arr[7];
+		String stand = arr[8];
+		String chair = arr[9];
+		int discountAmount = Integer.parseInt(arr[10]);
+		
+		Cart quickPay = new Cart(memNo, spaceNo, limit, date, detailCI, detailCO, park, animal, stand, chair, discountAmount);
+		Space s = new SpaceService().spaceDetailView(spaceNo);
 		ArrayList<Mcp> list = new MemberService().selectMyCouponList(quickPay.getMemNo());
 		
-		int result = new PayService().deleteCart(no);
+		//int result = new PayService().deleteCart(quickPay);
 		
-		if(result > 0) {
+		//if(result > 0) {
 			request.setAttribute("quickPay", quickPay);
 			request.setAttribute("s", s);
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("views/user/pay/payView.jsp").forward(request, response);
-		}
+		//}
 	}
 
 	/**
