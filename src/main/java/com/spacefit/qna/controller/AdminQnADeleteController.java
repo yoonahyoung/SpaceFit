@@ -36,15 +36,19 @@ public class AdminQnADeleteController extends HttpServlet {
 		QnA q = new QnAService().selectQnA(no);
 		HttpSession session = request.getSession();
 		request.setAttribute("qna", q);
-		int result2 = new QnAService().deleteQnA(no);		
+				
 		
-		if(result != 2 && result2 > 0) { // 삭제 후 목록으로 이동
-			session.setAttribute("alertMsg", "성공적으로 삭제되었습니다!");
-			request.getRequestDispatcher("/adminList.qa?cpage=1").forward(request, response);
+		if(result != 2) { // 답변완료된 글이 아니면(result가 2가 아니면) 삭제 후 목록으로 이동
+			int result2 = new QnAService().deleteQnA(no);
+				if(result2 > 0) {
+					session.setAttribute("alertMsg", "성공적으로 삭제되었습니다!");
+					request.getRequestDispatcher("/adminList.qa?cpage=1").forward(request, response);
+				}
 					//response.sendRedirect(request.getContextPath()+"/qnaDetailView.jsp");
 		}else { // 답변완료된 글이면 alertMsg 담아서 다시 문의글 상세조회 페이지로 이동
+			session.setAttribute("alertMsg", "답변 완료된 문의글은 삭제가 불가능합니다.");
 			//request.getRequestDispatcher("views/admin/qna/qnaDetailView.jsp").forward(request, response);
-			response.sendRedirect(request.getContextPath()+"/Admindetail.qa?no=" + no);
+			response.sendRedirect(request.getContextPath()+"/adminDetail.qa?no=" + no);
 		}
 	}
 
