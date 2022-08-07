@@ -151,7 +151,12 @@
     			 + '&cpEndDate=' + $(this).parent().find('label').text();
 				
 			})
-		})
+			
+		
+      
+			
+			
+	
 		
 
 			
