@@ -52,6 +52,17 @@
 								</div>
 								
 							  <div style="height : 60px"></div>
+							  <table class="pull-right">
+		                            <tr>
+		                                <td><select class="form-control mr-sm-0" name="searchType" id="searchType" style="height: 35px;">                                        
+		                                        <option value="userId">회원아이디</option>
+		                                        <option value="gradeName">등급명 (Basic, Silver, Gold)</option>
+		                                </select></td>
+		                                <td><input type="text" class="form-control" placeholder="검색어 입력" name="searchText" id="searchText"  maxlength="30" style="height: 35px;"></td>
+		                                <td><button type="button" id="searchBtn" class="btn btn-sm btn-primary" onclick="changeSelect();">검색</button></td>
+		                            </tr>        
+		                        </table> 
+		                      <div style="height : 60px"></div>
 							  <div id="selectSelection">
 								<div class="row" id="selectDivMem">
 							  		<div>
@@ -252,10 +263,16 @@
 			let orderBy = $("#orderBySel").val();
 			let contextPath = "<%= contextPath %>"
 			const memListTBody = $("#memListTBody");
+			
+		
+			
+			
 			 $.ajax({
 				       url:"<%=contextPath%>/orderByMem.me",
 			  		 data:{
-			  			orderBy:orderBy
+			  			orderBy:orderBy,
+			  			searchType:$("#searchType").val(),
+	  				    searchText:$("#searchText").val()
 			  		 },
 			  		 type:"post",
 			  		 success:function(memList){
@@ -273,30 +290,30 @@
 					  						$("#adminFlag").val("General").attr('selected', 'selected');
 					  					}
 					  				}) */
-				  	if(memList[i].memAdmFlag == 'A') {
-				  		memAdmFlag = "관리자"
-				  	} else {
-				  		memAdmFlag = "일반"
-				  	}
-	  				
-			  		if (memList[i].grName == "Basic") {
-	  					grSelectVal = "Basic";
-	  				} else if  (memList[i].grName == "Silver") {
-	  					grSelectVal = "Silver";
-	  				} else {
-	  					grSelectVal = "Gold";
-	  				}
-	  					
-			  		if (memList[i].memStatus == "Y") {
-			  			memStatus = "회원"
-	  				} else if  (memList[i].memStatus == "N") {
-	  					memStatus = "탈퇴회원"
-	  				} else {
-	  					memStatus = "블랙리스트"
-	  				}
-		  				
-		  			value += 
-			  			'<tr>'
+							  	if(memList[i].memAdmFlag == 'A') {
+							  		memAdmFlag = "관리자"
+							  	} else {
+							  		memAdmFlag = "일반"
+							  	}
+				  				
+						  		if (memList[i].grName == "Basic") {
+				  					grSelectVal = "Basic";
+				  				} else if  (memList[i].grName == "Silver") {
+				  					grSelectVal = "Silver";
+				  				} else {
+				  					grSelectVal = "Gold";
+				  				}
+				  					
+						  		if (memList[i].memStatus == "Y") {
+						  			memStatus = "회원"
+				  				} else if  (memList[i].memStatus == "N") {
+				  					memStatus = "탈퇴회원"
+				  				} else {
+				  					memStatus = "블랙리스트"
+				  				}
+					  				
+					  			value += 
+						  			'<tr>'
 	                                  + ' 	  <td><input type="checkbox" name="choice" id="choice" value="' + memList[i].memNo + '"></td> '
 	                                  + '     <td>' + memList[i].memNo + '</td> '
 	                                  + '     <td>' + memList[i].memId + '</td> '
@@ -312,6 +329,7 @@
 	                                  + '  </tr> '
 	                                  + '<input type="hidden" value="'+ memList[i].memNo +'">'
 	  					 }
+				  		//searchText.html("");
 		  				memListTBody.html(value);
 		  				
 			  		 }

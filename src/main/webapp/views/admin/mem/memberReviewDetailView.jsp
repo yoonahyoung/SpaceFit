@@ -43,7 +43,7 @@
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td><input type="text" value="<%=rv.getMemId() %>" readOnly></td>
+					<td><%=rv.getMemId() %></td>
 				</tr>
 				<tr>
 					<th>평점</th>

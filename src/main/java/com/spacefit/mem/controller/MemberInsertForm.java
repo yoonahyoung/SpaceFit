@@ -56,7 +56,7 @@ public class MemberInsertForm extends HttpServlet {
 		if(result > 0) {
 			request.getRequestDispatcher("views/user/myPage/signInThree.jsp").forward(request, response);
 		} else {
-			session.setAttribute("alertMsg", "회원가입에 실패했습니다. 관리자에게 연락주세요!");
+			session.setAttribute("alertMsg", "이미 가입한 회원 정보와 일치하는 회원입니다! 정보를 확인해주세요!");
 			response.sendRedirect(request.getContextPath());
 		}
 	}

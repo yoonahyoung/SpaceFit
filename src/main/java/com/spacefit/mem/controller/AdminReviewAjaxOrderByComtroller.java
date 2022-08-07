@@ -9,46 +9,49 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.spacefit.mem.model.service.MemberService;
-import com.spacefit.mem.model.vo.Member;
+import com.google.gson.Gson;
+import com.spacefit.review.model.service.ReviewService;
+import com.spacefit.review.model.vo.Review;
 
 /**
- * Servlet implementation class MemberManageController
+ * Servlet implementation class AdminMemberAjaxOrderByComtroller
  */
-@WebServlet("/memManage.me")
-public class AdminMemberManageController extends HttpServlet {
+@WebServlet("/orderByRev.me")
+public class AdminReviewAjaxOrderByComtroller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminMemberManageController() {
+    public AdminReviewAjaxOrderByComtroller() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");	
+		String orderBy = request.getParameter("orderBy");
 		
-		request.setCharacterEncoding("UTF-8");
-		
-		
-		ArrayList <Member> list = new MemberService().adminMemberManageListSelect();
-		int todayMem = new MemberService().todayMem();
-		int goldMem = new MemberService().goldMem();
+		ArrayList<Review> rvList = new ReviewService().selectReviewListOrderBy(orderBy);
 		
 		
-		request.setAttribute("list", list);
-		request.setAttribute("todayMem", todayMem);
-		request.setAttribute("goldMem", goldMem);
-		request.getRequestDispatcher("views/admin/mem/memberManage.jsp").forward(request, response);
+		response.setContentType("application/json; charset=UTF-8");
+		if(rvList.isEmpty()) {
+			new Gson().toJson(rvList, response.getWriter());
+		} else {
+			new Gson().toJson(rvList, response.getWriter());
+		}
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

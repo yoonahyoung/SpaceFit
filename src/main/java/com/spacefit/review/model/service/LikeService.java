@@ -34,4 +34,12 @@ public class LikeService {
 		close(conn);
 		return howManyRvPerSpace;
 	}
+	
+	   public int getLikeCount(int rvNo) {
+		      Connection conn = getConnection();
+		      int star = new LikeDao().getLikeCount(conn, rvNo);
+		      close(conn);
+		      return star;
+		   }
+
 }
