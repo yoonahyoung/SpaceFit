@@ -29,16 +29,19 @@
 				<tr>
 					<th>종류</th>					
                     <td><%= r.getCategory() %><td>
+                    
 				</tr>	
 				<tr>
 					<th>작성자</th>
 					<td><%= r.getRptMemId() %></td>
+					<td></td>
 				</tr>	
 				
 											
 				<tr>
 					<th>글 / 댓글 내용</th>					
                     <td><input type="textarea" value="<%= content %>" style="width:600px; height:300px;" readonly><td>
+                    
 				</tr>					
 			
 			</table>
