@@ -87,4 +87,28 @@ public class LikeDao {
 		
 		return howManyRvPerSpace;
 	}
+	
+	public int getLikeCount(Connection conn, int rvNo) {
+        int star = 0;
+        PreparedStatement pstmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("getLikeCount");
+        
+        try {   
+           pstmt = conn.prepareStatement(sql);
+           pstmt.setInt(1, rvNo);            
+           rset = pstmt.executeQuery();
+           
+           if(rset.next()) {
+              star = rset.getInt("LIKE"); 
+           }
+        } catch (SQLException e) {
+           e.printStackTrace();
+        } finally {
+           close(rset);
+           close(pstmt);
+        }
+        return star;
+     }
+
 }

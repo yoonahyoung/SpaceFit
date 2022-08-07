@@ -35,16 +35,17 @@ public class AjaxLikeUpdateController extends HttpServlet {
 		// 추천은 1번만 할 수 있음
 		int idCheckCount = new LikeService().checkLikeOnce(memNo, rvNo);
 		if(idCheckCount > 0) {
-			System.out.println("이미 추천한 후기입니다.");
-		} else {
-			int updateLike = new LikeService().updateLike(memNo, rvNo);
-			if(updateLike == 1) {
-				
-				response.getWriter().print("likeOk");
-			} else {
-				response.getWriter().print("likeNo");
-			}
-		}
+	         System.out.println("이미 추천한 후기입니다.");
+	         response.getWriter().print("likeNO");
+	      } else {
+	         int updateLike = new LikeService().updateLike(memNo, rvNo);
+	         if(updateLike == 1) {
+	            int rvStar = new LikeService().getLikeCount(rvNo);
+//	            response.getWriter().print("likeOk");
+	            response.getWriter().print(String.valueOf(rvStar));
+	         }
+	      }
+
 	}
 
 	/**

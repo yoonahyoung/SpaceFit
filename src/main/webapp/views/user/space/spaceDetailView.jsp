@@ -221,6 +221,7 @@ tbody p{
                                        <% if (!rvList.isEmpty()) { %> <!-- 리뷰리스트가 엠티가 아니면 -->
                                        
                                               <hr>
+                                              <div style="height:30px;"></div>
                                               <div class="introRv">
                                                   <div class="stars" >
                                                      <% for(int i=0; i<avgStars; i++) { %>
@@ -240,6 +241,7 @@ tbody p{
                                                   <div id="rvOrderBy">
                                                         <a>고객님들의 실제 이용 리뷰입니다!</a>
                                                   </div>
+                                                  <div style="height:30px;"></div>
                                               
                                               <% for(Review r : rvList) { %>  
                                               <div class="container-fluid eachRvList">
@@ -654,12 +656,13 @@ tbody p{
                    rvNo:rvNo
                 },
                 success:function(result){
-                   if(result == "likeOk"){
-                      // 추천이 완료된 데이터, 예약번호가 넘어옴
-                  alert("추천해주셔서 감사합니다!");
-                      // 바로 표시되게 하는 걸 못하게씀 ㅜㅜ
-                      console.dir($('this').parent().children().val());
-                      $('this').parent().children().text( $("#countPlusOne").text()+1 );
+                    if(result != "likeNO"){
+                       // 추천이 완료된 데이터, 예약번호가 넘어옴
+                   alert("추천해주셔서 감사합니다!");
+                       // 바로 표시되게 하는 걸 못하게씀 ㅜㅜ
+                       console.dir($('this').parent().children().val());
+                       $(e).nextAll()[5].innerText = result + "명이 이 후기를 추천했습니다!";
+
                } else {
                   // 후기 중복확인
                   console.dir($('this').parent().children().val());
