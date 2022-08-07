@@ -121,7 +121,7 @@
 		        	
 		        	function selectPaging(page){
 		        		$.ajax({
-		        			url:"<%=contextPath%>/loadQna.sp",
+		        			url:"<%=contextPath%>/ajaxList.sp",
 		        			data:{selectSp:$("select[name=selectSp] option:selected").val(),
 		        				  cpage:page},
 		        			success:function(h){
