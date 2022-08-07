@@ -193,7 +193,7 @@ tbody p{
                                                         <li>시간엄수 부탁드리며, 퇴실전 뒷정리 부탁드립니다.</li>
                                                     </ol>
                                                 </div>
-                                                <div class="tab-pane fade" id="pills-sDetailQNA" role="tabpanel" aria-labelledby="pills-sDetailQNA-tab" onclick="loadQna();">
+                                                <div class="tab-pane fade" id="pills-sDetailQNA" role="tabpanel" aria-labelledby="pills-sDetailQNA-tab" onclick="loadQna(1);">
                                                     <table id="QnATable" class="table">
                                                     	<tbody id="listArea">
                                                     	
