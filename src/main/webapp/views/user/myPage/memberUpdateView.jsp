@@ -62,7 +62,7 @@
     <div align="center">
        <div class="card memUpdateCard">
          <div class="card-body">
-           <form action="<%=contextPath %>/memUpdate.me" method="post" id="mem-update-form" enctype="multipart/form-data">
+           <form action="<%=contextPath %>/memUpdate.me" method="post" id="mem-update-form">
             <br>
             <div align="center">
               <br>
@@ -133,7 +133,7 @@
           <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#memUpdateModal">탈퇴하기</button>
           <button type="submit" class="btn btn-primary">수정하기</button>
   
-		        </form>
+        </form>
 		      </div>
 		    </div>
 			</div>

@@ -77,7 +77,7 @@
     margin: auto;
     margin-top: 50px;
 }
-#dataTable{
+#QnATable{
     text-align: left;
     margin:0px;
     border-bottom-color:white;
@@ -85,26 +85,27 @@
 th{
     font-size: 18px;
 }
-#datatable>tr>th{
+#QnAtable>tr>th{
     height:85px;
     line-height:85px;
 }
 tbody p{
     padding:35px 0 25px 0;
 }
-#dataTable>tbody>tr:hover{
-   background:#E1F0FF;
+
+#QnATable>tbody>tr:hover{
+	background:#E1F0FF;
 }
 #faqTr{
     padding-top:50px;
 }
-#dataTable tr, #dataTable td{
-   cursor:none;
-   background:white;
+#QnATable tr, #dataTable td{
+	cursor:none;
+	background:white;
 }
-#dataTable tr, #dataTable td:hover{
-   cursor:none;
-   background:white;
+#QnATable tr, #QnATable td:hover{
+	cursor:none;
+	background:white;
 }
 .paging-area{
    width:100%;
@@ -193,14 +194,13 @@ tbody p{
                                                     </ol>
                                                 </div>
                                                 <div class="tab-pane fade" id="pills-sDetailQNA" role="tabpanel" aria-labelledby="pills-sDetailQNA-tab" onclick="loadQna();">
-                                                    <table id="dataTable" class="table">
-                                                       <tbody id="listArea">
-                                                       
-                                                       
-                                                       </tbody>
-                                                      <tr>
-                                                         <td colspan="2" id="pgQna"><div class="paging-area" align="center"></div><td>
-                                                      <tr>
+                                                    <table id="QnATable" class="table">
+                                                    	<tbody id="listArea">
+                                                    	
+                                                    	</tbody>
+	                                                	<tr>
+	                                                		<td colspan="2" id="pgQna"><div class="paging-area" align="center"></div><td>
+	                                                	<tr>
                                                     </table>
                                                 </div>
                                             </div>
@@ -279,12 +279,15 @@ tbody p{
                                                       </div>
                                                       <div class="col-lg-3 memInfoDiv">
                                                           <div class="mem">
-                                                              <span class="material-symbols-outlined memProfilePic" id="memProfilePic">
-                                                                  account_circle
-                                                              </span>
-                                                              <span id="memSpan">
-                                                                  <div><%=r.getMemId() %></div>
-                                                                  <span>회원등급 :</span><span><%=r.getGradeName() %></span>
+			                                                     <% if(loginUser.getMemProfile() == null) { %>
+				                                                         <img src="<%=contextPath %>/resources/user/img/user.png" style="width:40px; height:40px; border-radius:50%; margin: auto;">
+				                                                <% }else { %>
+				                                                         <img src="<%=contextPath %>/<%= loginUser.getMemProfile() %>" style="width:30px; height:30px; border-radius:50%; margin: auto;">
+				                                                <% } %>
+                                                              <span id="memSpan" style="width:90px;">
+                                                                  <span style="font-size:17px;"><b><%=r.getMemId() %></b></span><br>
+                                                                  <span style="font-size:15px;">회원등급 :</span><br>
+                                                                  <span style="font-size:15px;"><%=r.getGradeName() %></span>
                                                               </span>
                                                           </div>
                                                           <br>
@@ -660,8 +663,9 @@ tbody p{
                        // 추천이 완료된 데이터, 예약번호가 넘어옴
                    alert("추천해주셔서 감사합니다!");
                        // 바로 표시되게 하는 걸 못하게씀 ㅜㅜ
-                       console.dir($('this').parent().children().val());
-                       $(e).nextAll()[5].innerText = result + "명이 이 후기를 추천했습니다!";
+                       //console.dir($('this').parent().children().val());
+                       //$(e).nextAll()[5].innerText = result + "명이 이 후기를 추천했습니다!";
+                       location.reload();
 
                } else {
                   // 후기 중복확인

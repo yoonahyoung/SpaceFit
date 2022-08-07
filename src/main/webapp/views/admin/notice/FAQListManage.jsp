@@ -36,17 +36,6 @@
                 <div class="row">
                     <div class="col-lg" align="right">
                         <div>
-                            <div align="center" style="display:inline-block">
-                                <div class="input-group" align="center" style="width:400px">
-                                    <input type="text" class="form-control bg-light border-1 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button">
-                                            <i class="fas fa-search fa-sm"></i>
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </div>
                             <div style="width:100px; display:inline-block">
                                 <a type="button" class="btn btn-secondary" href="<%=contextPath%>/adEnroll.fa">글작성</a>
                             </div>

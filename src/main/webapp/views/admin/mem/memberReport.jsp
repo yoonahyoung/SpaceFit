@@ -43,7 +43,7 @@
 								  	<h4><%=todayCommentCount %>/<%= totalCommentCount%></h4>	
 								  </div>
 								  <div class="col-4" id="avgReview">
-								  	<span>최다블랙리스트회원</span><br>
+								  	<span>최다신고당한회원</span><br>
 								  	<h4><%= memId%></h4>	
 								  </div>
 								</div>

@@ -28,15 +28,15 @@
                     	<form class="agreement"  method="post">
                     	
                     		<div>
-                                <input type="checkbox" name="agree_all" id="agree_all">
-                                <span>모두 동의합니다</span><br><hr>
+                               <!--  <input type="checkbox" name="agree_all" id="choiceAll" onclick="checkAll();">
+                                <span>모두 동의합니다</span><br><hr> -->
                             </div>
                             <table align="center">
                             	<tr>
 		                           	<td>
 		                           		<label for="agree">
 		                           			<div class="agreeInput">
-		                           				 <input type="checkbox" name="agree" id="agree1" value="1" required>
+		                           				 <input type="checkbox" name="agree" id="choice1" value="1" required>
 		                                    	 <span style="font-size:13px;">이용약관 동의<strong>(필수)</strong></span>
 		                           			</div>
 		                                    <div class="agreeBox">
@@ -50,7 +50,7 @@
 		                           	<td>
 		                           		<label for="agree">
 			                            	<div class="agreeInput">
-				                                <input type="checkbox" name="agree" id="agree2" value="2" required>
+				                                <input type="checkbox" name="agree" id="choice2" value="2" required>
 				                                <span style="font-size:13px;">개인정보 수집, 이용 동의<strong>(필수)</strong></span>
 				                            </div>
 			                                <div class="agreeBox">
@@ -94,7 +94,7 @@
 		                          	<td class="phone">
 		                           		<label for="agree">
 				                            	<div class="agreeInput">
-				                            		  <input type="checkbox" name="phoneAgree" value="3" required>
+				                            		  <input type="checkbox" name="choice3" value="3" required>
 				                                	  <span style="font-size:13px;">휴대폰 인증 이용약관 동의<strong>(필수)</strong></span>
 				                            	</div>
 												<div class="agreeBox">
@@ -155,6 +155,14 @@
 			$("#memNameSubmit").val($("#memName").val())
 			$("#phoneForm").submit()
 	}
+	 
+     function checkAll() {
+         if($("#choiceAll").is(':checked')) {
+            $("#forPadding :checkbox").prop("checked", true);
+         } else {
+            $("#forPadding :checkbox").prop("checked", false);
+         }
+      }  
 	</script>
 	<script type="text/javascript" src="<%=contextPath %>/resources/user/js/member.js"></script>
 </body>

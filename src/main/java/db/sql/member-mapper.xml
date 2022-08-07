@@ -77,9 +77,7 @@
 	<!-- 회원정보 수정 -->
 	<entry key="updateMember">
 		UPDATE TB_MEMBER
-		   SET MEM_NAME = ?
-		     , MEM_MAIL = ?
-		     , MEM_PHONE = ?
+		   SET MEM_MAIL = ?
 		     , MEM_MODIFY_DATE = SYSDATE
 		 WHERE MEM_ID = ?
 	</entry>
