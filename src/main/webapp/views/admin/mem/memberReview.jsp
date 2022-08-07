@@ -113,7 +113,7 @@
 	                            </div>
 	                        </div>
 	                        <div style="height : 20px"></div>
-	                        <button type="button" class = "btn btn-danger">추천 조작프로그램 실행</button>
+	                       <!-- <button type="button" class = "btn btn-danger">추천 조작프로그램 실행</button> --> 
 	                       	<div style="height : 40px"></div>
 							 <!-- 
 							<div class="paging-area" align="center">    
