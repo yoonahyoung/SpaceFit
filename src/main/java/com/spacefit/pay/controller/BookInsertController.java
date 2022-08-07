@@ -103,12 +103,28 @@ public class BookInsertController extends HttpServlet {
 			
 		}
 		
+		//String ddate = quickPay.getCartDate();
+		String changeDate;
+		String ddate = date;
 		
-		int result2 = new PayService().deleteCart(quickPay);
+		if(ddate.contains(".")) {
+			String dateArr[] = ddate.split("\\.");
+			
+			changeDate = dateArr[0]+"-"+dateArr[1]+"-"+dateArr[2];
+			
+			quickPay.setCartDate(changeDate);
+		}
 		
-		if(result * result2 > 0) {
-			request.getRequestDispatcher("views/user/myPage/reservationListView.jsp").forward(request, response);
-			//response.sendRedirect(request.getContextPath()+"/bolist.bo");
+		int result2 = new PayService().selectCart(quickPay);
+		int result3 = 1;
+		
+		if(result2 > 0){
+			result3 = new PayService().deleteCart(quickPay);
+		}
+		
+		if(result * result3 > 0) {
+			//request.getRequestDispatcher("views/user/myPage/reservationListView.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath()+"/bolist.bo");
 		}
 
 	}

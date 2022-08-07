@@ -112,12 +112,12 @@ public class PayService {
 		return result;
 	}
 	
-	public Cart selectCart(int spaceNo) {
+	public int selectCart(Cart quickPay) {
 		Connection conn = getConnection();
 		
-		Cart cartPay = new PayDao().selectCart(conn, spaceNo);
+		int result = new PayDao().selectCart(conn, quickPay);
 		close(conn);
-		return cartPay;
+		return result;
 	}
 	
 	// 결제 후 장바구니에서 삭제

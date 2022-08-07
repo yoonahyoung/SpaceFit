@@ -186,10 +186,20 @@ INSERT INTO TB_BOOK
 	      , CART_CHAIR
 	      , CART_PRICE
 	  FROM TB_CART
-	 WHERE SPACE_NO = ?
+     WHERE MEM_NO = ?
+       AND SPACE_NO = ?
+       AND CART_LIMIT = ?
+       AND CART_DATE = ?
+       AND CART_IN = ?
+       AND CART_OUT = ?
+       AND CART_PARKING = ?
+       AND CART_ANIMAL = ?
+       AND CART_STAND = ?
+       AND CART_CHAIR = ?
+       AND CART_PRICE = ?
 	</entry>
 	
-		<!-- 장바구니 조회 -->
+	<!-- 장바구니 삭제 -->
 	<entry key="deleteCart">
     DELETE FROM TB_CART
      WHERE MEM_NO = ?
@@ -204,6 +214,7 @@ INSERT INTO TB_BOOK
        AND CART_CHAIR = ?
        AND CART_PRICE = ?
 	</entry>
+	
 
 
 </properties>

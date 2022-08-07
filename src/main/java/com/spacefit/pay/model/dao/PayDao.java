@@ -213,41 +213,39 @@ private Properties prop = new Properties();
 		return result;
 	}
 	
-	public Cart selectCart(Connection conn, int spaceNo) {
+	public int selectCart(Connection conn, Cart quickPay) {
 		// select문 => ResultSet (한행) => Notice
-		Cart cartPay = null;
+		int result = 0;
+		
 		PreparedStatement pstmt = null;
-		ResultSet rset = null;
+		
 		String sql = prop.getProperty("selectCart");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1,  spaceNo);
+			pstmt.setInt(1, quickPay.getMemNo());
+			pstmt.setInt(2, quickPay.getSpaceNo());
+			pstmt.setInt(3, quickPay.getCartLimit());
+			pstmt.setString(4, quickPay.getCartDate());
+			pstmt.setString(5, quickPay.getCartIn());
+			pstmt.setString(6, quickPay.getCartOut());
+			pstmt.setString(7, quickPay.getCartParking());
+			pstmt.setString(8, quickPay.getCartAnimal());
+			pstmt.setString(9, quickPay.getCartStand());
+			pstmt.setString(10, quickPay.getCartChair());
+			pstmt.setInt(11, quickPay.getCartPrice());
 			
-			rset = pstmt.executeQuery();
+			result = pstmt.executeUpdate();
 			
-			if(rset.next()) {
-				cartPay = new Cart(rset.getInt("MEM_NO"),
-						       rset.getInt("SPACE_NO"),
-								rset.getInt("CART_LIMIT"),
-								rset.getString("CART_DATE"),
-								rset.getString("CART_IN"),
-								rset.getString("CART_OUT"),
-								rset.getString("CART_PARKING"),
-								rset.getString("CART_ANIMAL"),
-								rset.getString("CART_STAND"),
-								rset.getString("CART_CHAIR"),
-								rset.getInt("CART_PRICE")
-							   );
-			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(rset);
 			close(pstmt);
 		}
 		
-		return cartPay;
+		return result;
+	
 	}
 	
 	public int deleteCart(Connection conn, Cart quickPay) { 

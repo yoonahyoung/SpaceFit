@@ -39,7 +39,7 @@ public class cartPayViewController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
-		String cart = request.getParameter("cart-radio1");
+		String cart = request.getParameter("cart");
 		
 		System.out.println(cart);
 		String arr[] = cart.split(",");
@@ -59,12 +59,20 @@ public class cartPayViewController extends HttpServlet {
 		Space s = new SpaceService().spaceDetailView(spaceNo);
 		ArrayList<Mcp> list = new MemberService().selectMyCouponList(quickPay.getMemNo());
 		
+		if(s.getSpaceCategory().equals("practice")) {
+			s.setSpaceCategory("연습실");
+		} else if(s.getSpaceCategory().equals("studio")) {
+			s.setSpaceCategory("스튜디오");
+		}else if(s.getSpaceCategory().equals("party")) {
+			s.setSpaceCategory("파티룸");
+		}
 		//int result = new PayService().deleteCart(quickPay);
 		
 		//if(result > 0) {
 			request.setAttribute("quickPay", quickPay);
 			request.setAttribute("s", s);
 			request.setAttribute("list", list);
+			//response.sendRedirect(request.getContextPath()+"/bolist.bo");
 			request.getRequestDispatcher("views/user/pay/payView.jsp").forward(request, response);
 		//}
 	}

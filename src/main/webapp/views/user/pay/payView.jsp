@@ -101,11 +101,11 @@
         <br>
         <table class="table" id="book">
          <tr>
-            <td colspan="2"><h5 style="display:inline"><b>예약자정보</b></h5><h6 style="display:inline"> * 예약자 정보로 이메일이 발송됩니다. 정확한 정보인지 확인해주세요</h6></td>
+            <td colspan="2"><h5><b>예약자정보</b></h5></td>
          </tr>
            <tr>
               <th>예약자 *</th>    
-              <td><input type="text" size="68%" id="name" name="name" readonly value="<%=loginUser.getMemName() %>" style="background-color: #EEEEEE;"></td>                        
+              <td><input type="text" size="68%" id="name" name="name" value="<%=loginUser.getMemName() %>" required></td>                        
            </tr>
            <tr>
               <th>연락처 *</th>    
@@ -184,7 +184,7 @@
 <script>
 
       function checkRequired(){
-         if($("#phone").val() == '' || $("#email").val() == '' || $("#purpose").val() == ''){
+         if($("#phone").val() == '' || $("#email").val() == '' || $("#purpose").val() == ''|| $("#name").val() == ''){
    			   	alert("필수사항을 입력해주세요!");
                   return false;
    		   }else{

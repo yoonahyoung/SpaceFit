@@ -45,7 +45,7 @@
 		
 
 	<!-- Shoping Cart -->
-	<form class="bg0 p-t-75 p-b-85" action="pay.cart" method="post">
+	<form class="bg0 p-t-75 p-b-85">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
@@ -83,7 +83,7 @@
 												<td class="column-3"><%= c.getCartPrice() %>원</td>
 												<td class="column-4" style="text-align:center;">1</td>
 												<td class="column-5">
-													<input type="radio" name="cart-radio1" id="cart-radio1" value="<%= c.getMemNo()+","+ c.getSpaceNo() +","+c.getCartLimit()+","+c.getCartDate()+","+c.getCartIn()+","+c.getCartOut()+","+c.getCartParking()+","+c.getCartAnimal()+","+c.getCartStand()+","+c.getCartChair()+","+c.getCartPrice() %>">
+													<input type="radio" name="cart-radio" id="cart-radio1" value="<%= c.getMemNo()+","+ c.getSpaceNo() +","+c.getCartLimit()+","+c.getCartDate()+","+c.getCartIn()+","+c.getCartOut()+","+c.getCartParking()+","+c.getCartAnimal()+","+c.getCartStand()+","+c.getCartChair()+","+c.getCartPrice() %>">
 												</td>
 											</tr>
 										<% } %>
@@ -102,6 +102,7 @@
 							
 						<script>
 						
+							
 							function cartDelete(){
 								
 								let answer = confirm("정말 보관함을 비우시겠습니까?");
@@ -351,7 +352,7 @@
 						</div>
 
 						<div align="center">
-							<button class="btn btn-primary" style="border-radius:20px; width:130px">
+							<button type="button" class="btn btn-primary" style="border-radius:20px; width:130px" onclick="goPay();">
 								주문하기
 							</button>
 						</div>
@@ -492,7 +493,16 @@
 	</div>
 	 -->
 	
-	
+	<script>
+		function goPay() {
+		// <form> 태그의 name 속성으로 <form> 태그 객체를 받아온다.
+		var cart = $("input[name=cart-radio]:checked").val()
+
+			location.href = '<%= contextPath %>/pay.cart?cart='+cart
+		}
+
+	</script>
+
 		
 
 
