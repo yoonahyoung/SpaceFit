@@ -193,7 +193,7 @@ tbody p{
                                                         <li>시간엄수 부탁드리며, 퇴실전 뒷정리 부탁드립니다.</li>
                                                     </ol>
                                                 </div>
-                                                <div class="tab-pane fade" id="pills-sDetailQNA" role="tabpanel" aria-labelledby="pills-sDetailQNA-tab" onclick="loadQna();">
+                                                <div class="tab-pane fade" id="pills-sDetailQNA" role="tabpanel" aria-labelledby="pills-sDetailQNA-tab" onclick="loadQna(1);">
                                                     <table id="QnATable" class="table">
                                                     	<tbody id="listArea">
                                                     	
@@ -662,7 +662,7 @@ tbody p{
                        // 바로 표시되게 하는 걸 못하게씀 ㅜㅜ
                        //console.dir($('this').parent().children().val());
                        //$(e).nextAll()[5].innerText = result + "명이 이 후기를 추천했습니다!";
-                       location.reload();
+                       //location.reload();
 
                } else {
                   // 후기 중복확인
