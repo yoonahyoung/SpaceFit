@@ -39,8 +39,6 @@ public class DownCouponInsertController extends HttpServlet {
 		String cpName = request.getParameter("cpName");
 		String cpEndDate = request.getParameter("cpEndDate");
 		
-		System.out.println(cpName + cpEndDate);
-		
 		int result = new MemberService().insertDownCoupon(cpName, memNo, cpEndDate);
 		
 		if(result > 0) {

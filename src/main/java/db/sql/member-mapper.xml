@@ -197,8 +197,6 @@
 		  FROM TB_COUPON
 		  JOIN TB_MCP USING(CP_NO)
 		 WHERE MEM_NO = ?
-		 ORDER
-		    BY MCP_END_DATE
 	</entry>
 
 	<!-- 내쿠폰 페이지에서 회원의 쿠폰 등록 -->
