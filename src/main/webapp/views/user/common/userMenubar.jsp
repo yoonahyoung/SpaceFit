@@ -440,7 +440,7 @@
 	    		<div style="height:60px;"></div>
 				<div class="profile" style="margin: auto; display:flex; align-items:center; justify-content:center;">
 					<% if(loginUser.getMemProfile() == null) { %>
-								<img src="<%=contextPath %>/resources/user/img/user.png" style="width:60px; height:60px; border-radius:50%; margin: auto; margin-top:50px;">
+								<img src="<%=contextPath %>/resources/user/img/user.png" style="width:60px; height:60px; border-radius:50%; margin: auto;">
 					<% }else { %>
 								<img src="<%=contextPath %>/<%= loginUser.getMemProfile() %>" style="width:50px; height:50px; border-radius:50%; margin: auto;">
 					<% } %>
