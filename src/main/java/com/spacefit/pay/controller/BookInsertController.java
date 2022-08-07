@@ -46,8 +46,11 @@ public class BookInsertController extends HttpServlet {
 		int limit = Integer.parseInt(request.getParameter("limit"));
 		
 		String date = request.getParameter("date");
-		String arr[] = date.split("-");
-		date = arr[0]+"."+arr[1]+"."+arr[2];
+		
+		if(date.contains("-")) {
+			String arr[] = date.split("-");
+			date = arr[0]+"."+arr[1]+"."+arr[2];
+		}
 		
 		String detailCI = request.getParameter("in");
 		String detailCO = request.getParameter("out");
