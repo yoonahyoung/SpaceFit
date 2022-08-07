@@ -662,7 +662,7 @@ tbody p{
                        // 바로 표시되게 하는 걸 못하게씀 ㅜㅜ
                        //console.dir($('this').parent().children().val());
                        //$(e).nextAll()[5].innerText = result + "명이 이 후기를 추천했습니다!";
-                       location.reload();
+                       //location.reload();
 
                } else {
                   // 후기 중복확인
