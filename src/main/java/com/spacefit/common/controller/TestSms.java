@@ -23,9 +23,9 @@ public class TestSms {
 		  String ran = Integer.toString(rand.nextInt(10));
 		  randomNo += ran;
 	  }
-	  System.out.println("TestSms에서 확인하는 randomNo" +randomNo);
+	  System.out.println("TestSms에서 확인하는 randomNo  " +randomNo);
 	  //=> 실제 회원가입할때만 사용!
-	  certifiedPhoneNumber(memPhone, randomNo);
+	  //certifiedPhoneNumber(memPhone, randomNo);
 	  return randomNo;
 	  
   }
