@@ -1,4 +1,4 @@
-package com.spacefit.event.controller;
+package com.spacefit.mem.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
