@@ -955,6 +955,8 @@ tbody p{
                      url:"<%=contextPath%>/loadQna.sp",
                      data:{cpage:page, no:'<%=s.getSpaceNo()%>'},
                      success:function(h){
+                    	 
+                    	console.log(h);
                        let contextPath = "<%=contextPath%>";
                        let pi = h.pi;
                        let Qlist = h.Qlist; // 질문 리스트
@@ -984,25 +986,25 @@ tbody p{
                          
                             
                             if(pi.currentPage != 1){ 
-                               pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='loadQna(" + (pi.currentPage-1) + ");'>&lt;</button>";
+                               pageVal += "<button type='button' class='btn btn-sm btn-outline-primary' onclick='loadQna(" + (pi.currentPage-1) + ");'>&lt;</button>";
                                
-                        }
+                        	}
                         
-                         for(let p=pi.startPage; p<=pi.endPage; p++){
-                           if(p == pi.currentPage){
-                              pageVal += "<button disabled class='btn btn-sm btn-outline-primary'>" +  p  + "</button>";
-                              
-                           }else{ 
-                               pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='loadQna('" + p + ")';>" + p + "</button>";
-                              
-                              } 
-                        }    
-                        
-                        if(pi.currentPage != pi.maxPage){ 
-                         pageVal += "<button class='btn btn-sm btn-outline-primary' onclick='loadQna(" + (pi.currentPage+1) + ");'>&gt;</button>";
-                         
-                           } 
-                         }
+	                        for(let p=pi.startPage; p<=pi.endPage; p++){
+	                           if(p == pi.currentPage){
+	                              pageVal += "<button disabled class='btn btn-sm btn-outline-primary'>" +  p  + "</button>";
+	                              
+	                           }else{ 
+	                               pageVal += "<button type='button' class='btn btn-sm btn-outline-primary' onclick='loadQna(" + p + ")';>" + p + "</button>";
+	                              
+	                              } 
+	                        }    
+	                        
+	                        if(pi.currentPage != pi.maxPage){ 
+	                         	pageVal += "<button type='button' class='btn btn-sm btn-outline-primary' onclick='loadQna(" + (pi.currentPage+1) + ");'>&gt;</button>";
+	                         
+	                        } 
+	                    }
                                $("#listArea").html(el);
                            $(".paging-area").html(pageVal); 
                          }

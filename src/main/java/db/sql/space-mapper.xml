@@ -286,10 +286,11 @@
 	</entry>
 	
 	<entry key="selectListQnACount">
-		SELECT COUNT(*) COUNT
+		SELECT COUNT(*)
 		  FROM TB_QNA
 		 WHERE QNA_STATUS = 'Y'
 		   AND QNA_PUBLIC = 'Y'
+           AND QNA_REF_NO IS NOT NULL
 		   AND QNA_SPACE_NO = ?
 	</entry>
 </properties>
