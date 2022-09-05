@@ -318,8 +318,8 @@
 					                    </table>                     
 					                    <br>
 					                    <div>
-					                    <button type="submit" class="btn btn-sm btn-primary">send</button>
-					                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+											<button type="submit" class="btn btn-sm btn-primary">send</button>
+											<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
 					                    </div>                       
 					                </form> 
 					            </div>
@@ -327,6 +327,8 @@
 				        	</div>
         				</div>
        				 </div>
+
+
     			</div>
 			</div>       
 		</div>
